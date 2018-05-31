@@ -1,0 +1,3 @@
+rootProject.name = 'RetailCompanion'
+
+include ':app'
