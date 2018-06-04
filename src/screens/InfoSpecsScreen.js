@@ -5,47 +5,105 @@
  */
 
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Button, Text, View } from 'react-native';
+import { StyleSheet, ScrollView, Image, Button, Text, View } from 'react-native';
 import { connect } from 'react-redux';
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
-
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' +
-    'Cmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+import styles from './css/HomeScreenCss';
 
 class InfoSpecsScreen extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Info & Specs Details!
-        </Text>
-        <Button
-          title="Go to Home"
-          onPress={() => this.props.navigation.navigate('Home')}
-        />
-      </View>
+      <ScrollView contentContainerStyle={styles.container}>
+        <View style={styles.infoSpecBox}>
+          <Text style={styles.description}>
+            Discovery Galaxy S9 and S9+ and the revolutionary camera that adapts like the human eye.
+          </Text>
+
+          <View style={{ marginBottom: 15 }}>
+            <View style={styles.hrDivider}></View>
+            <Text style={styles.titleDivider}>Colors</Text>
+
+            <View style={styles.colorItemBox}>
+              <View style={styles.colorItem}>
+                <Image style={styles.colorImage} source={require('../assets/images/Bitmap.png')} />
+                <Text style={styles.colorTitle}>Lilac Purple</Text>
+              </View>
+
+              <View style={styles.colorItem}>
+                <Image style={styles.colorImage} source={require('../assets/images/Bitmap.png')} />
+                <Text style={styles.colorTitle}>Midnight Black</Text>
+              </View>
+
+              <View style={styles.colorItem}>
+                <Image style={styles.colorImage} source={require('../assets/images/Bitmap.png')} />
+                <Text style={styles.colorTitle}>Titanium Gray</Text>
+              </View>
+
+              <View style={styles.colorItem}>
+                <Image style={styles.colorImage} source={require('../assets/images/Bitmap.png')} />
+                <Text style={styles.colorTitle}>Coral Blue</Text>
+              </View>
+            </View>
+          </View>
+
+          <View style={{ marginBottom: 15 }}>
+            <View style={styles.hrDivider}></View>
+            <Text style={styles.titleDivider}>Storage</Text>
+
+            <View style={styles.storageBox}>
+              <View style={styles.storageItem}>
+                <Text style={styles.storageGB}>64GB</Text>
+                <Text style={styles.storagePrice}>$799</Text>
+              </View>
+
+              <View style={styles.storageItem}>
+                <Text style={styles.storageGB}>128GB</Text>
+                <Text style={styles.storagePrice}>$899</Text>
+              </View>
+            </View>
+          </View>
+
+          <View style={{ marginBottom: 15 }}>
+            <View style={styles.hrDivider}></View>
+            <Text style={styles.titleDivider}>Display</Text>
+
+            <View style={[styles.storageBox, styles.displayBox]}>
+              <View style={styles.displaySizeItem}>
+                <View style={styles.displaySizeHr}></View>
+                <Text style={styles.displaySize}>5.8"</Text>
+              </View>
+
+              <View style={styles.displayTextItem}>
+                <Text style={styles.displayText}>Quad HD+ Super AMOLED (2960x1440)</Text>
+                <Text style={styles.displayText}>570 ppi</Text>
+              </View>
+            </View>
+          </View>
+
+          <View style={{ marginBottom: 15 }}>
+            <View style={styles.hrDivider}></View>
+            <Text style={styles.titleDivider}>Camera</Text>
+
+            <View style={styles.storageBox}>
+              <View style={styles.cameraItem}>
+                <Text style={styles.cameraTitle}>FRONT CAMERA</Text>
+                <Text style={styles.cameraText}>8MP AF sensor</Text>
+                <Text style={styles.cameraText}>F1.7 aperture</Text>
+              </View>
+
+              <View style={styles.cameraItem}>
+                <Text style={styles.cameraTitle}>REAR CAMERA</Text>
+                <Text style={styles.cameraText}>12MP AF sensor</Text>
+                <Text style={styles.cameraText}>F1.5 aperture</Text>
+              </View>
+            </View>
+          </View>
+
+          <Button
+            title="Go to Home"
+            onPress={() => this.props.navigation.navigate('Home')}
+          />
+        </View>
+      </ScrollView>
     );
   }
 }
