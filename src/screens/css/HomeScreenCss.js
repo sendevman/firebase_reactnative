@@ -9,7 +9,7 @@ import { StyleSheet, ScrollView, Image, Button, Text, View } from 'react-native'
 export default StyleSheet.create({
   container: { backgroundColor: '#FFF' },
   infoSpecBox: { paddingHorizontal : 10 },
-  // - - Description Box - - 
+  // - - Description Box - -
   description: {
     marginVertical: 10,
     textAlign: 'left',
@@ -36,7 +36,7 @@ export default StyleSheet.create({
     letterSpacing: 0.12,
     lineHeight: 17
   },
-  // - - Color Box - - 
+  // - - Color Box - -
   colorItemBox: {
     flex: 1,
     flexDirection: 'row',
@@ -63,7 +63,7 @@ export default StyleSheet.create({
     textAlign: 'center',
     marginVertical: 5
   },
-  // - - Storage Box - - 
+  // - - Storage Box - -
   storageBox: {
     flex: 1,
     flexDirection: 'row',
@@ -92,7 +92,7 @@ export default StyleSheet.create({
     fontSize: 18,
     lineHeight: 21
   },
-  // - - Display Box - - 
+  // - - Display Box - -
   displayBox: { justifyContent: 'space-evenly' },
   displaySizeItem: {
     height: 50,
@@ -126,7 +126,7 @@ export default StyleSheet.create({
     letterSpacing: 0.12,
     lineHeight: 20
   },
-  // - - Camera Box - - 
+  // - - Camera Box - -
   cameraItem: {
     justifyContent: 'center',
     alignItems: 'center',
@@ -152,5 +152,20 @@ export default StyleSheet.create({
     fontSize: 14,
     letterSpacing: 0.12,
     lineHeight: 20
-  }
+  },
+  // - - Camera Box - List - -
+  cameraList: { marginVertical: 10 },
+  cameraListItem: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center'
+  },
+  cameraListDot: {
+    width: 3,
+    height: 3,
+    borderRadius: 5,
+    backgroundColor: '#1181FF'
+  },
+  cameraListText: { marginLeft: 5 }
 });
