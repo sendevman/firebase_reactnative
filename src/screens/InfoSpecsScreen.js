@@ -8,7 +8,7 @@ import React, { Component } from 'react';
 import { ScrollView, Image, Button, Text, View } from 'react-native';
 import { connect } from 'react-redux';
 
-import styles from './css/HomeScreenCss';
+import styles from './css/InfoSpecsScreenCss';
 import Icon from '../assets/images/Icon';
 
 class InfoSpecsScreen extends Component {
