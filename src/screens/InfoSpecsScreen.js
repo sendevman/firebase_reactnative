@@ -96,6 +96,27 @@ class InfoSpecsScreen extends Component {
                 <Text style={styles.cameraText}>F1.5 aperture</Text>
               </View>
             </View>
+
+            <View>
+              <View style={styles.cameraList}>
+                <View style={styles.cameraListItem}>
+                  <View style={styles.cameraListDot}></View>
+                  <Text style={[styles.cameraText, styles.cameraListText]}>4k video recording at 30 fps or 60 fps</Text>
+                </View>
+                <View style={styles.cameraListItem}>
+                  <View style={styles.cameraListDot}></View>
+                  <Text style={[styles.cameraText, styles.cameraListText]}>Super Slow-mo video support 720p at 960 fps</Text>
+                </View>
+                <View style={styles.cameraListItem}>
+                  <View style={styles.cameraListDot}></View>
+                  <Text style={[styles.cameraText, styles.cameraListText]}>Slow motion video support 1080p at 240 fps</Text>
+                </View>
+                <View style={styles.cameraListItem}>
+                  <View style={styles.cameraListDot}></View>
+                  <Text style={[styles.cameraText, styles.cameraListText]}>Hyperlapse video support 1080p</Text>
+                </View>
+              </View>
+            </View>
           </View>
 
           <Button
