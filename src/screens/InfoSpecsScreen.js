@@ -5,9 +5,11 @@
  */
 
 import React, { Component } from 'react';
-import { StyleSheet, ScrollView, Image, Button, Text, View } from 'react-native';
+import { ScrollView, Image, Button, Text, View } from 'react-native';
 import { connect } from 'react-redux';
+
 import styles from './css/HomeScreenCss';
+import Icon from '../assets/images/Icon';
 
 class InfoSpecsScreen extends Component {
   render() {
@@ -18,7 +20,7 @@ class InfoSpecsScreen extends Component {
             Discovery Galaxy S9 and S9+ and the revolutionary camera that adapts like the human eye.
           </Text>
 
-          <View style={{ marginBottom: 15 }}>
+          <View style={{ paddingBottom: 10 }}>
             <View style={styles.hrDivider}></View>
             <Text style={styles.titleDivider}>Colors</Text>
 
@@ -45,7 +47,7 @@ class InfoSpecsScreen extends Component {
             </View>
           </View>
 
-          <View style={{ marginBottom: 15 }}>
+          <View style={{ paddingBottom: 18 }}>
             <View style={styles.hrDivider}></View>
             <Text style={styles.titleDivider}>Storage</Text>
 
@@ -62,7 +64,7 @@ class InfoSpecsScreen extends Component {
             </View>
           </View>
 
-          <View style={{ marginBottom: 15 }}>
+          <View style={{ paddingBottom: 14 }}>
             <View style={styles.hrDivider}></View>
             <Text style={styles.titleDivider}>Display</Text>
 
@@ -79,7 +81,7 @@ class InfoSpecsScreen extends Component {
             </View>
           </View>
 
-          <View style={{ marginBottom: 15 }}>
+          <View style={{ paddingBottom: 5 }}>
             <View style={styles.hrDivider}></View>
             <Text style={styles.titleDivider}>Camera</Text>
 
@@ -103,14 +105,17 @@ class InfoSpecsScreen extends Component {
                   <View style={styles.cameraListDot}></View>
                   <Text style={[styles.cameraText, styles.cameraListText]}>4k video recording at 30 fps or 60 fps</Text>
                 </View>
+
                 <View style={styles.cameraListItem}>
                   <View style={styles.cameraListDot}></View>
                   <Text style={[styles.cameraText, styles.cameraListText]}>Super Slow-mo video support 720p at 960 fps</Text>
                 </View>
+
                 <View style={styles.cameraListItem}>
                   <View style={styles.cameraListDot}></View>
                   <Text style={[styles.cameraText, styles.cameraListText]}>Slow motion video support 1080p at 240 fps</Text>
                 </View>
+
                 <View style={styles.cameraListItem}>
                   <View style={styles.cameraListDot}></View>
                   <Text style={[styles.cameraText, styles.cameraListText]}>Hyperlapse video support 1080p</Text>
@@ -119,10 +124,114 @@ class InfoSpecsScreen extends Component {
             </View>
           </View>
 
-          <Button
-            title="Go to Home"
-            onPress={() => this.props.navigation.navigate('Home')}
-          />
+          <View style={{ paddingBottom: 8 }}>
+            <View style={styles.hrDivider}></View>
+            <Text style={styles.titleDivider}>Performance</Text>
+
+            <View style={styles.performanceBox}>
+              <View style={styles.performanceItem}>
+                <View style={styles.performanceViewImage}>
+                  <Icon name="Processor" viewBox="0 -7 45 45" />
+                </View>
+                <View style={styles.performanceViewText}>
+                  <Text style={[styles.performanceText, styles.performanceTitle]}>PROCESSOR</Text>
+                  <Text style={styles.performanceText}>10nm 64-bit Octa-Core Processor 2.8GHz + 1.7GHz (Maximum Clock Speed, Performance Core + Efficiency Core)</Text>
+                </View>
+              </View>
+
+              <View style={styles.performanceItem}>
+                <View style={styles.performanceViewImage}>
+                  <Icon name="Memory" viewBox="-3 -7 40 40" />
+                </View>
+                <View style={styles.performanceViewText}>
+                  <Text style={[styles.performanceText, styles.performanceTitle]}>MEMORY</Text>
+                  <Text style={styles.performanceText}>4GB</Text>
+                </View>
+              </View>
+            </View>
+          </View>
+
+          <View style={{ paddingBottom: 6 }}>
+            <View style={styles.hrDivider}></View>
+            <Text style={styles.titleDivider}>Expandable Storage & SIM Card</Text>
+
+            <View style={[styles.performanceBox, styles.expandableBox]}>
+              <View style={styles.expandableViewText}>
+                <Text style={[styles.performanceText, styles.performanceTitle]}>SINGLE SIM MODEL</Text>
+                <Text style={styles.performanceText}>One Nano SIM and one MicroSD slot (up to 400GB)</Text>
+              </View>
+
+              <View style={styles.expandableViewText}>
+                <Text style={[styles.performanceText, styles.performanceTitle]}>DUAL SIM MODEL</Text>
+                <Text style={styles.performanceText}>Two Nano SIM or one MicroSD slot (up to 400GB)</Text>
+              </View>
+            </View>
+          </View>
+
+          <View style={{ paddingBottom: 12 }}>
+            <View style={styles.hrDivider}></View>
+            <Text style={styles.titleDivider}>Battery</Text>
+
+            <View style={[styles.performanceBox, styles.expandableBox]}>
+              <View style={styles.expandableViewText}>
+                <Text style={[styles.performanceText, styles.performanceTitle]}>BATTERY CAPACITY</Text>
+                <Text style={styles.performanceText}>3000mAh</Text>
+              </View>
+
+              <View style={styles.expandableViewText}>
+                <Text style={[styles.performanceText, styles.performanceTitle]}>BATTERY LIFE</Text>
+
+                <View>
+                  <View style={styles.cameraListItem}>
+                    <View style={styles.cameraListDot}></View>
+                    <Text style={[styles.cameraText, styles.cameraListText]}>Talk time: up to 22 hrs</Text>
+                  </View>
+
+                  <View style={styles.cameraListItem}>
+                    <View style={styles.cameraListDot}></View>
+                    <Text style={[styles.cameraText, styles.cameraListText]}>Video playback: up to 16 hrs</Text>
+                  </View>
+
+                  <View style={styles.cameraListItem}>
+                    <View style={styles.cameraListDot}></View>
+                    <Text style={[styles.cameraText, styles.cameraListText]}>MP3 playback (AOD off): up to 80 hrs</Text>
+                  </View>
+
+                  <View style={styles.cameraListItem}>
+                    <View style={styles.cameraListDot}></View>
+                    <Text style={[styles.cameraText, styles.cameraListText]}>Internet use (Wi-Fi): up to 14 hrs</Text>
+                  </View>
+
+                  <View style={styles.cameraListItem}>
+                    <View style={styles.cameraListDot}></View>
+                    <Text style={[styles.cameraText, styles.cameraListText]}>Internet use (4G): up to 12 hrs</Text>
+                  </View>
+                </View>
+              </View>
+
+              <View style={styles.expandableViewText}>
+                <Text style={[styles.performanceText, styles.performanceTitle]}>CHARGING</Text>
+
+                <View>
+                  <View style={styles.cameraListItem}>
+                    <View style={styles.cameraListDot}></View>
+                    <Text style={[styles.cameraText, styles.cameraListText]}>Fast Charging on wired and wireless</Text>
+                  </View>
+                  <View style={styles.cameraListItem}>
+                    <View style={styles.cameraListDot}></View>
+                    <Text style={[styles.cameraText, styles.cameraListText]}>Wireless charging compatible with WPC and PMA</Text>
+                  </View>
+                </View>
+              </View>
+            </View>
+          </View>
+
+          <View>
+            <Button
+              title="Go to Home"
+              onPress={() => this.props.navigation.navigate('Home')}
+            />
+          </View>
         </View>
       </ScrollView>
     );

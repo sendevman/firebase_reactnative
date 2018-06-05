@@ -4,14 +4,16 @@
  * @flow
  */
 
-import { StyleSheet, ScrollView, Image, Button, Text, View } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
+var { width } = Dimensions.get('window');
 
 export default StyleSheet.create({
   container: { backgroundColor: '#FFF' },
   infoSpecBox: { paddingHorizontal : 10 },
   // - - Description Box - -
   description: {
-    marginVertical: 10,
+    marginTop: 15,
+    marginBottom: 13,
     textAlign: 'left',
     fontFamily: 'Rubik',
     fontSize: 18,
@@ -27,8 +29,9 @@ export default StyleSheet.create({
     marginBottom: 10
   },
   titleDivider: {
-    top: -20,
-    width: 50,
+    position: 'absolute',
+    top: 1,
+    paddingRight: 10,
     backgroundColor: '#FFF',
     color: '#1181FF',
     fontFamily: 'Rubik',
@@ -38,19 +41,20 @@ export default StyleSheet.create({
   },
   // - - Color Box - -
   colorItemBox: {
+    marginTop: 5,
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'center'
   },
   colorItem: {
+    alignItems: 'center',
     width: 70,
     flexDirection: 'column',
     justifyContent: 'center'
   },
   colorImage: {
     height: 85,
-    width: 40,
-    marginLeft: 5
+    width: 40
   },
   colorTitle: {
     height: 28,
@@ -65,6 +69,7 @@ export default StyleSheet.create({
   },
   // - - Storage Box - -
   storageBox: {
+    marginTop: 15,
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between'
@@ -93,7 +98,10 @@ export default StyleSheet.create({
     lineHeight: 21
   },
   // - - Display Box - -
-  displayBox: { justifyContent: 'space-evenly' },
+  displayBox: {
+    marginTop: 8,
+    justifyContent: 'space-evenly'
+  },
   displaySizeItem: {
     height: 50,
     width: 70,
@@ -105,7 +113,7 @@ export default StyleSheet.create({
     height: '110%',
     width: 2,
     backgroundColor: '#E3E9EF',
-    transform: [{ rotate: '45deg' }] 
+    transform: [{ rotate: '45deg' }]
   },
   displaySize: {
     backgroundColor: 'white',
@@ -167,5 +175,39 @@ export default StyleSheet.create({
     borderRadius: 5,
     backgroundColor: '#1181FF'
   },
-  cameraListText: { marginLeft: 5 }
+  cameraListText: { marginLeft: 5 },
+  // - - Performance Box - -
+  performanceBox: {
+    marginTop: 8,
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'space-between'
+  },
+  performanceItem: {
+    paddingVertical: 5,
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start'
+  },
+  performanceViewImage: {
+    height: 30,
+    width: 30,
+    transform: [{ rotate: '90deg' }]
+  },
+  performanceViewText: { width: width - 30 },
+  performanceText: {
+    color: '#3E3F42',
+    fontFamily: 'Roboto',
+    fontSize: 14,
+    letterSpacing: 0.12,
+    lineHeight: 20
+  },
+  performanceTitle: {
+    fontSize: 12,
+    fontWeight: 'bold'
+  },
+  // - - Expandable Storage Box - -
+  expandableBox: { marginTop: 10 },
+  expandableViewText: { marginBottom: 8 }
 });
