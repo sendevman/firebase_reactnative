@@ -172,6 +172,11 @@ class HomeScreen extends Component {
           onPress={() => this.props.navigation.goBack()}
         />
 
+        <Button
+          title="Go to Reviews"
+          onPress={() => this.props.navigation.navigate('Reviews')}
+        />
+
         <Button onPress={() => this.props.navigation.openDrawer()} title="Open drawer" />
 
         <Carousel

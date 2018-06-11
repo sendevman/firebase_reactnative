@@ -20,6 +20,7 @@ import Icon from '../assets/images/Icon';
 // Screens
 import HomeScreen from '../screens/HomeScreen';
 import InfoSpecsScreen from '../screens/InfoSpecsScreen';
+import ReviewsScreen from '../screens/ReviewsScreen';
 
 const MyNavScreen = ({ navigation, banner }) => (
   <View style={{ flex: 1 }}>
@@ -87,7 +88,7 @@ const TopTabNav = createTabNavigator(
       navigationOptions: { title: 'Info & Specs' }
     },
     Reviews: {
-      screen: Reviews,
+      screen: ReviewsScreen,
       navigationOptions: { title: 'Reviews' }
     },
     CostPlans: {
