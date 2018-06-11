@@ -1,5 +1,5 @@
 /**
- * Conexus-Tech - Reatail Companion AT&T
+ * Conexus-Tech - Retail Companion AT&T
  * https://conexustech.com/
  * @flow
  */
