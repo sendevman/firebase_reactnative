@@ -11,11 +11,13 @@ import { createStackNavigator } from 'react-navigation';
 import myStore from './store/myStore';
 import HomeScreen from './screens/HomeScreen';
 import InfoSpecsScreen from './screens/InfoSpecsScreen';
+import ReviewsScreen from './screens/ReviewsScreen';
 
 const RootStack = createStackNavigator(
   {
     Home: HomeScreen,
-    InfoSpecs: InfoSpecsScreen
+    InfoSpecs: InfoSpecsScreen,
+    Reviews: ReviewsScreen
   },
   {
     initialRouteName: 'Home'

@@ -38,6 +38,10 @@ class HomeScreen extends Component {
           title="Go to Info & Specs Details"
           onPress={() => this.props.navigation.navigate('InfoSpecs')}
         />
+        <Button
+          title="Go to Reviews"
+          onPress={() => this.props.navigation.navigate('Reviews')}
+        />
       </View>
     );
   }
