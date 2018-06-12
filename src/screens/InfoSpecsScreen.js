@@ -5,10 +5,13 @@
  */
 
 import React, { Component } from 'react';
-import { ScrollView, Image, Button, Text, View } from 'react-native';
+import { Image, ScrollView, Text, View } from 'react-native';
 import { connect } from 'react-redux';
 
+// My Styles
 import styles from './css/InfoSpecsScreenCss';
+
+// My Customs
 import Icon from '../assets/images/Icon';
 
 class InfoSpecsScreen extends Component {
@@ -26,22 +29,22 @@ class InfoSpecsScreen extends Component {
 
             <View style={styles.colorItemBox}>
               <View style={styles.colorItem}>
-                <Image style={styles.colorImage} source={require('../assets/images/Bitmap.png')} />
+                <Image style={styles.colorImage} source={require('../assets/images/files/Bitmap.png')} />
                 <Text style={styles.colorTitle}>Lilac Purple</Text>
               </View>
 
               <View style={styles.colorItem}>
-                <Image style={styles.colorImage} source={require('../assets/images/Bitmap.png')} />
+                <Image style={styles.colorImage} source={require('../assets/images/files/Bitmap.png')} />
                 <Text style={styles.colorTitle}>Midnight Black</Text>
               </View>
 
               <View style={styles.colorItem}>
-                <Image style={styles.colorImage} source={require('../assets/images/Bitmap.png')} />
+                <Image style={styles.colorImage} source={require('../assets/images/files/Bitmap.png')} />
                 <Text style={styles.colorTitle}>Titanium Gray</Text>
               </View>
 
               <View style={styles.colorItem}>
-                <Image style={styles.colorImage} source={require('../assets/images/Bitmap.png')} />
+                <Image style={styles.colorImage} source={require('../assets/images/files/Bitmap.png')} />
                 <Text style={styles.colorTitle}>Coral Blue</Text>
               </View>
             </View>
@@ -224,13 +227,6 @@ class InfoSpecsScreen extends Component {
                 </View>
               </View>
             </View>
-          </View>
-
-          <View>
-            <Button
-              title="Go to Home"
-              onPress={() => this.props.navigation.navigate('Home')}
-            />
           </View>
         </View>
       </ScrollView>
