@@ -8,12 +8,57 @@ import { StyleSheet, Dimensions } from 'react-native';
 var { width } = Dimensions.get('window');
 
 export default StyleSheet.create({
+
+  icon: {
+    width: 24,
+    height: 24,
+  },
+  
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
+  },
+  welcome: {
+    fontSize: 20,
+    textAlign: 'center',
+    margin: 10,
+  },
+  sliderBox: {
+    height: 150,
+    width: 250,
+    backgroundColor: 'grey'
+  },
+
+
+
+
+  headerBox: {
+    backgroundColor: 'grey',
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+
+  headerTitle: {
+    width: 85,
+    marginLeft: 10,
+    textAlign: 'left',
+    color: '#FFF',
+    fontFamily: 'Rubik',
+    fontSize: 16,
+    lineHeight: 19
+  },
+
+
   container: { backgroundColor: '#FFF' },
   infoSpecBox: { paddingHorizontal : 10 },
   // - - Description Box - -
   description: {
-    marginTop: 16,
-    marginBottom: 14,
+    marginTop: 15,
+    marginBottom: 13,
     textAlign: 'left',
     fontFamily: 'Rubik',
     fontSize: 18,
