@@ -12,8 +12,8 @@ export default StyleSheet.create({
   infoSpecBox: { paddingHorizontal : 10 },
   // - - Description Box - -
   description: {
-    marginTop: 15,
-    marginBottom: 13,
+    marginTop: 16,
+    marginBottom: 14,
     textAlign: 'left',
     fontFamily: 'Rubik',
     fontSize: 18,
