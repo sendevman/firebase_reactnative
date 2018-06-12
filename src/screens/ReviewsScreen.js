@@ -5,209 +5,230 @@
  */
 
 import React, { Component } from 'react';
-import { ScrollView, Image, Button, Text, View, WebView } from 'react-native';
+import { Image, ScrollView, Text, View, WebView } from 'react-native';
 import { connect } from 'react-redux';
-import { Rating, AirbnbRating} from 'react-native-ratings';
+import { Rating } from 'react-native-ratings';
 
+// My Styles
 import styles from './css/ReviewsScreenCss';
-import Icon from '../assets/images/Icon';
 
+// My Customs
+import Icon from '../assets/images/Icon';
 
 class ReviewsScreen extends Component {
   render() {
     return (
       <ScrollView contentContainerStyle={styles.container}>
         <View style={styles.reviewsBox}>
-          <View>
+          <View style={styles.headerPrincipal}>
             <Text style={styles.textTitleUno}>Make an informed decision.</Text>
             <Text style={styles.textSubtitle}>Read what the reviews are saying.</Text>
           </View>
-          
-          <View style={[styles.containerCustomer,{borderTopColor: '#1181FF'}]}>            
-            <View style={styles.alinearHear}>
-              <Image style={styles.logoImage} source={require('../assets/images/myatt_logo_small.jpg')} />
-              <Text style={styles.customerReviews}>Customer Reviews</Text>
+
+          <View style={[styles.cardContainer, { borderTopColor: '#1181FF' }]}>
+            <View style={styles.headerCard}>
+              <Image style={[styles.logoReview, { width: 60 }]} source={require('../assets/images/files/myAtt.jpg')} />
+              <Text style={[styles.titleReview, { marginTop: -4 }]}>Customer Reviews</Text>
             </View>
 
-            <View style={styles.alinearHear}>
-              <Text style={styles.contentList}>Karin M.</Text>
-                <Rating
-                  type='custom'
-                  ratingColor='#3498db'
-                  ratingBackgroundColor='#c8c7c8'
-                  ratingCount={5}
-                  imageSize={15}
-                  onFinishRating={this.ratingCompleted}
-                  style={{ paddingVertical: 10 }} 
-                />
-            </View>
             <View>
-              <Text style={styles.textCustomer}>
-                Lorem ipsum dolor sit amet consectetur adipiscing elit. Praesent vulputate nibh ante, in efficitur tellus mattis sit amet. Nam tempus lectus quis...
-              </Text>
-            </View>
-            <View style={styles.contentReadMore}>
-              <Text style={styles.textReadMore}>
-                + Read more
-              </Text>
-            </View>
+              <View style={styles.reviewItemBox}>
+                <View style={styles.headerReview}>
+                  <Text style={styles.authorReview}>Karin M.</Text>
+                  <Rating
+                    type='custom'
+                    ratingColor='#3498db'
+                    ratingBackgroundColor='#c8c7c8'
+                    ratingCount={5}
+                    imageSize={15}
+                    onFinishRating={this.ratingCompleted}
+                  />
+                </View>
 
-            <View style={styles.alinearHear}>
-              <Text style={styles.contentList}>Karin M.</Text>
-                <Rating
-                  type='custom'
-                  ratingColor='#3498db'
-                  ratingBackgroundColor='#c8c7c8'
-                  ratingCount={5}
-                  imageSize={15}
-                  onFinishRating={this.ratingCompleted}
-                  style={{ paddingVertical: 10 }}
-                />
-            </View>
-            <View>
-              <Text style={styles.textCustomer}>
-                Lorem ipsum dolor sit amet consectetur adipiscing elit. Praesent vulputate nibh ante, in efficitur tellus mattis sit amet. Nam tempus lectus quis...
-              </Text>
-            </View>
-            <View style={styles.contentReadMore}>
-              <Text style={styles.textReadMore}>
-                + Read more
-              </Text>
-            </View>
+                <Text style={styles.textReview}>
+                  Lorem ipsum dolor sit amet consectetur adipiscing elit. Praesent vulputate nibh ante, in efficitur tellus mattis sit amet. Nam tempus lectus quis...
+                </Text>
+              </View>
 
-            <View style={styles.alinearHear}>
-              <Text style={styles.contentList}>Karin M.</Text>
-                <Rating
-                  type='custom'
-                  ratingColor='#3498db'
-                  ratingBackgroundColor='#c8c7c8'
-                  ratingCount={5}
-                  imageSize={15}
-                  onFinishRating={this.ratingCompleted}
-                  style={{ paddingVertical: 10 }}
-                />
-            </View>
-            <View>
-              <Text style={styles.textCustomer}>
-                Lorem ipsum dolor sit amet consectetur adipiscing elit. Praesent vulputate nibh ante, in efficitur tellus mattis sit amet. Nam tempus lectus quis...
-              </Text>
-            </View>
-            <View style={styles.contentReadMore}>
-              <Text style={styles.textReadMore}>
-                + Read more
-              </Text>
-            </View>
-          </View> 
-        
-          <Text style={styles.textTitleDos}>Reviews from around the web</Text>
-          
-          <View style={[styles.containerCustomer,{borderTopColor: '#00AF48'}]}>            
-              <Image style={styles.logoImage} source={require('../assets/images/myatt_logo_small.jpg')} />
-              <Text style={styles.textReviews}>
-                The Galaxy S9 is all of the good and all of the bad we' ve come to expect from Samsung
-              </Text>
               <View style={styles.contentReadMore}>
                 <Text style={styles.textReadMore}>
                   + Read more
                 </Text>
               </View>
+            </View>
+
+            <View>
+              <View style={styles.reviewItemBox}>
+                <View style={styles.headerReview}>
+                  <Text style={styles.authorReview}>Karin M.</Text>
+                  <Rating
+                    type='custom'
+                    ratingColor='#3498db'
+                    ratingBackgroundColor='#c8c7c8'
+                    ratingCount={5}
+                    imageSize={15}
+                    onFinishRating={this.ratingCompleted}
+                  />
+                </View>
+
+                <Text style={styles.textReview}>
+                  Lorem ipsum dolor sit amet consectetur adipiscing elit. Praesent vulputate nibh ante, in efficitur tellus mattis sit amet. Nam tempus lectus quis...
+                </Text>
+              </View>
+
+              <View style={styles.contentReadMore}>
+                <Text style={styles.textReadMore}>
+                  + Read more
+                </Text>
+              </View>
+            </View>
+
+            <View>
+              <View style={styles.reviewItemBox}>
+                <View style={styles.headerReview}>
+                  <Text style={styles.authorReview}>Karin M.</Text>
+                  <Rating
+                    type='custom'
+                    ratingColor='#3498db'
+                    ratingBackgroundColor='#c8c7c8'
+                    ratingCount={5}
+                    imageSize={15}
+                    onFinishRating={this.ratingCompleted}
+                  />
+                </View>
+
+                <Text style={styles.textReview}>
+                  Lorem ipsum dolor sit amet consectetur adipiscing elit. Praesent vulputate nibh ante, in efficitur tellus mattis sit amet. Nam tempus lectus quis...
+                </Text>
+              </View>
+
+              <View style={styles.contentReadMore}>
+                <Text style={styles.textReadMore}>
+                  + Read more
+                </Text>
+              </View>
+            </View>
           </View>
 
-          <View style={[styles.containerCustomer,{borderTopColor: '#D60000'}]}>            
-              <Image style={styles.logoImage} source={require('../assets/images/myatt_logo_small.jpg')} />
-              <Text style={styles.textReviews}>
-               The Galaxy S9 is a nice incremental upgrade, but its low-light camera isn't a game changer and some new features fall far behind the iPhone X. S8 owners can skip, but it's a good upgrade from older Androids. 
-              </Text>
-              <View style={styles.separador}></View>
-              <View >
-                <Text style={styles.textListItem}>PROS</Text>
-                  <View style={styles.alinearHear}>
-                  <View style={styles.listDot}></View>
-                  <Text style={[styles.listText, styles.listaText]}>Great design</Text>
-                  </View>
-                  <View>
-                  <View style={styles.alinearHear}>
-                  <View style={styles.listDot}></View>
-                  <Text style={[styles.listText, styles.listaText]}>Beautiful display</Text>
-                  </View>
-                  </View>                  
-                  <View>
-                  <View style={styles.alinearHear}>
-                  <View style={styles.listDot}></View>
-                  <Text style={[styles.listText, styles.listaText]}>Fast performance</Text>
-                  </View>
-                  </View>
-                  <View>
-                  <View style={styles.alinearHear}>
-                  <View style={styles.listDot}></View>
-                  <Text style={[styles.listText, styles.listaText]}>Capable camera</Text>
-                  </View>
-                  </View>
-              </View>
+          <Text style={styles.webReviewTitle}>Reviews from around the web</Text>
 
-              <View >
-                <Text style={styles.textListItem}>CONS</Text>
-                  <View>
-                  <View style={styles.alinearHear}>
-                  <View style={styles.listDot}></View>
-                  <Text style={[styles.listText, styles.listaText]}>Average battery life</Text>
-                  </View>
-                  </View>
-                  <View>
-                  <View style={styles.alinearHear}>
-                  <View style={styles.listDot}></View>
-                  <Text style={[styles.listText, styles.listaText]}>Gimmicks galore</Text>
-                  </View>
-                  </View>
-                  <View>
-                  <View style={styles.alinearHear}>
-                  <View style={styles.listDot}></View>
-                  <Text style={[styles.listText, styles.listaText]}>Samsung has a poor history of updating its phones</Text>
-                  </View>
-                  </View>
-              </View>
-          <View style={styles.contentReadMore}>
-            <Text style={styles.textReadMore}>
-              - Collapse
+          <View style={[styles.cardContainer, { borderTopColor: '#00AF48' }]}>
+            <View style={styles.headerCard}>
+              <Icon height="22" width="80" name="ConsumerReports" viewBox="0 0 684 180" />
+            </View>
+
+            <Text style={styles.textReviewBig}>
+              The Galaxy S9 is all of the good and all of the bad we' ve come to expect from Samsung
             </Text>
+
+            <View style={styles.contentReadMore}>
+              <Text style={styles.textReadMore}>
+                + Read more
+              </Text>
+            </View>
           </View>
-          </View>
- 
-          <View style={[styles.containerCustomer,{borderTopColor: '#0094DD'}]}>            
-              <Image style={styles.logoImage} source={require('../assets/images/myatt_logo_small.jpg')} />
-              <Text style={styles.textReviews}>
-               The Galaxy S9 is a nice incremental upgrade, but its low-light camera isn't a game changer and some new features fall far behind the iPhone X. S8 owners can skip, but it's a good upgrade from older Androids. 
-              </Text> 
-              <View style={styles.contentReadMore}>
-                <Text style={styles.textReadMore}>
-                  + Read more
-                </Text>
+
+          <View style={[styles.cardContainer, { borderTopColor: '#D60000' }]}>
+            <View style={styles.headerCard}>
+              <Icon height="22" width="22" name="CNet" viewBox="0 0 100 100" />
+            </View>
+
+            <Text style={styles.textReviewBig}>
+              The Galaxy S9 is a nice incremental upgrade, but its low-light camera isn't a game changer and some new features fall far behind the iPhone X. S8 owners can skip, but it's a good upgrade from older Androids.
+            </Text>
+
+            <View style={styles.separador}></View>
+
+            <View>
+              <Text style={styles.textListItem}>PROS</Text>
+
+              <View style={styles.prosConsItem}>
+                <View style={styles.prosConsDot}></View>
+                <Text style={styles.prosConsText}>Great design</Text>
               </View>
+
+              <View style={styles.prosConsItem}>
+                <View style={styles.prosConsDot}></View>
+                <Text style={styles.prosConsText}>Beautiful display</Text>
+              </View>
+
+              <View style={styles.prosConsItem}>
+                <View style={styles.prosConsDot}></View>
+                <Text style={styles.prosConsText}>Fast performance</Text>
+              </View>
+
+              <View style={styles.prosConsItem}>
+                <View style={styles.prosConsDot}></View>
+                <Text style={styles.prosConsText}>Capable camera</Text>
+              </View>
+            </View>
+
+            <View style={{ marginBottom: 6 }}>
+              <Text style={styles.textListItem}>CONS</Text>
+
+              <View style={styles.prosConsItem}>
+                <View style={styles.prosConsDot}></View>
+                <Text style={styles.prosConsText}>Average battery life</Text>
+              </View>
+
+              <View style={styles.prosConsItem}>
+                <View style={styles.prosConsDot}></View>
+                <Text style={styles.prosConsText}>Gimmicks galore</Text>
+              </View>
+
+              <View style={styles.prosConsItem}>
+                <View style={styles.prosConsDot}></View>
+                <Text style={styles.prosConsText}>Samsung has a poor history of updating its phones</Text>
+              </View>
+            </View>
+
+            <View style={styles.contentReadMore}>
+              <Text style={styles.textReadMore}>
+                - Collapse
+              </Text>
+            </View>
           </View>
 
-          <View style={styles.containerVideo}>
-            <WebView style={styles.videoItem} source={{uri: 'https://www.youtube.com/watch?v=kB8g3TOAdqA&list=PLQeg8yfG9MRxzEqL9zk4EWdGHDmch00vj&index=11'}} 
-            />
-            <Text style={[styles.textReviews,{marginTop: 16}]}>The perfect ... Samsung!</Text>      
-            <Text style={styles.textVideo}>MKBHD</Text>
+          <View style={[styles.cardContainer, { borderTopColor: '#0094DD' }]}>
+            <View style={styles.headerCard}>
+              <Image style={[styles.logoReview, { width: 112 }]} source={require('../assets/images/files/digitalTrends.png')} />
+            </View>
+
+            <Text style={styles.textReviewBig}>
+              The Galaxy S9 is a nice incremental upgrade, but its low-light camera isn't a game changer and some new features fall far behind the iPhone X. S8 owners can skip, but it's a good upgrade from older Androids.
+            </Text>
+
+            <View style={styles.contentReadMore}>
+              <Text style={styles.textReadMore}>
+                + Read more
+              </Text>
+            </View>
           </View>
 
-          <View style={styles.containerVideo}>
-            <WebView style={styles.videoItem} source={{uri:'https://www.youtube.com/watch?v=kB8g3TOAdqA&list=PLQeg8yfG9MRxzEqL9zk4EWdGHDmch00vj&index=11'}} 
-            />
-            <Text style={[styles.textReviews,{marginTop: 16}]}>10 Things Before Buying!</Text>      
-            <Text style={styles.textVideo}>Jonathan Morrison</Text>
+          <View style={styles.videoContainer}>
+            <View style={styles.videoBox}>
+              <WebView
+                style={styles.videoItem}
+                source={{uri: 'https://www.youtube.com/watch?v=kB8g3TOAdqA&list=PLQeg8yfG9MRxzEqL9zk4EWdGHDmch00vj&index=11'}}
+              />
+            </View>
+
+            <Text style={[styles.textReviewBig, { marginTop: 16 }]}>The perfect ... Samsung!</Text>
+            <Text style={styles.videoAuthor}>MKBHD</Text>
           </View>
 
-          <View>
-            <Button
-                title="Go to Home"
-                onPress={() => this.props.navigation.navigate('Home')}
-            />
-          </View>
+          <View style={styles.videoContainer}>
+            <View style={styles.videoBox}>
+              <WebView
+                style={styles.videoItem}
+                source={{uri: 'https://www.youtube.com/watch?v=kB8g3TOAdqA&list=PLQeg8yfG9MRxzEqL9zk4EWdGHDmch00vj&index=11'}}
+              />
+            </View>
 
+            <Text style={[styles.textReviewBig, { marginTop: 16 }]}>10 Things Before Buying!</Text>
+            <Text style={styles.videoAuthor}>Jonathan Morrison</Text>
+          </View>
         </View>
-
       </ScrollView>
     );
   }
