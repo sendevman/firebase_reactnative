@@ -39,6 +39,7 @@ const MyNavScreen = ({ navigation, banner }) => (
   </View>
 );
 
+// Drawer Navigator - Screens
 const AboutRetailCompanion = ({ navigation }) => (
   <MyNavScreen banner={'About Retail Companion'} navigation={navigation} />
 );
@@ -55,7 +56,7 @@ const AccountSettings = ({ navigation }) => (
   <MyNavScreen banner={'Account Settings'} navigation={navigation} />
 );
 
-// Bottom Tab Navigator
+// Bottom Tab Navigator - Screens
 const Products = ({ navigation }) => (
   <MyNavScreen banner={'Products'} navigation={navigation} />
 );
@@ -72,11 +73,7 @@ const SharedSession = ({ navigation }) => (
   <MyNavScreen banner={'Shared Session'} navigation={navigation} />
 );
 
-// Top Tab Navigator
-const Reviews = ({ navigation }) => (
-  <MyNavScreen banner={'Reviews'} navigation={navigation} />
-);
-
+// Top Tab Navigator - Screens
 const CostPlans = ({ navigation }) => (
   <MyNavScreen banner={'Cost & Plans'} navigation={navigation} />
 );
@@ -92,7 +89,7 @@ const TopTabNav = createTabNavigator(
       navigationOptions: { title: 'Reviews' }
     },
     CostPlans: {
-      screen: CostPlans,
+      screen: HomeScreen,
       navigationOptions: { title: 'Cost & Plans' }
     }
   },
