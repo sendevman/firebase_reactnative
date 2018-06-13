@@ -5,61 +5,19 @@
  */
 
 import React, { Component } from 'react';
-import { StyleSheet, Button, Text, View, Alert } from 'react-native';
+import { Alert, Button, Text, View } from 'react-native';
 import { connect } from 'react-redux';
-import styles from './css/HomeScreenCss';
-
-import Carousel from 'react-native-carousel-view';
-
-
-import Icon from '../assets/images/Icon';
-
 import { Header } from 'react-navigation';
 import LinearGradient from 'react-native-linear-gradient';
 
+// My Styles
+import styles from './css/HomeScreenCss';
 
-      // style={[StyleSheet.absoluteFill, { height: Header.HEIGHT }]}
+// My Customs
+import Icon from '../assets/images/Icon';
+import ProductsNearSlide from '../components/ProductsNearSlide/ProductsNear'; 
 
-// const GradientHeader = props => (
-//   <View style={{ backgroundColor: '#eee' }}>
-//     <LinearGradient
-//       colors={['#222A33', '#43597D']}
-//     >
-//       <Header {...props} />
-//     </LinearGradient>
-//   </View>
-// );
-
-/*  <View style={{ backgroundColor: '#eee' }}>
-    <LinearGradient
-      colors={['#222A33', '#43597D']}
-    >
-      <Header {...props} />
-    </LinearGradient>
-  </View>
-*/
-/*<Text>
-  Sign in with Facebook
-</Text>*/
-
-
-/*<Header
-  leftComponent={{ icon: 'menu', color: '#fff' }}
-  centerComponent={{ text: 'MY TITLE', style: { color: '#fff' } }}
-  rightComponent={{ icon: 'home', color: '#fff' }}
-
-  {...props}
-/>*/
-const GradientHeader = props => (
-  <LinearGradient colors={['#222A33', '#43597D']}  >
-    <Header {...props} />
-  </LinearGradient>
-);
-    // <View style={{ flex: 1}}>
-    // </View>
-
-
-class LogoTitle extends React.Component {
+class LogoTitle extends Component {
   render() {
     return (
       <View style={ styles.headerBox }>
@@ -70,17 +28,19 @@ class LogoTitle extends React.Component {
   }
 }
 
+const GradientHeader = props => (
+  <LinearGradient colors={['#222A33', '#43597D']}  >
+    <Header {...props} />
+  </LinearGradient>
+);
 
 class HomeScreen extends Component {
   // static navigationOptions = {
   //   title: 'Home',
   //   headerStyle: {
   //     // backgroundColor: '#f4511e',
-  //     // backgroundColor: '180deg, #222A33 0%, #43597D 100%',
-  //     // backgroundColor: [{ linearGradient: '180deg, #222A33 0%, #43597D 100%' }],
   //     // transform: [{ rotate: '45deg' }]
   //     // transform: '45deg'
-  //     // linearGradient: '180deg, #222A33 0%, #43597D 100%'
   //   },
   //   // headerTintColor: '#fff',
   //   headerTitleStyle: {
@@ -88,10 +48,7 @@ class HomeScreen extends Component {
   //   }
   // };
 
-
   static navigationOptions = {
-    // title: 'Homess',
-    // headerTitle: 'Muaja',
     headerTitle: <LogoTitle />,
     header: props => <GradientHeader {...props} />,
     headerStyle: {
@@ -131,73 +88,12 @@ class HomeScreen extends Component {
     ),
   };
 
-      // <Button
-      //   title="hey"
-      //   color="blue"
-      //   onPress={ ({ navigation }) => (
-      //     console.log(navigation);
-      //   )}
-      // />
-        // {(props) => Alert.alert(
-        //   'Alert Title',
-        //   'My Alert Msg',
-        //   [
-        //     {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
-        //     {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-        //     {text: 'OK', onPress: () => console.dir(`${this.props}`)},
-        //   ],
-        //   { cancelable: false }
-        // )}
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Home Screen!
-        </Text>
-        <Button
-          title="Go to Info & Specs Details"
-          onPress={() => this.props.navigation.navigate('InfoSpecs')}
-        />
-
-        <Button
-          title="Go to Details... again"
-          onPress={() => this.props.navigation.push('Home')}
-        />
-        <Button
-          title="Go to Home"
-          onPress={() => this.props.navigation.navigate('Home')}
-        />
-        <Button
-          title="Go back"
-          onPress={() => this.props.navigation.goBack()}
-        />
-
-        <Button
-          title="Go to Reviews"
-          onPress={() => this.props.navigation.navigate('Reviews')}
-        />
-
-        <Button onPress={() => this.props.navigation.openDrawer()} title="Open drawer" />
-
-        <Carousel
-          width={375}
-          height={300}
-          delay={2000}
-          indicatorAtBottom={false}
-          indicatorSize={20}
-          indicatorText="✽"
-          indicatorColor="red"
-          >
-          <View style={styles.sliderBox}>
-            <Text style={styles.welcome}>Page 1</Text>
-          </View>
-          <View style={styles.sliderBox}>
-            <Text style={styles.welcome}>Page 2</Text>
-          </View>
-          <View style={styles.sliderBox}>
-            <Text style={styles.welcome}>Page 3</Text>
-          </View>
-        </Carousel>
+        <View style={{ marginVertical: 20 }}>
+          <ProductsNearSlide />
+        </View>
       </View>
     );
   }
