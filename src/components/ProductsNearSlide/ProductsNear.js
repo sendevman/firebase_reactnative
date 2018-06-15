@@ -19,7 +19,7 @@ import ButtonCompare from './ButtonCompare';
 class ProductsNear extends Component<props> {
   render() {
     return (
-      <LinearGradient colors={['#222A33', '#43597D']}  >
+      <LinearGradient colors={['#2b3748', '#43597D']}  >
         <Text style={styles.title}>PRODUCTS NEAR YOU</Text>
         <Carousel
           animate={false}
