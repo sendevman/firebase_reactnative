@@ -44,7 +44,7 @@ class ProductLayoutScreen extends Component<props> {
     return (
       <SafeAreaView forceInset={{ top: 'always' }}>
         <ProductsNearSlide />
-        <View style={{ width: '100%', height: height - 300 }}>
+        <View style={{ width: '100%', height: height - 252 }}>
           <RoutesProducts />
         </View>
       </SafeAreaView>
