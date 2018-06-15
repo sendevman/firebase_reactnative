@@ -14,6 +14,7 @@ export default StyleSheet.create({
     fontSize: 12,
     fontWeight: 'bold',
     lineHeight: 14,
+    marginTop: 10,
     marginBottom: 6,
     paddingHorizontal: 14
   },
