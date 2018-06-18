@@ -78,7 +78,7 @@ class HomeScreen extends Component {
       />
     ),
     headerLeft: (
-      <Button title="+1" color="grey" />
+      <Button title="+1" color="grey" onPress={() => alert('This is a button!')} />
         // onPress={() => alert('This is a button!')}
         // onPress={props => props.navigation.openDrawer()}
     ),
