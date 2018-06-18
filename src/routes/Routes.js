@@ -6,16 +6,14 @@
 
 import React, { Component } from 'react';
 import { Button, ScrollView, StatusBar, Text, View } from 'react-native';
-import {
-  createDrawerNavigator,
-  createBottomTabNavigator,
-  createTabNavigator,
-  SafeAreaView
-} from 'react-navigation';
+import { createDrawerNavigator, createBottomTabNavigator, SafeAreaView } from 'react-navigation';
 
 // My Customs
 import MyDrawer from '../components/Drawer/Drawer';
 import Icon from '../assets/images/Icon';
+
+// Layouts
+import ProductLayout from '../screens/ProductLayout';
 
 // Screens
 import HomeScreen from '../screens/HomeScreen';
@@ -57,10 +55,6 @@ const AccountSettings = ({ navigation }) => (
 );
 
 // Bottom Tab Navigator - Screens
-const Products = ({ navigation }) => (
-  <MyNavScreen banner={'Products'} navigation={navigation} />
-);
-
 const Compare = ({ navigation }) => (
   <MyNavScreen banner={'Compare'} navigation={navigation} />
 );
@@ -73,52 +67,10 @@ const SharedSession = ({ navigation }) => (
   <MyNavScreen banner={'Shared Session'} navigation={navigation} />
 );
 
-// Top Tab Navigator - Screens
-const CostPlans = ({ navigation }) => (
-  <MyNavScreen banner={'Cost & Plans'} navigation={navigation} />
-);
-
-const TopTabNav = createTabNavigator(
-  {
-    InfoSpecs: {
-      screen: InfoSpecsScreen,
-      navigationOptions: { title: 'Info & Specs' }
-    },
-    Reviews: {
-      screen: ReviewsScreen,
-      navigationOptions: { title: 'Reviews' }
-    },
-    CostPlans: {
-      screen: HomeScreen,
-      navigationOptions: { title: 'Cost & Plans' }
-    }
-  },
-  {
-    initialRouteName: 'InfoSpecs',
-    tabBarOptions: {
-      upperCaseLabel: false,
-      activeTintColor: '#1181FF',
-      activeBackgroundColor: '#FFF',
-      inactiveTintColor: '#3E3F42',
-      inactiveBackgroundColor: '#FFF',
-      style: {
-        height: 42,
-        backgroundColor: '#FFF'
-      },
-      labelStyle: {
-        marginTop: 4,
-        fontSize: 14,
-        letterSpacing: 0.13
-      },
-      indicatorStyle: { backgroundColor: '#1181FF' }
-    }
-  }
-);
-
 const BottomTabNav = createBottomTabNavigator(
   {
     Products: {
-      screen: TopTabNav,
+      screen: ProductLayout,
       navigationOptions: {
         title: 'Products',
         tabBarIcon: ({tintColor}) => {
