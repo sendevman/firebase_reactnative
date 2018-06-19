@@ -11,6 +11,7 @@ import { createMaterialTopTabNavigator, SafeAreaView } from 'react-navigation';
 // Screens
 import InfoSpecsScreen from '../screens/InfoSpecsScreen';
 import ReviewsScreen from '../screens/ReviewsScreen';
+import CostPlansScreen from '../screens/CostPlansScreen';
 
 const MyNavScreen = ({ navigation, banner }) => (
   <View style={{}}>
@@ -30,8 +31,8 @@ const MyNavScreen = ({ navigation, banner }) => (
 );
 
 // Top Tab Navigator - Screens
-const CostPlans = ({ navigation }) => (
-  <MyNavScreen banner={'Cost & Plans'} navigation={navigation} />
+const TestScreen = ({ navigation }) => (
+  <MyNavScreen banner={'Test Screen'} navigation={navigation} />
 );
 
 const TopTabNav = createMaterialTopTabNavigator(
@@ -45,7 +46,7 @@ const TopTabNav = createMaterialTopTabNavigator(
       navigationOptions: { title: 'Reviews' }
     },
     CostPlans: {
-      screen: CostPlans,
+      screen: CostPlansScreen,
       navigationOptions: { title: 'Cost & Plans' }
     }
   },
