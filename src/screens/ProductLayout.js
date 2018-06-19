@@ -24,20 +24,22 @@ class ProductLayoutScreen extends Component<props> {
     super(props);
   };
 
-  static navigationOptions = {
-    headerTitle: <LogoTitle />,
-    header: props => <GradientHeader {...props} />,
-    headerStyle: { backgroundColor: 'transparent' },
-    headerLeft: (
-      <TouchableHighlight style={{ marginLeft: 16 }} onPress={(navigation) => console.log(navigation)}>
-        <Icon name="Menu" width="24" height="24" fill="#FFF" viewBox="0 0 24 24" />
-      </TouchableHighlight>
-    ),
-    headerRight: (
-      <TouchableHighlight style={{ marginRight: 16 }} >
-        <Icon name="Menu" width="24" height="24" fill="transparent" viewBox="0 0 24 24" />
-      </TouchableHighlight>
-    )
+  static navigationOptions = ({ navigation }) => {
+    return {
+      headerTitle: <LogoTitle />,
+      header: props => <GradientHeader {...props} />,
+      headerStyle: { backgroundColor: 'transparent' },
+      headerLeft: (
+        <TouchableHighlight style={{ marginLeft: 16 }} onPress={() => navigation.openDrawer()}>
+          <Icon name="Menu" width="24" height="24" fill="#FFF" viewBox="0 0 24 24" />
+        </TouchableHighlight>
+      ),
+      headerRight: (
+        <TouchableHighlight style={{ marginRight: 16 }} >
+          <Icon name="Menu" width="24" height="24" fill="transparent" viewBox="0 0 24 24" />
+        </TouchableHighlight>
+      )
+    };
   };
 
   render() {
