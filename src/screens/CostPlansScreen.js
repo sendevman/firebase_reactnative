@@ -5,141 +5,170 @@
  */
 
 import React, { Component } from 'react';
-import { ScrollView, Button, Text, View } from 'react-native';
+import { ScrollView, Text, View } from 'react-native';
 import { connect } from 'react-redux';
 
+// My Styles
 import styles from './css/CostPlansScreenCss';
-import Icon from '../assets/images/Icon';
 
+// My Customs
+import Icon from '../assets/images/Icon';
 
 class CostPlansScreen extends Component {
   render() {
     return (
       <ScrollView contentContainerStyle={styles.container}>
-        <View style={styles.costplansBox}>
+        <View style={styles.costPlansBox}>
+          <View style={[ styles.cardBox, { marginTop: 16 }]}>
+            <Text style={styles.titleCard}>AT&T Next</Text>
+            <Text style={styles.subTitleCard}>Upgrade every 2 years. 0% APR; 30-month installment.</Text>
 
-          <View style={styles.containerCostPlans}>
-            <Text style={styles.containerTitle}>AT&T Next</Text>
-            <Text style={styles.containerSubTitle}>Upgrade every 2 years. 0% APR; 30-month installment.</Text>
-            <View style={styles.separator}></View>
-            <View style={styles.containerNext}>
-              <View style={styles.containerSmall}>
-                <Text style={styles.valor}>$0.00</Text>
-                <Text style={styles.textValor}>DUE TODAY</Text>
+            <View style={styles.separatorCard}></View>
+
+            <View style={styles.dataCardBox}>
+              <View style={styles.dataBox}>
+                <Text style={styles.dataValue}>$0.00</Text>
+                <Text style={styles.dataText}>DUE TODAY</Text>
               </View>
-              <View style={styles.divisor}></View>
-              <View style={styles.containerSmall}>
-                <Text style={styles.valor}>$26.34</Text>
-                <Text style={styles.textValor}>MONTHLY</Text>
+
+              <View style={styles.dataDivisor}></View>
+
+              <View style={styles.dataBox}>
+                <Text style={styles.dataValue}>$26.34</Text>
+                <Text style={styles.dataText}>MONTHLY</Text>
               </View>
-              <View style={styles.divisor}></View>
-              <View style={styles.containerSmall}>
-                <Text style={styles.valor}>May '20</Text>
-                <Text style={styles.textValor}>TRADE-IN</Text>
+
+              <View style={styles.dataDivisor}></View>
+
+              <View style={styles.dataBox}>
+                <Text style={styles.dataValue}>May '20</Text>
+                <Text style={styles.dataText}>TRADE-IN</Text>
               </View>
             </View>
           </View>
 
-          <View style={[styles.containerCostPlans,{marginTop: 8,}]}>
-            <Text style={styles.containerTitle}>AT&T Next Every Year</Text>
-            <Text style={styles.containerSubTitle}>Upgrade every years. 0% APR; 24-month installment.</Text>
-            <View style={styles.separator}></View> 
-            <View style={styles.containerNext}>
-              <View style={styles.containerSmall}>
-                <Text style={styles.valor}>$0.00</Text>
-                <Text style={styles.textValor}>DUE TODAY</Text>
+          <View style={styles.cardBox}>
+            <Text style={styles.titleCard}>AT&T Next Every Year</Text>
+            <Text style={styles.subTitleCard}>Upgrade every years. 0% APR; 24-month installment.</Text>
+
+            <View style={styles.separatorCard}></View> 
+
+            <View style={styles.dataCardBox}>
+              <View style={styles.dataBox}>
+                <Text style={styles.dataValue}>$0.00</Text>
+                <Text style={styles.dataText}>DUE TODAY</Text>
               </View>
-              <View style={styles.divisor}></View>
-              <View style={styles.containerSmall}>
-                <Text style={styles.valor}>$32.92</Text>
-                <Text style={styles.textValor}>MONTHLY</Text>
+
+              <View style={styles.dataDivisor}></View>
+
+              <View style={styles.dataBox}>
+                <Text style={styles.dataValue}>$32.92</Text>
+                <Text style={styles.dataText}>MONTHLY</Text>
               </View>
-              <View style={styles.divisor}></View>
-              <View style={styles.containerSmall}>
-                <Text style={styles.valor}>May '19</Text>
-                <Text style={styles.textValor}>TRADE-IN</Text>
+
+              <View style={styles.dataDivisor}></View>
+
+              <View style={styles.dataBox}>
+                <Text style={styles.dataValue}>May '19</Text>
+                <Text style={styles.dataText}>TRADE-IN</Text>
               </View>
             </View>
           </View>
 
-          <View style={[styles.containerCostPlans, {marginTop: 8,}]}>
-            <Text style={styles.containerTitle}>No annual contract</Text>
-            <Text style={styles.containerSubTitle}>Upgrade every years. 0% APR; 24-month installment.</Text>
-            <View style={styles.separator}></View>
-            <View style={styles.containerNext}>
-              <View style={styles.containerSmall}>
-                <Text style={styles.valor}>$789.99</Text>
-                <Text style={styles.textValor}>DUE TODAY</Text>
+          <View style={styles.cardBox}>
+            <Text style={styles.titleCard}>No annual contract</Text>
+            <Text style={styles.subTitleCard}>Upgrade every years. 0% APR; 24-month installment.</Text>
+
+            <View style={styles.separatorCard}></View>
+
+            <View style={styles.dataCardBox}>
+              <View style={styles.dataBox}>
+                <Text style={styles.dataValue}>$789.99</Text>
+                <Text style={styles.dataText}>DUE TODAY</Text>
               </View>
-              <View style={styles.divisor}></View>
-              <View style={styles.containerSmall}>
-                <Text style={styles.valor}>$0.00</Text>
-                <Text style={styles.textValor}>MONTHLY</Text>
+
+              <View style={styles.dataDivisor}></View>
+
+              <View style={styles.dataBox}>
+                <Text style={styles.dataValue}>$0.00</Text>
+                <Text style={styles.dataText}>MONTHLY</Text>
               </View>
-              <View style={styles.divisor}></View>
-              <View style={styles.containerSmall}>
-                <Text style={styles.textValor}>UPGRADE</Text>
-                <Text style={styles.textValor}>ANYTIME</Text>
+
+              <View style={styles.dataDivisor}></View>
+
+              <View style={styles.dataBox}>
+                <Text style={styles.dataText}>UPGRADE</Text>
+                <Text style={styles.dataText}>ANYTIME</Text>
               </View>
             </View>
           </View>
 
-          <Text style={styles.available}>Available in-store on May 17, 2018</Text>
-          <Text style={styles.device}>Device protection</Text>
+          <View style={styles.shippingBox}>
+            <Icon name="ShippingTruck" width="18" height="13" viewBox="0 0 18 13" />
+            <Text style={styles.availableText}>Available in-store on May 17, 2018</Text>
+          </View>
 
-          <View style={styles.containerCostPlans}>
-            <Text style={styles.containerTitle}>AT&T Mobile Insurance</Text>
-            <View style={styles.separator}></View>
-            <View style={styles.containerNext}>
-              <View style={styles.containerSmall}>
-                <Text style={styles.valor}>1</Text>
-                <Text style={styles.textValor}>DEVICE PROTECTED</Text>
+          <Text style={styles.titleDevice}>Device protection</Text>
+
+          <View style={styles.cardBox}>
+            <Text style={styles.titleCard}>AT&T Mobile Insurance</Text>
+
+            <View style={styles.separatorCard}></View>
+
+            <View style={styles.dataCardBox}>
+              <View style={styles.dataBox}>
+                <Text style={styles.dataValue}>1</Text>
+                <Text style={styles.dataText}>DEVICE PROTECTED</Text>
               </View>
-              <View style={styles.divisor}></View>
-              <View style={styles.containerSmall}>
-                <Text style={styles.valor}>$8.99</Text>
-                <Text style={styles.textValor}>MONTHLY</Text>
+
+              <View style={styles.dataDivisor}></View>
+
+              <View style={styles.dataBox}>
+                <Text style={styles.dataValue}>$8.99</Text>
+                <Text style={styles.dataText}>MONTHLY</Text>
               </View>
             </View>
           </View>
 
-          <View style={[styles.containerCostPlans, {marginTop: 8,}]}>
-            <Text style={styles.containerTitle}>AT&T Mobile Protection Pack</Text>
-            <View style={styles.separator}></View>
-            <View style={styles.containerNext}>
-              <View style={styles.containerSmall}>
-                <Text style={styles.valor}>1</Text>
-                <Text style={styles.textValor}>DEVICE PROTECTED</Text>
+          <View style={styles.cardBox}>
+            <Text style={styles.titleCard}>AT&T Mobile Protection Pack</Text>
+
+            <View style={styles.separatorCard}></View>
+
+            <View style={styles.dataCardBox}>
+              <View style={styles.dataBox}>
+                <Text style={styles.dataValue}>1</Text>
+                <Text style={styles.dataText}>DEVICE PROTECTED</Text>
               </View>
-              <View style={styles.divisor}></View>
-              <View style={styles.containerSmall}>
-                <Text style={styles.valor}>$11.99</Text>
-                <Text style={styles.textValor}>MONTHLY</Text>
+
+              <View style={styles.dataDivisor}></View>
+
+              <View style={styles.dataBox}>
+                <Text style={styles.dataValue}>$11.99</Text>
+                <Text style={styles.dataText}>MONTHLY</Text>
               </View>
             </View>
           </View>
 
-          <View style={[styles.containerCostPlans, {marginTop: 8,}]}>
-            <Text style={styles.containerTitle}>AT&T Multi Device Protection Pack</Text>
-            <View style={styles.separator}></View>
-            <View style={styles.containerNext}>
-              <View style={styles.containerSmall}>
-                <Text style={styles.valor}>3</Text>
-                <Text style={styles.textValor}>DEVICES PROTECTED</Text>
+          <View style={styles.cardBox}>
+            <Text style={styles.titleCard}>AT&T Multi Device Protection Pack</Text>
+
+            <View style={styles.separatorCard}></View>
+
+            <View style={styles.dataCardBox}>
+              <View style={styles.dataBox}>
+                <Text style={styles.dataValue}>3</Text>
+                <Text style={styles.dataText}>DEVICES PROTECTED</Text>
               </View>
-              <View style={styles.divisor}></View>
-              <View style={styles.containerSmall}>
-                <Text style={styles.valor}>$34.99</Text>
-                <Text style={styles.textValor}>MONTHLY</Text>
+
+              <View style={styles.dataDivisor}></View>
+
+              <View style={styles.dataBox}>
+                <Text style={styles.dataValue}>$34.99</Text>
+                <Text style={styles.dataText}>MONTHLY</Text>
               </View>
             </View>
           </View>
-        <View>
-            <Button
-                title="Go to Home"
-                onPress={() => this.props.navigation.navigate('Home')}
-            />
-        </View>
         </View>
       </ScrollView>
     );
