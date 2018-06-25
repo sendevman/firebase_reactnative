@@ -234,7 +234,7 @@ class InfoSpecsScreen extends Component {
   }
 }
 
-function mapStateToProps(state) {
+const mapStateToProps = state => {
   return { infoSpecs: 0 };
 }
 
