@@ -24,12 +24,12 @@ const BleManagerModule = NativeModules.BleManager;
 const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
 
 class ProductsNear extends Component {
-  constructor(){
-    super()
+  constructor() {
+    super();
     this.state = {
       walkbaseState: '',
-      bleState: 0, //0 : off, 1: on
-    }
+      bleState: 0 // 0: off, 1: on
+    };
     this.handleEventNotDetermined = this.handleEventNotDetermined.bind(this);
     this.handleEventInitializing = this.handleEventInitializing.bind(this);
     this.handleEventPause = this.handleEventPause.bind(this);
@@ -37,9 +37,9 @@ class ProductsNear extends Component {
     this.handleEventFailed = this.handleEventFailed.bind(this);
     this.handleEventReceivedAdvertisement = this.handleEventReceivedAdvertisement.bind(this);
     this.handleEventErrors = this.handleEventErrors.bind(this);
-  }
-  componentWillMount() {
-  }
+  };
+
+  componentWillMount() {};
 
   componentDidMount() {
     this.handlerDiscover1 = bleManagerEmitter.addListener('WBEngageManagerStateNotDetermined', this.handleEventNotDetermined );
@@ -49,27 +49,19 @@ class ProductsNear extends Component {
     this.handlerDiscover5 = bleManagerEmitter.addListener('WBEngageManagerStateFailed', this.handleEventFailed );
     this.handlerDiscover6 = bleManagerEmitter.addListener('WBEngageManagerReceivedAdvertisement', this.handleEventReceivedAdvertisement );
     this.handlerDiscover7 = bleManagerEmitter.addListener('WBEngageManagerOff', this.handleEventErrors );
-  }
+  };
 
-  handleEventNotDetermined(data) {
-    console.log("Not determined");
-  }
-  handleEventInitializing(data) {
-    console.log("Initializing");
-  }
-  handleEventPause(data) {
-    console.log("Pause");
-  }
-  handleEventScanning(data) {
-    console.log("Scanning");
-  }
-  handleEventFailed(data) {
-    console.log("Failed");
-  }
+  handleEventNotDetermined(data) { console.log("Not determined"); };
+  handleEventInitializing(data) { console.log("Initializing"); };
+  handleEventPause(data) { console.log("Pause"); };
+  handleEventScanning(data) { console.log("Scanning"); };
+  handleEventFailed(data) { console.log("Failed"); };
+
   handleEventReceivedAdvertisement(data) {
     console.log(data);
     this.handleFetchData(data);
-  }
+  };
+
   handleEventErrors(data) {
     if(data.state === 'WBErrorUnknown') {
       console.log(data);
@@ -79,13 +71,10 @@ class ProductsNear extends Component {
     } else if(data.state === 'Not error code') {
       this.setState({bleState:1})
     }
-  }
+  };
 
-  handleFetchData(data) {
-    //Analyzing the data
-  }
+  handleFetchData(data) { /* Analyzing the data */ };
   
-
   componentWillUnmount() {
     this.handlerDiscover1.remove();
     this.handlerDiscover2.remove();
@@ -94,7 +83,8 @@ class ProductsNear extends Component {
     this.handlerDiscover5.remove();
     this.handlerDiscover6.remove();
     this.handlerDiscover7.remove();
-  }
+  };
+
   render() {
     return (
       <LinearGradient colors={['#2b3748', '#43597D']}  >
