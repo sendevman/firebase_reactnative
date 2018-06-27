@@ -19,7 +19,7 @@ import RoutesProducts from '../routes/Products'
 
 var { height } = Dimensions.get('window');
 
-class ProductLayoutScreen extends Component<props> {
+class ProductLayoutScreen extends Component {
   constructor(props) {
     super(props);
   };
@@ -44,9 +44,9 @@ class ProductLayoutScreen extends Component<props> {
 
   render() {
     return (
-      <SafeAreaView forceInset={{ top: 'always' }}>
+      <SafeAreaView forceInset={{ top: 'always' }} style={{ backgroundColor: '#FFF' }}>
         <ProductsNearSlide />
-        <View style={{ width: '100%', height: height - 252 }}>
+        <View style={{ width: '100%', height: height - 300 }}>
           <RoutesProducts />
         </View>
       </SafeAreaView>
