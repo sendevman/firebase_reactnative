@@ -9,7 +9,15 @@ var { width } = Dimensions.get('window');
 
 export default StyleSheet.create({
   container: { backgroundColor: '#FFF' },
-  infoSpecBox: { paddingHorizontal : 10 },
+  infoSpecBox: { paddingHorizontal: 10 },
+  // - - Skeleton Loading Box - -
+  skeletonLoading: {
+    height: '100%',
+    backgroundColor: 'transparent',
+    marginTop: 10,
+    paddingHorizontal: 10,
+    paddingTop: 10
+  },
   // - - Description Box - -
   description: {
     marginTop: 16,
