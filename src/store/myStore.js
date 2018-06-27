@@ -8,17 +8,14 @@ import { applyMiddleware, compose, createStore } from 'redux';
 import thunk from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 
-const initialStatePivot = { testing: 0 };
-
-function reducer(state = initialStatePivot, action) {
-  return state;
-}
+// My Root Reducer
+import rootReducer from '../reducers/index';
 
 const logger = createLogger();
 const enhancer = compose(
   applyMiddleware(thunk, logger)
 );
 
-const myStore = createStore(reducer, enhancer);
+const myStore = createStore(rootReducer, enhancer);
 
 export default myStore;

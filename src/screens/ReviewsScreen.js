@@ -235,7 +235,9 @@ class ReviewsScreen extends Component {
 }
 
 function mapStateToProps(state) {
-  return { reviews: 0 };
+  const { current } = state;
+
+  return { reviews: current.product };
 }
 
 export default connect(mapStateToProps)(ReviewsScreen);
