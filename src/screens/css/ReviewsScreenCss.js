@@ -10,6 +10,13 @@ var { width } = Dimensions.get('window');
 export default StyleSheet.create({
   container: { backgroundColor: '#EEF1F4' },
   reviewsBox: { paddingHorizontal: 10 },
+  // - - Skeleton Loading Box - -
+  skeletonLoading: {
+    height: '100%',
+    backgroundColor: '#FFF',
+    paddingHorizontal: 10,
+    paddingTop: 20
+  },
   // - - Description Box - -
   headerPrincipal: {
     marginTop: 18,
