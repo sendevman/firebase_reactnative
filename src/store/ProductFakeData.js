@@ -58,17 +58,17 @@ export const FakeProduct = {
   customerReviews: [
     {
       name: 'Karin M.',
-      review: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vulputate nibh ante, in efficitur tellus mattis sit amet. Nam tempus lectus quis…',
+      review: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vulputate nibh ante, in efficitur tellus mattis sit amet. Nam tempus lectus quisan and Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vulputate nibh ante, in efficitur tellus mattis sit amet.',
       stars: 4.0
     },
     {
       name: 'Joseph H.',
-      review: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vulputate nibh ante, in efficitur tellus mattis sit amet. Nam tempus lectus quis…',
+      review: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vulputate nibh ante, in efficitur tellus mattis sit amet. Nam tempus lectus quisan and Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vulputate nibh ante, in efficitur tellus mattis sit amet.',
       stars: 5.0
     },
     {
       name: 'Felix L.',
-      review: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vulputate nibh ante, in efficitur tellus mattis sit amet. Nam tempus lectus quis…',
+      review: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vulputate nibh ante, in efficitur tellus mattis sit amet. Nam tempus lectus quisan and Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vulputate nibh ante, in efficitur tellus mattis sit amet.',
       stars: 4.5
     }
   ],
@@ -124,27 +124,33 @@ export const FakeProduct = {
   videoContent: [
     {
       author: 'MKBHD',
-      src: '',
-      title: 'The perfect (Before Buying Before Buying) Samsung!'
+      src: 'https://www.youtube.com/watch?v=Gzy_nCkn88U',
+      title: 'The perfect ... Samsung!'
     },
     {
       author: 'Jonathan Morrison',
-      src: '',
+      src: 'https://www.youtube.com/watch?v=4BQSLKPF0A8',
       title: '10 Things Before Buying!'
     }
   ],
   webReviews: [
     {
-      cons: ['con1', 'con2', 'con3', 'con4'],
-      pros: ['pro1', 'pro2', 'pro3', 'pro4'],
+      cons: ['Average battery life', 'Gimmicks galore', 'Samsung has a poor history of updating its phones'],
+      pros: ['Great design', 'Beautiful display', 'Fast performance', 'Capable camera'],
       publication: 'consumer_reports',
-      summary: ''
+      summary: "The Galaxy S9 is all of the good and all of the bad we’ve come to expect from Samsung"
     },
     {
-      cons: ['con1', 'con2', 'con3', 'con4'],
-      pros: ['pro1', 'pro2', 'pro3', 'pro4'],
-      publication: 'consumer_reports',
-      summary: ''
+      cons: ['Average battery life', 'Gimmicks galore', 'Samsung has a poor history of updating its phones'],
+      pros: ['Great design', 'Beautiful display', 'Fast performance', 'Capable camera'],
+      publication: 'cnet',
+      summary: "The Galaxy S9 is a nice incremental upgrade, but its low-light camera isn’t a game changer and some new features fall far behind the iPhone X. S8 owners can skip, but it's a good upgrade from older Androids."
+    },
+    {
+      cons: ['Average battery life', 'Gimmicks galore', 'Samsung has a poor history of updating its phones'],
+      pros: ['Great design', 'Beautiful display', 'Fast performance', 'Capable camera'],
+      publication: 'digital_trends',
+      summary: "The Galaxy S9 is a nice incremental upgrade, but its low-light camera isn’t a game changer and some new features fall far behind the iPhone X. S8 owners can skip, but it's a good upgrade from older Androids."
     }
   ]
 }
