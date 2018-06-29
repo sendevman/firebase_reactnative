@@ -72,6 +72,7 @@
 		EC854E3408C5452FBBED8B7C /* Rubik-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 55C545F816E041C78AD4ACFE /* Rubik-MediumItalic.ttf */; };
 		F0548C9920E4B6E000340237 /* libBleManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F0548C6E20E4B6D200340237 /* libBleManager.a */; };
 		F0548C9B20E4B7C100340237 /* WalkbaseEngageSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0548C9A20E4B7C100340237 /* WalkbaseEngageSDK.framework */; };
+		F0548E7420E615DE00340237 /* libReact Native Open Settings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F0548E7320E615C500340237 /* libReact Native Open Settings.a */; };
 		F3DB9928DE604DB996889FA1 /* SF-Pro-Text.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DAB3719094E141409B187CBA /* SF-Pro-Text.ttf */; };
 		F8369D982B134129970789C8 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5935B935CE3C45A3B61C7F54 /* Foundation.ttf */; };
 		FD26D0E2D0FF4FAB9C244662 /* TSLocationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA0B1ED21A7346F5ABBBA733 /* TSLocationManager.framework */; };
@@ -415,6 +416,13 @@
 			remoteGlobalIDString = 18F3BFD71A81E06E00692297;
 			remoteInfo = "CocoaLumberjack-iOS-Static";
 		};
+		F0548E7220E615C500340237 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F0548E6E20E615C500340237 /* React Native Open Settings.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 190C8BAA1BEAADCC00CD505E;
+			remoteInfo = "React Native Open Settings";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -489,6 +497,7 @@
 		F0548C9A20E4B7C100340237 /* WalkbaseEngageSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WalkbaseEngageSDK.framework; sourceTree = "<group>"; };
 		F0548CD720E5286C00340237 /* Roboto.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Roboto.ttf; sourceTree = "<group>"; };
 		F0548CD820E5286C00340237 /* Rubik.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Rubik.ttf; sourceTree = "<group>"; };
+		F0548E6E20E615C500340237 /* React Native Open Settings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "React Native Open Settings.xcodeproj"; path = "../node_modules/react-native-open-settings/React Native Open Settings.xcodeproj"; sourceTree = "<group>"; };
 		F7275B076CF0439E97E848C1 /* Rubik-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Rubik-Light.ttf"; path = "../app/fonts/Rubik-Light.ttf"; sourceTree = "<group>"; };
 		F7E7043250064637A12355E7 /* BVLinearGradient.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = BVLinearGradient.xcodeproj; path = "../node_modules/react-native-linear-gradient/BVLinearGradient.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -506,6 +515,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F0548E7420E615DE00340237 /* libReact Native Open Settings.a in Frameworks */,
 				F0548C9920E4B6E000340237 /* libBleManager.a in Frameworks */,
 				ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */,
 				5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */,
@@ -745,6 +755,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				F0548E6E20E615C500340237 /* React Native Open Settings.xcodeproj */,
 				F0548C6920E4B6D200340237 /* BleManager.xcodeproj */,
 				5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
@@ -886,6 +897,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		F0548E6F20E615C500340237 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F0548E7320E615C500340237 /* libReact Native Open Settings.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -972,9 +991,11 @@
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = E7J65AP6DQ;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
+						DevelopmentTeam = E7J65AP6DQ;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = true;
@@ -1059,6 +1080,10 @@
 				{
 					ProductGroup = 139FDEE71B06529A00C62182 /* Products */;
 					ProjectRef = 139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */;
+				},
+				{
+					ProductGroup = F0548E6F20E615C500340237 /* Products */;
+					ProjectRef = F0548E6E20E615C500340237 /* React Native Open Settings.xcodeproj */;
 				},
 				{
 					ProductGroup = 146834001AC3E56700842450 /* Products */;
@@ -1414,6 +1439,13 @@
 			remoteRef = F0548DF520E5B1A200340237 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		F0548E7320E615C500340237 /* libReact Native Open Settings.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libReact Native Open Settings.a";
+			remoteRef = F0548E7220E615C500340237 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -1573,6 +1605,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = E7J65AP6DQ;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/../node_modules/react-native-background-geolocation/ios/**",
 					"$(PROJECT_DIR)/../node_modules/react-native-background-fetch/ios/**",
@@ -1614,6 +1647,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = E7J65AP6DQ;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/../node_modules/react-native-background-geolocation/ios/**",
 					"$(PROJECT_DIR)/../node_modules/react-native-background-fetch/ios/**",
@@ -1652,6 +1686,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
+				DEVELOPMENT_TEAM = E7J65AP6DQ;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1685,6 +1720,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = E7J65AP6DQ;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",

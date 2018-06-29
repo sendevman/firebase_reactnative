@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="230px" height="63px" viewBox="0 0 230 63" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>634068C1-1F32-4447-8B5B-DD214FF7CD84</title>
+    <desc>Created with sketchtool.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Onboarding-4---Bluetooth-permisison" transform="translate(-73.000000, -195.000000)">
+            <g id="Permission_popup" transform="translate(16.000000, 139.000000)">
+                <g id="Illustration" transform="translate(57.000000, 56.000000)">
+                    <g id="if_bluetoothBG_925802" transform="translate(93.000000, 0.000000)" fill="#1181FF" fill-rule="nonzero">
+                        <path d="M24.5882353,48.0980392 L29.9803922,42.7058824 L24.5882353,37.3137255 L24.5882353,48.0980392 Z M18.3333333,31.0588235 L8.62745098,40.7647059 C6.03921569,43.3529412 9.70588235,47.0196078 12.2941176,44.4313725 L19.4117647,37.3137255 L19.4117647,54.3529412 C19.4117647,56.5098039 22,58.0196078 23.9411765,56.0784314 L35.372549,44.6470588 C36.4509804,43.5686275 36.4509804,41.8431373 35.372549,40.7647059 L25.6666667,31.0588235 L35.372549,21.3529412 C36.4509804,20.2745098 36.4509804,18.5490196 35.372549,17.4705882 L23.9411765,6.03921569 C22,4.09803922 19.4117647,5.60784314 19.4117647,7.76470588 L19.4117647,24.8039216 L12.2941176,17.6862745 C9.70588235,15.0980392 6.03921569,18.7647059 8.62745098,21.3529412 L18.3333333,31.0588235 Z M24.5882353,14.0196078 L24.5882353,24.8039216 L29.9803922,19.4117647 L24.5882353,14.0196078 Z M44,31.0588235 C44,56.9411765 36.2352941,62.1176471 22,62.1176471 C7.76470588,62.1176471 0,56.9411765 0,31.0588235 C0,5.17647059 8.19607843,0 22.2156863,0 C36.2352941,0 44,5.17647059 44,31.0588235 Z" id="Shape"></path>
+                    </g>
+                    <circle id="Oval" fill="#1181FF" cx="223.5" cy="29.5" r="6.5"></circle>
+                    <circle id="Oval-Copy" fill="#1181FF" cx="6.5" cy="29.5" r="6.5"></circle>
+                    <path d="M21,30 L85,30" id="Path-2" stroke="#AEBECD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="1,3"></path>
+                    <path d="M145,30 L209,30" id="Path-2-Copy" stroke="#AEBECD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="1,3"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
