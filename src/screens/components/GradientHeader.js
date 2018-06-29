@@ -15,7 +15,7 @@ class GradientHeader extends Component<props> {
 
   render() {
     return (
-      <LinearGradient colors={['#242d39', '#2b3748']}  >
+      <LinearGradient colors={['#242d39', '#2b3748']}>
         <Header {...this.props} />
       </LinearGradient>
     );

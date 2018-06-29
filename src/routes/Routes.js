@@ -12,10 +12,11 @@ import { createDrawerNavigator, createBottomTabNavigator, SafeAreaView } from 'r
 import MyDrawer from '../components/Drawer/Drawer';
 import Icon from '../assets/images/Icon';
 
-// Layouts
+// My Layouts
 import ProductLayout from '../screens/ProductLayout';
+import OnBoardingLayout from '../screens/OnBoardingLayout';
 
-// Screens
+// My Screens
 import HomeScreen from '../screens/HomeScreen';
 import InfoSpecsScreen from '../screens/InfoSpecsScreen';
 import ReviewsScreen from '../screens/ReviewsScreen';
@@ -150,6 +151,10 @@ const DrawerNav = createDrawerNavigator(
     Events: {
       screen: Events,
       navigationOptions: { title: 'Events' }
+    },
+    OnBoarding: {
+      screen: OnBoardingLayout,
+      navigationOptions: { title: 'OnBoarding' }
     },
     AccountSettings: {
       screen: AccountSettings,
