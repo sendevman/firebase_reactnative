@@ -8,7 +8,7 @@ import React, { Component } from 'react';
 import { Button, ScrollView, StatusBar, Text, View } from 'react-native';
 import { createMaterialTopTabNavigator, SafeAreaView } from 'react-navigation';
 
-// Screens
+// My Screens
 import InfoSpecsScreen from '../screens/InfoSpecsScreen';
 import ReviewsScreen from '../screens/ReviewsScreen';
 import CostPlansScreen from '../screens/CostPlansScreen';
