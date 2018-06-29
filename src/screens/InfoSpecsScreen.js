@@ -6,7 +6,7 @@
 
 import React, { Component } from 'react';
 import { Image, ScrollView, Text, View } from 'react-native';
-import Svg, { Circle, Rect } from 'react-native-svg';
+import Svg, { Rect } from 'react-native-svg';
 import { connect } from 'react-redux';
 
 // My Styles
@@ -52,15 +52,14 @@ class InfoSpecsScreen extends Component {
   renderColors() {
     const { colors } = this.props.infoSpecs;
 
-    if (colors && colors.length > 0) {
+    if (typeof colors != "undefined" && colors.length > 0) {
       return (
         <View style={{ paddingBottom: 10 }}>
           <View style={styles.hrDivider}></View>
           <Text style={styles.titleDivider}>Colors</Text>
 
           <View style={styles.colorItemBox}>
-            {
-              colors.map((item, index) => {
+            { colors.map((item, index) => {
                 return (
                   <View key={index} style={styles.colorItem}>
                     <Image style={styles.colorImage} source={{ uri: item.img }} />
