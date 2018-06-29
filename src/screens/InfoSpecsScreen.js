@@ -6,6 +6,7 @@
 
 import React, { Component } from 'react';
 import { Image, ScrollView, Text, View } from 'react-native';
+import Svg, { Rect } from 'react-native-svg';
 import { connect } from 'react-redux';
 
 // My Styles
@@ -13,229 +14,419 @@ import styles from './css/InfoSpecsScreenCss';
 
 // My Customs
 import Icon from '../assets/images/Icon';
+import SkeletonLoading from './components/SkeletonLoading';
+
+const InfoSpecsSkeleton = () => (
+  <View style={styles.skeletonLoading}>
+    <SkeletonLoading height={220}>
+      <Rect x="0" y="0" rx="3" ry="3" width="90%" height="10"/>
+      <Rect x="0" y="15" rx="3" ry="3" width="100%" height="10"/>
+      <Rect x="0" y="30" rx="3" ry="3" width="80%" height="10"/>
+
+      <Rect x="0" y="50" rx="3" ry="3" width="40" height="10"/>
+      <Rect x="50" y="54" rx="2" ry="2" width="250" height="2"/>
+
+      <Rect x="40" y="70" rx="5" ry="5" width="40" height="70"/>
+      <Rect x="100" y="70" rx="5" ry="5" width="40" height="70"/>
+      <Rect x="160" y="70" rx="5" ry="5" width="40" height="70"/>
+      <Rect x="220" y="70" rx="5" ry="5" width="40" height="70"/>
+
+      <Rect x="0" y="150" rx="3" ry="3" width="60" height="10"/>
+      <Rect x="70" y="154" rx="2" ry="2" width="230" height="2"/>
+
+      <Rect x="0" y="170" rx="3" ry="3" width="80" height="10"/>
+      <Rect x="90" y="170" rx="3" ry="3" width="120" height="10"/>
+      <Rect x="220" y="170" rx="3" ry="3" width="80" height="10"/>
+      <Rect x="0" y="185" rx="3" ry="3" width="100%" height="10"/>
+      <Rect x="0" y="200" rx="3" ry="3" width="160" height="10"/>
+      <Rect x="170" y="200" rx="3" ry="3" width="130" height="10"/>
+    </SkeletonLoading>
+  </View>
+);
 
 class InfoSpecsScreen extends Component {
-  render() {
-    return (
-      <ScrollView contentContainerStyle={styles.container}>
-        <View style={styles.infoSpecBox}>
-          <Text style={styles.description}>
-            Discovery Galaxy S9 and S9+ and the revolutionary camera that adapts like the human eye.
-          </Text>
+  constructor(props) {
+    super(props);
+  }
 
-          <View style={{ paddingBottom: 10 }}>
-            <View style={styles.hrDivider}></View>
-            <Text style={styles.titleDivider}>Colors</Text>
+  renderColors() {
+    const { colors } = this.props.infoSpecs;
 
-            <View style={styles.colorItemBox}>
-              <View style={styles.colorItem}>
-                <Image style={styles.colorImage} source={require('../assets/images/files/Bitmap.png')} />
-                <Text style={styles.colorTitle}>Lilac Purple</Text>
-              </View>
+    if (typeof colors != "undefined" && colors.length > 0) {
+      return (
+        <View style={{ paddingBottom: 10 }}>
+          <View style={styles.hrDivider}></View>
+          <Text style={styles.titleDivider}>Colors</Text>
 
-              <View style={styles.colorItem}>
-                <Image style={styles.colorImage} source={require('../assets/images/files/Bitmap.png')} />
-                <Text style={styles.colorTitle}>Midnight Black</Text>
-              </View>
+          <View style={styles.colorItemBox}>
+            { colors.map((item, index) => {
+                return (
+                  <View key={index} style={styles.colorItem}>
+                    <Image style={styles.colorImage} source={{ uri: item.img }} />
+                    <Text style={styles.colorTitle}>{item.name}</Text>
+                  </View>
+                );
+              })
+            }
+          </View>
+        </View>
+      );
+    }
+  }
 
-              <View style={styles.colorItem}>
-                <Image style={styles.colorImage} source={require('../assets/images/files/Bitmap.png')} />
-                <Text style={styles.colorTitle}>Titanium Gray</Text>
-              </View>
+  renderStorage() {
+    const { deviceOptions } = this.props.infoSpecs;
 
-              <View style={styles.colorItem}>
-                <Image style={styles.colorImage} source={require('../assets/images/files/Bitmap.png')} />
-                <Text style={styles.colorTitle}>Coral Blue</Text>
-              </View>
+    if (deviceOptions && deviceOptions.length > 0) {
+      return (
+        <View style={{ paddingBottom: 18 }}>
+          <View style={styles.hrDivider}></View>
+          <Text style={styles.titleDivider}>Storage</Text>
+
+          <View style={styles.storageBox}>
+            {
+              deviceOptions.map((item, index) => {
+                return (
+                  <View key={index} style={styles.storageItem}>
+                    <Text style={styles.storageGB}>{item.storage}GB</Text>
+                    <Text style={styles.storagePrice}>${item.price}</Text>
+                  </View>
+                );
+              })
+            }
+          </View>
+        </View>
+      );
+    }
+  }
+
+  renderDisplay() {
+    const { display } = this.props.infoSpecs;
+
+    if (Object.keys(display).length !== 0 && display.constructor === Object) {
+      return (
+        <View style={{ paddingBottom: 14 }}>
+          <View style={styles.hrDivider}></View>
+          <Text style={styles.titleDivider}>Display</Text>
+
+          <View style={[styles.storageBox, styles.displayBox]}>
+            <View style={styles.displaySizeItem}>
+              <View style={styles.displaySizeHr}></View>
+              <Text style={styles.displaySize}>{display.size}"</Text>
+            </View>
+
+            <View style={styles.displayTextItem}>
+              <Text style={styles.displayText}>{display.description} ({display.resolution})</Text>
+              <Text style={styles.displayText}>{display.ppi} ppi</Text>
             </View>
           </View>
+        </View>
+      );
+    }
+  }
 
-          <View style={{ paddingBottom: 18 }}>
-            <View style={styles.hrDivider}></View>
-            <Text style={styles.titleDivider}>Storage</Text>
+  renderCamera() {
+    const { camera } = this.props.infoSpecs;
 
+    if (Object.keys(camera).length !== 0 && camera.constructor === Object) {
+      const { features, front, rear } = camera;
+
+      return (
+        <View style={{ paddingBottom: 5 }}>
+          <View style={styles.hrDivider}></View>
+          <Text style={styles.titleDivider}>Camera</Text>
+
+          { (Object.keys(front).length !== 0 || Object.keys(rear).length !== 0) &&
             <View style={styles.storageBox}>
-              <View style={styles.storageItem}>
-                <Text style={styles.storageGB}>64GB</Text>
-                <Text style={styles.storagePrice}>$799</Text>
-              </View>
+              { Object.keys(front).length !== 0 &&
+                <View style={styles.cameraItem}>
+                  <Text style={styles.cameraTitle}>FRONT CAMERA</Text>
+                  <Text style={styles.cameraText}>{front.sensor} sensor</Text>
+                  <Text style={styles.cameraText}>{front.aperture} aperture</Text>
+                </View>
+              }
 
-              <View style={styles.storageItem}>
-                <Text style={styles.storageGB}>128GB</Text>
-                <Text style={styles.storagePrice}>$899</Text>
-              </View>
+              { Object.keys(rear).length !== 0 &&
+                <View style={styles.cameraItem}>
+                  <Text style={styles.cameraTitle}>REAR CAMERA</Text>
+                  <Text style={styles.cameraText}>{rear.sensor} sensor</Text>
+                  <Text style={styles.cameraText}>{rear.aperture} aperture</Text>
+                </View>
+              }
             </View>
-          </View>
+          }
 
-          <View style={{ paddingBottom: 14 }}>
-            <View style={styles.hrDivider}></View>
-            <Text style={styles.titleDivider}>Display</Text>
-
-            <View style={[styles.storageBox, styles.displayBox]}>
-              <View style={styles.displaySizeItem}>
-                <View style={styles.displaySizeHr}></View>
-                <Text style={styles.displaySize}>5.8"</Text>
-              </View>
-
-              <View style={styles.displayTextItem}>
-                <Text style={styles.displayText}>Quad HD+ Super AMOLED (2960x1440)</Text>
-                <Text style={styles.displayText}>570 ppi</Text>
-              </View>
-            </View>
-          </View>
-
-          <View style={{ paddingBottom: 5 }}>
-            <View style={styles.hrDivider}></View>
-            <Text style={styles.titleDivider}>Camera</Text>
-
-            <View style={styles.storageBox}>
-              <View style={styles.cameraItem}>
-                <Text style={styles.cameraTitle}>FRONT CAMERA</Text>
-                <Text style={styles.cameraText}>8MP AF sensor</Text>
-                <Text style={styles.cameraText}>F1.7 aperture</Text>
-              </View>
-
-              <View style={styles.cameraItem}>
-                <Text style={styles.cameraTitle}>REAR CAMERA</Text>
-                <Text style={styles.cameraText}>12MP AF sensor</Text>
-                <Text style={styles.cameraText}>F1.5 aperture</Text>
-              </View>
-            </View>
-
+          { (features && features.length > 0) &&
             <View>
               <View style={styles.cameraList}>
-                <View style={styles.cameraListItem}>
-                  <View style={styles.cameraListDot}></View>
-                  <Text style={[styles.cameraText, styles.cameraListText]}>4k video recording at 30 fps or 60 fps</Text>
-                </View>
-
-                <View style={styles.cameraListItem}>
-                  <View style={styles.cameraListDot}></View>
-                  <Text style={[styles.cameraText, styles.cameraListText]}>Super Slow-mo video support 720p at 960 fps</Text>
-                </View>
-
-                <View style={styles.cameraListItem}>
-                  <View style={styles.cameraListDot}></View>
-                  <Text style={[styles.cameraText, styles.cameraListText]}>Slow motion video support 1080p at 240 fps</Text>
-                </View>
-
-                <View style={styles.cameraListItem}>
-                  <View style={styles.cameraListDot}></View>
-                  <Text style={[styles.cameraText, styles.cameraListText]}>Hyperlapse video support 1080p</Text>
-                </View>
+                {
+                  features.map((item, index) => {
+                    return (
+                      <View key={index} style={styles.cameraListItem}>
+                        <View style={styles.cameraListDot}></View>
+                        <Text style={[styles.cameraText, styles.cameraListText]}>{item}</Text>
+                      </View>
+                    );
+                  })
+                }
               </View>
             </View>
-          </View>
+          }
+        </View>
+      );
+    }
+  }
 
-          <View style={{ paddingBottom: 8 }}>
-            <View style={styles.hrDivider}></View>
-            <Text style={styles.titleDivider}>Performance</Text>
+  renderPerformance() {
+    const { memory, processor } = this.props.infoSpecs;
+    const memoryEmpty = (!memory || !memory.trim() || 0 === memory.length);
 
-            <View style={styles.performanceBox}>
+    if (Object.keys(processor).length !== 0 || memoryEmpty) {
+      return (
+        <View style={{ paddingBottom: 8 }}>
+          <View style={styles.hrDivider}></View>
+          <Text style={styles.titleDivider}>Performance</Text>
+
+          <View style={styles.performanceBox}>
+            { Object.keys(processor).length !== 0 &&
               <View style={styles.performanceItem}>
                 <View style={styles.performanceViewImage}>
                   <Icon name="Processor" viewBox="0 -7 45 45" />
                 </View>
                 <View style={styles.performanceViewText}>
                   <Text style={[styles.performanceText, styles.performanceTitle]}>PROCESSOR</Text>
-                  <Text style={styles.performanceText}>10nm 64-bit Octa-Core Processor 2.8GHz + 1.7GHz (Maximum Clock Speed, Performance Core + Efficiency Core)</Text>
+                  <Text style={styles.performanceText}>{processor.long}</Text>
                 </View>
               </View>
+            }
 
+            { !memoryEmpty &&
               <View style={styles.performanceItem}>
                 <View style={styles.performanceViewImage}>
                   <Icon name="Memory" viewBox="-3 -7 40 40" />
                 </View>
                 <View style={styles.performanceViewText}>
                   <Text style={[styles.performanceText, styles.performanceTitle]}>MEMORY</Text>
-                  <Text style={styles.performanceText}>4GB</Text>
+                  <Text style={styles.performanceText}>{memory}GB</Text>
                 </View>
               </View>
-            </View>
+            }
           </View>
+        </View>
+      );
+    }
+  }
 
+  renderExpandableStorage() {
+    const { sim } = this.props.infoSpecs;
+
+    if (typeof sim == "undefined") return;
+    if (Object.keys(sim).length !== 0 && sim.constructor === Object) {
+      const { simOptions, type } = sim;
+      const simOptionsNoEmpty = (simOptions && simOptions.length > 0);
+      const typeEmpty = (!type || !type.trim() || 0 === type.length);
+
+      const { expandableStorage } = this.props.infoSpecs;
+      if (typeof expandableStorage == "undefined") {
+        var expandableAvailable = false;
+      } else {
+        const expandableStorageEmpty = (Object.keys(expandableStorage).length === 0 && expandableStorage.constructor === Object);
+        var expandableAvailable = (!expandableStorageEmpty && expandableStorage.available);
+      }
+
+      if (!typeEmpty && simOptionsNoEmpty) {
+        return (
           <View style={{ paddingBottom: 6 }}>
             <View style={styles.hrDivider}></View>
             <Text style={styles.titleDivider}>Expandable Storage & SIM Card</Text>
 
-            <View style={[styles.performanceBox, styles.expandableBox]}>
-              <View style={styles.expandableViewText}>
-                <Text style={[styles.performanceText, styles.performanceTitle]}>SINGLE SIM MODEL</Text>
-                <Text style={styles.performanceText}>One Nano SIM and one MicroSD slot (up to 400GB)</Text>
-              </View>
+            { simOptions.length == 2 &&
+              <View style={[styles.performanceBox, styles.expandableBox]}>
+                <View style={styles.expandableViewText}>
+                  <Text style={[styles.performanceText, styles.performanceTitle]}>SINGLE SIM MODEL</Text>
+                  { expandableAvailable &&
+                    <Text style={styles.performanceText}>One {type} SIM and one {expandableStorage.type} slot</Text>
+                  }
+                  { !expandableAvailable &&
+                    <Text style={styles.performanceText}>One {type} SIM</Text>
+                  }
+                </View>
 
-              <View style={styles.expandableViewText}>
-                <Text style={[styles.performanceText, styles.performanceTitle]}>DUAL SIM MODEL</Text>
-                <Text style={styles.performanceText}>Two Nano SIM or one MicroSD slot (up to 400GB)</Text>
+                <View style={styles.expandableViewText}>
+                  <Text style={[styles.performanceText, styles.performanceTitle]}>DUAL SIM MODEL</Text>
+                  { expandableAvailable &&
+                    <Text style={styles.performanceText}>Two {type} SIM or one {expandableStorage.type} slot</Text>
+                  }
+                  { !expandableAvailable &&
+                    <Text style={styles.performanceText}>Two {type} SIM</Text>
+                  }
+                </View>
               </View>
-            </View>
+            }
+
+            { simOptions.length == 1 &&
+              <View style={[styles.performanceBox, styles.expandableBox]}>
+                <View style={styles.expandableViewText}>
+                  <Text style={[styles.performanceText, styles.performanceTitle]}>SINGLE SIM MODEL</Text>
+                  { expandableAvailable &&
+                    <Text style={styles.performanceText}>One {type} SIM and one {expandableStorage.type} slot</Text>
+                  }
+                  { !expandableAvailable &&
+                    <Text style={styles.performanceText}>One {type} SIM</Text>
+                  }
+                </View>
+              </View>
+            }
           </View>
+        );
+      }
+    }
+  }
 
-          <View style={{ paddingBottom: 12 }}>
-            <View style={styles.hrDivider}></View>
-            <Text style={styles.titleDivider}>Battery</Text>
+  renderBattery() {
+    const { battery } = this.props.infoSpecs;
 
-            <View style={[styles.performanceBox, styles.expandableBox]}>
+    if (Object.keys(battery).length !== 0 && battery.constructor === Object) {
+      const { capacity, life } = battery;
+      const capacityEmpty = (!capacity || !capacity.trim() || 0 === capacity.length);
+      const lifeEmpty = (Object.keys(life).length === 0 && life.constructor === Object);
+      const talkTimeEmpty = (!life.talkTime || !life.talkTime.trim() || 0 === life.talkTime.length);
+      const videoEmpty = (!life.video || !life.video.trim() || 0 === life.video.length);
+      const audioEmpty = (!life.audio || !life.audio.trim() || 0 === life.audio.length);
+      const internetWifiEmpty = (!life.internetWifi || !life.internetWifi.trim() || 0 === life.internetWifi.length);
+      const internetL4GEmpty = (!life.internetL4G || !life.internetL4G.trim() || 0 === life.internetL4G.length);
+      const batteryLifeEmpty = (talkTimeEmpty && videoEmpty && audioEmpty && internetWifiEmpty && internetL4GEmpty);
+      const chargingNoEmpty = (!lifeEmpty &&
+        (life.chargingWired || life.chargingWireless ||
+          (life.wirelesChargingType && life.wirelesChargingType.length > 0)));
+
+      return (
+        <View style={{ paddingBottom: 12 }}>
+          <View style={styles.hrDivider}></View>
+          <Text style={styles.titleDivider}>Battery</Text>
+
+          <View style={[styles.performanceBox, styles.expandableBox]}>
+            { !capacityEmpty &&
               <View style={styles.expandableViewText}>
                 <Text style={[styles.performanceText, styles.performanceTitle]}>BATTERY CAPACITY</Text>
-                <Text style={styles.performanceText}>3000mAh</Text>
+                <Text style={styles.performanceText}>{capacity}</Text>
               </View>
+            }
 
+            { !batteryLifeEmpty &&
               <View style={styles.expandableViewText}>
                 <Text style={[styles.performanceText, styles.performanceTitle]}>BATTERY LIFE</Text>
 
                 <View>
-                  <View style={styles.cameraListItem}>
-                    <View style={styles.cameraListDot}></View>
-                    <Text style={[styles.cameraText, styles.cameraListText]}>Talk time: up to 22 hrs</Text>
-                  </View>
+                  { !talkTimeEmpty &&
+                    <View style={styles.cameraListItem}>
+                      <View style={styles.cameraListDot}></View>
+                      <Text style={[styles.cameraText, styles.cameraListText]}>Talk time: up to {life.talkTime}</Text>
+                    </View>
+                  }
 
-                  <View style={styles.cameraListItem}>
-                    <View style={styles.cameraListDot}></View>
-                    <Text style={[styles.cameraText, styles.cameraListText]}>Video playback: up to 16 hrs</Text>
-                  </View>
+                  { !videoEmpty &&
+                    <View style={styles.cameraListItem}>
+                      <View style={styles.cameraListDot}></View>
+                      <Text style={[styles.cameraText, styles.cameraListText]}>Video playback: up to {life.video}</Text>
+                    </View>
+                  }
 
-                  <View style={styles.cameraListItem}>
-                    <View style={styles.cameraListDot}></View>
-                    <Text style={[styles.cameraText, styles.cameraListText]}>MP3 playback (AOD off): up to 80 hrs</Text>
-                  </View>
+                  { !audioEmpty &&
+                    <View style={styles.cameraListItem}>
+                      <View style={styles.cameraListDot}></View>
+                      <Text style={[styles.cameraText, styles.cameraListText]}>MP3 playback (AOD off): up to {life.audio}</Text>
+                    </View>
+                  }
 
-                  <View style={styles.cameraListItem}>
-                    <View style={styles.cameraListDot}></View>
-                    <Text style={[styles.cameraText, styles.cameraListText]}>Internet use (Wi-Fi): up to 14 hrs</Text>
-                  </View>
+                  { !internetWifiEmpty &&
+                    <View style={styles.cameraListItem}>
+                      <View style={styles.cameraListDot}></View>
+                      <Text style={[styles.cameraText, styles.cameraListText]}>Internet use (Wi-Fi): up to {life.internetWifi}</Text>
+                    </View>
+                  }
 
-                  <View style={styles.cameraListItem}>
-                    <View style={styles.cameraListDot}></View>
-                    <Text style={[styles.cameraText, styles.cameraListText]}>Internet use (4G): up to 12 hrs</Text>
-                  </View>
+                  { !internetL4GEmpty &&
+                    <View style={styles.cameraListItem}>
+                      <View style={styles.cameraListDot}></View>
+                      <Text style={[styles.cameraText, styles.cameraListText]}>Internet use (4G): up to {life.internetL4G}</Text>
+                    </View>
+                  }
                 </View>
               </View>
+            }
 
+            { chargingNoEmpty &&
               <View style={styles.expandableViewText}>
                 <Text style={[styles.performanceText, styles.performanceTitle]}>CHARGING</Text>
 
                 <View>
-                  <View style={styles.cameraListItem}>
-                    <View style={styles.cameraListDot}></View>
-                    <Text style={[styles.cameraText, styles.cameraListText]}>Fast Charging on wired and wireless</Text>
-                  </View>
-                  <View style={styles.cameraListItem}>
-                    <View style={styles.cameraListDot}></View>
-                    <Text style={[styles.cameraText, styles.cameraListText]}>Wireless charging compatible with WPC and PMA</Text>
-                  </View>
+                  { (life.chargingWired || life.chargingWireless) &&
+                    <View style={styles.cameraListItem}>
+                      <View style={styles.cameraListDot}></View>
+                      { (life.chargingWired && life.chargingWireless) &&
+                        <Text style={[styles.cameraText, styles.cameraListText]}>Fast Charging on wired and wireless</Text>
+                      }
+                      { (!(life.chargingWired && life.chargingWireless) && life.chargingWired) &&
+                        <Text style={[styles.cameraText, styles.cameraListText]}>Fast Charging on wired</Text>
+                      }
+                      { (!(life.chargingWired && life.chargingWireless) && life.chargingWireless) &&
+                        <Text style={[styles.cameraText, styles.cameraListText]}>Fast Charging on wireless</Text>
+                      }
+                    </View>
+                  }
+
+                  { (life.wirelesChargingType && life.wirelesChargingType.length > 0) &&
+                    <View style={styles.cameraListItem}>
+                      <View style={styles.cameraListDot}></View>
+                      <Text style={[styles.cameraText, styles.cameraListText]}>Wireless charging compatible with {life.wirelesChargingType.join(' and ')}</Text>
+                    </View>
+                  }
                 </View>
               </View>
-            </View>
+            }
           </View>
         </View>
+      );
+    }
+  }
+
+  renderContent() {
+    const { infoSpecs } = this.props;
+
+    if (Object.keys(infoSpecs).length === 0 && infoSpecs.constructor === Object) {
+      return ( <InfoSpecsSkeleton /> );
+    } else {
+      return (
+        <View style={styles.infoSpecBox}>
+          <Text style={styles.description}>
+            { infoSpecs.description }
+          </Text>
+          { this.renderColors() }
+          { this.renderStorage() }
+          { this.renderDisplay() }
+          { this.renderCamera() }
+          { this.renderPerformance() }
+          { this.renderExpandableStorage() }
+          { this.renderBattery() }
+        </View>
+      );
+    }
+  }
+
+  render() {
+    return (
+      <ScrollView contentContainerStyle={styles.container}>
+        { this.renderContent() }
       </ScrollView>
     );
   }
 }
 
-function mapStateToProps(state) {
-  return { infoSpecs: 0 };
+const mapStateToProps = state => {
+  const { current } = state;
+
+  return { infoSpecs: current.product };
 }
 
 export default connect(mapStateToProps)(InfoSpecsScreen);

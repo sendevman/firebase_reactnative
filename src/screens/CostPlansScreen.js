@@ -176,7 +176,9 @@ class CostPlansScreen extends Component {
 }
 
 function mapStateToProps(state) {
-  return { costplans: 0 };
+  const { current } = state;
+
+  return { costplans: current.product };
 }
 
 export default connect(mapStateToProps)(CostPlansScreen);
