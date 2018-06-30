@@ -15,6 +15,7 @@ import styles from './css/OnBoardingScreenCss';
 
 // My Customs
 import Icon from '../assets/images/Icon';
+import OnBoardingModal from '../components/OnBoardingModal/OnBoardingModal';
 
 // Slides
 const OnBoardingOne = () => (
@@ -94,49 +95,52 @@ const OnBoardingThree = () => (
   </View>
 );
 
-const OnBoardingFour = () => (
-  <View>
-    <View style={[styles.fiftyBox, { alignItems: 'flex-end' }]}>
-      <View style={styles.containerPhone}>
-        <View>
-          <Image style={styles.imageFourLeft} source={require('../assets/images/files/imageLeft.png')} />
+const OnBoardingFour = (props) => {
+  const { onShowModal } = props;
+
+  return (
+    <View>
+      <View style={[styles.fiftyBox, { alignItems: 'flex-end' }]}>
+        <View style={styles.containerPhone}>
+          <View>
+            <Image style={styles.imageFourLeft} source={require('../assets/images/files/imageLeft.png')} />
+          </View>
+          <View>
+            <Image style={styles.imageFourCenter} source={require('../assets/images/files/imageCenter.png')} />
+          </View>
+          <View>
+            <Image style={styles.imageFourRight} source={require('../assets/images/files/imageRight.png')} />
+          </View>
         </View>
-        <View>
-          <Image style={styles.imageFourCenter} source={require('../assets/images/files/imageCenter.png')} />
-        </View>
-        <View>
-          <Image style={styles.imageFourRight} source={require('../assets/images/files/imageRight.png')} />
+      </View>
+
+      <View style={[styles.fiftyBox, { alignItems: 'flex-start' }]}>
+        <View style={styles.containerText}>
+          <Text style={styles.title}>Exclusive video-on-demand</Text>
+
+          <View style={{ maxWidth: 314 }}>
+            <Text style={styles.subTitle}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu sodales ligula. Nunc sit amet massa sem. Sed venenatis velit commodo, mattis nulla ut, sodales eros.</Text>
+          </View>
+
+          <TouchableOpacity style={styles.getStartedBtn} onPress={() => { onShowModal() }}>
+            <Text style={styles.getStartedBtnText}>Get started</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </View>
-
-    <View style={[styles.fiftyBox, { alignItems: 'flex-start' }]}>
-      <View style={styles.containerText}>
-        <Text style={styles.title}>Exclusive video-on-demand</Text>
-
-        <View style={{ maxWidth: 314 }}>
-          <Text style={styles.subTitle}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu sodales ligula. Nunc sit amet massa sem. Sed venenatis velit commodo, mattis nulla ut, sodales eros.</Text>
-        </View>
-
-        <TouchableOpacity style={styles.getStartedBtn}
-          onPress={() => Alert.alert(
-            'Alert Title',
-            'Go To Compare',
-            [
-              {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
-              {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-              {text: 'OK', onPress: () => console.log('OK Pressed')},
-            ],
-            { cancelable: false }
-          )}>
-          <Text style={styles.getStartedBtnText}>Get started</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
-  </View>
-);
+  );
+};
 
 class OnBoardingScreen extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = { showModal: false };
+  };
+
+  hideModal = () => { this.setState({ showModal: false }); }
+  showModal = () => { this.setState({ showModal: true }); }
+
   render() {
     return (
       <LinearGradient colors={['#222A33', '#43597D']} style={styles.container}>
@@ -162,9 +166,10 @@ class OnBoardingScreen extends Component {
           </View>
 
           <View style={styles.container}>
-            <OnBoardingFour />
+            <OnBoardingFour onShowModal={this.showModal} />
           </View>
         </Carousel>
+        <OnBoardingModal onHideModal={this.hideModal} showModal={this.state.showModal} />
       </LinearGradient>
     );
   }
