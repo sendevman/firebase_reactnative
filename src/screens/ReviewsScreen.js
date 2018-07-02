@@ -18,6 +18,9 @@ import CustomerReview from './components/CustomerReview';
 import WebReview from './components/WebReview';
 import VideoContent from './components/VideoContent';
 
+// My Actions
+import { updateHeaderNav } from '../actions/Common'
+
 const ReviewsSkeleton = () => (
   <View style={styles.skeletonLoading}>
     <SkeletonLoading height={235}>
@@ -34,6 +37,36 @@ const ReviewsSkeleton = () => (
 class ReviewsScreen extends Component {
   constructor(props) {
     super(props);
+
+    handleScroll = (event) => {
+      const { dispatch, customHeaderNav } = this.props;
+      var value = event.nativeEvent.contentOffset.y;
+
+      if ((value >= 0) && (value <= 56)) {
+        let newValue = this.setNewValue(false, 56 - value, false, 166);
+        dispatch(updateHeaderNav(newValue));
+        return;
+      } else if ((value >= 57) && (value <= 222)) {
+        let newValue = this.setNewValue(true, 0, false, 166 - (value - 56));
+        dispatch(updateHeaderNav(newValue));
+        return;
+      } else {
+        let newValue = this.setNewValue(true, 0, true, 0);
+        dispatch(updateHeaderNav(newValue));
+        return;
+      }
+    };
+  }
+
+  setNewValue(a, b, c, d) {
+    return {
+      customHeaderNav: {
+        hideHeader: a,
+        heightHeader: b,
+        hideSlide: c,
+        heightSlide: d
+      }
+    }
   }
 
   renderCustomerReviews() {
@@ -111,7 +144,7 @@ class ReviewsScreen extends Component {
 
   render() {
     return (
-      <ScrollView contentContainerStyle={styles.container}>
+      <ScrollView contentContainerStyle={styles.container} onScroll={handleScroll.bind(this)} scrollEventThrottle={16}>
         { this.renderContent() }
       </ScrollView>
     );
@@ -119,9 +152,9 @@ class ReviewsScreen extends Component {
 }
 
 const mapStateToProps = state => {
-  const { current } = state;
+  const { current, common } = state;
 
-  return { reviews: current.product };
+  return { reviews: current.product, customHeaderNav: common.customHeaderNav };
 }
 
 export default connect(mapStateToProps)(ReviewsScreen);
