@@ -16,6 +16,9 @@ import styles from './css/InfoSpecsScreenCss';
 import Icon from '../assets/images/Icon';
 import SkeletonLoading from './components/SkeletonLoading';
 
+// My Actions
+import { updateHeaderNav } from '../actions/Common';
+
 const InfoSpecsSkeleton = () => (
   <View style={styles.skeletonLoading}>
     <SkeletonLoading height={220}>
@@ -47,6 +50,33 @@ const InfoSpecsSkeleton = () => (
 class InfoSpecsScreen extends Component {
   constructor(props) {
     super(props);
+
+    handleScroll = (event) => {
+      const { dispatch } = this.props;
+      var value = event.nativeEvent.contentOffset.y;
+
+      if ((value >= 0) && (value <= 56)) {
+        let newValue = this.setNewValue(false, 56 - value, false, 166);
+        dispatch(updateHeaderNav(newValue));
+      } else if ((value >= 57) && (value <= 222)) {
+        let newValue = this.setNewValue(true, 0, false, 166 - (value - 56));
+        dispatch(updateHeaderNav(newValue));
+      } else {
+        let newValue = this.setNewValue(true, 0, true, 0);
+        dispatch(updateHeaderNav(newValue));
+      }
+    };
+  }
+
+  setNewValue(a, b, c, d) {
+    return {
+      customHeaderNav: {
+        hideHeader: a,
+        heightHeader: b,
+        hideSlide: c,
+        heightSlide: d
+      }
+    }
   }
 
   renderColors() {
@@ -402,6 +432,7 @@ class InfoSpecsScreen extends Component {
           <Text style={styles.description}>
             { infoSpecs.description }
           </Text>
+
           { this.renderColors() }
           { this.renderStorage() }
           { this.renderDisplay() }
@@ -416,7 +447,7 @@ class InfoSpecsScreen extends Component {
 
   render() {
     return (
-      <ScrollView contentContainerStyle={styles.container}>
+      <ScrollView contentContainerStyle={styles.container} onScroll={handleScroll.bind(this)} scrollEventThrottle={16}>
         { this.renderContent() }
       </ScrollView>
     );
@@ -424,9 +455,9 @@ class InfoSpecsScreen extends Component {
 }
 
 const mapStateToProps = state => {
-  const { current } = state;
+  const { current, common } = state;
 
-  return { infoSpecs: current.product };
+  return { infoSpecs: current.product, customHeaderNav: common.customHeaderNav };
 }
 
 export default connect(mapStateToProps)(InfoSpecsScreen);
