@@ -13,6 +13,13 @@ export default StyleSheet.create({
     paddingHorizontal: 10,
     marginBottom: 14
   },
+  // - - Skeleton Loading Box - -
+  skeletonLoading: {
+    height: '100%',
+    backgroundColor: '#FFF',
+    paddingHorizontal: 10,
+    paddingTop: 20
+  },
   // Card Box
   cardBox: {
     backgroundColor: '#FFFFFF',
@@ -94,6 +101,7 @@ export default StyleSheet.create({
     color: '#3E3F42',
     fontFamily: 'Rubik',
     fontSize: 12,
+    fontWeight: '500',
     letterSpacing: 0.15,
     lineHeight: 18
   },

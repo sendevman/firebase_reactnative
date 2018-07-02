@@ -5,8 +5,9 @@
  */
 
 import React, { Component } from 'react';
-import { Dimensions, TouchableHighlight, View } from 'react-native';
+import { Animated, Dimensions, TouchableHighlight, View } from 'react-native';
 import { createStackNavigator, SafeAreaView } from 'react-navigation';
+import { connect } from 'react-redux';
 
 // My Customs
 import Icon from '../assets/images/Icon';
@@ -22,13 +23,34 @@ var { height } = Dimensions.get('window');
 class ProductLayoutScreen extends Component {
   constructor(props) {
     super(props);
+
+    this._animatedValue = new Animated.Value(0);
   };
 
+  componentWillReceiveProps(nextProps) {
+    if (this.props.customHeaderNav !== nextProps.customHeaderNav) {
+      const HEADER_MAX_HEIGHT = nextProps.customHeaderNav.heightHeader
+      const HEADER_MIN_HEIGHT = 0
+      const HEADER_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT
+
+      this.props.navigation.setParams({
+        heightHeader: this._animatedValue.interpolate({
+          inputRange: [0, HEADER_DISTANCE],
+          outputRange: [HEADER_MAX_HEIGHT, HEADER_MIN_HEIGHT],
+          extrapolate: 'clamp'
+        })
+      });
+    }
+  }
+
   static navigationOptions = ({ navigation }) => {
+    let heightPiv = navigation.getParam('heightHeader');
+    let heightHeader = (typeof heightPiv === "undefined") ? 56 : heightPiv;
+
     return {
       headerTitle: <LogoTitle />,
       header: props => <GradientHeader {...props} />,
-      headerStyle: { backgroundColor: 'transparent' },
+      headerStyle: { backgroundColor: 'transparent', overflow: 'hidden', height: heightHeader },
       headerLeft: (
         <TouchableHighlight style={{ marginLeft: 16 }} onPress={() => navigation.openDrawer()}>
           <Icon name="Menu" width="24" height="24" fill="#FFF" viewBox="0 0 24 24" />
@@ -45,8 +67,10 @@ class ProductLayoutScreen extends Component {
   render() {
     return (
       <SafeAreaView forceInset={{ top: 'always' }} style={{ backgroundColor: '#FFF' }}>
-        <ProductsNearSlide />
-        <View style={{ width: '100%', height: height - 300 }}>
+        <View style={{ marginTop: this.props.customHeaderNav.heightSlide - 166 }}>
+          <ProductsNearSlide />
+        </View>
+        <View style={{ width: '100%', height: height - 78 }}>
           <RoutesProducts />
         </View>
       </SafeAreaView>
@@ -54,8 +78,14 @@ class ProductLayoutScreen extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  const { common } = state;
+
+  return { customHeaderNav: common.customHeaderNav };
+}
+
 const ProductLayout = createStackNavigator({
-  Root: { screen: ProductLayoutScreen }
+  Root: { screen: connect(mapStateToProps)(ProductLayoutScreen) }
 });
 
 export default ProductLayout;
