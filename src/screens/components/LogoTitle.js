@@ -37,8 +37,8 @@ class LogoTitle extends Component<props> {
   render() {
     return (
       <View style={ styles.headerBox }>
-        <Icon name="Globe" width="44" height="44" fill="#FFF" viewBox="0 0 50 50" />
-        <Text style={ styles.headerTitle }>Retail Companion</Text>
+        <Icon name="Globe" width="24" height="24" fill="#FFF" viewBox="0 0 50 50" />
+        <Text style={ styles.headerTitle }>Shopping</Text>
       </View>
     );
   }
