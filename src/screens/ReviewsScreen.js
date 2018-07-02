@@ -19,7 +19,7 @@ import WebReview from './components/WebReview';
 import VideoContent from './components/VideoContent';
 
 // My Actions
-import { updateHeaderNav } from '../actions/Common'
+import { updateHeaderNav } from '../actions/Common';
 
 const ReviewsSkeleton = () => (
   <View style={styles.skeletonLoading}>

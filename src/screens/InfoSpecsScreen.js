@@ -17,7 +17,7 @@ import Icon from '../assets/images/Icon';
 import SkeletonLoading from './components/SkeletonLoading';
 
 // My Actions
-import { updateHeaderNav } from '../actions/Common'
+import { updateHeaderNav } from '../actions/Common';
 
 const InfoSpecsSkeleton = () => (
   <View style={styles.skeletonLoading}>
