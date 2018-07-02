@@ -33,25 +33,25 @@ export const FakeProduct = {
   compatableAccessories: {},
   cost: {
     next: {
-      description: 'description',
+      description: 'Upgrade every 2 years. 0% APR; 30-month installment.',
       dueToday: 0,
       monthly: 26.34,
-      title: 'title',
-      tradeIn: "May 19"
+      title: 'AT&T Next',
+      tradeIn: "May '20"
     },
     nextEveryYear: {
-      description: 'description',
+      description: 'Upgrade every year. 0% APR; 24-month installment.',
       dueToday: 0,
       monthly: 32.92,
-      title: 'title',
-      tradeIn: "May 19"
+      title: 'AT&T Next Every Year',
+      tradeIn: "May '19"
     },
     noContract: {
-      description: 'description',
+      description: 'Upgrade every year. 0% APR; 24-month installment.',
       dueToday: 789.99,
       monthly: 0,
-      title: 'title',
-      tradeIn: "Upgrade Anytime"
+      title: 'No annual contract',
+      tradeIn: "UPGRADE ANYTIME"
     }
   },
   currentPromotion: ['promotion id'],
@@ -113,7 +113,7 @@ export const FakeProduct = {
     long: '10nm 64-bit Octa-Core Processor 2.8GHz + 1.7GHz (Maximum Clock Speed, Performance Core + Efficiency Core)',
     short: '10nm 64-bit Octa-Core Processor 2.8GHz + 1.7GHz'
   },
-  releaseDate: '2018-05-15',
+  releaseDate: '2018-05-17',
   sim: {
     simOptions: [1, 2],
     type: 'Nano'
