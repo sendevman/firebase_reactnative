@@ -7,6 +7,7 @@
 import React, { Component } from 'react';
 import { ScrollView, Text, View } from 'react-native';
 import Svg, { Rect } from 'react-native-svg';
+import moment from 'moment';
 import { connect } from 'react-redux';
 
 // My Styles
@@ -250,6 +251,25 @@ class CostPlansScreen extends Component {
     );
   }
 
+  renderShippingInfo() {
+    const { releaseDate } = this.props.costplans;
+
+    if (typeof releaseDate == "undefined" || !releaseDate.trim() || releaseDate.length === 0) return;
+
+    const dateRelease = moment(releaseDate).format("ll");
+    const dateInAdvance = moment(releaseDate).add(4, 'days').format("ll");
+
+    return(
+      <View style={styles.shippingBox}>
+        <Icon name="ShippingTruck" width="18" height="13" viewBox="0 0 18 13" />
+        <View>
+          <Text style={styles.availableText}>Ships between {dateRelease} - {dateInAdvance}.</Text>
+          <Text style={[styles.availableText, { fontWeight: '300' }]}>Shipping date subject to change.</Text>
+        </View>
+      </View>
+    );
+  }
+
   renderContent() {
     const { costplans } = this.props;
 
@@ -258,19 +278,10 @@ class CostPlansScreen extends Component {
     } else {
       return (
         <View style={styles.costPlansBox}>
-
           { this.renderCostNext() }
           { this.renderCostNextYear() }
           { this.renderCostNoContract() }
-
-          <View style={styles.shippingBox}>
-            <Icon name="ShippingTruck" width="18" height="13" viewBox="0 0 18 13" />
-            <View>
-              <Text style={styles.availableText}>Ships between May 17, 2018 - May 21, 2018.</Text>
-              <Text style={[styles.availableText, { fontWeight: '300' }]}>Shipping date subject to change.</Text>
-            </View>
-          </View>
-
+          { this.renderShippingInfo() }
           { this.renderDeviceProtection() }
         </View>
       );
