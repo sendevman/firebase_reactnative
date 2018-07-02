@@ -73,7 +73,7 @@ const BottomTabNav = createBottomTabNavigator(
     Products: {
       screen: ProductLayout,
       navigationOptions: {
-        title: 'Products',
+        title: 'Shopping',
         tabBarIcon: ({tintColor}) => {
           if (tintColor === "#3E3F42")
             return <Icon name="ProductsUnFill" width="23" height="18" viewBox="0 0 23 18" />;
