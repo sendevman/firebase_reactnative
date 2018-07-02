@@ -14,6 +14,8 @@ import Icon from '../assets/images/Icon';
 
 // My Layouts
 import ProductLayout from '../screens/ProductLayout';
+import CompareLayout from '../screens/CompareLayout';
+import ExclusiveVodLayout from '../screens/ExclusiveVodLayout';
 import OnBoardingLayout from '../screens/OnBoardingLayout';
 
 // My Screens
@@ -56,14 +58,6 @@ const AccountSettings = ({ navigation }) => (
 );
 
 // Bottom Tab Navigator - Screens
-const Compare = ({ navigation }) => (
-  <MyNavScreen banner={'Compare'} navigation={navigation} />
-);
-
-const ExclusiveVod = ({ navigation }) => (
-  <MyNavScreen banner={'Exclusive VOD'} navigation={navigation} />
-);
-
 const SharedSession = ({ navigation }) => (
   <MyNavScreen banner={'Shared Session'} navigation={navigation} />
 );
@@ -83,7 +77,7 @@ const BottomTabNav = createBottomTabNavigator(
       }
     },
     Compare: {
-      screen: Compare,
+      screen: CompareLayout,
       navigationOptions: {
         title: 'Compare',
         tabBarIcon: ({tintColor}) => {
@@ -92,7 +86,7 @@ const BottomTabNav = createBottomTabNavigator(
       }
     },
     ExclusiveVod: {
-      screen: ExclusiveVod,
+      screen: ExclusiveVodLayout,
       navigationOptions: {
         title: 'Exclusive VOD',
         tabBarIcon: ({tintColor}) => {
