@@ -14,10 +14,47 @@ import styles from './css/CostPlansScreenCss';
 // My Customs
 import Icon from '../assets/images/Icon';
 
+// My Actions
+import { updateHeaderNav } from '../actions/Common'
+
 class CostPlansScreen extends Component {
+  constructor(props) {
+    super(props);
+
+    handleScroll = (event) => {
+      const { dispatch, customHeaderNav } = this.props;
+      var value = event.nativeEvent.contentOffset.y;
+
+      if ((value >= 0) && (value <= 56)) {
+        let newValue = this.setNewValue(false, 56 - value, false, 166);
+        dispatch(updateHeaderNav(newValue));
+        return;
+      } else if ((value >= 57) && (value <= 222)) {
+        let newValue = this.setNewValue(true, 0, false, 166 - (value - 56));
+        dispatch(updateHeaderNav(newValue));
+        return;
+      } else {
+        let newValue = this.setNewValue(true, 0, true, 0);
+        dispatch(updateHeaderNav(newValue));
+        return;
+      }
+    };
+  }
+
+  setNewValue(a, b, c, d) {
+    return {
+      customHeaderNav: {
+        hideHeader: a,
+        heightHeader: b,
+        hideSlide: c,
+        heightSlide: d
+      }
+    }
+  }
+
   render() {
     return (
-      <ScrollView contentContainerStyle={styles.container}>
+      <ScrollView contentContainerStyle={styles.container} onScroll={handleScroll.bind(this)} scrollEventThrottle={16}>
         <View style={styles.costPlansBox}>
           <View style={[ styles.cardBox, { marginTop: 16 }]}>
             <Text style={styles.titleCard}>AT&T Next</Text>
@@ -176,9 +213,9 @@ class CostPlansScreen extends Component {
 }
 
 function mapStateToProps(state) {
-  const { current } = state;
+  const { current, common } = state;
 
-  return { costplans: current.product };
+  return { costplans: current.product, customHeaderNav: common.customHeaderNav };
 }
 
 export default connect(mapStateToProps)(CostPlansScreen);
