@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
   }
 });
 
-class LogoTitle extends Component {
+class LogoTitleCompare extends Component {
   constructor(props) {
     super(props);
   };
@@ -38,10 +38,10 @@ class LogoTitle extends Component {
     return (
       <View style={ styles.headerBox }>
         <Icon name="Globe" width="24" height="24" fill="#FFF" viewBox="0 0 50 50" />
-        <Text style={ styles.headerTitle }>Shopping</Text>
+        <Text style={ styles.headerTitle }>Compare</Text>
       </View>
     );
   }
 }
 
-export default LogoTitle;
+export default LogoTitleCompare;
