@@ -9,10 +9,12 @@ import { Image, Text, View,
   NativeEventEmitter,
   DeviceEventEmitter,
   Platform,
-  NativeModules, } from 'react-native';
+  NativeModules,
+  YellowBox } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Carousel from 'react-native-carousel-view';
 
+// import WS from 'react-native-websocket'
 // My Styles
 import styles from './ProductsNearCss';
 
@@ -24,8 +26,9 @@ import ButtonCompare from './ButtonCompare';
 import BleManager from 'react-native-ble-manager';
 const BleManagerModule = NativeModules.BleManager;
 const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
-// const io = require('socket.io');
-// var wsUri = "wss://wai.walkbase.com/api/v2/subscribe/device";
+const ws = new WebSocket('wss://wai.walkbase.com/api/v2/subscribe/device');
+YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader']);
+var wsUri = "wss://wai.walkbase.com/api/v2/subscribe/device";
 
 class ProductsNear extends Component {
   constructor() {
@@ -52,14 +55,14 @@ class ProductsNear extends Component {
       (position) => {
         this.setState({coords: position.coords});
         var initialPosition = JSON.stringify(position);
-        alert(initialPosition);
+        // alert(initialPosition);
       }
     )
     navigator.geolocation.watchPosition(
       (position) => {
         this.setState({coords: position.coords});
         var initialPosition = JSON.stringify(position);
-        alert(initialPosition);
+        // alert(initialPosition);
       }
     )
   };
@@ -73,6 +76,7 @@ class ProductsNear extends Component {
     this.handlerDiscover6 = bleManagerEmitter.addListener('WBEngageManagerReceivedAdvertisement', this.handleEventReceivedAdvertisement );
     this.handlerDiscover7 = bleManagerEmitter.addListener('WBEngageManagerOff', this.handleEventErrors );
     this.fetchLocation();
+    this.webAPI();
     // io.on('connection', (client) => {
 
     // })
@@ -103,6 +107,7 @@ class ProductsNear extends Component {
   handleFetchData(data) { /* Analyzing the data */ };
   
   componentWillUnmount() {
+    this.websocketClose();
     this.handlerDiscover1.remove();
     this.handlerDiscover2.remove();
     this.handlerDiscover3.remove();
@@ -146,11 +151,59 @@ class ProductsNear extends Component {
       });
   }
 
+  webAPI() {
+    
+    ws.onopen = () => {
+      // connection opened
+      ws.send('{"user_id": "office_dev", "api_key": "VZHkscRFhAjkScc"}'); // send a message
+    };
+    
+    ws.onmessage = (e) => {
+      // a message was received
+      if(e.data === "") { //Auth true
+        console.log("AUTH true", e);
+        this.getStreamingData();
+      } else { //Auth false
+        console.log("AUTH false", e);
+        alert(e.data);
+      }
+    };
+    
+    ws.onerror = (e) => {
+      // an error occurred
+      alert("error");
+      console.log(e.message);
+    };
+  }
+  websocketClose() {    
+    ws.onclose = (e) => {
+      // connection closed
+      alert("close");
+      console.log(e.code, e.reason);
+    };
+  }
+
+  getStreamingData() {
+    ws.send('{"lat": 39.765914, "lng": -84.193231, "height": 1.0, "ts": "2018-07-03T17:40:21Z", "floor_id": 123, "zone_id": "null"}');
+  }
+
   render() {
     return (
       <LinearGradient colors={['#2b3748', '#43597D']}>
         <Text style={styles.title}>PRODUCTS NEAR YOU</Text>
-        <Carousel
+        {/* <WS
+          ref={ref => {this.ws = ref}}
+          url="wss://wai.walkbase.com/api/v2/subscribe/device"
+          onOpen={() => {
+            console.log('Open!')
+            this.ws.send('{"user_id": "office_dev", "api_key": "VZHkscRFhAjkScc"}')
+          }}
+          onMessage={console.log}
+          onError={console.log}
+          onClose={console.log}
+          reconnect // Will try to reconnect onClose
+        /> */}
+        {/* <Carousel
           animate={false}
           height={136}
           indicatorOffset={4}
@@ -250,7 +303,7 @@ class ProductsNear extends Component {
               </View>
             </View>
           </View>
-        </Carousel>
+        </Carousel> */}
       </LinearGradient>
     );
   }
