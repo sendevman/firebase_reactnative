@@ -7,6 +7,8 @@
 import React, { Component } from 'react';
 import { Image, Text, View,
   NativeEventEmitter,
+  DeviceEventEmitter,
+  Platform,
   NativeModules, } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Carousel from 'react-native-carousel-view';
@@ -22,12 +24,18 @@ import ButtonCompare from './ButtonCompare';
 import BleManager from 'react-native-ble-manager';
 const BleManagerModule = NativeModules.BleManager;
 const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
+// const io = require('socket.io');
+// var wsUri = "wss://wai.walkbase.com/api/v2/subscribe/device";
 
 class ProductsNear extends Component {
   constructor() {
     super();
     this.state = {
       walkbaseState: '',
+      coords: {
+        latitude: 0,
+        longitude: 0
+      },
       bleState: 0 // 0: off, 1: on
     };
     this.handleEventNotDetermined = this.handleEventNotDetermined.bind(this);
@@ -39,7 +47,22 @@ class ProductsNear extends Component {
     this.handleEventErrors = this.handleEventErrors.bind(this);
   };
 
-  componentWillMount() {};
+  componentWillMount() {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        this.setState({coords: position.coords});
+        var initialPosition = JSON.stringify(position);
+        alert(initialPosition);
+      }
+    )
+    navigator.geolocation.watchPosition(
+      (position) => {
+        this.setState({coords: position.coords});
+        var initialPosition = JSON.stringify(position);
+        alert(initialPosition);
+      }
+    )
+  };
 
   componentDidMount() {
     this.handlerDiscover1 = bleManagerEmitter.addListener('WBEngageManagerStateNotDetermined', this.handleEventNotDetermined );
@@ -49,6 +72,10 @@ class ProductsNear extends Component {
     this.handlerDiscover5 = bleManagerEmitter.addListener('WBEngageManagerStateFailed', this.handleEventFailed );
     this.handlerDiscover6 = bleManagerEmitter.addListener('WBEngageManagerReceivedAdvertisement', this.handleEventReceivedAdvertisement );
     this.handlerDiscover7 = bleManagerEmitter.addListener('WBEngageManagerOff', this.handleEventErrors );
+    this.fetchLocation();
+    // io.on('connection', (client) => {
+
+    // })
   };
 
   handleEventNotDetermined(data) { console.log("Not determined"); };
@@ -83,7 +110,41 @@ class ProductsNear extends Component {
     this.handlerDiscover5.remove();
     this.handlerDiscover6.remove();
     this.handlerDiscover7.remove();
+    // navigator.geolocation.clearWatch(this.watchID);
+    // LocationServicesDialogBox.stopListener();
   };
+
+  checkLocationPermission() {
+    if (Platform.OS === 'android') {
+    } else {
+      this.fetchLocation();
+    }
+  }
+
+  fetchLocation() {
+    navigator.geolocation.getCurrentPosition(
+      ({ coords }) => {
+        this.currentCoord = {
+          latitude: coords.latitude,
+          longitude: coords.longitude
+        };
+      },
+      error => console.log('Location Error1', error),
+      {
+        timeout: 20000,
+        enableHighAccuracy: true,
+      });
+    this.watchID = navigator.geolocation.watchPosition(
+      ({ coords }) => {
+        this.currentCoord = {
+          latitude: coords.latitude,
+          longitude: coords.longitude
+        };
+      },
+      (error) => {
+        console.log('Location Error2', error)
+      });
+  }
 
   render() {
     return (
@@ -154,7 +215,6 @@ class ProductsNear extends Component {
                     <Text style={styles.deviceOptionText}>18MP + 8MP</Text>
                   </View>
                 </View>
-
                 <ButtonCompare />
               </View>
             </View>
