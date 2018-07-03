@@ -20,10 +20,10 @@
   [WBEngageManager sharedInstance].debugMode = YES;
 
   /* Your custom Engage Engine API key. */
-  [WBEngageManager startWithAPIKey:@"kalapuikko"];
+  [WBEngageManager startWithAPIKey:@"VZHkscRFhAjkScc"];
 
   /* A custom user id. Setting this is optional. */
-  [WBEngageManager setUserIdentifier:@"CUSTOM_USER_ID_1"];
+  [WBEngageManager setUserIdentifier:@"office_dev"];
   
   [WBEngageManager sharedInstance].delegate = self;
   
