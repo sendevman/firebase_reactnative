@@ -16,16 +16,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-  /* Set to display extra debugging information from the Engage SDK. */
-  [WBEngageManager sharedInstance].debugMode = YES;
-
-  /* Your custom Engage Engine API key. */
-  [WBEngageManager startWithAPIKey:@"kalapuikko"];
-
-  /* A custom user id. Setting this is optional. */
-  [WBEngageManager setUserIdentifier:@"CUSTOM_USER_ID_1"];
-  
-  [WBEngageManager sharedInstance].delegate = self;
   
   NSURL *jsCodeLocation;
 
@@ -47,6 +37,17 @@
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
+  
+  /* Set to display extra debugging information from the Engage SDK. */
+//  [WBEngageManager sharedInstance].debugMode = YES;
+  
+  /* Your custom Engage Engine API key. */
+//  [WBEngageManager startWithAPIKey:@"VZHkscRFhAjkScc"];
+  
+  /* A custom user id. Setting this is optional. */
+//  [WBEngageManager setUserIdentifier:@"office_dev"];
+  
+  //  [WBEngageManager sharedInstance].delegate = self;
   return YES;
 }
 
