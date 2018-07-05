@@ -28,9 +28,11 @@
 	<dict>
 		<key>NSExceptionDomains</key>
 		<dict>
-			<key>localhost</key>
+			<key>walkbase.com</key>
 			<dict>
-				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<key>NSExceptionRequiresForwardSecrecy</key>
+				<false/>
+				<key>NSIncludesSubdomains</key>
 				<true/>
 			</dict>
 		</dict>
@@ -64,6 +66,9 @@
 		<string>Rubik-Medium.ttf</string>
 		<string>Rubik-MediumItalic.ttf</string>
 		<string>Rubik-Regular.ttf</string>
+		<string>Roboto.ttf</string>
+		<string>SF-Pro-Text.ttf</string>
+		<string>Rubik.ttf</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>

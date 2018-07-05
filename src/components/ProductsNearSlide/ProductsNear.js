@@ -5,7 +5,7 @@
  */
 
 import React, { Component } from 'react';
-import { Image, Text, View,
+import { Image, Text, View,YellowBox,
   NativeEventEmitter,
   NativeModules, } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
@@ -22,6 +22,7 @@ import ButtonCompare from './ButtonCompare';
 import BleManager from 'react-native-ble-manager';
 const BleManagerModule = NativeModules.BleManager;
 const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
+YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader']);
 
 class ProductsNear extends Component {
   constructor() {
@@ -42,6 +43,7 @@ class ProductsNear extends Component {
   componentWillMount() {};
 
   componentDidMount() {
+    alert("start");
     this.handlerDiscover1 = bleManagerEmitter.addListener('WBEngageManagerStateNotDetermined', this.handleEventNotDetermined );
     this.handlerDiscover2 = bleManagerEmitter.addListener('WBEngageManagerStateInitializing', this.handleEventInitializing );
     this.handlerDiscover3 = bleManagerEmitter.addListener('WBEngageManagerStatePaused', this.handleEventPause );
@@ -51,15 +53,16 @@ class ProductsNear extends Component {
     this.handlerDiscover7 = bleManagerEmitter.addListener('WBEngageManagerOff', this.handleEventErrors );
   };
 
-  handleEventNotDetermined(data) { console.log("Not determined"); };
-  handleEventInitializing(data) { console.log("Initializing"); };
-  handleEventPause(data) { console.log("Pause"); };
-  handleEventScanning(data) { console.log("Scanning"); };
-  handleEventFailed(data) { console.log("Failed"); };
+  handleEventNotDetermined(data) { console.log("Not determined"); alert("a")};
+  handleEventInitializing(data) { console.log("Initializing");  alert("b")};
+  handleEventPause(data) { console.log("Pause");  alert("c")};
+  handleEventScanning(data) { console.log("Scanning");  alert("d")};
+  handleEventFailed(data) { console.log("Failed");  alert("e")};
 
   handleEventReceivedAdvertisement(data) {
     console.log(data);
     this.handleFetchData(data);
+    alert("f")
   };
 
   handleEventErrors(data) {
@@ -89,7 +92,7 @@ class ProductsNear extends Component {
     return (
       <LinearGradient colors={['#2b3748', '#43597D']} height={166}>
         <Text style={styles.title}>PRODUCTS NEAR YOU</Text>
-        <Carousel
+        {/* <Carousel
           animate={false}
           height={136}
           indicatorOffset={4}
@@ -98,8 +101,8 @@ class ProductsNear extends Component {
           inactiveIndicatorColor={'rgba(255, 255, 255, 0.3)'}
           indicatorSpace={8}
           >
-          <View style={styles.itemContainer}>
-            <View style={styles.itemBox}>
+          <View style={styles.itemContainer}> */}
+            {/* <View style={styles.itemBox}>
               <View style={styles.imageBox}>
                 <Image style={{ width: 84 }} source={require('../../assets/images/files/S9-Dual.png')} />
               </View>
@@ -188,9 +191,9 @@ class ProductsNear extends Component {
 
                 <ButtonCompare />
               </View>
-            </View>
-          </View>
-        </Carousel>
+            </View> */}
+          {/* </View>
+        </Carousel> */}
       </LinearGradient>
     );
   }
