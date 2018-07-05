@@ -5,6 +5,7 @@
  */
 
 import { StyleSheet, Dimensions } from 'react-native';
+import { white } from 'ansi-colors';
 var { width } = Dimensions.get('window');
 
 export default StyleSheet.create({
@@ -73,5 +74,11 @@ export default StyleSheet.create({
     fontSize: 13,
     lineHeight: 15,
     marginLeft: 3
+  },
+  testpart1: {
+    color: '#ffffff',
+    fontSize: 11,
+    marginLeft: 10,
+    paddingTop: 3
   }
 });

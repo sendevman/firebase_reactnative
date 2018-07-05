@@ -5,6 +5,7 @@
  */
 
 import React, { Component } from 'react';
+import moment from 'moment';
 import { Image, Text, View,YellowBox,
   NativeEventEmitter,
   NativeModules, } from 'react-native';
@@ -22,6 +23,8 @@ import ButtonCompare from './ButtonCompare';
 import BleManager from 'react-native-ble-manager';
 const BleManagerModule = NativeModules.BleManager;
 const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
+const ws = new WebSocket('wss://wai.walkbase.com/api/v2/subscribe/device');
+var wsUri = "wss://wai.walkbase.com/api/v2/subscribe/device";
 YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader']);
 
 class ProductsNear extends Component {
@@ -29,6 +32,11 @@ class ProductsNear extends Component {
     super();
     this.state = {
       walkbaseState: '',
+      auth:"CHECKING...",
+      latitude: 0,
+      longitude: 0,
+      sentData : '',
+      receivedData : '',
       bleState: 0 // 0: off, 1: on
     };
     this.handleEventNotDetermined = this.handleEventNotDetermined.bind(this);
@@ -40,10 +48,20 @@ class ProductsNear extends Component {
     this.handleEventErrors = this.handleEventErrors.bind(this);
   };
 
-  componentWillMount() {};
-
   componentDidMount() {
-    alert("start");
+    this.watchID = navigator.geolocation.watchPosition(
+      (position) => {
+        this.setState({
+          latitude : position.coords.latitude,
+          longitude: position.coords.longitude
+        });
+        this.getStreamingData();
+       },
+       (error) => this.setState({ error: error.message }),
+       { enableHighAccuracy: true, timeout: 2000, maximumAge: 0, distanceFilter: 1},
+    );
+  }
+  componentWillMount() {
     this.handlerDiscover1 = bleManagerEmitter.addListener('WBEngageManagerStateNotDetermined', this.handleEventNotDetermined );
     this.handlerDiscover2 = bleManagerEmitter.addListener('WBEngageManagerStateInitializing', this.handleEventInitializing );
     this.handlerDiscover3 = bleManagerEmitter.addListener('WBEngageManagerStatePaused', this.handleEventPause );
@@ -51,13 +69,14 @@ class ProductsNear extends Component {
     this.handlerDiscover5 = bleManagerEmitter.addListener('WBEngageManagerStateFailed', this.handleEventFailed );
     this.handlerDiscover6 = bleManagerEmitter.addListener('WBEngageManagerReceivedAdvertisement', this.handleEventReceivedAdvertisement );
     this.handlerDiscover7 = bleManagerEmitter.addListener('WBEngageManagerOff', this.handleEventErrors );
+    this.webAPI();
   };
 
   handleEventNotDetermined(data) { console.log("Not determined"); alert("a")};
   handleEventInitializing(data) { console.log("Initializing");  alert("b")};
   handleEventPause(data) { console.log("Pause");  alert("c")};
   handleEventScanning(data) { console.log("Scanning");  alert("d")};
-  handleEventFailed(data) { console.log("Failed");  alert("e")};
+  handleEventFailed(data) { console.log("Failed");};
 
   handleEventReceivedAdvertisement(data) {
     console.log(data);
@@ -79,6 +98,7 @@ class ProductsNear extends Component {
   handleFetchData(data) { /* Analyzing the data */ };
   
   componentWillUnmount() {
+    this.websocketClose();
     this.handlerDiscover1.remove();
     this.handlerDiscover2.remove();
     this.handlerDiscover3.remove();
@@ -86,12 +106,64 @@ class ProductsNear extends Component {
     this.handlerDiscover5.remove();
     this.handlerDiscover6.remove();
     this.handlerDiscover7.remove();
+    navigator.geolocation.clearWatch(this.watchID);
   };
 
+  webAPI() {
+    
+    ws.onopen = () => {
+      // connection opened
+      ws.send('{"user_id": "office_dev", "api_key": "VZHkscRFhAjkScc"}'); // send a message
+    };
+    
+    ws.onmessage = (e) => {
+      // a message was received
+      if(e.data === "") { //Auth true
+        this.setState({auth:"TRUE", receivedData: e});
+        console.log("AUTH true", e);
+      } else { //Auth false
+        this.setState({auth:"FALSE"});
+        console.log("AUTH false", e);
+      }
+    };
+    
+    ws.onerror = (e) => {
+      // an error occurred
+      alert("error");
+      console.log(e.message);
+    };
+  }
+  websocketClose() {    
+    ws.onclose = (e) => {
+      // connection closed
+      alert("close");
+      console.log(e.code, e.reason);
+    };
+  }
+
+  getStreamingData() {
+    let time = moment.utc().format();
+    let send_data = {
+      "lat" : this.state.latitude,
+      "lng" : this.state.longitude,
+      "height" : 1.0,
+      "ts": time,
+      "flood_id": 123,
+      "zone_id": null
+    }
+    this.setState({sentData: JSON.stringify(send_data)});
+    // ws.send(JSON.stringify(send_data));
+    console.log("Sent data" + JSON.stringify(send_data));
+  }
   render() {
+    const {latitude, longitude, bleState, auth, sentData, receivedData} = this.state;
     return (
       <LinearGradient colors={['#2b3748', '#43597D']} height={166}>
         <Text style={styles.title}>PRODUCTS NEAR YOU</Text>
+        <Text style={styles.testpart1}> Latitude : {latitude}    Longitude : {longitude} </Text>
+        <Text style={styles.testpart1}> Auth : {auth} </Text>
+        <Text style={styles.testpart1}> Sent Data : {sentData} </Text>
+        <Text style={styles.testpart1}> Received Data : {receivedData.data} </Text>
         {/* <Carousel
           animate={false}
           height={136}
