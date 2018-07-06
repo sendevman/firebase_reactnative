@@ -30,7 +30,7 @@ export const FakeProduct = {
     { name: 'Titanium Gray', img: 'https://firebasestorage.googleapis.com/v0/b/fanexperience-dev.appspot.com/o/products%2FnaUkEQFqUAh8FcheyXLL%2Fcolors%2FTitanium_Gray.png?alt=media&token=e84baa0d-9b67-4247-9f46-b1298fd929c1' },
     { name: 'Coral Blue', img: 'https://firebasestorage.googleapis.com/v0/b/fanexperience-dev.appspot.com/o/products%2FnaUkEQFqUAh8FcheyXLL%2Fcolors%2FCoral_Blue.png?alt=media&token=eaeccdf2-ecf2-4344-8d8a-9eeb0b555a9a' }
   ],
-  compatableAccessories: {},
+  compatibleAccessories: {},
   cost: {
     next: {
       description: 'Upgrade every 2 years. 0% APR; 30-month installment.',
