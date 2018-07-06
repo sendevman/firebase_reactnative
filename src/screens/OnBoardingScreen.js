@@ -5,17 +5,17 @@
  */
 
 import React, { Component } from 'react';
-import { Alert, Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { Alert, Image, ScrollView, Text, TouchableOpacity, View, Modal } from 'react-native';
 import { connect } from 'react-redux';
 import LinearGradient from 'react-native-linear-gradient';
 import Carousel from 'react-native-carousel-view';
+import OpenSettings from 'react-native-open-settings';
 
 // My Styles
 import styles from './css/OnBoardingScreenCss';
 
 // My Customs
 import Icon from '../assets/images/Icon';
-import OnBoardingModal from '../components/OnBoardingModal/OnBoardingModal';
 
 // Slides
 const OnBoardingOne = () => (
@@ -44,7 +44,6 @@ const OnBoardingOne = () => (
     </View>
   </View>
 );
-
 const OnBoardingTwo = () => (
   <View>
     <View style={[styles.fiftyBox, { alignItems: 'flex-end' }]}>
@@ -54,7 +53,6 @@ const OnBoardingTwo = () => (
         </View>
       </View>
     </View>
-
     <View style={[styles.fiftyBox, { alignItems: 'flex-start' }]}>
       <View style={styles.containerText}>
         <Text style={styles.title}>Don't take our word for it</Text>
@@ -95,51 +93,109 @@ const OnBoardingThree = () => (
   </View>
 );
 
-const OnBoardingFour = (props) => {
-  const { onShowModal } = props;
+class OnBoardingFour  extends React.Component {
+  constructor(props) {
+    super(props);
+    
+    this.state = {
+      modalVisible: false
+    }
+  }
 
-  return (
+  render () {
+    return (
     <View>
-      <View style={[styles.fiftyBox, { alignItems: 'flex-end' }]}>
-        <View style={styles.containerPhone}>
-          <View>
-            <Image style={styles.imageFourLeft} source={require('../assets/images/files/imageLeft.png')} />
-          </View>
-          <View>
-            <Image style={styles.imageFourCenter} source={require('../assets/images/files/imageCenter.png')} />
-          </View>
-          <View>
-            <Image style={styles.imageFourRight} source={require('../assets/images/files/imageRight.png')} />
-          </View>
+    <View style={[styles.fiftyBox, { alignItems: 'flex-end' }]}>
+      <View style={styles.containerPhone}>
+        <View>
+          <Image style={styles.imageFourLeft} source={require('../assets/images/files/imageLeft.png')} />
         </View>
-      </View>
-
-      <View style={[styles.fiftyBox, { alignItems: 'flex-start' }]}>
-        <View style={styles.containerText}>
-          <Text style={styles.title}>Exclusive video-on-demand</Text>
-
-          <View style={{ maxWidth: 314 }}>
-            <Text style={styles.subTitle}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu sodales ligula. Nunc sit amet massa sem. Sed venenatis velit commodo, mattis nulla ut, sodales eros.</Text>
-          </View>
-
-          <TouchableOpacity style={styles.getStartedBtn} onPress={() => { onShowModal() }}>
-            <Text style={styles.getStartedBtnText}>Get started</Text>
-          </TouchableOpacity>
+        <View>
+          <Image style={styles.imageFourCenter} source={require('../assets/images/files/imageCenter.png')} />
+        </View>
+        <View>
+          <Image style={styles.imageFourRight} source={require('../assets/images/files/imageRight.png')} />
         </View>
       </View>
     </View>
+
+    <View style={[styles.fiftyBox, { alignItems: 'flex-start' }]}>
+      <View style={styles.containerText}>
+        <Text style={styles.title}>Exclusive video-on-demand</Text>
+
+        <View style={{ maxWidth: 314 }}>
+          <Text style={styles.subTitle}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu sodales ligula. Nunc sit amet massa sem. Sed venenatis velit commodo, mattis nulla ut, sodales eros.</Text>
+        </View>
+
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={this.state.modalVisible}
+          onRequestClose={() => {
+            alert('Modal has been closed.');
+          }}>
+          <View style={styles.modalView}>
+            <View style={{alignItems: 'center'}}>
+              <Image style={{marginTop: 56}} source={require('../assets/images/files/allowBle.png')} />
+              <View style={{width: 315, marginTop: 25}}>
+                <Text style={styles.modalInnerText}>In order for AT&T Retail Companion™
+                  to work, you need to grant it permission
+                  to use your device’s Bluetooth.
+                </Text>
+              </View>
+              <TouchableOpacity
+                onPress={() => {
+                  Alert.alert(
+                    'Turn On Bluetooth To Allow "AT&T Retail Companion" to Connect to Accesorries',
+                    '',
+                    [
+                      {text: 'Settings', onPress: () => OpenSettings.openSettings()
+},
+                      {text: 'Cancel', onPress: () => console.log('Cancel Pressed')},
+                    ],
+                    { cancelable: false }
+                  )
+                }}>
+                <View style={[styles.modalInnerTextView, {backgroundColor: '#0087ff', borderRadius: 28, marginTop: 24}]}>
+                  <Text style={[styles.modalInnerText, {color: 'white'}]}>Allow</Text>
+                </View>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                onPress={() => {
+                  this.setState({modalVisible: false});
+                }}>
+                <View style={styles.modalInnerTextView}>
+                  <Text style={[styles.modalInnerText, {textDecorationLine: 'underline'}]}>Decline</Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </Modal>
+
+        <TouchableOpacity style={styles.getStartedBtn}
+         
+          onPress={() => {
+            this.setState({modalVisible: true})
+          }}>
+          <Text style={styles.getStartedBtnText}>Get started</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  </View>
   );
-};
+  }
+} 
 
 class OnBoardingScreen extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = { showModal: false };
+  
+  state = {
+    modalVisible: false,
   };
 
-  hideModal = () => { this.setState({ showModal: false }); }
-  showModal = () => { this.setState({ showModal: true }); }
+  setModalVisible = (visible) => {
+    this.setState({modalVisible: visible});
+  }
 
   render() {
     return (
@@ -166,10 +222,9 @@ class OnBoardingScreen extends Component {
           </View>
 
           <View style={styles.container}>
-            <OnBoardingFour onShowModal={this.showModal} />
+            <OnBoardingFour/>
           </View>
         </Carousel>
-        <OnBoardingModal onHideModal={this.hideModal} showModal={this.state.showModal} />
       </LinearGradient>
     );
   }
