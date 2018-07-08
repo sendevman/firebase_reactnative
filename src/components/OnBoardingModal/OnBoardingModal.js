@@ -12,6 +12,7 @@ import styles from './OnBoardingModalCss';
 
 // My Customs
 import Icon from '../../assets/images/Icon';
+import OpenSettings from 'react-native-open-settings';
 
 class OnBoardingModal extends Component {
   constructor(props) {
@@ -47,7 +48,7 @@ class OnBoardingModal extends Component {
                   'Turn On Bluetooth To Allow "AT&T Retail Companion" to Connect to Accessories',
                   'Go to Allow Action!',
                   [
-                    {text: 'Settings', onPress: () => console.log('Go to Settings')},
+                    {text: 'Settings', onPress: () => OpenSettings.openBluetooth()},
                     {text: 'Cancel', onPress: () => console.log('Go to Cancel'), style: 'cancel'}
                   ],
                   { cancelable: false }
