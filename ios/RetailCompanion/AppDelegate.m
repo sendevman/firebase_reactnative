@@ -37,18 +37,24 @@
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
-  
+  [[CBCentralManager alloc] initWithDelegate:self queue:nil];
   /* Set to display extra debugging information from the Engage SDK. */
-//  [WBEngageManager sharedInstance].debugMode = YES;
+  [WBEngageManager sharedInstance].debugMode = YES;
   
   /* Your custom Engage Engine API key. */
-//  [WBEngageManager startWithAPIKey:@"VZHkscRFhAjkScc"];
+  [WBEngageManager startWithAPIKey:@"VZHkscRFhAjkScc"];
   
   /* A custom user id. Setting this is optional. */
-//  [WBEngageManager setUserIdentifier:@"office_dev"];
+  [WBEngageManager setUserIdentifier:@"office_dev"];
   
-  //  [WBEngageManager sharedInstance].delegate = self;
+//  [WBEngageManager sharedInstance].delegate = self;
   return YES;
 }
-
+- (void)centralManagerDidUpdateState:(CBCentralManager *)central {
+  if (central.state == CBCentralManagerStatePoweredOn) {
+    //Do what you intend to do
+  } else if(central.state == CBCentralManagerStatePoweredOff) {
+    //Bluetooth is disabled. ios pops-up an alert automatically
+  }
+}
 @end

@@ -9,13 +9,14 @@ import { Provider } from 'react-redux';
 
 // My Config Files
 import myStore from './store/myStore';
-import RoutesNav from './routes/Routes';
+import Routes from './routes/Routes';
 
 export default class App extends Component {
+
   render() {
     return (
       <Provider store={myStore}>
-        <RoutesNav />
+        <Routes />
       </Provider>
     );
   }
