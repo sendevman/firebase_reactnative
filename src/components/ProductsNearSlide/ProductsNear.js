@@ -22,21 +22,9 @@ YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Class RCTCxx
 class ProductsNear extends Component {
   constructor() {
     super();
-    this.state = {
-      walkbaseState: '',
-      auth:"CHECKING...",
-      latitude: 0,
-      longitude: 0,
-      sentData : '',
-      receivedData : '',
-      bleState: 0 // 0: off, 1: on
-    };
-  };
-  componentWillMount() {
   };
 
   render() {
-    const {latitude, longitude, bleState, auth, sentData, receivedData} = this.state;
     return (
       <LinearGradient colors={['#2b3748', '#43597D']} height={166}>
         <Carousel

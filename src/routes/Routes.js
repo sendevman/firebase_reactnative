@@ -19,8 +19,9 @@ import CompareLayout from '../screens/CompareLayout';
 import ExclusiveVodLayout from '../screens/ExclusiveVodLayout';
 import OnBoardingLayout from '../screens/OnBoardingLayout';
 
+import TestScreen from '../screens/TestScreen';
 // My Actions
-import { setLocationInfo, setBLEInfo } from '../actions/BLEManage';
+import { setLocationInfo, setBLEInfo, saveBLEInfo } from '../actions/BLEManage';
 
 // Walkbase Engage
 import BleManager from 'react-native-ble-manager';
@@ -32,7 +33,7 @@ import HomeScreen from '../screens/HomeScreen';
 import InfoSpecsScreen from '../screens/InfoSpecsScreen';
 import ReviewsScreen from '../screens/ReviewsScreen';
 
-class Routes extends Component  {
+class Routes extends Component {
   constructor(props) {
     super(props);
   }
@@ -46,52 +47,42 @@ class Routes extends Component  {
     this.handleEventErrors = this.handleEventErrors.bind(this);
   };
   componentDidMount() {
-    const { dispatch } = this.props;
-    // this.watchID = navigator.geolocation.watchPosition(
-    //   (position) => {
-    //     dispatch(setLocationInfo(position));
-    //     // this.props.saveLocationData(position);
-    //    },
-    //    (error) => this.setState({ error: error.message }),
-    //    { enableHighAccuracy: true, timeout: 2000, maximumAge: 0, distanceFilter: 1},
-    // );
 
-    this.handlerDiscover1 = bleManagerEmitter.addListener("EngageManagerStateNotDetermined", this.handleEventNotDetermined );
-    this.handlerDiscover2 = bleManagerEmitter.addListener("EngageManagerStateInitializing", this.handleEventInitializing );
-    this.handlerDiscover3 = bleManagerEmitter.addListener("EngageManagerStatePaused", this.handleEventPause );
-    this.handlerDiscover4 = bleManagerEmitter.addListener("EngageManagerStateScanning", this.handleEventScanning );
-    this.handlerDiscover5 = bleManagerEmitter.addListener("EngageManagerStateFailed", this.handleEventFailed );
-    this.handlerDiscover6 = bleManagerEmitter.addListener("EngageManagerReceivedAdvertisement", this.handleEventReceivedAdvertisement );
-    this.handlerDiscover7 = bleManagerEmitter.addListener("EngageManagerOff", this.handleEventErrors );
+    this.handlerDiscover1 = bleManagerEmitter.addListener("EngageManagerStateNotDetermined", this.handleEventNotDetermined);
+    this.handlerDiscover2 = bleManagerEmitter.addListener("EngageManagerStateInitializing", this.handleEventInitializing);
+    this.handlerDiscover3 = bleManagerEmitter.addListener("EngageManagerStatePaused", this.handleEventPause);
+    this.handlerDiscover4 = bleManagerEmitter.addListener("EngageManagerStateScanning", this.handleEventScanning);
+    this.handlerDiscover5 = bleManagerEmitter.addListener("EngageManagerStateFailed", this.handleEventFailed);
+    this.handlerDiscover6 = bleManagerEmitter.addListener("EngageManagerReceivedAdvertisement", this.handleEventReceivedAdvertisement);
+    this.handlerDiscover7 = bleManagerEmitter.addListener("EngageManagerOff", this.handleEventErrors);
     this.webAPI();
   }
 
-  handleEventNotDetermined(data) { console.log("Not determined"); alert("a")};
-  handleEventInitializing(data) { console.log("Initializing");  alert("b")};
-  handleEventPause(data) { console.log("Pause");  alert("c")};
-  handleEventScanning(data) { console.log("Scanning");  alert("d")};
-  handleEventFailed(data) { console.log("Failed");};
+  handleEventNotDetermined(data) { console.log("Not determined"); alert("a") };
+  handleEventInitializing(data) { console.log("Initializing"); alert("b") };
+  handleEventPause(data) { console.log("Pause"); alert("c") };
+  handleEventScanning(data) { console.log("Scanning"); alert("d") };
+  handleEventFailed(data) { console.log("Failed"); };
 
   handleEventReceivedAdvertisement(data) {
     console.log(data);
-    dispatch(setBLEInfo(data));
     // this.handleFetchData(data);
     // alert(JSON.stringify(data));
   };
 
   handleEventErrors(data) {
-    if(data.state === 'WBErrorUnknown') {
+    if (data.state === 'WBErrorUnknown') {
       console.log(data);
-    } else if(data.state === 'WBErrorBluetoothOff') {
+    } else if (data.state === 'WBErrorBluetoothOff') {
       alert("Bluetooth is OFF. Please ON the Bluetooth");
-      this.setState({bleState:0})
-    } else if(data.state === 'Not error code') {
-      this.setState({bleState:1})
+      this.setState({ bleState: 0 })
+    } else if (data.state === 'Not error code') {
+      this.setState({ bleState: 1 })
     }
   };
 
   handleFetchData(data) { /* Analyzing the data */ };
-  
+
   componentWillUnmount() {
     this.websocketClose();
     this.handlerDiscover1.remove();
@@ -104,32 +95,37 @@ class Routes extends Component  {
     navigator.geolocation.clearWatch(this.watchID);
   };
 
-  webAPI() {    
+  webAPI() {
     ws.onopen = () => {
       // connection opened
       ws.send('{"user_id": "office_dev", "api_key": "VZHkscRFhAjkScc"}'); // send a message
-      alert("sent websocket api");
+      // alert("sent websocket api");
     };
-    
+
     ws.onmessage = (e) => {
-      console.log("received---", e);
-      // a message was received
-      // if(e.data === "") { //Auth true
-      //   // this.setState({auth:"TRUE", receivedData: e});
-      //   console.log("received---", e);
-      // } else { //Auth false
-      //   this.setState({auth:"FALSE"});
-      //   console.log("received---", e);
+      console.log("received---", e.data);
+      if (e.data !== "") {
+        this.props.saveBLEData(e.data);
+      }
+      // let data = {
+      //   lat:"35.000",
+      //   lng:"-80.000",
+      //   height:"1",
+      //   ts:"2018-07-09",
+      //   floor_id:"1348",
+      //   zone_id:"1"
       // }
+      // // this.props.saveBLEData(data);
+      // this.props.dispatch(setBLEInfo(data));
     };
-    
+
     ws.onerror = (e) => {
       // an error occurred
       alert("error");
       console.log(e.message);
     };
   }
-  websocketClose() {    
+  websocketClose() {
     ws.onclose = (e) => {
       // connection closed
       alert("close");
@@ -139,15 +135,16 @@ class Routes extends Component  {
 
   render() {
     return (
-      <DrawerNav/>
+      <DrawerNav />
     )
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    // saveLocationData: (data) => dispatch(BLEAction.setLocationInfo(data)),
-
+    saveBLEData: (data) => {
+      return dispatch(setBLEInfo(data))
+    }
   }
 }
 export default connect(mapDispatchToProps)(Routes);
@@ -156,7 +153,7 @@ const MyNavScreen = ({ navigation, banner }) => (
   <View style={{ flex: 1 }}>
     <ScrollView>
       <SafeAreaView forceInset={{ top: 'always' }}>
-        <Text style={{ fontSize: 14}}>{banner}</Text>
+        <Text style={{ fontSize: 14 }}>{banner}</Text>
         <Button onPress={() => navigation.openDrawer()} title="Open drawer" />
         <Button
           onPress={() => navigation.navigate('Email')}
@@ -169,20 +166,6 @@ const MyNavScreen = ({ navigation, banner }) => (
   </View>
 );
 
-const TestScreen = () => (
-
-  <View style={{ flex: 1 }}>
-    <ScrollView>
-      <SafeAreaView forceInset={{ top: 'always' }}>
-        <Text >PRODUCTS NEAR YOU</Text>
-        <Text > Latitude :    Longitude :  </Text>
-        <Text > Auth :  </Text>
-        <Text > Sent Data :  </Text>
-        <Text > Received Data :  </Text>
-      </SafeAreaView>
-    </ScrollView>
-    </View>
-);
 
 // Drawer Navigator - Screens
 const AboutRetailCompanion = ({ navigation }) => (
@@ -202,7 +185,7 @@ const AccountSettings = ({ navigation }) => (
 );
 
 const DebugViews = () => (
-  <TestScreen  />
+  <TestScreen />
 );
 // Bottom Tab Navigator - Screens
 const SharedSession = ({ navigation }) => (
@@ -215,7 +198,7 @@ const BottomTabNav = createBottomTabNavigator(
       screen: ProductLayout,
       navigationOptions: {
         title: 'Shopping',
-        tabBarIcon: ({tintColor}) => {
+        tabBarIcon: ({ tintColor }) => {
           if (tintColor === "#3E3F42")
             return <Icon name="ProductsUnFill" width="23" height="18" viewBox="0 0 23 18" />;
           else
@@ -227,7 +210,7 @@ const BottomTabNav = createBottomTabNavigator(
       screen: CompareLayout,
       navigationOptions: {
         title: 'Compare',
-        tabBarIcon: ({tintColor}) => {
+        tabBarIcon: ({ tintColor }) => {
           return <Icon name="Compare" width="22" height="22" fill={tintColor} viewBox="0 0 22 22" />;
         }
       }
@@ -236,7 +219,7 @@ const BottomTabNav = createBottomTabNavigator(
       screen: ExclusiveVodLayout,
       navigationOptions: {
         title: 'Exclusive VOD',
-        tabBarIcon: ({tintColor}) => {
+        tabBarIcon: ({ tintColor }) => {
           if (tintColor === "#3E3F42")
             return <Icon name="ExclusiveVodUnFill" width="22" height="18" viewBox="0 0 22 18" />;
           else
@@ -248,7 +231,7 @@ const BottomTabNav = createBottomTabNavigator(
       screen: SharedSession,
       navigationOptions: {
         title: 'Shared Session',
-        tabBarIcon: ({tintColor}) => {
+        tabBarIcon: ({ tintColor }) => {
           return <Icon name="SharedSession" width="22" height="22" fill={tintColor} viewBox="0 0 22 22" />;
         }
       }

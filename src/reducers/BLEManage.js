@@ -14,6 +14,7 @@ export default (state = initialState, action) => {
         break;
         case 'UPDATE_WALKBASE':
             return {
+                ...state,
                 bleData: _.merge(state.bleData, action.payload)
             }
         break;
