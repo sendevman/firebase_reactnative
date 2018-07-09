@@ -107,6 +107,7 @@ class Routes extends Component {
       if (e.data !== "") {
         this.props.saveBLEData(e.data);
       }
+      this.props.dispatch(setBLEInfo(e.data));
       // let data = {
       //   lat:"35.000",
       //   lng:"-80.000",
