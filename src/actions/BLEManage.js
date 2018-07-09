@@ -17,11 +17,19 @@ export const setBLEInfo = (params) => ({
     payload: params
 })
 
-   export function saveLocationInfo(params){
-      return async function(dispatch, getState) {
-          return dispatch({
-              type: 'UPDATE_LOCATION',
-              payload: params
-          })
-      }
-  }
+export function saveLocationInfo(params){
+    return async function(dispatch, getState) {
+        return dispatch({
+            type: 'UPDATE_LOCATION',
+            payload: params
+        })
+    }
+}
+export function saveBLEInfo(params){
+   return async function(dispatch, getState) {
+       return dispatch({
+           type: 'UPDATE_WALKBASE',
+           payload: params
+       })
+   }
+}
