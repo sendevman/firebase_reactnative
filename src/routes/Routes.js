@@ -48,20 +48,20 @@ class Routes extends Component {
   };
   componentDidMount() {
 
-    this.handlerDiscover1 = bleManagerEmitter.addListener("EngageManagerStateNotDetermined", this.handleEventNotDetermined);
-    this.handlerDiscover2 = bleManagerEmitter.addListener("EngageManagerStateInitializing", this.handleEventInitializing);
-    this.handlerDiscover3 = bleManagerEmitter.addListener("EngageManagerStatePaused", this.handleEventPause);
-    this.handlerDiscover4 = bleManagerEmitter.addListener("EngageManagerStateScanning", this.handleEventScanning);
-    this.handlerDiscover5 = bleManagerEmitter.addListener("EngageManagerStateFailed", this.handleEventFailed);
-    this.handlerDiscover6 = bleManagerEmitter.addListener("EngageManagerReceivedAdvertisement", this.handleEventReceivedAdvertisement);
-    this.handlerDiscover7 = bleManagerEmitter.addListener("EngageManagerOff", this.handleEventErrors);
+    this.handlerDiscover1 = bleManagerEmitter.addListener("WBEngageManagerStateNotDetermined", this.handleEventNotDetermined);
+    this.handlerDiscover2 = bleManagerEmitter.addListener("WBEngageManagerStateInitializing", this.handleEventInitializing);
+    this.handlerDiscover3 = bleManagerEmitter.addListener("WBEngageManagerStatePaused", this.handleEventPause);
+    this.handlerDiscover4 = bleManagerEmitter.addListener("WBEngageManagerStateScanning", this.handleEventScanning);
+    this.handlerDiscover5 = bleManagerEmitter.addListener("WBEngageManagerStateFailed", this.handleEventFailed);
+    this.handlerDiscover6 = bleManagerEmitter.addListener("WBEngageManagerReceivedAdvertisement", this.handleEventReceivedAdvertisement);
+    this.handlerDiscover7 = bleManagerEmitter.addListener("WBEngageManagerOff", this.handleEventErrors);
     this.webAPI();
   }
 
-  handleEventNotDetermined(data) { console.log("Not determined"); alert("a") };
-  handleEventInitializing(data) { console.log("Initializing"); alert("b") };
-  handleEventPause(data) { console.log("Pause"); alert("c") };
-  handleEventScanning(data) { console.log("Scanning"); alert("d") };
+  handleEventNotDetermined(data) { console.log("Not determined");};
+  handleEventInitializing(data) { console.log("Initializing"); };
+  handleEventPause(data) { console.log("Pause"); };
+  handleEventScanning(data) { console.log("Scanning");};
   handleEventFailed(data) { console.log("Failed"); };
 
   handleEventReceivedAdvertisement(data) {
@@ -75,9 +75,9 @@ class Routes extends Component {
       console.log(data);
     } else if (data.state === 'WBErrorBluetoothOff') {
       alert("Bluetooth is OFF. Please ON the Bluetooth");
-      this.setState({ bleState: 0 })
+      // this.setState({ bleState: 0 })
     } else if (data.state === 'Not error code') {
-      this.setState({ bleState: 1 })
+      // this.setState({ bleState: 1 })
     }
   };
 
@@ -99,7 +99,6 @@ class Routes extends Component {
     ws.onopen = () => {
       // connection opened
       ws.send('{"user_id": "office_dev", "api_key": "VZHkscRFhAjkScc"}'); // send a message
-      // alert("sent websocket api");
     };
 
     ws.onmessage = (e) => {
@@ -116,20 +115,17 @@ class Routes extends Component {
       //   floor_id:"1348",
       //   zone_id:"1"
       // }
-      // // this.props.saveBLEData(data);
       // dispatch(setBLEInfo(data));
     };
 
     ws.onerror = (e) => {
       // an error occurred
-      alert("error");
       console.log(e.message);
     };
   }
   websocketClose() {
     ws.onclose = (e) => {
       // connection closed
-      alert("close");
       console.log(e.code, e.reason);
     };
   }
