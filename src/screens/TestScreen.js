@@ -9,8 +9,8 @@ import { setBLEInfo } from '../actions/BLEManage';
 class TestScreen extends Component {
 
     render() {
-        const { bledata } = this.props;
-        console.log(bledata);
+        const bledata = this.props.bledata ? (this.props.bledata.bleData || {}) : {}
+        console.log("======", this.props.bledata);
         return (
             <View style={{ flex: 1 }}>
                 <ScrollView>
@@ -28,6 +28,6 @@ class TestScreen extends Component {
     }
 }
 function mapStateToProps(state) {
-    return { bledata: state.bleManage.bleData };
+    return { bledata: state.bleManage };
 }
 export default connect(mapStateToProps)(TestScreen);
