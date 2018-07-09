@@ -16,7 +16,8 @@ class TestScreen extends Component {
                 <ScrollView>
                     <SafeAreaView forceInset={{ top: 'always' }}>
                         <Text >PRODUCTS NEAR YOU</Text>
-                        <Text > Latitude :  {bledata.lat}  Longitude : {bledata.lng} </Text>
+                        <Text > Latitude :  {bledata.lat} </Text>
+                        <Text > Longitude : {bledata.lng} </Text>
                         <Text > Height : {bledata.height} </Text>
                         <Text > Floor ID : {bledata.floor_id} </Text>
                         <Text > Zone ID : {bledata.zone_id} </Text>
