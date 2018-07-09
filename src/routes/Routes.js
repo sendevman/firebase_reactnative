@@ -101,11 +101,13 @@ class Routes extends Component {
       ws.send('{"user_id": "office_dev", "api_key": "VZHkscRFhAjkScc"}'); // send a message
     };
 
+    var iii = 0;
     ws.onmessage = (e) => {
       console.log("received---", e.data);
       if (e.data !== "") {
-        this.props.dispatch(setBLEInfo(e.data));
+        this.props.dispatch(setBLEInfo(JSON.parse(e.data)));
       }
+      // iii++;
       // let data = {
       //   lat:"35.000",
       //   lng:"-80.000",
@@ -114,7 +116,19 @@ class Routes extends Component {
       //   floor_id:"1348",
       //   zone_id:"1"
       // }
-      // this.props.dispatch(setBLEInfo(data));
+      // let data1 = {
+      //   lat:"-35.000",
+      //   lng:"-80.000",
+      //   height:"-1",
+      //   ts:"2018-07-09",
+      //   floor_id:"-1348",
+      //   zone_id:"-1"
+      // }
+      // if(iii % 2 === 0){
+      //   this.props.dispatch(setBLEInfo(data));
+      // }else if(iii % 2 === 1){
+      //   this.props.dispatch(setBLEInfo(data1));
+      // }
     };
 
     ws.onerror = (e) => {
