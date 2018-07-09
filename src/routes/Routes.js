@@ -104,8 +104,7 @@ class Routes extends Component {
     ws.onmessage = (e) => {
       console.log("received---", e.data);
       if (e.data !== "") {
-        // this.props.saveBLEData(e.data);
-        dispatch(setBLEInfo(e.data));
+        this.props.dispatch(setBLEInfo(e.data));
       }
       // let data = {
       //   lat:"35.000",
@@ -115,7 +114,7 @@ class Routes extends Component {
       //   floor_id:"1348",
       //   zone_id:"1"
       // }
-      // dispatch(setBLEInfo(data));
+      // this.props.dispatch(setBLEInfo(data));
     };
 
     ws.onerror = (e) => {
