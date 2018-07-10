@@ -21,7 +21,7 @@ import OnBoardingLayout from '../screens/OnBoardingLayout';
 
 import TestScreen from '../screens/TestScreen';
 // My Actions
-import { setLocationInfo, setBLEInfo, saveBLEInfo } from '../actions/BLEManage';
+import { setLocationData } from '../actions/Current';
 
 // Walkbase Engage
 import BleManager from 'react-native-ble-manager';
@@ -102,33 +102,47 @@ class Routes extends Component {
     };
 
     var iii = 0;
+    var arrData = new Array();
+    const maxLength = 5;
     ws.onmessage = (e) => {
-      console.log("received---", e.data);
-      if (e.data !== "") {
-        this.props.dispatch(setBLEInfo(JSON.parse(e.data)));
+      let isTest = true;
+      if(isTest) {
+        iii++;
+        let data = {
+          lat:"35.000",
+          lng:"-80.000",
+          height:"1",
+          ts:"2018-07-09",
+          floor_id:"1348",
+          zone_id: 3902
+        }
+        let data1 = {
+          lat:"-35.000",
+          lng:"-80.000",
+          height:"-1",
+          ts:"2018-07-09",
+          floor_id:"-1348",
+          zone_id:3901
+        }
+        if(iii % 20 === 0){
+          this.props.dispatch(setLocationData(data));
+        }else if(iii % 20 === 10){
+          this.props.dispatch(setLocationData(data1));
+        }
+      }else {
+        if (e.data !== "") {
+          locationdata = JSON.parse(e.data);
+          this.props.dispatch(setLocationData(locationdata));
+          // if(arrData.length >= 5){
+          //   arrData.pop(0);
+          //   arrData.push(locationdata);
+          // }else{
+          //   arrData.push(locationdata);
+          // }
+          // this.props.dispatch(setLocationData(arrData));
+        }
+
       }
-      // iii++;
-      // let data = {
-      //   lat:"35.000",
-      //   lng:"-80.000",
-      //   height:"1",
-      //   ts:"2018-07-09",
-      //   floor_id:"1348",
-      //   zone_id:"1"
-      // }
-      // let data1 = {
-      //   lat:"-35.000",
-      //   lng:"-80.000",
-      //   height:"-1",
-      //   ts:"2018-07-09",
-      //   floor_id:"-1348",
-      //   zone_id:"-1"
-      // }
-      // if(iii % 2 === 0){
-      //   this.props.dispatch(setBLEInfo(data));
-      // }else if(iii % 2 === 1){
-      //   this.props.dispatch(setBLEInfo(data1));
-      // }
     };
 
     ws.onerror = (e) => {
@@ -152,8 +166,8 @@ class Routes extends Component {
 
 function mapDispatchToProps(dispatch) {
   return {
-    saveBLEData: (data) => {
-      return dispatch(setBLEInfo(data))
+    setLocationData: (data) => {
+      return dispatch(setLocationData(data))
     }
   }
 }

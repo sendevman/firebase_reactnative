@@ -52,12 +52,12 @@
 	</dict>
 	<key>NSBluetoothPeripheralUsageDescription</key>
 	<string>BLE Permission required</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>AT&amp;T Retail Companion required Location Permission</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Location permission required</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Location permission required</string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>AT&amp;T Retail Companion required Location Permission</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Entypo.ttf</string>
