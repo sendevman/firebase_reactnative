@@ -8,6 +8,22 @@ import { StyleSheet, Dimensions } from 'react-native';
 var { width } = Dimensions.get('window');
 
 export default StyleSheet.create({
+  containerModal: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.6)',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  containerNuevo: {
+    width: 310,
+    height: 370,
+    borderRadius: 16,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    backgroundColor: '#FFF'
+  },
+
   container: {
     backgroundColor: '#FFFFFF'
   },
