@@ -134,6 +134,7 @@ class Routes extends Component {
         if (e.data !== "") {
           locationdata = JSON.parse(e.data);
           if(zone_id === locationdata.zone_id){
+          }else {
             this.props.dispatch(setLocationData(locationdata));
             zone_id = locationdata.zone_id;
 
