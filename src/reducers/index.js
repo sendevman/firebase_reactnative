@@ -7,12 +7,10 @@
 import { combineReducers } from 'redux';
 
 // My Reducers
-import bleManage from './BLEManage';
 import common from './Common';
 import current from './Current';
 
 const rootReducer = combineReducers({
-  bleManage,
   common,
   current
 });
