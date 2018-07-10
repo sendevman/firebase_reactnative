@@ -18,11 +18,6 @@ import CompareLayout from '../screens/CompareLayout';
 import ExclusiveVodLayout from '../screens/ExclusiveVodLayout';
 import OnBoardingLayout from '../screens/OnBoardingLayout';
 
-// My Screens
-import HomeScreen from '../screens/HomeScreen';
-import InfoSpecsScreen from '../screens/InfoSpecsScreen';
-import ReviewsScreen from '../screens/ReviewsScreen';
-
 const MyNavScreen = ({ navigation, banner }) => (
   <View style={{ flex: 1 }}>
     <ScrollView>

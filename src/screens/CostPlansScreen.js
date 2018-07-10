@@ -17,6 +17,9 @@ import styles from './css/CostPlansScreenCss';
 import Icon from '../assets/images/Icon';
 import SkeletonLoading from './components/SkeletonLoading';
 
+// My Routes
+import RoutesAccessories from '../routes/Accessories';
+
 // My Actions
 import { updateHeaderNav } from '../actions/Common';
 
@@ -288,16 +291,29 @@ class CostPlansScreen extends Component {
     }
   }
 
+  renderAccessories() {
+    const { compatibleAccessories } = this.props.costplans;
+
+    if ((typeof compatibleAccessories == "undefined") || (Object.keys(compatibleAccessories).length === 0 && compatibleAccessories.constructor === Object)) return;
+
+    return (
+      <View style={{ height: 190 }}>
+        { <RoutesAccessories /> }
+      </View>
+    );
+  }
+
   render() {
     return (
       <ScrollView contentContainerStyle={styles.container} onScroll={handleScroll.bind(this)} scrollEventThrottle={16}>
         { this.renderContent() }
+        { this.renderAccessories() }
       </ScrollView>
     );
   }
 }
 
-function mapStateToProps(state) {
+const mapStateToProps = state => {
   const { current, common } = state;
 
   return { costplans: current.product, customHeaderNav: common.customHeaderNav };

@@ -16,6 +16,9 @@ import styles from './css/InfoSpecsScreenCss';
 import Icon from '../assets/images/Icon';
 import SkeletonLoading from './components/SkeletonLoading';
 
+// My Routes
+import RoutesAccessories from '../routes/Accessories';
+
 // My Actions
 import { updateHeaderNav } from '../actions/Common';
 
@@ -445,10 +448,23 @@ class InfoSpecsScreen extends Component {
     }
   }
 
+  renderAccessories() {
+    const { compatibleAccessories } = this.props.infoSpecs;
+
+    if ((typeof compatibleAccessories == "undefined") || (Object.keys(compatibleAccessories).length === 0 && compatibleAccessories.constructor === Object)) return;
+
+    return (
+      <View style={{ height: 204 }}>
+        { <RoutesAccessories /> }
+      </View>
+    );
+  }
+
   render() {
     return (
       <ScrollView contentContainerStyle={styles.container} onScroll={handleScroll.bind(this)} scrollEventThrottle={16}>
         { this.renderContent() }
+        { this.renderAccessories() }
       </ScrollView>
     );
   }
