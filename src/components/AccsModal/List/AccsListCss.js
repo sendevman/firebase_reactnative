@@ -8,8 +8,36 @@ import { StyleSheet, Dimensions } from 'react-native';
 var { width } = Dimensions.get('window');
 
 export default StyleSheet.create({
+  // container: {
+  //   height: '90%',
+  //   position: 'absolute',
+  //   bottom: 10,
+  //   backgroundColor: '#FFFFFF',
+  //   // borderRadius: 16,
+  //   shadowColor: '#AEBECD',
+
+  //   borderTopLeftRadius: 16,
+  //   borderTopRightRadius: 16
+  // },
   container: {
-    backgroundColor: '#EEF1F4'
+    backgroundColor: '#FFFFFF',
+    borderRadius: 16,
+    shadowColor: '#AEBECD'
+  },
+  posChoose: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-end',
+    marginHorizontal: 16,
+    marginTop: 18,
+    marginBottom: 16
+  },
+  textCompatible: {
+    color: '#3E3F42',
+    fontFamily: 'Rubik',
+    fontSize: 16,
+    letterSpacing: 0.11,
+    lineHeight: 19
   },
   textTitle:{
     color: '#1181FF',
@@ -17,11 +45,11 @@ export default StyleSheet.create({
     fontSize: 14,
     letterSpacing: 0.12,
     lineHeight: 17,
-    marginTop: 16,
-    marginLeft: 10
+    marginTop: 17,
+    marginLeft: 17
   },
   containerBox: {
-    paddingHorizontal: 10,
+    paddingHorizontal: 17,
     marginTop: 8,
     marginBottom: 14,
     flex: 1,
@@ -52,10 +80,6 @@ export default StyleSheet.create({
     alignItems: 'center',
     marginVertical: 7,
     marginHorizontal: 7
-  },
-  resizeMode: {
-    height: 86,
-    width: 106
   },
   separator: {
     borderTopColor: '#E3E9EF',
@@ -90,6 +114,10 @@ export default StyleSheet.create({
     letterSpacing: 0.1,
     lineHeight: 15,
     marginTop: 4
+  },
+  resizeMode: {
+    width: 106,
+    height: 86
   }
   
 });

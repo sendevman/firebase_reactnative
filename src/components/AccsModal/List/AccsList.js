@@ -9,10 +9,10 @@ import { Image, ScrollView, Text, View, WebView } from 'react-native';
 import { connect } from 'react-redux';
 
 // My Styles
-import styles from './css/AccesoriesBrowseScreenCss';
+import styles from './AccsListCss';
 
 // My Customs
-import Icon from '../assets/images/Icon';
+import Icon from '../../../assets/images/Icon';
 
 
 class AccesoriesBrowseScreen extends Component {
@@ -37,7 +37,7 @@ class AccesoriesBrowseScreen extends Component {
                   <Image 
                     style={styles.resizeMode}
                     resizeMode={Image.resizeMode.contain}
-                    source={require('../assets/images/files/S9-Compare1.png')} />
+                    source={require('../../../assets/images/files/S9-Compare1.png')} />
             		</View>
                 <View style={styles.separator}></View>
                 <View>
@@ -52,7 +52,7 @@ class AccesoriesBrowseScreen extends Component {
                   <Image 
                     style={styles.resizeMode}
                     resizeMode={Image.resizeMode.contain}
-                    source={require('../assets/images/files/S9-Compare.png')} />
+                    source={require('../../../assets/images/files/S9-Compare.png')} />
                 </View>
                 <View style={styles.separator}></View>
                 <View>
@@ -67,7 +67,7 @@ class AccesoriesBrowseScreen extends Component {
                   <Image 
                     style={styles.resizeMode}
                     resizeMode={Image.resizeMode.contain}
-                    source={require('../assets/images/files/Bitmap.png')} />
+                    source={require('../../../assets/images/files/S9-Compare.png')} />
                 </View>
                 <View style={styles.separator}></View>
                 <View>
@@ -95,7 +95,7 @@ class AccesoriesBrowseScreen extends Component {
                   <Image 
                     style={styles.resizeMode}
                     resizeMode={Image.resizeMode.contain}
-                    source={require('../assets/images/files/S9-Dual.png')} />
+                    source={require('../../../assets/images/files/S9-Dual.png')} />
                 </View>
                 <View style={styles.separator}></View>
                 <View>
@@ -110,7 +110,7 @@ class AccesoriesBrowseScreen extends Component {
                   <Image 
                     style={styles.resizeMode}
                     resizeMode={Image.resizeMode.contain}
-                    source={require('../assets/images/files/S9-Compare.png')} />
+                    source={require('../../../assets/images/files/S9-Compare.png')} />
                 </View>
                 <View style={styles.separator}></View>
                 <View>
@@ -125,7 +125,7 @@ class AccesoriesBrowseScreen extends Component {
                   <Image 
                     style={styles.resizeMode}
                     resizeMode={Image.resizeMode.contain}
-                    source={require('../assets/images/files/Bitmap.png')} />
+                    source={require('../../../assets/images/files/S9-Compare.png')} />
                 </View>
                 <View style={styles.separator}></View>
                 <View>
@@ -153,7 +153,7 @@ class AccesoriesBrowseScreen extends Component {
                   <Image 
                     style={styles.resizeMode}
                     resizeMode={Image.resizeMode.contain}
-                    source={require('../assets/images/files/S9-Dual.png')} />
+                    source={require('../../../assets/images/files/S9-Dual.png')} />
                 </View>
                 <View style={styles.separator}></View>
                 <View>
@@ -168,7 +168,7 @@ class AccesoriesBrowseScreen extends Component {
                   <Image
                     style={styles.resizeMode}
                     resizeMode={Image.resizeMode.contain}
-                    source={require('../assets/images/files/S9-Compare.png')} />
+                    source={require('../../../assets/images/files/S9-Compare.png')} />
                 </View>
                 <View style={styles.separator}></View>
                 <View>
@@ -183,7 +183,7 @@ class AccesoriesBrowseScreen extends Component {
                   <Image
                     style={styles.resizeMode}
                     resizeMode={Image.resizeMode.contain}
-                    source={require('../assets/images/files/BitmapGris.png')}
+                    source={require('../../../assets/images/files/BitmapGris.png')}
                   />
                 </View>
                 <View style={styles.separator}></View>
