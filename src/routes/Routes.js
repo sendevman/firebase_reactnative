@@ -102,6 +102,7 @@ class Routes extends Component {
     };
 
     var iii = 0;
+    var zone_id = 0;
     var arrData = new Array();
     const maxLength = 5;
     ws.onmessage = (e) => {
@@ -132,7 +133,11 @@ class Routes extends Component {
       }else {
         if (e.data !== "") {
           locationdata = JSON.parse(e.data);
-          this.props.dispatch(setLocationData(locationdata));
+          if(zone_id === locationdata.zone_id){
+            this.props.dispatch(setLocationData(locationdata));
+            zone_id = locationdata.zone_id;
+
+          }
           // if(arrData.length >= 5){
           //   arrData.pop(0);
           //   arrData.push(locationdata);
