@@ -15,7 +15,7 @@ class ButtonChange extends Component<props> {
   render() {
     return (
       <Button
-        raiseds
+        raised
         title='Change'
         color="#1181FF"
         borderRadius={12}

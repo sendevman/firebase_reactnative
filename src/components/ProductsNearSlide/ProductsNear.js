@@ -5,16 +5,11 @@
  */
 
 import React, { Component } from 'react';
-import { Image, Text, View,
-  NativeEventEmitter,
-  DeviceEventEmitter,
-  Platform,
-  NativeModules,
-  YellowBox } from 'react-native';
+import moment from 'moment';
+import { Image, Text, View, YellowBox } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Carousel from 'react-native-carousel-view';
 
-// import WS from 'react-native-websocket'
 // My Styles
 import styles from './ProductsNearCss';
 
@@ -22,188 +17,18 @@ import styles from './ProductsNearCss';
 import Icon from '../../assets/images/Icon';
 import ButtonCompare from './ButtonCompare';
 
-// Walkbase Engage
-import BleManager from 'react-native-ble-manager';
-const BleManagerModule = NativeModules.BleManager;
-const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
-const ws = new WebSocket('wss://wai.walkbase.com/api/v2/subscribe/device');
-YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader']);
-var wsUri = "wss://wai.walkbase.com/api/v2/subscribe/device";
+YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Class RCTCxxModule']);
 
 class ProductsNear extends Component {
   constructor() {
     super();
-    this.state = {
-      walkbaseState: '',
-      coords: {
-        latitude: 0,
-        longitude: 0
-      },
-      bleState: 0 // 0: off, 1: on
-    };
-    this.handleEventNotDetermined = this.handleEventNotDetermined.bind(this);
-    this.handleEventInitializing = this.handleEventInitializing.bind(this);
-    this.handleEventPause = this.handleEventPause.bind(this);
-    this.handleEventScanning = this.handleEventScanning.bind(this);
-    this.handleEventFailed = this.handleEventFailed.bind(this);
-    this.handleEventReceivedAdvertisement = this.handleEventReceivedAdvertisement.bind(this);
-    this.handleEventErrors = this.handleEventErrors.bind(this);
   };
-
-  componentWillMount() {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        this.setState({coords: position.coords});
-        var initialPosition = JSON.stringify(position);
-        // alert(initialPosition);
-      }
-    )
-    navigator.geolocation.watchPosition(
-      (position) => {
-        this.setState({coords: position.coords});
-        var initialPosition = JSON.stringify(position);
-        // alert(initialPosition);
-      }
-    )
-  };
-
-  componentDidMount() {
-    this.handlerDiscover1 = bleManagerEmitter.addListener('WBEngageManagerStateNotDetermined', this.handleEventNotDetermined );
-    this.handlerDiscover2 = bleManagerEmitter.addListener('WBEngageManagerStateInitializing', this.handleEventInitializing );
-    this.handlerDiscover3 = bleManagerEmitter.addListener('WBEngageManagerStatePaused', this.handleEventPause );
-    this.handlerDiscover4 = bleManagerEmitter.addListener('WBEngageManagerStateScanning', this.handleEventScanning );
-    this.handlerDiscover5 = bleManagerEmitter.addListener('WBEngageManagerStateFailed', this.handleEventFailed );
-    this.handlerDiscover6 = bleManagerEmitter.addListener('WBEngageManagerReceivedAdvertisement', this.handleEventReceivedAdvertisement );
-    this.handlerDiscover7 = bleManagerEmitter.addListener('WBEngageManagerOff', this.handleEventErrors );
-    this.fetchLocation();
-    this.webAPI();
-    // io.on('connection', (client) => {
-
-    // })
-  };
-
-  handleEventNotDetermined(data) { console.log("Not determined"); };
-  handleEventInitializing(data) { console.log("Initializing"); };
-  handleEventPause(data) { console.log("Pause"); };
-  handleEventScanning(data) { console.log("Scanning"); };
-  handleEventFailed(data) { console.log("Failed"); };
-
-  handleEventReceivedAdvertisement(data) {
-    console.log(data);
-    this.handleFetchData(data);
-  };
-
-  handleEventErrors(data) {
-    if(data.state === 'WBErrorUnknown') {
-      console.log(data);
-    } else if(data.state === 'WBErrorBluetoothOff') {
-      alert("Bluetooth is OFF. Please ON the Bluetooth");
-      this.setState({bleState:0})
-    } else if(data.state === 'Not error code') {
-      this.setState({bleState:1})
-    }
-  };
-
-  handleFetchData(data) { /* Analyzing the data */ };
-  
-  componentWillUnmount() {
-    this.websocketClose();
-    this.handlerDiscover1.remove();
-    this.handlerDiscover2.remove();
-    this.handlerDiscover3.remove();
-    this.handlerDiscover4.remove();
-    this.handlerDiscover5.remove();
-    this.handlerDiscover6.remove();
-    this.handlerDiscover7.remove();
-    // navigator.geolocation.clearWatch(this.watchID);
-    // LocationServicesDialogBox.stopListener();
-  };
-
-  checkLocationPermission() {
-    if (Platform.OS === 'android') {
-    } else {
-      this.fetchLocation();
-    }
-  }
-
-  fetchLocation() {
-    navigator.geolocation.getCurrentPosition(
-      ({ coords }) => {
-        this.currentCoord = {
-          latitude: coords.latitude,
-          longitude: coords.longitude
-        };
-      },
-      error => console.log('Location Error1', error),
-      {
-        timeout: 20000,
-        enableHighAccuracy: true,
-      });
-    this.watchID = navigator.geolocation.watchPosition(
-      ({ coords }) => {
-        this.currentCoord = {
-          latitude: coords.latitude,
-          longitude: coords.longitude
-        };
-      },
-      (error) => {
-        console.log('Location Error2', error)
-      });
-  }
-
-  webAPI() {
-    
-    ws.onopen = () => {
-      // connection opened
-      ws.send('{"user_id": "office_dev", "api_key": "VZHkscRFhAjkScc"}'); // send a message
-    };
-    
-    ws.onmessage = (e) => {
-      // a message was received
-      if(e.data === "") { //Auth true
-        console.log("AUTH true", e);
-        this.getStreamingData();
-      } else { //Auth false
-        console.log("AUTH false", e);
-        alert(e.data);
-      }
-    };
-    
-    ws.onerror = (e) => {
-      // an error occurred
-      alert("error");
-      console.log(e.message);
-    };
-  }
-  websocketClose() {    
-    ws.onclose = (e) => {
-      // connection closed
-      alert("close");
-      console.log(e.code, e.reason);
-    };
-  }
-
-  getStreamingData() {
-    ws.send('{"lat": 39.765914, "lng": -84.193231, "height": 1.0, "ts": "2018-07-03T17:40:21Z", "floor_id": 123, "zone_id": "null"}');
-  }
 
   render() {
     return (
-      <LinearGradient colors={['#2b3748', '#43597D']}>
+      <LinearGradient colors={['#2b3748', '#43597D']} height={166}>
         <Text style={styles.title}>PRODUCTS NEAR YOU</Text>
-        {/* <WS
-          ref={ref => {this.ws = ref}}
-          url="wss://wai.walkbase.com/api/v2/subscribe/device"
-          onOpen={() => {
-            console.log('Open!')
-            this.ws.send('{"user_id": "office_dev", "api_key": "VZHkscRFhAjkScc"}')
-          }}
-          onMessage={console.log}
-          onError={console.log}
-          onClose={console.log}
-          reconnect // Will try to reconnect onClose
-        /> */}
-        {/* <Carousel
+        <Carousel
           animate={false}
           height={136}
           indicatorOffset={4}
@@ -268,6 +93,7 @@ class ProductsNear extends Component {
                     <Text style={styles.deviceOptionText}>18MP + 8MP</Text>
                   </View>
                 </View>
+
                 <ButtonCompare />
               </View>
             </View>
@@ -303,7 +129,7 @@ class ProductsNear extends Component {
               </View>
             </View>
           </View>
-        </Carousel> */}
+        </Carousel>
       </LinearGradient>
     );
   }

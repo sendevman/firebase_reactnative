@@ -93,7 +93,7 @@ class HomeScreen extends Component {
     return (
       <View style={styles.container}>
         <View style={{ marginVertical: 20 }}>
-          <ProductsNearSlide />
+          {/* <ProductsNearSlide /> */}
         </View>
       </View>
     );

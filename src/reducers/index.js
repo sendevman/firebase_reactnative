@@ -7,9 +7,11 @@
 import { combineReducers } from 'redux';
 
 // My Reducers
+import common from './Common';
 import current from './Current';
 
 const rootReducer = combineReducers({
+  common,
   current
 });
 

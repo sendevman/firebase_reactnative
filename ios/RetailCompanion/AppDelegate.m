@@ -11,26 +11,24 @@
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
 #import <CoreBluetooth/CoreBluetooth.h>
+#import <Firebase.h>
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-  /* Set to display extra debugging information from the Engage SDK. */
-  [WBEngageManager sharedInstance].debugMode = YES;
-
-  /* Your custom Engage Engine API key. */
-  [WBEngageManager startWithAPIKey:@"VZHkscRFhAjkScc"];
-
-  /* A custom user id. Setting this is optional. */
-  [WBEngageManager setUserIdentifier:@"office_dev"];
-  
-  [WBEngageManager sharedInstance].delegate = self;
   
   NSURL *jsCodeLocation;
 
   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
+  #ifdef DEBUG
+    jsCodeLocation = [NSURL URLWithString:@"http://172.16.2.170:8081/index.bundle?platform=ios&dev=true"];
+  #else
+    jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
+  #endif
 
+//  jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
+  [FIRApp configure];
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
                                                       moduleName:@"RetailCompanion"
                                                initialProperties:nil
@@ -47,7 +45,24 @@
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
+  [[CBCentralManager alloc] initWithDelegate:self queue:nil];
+  /* Set to display extra debugging information from the Engage SDK. */
+  [WBEngageManager sharedInstance].debugMode = YES;
+  
+  /* Your custom Engage Engine API key. */
+  [WBEngageManager startWithAPIKey:@"VZHkscRFhAjkScc"];
+  
+  /* A custom user id. Setting this is optional. */
+  [WBEngageManager setUserIdentifier:@"office_dev"];
+  
+//  [WBEngageManager sharedInstance].delegate = self;
   return YES;
 }
-
+- (void)centralManagerDidUpdateState:(CBCentralManager *)central {
+  if (central.state == CBCentralManagerStatePoweredOn) {
+    //Do what you intend to do
+  } else if(central.state == CBCentralManagerStatePoweredOff) {
+    //Bluetooth is disabled. ios pops-up an alert automatically
+  }
+}
 @end
