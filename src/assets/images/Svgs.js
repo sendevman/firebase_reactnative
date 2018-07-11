@@ -108,8 +108,8 @@ export default {
     svg: <G stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><G transform="translate(-345.000000, -126.000000)" fill="#1181FF" fill-rule="nonzero"><G transform="translate(0.000000, 105.000000)"><G transform="translate(345.000000, 21.000000)"><Polygon fill="#1181FF" points="14 1.41 12.59 0 7 5.59 1.41 0 0 1.41 5.59 7 0 12.59 1.41 14 7 8.41 12.59 14 14 12.59 8.41 7" /></G></G></G></G>,
     viewBox: '0 0 14 14'
   },
-  Flecha: {
-    svg: <G stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><G transform="translate(-16.000000, -42.000000)" fill="#1181FF" fill-rule="nonzero"><G transform="translate(16.000000, 42.000000)"><Polygon fill="#1181FF" points="9.2625 13.8625 3.5375 8.125 9.2625 2.3875 7.5 0.625 0 8.125 7.5 15.625" /></G></G></G>,
-    viewBox: '0 0 10 14'
+  ArrowLeft: {
+    svg: <G><Polygon points="9.2625 13.8625 3.5375 8.125 9.2625 2.3875 7.5 0.625 0 8.125 7.5 15.625" /></G>,
+    viewBox: '0 0 10 16'
   }
 }
