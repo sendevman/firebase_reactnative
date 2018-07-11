@@ -12,7 +12,6 @@ import myStore from './store/myStore';
 import Routes from './routes/Routes';
 
 export default class App extends Component {
-
   render() {
     return (
       <Provider store={myStore}>

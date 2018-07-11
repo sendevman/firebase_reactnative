@@ -19,19 +19,19 @@ const initialState = {
 export default current = (state = initialState, action) => {
   let newState = _.merge({}, state)
   switch (action.type) {
-      case 'UPDATE_LOCATION':
-          return {
-              ...state,
-              postition: action.payload
-          }
-      break;
-      case 'UPDATE_PRODUCT_INFO':
-          return {
-              ...state,
-              product: action.payload
-          }
-      break;
-      default:
+    case 'UPDATE_LOCATION':
+      return {
+        ...state,
+        postition: action.payload
+      }
+    break;
+    case 'UPDATE_PRODUCT_INFO':
+      return {
+        ...state,
+        product: action.payload
+      }
+    break;
+    default:
       return newState;
   }
   return newState;
