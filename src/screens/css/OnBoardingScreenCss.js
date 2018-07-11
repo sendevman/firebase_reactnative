@@ -59,7 +59,7 @@ export default StyleSheet.create({
   },
   title: {
     color: '#FFFFFF',
-    fontFamily: 'Rubik',
+    // fontFamily: 'Rubik',
     fontSize: 16,
     fontWeight: '500',
     lineHeight: 19,
@@ -68,7 +68,7 @@ export default StyleSheet.create({
   },
   subTitle: {
     color: '#839FBE',
-    fontFamily: 'Roboto',
+    // fontFamily: 'Roboto',
     fontSize: 15,
     lineHeight: 20,
     textAlign: 'center'
@@ -87,7 +87,7 @@ export default StyleSheet.create({
   },
   getStartedBtnText: {
     color: '#FFFFFF',
-    fontFamily: 'Rubik',
+    // fontFamily: 'Rubik',
     fontSize: 16,
     fontWeight: '500',
     lineHeight: 19,
