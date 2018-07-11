@@ -23,7 +23,6 @@ class OnBoardingModal extends Component {
 
     return (
       <Modal
-        style={{backgroundColor: 'green'}}
         animationType="slide"
         transparent={true}
         presentationStyle="overFullScreen"
