@@ -46,8 +46,7 @@ class ProductLayoutScreen extends Component {
         }
       });
   }
-
-  getProductDetails(product_id) {
+  getProductDetails(arrAreas) {
     const ref = firebase.firestore().collection('products');
     if (arrAreas[0] != undefined) {
       const arrproducts = arrAreas[0].products;
@@ -57,7 +56,22 @@ class ProductLayoutScreen extends Component {
       })
     }
   }
-  getProductDetails1(product_id) {
+  getProductDetails1(arrAreas) {
+    const ref = firebase.firestore().collection('products');
+    if (arrAreas[0] != undefined) {
+      const arrproducts = arrAreas[0].products;
+      var arrDetails = new Array();
+      for (j = 0; j < arrproducts.length; j++) {
+        ref.doc(arrproducts[j]).get().then(snapshot => {
+          const productDetails = snapshot.data();
+          arrDetails.push(productDetails);
+        })
+      }
+      console.log("+++", arrDetails);
+      this.props.dispatch(setProductInfo(arrDetails));
+    }
+  }
+  getProductDetails2(product_id) {
     const ref = firebase.firestore().collection('products');
     ref.doc(product_id).get().then(snapshot => {
       const productDetails = snapshot.data();
