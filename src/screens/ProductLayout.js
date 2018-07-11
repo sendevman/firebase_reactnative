@@ -16,10 +16,11 @@ import LogoTitle from './components/LogoTitle';
 import GradientHeader from './components/GradientHeader';
 import ProductsNearSlide from '../components/ProductsNearSlide/ProductsNear';
 
-// Action
-import { setProductInfo } from '../actions/Current';
 // My Routes
 import RoutesProducts from '../routes/Products'
+
+// Action
+import { setProductInfo } from '../actions/Current';
 
 var { height } = Dimensions.get('window');
 
@@ -30,9 +31,9 @@ class ProductLayoutScreen extends Component {
     this._animatedValue = new Animated.Value(0);
   }
 
-  componentWillMount() {
-    // this.getProductID(3902);
-  }
+  // componentWillMount() {
+  //   // this.getProductID(3902);
+  // }
 
   getProductID(zone_id) {
     const ref = firebase.firestore().collection('areas');
@@ -46,6 +47,7 @@ class ProductLayoutScreen extends Component {
       }
     });
   }
+
   getProductDetails(product_id) {
     const ref = firebase.firestore().collection('products');
     ref.doc(product_id).get().then(snapshot => {
@@ -56,20 +58,21 @@ class ProductLayoutScreen extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    // if (this.props.customHeaderNav !== nextProps.customHeaderNav) {
-    //   const HEADER_MAX_HEIGHT = nextProps.customHeaderNav.heightHeader
-    //   const HEADER_MIN_HEIGHT = 0
-    //   const HEADER_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT
+    if (this.props.customHeaderNav !== nextProps.customHeaderNav) {
+      const HEADER_MAX_HEIGHT = nextProps.customHeaderNav.heightHeader
+      const HEADER_MIN_HEIGHT = 0
+      const HEADER_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT
 
-    //   this.props.navigation.setParams({
-    //     heightHeader: this._animatedValue.interpolate({
-    //       inputRange: [0, HEADER_DISTANCE],
-    //       outputRange: [HEADER_MAX_HEIGHT, HEADER_MIN_HEIGHT],
-    //       extrapolate: 'clamp'
-    //     })
-    //   });
-    // }
-    if(this.props.locationData.zone_id !== nextProps.locationData.zone_id) {
+      this.props.navigation.setParams({
+        heightHeader: this._animatedValue.interpolate({
+          inputRange: [0, HEADER_DISTANCE],
+          outputRange: [HEADER_MAX_HEIGHT, HEADER_MIN_HEIGHT],
+          extrapolate: 'clamp'
+        })
+      });
+    }
+
+    if (this.props.locationData.zone_id !== nextProps.locationData.zone_id) {
       console.log("--------props-------", this.props.locationData.zone_id);
       let zone_id = this.props.locationData.zone_id;
       this.getProductID(zone_id);
@@ -112,12 +115,9 @@ class ProductLayoutScreen extends Component {
 }
 
 const mapStateToProps = state => {
-  const { current, common } = state;
+  const { common, current } = state;
 
-  return { 
-    customHeaderNav: common.customHeaderNav,
-    locationData: state.current.postition
-   };
+  return { customHeaderNav: common.customHeaderNav, locationData: current.postition };
 }
 
 const ProductLayout = createStackNavigator({

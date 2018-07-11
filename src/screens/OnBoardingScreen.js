@@ -10,7 +10,6 @@ import styles from './css/OnBoardingScreenCss';
 // My Customs
 import Icon from '../assets/images/Icon';
 import OnBoardingModal from '../components/OnBoardingModal/OnBoardingModal';
-import OpenSettings from 'react-native-open-settings';
 
 // Slides
 const OnBoardingOne = () => (
