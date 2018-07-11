@@ -45,7 +45,7 @@ export default StyleSheet.create({
   headerText: {
     flex: 1,
     color: '#3E3F42',
-    fontFamily: 'Rubik',
+    // fontFamily: 'Rubik',
     fontSize: 16,
     letterSpacing: 0.11,
     lineHeight: 19
@@ -87,7 +87,7 @@ export default StyleSheet.create({
   titleText: {
     marginBottom: 10,
     color: '#3E3F42',
-    fontFamily: 'Rubik',
+    // fontFamily: 'Rubik',
     fontSize: 16,
     letterSpacing: 0.1,
     lineHeight: 19
@@ -95,7 +95,7 @@ export default StyleSheet.create({
   descriptionText: {
     marginTop: 14,
     color: '#3E3F42',
-    fontFamily: 'Roboto',
+    // fontFamily: 'Roboto',
     fontSize: 14,
     letterSpacing: 0.1,
     lineHeight: 21
@@ -103,7 +103,7 @@ export default StyleSheet.create({
   // Buy Button
   textBuyBtn: {
     color: '#FFF',
-    fontFamily: 'Rubik',
+    // fontFamily: 'Rubik',
     fontSize: 18,
     letterSpacing: 0.1,
     lineHeight: 22,

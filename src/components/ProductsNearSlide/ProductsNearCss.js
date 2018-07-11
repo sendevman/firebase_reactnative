@@ -11,7 +11,7 @@ var { width } = Dimensions.get('window');
 export default StyleSheet.create({
   title: {
     color: '#6B92BF',
-    fontFamily: 'Roboto',
+    // fontFamily: 'Roboto',
     fontSize: 12,
     fontWeight: 'bold',
     lineHeight: 14,
@@ -47,7 +47,7 @@ export default StyleSheet.create({
   },
   titleItem: {
     color: '#3E3F42',
-    fontFamily: 'Rubik',
+    // fontFamily: 'Rubik',
     fontSize: 18,
     lineHeight: 22,
     paddingVertical: 6
@@ -70,7 +70,7 @@ export default StyleSheet.create({
   },
   deviceOptionText: {
     color: '#3E3F42',
-    fontFamily: 'Roboto',
+    // fontFamily: 'Roboto',
     fontSize: 13,
     lineHeight: 15,
     marginLeft: 3
