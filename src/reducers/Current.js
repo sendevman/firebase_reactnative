@@ -31,6 +31,12 @@ export default current = (state = initialState, action) => {
         product: action.payload
       }
     break;
+    case 'UPDATE_AREA_INFO':
+        return {
+            ...state,
+            allAreas: action.payload
+        }
+    break;
     default:
       return newState;
   }

@@ -20,7 +20,7 @@ import ProductsNearSlide from '../components/ProductsNearSlide/ProductsNear';
 import RoutesProducts from '../routes/Products'
 
 // Action
-import { setProductInfo } from '../actions/Current';
+import { setProductInfo, setAreaInfo } from '../actions/Current';
 
 var { height } = Dimensions.get('window');
 
@@ -38,21 +38,30 @@ class ProductLayoutScreen extends Component {
   getProductID(zone_id) {
     const ref = firebase.firestore().collection('areas');
     ref.where('id', '==', zone_id).get()
-    .then(snapshot => {
-      const arrAreas = snapshot.docs.map(doc => doc.data());
-      if(arrAreas.length > 0){
-        const product_id = arrAreas[0].products[0];
-        console.log("======",product_id);
-        this.getProductDetails(product_id);
-      }
-    });
+      .then(snapshot => {
+        const arrAreas = snapshot.docs.map(doc => doc.data());
+        this.props.dispatch(setAreaInfo(arrAreas));
+        if (arrAreas.length > 0) {
+          this.getProductDetails(arrAreas);
+        }
+      });
   }
 
   getProductDetails(product_id) {
     const ref = firebase.firestore().collection('products');
+    if (arrAreas[0] != undefined) {
+      const arrproducts = arrAreas[0].products;
+      ref.doc(arrproducts[0]).get().then(snapshot => {
+        const productDetails = snapshot.data();
+        this.props.dispatch(setProductInfo(productDetails));
+      })
+    }
+  }
+  getProductDetails1(product_id) {
+    const ref = firebase.firestore().collection('products');
     ref.doc(product_id).get().then(snapshot => {
       const productDetails = snapshot.data();
-      console.log("======",productDetails);
+      console.log("======", productDetails);
       this.props.dispatch(setProductInfo(productDetails));
     })
   }

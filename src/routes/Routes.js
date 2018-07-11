@@ -288,7 +288,7 @@ class Routes extends Component {
           height:"-1",
           ts:"2018-07-09",
           floor_id:"-1348",
-          zone_id:3901
+          zone_id:3903
         }
         if(iii % 20 === 0){
           this.props.dispatch(setLocationData(data));
