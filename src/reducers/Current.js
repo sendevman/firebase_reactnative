@@ -5,6 +5,7 @@
  */
 
 // import {} from '../actions/Current';
+import _ from 'lodash'
 
 // My FakeData
 import { FakeProduct } from '../store/ProductFakeData';
@@ -16,5 +17,22 @@ const initialState = {
 };
 
 export default current = (state = initialState, action) => {
-  return state;
+  let newState = _.merge({}, state)
+  switch (action.type) {
+      case 'UPDATE_LOCATION':
+          return {
+              ...state,
+              postition: action.payload
+          }
+      break;
+      case 'UPDATE_PRODUCT_INFO':
+          return {
+              ...state,
+              product: action.payload
+          }
+      break;
+      default:
+      return newState;
+  }
+  return newState;
 };

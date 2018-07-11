@@ -1,9 +1,3 @@
-/**
- * Conexus-Tech - Retail Companion AT&T
- * https://conexustech.com/
- * @flow
- */
-
 import { StyleSheet, Dimensions } from 'react-native';
 var { width } = Dimensions.get('window');
 
