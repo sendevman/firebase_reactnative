@@ -21,11 +21,11 @@ class ButtonChange extends Component<props> {
         borderRadius={12}
         backgroundColor="#FFF"
         textStyle={{
-          fontFamily: 'Roboto',
+          // fontFamily: 'Roboto',
           fontSize: 12,
           lineHeight: 14
         }}
-        buttonStyle={{ marginTop: 8, paddingTop: 5, paddingBottom: 4, paddingHorizontal: 20, borderWidth: 1, borderStyle: 'solid', borderColor: '#1181FF' }  }
+        buttonStyle={{ marginTop: 8, paddingTop: 5, paddingBottom: 4, paddingHorizontal: 20, borderWidth: 1, borderStyle: 'solid', borderColor: '#1181FF' }}
         onPress={() => Alert.alert(
           'Alert Title',
           'Go To Compare',

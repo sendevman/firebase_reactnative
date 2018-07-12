@@ -40,7 +40,7 @@ export default StyleSheet.create({
   },
   titleProduct: {
     color: '#3E3F42',
-    fontFamily: 'Rubik',
+    // fontFamily: 'Rubik',
     fontSize: 12,
     letterSpacing: 0.1,
     lineHeight: 15,
@@ -48,7 +48,7 @@ export default StyleSheet.create({
   },
   titleVs: {
   	color: '#AEBECD',
-  	fontFamily: 'Roboto',
+  	// fontFamily: 'Roboto',
   	fontSize: 15,
   	letterSpacing: 0.13,
   	lineHeight: 18,
