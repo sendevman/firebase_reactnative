@@ -22,7 +22,7 @@ class ButtonCompare extends Component<props> {
         borderRadius={18}
         backgroundColor="#1181FF"
         textStyle={{
-          fontFamily: 'Rubik',
+          // fontFamily: 'Rubik',
           fontSize: 14,
           lineHeight: 17
         }}

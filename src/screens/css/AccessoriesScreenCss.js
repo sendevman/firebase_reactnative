@@ -16,7 +16,7 @@ export default StyleSheet.create({
   // Accesories Box
   textTitle: {
     color: '#1181FF',
-    fontFamily: 'Rubik',
+    // fontFamily: 'Rubik',
     fontSize: 14,
     letterSpacing: 0.12,
     lineHeight: 17,
@@ -70,7 +70,7 @@ export default StyleSheet.create({
     marginTop: 8,
     marginHorizontal: 10,
     color: '#3E3F42',
-    fontFamily: 'Rubik',
+    // fontFamily: 'Rubik',
     fontSize: 12,
     letterSpacing: 0.1,
     lineHeight: 15
@@ -88,7 +88,7 @@ export default StyleSheet.create({
   addText: {
     width: 68,
     color: '#3E3F42',
-    fontFamily: 'Rubik',
+    // fontFamily: 'Rubik',
     fontSize: 12,
     letterSpacing: 0.1,
     lineHeight: 15,
