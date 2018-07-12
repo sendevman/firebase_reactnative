@@ -24,14 +24,14 @@ export default StyleSheet.create({
   },
   title: {
     color: '#3E3F42',
-    fontFamily: 'Rubik',
+    // fontFamily: 'Rubik',
     fontSize: 17,
     lineHeight: 18,
     letterSpacing: 0.8
   },
   subTitle: {
     color: '#3E3F42',
-    fontFamily: 'Rubik',
+    // fontFamily: 'Rubik',
     fontSize: 14,
     lineHeight: 16
   },
@@ -47,7 +47,7 @@ export default StyleSheet.create({
     borderBottomColor: '#E3E9EF'
   },
   labelStyle: {
-    fontFamily: 'Rubik',
+    // fontFamily: 'Rubik',
     fontSize: 14,
     lineHeight: 18,
     fontWeight: 'normal',
@@ -61,7 +61,7 @@ export default StyleSheet.create({
   },
   signOut: {
     color: '#F44242',
-    fontFamily: 'Rubik',
+    // fontFamily: 'Rubik',
     fontSize: 14,
     lineHeight: 18
   }

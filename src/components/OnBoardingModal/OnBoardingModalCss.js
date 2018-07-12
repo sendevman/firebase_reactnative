@@ -35,7 +35,7 @@ export default StyleSheet.create({
   },
   modalText: {
     color: '#3E3F42',
-    fontFamily: 'Roboto',
+    // fontFamily: 'Roboto',
     fontSize: 16,
     lineHeight: 27,
     textAlign: 'center'
@@ -50,7 +50,7 @@ export default StyleSheet.create({
   },
   allowBtnText: {
     color: '#FFFFFF',
-    fontFamily: 'Roboto',
+    // fontFamily: 'Roboto',
     fontSize: 16,
     lineHeight: 21,
     textAlign: 'center'
@@ -64,7 +64,7 @@ export default StyleSheet.create({
   declineBtnText: {
     color: '#536C88',
     textDecorationLine: 'underline',
-    fontFamily: 'Roboto',
+    // fontFamily: 'Roboto',
     fontSize: 16,
     lineHeight: 21,
     textAlign: 'center'

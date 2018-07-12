@@ -32,7 +32,7 @@ export default StyleSheet.create({
     marginLeft: 16,
     marginBottom: 2,
     color: '#3E3F42',
-    fontFamily: 'Rubik',
+    // fontFamily: 'Rubik',
     fontSize: 18,
     letterSpacing: 0.15,
     lineHeight: 22
@@ -40,7 +40,7 @@ export default StyleSheet.create({
   subTitleCard: {
     marginLeft: 16,
     color: '#3E3F42',
-    fontFamily: 'Rubik',
+    // fontFamily: 'Rubik',
     fontSize: 12,
     fontWeight: '300',
     letterSpacing: 0.2,
@@ -66,7 +66,7 @@ export default StyleSheet.create({
   },
   dataValue: {
     color: '#1181FF',
-    fontFamily: 'Rubik',
+    // fontFamily: 'Rubik',
     fontSize: 18,
     fontWeight: '300',
     letterSpacing: 0.15,
@@ -76,7 +76,7 @@ export default StyleSheet.create({
   },
   dataText: {
     color: '#3E3F42',
-    fontFamily: 'Rubik',
+    // fontFamily: 'Rubik',
     fontSize: 12,
     letterSpacing: 0.15,
     lineHeight: 14,
@@ -99,7 +99,7 @@ export default StyleSheet.create({
   availableText: {
     marginLeft: 8,
     color: '#3E3F42',
-    fontFamily: 'Rubik',
+    // fontFamily: 'Rubik',
     fontSize: 12,
     fontWeight: '500',
     letterSpacing: 0.15,
@@ -108,7 +108,7 @@ export default StyleSheet.create({
   titleDevice: {
     marginTop: 16,
     color: '#1181FF',
-    fontFamily: 'Rubik',
+    // fontFamily: 'Rubik',
     fontSize: 14,
     letterSpacing: 0.12,
     lineHeight: 17,
