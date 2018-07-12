@@ -11,6 +11,7 @@ import _ from 'lodash'
 import { FakeProduct } from '../store/ProductFakeData';
 
 const initialState = {
+  allAreas: [],
   postition: {},
   product: FakeProduct,
   compare: []
@@ -24,19 +25,19 @@ export default current = (state = initialState, action) => {
         ...state,
         postition: action.payload
       }
-    break;
+      break;
     case 'UPDATE_PRODUCT_INFO':
       return {
         ...state,
-        product: action.payload
+        product: Object.assign(action.payload, { id: state.currentProductID })
       }
-    break;
+      break;
     case 'UPDATE_AREA_INFO':
-        return {
-            ...state,
-            allAreas: action.payload
-        }
-    break;
+      return {
+        ...state,
+        allAreas: action.payload
+      }
+      break;
     default:
       return newState;
   }

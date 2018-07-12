@@ -138,6 +138,15 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-vector-icons')
+    compile project(':react-native-svg')
+    compile project(':react-native-spinkit')
+    compile project(':react-native-open-settings')
+    compile project(':react-native-linear-gradient')
+    compile(project(':react-native-firebase')) {
+        transitive = false
+    }
+    compile project(':react-native-background-geolocation')
   implementation(project(':react-native-firebase')) {
     transitive = false
   }

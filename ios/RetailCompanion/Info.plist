@@ -53,7 +53,7 @@
 	<key>NSBluetoothPeripheralUsageDescription</key>
 	<string>BLE Permission required</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>AT&amp;T Retail Companion required Location Permission</string>
+	<string>This app requires background tracking</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>This app requires background tracking</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
@@ -106,8 +106,6 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>This app requires background tracking</string>
 	<key>NSMotionUsageDescription</key>
 	<string>Accelerometer use increases battery efficiency by intelligently toggling location-tracking</string>
 </dict>

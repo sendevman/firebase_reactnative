@@ -15,6 +15,7 @@ import Icon from '../assets/images/Icon';
 import LogoTitle from './components/LogoTitle';
 import GradientHeader from './components/GradientHeader';
 import ProductsNearSlide from '../components/ProductsNearSlide/ProductsNear';
+import { InfoSpecsSkeleton } from './InfoSpecsScreen';
 
 // My Routes
 import RoutesProducts from '../routes/Products'
@@ -27,6 +28,10 @@ var { height } = Dimensions.get('window');
 class ProductLayoutScreen extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      currentProductID: null,
+    }
 
     this._animatedValue = new Animated.Value(0);
   }
@@ -42,41 +47,25 @@ class ProductLayoutScreen extends Component {
         const arrAreas = snapshot.docs.map(doc => doc.data());
         this.props.dispatch(setAreaInfo(arrAreas));
         if (arrAreas.length > 0) {
-          this.getProductDetails(arrAreas);
+          this.getFirstProductDetail(arrAreas);
         }
       });
   }
-  getProductDetails(arrAreas) {
-    const ref = firebase.firestore().collection('products');
+  getFirstProductDetail(arrAreas) {
     if (arrAreas[0] != undefined) {
       const arrproducts = arrAreas[0].products;
-      ref.doc(arrproducts[0]).get().then(snapshot => {
-        const productDetails = snapshot.data();
-        this.props.dispatch(setProductInfo(productDetails));
-      })
+      this.getProductDetail(arrproducts[0]);
+    } else {
+      // Set Null for Non-Zone
     }
   }
-  getProductDetails1(arrAreas) {
+  getProductDetail(productId) {
     const ref = firebase.firestore().collection('products');
-    if (arrAreas[0] != undefined) {
-      const arrproducts = arrAreas[0].products;
-      var arrDetails = new Array();
-      for (j = 0; j < arrproducts.length; j++) {
-        ref.doc(arrproducts[j]).get().then(snapshot => {
-          const productDetails = snapshot.data();
-          arrDetails.push(productDetails);
-        })
-      }
-      console.log("+++", arrDetails);
-      this.props.dispatch(setProductInfo(arrDetails));
-    }
-  }
-  getProductDetails2(product_id) {
-    const ref = firebase.firestore().collection('products');
-    ref.doc(product_id).get().then(snapshot => {
+    this.setState({ currentProductID: null });
+    ref.doc(productId).get().then(snapshot => {
       const productDetails = snapshot.data();
-      console.log("======", productDetails);
       this.props.dispatch(setProductInfo(productDetails));
+      this.setState({ currentProductID: productId });
     })
   }
 
@@ -97,7 +86,7 @@ class ProductLayoutScreen extends Component {
 
     if (this.props.locationData.zone_id !== nextProps.locationData.zone_id) {
       console.log("--------props-------", this.props.locationData.zone_id);
-      let zone_id = this.props.locationData.zone_id;
+      let zone_id = nextProps.locationData.zone_id;
       this.getProductID(zone_id);
     }
   }
@@ -124,13 +113,22 @@ class ProductLayoutScreen extends Component {
   };
 
   render() {
+    const { currentProductID } = this.state;
+
     return (
       <SafeAreaView forceInset={{ top: 'always' }} style={{ backgroundColor: '#FFF' }}>
         <View style={{ marginTop: this.props.customHeaderNav.heightSlide - 166 }}>
-          <ProductsNearSlide />
+          <ProductsNearSlide
+            onProductIdChange={productId => this.getProductDetail(productId)}
+            currentProductID={currentProductID} />
         </View>
         <View style={{ width: '100%', height: height - 78 }}>
-          <RoutesProducts />
+          {
+            !currentProductID ?
+              <InfoSpecsSkeleton />
+              :
+              <RoutesProducts />
+          }
         </View>
       </SafeAreaView>
     );

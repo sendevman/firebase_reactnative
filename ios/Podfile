@@ -9,4 +9,8 @@ pod 'Firebase/Firestore'
 pod 'Firebase/Storage'
   # Pods for RetailCompanion
 
+  pod 'RNBackgroundGeolocation', :path => '../node_modules/react-native-background-geolocation'
+
+  pod 'react-native-spinkit', :path => '../node_modules/react-native-spinkit'
+
 end
