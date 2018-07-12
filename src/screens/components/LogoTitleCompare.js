@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     textAlign: 'left',
     color: '#FFF',
-    fontFamily: 'Rubik',
+    // fontFamily: 'Rubik',
     fontSize: 16,
     lineHeight: 19
   }

@@ -43,7 +43,7 @@ export default StyleSheet.create({
   },
   titleProduct: {
     color: '#3E3F42',
-    fontFamily: 'Rubik',
+    // fontFamily: 'Rubik',
     fontSize: 12,
     letterSpacing: 0.1,
     lineHeight: 15,
@@ -51,7 +51,7 @@ export default StyleSheet.create({
   },
   titleVs: {
     color: '#AEBECD',
-    fontFamily: 'Roboto',
+    // fontFamily: 'Roboto',
     fontSize: 15,
     letterSpacing: 0.13,
     lineHeight: 18
@@ -60,7 +60,7 @@ export default StyleSheet.create({
     maxWidth: 124,
     marginHorizontal: 10,
     color: '#3E3F42',
-    fontFamily: 'Rubik',
+    // fontFamily: 'Rubik',
     fontSize: 18,
     fontWeight: '300',
     lineHeight: 22,
@@ -69,7 +69,7 @@ export default StyleSheet.create({
   },
   titleChange: {
     color: '#1181FF',
-    fontFamily: 'Roboto',
+    // fontFamily: 'Roboto',
     fontSize: 12,
     letterSpacing: 0.1,
     lineHeight: 14
@@ -92,7 +92,7 @@ export default StyleSheet.create({
     maxWidth: 124,
     marginHorizontal: 10,
     color: '#3E3F42',
-    fontFamily: 'Roboto',
+    // fontFamily: 'Roboto',
     fontSize: 15,
     letterSpacing: 0.13,
     lineHeight: 22,
