@@ -112,7 +112,7 @@ const BottomTabNav = createBottomTabNavigator(
       labelStyle: {
         marginTop: -4,
         marginBottom: 8,
-        fontFamily: 'SF Pro Text',
+        // fontFamily: 'SF Pro Text',
         fontSize: 11,
         fontWeight: '500',
         letterSpacing: 0.13,
