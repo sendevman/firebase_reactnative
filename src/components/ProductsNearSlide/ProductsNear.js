@@ -79,8 +79,8 @@ class ProductsNear extends Component {
                       </View>
                     </View>
                     :
-                    <View style={styles.itemBox}>
-                    <Spinkit isVisible={true} />
+                    <View style={styles.loadingBox}>
+                      <Spinkit isVisible={true} type={'Circle'} color={'gray'} size={20}/>
                     </View>
                 }
               </View>
