@@ -33,7 +33,7 @@ class ProductsNear extends Component {
     const areaData = this.props.areaData || {};
     const { currentProductID, infoSpecs } = this.props;
 
-    console.log("-----area data-----", areaData);
+    console.log("-----area data-----", areaData.products);
     return (
       <LinearGradient colors={['#2b3748', '#43597D']} height={166}>
         <Text style={styles.title}>PRODUCTS NEAR YOU</Text>
@@ -46,7 +46,7 @@ class ProductsNear extends Component {
           inactiveIndicatorColor={'rgba(255, 255, 255, 0.3)'}
           indicatorSpace={8}
           onPageChange={(index) => 
-            (areaData.products && areaData.products.count > index) ? 
+            (areaData.products || []) ? 
               this.props.onProductIdChange(areaData.products[index])
             : this.check()}
         >
