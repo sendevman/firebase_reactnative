@@ -25,7 +25,7 @@ export default StyleSheet.create({
   textTitleUno: {
     textAlign: 'center',
     color: '#3E3F42',
-    fontFamily: 'Rubik',
+    // fontFamily: 'Rubik',
     fontSize: 18,
     fontWeight: '300',
     letterSpacing: 0.12,
@@ -34,7 +34,7 @@ export default StyleSheet.create({
   textSubtitle: {
     textAlign: 'center',
     color: '#3E3F42',
-    fontFamily: 'Roboto',
+    // fontFamily: 'Roboto',
     fontSize: 14,
     letterSpacing: 0.12,
     lineHeight: 25
@@ -59,7 +59,7 @@ export default StyleSheet.create({
   logoReview: { height: 22 },
   titleReview: {
     color: '#3E3F42',
-    fontFamily: 'Rubik',
+    // fontFamily: 'Rubik',
     fontSize: 13,
     letterSpacing: 0.09,
     lineHeight: 15,
@@ -80,7 +80,7 @@ export default StyleSheet.create({
   },
   authorReview: {
     color: '#AEBECD',
-    fontFamily: 'Rubik',
+    // fontFamily: 'Rubik',
     fontSize: 13,
     letterSpacing: 0.09,
     lineHeight: 15,
@@ -88,7 +88,7 @@ export default StyleSheet.create({
   },
   textReview: {
     color: '#3E3F42',
-    fontFamily: 'Roboto',
+    // fontFamily: 'Roboto',
     fontSize: 13,
     letterSpacing: 0.09,
     lineHeight: 19,
@@ -103,7 +103,7 @@ export default StyleSheet.create({
   },
   textReadMore: {
     color: '#1181FF',
-    fontFamily: 'Roboto',
+    // fontFamily: 'Roboto',
     fontSize: 13,
     letterSpacing: 0.09,
     lineHeight: 15,
@@ -115,7 +115,7 @@ export default StyleSheet.create({
     marginTop: 2,
     marginBottom: 8,
     color: '#1181FF',
-    fontFamily: 'Rubik',
+    // fontFamily: 'Rubik',
     fontSize: 14,
     letterSpacing: 0.12,
     lineHeight: 17
@@ -123,7 +123,7 @@ export default StyleSheet.create({
   textReviewBig: {
     marginHorizontal: 16,
     color: '#3E3F42',
-    fontFamily: 'Rubik',
+    // fontFamily: 'Rubik',
     fontSize: 18,
     fontWeight: '300',
     letterSpacing: 0.12,
@@ -138,7 +138,7 @@ export default StyleSheet.create({
   },
   textListItem: {
     color: '#D60000',
-    fontFamily: 'Rubik',
+    // fontFamily: 'Rubik',
     fontSize: 12,
     fontWeight: '500',
     letterSpacing: 0.08,
@@ -162,7 +162,7 @@ export default StyleSheet.create({
   },
   prosConsText: {
     color: '#3E3F42',
-    fontFamily: 'Roboto',
+    // fontFamily: 'Roboto',
     fontSize: 14,
     letterSpacing: 0.12,
     lineHeight: 25,
@@ -191,7 +191,7 @@ export default StyleSheet.create({
   },
   videoAuthor: {
     color: '#3E3F42',
-    fontFamily: 'Roboto',
+    // fontFamily: 'Roboto',
     fontSize: 12,
     fontWeight: '500',
     letterSpacing: 0.08,
