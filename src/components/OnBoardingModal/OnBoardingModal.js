@@ -13,13 +13,16 @@ import styles from './OnBoardingModalCss';
 // My Customs
 import Icon from '../../assets/images/Icon';
 
+// My Actions
+import { updateBluetoothIsOn } from '../../actions/Common';
+
 class OnBoardingModal extends Component {
   constructor(props) {
     super(props);
   };
 
   render() {
-    const { onHideModal, showModal } = this.props;
+    const { dispatch, onHideModal, showModal } = this.props;
 
     return (
       <Modal
@@ -46,7 +49,7 @@ class OnBoardingModal extends Component {
                   'Turn On Bluetooth To Allow "AT&T Retail Companion" to Connect to Accessories',
                   'Go to Allow Action!',
                   [
-                    {text: 'Settings', onPress: () => console.log('Go to Settings')},
+                    {text: 'Settings', onPress: () => dispatch(updateBluetoothIsOn(true))},
                     {text: 'Cancel', onPress: () => console.log('Go to Cancel'), style: 'cancel'}
                   ],
                   { cancelable: false }
