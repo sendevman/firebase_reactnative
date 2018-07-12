@@ -30,6 +30,17 @@ export default StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center'
   },
+  loadingBox: {
+    backgroundColor: '#FFF',
+    height: 120,
+    maxWidth: 344,
+    width: '100%',
+    padding: 8,
+    borderRadius: 6,
+    justifyContent: 'center',
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
   imageBox: {
     backgroundColor: 'transparent',
     height: '100%',
