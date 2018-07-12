@@ -57,6 +57,12 @@ const SharedSession = ({ navigation }) => (
   <MyNavScreen banner={'Shared Session'} navigation={navigation} />
 );
 
+class Hidden extends Component {
+  render() {
+    return null;
+  }
+}
+
 const BottomTabNav = createBottomTabNavigator(
   {
     Products: {
@@ -141,10 +147,6 @@ const DrawerNav = createDrawerNavigator(
       screen: Events,
       navigationOptions: { title: 'Events' }
     },
-    OnBoarding: {
-      screen: OnBoardingLayout,
-      navigationOptions: { title: 'OnBoarding' }
-    },
     AccountSettings: {
       screen: AccountSettings,
       navigationOptions: {
@@ -153,10 +155,17 @@ const DrawerNav = createDrawerNavigator(
           <Icon name="SettingsApp" width="14" height="14" fill={tintColor} viewBox="3 1 20 20" />
         )
       }
+    },
+    OnBoarding: {
+      screen: OnBoardingLayout,
+      navigationOptions: {
+        title: 'OnBoarding',
+        drawerLabel: <Hidden />
+      }
     }
   },
   {
-    initialRouteName: 'Home',
+    initialRouteName: 'OnBoarding',
     contentOptions: {
       activeTintColor: '#1181FF',
       activeBackgroundColor: '#EEF1F4',
