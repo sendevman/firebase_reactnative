@@ -7,6 +7,7 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import { createStackNavigator, SafeAreaView } from 'react-navigation';
+import { connect } from 'react-redux';
 
 // My Screens
 import OnBoardingScreen from '../screens/OnBoardingScreen';
@@ -14,22 +15,40 @@ import OnBoardingScreen from '../screens/OnBoardingScreen';
 class OnBoardingLayoutScreen extends Component {
   constructor(props) {
     super(props);
+
+    this.checkBluetoothIsOn(this.props.bluetoothIsOn);
   };
+
+  checkBluetoothIsOn(bluetoothIsOn) {
+    if (bluetoothIsOn) this.props.navigation.navigate('Home');
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.bluetoothIsOn !== nextProps.bluetoothIsOn) {
+      this.checkBluetoothIsOn(nextProps.bluetoothIsOn);
+    }
+  }
 
   render() {
     return (
       <SafeAreaView forceInset={{ top: 'always' }}>
         <View style={{ width: '100%', height: '100%' }}>
-          <OnBoardingScreen />
+          <OnBoardingScreen navigation={this.props.navigation}/>
         </View>
       </SafeAreaView>
     );
   }
 }
 
+const mapStateToProps = state => {
+  const { common } = state;
+
+  return { bluetoothIsOn: common.bluetoothIsOn };
+}
+
 const OnBoardingLayout = createStackNavigator(
   {
-    Root: { screen: OnBoardingLayoutScreen }
+    Root: { screen: connect(mapStateToProps)(OnBoardingLayoutScreen) }
   },
   {
     headerMode: 'none'
