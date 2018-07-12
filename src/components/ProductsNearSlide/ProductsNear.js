@@ -67,11 +67,11 @@ class ProductsNear extends Component {
                           </View>
                           <View style={styles.deviceOptionItem}>
                             <Icon height="14" width="14" name="BatteryInclined" viewBox="0 0 20 20" />
-                            <Text style={styles.deviceOptionText}>16hrs</Text>
+                            <Text style={styles.deviceOptionText}>{infoSpecs.battery.capacity}</Text>
                           </View>
                           <View style={styles.deviceOptionItem}>
                             <Icon height="14" width="14" name="Camera" viewBox="0 0 24 24" />
-                            <Text style={styles.deviceOptionText}>18MP + 8MP</Text>
+                            <Text style={styles.deviceOptionText}>{infoSpecs.camera.front.sensor} + {infoSpecs.camera.rear.sensor}</Text>
                           </View>
                         </View>
 
