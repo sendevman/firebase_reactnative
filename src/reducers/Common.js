@@ -16,7 +16,7 @@ const initialState = {
 export default common = (state = initialState, action) => {
   switch (action.type) {
     case 'UPDATE_HEADERNAV':
-      return action.newValue
+      return state//action.newValue
     default:
       return state
   }

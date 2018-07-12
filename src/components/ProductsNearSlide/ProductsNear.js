@@ -26,12 +26,13 @@ class ProductsNear extends Component {
     super();
   };
 
-  check() {
-
-  }
   render() {
     const areaData = this.props.areaData || {};
-    const { currentProductID, infoSpecs } = this.props;
+    const { currentProducts } = this.props;
+    const getProduct = (productId) => {
+      const match = currentProducts.filter(product => product.id === productId);
+      return match.length > 0 ? match[0] : null;
+    };
 
     console.log("-----area data-----", areaData.products);
     return (
@@ -45,16 +46,17 @@ class ProductsNear extends Component {
           indicatorSize={6}
           inactiveIndicatorColor={'rgba(255, 255, 255, 0.3)'}
           indicatorSpace={8}
-          onPageChange={(index) => 
-            (areaData.products || []) ? 
+          onPageChange={(index) =>
+            (areaData.products) ?
               this.props.onProductIdChange(areaData.products[index])
-            : this.check()}
+              : null}
         >
           {
-            (areaData.products || []).map((productId, index) => (
-              <View style={styles.itemContainer} key={index}>
+            (areaData.products || []).map((productId, index) => {
+              const infoSpecs = getProduct(productId);
+              return <View style={styles.itemContainer} key={index}>
                 {
-                  currentProductID === productId ?
+                  infoSpecs ?
                     <View style={styles.itemBox}>
                       <View style={styles.imageBox}>
                         <Image style={{ width: 84 }} source={require('../../assets/images/files/S9-Dual.png')} />
@@ -85,11 +87,11 @@ class ProductsNear extends Component {
                     </View>
                     :
                     <View style={styles.loadingBox}>
-                      <Spinkit isVisible={true} type={'Circle'} color={'gray'} size={20}/>
+                      <Spinkit isVisible={true} type={'Circle'} color={'gray'} size={20} />
                     </View>
                 }
               </View>
-            ))
+            })
           }
         </Carousel>
       </LinearGradient>
@@ -100,6 +102,6 @@ class ProductsNear extends Component {
 const mapStateToProps = state => {
   const { current } = state;
 
-  return { areaData: current.allAreas[0], infoSpecs: current.product };
+  return { areaData: current.allAreas[0] };
 }
 export default connect(mapStateToProps)(ProductsNear);
