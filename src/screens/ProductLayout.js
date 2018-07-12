@@ -22,16 +22,13 @@ import RoutesProducts from '../routes/Products'
 
 // Action
 import { setProductInfo, setAreaInfo } from '../actions/Current';
+import { setProductsNearInfo } from '../actions/ProductsNear';
 
 var { height } = Dimensions.get('window');
 
 class ProductLayoutScreen extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      currentProductID: null,
-    }
 
     this._animatedValue = new Animated.Value(0);
   }
@@ -54,35 +51,48 @@ class ProductLayoutScreen extends Component {
   getFirstProductDetail(arrAreas) {
     if (arrAreas[0] != undefined) {
       const arrproducts = arrAreas[0].products;
-      this.getProductDetail(arrproducts[0]);
+
+      const ref = firebase.firestore().collection('products');
+      Promise.all(arrproducts.map(productID => new Promise((resolve, reject) => {
+        ref.doc(productID).get().then(snapshot => {
+          const productDetails = snapshot.data();
+          productDetails.id = productID;
+          resolve(productDetails);
+        })
+          .catch(error => reject(error));
+      })))
+        .then(results => {
+          this.props.dispatch(setProductsNearInfo(results));
+        })
+        .catch(error => {
+          this.props.dispatch(setProductsNearInfo([]));
+        })
+
     } else {
       // Set Null for Non-Zone
     }
   }
-  getProductDetail(productId) {
-    const ref = firebase.firestore().collection('products');
-    this.setState({ currentProductID: null });
-    ref.doc(productId).get().then(snapshot => {
-      const productDetails = snapshot.data();
-      this.props.dispatch(setProductInfo(productDetails));
-      this.setState({ currentProductID: productId });
-    })
+  setCurrentProduct(productId) {
+    const { productsNear } = this.props;
+    if (!productsNear || productsNear.length === 0) return;
+    const match = productsNear.filter(product => product.id === productId);
+    this.props.dispatch(setProductInfo(match.length > 0 ? match[0] : {}));
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.customHeaderNav !== nextProps.customHeaderNav) {
-      const HEADER_MAX_HEIGHT = nextProps.customHeaderNav.heightHeader
-      const HEADER_MIN_HEIGHT = 0
-      const HEADER_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT
+    // if (this.props.customHeaderNav !== nextProps.customHeaderNav) {
+    //   const HEADER_MAX_HEIGHT = nextProps.customHeaderNav.heightHeader
+    //   const HEADER_MIN_HEIGHT = 0
+    //   const HEADER_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT
 
-      this.props.navigation.setParams({
-        heightHeader: this._animatedValue.interpolate({
-          inputRange: [0, HEADER_DISTANCE],
-          outputRange: [HEADER_MAX_HEIGHT, HEADER_MIN_HEIGHT],
-          extrapolate: 'clamp'
-        })
-      });
-    }
+    //   this.props.navigation.setParams({
+    //     heightHeader: this._animatedValue.interpolate({
+    //       inputRange: [0, HEADER_DISTANCE],
+    //       outputRange: [HEADER_MAX_HEIGHT, HEADER_MIN_HEIGHT],
+    //       extrapolate: 'clamp'
+    //     })
+    //   });
+    // }
 
     if (this.props.locationData.zone_id !== nextProps.locationData.zone_id) {
       console.log("--------props-------", this.props.locationData.zone_id);
@@ -113,22 +123,17 @@ class ProductLayoutScreen extends Component {
   };
 
   render() {
-    const { currentProductID } = this.state;
+    const { productsNear } = this.props;
 
     return (
       <SafeAreaView forceInset={{ top: 'always' }} style={{ backgroundColor: '#FFF' }}>
         <View style={{ marginTop: this.props.customHeaderNav.heightSlide - 166 }}>
           <ProductsNearSlide
-            onProductIdChange={productId => this.getProductDetail(productId)}
-            currentProductID={currentProductID} />
+            onProductIdChange={productId => this.setCurrentProduct(productId)}
+            currentProducts={productsNear} />
         </View>
         <View style={{ width: '100%', height: height - 78 }}>
-          {
-            !currentProductID ?
-              <InfoSpecsSkeleton />
-              :
-              <RoutesProducts />
-          }
+          <RoutesProducts />
         </View>
       </SafeAreaView>
     );
@@ -136,9 +141,9 @@ class ProductLayoutScreen extends Component {
 }
 
 const mapStateToProps = state => {
-  const { common, current } = state;
+  const { common, current, productsNear } = state;
 
-  return { customHeaderNav: common.customHeaderNav, locationData: current.postition };
+  return { customHeaderNav: common.customHeaderNav, locationData: current.postition, productsNear: productsNear.productsNear };
 }
 
 const ProductLayout = createStackNavigator({
