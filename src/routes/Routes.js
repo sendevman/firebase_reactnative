@@ -271,7 +271,7 @@ class Routes extends Component {
     var arrData = new Array();
     const maxLength = 5;
     ws.onmessage = (e) => {
-      let isTest = true;
+      let isTest = false;
       if(isTest) {
         iii++;
         let data = {
