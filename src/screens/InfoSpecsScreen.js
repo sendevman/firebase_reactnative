@@ -22,7 +22,7 @@ import RoutesAccessories from '../routes/Accessories';
 // My Actions
 import { updateHeaderNav } from '../actions/Common';
 
-const InfoSpecsSkeleton = () => (
+export const InfoSpecsSkeleton = () => (
   <View style={styles.skeletonLoading}>
     <SkeletonLoading height={220}>
       <Rect x="0" y="0" rx="3" ry="3" width="90%" height="10"/>

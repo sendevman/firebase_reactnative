@@ -9,7 +9,9 @@ import moment from 'moment';
 import { Image, Text, View, YellowBox } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Carousel from 'react-native-carousel-view';
+import Spinkit from 'react-native-spinkit';
 
+import { connect } from 'react-redux';
 // My Styles
 import styles from './ProductsNearCss';
 
@@ -24,7 +26,12 @@ class ProductsNear extends Component {
     super();
   };
 
+
   render() {
+    const areaData = this.props.areaData || {};
+    const { currentProductID, infoSpecs } = this.props;
+
+    console.log("-----area data-----", areaData);
     return (
       <LinearGradient colors={['#2b3748', '#43597D']} height={166}>
         <Text style={styles.title}>PRODUCTS NEAR YOU</Text>
@@ -36,103 +43,58 @@ class ProductsNear extends Component {
           indicatorSize={6}
           inactiveIndicatorColor={'rgba(255, 255, 255, 0.3)'}
           indicatorSpace={8}
-          >
-          <View style={styles.itemContainer}>
-            <View style={styles.itemBox}>
-              <View style={styles.imageBox}>
-                <Image style={{ width: 84 }} source={require('../../assets/images/files/S9-Dual.png')} />
+          onPageChange={(index) => this.props.onProductIdChange(areaData.products[index])}
+        >
+          {
+            (areaData.products || []).map((productId, index) => (
+              <View style={styles.itemContainer} key={index}>
+                {
+                  currentProductID === productId ?
+                    <View style={styles.itemBox}>
+                      <View style={styles.imageBox}>
+                        <Image style={{ width: 84 }} source={require('../../assets/images/files/S9-Dual.png')} />
+                      </View>
+
+                      <View style={styles.detailsBox}>
+                        <Text style={styles.titleItem}>{infoSpecs.manufacture} {infoSpecs.model}</Text>
+
+                        <View style={styles.hrDivider}></View>
+
+                        <View style={styles.deviceOptionsBox}>
+                          <View style={styles.deviceOptionItem}>
+                            <Icon height="14" width="14" name="Storage" viewBox="0 0 24 24" />
+                            <Text style={styles.deviceOptionText}>64GB</Text>
+                          </View>
+                          <View style={styles.deviceOptionItem}>
+                            <Icon height="14" width="14" name="BatteryInclined" viewBox="0 0 20 20" />
+                            <Text style={styles.deviceOptionText}>16hrs</Text>
+                          </View>
+                          <View style={styles.deviceOptionItem}>
+                            <Icon height="14" width="14" name="Camera" viewBox="0 0 24 24" />
+                            <Text style={styles.deviceOptionText}>18MP + 8MP</Text>
+                          </View>
+                        </View>
+
+                        <ButtonCompare />
+                      </View>
+                    </View>
+                    :
+                    <View style={styles.itemBox}>
+                    <Spinkit isVisible={true} />
+                    </View>
+                }
               </View>
-
-              <View style={styles.detailsBox}>
-                <Text style={styles.titleItem}>Samsung Galaxy S9</Text>
-
-                <View style={styles.hrDivider}></View>
-
-                <View style={styles.deviceOptionsBox}>
-                  <View style={styles.deviceOptionItem}>
-                    <Icon height="14" width="14" name="Storage" viewBox="0 0 24 24" />
-                    <Text style={styles.deviceOptionText}>64GB</Text>
-                  </View>
-                  <View style={styles.deviceOptionItem}>
-                    <Icon height="14" width="14" name="BatteryInclined" viewBox="0 0 20 20" />
-                    <Text style={styles.deviceOptionText}>16hrs</Text>
-                  </View>
-                  <View style={styles.deviceOptionItem}>
-                    <Icon height="14" width="14" name="Camera" viewBox="0 0 24 24" />
-                    <Text style={styles.deviceOptionText}>18MP + 8MP</Text>
-                  </View>
-                </View>
-
-                <ButtonCompare />
-              </View>
-            </View>
-          </View>
-
-          <View style={styles.itemContainer}>
-            <View style={styles.itemBox}>
-              <View style={styles.imageBox}>
-                <Image style={{ width: 84 }} source={require('../../assets/images/files/S9-Dual.png')} />
-              </View>
-
-              <View style={styles.detailsBox}>
-                <Text style={styles.titleItem}>Samsung Galaxy S9</Text>
-
-                <View style={styles.hrDivider}></View>
-
-                <View style={styles.deviceOptionsBox}>
-                  <View style={styles.deviceOptionItem}>
-                    <Icon height="14" width="14" name="Storage" viewBox="0 0 24 24" />
-                    <Text style={styles.deviceOptionText}>64GB</Text>
-                  </View>
-                  <View style={styles.deviceOptionItem}>
-                    <Icon height="14" width="14" name="BatteryInclined" viewBox="0 0 20 20" />
-                    <Text style={styles.deviceOptionText}>16hrs</Text>
-                  </View>
-                  <View style={styles.deviceOptionItem}>
-                    <Icon height="14" width="14" name="Camera" viewBox="0 0 24 24" />
-                    <Text style={styles.deviceOptionText}>18MP + 8MP</Text>
-                  </View>
-                </View>
-
-                <ButtonCompare />
-              </View>
-            </View>
-          </View>
-
-          <View style={styles.itemContainer}>
-            <View style={styles.itemBox}>
-              <View style={styles.imageBox}>
-                <Image style={{ width: 84 }} source={require('../../assets/images/files/S9-Dual.png')} />
-              </View>
-
-              <View style={styles.detailsBox}>
-                <Text style={styles.titleItem}>Samsung Galaxy S9</Text>
-
-                <View style={styles.hrDivider}></View>
-
-                <View style={styles.deviceOptionsBox}>
-                  <View style={styles.deviceOptionItem}>
-                    <Icon height="14" width="14" name="Storage" viewBox="0 0 24 24" />
-                    <Text style={styles.deviceOptionText}>64GB</Text>
-                  </View>
-                  <View style={styles.deviceOptionItem}>
-                    <Icon height="14" width="14" name="BatteryInclined" viewBox="0 0 20 20" />
-                    <Text style={styles.deviceOptionText}>16hrs</Text>
-                  </View>
-                  <View style={styles.deviceOptionItem}>
-                    <Icon height="14" width="14" name="Camera" viewBox="0 0 24 24" />
-                    <Text style={styles.deviceOptionText}>18MP + 8MP</Text>
-                  </View>
-                </View>
-
-                <ButtonCompare />
-              </View>
-            </View>
-          </View>
+            ))
+          }
         </Carousel>
       </LinearGradient>
     );
   }
 }
 
-export default ProductsNear;
+const mapStateToProps = state => {
+  const { current } = state;
+
+  return { areaData: current.allAreas[0], infoSpecs: current.product };
+}
+export default connect(mapStateToProps)(ProductsNear);

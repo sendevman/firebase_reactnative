@@ -290,10 +290,10 @@ class Routes extends Component {
           floor_id:"-1348",
           zone_id:3903
         }
-        if(iii % 20 === 0){
+        if(iii % 10 === 0){
           this.props.dispatch(setLocationData(data));
-        }else if(iii % 20 === 10){
-          this.props.dispatch(setLocationData(data1));
+        }else if(iii % 60 === 40){
+          // this.props.dispatch(setLocationData(data1));
         }
       }else {
         if (e.data !== "") {

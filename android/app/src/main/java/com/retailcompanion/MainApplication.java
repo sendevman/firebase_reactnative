@@ -3,6 +3,13 @@ package com.retailcompanion;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.oblador.vectoricons.VectorIconsPackage;
+import com.horcrux.svg.SvgPackage;
+import com.react.rnspinkit.RNSpinkitPackage;
+import com.opensettings.OpenSettingsPackage;
+import com.BV.LinearGradient.LinearGradientPackage;
+import io.invertase.firebase.RNFirebasePackage;
+import com.transistorsoft.rnbackgroundgeolocation.RNBackgroundGeolocation;
 import io.invertase.firebase.RNFirebasePackage;
 import io.invertase.firebase.firestore.RNFirebaseFirestorePackage;
 import com.opensettings.OpenSettingsPackage;
@@ -29,6 +36,13 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new VectorIconsPackage(),
+            new SvgPackage(),
+            new RNSpinkitPackage(),
+            new OpenSettingsPackage(),
+            new LinearGradientPackage(),
+            new RNFirebasePackage(),
+            new RNBackgroundGeolocation(),
             new RNFirebasePackage(),
             new RNFirebaseFirestorePackage(),
             new OpenSettingsPackage(),
