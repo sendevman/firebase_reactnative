@@ -26,7 +26,9 @@ class ProductsNear extends Component {
     super();
   };
 
+  check() {
 
+  }
   render() {
     const areaData = this.props.areaData || {};
     const { currentProductID, infoSpecs } = this.props;
@@ -43,7 +45,10 @@ class ProductsNear extends Component {
           indicatorSize={6}
           inactiveIndicatorColor={'rgba(255, 255, 255, 0.3)'}
           indicatorSpace={8}
-          onPageChange={(index) => this.props.onProductIdChange(areaData.products[index])}
+          onPageChange={(index) => 
+            (areaData.products && areaData.products.count > index) ? 
+              this.props.onProductIdChange(areaData.products[index])
+            : this.check()}
         >
           {
             (areaData.products || []).map((productId, index) => (
