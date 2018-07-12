@@ -9,7 +9,6 @@ import { createStackNavigator } from 'react-navigation';
 
 // My Customs
 import AccsModal from '../components/AccsModal/AccsModal';
-import AccsDetailModal from '../components/AccsModal/Detail/AccsDetail';
 
 // My Screens
 import AccessoriesScreen from '../screens/AccessoriesScreen';
@@ -21,9 +20,6 @@ const AccessoriesStack = createStackNavigator(
     },
     AccsModal: {
       screen: props => <AccsModal {...props} />
-    },
-    AccsDetail: {
-      screen: props => <AccsDetailModal {...props} />
     }
   },
   {

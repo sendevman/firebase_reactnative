@@ -125,5 +125,64 @@ export default StyleSheet.create({
     fontSize: 12,
     letterSpacing: 0.1,
     lineHeight: 15
+  },
+  // Content Box
+  contentBox: {
+    width: width - 20,
+    marginVertical: 10,
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    alignItems: 'center'
+  },
+  imageBox: {
+    width: '100%',
+    height: 196,
+    borderRadius: 6,
+    padding: 10,
+    borderWidth: 1,
+    borderStyle: 'solid',
+    borderColor: '#E3E9EF'
+  },
+  itemImageDetail: {
+    width: width - 40,
+    height: 176
+  },
+  // Detail Box
+  detailBox: {
+    marginTop: 16,
+    flexDirection: 'column',
+    justifyContent: 'flex-start'
+  },
+  titleText: {
+    marginBottom: 10,
+    color: '#3E3F42',
+    // fontFamily: 'Rubik',
+    fontSize: 16,
+    letterSpacing: 0.1,
+    lineHeight: 19
+  },
+  descriptionText: {
+    marginTop: 14,
+    color: '#3E3F42',
+    // fontFamily: 'Roboto',
+    fontSize: 14,
+    letterSpacing: 0.1,
+    lineHeight: 21
+  },
+  // Buy Button
+  textBuyBtn: {
+    color: '#FFF',
+    // fontFamily: 'Rubik',
+    fontSize: 18,
+    letterSpacing: 0.1,
+    lineHeight: 22,
+    textAlign: 'center'
+  },
+  buyBtn: {
+    width: width - 20,
+    height: 48,
+    backgroundColor: '#1181FF',
+    borderRadius: 6,
+    marginVertical: 24
   }
 });

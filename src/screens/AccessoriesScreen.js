@@ -34,7 +34,7 @@ class AccessoriesScreen extends Component {
       <View style={styles.containerBox}>
         { items.map((item, index) => {
             return (
-              <TouchableWithoutFeedback key={index} onPress={() => navigation.navigate('AccsDetail', { isDetail: true, itemId: item.id, itemCategory: item.category })} style={styles.containerItem}>
+              <TouchableWithoutFeedback key={index} onPress={() => navigation.navigate('AccsModal', { isDetail: true, fromScreen: true, itemId: item.id, itemCategory: item.category })} style={styles.containerItem}>
                 <View style={styles.itemBox}>
                   <View style={styles.frameImage}>
                     <Image style={styles.itemImage} resizeMode={Image.resizeMode.contain} source={{ uri: item.img }} />
