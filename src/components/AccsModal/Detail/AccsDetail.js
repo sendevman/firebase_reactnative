@@ -33,7 +33,7 @@ class AccsDetailModal extends Component {
     const fullList = compatibleAccessories.fullList;
     if (typeof fullList == "undefined" || fullList.length <= 0) return false;
 
-    let byCategory = fullList.filter((obj) => { return (obj.name === itemCategory); });
+    let byCategory = fullList.filter((obj) => { return (obj.type === itemCategory); });
     if ((typeof byCategory == "undefined") || (Object.keys(byCategory).length === 0 && byCategory.constructor === Object)) return false;
 
     const items = byCategory[0].items;

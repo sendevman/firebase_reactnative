@@ -79,7 +79,8 @@ export const FakeProduct = {
       }
     ],
     fullList: [
-      { name: 'battery_packs',
+      { name: 'Battery packs',
+        type: 'battery_packs',
         items: [
           {
             id: '004',
@@ -117,7 +118,8 @@ export const FakeProduct = {
           }
         ]
       },
-      { name: 'case_covers',
+      { name: 'Case & Covers',
+        type: 'case_covers',
         items: [
           {
             id: '003',
@@ -265,7 +267,8 @@ export const FakeProduct = {
           }
         ]
       },
-      { name: 'audio',
+      { name: 'Audio',
+        type: 'audio',
         items: [
           {
             id: '001',
@@ -303,7 +306,8 @@ export const FakeProduct = {
           }
         ]
       },
-      { name: 'fun',
+      { name: 'Fun',
+        type: 'fun',
         items: [
           {
             id: '005',
