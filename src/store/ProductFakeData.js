@@ -413,6 +413,12 @@ export const FakeProduct = {
   manufacture: 'manufacture',
   memory: '4',
   model: 'model',
+  offer: {
+    description: 'Buy a Galaxy S9, get a Galaxy A5 for free!',
+    img: 'Img URL',
+    opusCode: 'Opus Code',
+    title: 'LIMITED TIME OFFER'
+  },
   powerAdapterType: 'USB-C',
   processor: {
     long: '10nm 64-bit Octa-Core Processor 2.8GHz + 1.7GHz (Maximum Clock Speed, Performance Core + Efficiency Core)',
