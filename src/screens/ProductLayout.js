@@ -15,16 +15,16 @@ import Icon from '../assets/images/Icon';
 import LogoTitle from './components/LogoTitle';
 import GradientHeader from './components/GradientHeader';
 import ProductsNearSlide from '../components/ProductsNearSlide/ProductsNear';
-import { InfoSpecsSkeleton } from './InfoSpecsScreen';
 
 // My Routes
 import RoutesProducts from '../routes/Products'
 
 // Action
-import { setProductInfo, setAreaInfo } from '../actions/Current';
+import { setProductInfo, setAreaInfo, setLocationData } from '../actions/Current';
 import { setProductsNearInfo } from '../actions/ProductsNear';
 
 var { height } = Dimensions.get('window');
+var count = 0;
 
 class ProductLayoutScreen extends Component {
   constructor(props) {
@@ -32,10 +32,6 @@ class ProductLayoutScreen extends Component {
 
     this._animatedValue = new Animated.Value(0);
   }
-
-  // componentWillMount() {
-  //   // this.getProductID(3902);
-  // }
 
   getProductID(zone_id) {
     const ref = firebase.firestore().collection('areas');
@@ -63,9 +59,10 @@ class ProductLayoutScreen extends Component {
       })))
         .then(results => {
           this.props.dispatch(setProductsNearInfo(results));
+          this.props.dispatch(setProductInfo(results[0]));
+          setTimeout(() => this.forceUpdate(), 300);
         })
         .catch(error => {
-          this.props.dispatch(setProductsNearInfo([]));
         })
 
     } else {
@@ -95,8 +92,10 @@ class ProductLayoutScreen extends Component {
     // }
 
     if (this.props.locationData.zone_id !== nextProps.locationData.zone_id) {
-      console.log("--------props-------", this.props.locationData.zone_id);
       let zone_id = nextProps.locationData.zone_id;
+      this.props.dispatch(setProductInfo({}));
+      this.props.dispatch(setProductsNearInfo([]));
+      setTimeout(() => this.forceUpdate(), 100);
       this.getProductID(zone_id);
     }
   }
@@ -122,6 +121,26 @@ class ProductLayoutScreen extends Component {
     };
   };
 
+  zone() {
+    let data = {
+      lat:"35.000",
+      lng:"-80.000",
+      height:"1",
+      ts:"2018-07-09",
+      floor_id:"1348",
+      zone_id: 3902
+    }
+    let data1 = {
+      lat:"-35.000",
+      lng:"-80.000",
+      height:"-1",
+      ts:"2018-07-09",
+      floor_id:"-1348",
+      zone_id:3903
+    }
+    count++;
+    this.props.dispatch(setLocationData(count%2 === 0 ? data : data1));
+  }
   render() {
     const { productsNear } = this.props;
 
@@ -130,7 +149,8 @@ class ProductLayoutScreen extends Component {
         <View style={{ marginTop: this.props.customHeaderNav.heightSlide - 166 }}>
           <ProductsNearSlide
             onProductIdChange={productId => this.setCurrentProduct(productId)}
-            currentProducts={productsNear} />
+            currentProducts={productsNear} 
+            zone={this.zone.bind(this)}/>
         </View>
         <View style={{ width: '100%', height: height - 78 }}>
           <RoutesProducts />

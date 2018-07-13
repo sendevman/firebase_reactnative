@@ -39,22 +39,22 @@ class ReviewsScreen extends Component {
     super(props);
 
     handleScroll = (event) => {
-      const { dispatch, customHeaderNav } = this.props;
-      var value = event.nativeEvent.contentOffset.y;
+      // const { dispatch, customHeaderNav } = this.props;
+      // var value = event.nativeEvent.contentOffset.y;
 
-      if ((value >= 0) && (value <= 56)) {
-        let newValue = this.setNewValue(false, 56 - value, false, 166);
-        dispatch(updateHeaderNav(newValue));
-        return;
-      } else if ((value >= 57) && (value <= 222)) {
-        let newValue = this.setNewValue(true, 0, false, 166 - (value - 56));
-        dispatch(updateHeaderNav(newValue));
-        return;
-      } else {
-        let newValue = this.setNewValue(true, 0, true, 0);
-        dispatch(updateHeaderNav(newValue));
-        return;
-      }
+      // if ((value >= 0) && (value <= 56)) {
+      //   let newValue = this.setNewValue(false, 56 - value, false, 166);
+      //   dispatch(updateHeaderNav(newValue));
+      //   return;
+      // } else if ((value >= 57) && (value <= 222)) {
+      //   let newValue = this.setNewValue(true, 0, false, 166 - (value - 56));
+      //   dispatch(updateHeaderNav(newValue));
+      //   return;
+      // } else {
+      //   let newValue = this.setNewValue(true, 0, true, 0);
+      //   dispatch(updateHeaderNav(newValue));
+      //   return;
+      // }
     };
   }
 
