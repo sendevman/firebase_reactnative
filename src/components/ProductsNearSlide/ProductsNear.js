@@ -28,7 +28,7 @@ class ProductsNear extends Component {
 
   render() {
     const areaData = this.props.areaData || {};
-    const { currentProducts } = this.props;
+    const { currentProducts, position } = this.props;
     const getProduct = (productId) => {
       const match = currentProducts.filter(product => product.id === productId);
       return match.length > 0 ? match[0] : null;
@@ -42,7 +42,7 @@ class ProductsNear extends Component {
     return (
       <LinearGradient colors={['#2b3748', '#43597D']} height={166}>
         <TouchableOpacity onPress={this.props.zone}>
-          <Text style={styles.title}>PRODUCTS NEAR YOU</Text>
+          <Text style={styles.title}>PRODUCTS NEAR YOU ({(position && position.zone_id) ? position.zone_id : '---'})</Text>
         </TouchableOpacity>
         {
           (currentProducts || []).length > 0 ?
@@ -114,6 +114,6 @@ class ProductsNear extends Component {
 const mapStateToProps = state => {
   const { current } = state;
 
-  return { areaData: current.allAreas[0] };
+  return { areaData: current.allAreas[0], position: current.postition };
 }
 export default connect(mapStateToProps)(ProductsNear);
