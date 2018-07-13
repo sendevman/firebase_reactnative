@@ -15,6 +15,7 @@ import styles from './css/InfoSpecsScreenCss';
 // My Customs
 import Icon from '../assets/images/Icon';
 import SkeletonLoading from './components/SkeletonLoading';
+import Offer from '../components/LimitedTimeOffer/Offer';
 
 // My Routes
 import RoutesAccessories from '../routes/Accessories';
@@ -80,6 +81,18 @@ class InfoSpecsScreen extends Component {
         heightSlide: d
       }
     }
+  }
+
+  renderOffer() {
+    const { offer } = this.props.infoSpecs;
+
+    if (typeof offer == "undefined" || (Object.keys(offer).length === 0 && offer.constructor === Object)) return false;
+
+    return (
+      <View style={{ marginTop: 16 }}>
+        <Offer offer={offer} />
+      </View>
+    );
   }
 
   renderColors() {
@@ -432,6 +445,8 @@ class InfoSpecsScreen extends Component {
     } else {
       return (
         <View style={styles.infoSpecBox}>
+          { this.renderOffer() }
+
           <Text style={styles.description}>
             { infoSpecs.description }
           </Text>
