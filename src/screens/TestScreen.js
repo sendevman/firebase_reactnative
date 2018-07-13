@@ -11,12 +11,9 @@ import { connect } from 'react-redux';
 
 class TestScreen extends Component {
   render() {
-    const bledata = this.props.positionData ? (this.props.positionData.postition || {}) : {}
-    console.log("======", this.props.positionData);
-
+    const bledata = this.props.positionData ? (this.props.positionData.postition || {}) : {};
     return (
-      <SafeAreaView forceInset={{ top: 'always' }}>
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 1, marginTop:30 }}>
           <ScrollView>
             <Text>PRODUCTS NEAR YOU</Text>
             <Text>Latitude  : {bledata.lat}</Text>
@@ -27,7 +24,6 @@ class TestScreen extends Component {
             <Text>Time      : {bledata.ts}</Text>
           </ScrollView>
         </View>
-      </SafeAreaView>
     );
   }
 }
