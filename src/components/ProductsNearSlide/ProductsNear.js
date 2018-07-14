@@ -101,11 +101,11 @@ class ProductsNear extends Component {
           <View style={styles.itemContainer}>
             <View style={styles.itemBox}>
               <View style={styles.imageBox}>
-                <Image style={{ width: 84 }} source={require('../../assets/images/files/S9-Dual.png')} />
+                <Image style={styles.itemImage} resizeMode={Image.resizeMode.contain} source={{ uri: 'https://www.att.com/catalog/en/skus/Samsung/Samsung%20Galaxy%20S9+/hi_res_images/coral%20blue-hero-zoom.jpg' }} />
               </View>
 
               <View style={styles.detailsBox}>
-                <Text style={styles.titleItem}>Samsung Galaxy S9</Text>
+                <Text style={styles.titleItem}>Samsung Galaxy S9+</Text>
 
                 <View style={styles.hrDivider}></View>
 
@@ -132,11 +132,11 @@ class ProductsNear extends Component {
           <View style={styles.itemContainer}>
             <View style={styles.itemBox}>
               <View style={styles.imageBox}>
-                <Image style={{ width: 84 }} source={require('../../assets/images/files/S9-Dual.png')} />
+                <Image style={styles.itemImage} resizeMode={Image.resizeMode.contain} source={{ uri: 'https://www.att.com/catalog/en/skus/Samsung/Samsung%20Galaxy%20S9+/hi_res_images/coral%20blue-hero-zoom.jpg' }} />
               </View>
 
               <View style={styles.detailsBox}>
-                <Text style={styles.titleItem}>Samsung Galaxy S9</Text>
+                <Text style={styles.titleItem}>Samsung Galaxy S9+</Text>
 
                 <View style={styles.hrDivider}></View>
 
@@ -163,11 +163,11 @@ class ProductsNear extends Component {
           <View style={styles.itemContainer}>
             <View style={styles.itemBox}>
               <View style={styles.imageBox}>
-                <Image style={{ width: 84 }} source={require('../../assets/images/files/S9-Dual.png')} />
+                <Image style={styles.itemImage} resizeMode={Image.resizeMode.contain} source={{ uri: 'https://www.att.com/catalog/en/skus/Samsung/Samsung%20Galaxy%20S9+/hi_res_images/coral%20blue-hero-zoom.jpg' }} />
               </View>
 
               <View style={styles.detailsBox}>
-                <Text style={styles.titleItem}>Samsung Galaxy S9</Text>
+                <Text style={styles.titleItem}>Samsung Galaxy S9+</Text>
 
                 <View style={styles.hrDivider}></View>
 

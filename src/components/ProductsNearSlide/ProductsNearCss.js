@@ -38,7 +38,14 @@ export default StyleSheet.create({
     borderColor: '#E3E9EF',
     borderRadius: 6,
     paddingTop: 14,
-    paddingHorizontal: 8
+    paddingHorizontal: 8,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  itemImage: {
+    borderRadius: 6,
+    height: '100%',
+    width: 98
   },
   detailsBox: {
     flex: 1,
