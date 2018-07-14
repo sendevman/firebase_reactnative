@@ -404,6 +404,7 @@ export const FakeProduct = {
   expandableStorage: { available: true, type: 'MicroSD' },
   geekbench: { multiCore: 8551, singleCore: 3356 },
   headphoneJack: true,
+  img: 'https://www.att.com/catalog/en/skus/Samsung/Samsung%20Galaxy%20S9+/hi_res_images/coral%20blue-hero-zoom.jpg',
   insurance: {
     mobileInsurance: { deviceProtected: 1, monthlyCost: 8.99 },
     mobileProtection: { deviceProtected: 1, monthlyCost: 11.99 },
@@ -429,7 +430,6 @@ export const FakeProduct = {
     type: 'Nano'
   },
   sku: 'sku8730723',
-  titleImg: 'Title Img',
   type: 'phone',
   videoContent: [
     {
