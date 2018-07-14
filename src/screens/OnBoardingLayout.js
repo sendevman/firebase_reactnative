@@ -20,7 +20,7 @@ class OnBoardingLayoutScreen extends Component {
   };
 
   checkBluetoothIsOn(bluetoothIsOn) {
-    if (bluetoothIsOn) this.props.navigation.navigate('Home');
+    if (bluetoothIsOn) this.props.navigation.navigate('Shopping');
   }
 
   componentWillReceiveProps(nextProps) {
