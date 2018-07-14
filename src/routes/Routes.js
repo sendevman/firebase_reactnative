@@ -131,9 +131,9 @@ const BottomTabNav = createBottomTabNavigator(
 
 const DrawerNav = createDrawerNavigator(
   {
-    Home: {
+    Shopping: {
       screen: BottomTabNav,
-      navigationOptions: { title: 'Home' }
+      navigationOptions: { title: 'Shopping' }
     },
     AboutRetailCompanion: {
       screen: AboutRetailCompanion,
