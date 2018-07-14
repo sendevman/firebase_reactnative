@@ -18,8 +18,7 @@ export const FakeProduct = {
     features: [
       '4K video recording at 30 fps or 60fps',
       'Super Slow-mo video support 720p at 960 fps',
-      'Slow motion video support 1080p at 240 fps',
-      'Hyperlapse video support 1080p'
+      'Slow motion video support 1080p at 240 fps'
     ],
     front: { aperture: 'F1.7', sensor: '8MP AF' },
     rear: { aperture: 'F1.5', sensor: '12MP AF' }

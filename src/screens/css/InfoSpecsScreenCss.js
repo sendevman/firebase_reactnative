@@ -148,14 +148,10 @@ export default StyleSheet.create({
     alignItems: 'center',
     height: 85,
     minWidth: '48%',
-    borderWidth: 1,
-    borderStyle: 'solid',
-    borderColor: '#E3E9EF',
-    borderRadius: 6,
-    backgroundColor: '#FFFFFF'
+    borderRadius: 6
   },
   cameraTitle: {
-    color: '#3E3F42',
+    color: '#CC7800',
     // fontFamily: 'Roboto',
     fontSize: 12,
     fontWeight: 'bold',
@@ -163,18 +159,30 @@ export default StyleSheet.create({
     lineHeight: 20
   },
   cameraText: {
-    color: '#3E3F42',
+    color: '#FFF',
     // fontFamily: 'Roboto',
     fontSize: 14,
     letterSpacing: 0.12,
     lineHeight: 20
   },
   // - - Camera Box - List - -
-  cameraList: { marginVertical: 10 },
-  cameraListItem: {
-    flex: 1,
+  cameraList: {
+    width: width - 15,
+    marginHorizontal: -2.5,
+    marginTop: 11,
+    marginBottom: 6,
     flexDirection: 'row',
-    justifyContent: 'flex-start',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    flexWrap: 'wrap'
+  },
+  cameraListItem: {
+    height: 85,
+    width: 110,
+    borderRadius: 6,
+    marginBottom: 4,
+    flexDirection: 'column',
+    justifyContent: 'center',
     alignItems: 'center'
   },
   cameraListDot: {
@@ -217,5 +225,139 @@ export default StyleSheet.create({
   },
   // - - Expandable Storage Box - -
   expandableBox: { marginTop: 10 },
-  expandableViewText: { marginBottom: 8 }
+  expandableViewText: { marginBottom: 8 },
+  // Feature Box
+  featuresBox: {
+    marginBottom: 6,
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  },
+  featureBox: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexWrap: 'wrap'
+  },
+  // Feature Item Box
+  featureItemBox: {
+    margin: 2,
+    flexGrow: 1,
+    height: 85,
+    minWidth: 56,
+    maxWidth: 66,
+    borderRadius: 6,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  featureItemTitle: {
+    color: '#3E3F42',
+    // fontFamily: 'Roboto',
+    fontSize: 12,
+    fontWeight: 'bold',
+    letterSpacing: 0.12,
+    lineHeight: 14
+  },
+  featureItemMount: {
+    color: '#3E3F42',
+    // fontFamily: 'Roboto',
+    fontSize: 24,
+    letterSpacing: 0.24,
+    lineHeight: 28,
+    marginTop: 4
+  },
+  featureItemHour: {
+    color: '#3E3F42',
+    // fontFamily: 'Roboto',
+    fontSize: 12,
+    letterSpacing: 0.12,
+    lineHeight: 14
+  },
+  // Charging Type Box
+  chagingTypeBox: {
+    marginTop: 16,
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    alignItems: 'center'
+  },
+  chagingItemBox: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  chagingItemText: {
+    marginLeft: 8,
+    color: '#3E3F42',
+    // fontFamily: 'Roboto',
+    fontSize: 14,
+    letterSpacing: 0.12,
+    lineHeight: 20,
+    textAlign: 'center'
+  },
+  // - - Performance Box - -
+  performanceStorageBox: {
+    marginTop: 14,
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    alignItems: 'center'
+  },
+  performanceStorageItem: {
+    height: 140,
+    width: 140,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  performanceStorageContentBox: {
+    position: 'absolute',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  performanceStorageTitle: {
+    color: '#3E3F42',
+    // fontFamily: 'Roboto',
+    fontSize: 12,
+    fontWeight: 'bold',
+    letterSpacing: 0.12,
+    lineHeight: 20
+  },
+  performanceStorageText: {
+    marginTop: 4,
+    maxWidth: 110,
+    color: '#3E3F42',
+    // fontFamily: 'Roboto',
+    fontSize: 14,
+    letterSpacing: 0.12,
+    lineHeight: 20,
+    textAlign: 'center'
+  },
+  storageBlueBox: {
+    height: 70,
+    width: 120,
+    borderRadius: 4,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  storageBlueTitle: {
+    color: '#FFFFFF',
+    // fontFamily: 'Roboto',
+    fontSize: 12,
+    fontWeight: 'bold',
+    letterSpacing: 0.12,
+    lineHeight: 20
+  },
+  storageBlueText: {
+    marginTop: 4,
+    color: '#FFFFFF',
+    // fontFamily: 'Roboto'
+    fontSize: 14,
+    letterSpacing: 0.12,
+    lineHeight: 20,
+    textAlign: 'center'
+  }
 });
