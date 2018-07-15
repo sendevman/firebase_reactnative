@@ -410,9 +410,9 @@ export const FakeProduct = {
     mobileProtection: { deviceProtected: 1, monthlyCost: 11.99 },
     mobileProtectionMulit: { deviceProtected: 3, monthlyCost: 34.99 }
   },
-  manufacture: 'manufacture',
+  manufacture: 'Samsung',
   memory: '4',
-  model: 'model',
+  model: 'Galaxy S9+',
   offer: {
     description: 'Buy a Galaxy S9, get a Galaxy A5 for free!',
     img: 'Img URL',
