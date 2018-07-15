@@ -5,7 +5,7 @@
  */
 
 import React, { Component } from 'react';
-import { Image, ScrollView, Text, View } from 'react-native';
+import { Dimensions, Image, ScrollView, Text, View } from 'react-native';
 import Svg, { Rect } from 'react-native-svg';
 import LinearGradient from 'react-native-linear-gradient';
 import { connect } from 'react-redux';
@@ -24,6 +24,12 @@ import RoutesAccessories from '../routes/Accessories';
 // My Actions
 import { updateHeaderNav } from '../actions/Common';
 
+var { width } = Dimensions.get('window');
+
+const getWidth = (number) => {
+  return ((width - 20) - number);
+};
+
 const InfoSpecsSkeleton = () => (
   <View style={styles.skeletonLoading}>
     <SkeletonLoading height={220}>
@@ -32,7 +38,7 @@ const InfoSpecsSkeleton = () => (
       <Rect x="0" y="30" rx="3" ry="3" width="80%" height="10"/>
 
       <Rect x="0" y="50" rx="3" ry="3" width="40" height="10"/>
-      <Rect x="50" y="54" rx="2" ry="2" width="250" height="2"/>
+      <Rect x="50" y="54" rx="2" ry="2" width={getWidth(50)} height="2"/>
 
       <Rect x="40" y="70" rx="5" ry="5" width="40" height="70"/>
       <Rect x="100" y="70" rx="5" ry="5" width="40" height="70"/>
@@ -40,7 +46,7 @@ const InfoSpecsSkeleton = () => (
       <Rect x="220" y="70" rx="5" ry="5" width="40" height="70"/>
 
       <Rect x="0" y="150" rx="3" ry="3" width="60" height="10"/>
-      <Rect x="70" y="154" rx="2" ry="2" width="230" height="2"/>
+      <Rect x="70" y="154" rx="2" ry="2" width={getWidth(70)} height="2"/>
 
       <Rect x="0" y="170" rx="3" ry="3" width="80" height="10"/>
       <Rect x="90" y="170" rx="3" ry="3" width="120" height="10"/>
