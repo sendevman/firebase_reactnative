@@ -5,7 +5,7 @@
  */
 
 import React, { Component } from 'react';
-import { Image, ScrollView, Text, View } from 'react-native';
+import { Dimensions, Image, ScrollView, Text, View } from 'react-native';
 import Svg, { Rect } from 'react-native-svg';
 import { connect } from 'react-redux';
 
@@ -21,11 +21,17 @@ import VideoContent from './components/VideoContent';
 // My Actions
 import { updateHeaderNav } from '../actions/Common';
 
+var { width } = Dimensions.get('window');
+
+const getWidth = (number) => {
+  return (((width - 20)/2) - number);
+};
+
 const ReviewsSkeleton = () => (
   <View style={styles.skeletonLoading}>
     <SkeletonLoading height={235}>
-      <Rect x="50" y="0" rx="3" ry="3" width="200" height="10"/>
-      <Rect x="60" y="15" rx="3" ry="3" width="180" height="10"/>
+      <Rect x={getWidth(100)} y="0" rx="3" ry="3" width="200" height="10"/>
+      <Rect x={getWidth(90)} y="15" rx="3" ry="3" width="180" height="10"/>
       <Rect x="0" y="40" rx="5" ry="5" width="100%" height="80"/>
 
       <Rect x="0" y="130" rx="3" ry="3" width="120" height="10"/>
