@@ -75,6 +75,12 @@ const SharedSession = ({ navigation }) => (
   <MyNavScreen banner={'Shared Session'} navigation={navigation} />
 );
 
+class Hidden extends Component {
+  render() {
+    return null;
+  }
+}
+
 const BottomTabNav = createBottomTabNavigator(
   {
     Products: {
@@ -130,7 +136,7 @@ const BottomTabNav = createBottomTabNavigator(
       labelStyle: {
         marginTop: -4,
         marginBottom: 8,
-        fontFamily: 'SF Pro Text',
+        // fontFamily: 'SF Pro Text',
         fontSize: 11,
         fontWeight: '500',
         letterSpacing: 0.13,
@@ -143,9 +149,9 @@ const BottomTabNav = createBottomTabNavigator(
 
 const DrawerNav = createDrawerNavigator(
   {
-    Home: {
+    Shopping: {
       screen: BottomTabNav,
-      navigationOptions: { title: 'Home' }
+      navigationOptions: { title: 'Shopping' }
     },
     AboutRetailCompanion: {
       screen: AboutRetailCompanion,
@@ -159,10 +165,6 @@ const DrawerNav = createDrawerNavigator(
       screen: Events,
       navigationOptions: { title: 'Events' }
     },
-    OnBoarding: {
-      screen: OnBoardingLayout,
-      navigationOptions: { title: 'OnBoarding' }
-    },
     AccountSettings: {
       screen: AccountSettings,
       navigationOptions: {
@@ -174,10 +176,17 @@ const DrawerNav = createDrawerNavigator(
     },
     DebugViews: {
       screen: DebugViews
+    },
+    OnBoarding: {
+      screen: OnBoardingLayout,
+      navigationOptions: {
+        title: 'OnBoarding',
+        drawerLabel: <Hidden />
+      }
     }
   },
   {
-    initialRouteName: 'Home',
+    initialRouteName: 'OnBoarding',
     contentOptions: {
       activeTintColor: '#1181FF',
       activeBackgroundColor: '#EEF1F4',

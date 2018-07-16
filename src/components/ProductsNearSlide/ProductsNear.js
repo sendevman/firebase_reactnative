@@ -46,8 +46,7 @@ class ProductsNear extends Component {
         <TouchableOpacity onPress={this.props.zone}>
           <Text style={styles.title}>PRODUCTS NEAR YOU ({(position && position.zone_id) ? position.zone_id : '---'})</Text>
         </TouchableOpacity>
-        {
-          (currentProducts || []).length > 0 ?
+        { (currentProducts || []).length > 0 ?
             <Carousel
               animate={false}
               height={136}
@@ -66,7 +65,7 @@ class ProductsNear extends Component {
                   <View style={styles.itemContainer} key={index}>
                     <View style={styles.itemBox}>
                       <View style={styles.imageBox}>
-                        <Image style={{ width: 84 }} source={require('../../assets/images/files/S9-Dual.png')} />
+                        <Image style={styles.itemImage} resizeMode={Image.resizeMode.contain} source={{ uri: matching[productId].img }} />
                       </View>
 
                       <View style={styles.detailsBox}>
@@ -77,11 +76,11 @@ class ProductsNear extends Component {
                         <View style={styles.deviceOptionsBox}>
                           <View style={styles.deviceOptionItem}>
                             <Icon height="14" width="14" name="Storage" viewBox="0 0 24 24" />
-                            <Text style={styles.deviceOptionText}>64GB</Text>
+                            <Text style={styles.deviceOptionText}>{matching[productId].deviceOptions[0].storage}GB</Text>
                           </View>
                           <View style={styles.deviceOptionItem}>
                             <Icon height="14" width="14" name="BatteryInclined" viewBox="0 0 20 20" />
-                            <Text style={styles.deviceOptionText}>{matching[productId].battery.capacity}</Text>
+                            <Text style={styles.deviceOptionText}>{matching[productId].battery.life.video.replace(' ', '')}</Text>
                           </View>
                           <View style={styles.deviceOptionItem}>
                             <Icon height="14" width="14" name="Camera" viewBox="0 0 24 24" />
@@ -98,8 +97,7 @@ class ProductsNear extends Component {
             </Carousel>
             :
             <View style={styles.itemContainer}>
-              {
-                !areaData.products ?
+              { !areaData.products ?
                   null
                   :
                   <View style={styles.loadingBox}>

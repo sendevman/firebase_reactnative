@@ -47,7 +47,7 @@ export default StyleSheet.create({
     marginLeft: 10,
     textAlign: 'left',
     color: '#FFF',
-    fontFamily: 'Rubik',
+    // fontFamily: 'Rubik',
     fontSize: 16,
     lineHeight: 19
   },
@@ -60,7 +60,7 @@ export default StyleSheet.create({
     marginTop: 15,
     marginBottom: 13,
     textAlign: 'left',
-    fontFamily: 'Rubik',
+    // fontFamily: 'Rubik',
     fontSize: 18,
     fontWeight: '300',
     letterSpacing: 0.12,
@@ -79,7 +79,7 @@ export default StyleSheet.create({
     paddingRight: 10,
     backgroundColor: '#FFF',
     color: '#1181FF',
-    fontFamily: 'Rubik',
+    // fontFamily: 'Rubik',
     fontSize: 14,
     letterSpacing: 0.12,
     lineHeight: 17
@@ -105,7 +105,7 @@ export default StyleSheet.create({
     height: 28,
     width: 50,
     color: '#3E3F42',
-    fontFamily: 'Roboto',
+    // fontFamily: 'Roboto',
     fontSize: 12,
     letterSpacing: 0.1,
     lineHeight: 14,
@@ -132,13 +132,13 @@ export default StyleSheet.create({
   },
   storageGB: {
     color: '#3E3F42',
-    fontFamily: 'Roboto',
+    // fontFamily: 'Roboto',
     fontSize: 18,
     lineHeight: 21
   },
   storagePrice: {
     color: '#AEBECD',
-    fontFamily: 'Roboto',
+    // fontFamily: 'Roboto',
     fontSize: 18,
     lineHeight: 21
   },
@@ -163,7 +163,7 @@ export default StyleSheet.create({
   displaySize: {
     backgroundColor: 'white',
     color: '#3E3F42',
-    fontFamily: 'Rubik',
+    // fontFamily: 'Rubik',
     fontSize: 20,
     letterSpacing: 0.17,
     lineHeight: 22
@@ -174,7 +174,7 @@ export default StyleSheet.create({
   },
   displayText: {
     color: '#3E3F42',
-    fontFamily: 'Roboto',
+    // fontFamily: 'Roboto',
     fontSize: 14,
     letterSpacing: 0.12,
     lineHeight: 20
@@ -193,7 +193,7 @@ export default StyleSheet.create({
   },
   cameraTitle: {
     color: '#3E3F42',
-    fontFamily: 'Roboto',
+    // fontFamily: 'Roboto',
     fontSize: 12,
     fontWeight: 'bold',
     letterSpacing: 0.12,
@@ -201,7 +201,7 @@ export default StyleSheet.create({
   },
   cameraText: {
     color: '#3E3F42',
-    fontFamily: 'Roboto',
+    // fontFamily: 'Roboto',
     fontSize: 14,
     letterSpacing: 0.12,
     lineHeight: 20
@@ -243,7 +243,7 @@ export default StyleSheet.create({
   performanceViewText: { width: width - 30 },
   performanceText: {
     color: '#3E3F42',
-    fontFamily: 'Roboto',
+    // fontFamily: 'Roboto',
     fontSize: 14,
     letterSpacing: 0.12,
     lineHeight: 20

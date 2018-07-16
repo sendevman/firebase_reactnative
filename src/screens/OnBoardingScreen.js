@@ -161,7 +161,7 @@ class OnBoardingScreen extends Component {
             <OnBoardingFour onShowModal={this.showModal} />
           </View>
         </Carousel>
-        <OnBoardingModal onHideModal={this.hideModal} showModal={this.state.showModal} />
+        <OnBoardingModal dispatch={this.props.dispatch} navigation={this.props.navigation} onHideModal={this.hideModal} showModal={this.state.showModal} />
       </LinearGradient>
     );
   }

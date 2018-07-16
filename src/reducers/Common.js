@@ -5,6 +5,7 @@
  */
 
 const initialState = {
+  bluetoothIsOn: false,
   customHeaderNav: {
     hideHeader: false,
     heightHeader: 56,
@@ -16,7 +17,17 @@ const initialState = {
 export default common = (state = initialState, action) => {
   switch (action.type) {
     case 'UPDATE_HEADERNAV':
-      return state//action.newValue
+      // return state
+      return {
+        ...state,
+        customHeaderNav: action.newValue.customHeaderNav
+      }
+    case 'UPDATE_BLUETOOTH_IS_ON':
+      return {
+        ...state,
+        bluetoothIsOn: action.payload
+      }
+      break;
     default:
       return state
   }
