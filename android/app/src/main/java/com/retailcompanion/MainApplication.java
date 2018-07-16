@@ -9,13 +9,7 @@ import com.react.rnspinkit.RNSpinkitPackage;
 import com.opensettings.OpenSettingsPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
 import io.invertase.firebase.RNFirebasePackage;
-import com.transistorsoft.rnbackgroundgeolocation.RNBackgroundGeolocation;
-import io.invertase.firebase.RNFirebasePackage;
 import io.invertase.firebase.firestore.RNFirebaseFirestorePackage;
-import com.opensettings.OpenSettingsPackage;
-import com.oblador.vectoricons.VectorIconsPackage;
-import com.BV.LinearGradient.LinearGradientPackage;
-import com.horcrux.svg.SvgPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -35,20 +29,14 @@ public class MainApplication extends Application implements ReactApplication {
     @Override
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
-          new MainReactPackage(),
-            new VectorIconsPackage(),
-            new SvgPackage(),
-            new RNSpinkitPackage(),
-            new OpenSettingsPackage(),
-            new LinearGradientPackage(),
-            new RNFirebasePackage(),
-            new RNBackgroundGeolocation(),
-            new RNFirebasePackage(),
-            new RNFirebaseFirestorePackage(),
-            new OpenSettingsPackage(),
-            new VectorIconsPackage(),
-            new LinearGradientPackage(),
-            new SvgPackage()
+        new MainReactPackage(),
+        new VectorIconsPackage(),
+        new SvgPackage(),
+        new RNSpinkitPackage(),
+        new OpenSettingsPackage(),
+        new LinearGradientPackage(),
+        new RNFirebasePackage(),
+        new RNFirebaseFirestorePackage()
       );
     }
 
