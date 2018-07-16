@@ -10,8 +10,8 @@ import { Image, Text, View, YellowBox, TouchableOpacity } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Carousel from 'react-native-carousel-view';
 import Spinkit from 'react-native-spinkit';
-
 import { connect } from 'react-redux';
+
 // My Styles
 import styles from './ProductsNearCss';
 
@@ -29,10 +29,12 @@ class ProductsNear extends Component {
   render() {
     const areaData = this.props.areaData || {};
     const { currentProducts, position } = this.props;
+
     const getProduct = (productId) => {
       const match = currentProducts.filter(product => product.id === productId);
       return match.length > 0 ? match[0] : null;
     };
+
     console.log("-=-=-=", currentProducts, this.props);
     const matching = {};
     (areaData.products || []).forEach(element => {
@@ -116,4 +118,5 @@ const mapStateToProps = state => {
 
   return { areaData: current.allAreas[0], position: current.postition };
 }
+
 export default connect(mapStateToProps)(ProductsNear);

@@ -149,8 +149,8 @@ class ProductLayoutScreen extends Component {
         <View style={{ marginTop: this.props.customHeaderNav.heightSlide - 166 }}>
           <ProductsNearSlide
             onProductIdChange={productId => this.setCurrentProduct(productId)}
-            currentProducts={productsNear} 
-            zone={this.zone.bind(this)}/>
+            currentProducts={productsNear}
+            zone={this.zone.bind(this)} />
         </View>
         <View style={{ width: '100%', height: height - 78 }}>
           <RoutesProducts />
