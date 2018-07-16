@@ -14,13 +14,16 @@ import styles from './OnBoardingModalCss';
 import Icon from '../../assets/images/Icon';
 import OpenSettings from 'react-native-open-settings';
 
+// My Actions
+import { updateBluetoothIsOn } from '../../actions/Common';
+
 class OnBoardingModal extends Component {
   constructor(props) {
     super(props);
   };
 
   render() {
-    const { onHideModal, showModal } = this.props;
+    const { dispatch, onHideModal, showModal } = this.props;
 
     return (
       <Modal
@@ -48,6 +51,7 @@ class OnBoardingModal extends Component {
                   'Go to Allow Action!',
                   [
                     {text: 'Settings', onPress: () => OpenSettings.openBluetooth()},
+                    // {text: 'Settings', onPress: () => dispatch(updateBluetoothIsOn(true))},
                     {text: 'Cancel', onPress: () => console.log('Go to Cancel'), style: 'cancel'}
                   ],
                   { cancelable: false }

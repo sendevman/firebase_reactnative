@@ -77,19 +77,19 @@ class ProductLayoutScreen extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    // if (this.props.customHeaderNav !== nextProps.customHeaderNav) {
-    //   const HEADER_MAX_HEIGHT = nextProps.customHeaderNav.heightHeader
-    //   const HEADER_MIN_HEIGHT = 0
-    //   const HEADER_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT
+    /*if (this.props.customHeaderNav !== nextProps.customHeaderNav) {
+      const HEADER_MAX_HEIGHT = nextProps.customHeaderNav.heightHeader
+      const HEADER_MIN_HEIGHT = 0
+      const HEADER_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT
 
-    //   this.props.navigation.setParams({
-    //     heightHeader: this._animatedValue.interpolate({
-    //       inputRange: [0, HEADER_DISTANCE],
-    //       outputRange: [HEADER_MAX_HEIGHT, HEADER_MIN_HEIGHT],
-    //       extrapolate: 'clamp'
-    //     })
-    //   });
-    // }
+      this.props.navigation.setParams({
+        heightHeader: this._animatedValue.interpolate({
+          inputRange: [0, HEADER_DISTANCE],
+          outputRange: [HEADER_MAX_HEIGHT, HEADER_MIN_HEIGHT],
+          extrapolate: 'clamp'
+        })
+      });
+    }*/
 
     if (this.props.locationData.zone_id !== nextProps.locationData.zone_id) {
       let zone_id = nextProps.locationData.zone_id;
