@@ -5,6 +5,7 @@
  */
 
 import { StyleSheet, Dimensions } from 'react-native';
+import { white } from 'ansi-colors';
 var { width } = Dimensions.get('window');
 
 export default StyleSheet.create({
@@ -26,6 +27,17 @@ export default StyleSheet.create({
     width: '100%',
     padding: 8,
     borderRadius: 6,
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  loadingBox: {
+    backgroundColor: '#FFF',
+    height: 120,
+    maxWidth: 344,
+    width: '100%',
+    padding: 8,
+    borderRadius: 6,
+    justifyContent: 'center',
     flexDirection: 'row',
     alignItems: 'center'
   },

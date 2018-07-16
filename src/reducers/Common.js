@@ -17,7 +17,11 @@ const initialState = {
 export default common = (state = initialState, action) => {
   switch (action.type) {
     case 'UPDATE_HEADERNAV':
-      return action.newValue
+      // return state
+      return {
+        ...state,
+        customHeaderNav: action.newValue.customHeaderNav
+      }
     case 'UPDATE_BLUETOOTH_IS_ON':
       return {
         ...state,

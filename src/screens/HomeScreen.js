@@ -9,6 +9,7 @@ import { Alert, Button, Text, View } from 'react-native';
 import { connect } from 'react-redux';
 import { Header } from 'react-navigation';
 import LinearGradient from 'react-native-linear-gradient';
+import BackgroundGeolocation from "react-native-background-geolocation";
 
 // My Styles
 import styles from './css/HomeScreenCss';
@@ -92,7 +93,7 @@ class HomeScreen extends Component {
     return (
       <View style={styles.container}>
         <View style={{ marginVertical: 20 }}>
-          <ProductsNearSlide />
+          {/* <ProductsNearSlide /> */}
         </View>
       </View>
     );

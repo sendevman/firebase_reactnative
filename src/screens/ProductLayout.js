@@ -8,6 +8,7 @@ import React, { Component } from 'react';
 import { Animated, Dimensions, TouchableHighlight, View } from 'react-native';
 import { createStackNavigator, SafeAreaView } from 'react-navigation';
 import { connect } from 'react-redux';
+import firebase from 'react-native-firebase';
 
 // My Customs
 import Icon from '../assets/images/Icon';
@@ -18,17 +19,65 @@ import ProductsNearSlide from '../components/ProductsNearSlide/ProductsNear';
 // My Routes
 import RoutesProducts from '../routes/Products'
 
+// Action
+import { setProductInfo, setAreaInfo, setLocationData } from '../actions/Current';
+import { setProductsNearInfo } from '../actions/ProductsNear';
+
 var { height } = Dimensions.get('window');
+var count = 0;
 
 class ProductLayoutScreen extends Component {
   constructor(props) {
     super(props);
 
     this._animatedValue = new Animated.Value(0);
-  };
+  }
+
+  getProductID(zone_id) {
+    const ref = firebase.firestore().collection('areas');
+    ref.where('id', '==', zone_id).get()
+      .then(snapshot => {
+        const arrAreas = snapshot.docs.map(doc => doc.data());
+        this.props.dispatch(setAreaInfo(arrAreas));
+        if (arrAreas.length > 0) {
+          this.getFirstProductDetail(arrAreas);
+        }
+      });
+  }
+  getFirstProductDetail(arrAreas) {
+    if (arrAreas[0] != undefined) {
+      const arrproducts = arrAreas[0].products;
+
+      const ref = firebase.firestore().collection('products');
+      Promise.all(arrproducts.map(productID => new Promise((resolve, reject) => {
+        ref.doc(productID).get().then(snapshot => {
+          const productDetails = snapshot.data();
+          productDetails.id = productID;
+          resolve(productDetails);
+        })
+          .catch(error => reject(error));
+      })))
+        .then(results => {
+          this.props.dispatch(setProductsNearInfo(results));
+          this.props.dispatch(setProductInfo(results[0]));
+          setTimeout(() => this.forceUpdate(), 300);
+        })
+        .catch(error => {
+        })
+
+    } else {
+      // Set Null for Non-Zone
+    }
+  }
+  setCurrentProduct(productId) {
+    const { productsNear } = this.props;
+    if (!productsNear || productsNear.length === 0) return;
+    const match = productsNear.filter(product => product.id === productId);
+    this.props.dispatch(setProductInfo(match.length > 0 ? match[0] : {}));
+  }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.customHeaderNav !== nextProps.customHeaderNav) {
+    /*if (this.props.customHeaderNav !== nextProps.customHeaderNav) {
       const HEADER_MAX_HEIGHT = nextProps.customHeaderNav.heightHeader
       const HEADER_MIN_HEIGHT = 0
       const HEADER_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT
@@ -40,6 +89,14 @@ class ProductLayoutScreen extends Component {
           extrapolate: 'clamp'
         })
       });
+    }*/
+
+    if (this.props.locationData.zone_id !== nextProps.locationData.zone_id) {
+      let zone_id = nextProps.locationData.zone_id;
+      this.props.dispatch(setProductInfo({}));
+      this.props.dispatch(setProductsNearInfo([]));
+      setTimeout(() => this.forceUpdate(), 100);
+      this.getProductID(zone_id);
     }
   }
 
@@ -64,11 +121,36 @@ class ProductLayoutScreen extends Component {
     };
   };
 
+  zone() {
+    let data = {
+      lat:"35.000",
+      lng:"-80.000",
+      height:"1",
+      ts:"2018-07-09",
+      floor_id:"1348",
+      zone_id: 3902
+    }
+    let data1 = {
+      lat:"-35.000",
+      lng:"-80.000",
+      height:"-1",
+      ts:"2018-07-09",
+      floor_id:"-1348",
+      zone_id:3903
+    }
+    count++;
+    this.props.dispatch(setLocationData(count%2 === 0 ? data : data1));
+  }
   render() {
+    const { productsNear } = this.props;
+
     return (
       <SafeAreaView forceInset={{ top: 'always' }} style={{ backgroundColor: '#FFF' }}>
         <View style={{ marginTop: this.props.customHeaderNav.heightSlide - 166 }}>
-          <ProductsNearSlide />
+          <ProductsNearSlide
+            onProductIdChange={productId => this.setCurrentProduct(productId)}
+            currentProducts={productsNear}
+            zone={this.zone.bind(this)} />
         </View>
         <View style={{ width: '100%', height: height - 78 }}>
           <RoutesProducts />
@@ -79,9 +161,9 @@ class ProductLayoutScreen extends Component {
 }
 
 const mapStateToProps = state => {
-  const { common } = state;
+  const { common, current, productsNear } = state;
 
-  return { customHeaderNav: common.customHeaderNav };
+  return { customHeaderNav: common.customHeaderNav, locationData: current.postition, productsNear: productsNear.productsNear };
 }
 
 const ProductLayout = createStackNavigator({
