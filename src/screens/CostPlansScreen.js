@@ -64,12 +64,10 @@ class CostPlansScreen extends Component {
 
   setNewValue(a, b, c, d) {
     return {
-      customHeaderNav: {
-        hideHeader: a,
-        heightHeader: b,
-        hideSlide: c,
-        heightSlide: d
-      }
+      hideHeader: a,
+      heightHeader: b,
+      hideSlide: c,
+      heightSlide: d
     }
   }
 
