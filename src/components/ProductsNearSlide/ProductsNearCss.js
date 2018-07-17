@@ -19,7 +19,11 @@ export default StyleSheet.create({
     marginBottom: 6,
     paddingHorizontal: 14
   },
-  itemContainer: { paddingHorizontal: 10 },
+  itemContainer: {
+    paddingHorizontal: 10,
+    flexDirection: 'column',
+    alignItems: 'center'
+  },
   itemBox: {
     backgroundColor: '#FFF',
     height: 120,

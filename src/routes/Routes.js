@@ -38,10 +38,7 @@ const MyNavScreen = ({ navigation, banner }) => (
       <SafeAreaView forceInset={{ top: 'always' }}>
         <Text style={{ fontSize: 14 }}>{banner}</Text>
         <Button onPress={() => navigation.openDrawer()} title="Open drawer" />
-        <Button
-          onPress={() => navigation.navigate('Email')}
-          title="Open other screen"
-        />
+        <Text style={{ fontSize: 14}}></Text>
         <Button onPress={() => navigation.goBack(null)} title="Go back" />
       </SafeAreaView>
       <StatusBar barStyle="default" />
@@ -115,7 +112,7 @@ const BottomTabNav = createBottomTabNavigator(
             return <Icon name="ExclusiveVodFill" width="22" height="18" viewBox="0 0 22 18" />;
         }
       }
-    },
+    }/*,
     SharedSession: {
       screen: SharedSession,
       navigationOptions: {
@@ -124,7 +121,7 @@ const BottomTabNav = createBottomTabNavigator(
           return <Icon name="SharedSession" width="22" height="22" fill={tintColor} viewBox="0 0 22 22" />;
         }
       }
-    }
+    }*/
   },
   {
     initialRouteName: 'Products',
