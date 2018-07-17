@@ -20,7 +20,7 @@ export default common = (state = initialState, action) => {
       // return state
       return {
         ...state,
-        customHeaderNav: action.newValue.customHeaderNav
+        customHeaderNav: action.payload
       }
     case 'UPDATE_BLUETOOTH_IS_ON':
       return {
