@@ -67,7 +67,12 @@ class ProductLayoutScreen extends Component {
                 const reviewData = review.data();
                 webReviews.push(reviewData);
               });
-              productData.webReviews = webReviews;
+
+              productData.webReviews = webReviews.sort((a, b) => {
+                if (a.position < b.position) return -1;
+                if (a.position > b.position) return 1;
+                return 0;
+              });
 
               resolve(productData);
             })
