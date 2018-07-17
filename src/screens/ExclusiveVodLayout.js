@@ -60,8 +60,13 @@ const mapStateToProps = state => {
   return { customHeaderNav: common.customHeaderNav };
 }
 
-const ExclusiveVodLayout = createStackNavigator({
-  Root: { screen: connect(mapStateToProps)(ExclusiveVodLayoutScreen) }
-});
+const ExclusiveVodLayout = createStackNavigator(
+  {
+    Root: { screen: connect(mapStateToProps)(ExclusiveVodLayoutScreen) }
+  },
+  {
+    headerMode: 'none'
+  }
+);
 
 export default ExclusiveVodLayout;

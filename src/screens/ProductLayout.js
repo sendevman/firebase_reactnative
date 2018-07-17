@@ -34,41 +34,59 @@ class ProductLayoutScreen extends Component {
   }
 
   getProductID(zone_id) {
-    const ref = firebase.firestore().collection('areas');
-    ref.where('id', '==', zone_id).get()
-      .then(snapshot => {
-        const arrAreas = snapshot.docs.map(doc => doc.data());
-        this.props.dispatch(setAreaInfo(arrAreas));
-        if (arrAreas.length > 0) {
-          this.getFirstProductDetail(arrAreas);
-        }
-      });
+    const areasRef = firebase.firestore().collection('areas');
+    areasRef.where('id', '==', zone_id).get()
+    .then(snapshot => {
+      const arrAreas = snapshot.docs.map(doc => doc.data());
+      this.props.dispatch(setAreaInfo(arrAreas));
+      if (arrAreas.length > 0) {
+        this.getFirstProductDetail(arrAreas);
+      }
+    });
   }
+
   getFirstProductDetail(arrAreas) {
     if (arrAreas[0] != undefined) {
       const arrproducts = arrAreas[0].products;
+      const productRef = firebase.firestore().collection('products');
 
-      const ref = firebase.firestore().collection('products');
-      Promise.all(arrproducts.map(productID => new Promise((resolve, reject) => {
-        ref.doc(productID).get().then(snapshot => {
-          const productDetails = snapshot.data();
-          productDetails.id = productID;
-          resolve(productDetails);
-        })
+      Promise.all(
+        arrproducts.map(productID => new Promise((resolve, reject) => {
+          productRef.doc(productID).get()
+          .then(product => {
+            if (!product.exists) resolve({});
+
+            const productData = product.data();
+            productData.id = productID;
+
+            productRef.doc(productID).collection('web-reviews').get()
+            .then(reviews => {
+              var webReviews = [];
+
+              reviews.forEach(review => {
+                const reviewData = review.data();
+                webReviews.push(reviewData);
+              });
+              productData.webReviews = webReviews;
+
+              resolve(productData);
+            })
+            .catch(err => { console.log('Error getting documents', err); });
+          })
           .catch(error => reject(error));
-      })))
-        .then(results => {
-          this.props.dispatch(setProductsNearInfo(results));
-          this.props.dispatch(setProductInfo(results[0]));
-          setTimeout(() => this.forceUpdate(), 300);
-        })
-        .catch(error => {
-        })
-
+        }))
+      )
+      .then(results => {
+        this.props.dispatch(setProductsNearInfo(results));
+        this.props.dispatch(setProductInfo(results[0]));
+        setTimeout(() => this.forceUpdate(), 300);
+      })
+      .catch(error => {})
     } else {
       // Set Null for Non-Zone
     }
   }
+
   setCurrentProduct(productId) {
     const { productsNear } = this.props;
     if (!productsNear || productsNear.length === 0) return;
@@ -152,7 +170,7 @@ class ProductLayoutScreen extends Component {
             currentProducts={productsNear}
             zone={this.zone.bind(this)} />
         </View>
-        <View style={{ width: '100%', height: height - 78 }}>
+        <View style={{ width: '100%', height: height - 244 }}>
           <RoutesProducts />
         </View>
       </SafeAreaView>
@@ -166,8 +184,13 @@ const mapStateToProps = state => {
   return { customHeaderNav: common.customHeaderNav, locationData: current.postition, productsNear: productsNear.productsNear };
 }
 
-const ProductLayout = createStackNavigator({
-  Root: { screen: connect(mapStateToProps)(ProductLayoutScreen) }
-});
+const ProductLayout = createStackNavigator(
+  {
+    Root: { screen: connect(mapStateToProps)(ProductLayoutScreen) }
+  },
+  {
+    headerMode: 'none'
+  }
+);
 
 export default ProductLayout;
