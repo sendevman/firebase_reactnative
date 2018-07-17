@@ -60,8 +60,7 @@ class ProductsNear extends Component {
                   this.props.onProductIdChange(areaData.products[index])
                   : null}
             >
-              {
-                (areaData.products || []).map((productId, index) => (
+              { (areaData.products || []).map((productId, index) => (
                   <View style={styles.itemContainer} key={index}>
                     <View style={styles.itemBox}>
                       <View style={styles.imageBox}>
@@ -69,7 +68,7 @@ class ProductsNear extends Component {
                       </View>
 
                       <View style={styles.detailsBox}>
-                        <Text style={styles.titleItem}>{matching[productId].manufacture} {matching[productId].model}</Text>
+                        <Text numberOfLines={1} style={styles.titleItem}>{matching[productId].manufacture} {matching[productId].model}</Text>
 
                         <View style={styles.hrDivider}></View>
 
