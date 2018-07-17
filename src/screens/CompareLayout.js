@@ -60,8 +60,13 @@ const mapStateToProps = state => {
   return { customHeaderNav: common.customHeaderNav };
 }
 
-const CompareLayout = createStackNavigator({
-  Root: { screen: connect(mapStateToProps)(CompareLayoutScreen) }
-});
+const CompareLayout = createStackNavigator(
+  {
+    Root: { screen: connect(mapStateToProps)(CompareLayoutScreen) }
+  },
+  {
+    headerMode: 'none'
+  }
+);
 
 export default CompareLayout;
