@@ -16,6 +16,7 @@ import styles from './css/CostPlansScreenCss';
 // My Customs
 import Icon from '../assets/images/Icon';
 import SkeletonLoading from './components/SkeletonLoading';
+import FeedbackSurvey from './components/FeedbackSurvey';
 
 // My Routes
 import RoutesAccessories from '../routes/Accessories';
@@ -388,6 +389,7 @@ class CostPlansScreen extends Component {
       <ScrollView contentContainerStyle={styles.container} onScroll={handleScroll.bind(this)} scrollEventThrottle={16}>
         { this.renderContent() }
         { this.renderAccessories() }
+        <FeedbackSurvey />
       </ScrollView>
     );
   }
