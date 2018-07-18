@@ -138,7 +138,7 @@ android {
 }
 
 dependencies {
-    compile project(':react-native-system-setting')
+  implementation project(':react-native-system-setting')
   implementation project(':react-native-spinkit')
   implementation(project(':react-native-firebase')) {
     transitive = false
@@ -148,6 +148,7 @@ dependencies {
   implementation project(':react-native-linear-gradient')
   implementation project(':react-native-walkbase-engage')
   implementation project(':react-native-svg')
+  implementation project(':react-native-spinkit')
   implementation fileTree(dir: "libs", include: ["*.jar"])
   implementation "com.facebook.react:react-native:+"  // From node_modules
 

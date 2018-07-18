@@ -18,8 +18,7 @@ export const FakeProduct = {
     features: [
       '4K video recording at 30 fps or 60fps',
       'Super Slow-mo video support 720p at 960 fps',
-      'Slow motion video support 1080p at 240 fps',
-      'Hyperlapse video support 1080p'
+      'Slow motion video support 1080p at 240 fps'
     ],
     front: { aperture: 'F1.7', sensor: '8MP AF' },
     rear: { aperture: 'F1.5', sensor: '12MP AF' }
@@ -79,7 +78,8 @@ export const FakeProduct = {
       }
     ],
     fullList: [
-      { name: 'battery_packs',
+      { name: 'Battery packs',
+        type: 'battery_packs',
         items: [
           {
             id: '004',
@@ -117,7 +117,8 @@ export const FakeProduct = {
           }
         ]
       },
-      { name: 'case_covers',
+      { name: 'Case & Covers',
+        type: 'case_covers',
         items: [
           {
             id: '003',
@@ -265,7 +266,8 @@ export const FakeProduct = {
           }
         ]
       },
-      { name: 'audio',
+      { name: 'Audio',
+        type: 'audio',
         items: [
           {
             id: '001',
@@ -303,7 +305,8 @@ export const FakeProduct = {
           }
         ]
       },
-      { name: 'fun',
+      { name: 'Fun',
+        type: 'fun',
         items: [
           {
             id: '005',
@@ -401,14 +404,21 @@ export const FakeProduct = {
   expandableStorage: { available: true, type: 'MicroSD' },
   geekbench: { multiCore: 8551, singleCore: 3356 },
   headphoneJack: true,
+  img: 'https://www.att.com/catalog/en/skus/Samsung/Samsung%20Galaxy%20S9+/hi_res_images/coral%20blue-hero-zoom.jpg',
   insurance: {
     mobileInsurance: { deviceProtected: 1, monthlyCost: 8.99 },
     mobileProtection: { deviceProtected: 1, monthlyCost: 11.99 },
     mobileProtectionMulit: { deviceProtected: 3, monthlyCost: 34.99 }
   },
-  manufacture: 'manufacture',
+  manufacture: 'Samsung',
   memory: '4',
-  model: 'model',
+  model: 'Galaxy S9+',
+  offer: {
+    description: 'Buy a Galaxy S9, get a Galaxy A5 for free!',
+    img: 'Img URL',
+    opusCode: 'Opus Code',
+    title: 'LIMITED TIME OFFER'
+  },
   powerAdapterType: 'USB-C',
   processor: {
     long: '10nm 64-bit Octa-Core Processor 2.8GHz + 1.7GHz (Maximum Clock Speed, Performance Core + Efficiency Core)',
@@ -420,7 +430,6 @@ export const FakeProduct = {
     type: 'Nano'
   },
   sku: 'sku8730723',
-  titleImg: 'Title Img',
   type: 'phone',
   videoContent: [
     {

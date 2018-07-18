@@ -295,7 +295,6 @@ class OnBoardingScreen extends Component {
           </View>
         </IndicatorViewPager>
         <OnBoardingModal onHideModal={this.hideModal} showModal={this.state.showModal} />
-
       </LinearGradient>
     );
   }

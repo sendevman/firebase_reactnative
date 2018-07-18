@@ -10,8 +10,8 @@ import { Image, Text, View, YellowBox, TouchableOpacity } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Carousel from 'react-native-carousel-view';
 import Spinkit from 'react-native-spinkit';
-
 import { connect } from 'react-redux';
+
 // My Styles
 import styles from './ProductsNearCss';
 
@@ -29,10 +29,12 @@ class ProductsNear extends Component {
   render() {
     const areaData = this.props.areaData || {};
     const { currentProducts, position } = this.props;
+
     const getProduct = (productId) => {
       const match = currentProducts.filter(product => product.id === productId);
       return match.length > 0 ? match[0] : null;
     };
+
     console.log("-=-=-=", currentProducts, this.props);
     const matching = {};
     (areaData.products || []).forEach(element => {
@@ -44,8 +46,7 @@ class ProductsNear extends Component {
         <TouchableOpacity onPress={this.props.zone}>
           <Text style={styles.title}>PRODUCTS NEAR YOU ({(position && position.zone_id) ? position.zone_id : '---'})</Text>
         </TouchableOpacity>
-        {
-          (currentProducts || []).length > 0 ?
+        { (currentProducts || []).length > 0 ?
             <Carousel
               animate={false}
               height={136}
@@ -59,31 +60,30 @@ class ProductsNear extends Component {
                   this.props.onProductIdChange(areaData.products[index])
                   : null}
             >
-              {
-                (areaData.products || []).map((productId, index) => (
+              { (areaData.products || []).map((productId, index) => (
                   <View style={styles.itemContainer} key={index}>
                     <View style={styles.itemBox}>
                       <View style={styles.imageBox}>
-                        <Image style={{ width: 84 }} source={require('../../assets/images/files/S9-Dual.png')} />
+                        <Image style={styles.itemImage} resizeMode={Image.resizeMode.contain} source={{ uri: matching[productId] ? matching[productId].img : "" }} />
                       </View>
 
                       <View style={styles.detailsBox}>
-                        <Text style={styles.titleItem}>{matching[productId].manufacture} {matching[productId].model}</Text>
+                        <Text numberOfLines={1} style={styles.titleItem}>{matching[productId] ? matching[productId].manufacture + " " + matching[productId].model : ""}</Text>
 
                         <View style={styles.hrDivider}></View>
 
                         <View style={styles.deviceOptionsBox}>
                           <View style={styles.deviceOptionItem}>
                             <Icon height="14" width="14" name="Storage" viewBox="0 0 24 24" />
-                            <Text style={styles.deviceOptionText}>64GB</Text>
+                            <Text style={styles.deviceOptionText}>{matching[productId] ? matching[productId].deviceOptions[0].storage : 0}GB</Text>
                           </View>
                           <View style={styles.deviceOptionItem}>
                             <Icon height="14" width="14" name="BatteryInclined" viewBox="0 0 20 20" />
-                            <Text style={styles.deviceOptionText}>{matching[productId].battery.capacity}</Text>
+                            <Text style={styles.deviceOptionText}>{matching[productId] ? matching[productId].battery.life.video.replace(' ', '') : 0}</Text>
                           </View>
                           <View style={styles.deviceOptionItem}>
                             <Icon height="14" width="14" name="Camera" viewBox="0 0 24 24" />
-                            <Text style={styles.deviceOptionText}>{matching[productId].camera.front.sensor} + {matching[productId].camera.rear.sensor}</Text>
+                            <Text style={styles.deviceOptionText}>{matching[productId] ? matching[productId].camera.front.sensor + " " + matching[productId].camera.rear.sensor : ""}</Text>
                           </View>
                         </View>
 
@@ -96,8 +96,7 @@ class ProductsNear extends Component {
             </Carousel>
             :
             <View style={styles.itemContainer}>
-              {
-                !areaData.products ?
+              { !areaData.products ?
                   null
                   :
                   <View style={styles.loadingBox}>
@@ -116,4 +115,5 @@ const mapStateToProps = state => {
 
   return { areaData: current.allAreas[0], position: current.postition };
 }
+
 export default connect(mapStateToProps)(ProductsNear);
