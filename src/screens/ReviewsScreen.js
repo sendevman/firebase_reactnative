@@ -17,6 +17,7 @@ import SkeletonLoading from './components/SkeletonLoading';
 import CustomerReview from './components/CustomerReview';
 import WebReview from './components/WebReview';
 import VideoContent from './components/VideoContent';
+import FeedbackSurvey from './components/FeedbackSurvey';
 
 // My Actions
 import { updateHeaderNav } from '../actions/Common';
@@ -152,6 +153,7 @@ class ReviewsScreen extends Component {
     return (
       <ScrollView contentContainerStyle={styles.container} onScroll={handleScroll.bind(this)} scrollEventThrottle={16}>
         { this.renderContent() }
+        <FeedbackSurvey />
       </ScrollView>
     );
   }
