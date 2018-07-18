@@ -280,6 +280,7 @@ class CostPlansScreen extends Component {
 
   renderDeviceProtection() {
     const { insurance } = this.props.costplans;
+    const { viewMoreInsurance } = this.state;
 
     if ((typeof insurance == "undefined") || (Object.keys(insurance).length === 0 && insurance.constructor === Object)) return;
 
@@ -292,13 +293,27 @@ class CostPlansScreen extends Component {
     let mProtectionMulti = insurance.mobileProtectionMulit;
     let mProtectionMultiEmpty = ((typeof mProtectionMulti == "undefined") || (Object.keys(mProtectionMulti).length === 0 && mProtectionMulti.constructor === Object));
 
+    let viewMoreInsuranceText = viewMoreInsurance ? "- Collapse" : "+ View more plans";
+    let showInsurance = viewMoreInsurance;
+
     return (
       <View>
         <Text style={styles.titleDevice}>Device protection</Text>
 
         { !mInsuranceEmpty && this.setItem('mobileInsurance', mInsurance) }
-        { !mProtectionEmpty && this.setItem('mobileProtection', mProtection) }
-        { !mProtectionMultiEmpty && this.setItem('mobileProtectionMulit', mProtectionMulti) }
+
+        { showInsurance &&
+          <View>
+            { !mProtectionEmpty && this.setItem('mobileProtection', mProtection) }
+            { !mProtectionMultiEmpty && this.setItem('mobileProtectionMulit', mProtectionMulti) }
+          </View>
+        }
+
+        <TouchableWithoutFeedback onPress={this.toggleViewMoreInsurance}>
+          <View style={styles.contentReadMore}>
+            <Text style={styles.textReadMore}>{viewMoreInsuranceText}</Text>
+          </View>
+        </TouchableWithoutFeedback>
       </View>
     );
   }
@@ -324,9 +339,6 @@ class CostPlansScreen extends Component {
   renderContent() {
     const { costplans } = this.props;
     const { viewMoreInsurance, viewMorePlans } = this.state;
-
-    let viewMoreInsuranceText = viewMoreInsurance ? "- Collapse" : "+ View more plans";
-    let showInsurance = viewMoreInsurance;
 
     let viewMorePlansText = viewMorePlans ? "- Collapse" : "+ View more plans";
     let showPlans = viewMorePlans;
