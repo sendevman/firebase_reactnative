@@ -17,6 +17,7 @@ import styles from './css/InfoSpecsScreenCss';
 import Icon from '../assets/images/Icon';
 import SkeletonLoading from './components/SkeletonLoading';
 import Offer from '../components/LimitedTimeOffer/Offer';
+import FeedbackSurvey from './components/FeedbackSurvey';
 
 // My Routes
 import RoutesAccessories from '../routes/Accessories';
@@ -399,6 +400,7 @@ class InfoSpecsScreen extends Component {
       <ScrollView contentContainerStyle={styles.container} onScroll={handleScroll.bind(this)} scrollEventThrottle={16}>
         { this.renderContent() }
         { this.renderAccessories() }
+        <FeedbackSurvey />
       </ScrollView>
     );
   }
