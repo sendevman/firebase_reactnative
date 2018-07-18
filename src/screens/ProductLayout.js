@@ -177,7 +177,7 @@ class ProductLayoutScreen extends Component {
             currentProducts={productsNear}
             zone={this.zone.bind(this)} />
         </View>
-        <View style={{ width: '100%', height: height }}>
+        <View style={{ width: '100%', height: height - 244 }}>
         {/* <View > */}
           <RoutesProducts />
         </View>
