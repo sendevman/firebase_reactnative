@@ -59,7 +59,7 @@ class WebReview extends Component<props> {
                   return (
                     <View key={index} style={styles.prosConsItem}>
                       <View style={styles.prosConsDot}></View>
-                      <Text style={styles.prosConsText}>{item}</Text>
+                      <Text numberOfLines={1} style={styles.prosConsText}>{item}</Text>
                     </View>
                   );
                 })
@@ -75,7 +75,7 @@ class WebReview extends Component<props> {
                   return (
                     <View key={index} style={styles.prosConsItem}>
                       <View style={styles.prosConsDot}></View>
-                      <Text style={styles.prosConsText}>{item}</Text>
+                      <Text numberOfLines={1} style={styles.prosConsText}>{item}</Text>
                     </View>
                   );
                 })
