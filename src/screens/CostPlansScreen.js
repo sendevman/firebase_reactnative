@@ -5,7 +5,7 @@
  */
 
 import React, { Component } from 'react';
-import { ScrollView, Text, View } from 'react-native';
+import { ScrollView, Text, TouchableWithoutFeedback, View } from 'react-native';
 import Svg, { Rect } from 'react-native-svg';
 import moment from 'moment';
 import { connect } from 'react-redux';
@@ -42,6 +42,11 @@ class CostPlansScreen extends Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      viewMoreInsurance: false,
+      viewMorePlans: false
+    };
+
     handleScroll = (event) => {
       // const { dispatch, customHeaderNav } = this.props;
       // var value = event.nativeEvent.contentOffset.y;
@@ -62,14 +67,20 @@ class CostPlansScreen extends Component {
     };
   }
 
+  toggleViewMorePlans = () => {
+    this.setState({ viewMorePlans: !this.state.viewMorePlans });
+  }
+
+  toggleViewMoreInsurance = () => {
+    this.setState({ viewMoreInsurance: !this.state.viewMoreInsurance });
+  }
+
   setNewValue(a, b, c, d) {
     return {
-      customHeaderNav: {
-        hideHeader: a,
-        heightHeader: b,
-        hideSlide: c,
-        heightSlide: d
-      }
+      hideHeader: a,
+      heightHeader: b,
+      hideSlide: c,
+      heightSlide: d
     }
   }
 
@@ -81,6 +92,44 @@ class CostPlansScreen extends Component {
       return `${nSplit[0]}.${nSplit[1]}0`;
     }
     return `${nSplit[0]}.00`;
+  }
+
+  renderStorage() {
+    const { deviceOptions, expandableStorage } = this.props.costplans;
+    const esIsValid = (typeof expandableStorage == "undefined" || Object.keys(expandableStorage).length === 0) ? false : true;
+
+    var isAvailable = false;
+    if (esIsValid) isAvailable = (typeof expandableStorage.available == "undefined") ? false : expandableStorage.available;
+    else isAvailable = false;
+
+    if (deviceOptions && deviceOptions.length > 0) {
+      return (
+        <View style={{ paddingBottom: 0 }}>
+          <View style={styles.hrDivider}></View>
+          <Text style={styles.titleDivider}>Device options</Text>
+
+          <View style={styles.storageBox}>
+            {
+              deviceOptions.map((item, index) => {
+                return (
+                  <View key={index} style={styles.storageItem}>
+                    <Text style={styles.storageGB}>{item.storage}GB</Text>
+                    <Text style={styles.storagePrice}>${item.price}</Text>
+                  </View>
+                );
+              })
+            }
+          </View>
+
+          { isAvailable &&
+            <View style={styles.sdCardBox}>
+              <Icon name="SDCard" width="18" height="23" viewBox="0 0 18 23" />
+              <Text style={styles.sdCardText}>SD card slot available</Text>
+            </View>
+          }
+        </View>
+      );
+    }
   }
 
   renderCostNext() {
@@ -231,6 +280,7 @@ class CostPlansScreen extends Component {
 
   renderDeviceProtection() {
     const { insurance } = this.props.costplans;
+    const { viewMoreInsurance } = this.state;
 
     if ((typeof insurance == "undefined") || (Object.keys(insurance).length === 0 && insurance.constructor === Object)) return;
 
@@ -243,13 +293,27 @@ class CostPlansScreen extends Component {
     let mProtectionMulti = insurance.mobileProtectionMulit;
     let mProtectionMultiEmpty = ((typeof mProtectionMulti == "undefined") || (Object.keys(mProtectionMulti).length === 0 && mProtectionMulti.constructor === Object));
 
+    let viewMoreInsuranceText = viewMoreInsurance ? "- Collapse" : "+ View more plans";
+    let showInsurance = viewMoreInsurance;
+
     return (
       <View>
         <Text style={styles.titleDevice}>Device protection</Text>
 
         { !mInsuranceEmpty && this.setItem('mobileInsurance', mInsurance) }
-        { !mProtectionEmpty && this.setItem('mobileProtection', mProtection) }
-        { !mProtectionMultiEmpty && this.setItem('mobileProtectionMulit', mProtectionMulti) }
+
+        { showInsurance &&
+          <View>
+            { !mProtectionEmpty && this.setItem('mobileProtection', mProtection) }
+            { !mProtectionMultiEmpty && this.setItem('mobileProtectionMulit', mProtectionMulti) }
+          </View>
+        }
+
+        <TouchableWithoutFeedback onPress={this.toggleViewMoreInsurance}>
+          <View style={styles.contentReadMore}>
+            <Text style={styles.textReadMore}>{viewMoreInsuranceText}</Text>
+          </View>
+        </TouchableWithoutFeedback>
       </View>
     );
   }
@@ -266,8 +330,7 @@ class CostPlansScreen extends Component {
       <View style={styles.shippingBox}>
         <Icon name="ShippingTruck" width="18" height="13" viewBox="0 0 18 13" />
         <View>
-          <Text style={styles.availableText}>Ships between {dateRelease} - {dateInAdvance}.</Text>
-          <Text style={[styles.availableText, { fontWeight: '300' }]}>Shipping date subject to change.</Text>
+          <Text style={[styles.availableText, { fontWeight: '300' }]}>Available in-store on {dateRelease}</Text>
         </View>
       </View>
     );
@@ -275,15 +338,32 @@ class CostPlansScreen extends Component {
 
   renderContent() {
     const { costplans } = this.props;
+    const { viewMoreInsurance, viewMorePlans } = this.state;
+
+    let viewMorePlansText = viewMorePlans ? "- Collapse" : "+ View more plans";
+    let showPlans = viewMorePlans;
 
     if (Object.keys(costplans).length === 0 && costplans.constructor === Object) {
       return ( <CostPlansSkeleton /> );
     } else {
       return (
         <View style={styles.costPlansBox}>
+          { this.renderStorage() }
           { this.renderCostNext() }
-          { this.renderCostNextYear() }
-          { this.renderCostNoContract() }
+
+          { showPlans &&
+            <View>
+              { this.renderCostNextYear() }
+              { this.renderCostNoContract() }
+            </View>
+          }
+
+          <TouchableWithoutFeedback onPress={this.toggleViewMorePlans}>
+            <View style={styles.contentReadMore}>
+              <Text style={styles.textReadMore}>{viewMorePlansText}</Text>
+            </View>
+          </TouchableWithoutFeedback>
+
           { this.renderShippingInfo() }
           { this.renderDeviceProtection() }
         </View>

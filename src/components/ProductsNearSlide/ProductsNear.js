@@ -64,26 +64,26 @@ class ProductsNear extends Component {
                   <View style={styles.itemContainer} key={index}>
                     <View style={styles.itemBox}>
                       <View style={styles.imageBox}>
-                        <Image style={styles.itemImage} resizeMode={Image.resizeMode.contain} source={{ uri: matching[productId].img }} />
+                        <Image style={styles.itemImage} resizeMode={Image.resizeMode.contain} source={{ uri: matching[productId] ? matching[productId].img : "" }} />
                       </View>
 
                       <View style={styles.detailsBox}>
-                        <Text numberOfLines={1} style={styles.titleItem}>{matching[productId].manufacture} {matching[productId].model}</Text>
+                        <Text numberOfLines={1} style={styles.titleItem}>{matching[productId] ? matching[productId].manufacture + " " + matching[productId].model : ""}</Text>
 
                         <View style={styles.hrDivider}></View>
 
                         <View style={styles.deviceOptionsBox}>
                           <View style={styles.deviceOptionItem}>
                             <Icon height="14" width="14" name="Storage" viewBox="0 0 24 24" />
-                            <Text style={styles.deviceOptionText}>{matching[productId].deviceOptions[0].storage}GB</Text>
+                            <Text style={styles.deviceOptionText}>{matching[productId] ? matching[productId].deviceOptions[0].storage : 0}GB</Text>
                           </View>
                           <View style={styles.deviceOptionItem}>
                             <Icon height="14" width="14" name="BatteryInclined" viewBox="0 0 20 20" />
-                            <Text style={styles.deviceOptionText}>{matching[productId].battery.life.video.replace(' ', '')}</Text>
+                            <Text style={styles.deviceOptionText}>{matching[productId] ? matching[productId].battery.life.video.replace(' ', '') : 0}</Text>
                           </View>
                           <View style={styles.deviceOptionItem}>
                             <Icon height="14" width="14" name="Camera" viewBox="0 0 24 24" />
-                            <Text style={styles.deviceOptionText}>{matching[productId].camera.front.sensor} + {matching[productId].camera.rear.sensor}</Text>
+                            <Text style={styles.deviceOptionText}>{matching[productId] ? matching[productId].camera.front.sensor + " " + matching[productId].camera.rear.sensor : ""}</Text>
                           </View>
                         </View>
 
