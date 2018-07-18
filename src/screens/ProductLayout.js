@@ -164,6 +164,7 @@ class ProductLayoutScreen extends Component {
     count++;
     this.props.dispatch(setLocationData(count%2 === 0 ? data : data1));
   }
+
   render() {
     const { productsNear } = this.props;
 
