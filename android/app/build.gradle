@@ -95,7 +95,7 @@ def enableProguardInReleaseBuilds = false
 
 android {
   compileSdkVersion 25
-  buildToolsVersion "23.0.1"
+  buildToolsVersion '27.0.3'
 
   defaultConfig {
     applicationId "com.retailcompanion"
@@ -148,7 +148,6 @@ dependencies {
   implementation project(':react-native-linear-gradient')
   implementation project(':react-native-walkbase-engage')
   implementation project(':react-native-svg')
-  implementation project(':react-native-spinkit')
   implementation fileTree(dir: "libs", include: ["*.jar"])
   implementation "com.facebook.react:react-native:+"  // From node_modules
 
