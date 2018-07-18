@@ -17,6 +17,7 @@ import SkeletonLoading from './components/SkeletonLoading';
 import CustomerReview from './components/CustomerReview';
 import WebReview from './components/WebReview';
 import VideoContent from './components/VideoContent';
+import FeedbackSurvey from './components/FeedbackSurvey';
 
 // My Actions
 import { updateHeaderNav } from '../actions/Common';
@@ -45,33 +46,31 @@ class ReviewsScreen extends Component {
     super(props);
 
     handleScroll = (event) => {
-      const { dispatch, customHeaderNav } = this.props;
-      var value = event.nativeEvent.contentOffset.y;
+      // const { dispatch, customHeaderNav } = this.props;
+      // var value = event.nativeEvent.contentOffset.y;
 
-      if ((value >= 0) && (value <= 56)) {
-        let newValue = this.setNewValue(false, 56 - value, false, 166);
-        dispatch(updateHeaderNav(newValue));
-        return;
-      } else if ((value >= 57) && (value <= 222)) {
-        let newValue = this.setNewValue(true, 0, false, 166 - (value - 56));
-        dispatch(updateHeaderNav(newValue));
-        return;
-      } else {
-        let newValue = this.setNewValue(true, 0, true, 0);
-        dispatch(updateHeaderNav(newValue));
-        return;
-      }
+      // if ((value >= 0) && (value <= 56)) {
+      //   let newValue = this.setNewValue(false, 56 - value, false, 166);
+      //   dispatch(updateHeaderNav(newValue));
+      //   return;
+      // } else if ((value >= 57) && (value <= 222)) {
+      //   let newValue = this.setNewValue(true, 0, false, 166 - (value - 56));
+      //   dispatch(updateHeaderNav(newValue));
+      //   return;
+      // } else {
+      //   let newValue = this.setNewValue(true, 0, true, 0);
+      //   dispatch(updateHeaderNav(newValue));
+      //   return;
+      // }
     };
   }
 
   setNewValue(a, b, c, d) {
     return {
-      customHeaderNav: {
-        hideHeader: a,
-        heightHeader: b,
-        hideSlide: c,
-        heightSlide: d
-      }
+      hideHeader: a,
+      heightHeader: b,
+      hideSlide: c,
+      heightSlide: d
     }
   }
 
@@ -80,16 +79,20 @@ class ReviewsScreen extends Component {
 
     if (typeof customerReviews != "undefined" && customerReviews.length > 0) {
       return (
-        <View style={[styles.cardContainer, { borderTopColor: '#1181FF' }]}>
-          <View style={styles.headerCard}>
-            <Image style={[styles.logoReview, { width: 60 }]} source={require('../assets/images/files/myAtt.jpg')} />
-            <Text style={[styles.titleReview, { marginTop: -4 }]}>Customer Reviews</Text>
-          </View>
+        <View>
+          <Text style={styles.webReviewTitle}>Reviews from myAT&T</Text>
 
-          { customerReviews.map((item, index) => {
-              return <CustomerReview key={index} index={index} item={item} />;
-            })
-          }
+          <View style={[styles.cardContainer, { borderTopColor: '#1181FF' }]}>
+            <View style={styles.headerCard}>
+              <Image style={[styles.logoReview, { width: 60 }]} source={require('../assets/images/files/myAtt.jpg')} />
+              <Text style={[styles.titleReview, { marginTop: -4 }]}>Customer Reviews</Text>
+            </View>
+
+            { customerReviews.map((item, index) => {
+                return <CustomerReview key={index} index={index} item={item} />;
+              })
+            }
+          </View>
         </View>
       );
     }
@@ -101,8 +104,6 @@ class ReviewsScreen extends Component {
     if (typeof webReviews != "undefined" && webReviews.length > 0) {
       return (
         <View>
-          <Text style={styles.webReviewTitle}>Reviews from around the web</Text>
-
           { webReviews.map((item, index) => {
               return <WebReview key={index} index={index} item={item} />;
             })
@@ -140,8 +141,8 @@ class ReviewsScreen extends Component {
             <Text style={styles.textSubtitle}>Read what the reviews are saying.</Text>
           </View>
 
-          { this.renderCustomerReviews() }
           { this.renderWebReviews() }
+          { this.renderCustomerReviews() }
           { this.renderVideoContent() }
         </View>
       );
@@ -152,6 +153,7 @@ class ReviewsScreen extends Component {
     return (
       <ScrollView contentContainerStyle={styles.container} onScroll={handleScroll.bind(this)} scrollEventThrottle={16}>
         { this.renderContent() }
+        <FeedbackSurvey />
       </ScrollView>
     );
   }

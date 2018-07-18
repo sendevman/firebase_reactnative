@@ -5,13 +5,14 @@
  */
 
 import React, { Component } from 'react';
-import { Alert, Modal, Text, TouchableOpacity, View} from 'react-native';
+import { Alert, Modal, Text, TouchableOpacity, View, Platform } from 'react-native';
 
 // My Styles
 import styles from './OnBoardingModalCss';
 
 // My Customs
 import Icon from '../../assets/images/Icon';
+import OpenSettings from 'react-native-open-settings';
 
 // My Actions
 import { updateBluetoothIsOn } from '../../actions/Common';
@@ -49,8 +50,9 @@ class OnBoardingModal extends Component {
                   'Turn On Bluetooth To Allow "AT&T Retail Companion" to Connect to Accessories',
                   'Go to Allow Action!',
                   [
-                    {text: 'Settings', onPress: () => dispatch(updateBluetoothIsOn(true))},
-                    {text: 'Cancel', onPress: () => console.log('Go to Cancel'), style: 'cancel'}
+                    { text: 'Settings', onPress: () => OpenSettings.openSettings()},
+                    // { text: 'Settings', onPress: () => Platform.OS == 'ios' ? OpenSettings.openBluetooth(): OpenSettings.OpenSettings() },
+                    { text: 'Cancel', onPress: () => console.log('Go to Cancel'), style: 'cancel' }
                   ],
                   { cancelable: false }
                 )}>
