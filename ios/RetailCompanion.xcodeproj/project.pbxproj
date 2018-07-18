@@ -43,8 +43,9 @@
 		CDC9DF023B8D4BCEAAAD325C /* Rubik-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8174F01626CE47B985412E3A /* Rubik-BlackItalic.ttf */; };
 		DC99C4B4C694441DAECE716B /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B8AD524A95FC4A52A34079FF /* Entypo.ttf */; };
 		DCA8F8620A1342CDB0045381 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 39F592C9C86B4521AB72E84E /* Octicons.ttf */; };
+		E16A6FFF20FEEAFE0091DCE2 /* libBleManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E16A6FFE20FEEA2E0091DCE2 /* libBleManager.a */; };
+		E16A700620FEF20F0091DCE2 /* libRCTSystemSetting.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E16A700520FEF1FE0091DCE2 /* libRCTSystemSetting.a */; };
 		E17D7E5920F3E86000636553 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E17D7E5820F3E86000636553 /* GoogleService-Info.plist */; };
-		E195E8F720F7583E00695497 /* libBleManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E195E8F620F7571D00695497 /* libBleManager.a */; };
 		E195E90120F7593D00695497 /* libRNSpinkit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E195E8FE20F7592E00695497 /* libRNSpinkit.a */; };
 		E1B4234320EFCC6A00D41C62 /* libReact Native Open Settings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E1B4234220EFB4F800D41C62 /* libReact Native Open Settings.a */; };
 		E1FC9B4D20EE707800D49522 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1FC9B4B20EE707700D49522 /* CoreBluetooth.framework */; };
@@ -362,6 +363,20 @@
 			remoteGlobalIDString = 5DBEB1501B18CEA900B34395;
 			remoteInfo = RNVectorIcons;
 		};
+		E16A6FFD20FEEA2E0091DCE2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E16A6FF920FEEA2E0091DCE2 /* BleManager.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = BleManager;
+		};
+		E16A700420FEF1FE0091DCE2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E16A700020FEF1FD0091DCE2 /* RCTSystemSetting.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 30D12B621EDC0C3A00775BF0;
+			remoteInfo = RCTSystemSetting;
+		};
 		E17D7F8920F49C9900636553 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9C29040D5EAB40B48A02706B /* RNFirebase.xcodeproj */;
@@ -382,13 +397,6 @@
 			proxyType = 2;
 			remoteGlobalIDString = 18F3BFD71A81E06E00692297;
 			remoteInfo = "CocoaLumberjack-iOS-Static";
-		};
-		E195E8F520F7571D00695497 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E195E8F120F7571D00695497 /* BleManager.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 134814201AA4EA6300B7C361;
-			remoteInfo = BleManager;
 		};
 		E195E8FD20F7592E00695497 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -468,8 +476,9 @@
 		DAB3719094E141409B187CBA /* SF-Pro-Text.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Text.ttf"; path = "../app/fonts/SF-Pro-Text.ttf"; sourceTree = "<group>"; };
 		DECDDA4AA7E549C2BF7F800B /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
 		E03F47821E9A4A8D96924417 /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
+		E16A6FF920FEEA2E0091DCE2 /* BleManager.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BleManager.xcodeproj; path = "../node_modules/react-native-ble-manager/ios/BleManager.xcodeproj"; sourceTree = "<group>"; };
+		E16A700020FEF1FD0091DCE2 /* RCTSystemSetting.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSystemSetting.xcodeproj; path = "../node_modules/react-native-system-setting/ios/RCTSystemSetting.xcodeproj"; sourceTree = "<group>"; };
 		E17D7E5820F3E86000636553 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		E195E8F120F7571D00695497 /* BleManager.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BleManager.xcodeproj; path = "../node_modules/react-native-ble-manager/ios/BleManager.xcodeproj"; sourceTree = "<group>"; };
 		E195E8F820F7592D00695497 /* RNSpinkit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNSpinkit.xcodeproj; path = "../node_modules/react-native-spinkit/ios/RNSpinkit.xcodeproj"; sourceTree = "<group>"; };
 		E1FC9B4B20EE707700D49522 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		E1FC9B4C20EE707700D49522 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -503,8 +512,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E16A700620FEF20F0091DCE2 /* libRCTSystemSetting.a in Frameworks */,
+				E16A6FFF20FEEAFE0091DCE2 /* libBleManager.a in Frameworks */,
 				E195E90120F7593D00695497 /* libRNSpinkit.a in Frameworks */,
-				E195E8F720F7583E00695497 /* libBleManager.a in Frameworks */,
 				E1B4234320EFCC6A00D41C62 /* libReact Native Open Settings.a in Frameworks */,
 				E1FC9B5420EE710700D49522 /* AdSupport.framework in Frameworks */,
 				E1FC9B5620EE718200D49522 /* WalkbaseEngageSDK.framework in Frameworks */,
@@ -740,8 +750,9 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				E16A700020FEF1FD0091DCE2 /* RCTSystemSetting.xcodeproj */,
+				E16A6FF920FEEA2E0091DCE2 /* BleManager.xcodeproj */,
 				E195E8F820F7592D00695497 /* RNSpinkit.xcodeproj */,
-				E195E8F120F7571D00695497 /* BleManager.xcodeproj */,
 				5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
 				00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */,
@@ -845,6 +856,22 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		E16A6FFA20FEEA2E0091DCE2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E16A6FFE20FEEA2E0091DCE2 /* libBleManager.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E16A700120FEF1FD0091DCE2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E16A700520FEF1FE0091DCE2 /* libRCTSystemSetting.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		E17D7F8620F49C9900636553 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -857,14 +884,6 @@
 			isa = PBXGroup;
 			children = (
 				E195E8C420F756E500695497 /* libCocoaLumberjack.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		E195E8F220F7571D00695497 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				E195E8F620F7571D00695497 /* libBleManager.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -919,7 +938,7 @@
 				ORGANIZATIONNAME = Facebook;
 				TargetAttributes = {
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = Y99QWNW447;
+						DevelopmentTeam = E7J65AP6DQ;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = true;
@@ -941,8 +960,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = E195E8F220F7571D00695497 /* Products */;
-					ProjectRef = E195E8F120F7571D00695497 /* BleManager.xcodeproj */;
+					ProductGroup = E16A6FFA20FEEA2E0091DCE2 /* Products */;
+					ProjectRef = E16A6FF920FEEA2E0091DCE2 /* BleManager.xcodeproj */;
 				},
 				{
 					ProductGroup = E1621E9220E15EB600776A66 /* Products */;
@@ -983,6 +1002,10 @@
 				{
 					ProductGroup = 139105B71AF99BAD00B5F7CC /* Products */;
 					ProjectRef = 139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */;
+				},
+				{
+					ProductGroup = E16A700120FEF1FD0091DCE2 /* Products */;
+					ProjectRef = E16A700020FEF1FD0091DCE2 /* RCTSystemSetting.xcodeproj */;
 				},
 				{
 					ProductGroup = 832341B11AAA6A8300B99B32 /* Products */;
@@ -1316,6 +1339,20 @@
 			remoteRef = E1621E9D20E15EB600776A66 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		E16A6FFE20FEEA2E0091DCE2 /* libBleManager.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libBleManager.a;
+			remoteRef = E16A6FFD20FEEA2E0091DCE2 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		E16A700520FEF1FE0091DCE2 /* libRCTSystemSetting.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTSystemSetting.a;
+			remoteRef = E16A700420FEF1FE0091DCE2 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		E17D7F8A20F49C9900636553 /* libRNFirebase.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1335,13 +1372,6 @@
 			fileType = archive.ar;
 			path = libCocoaLumberjack.a;
 			remoteRef = E195E8C320F756E500695497 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		E195E8F620F7571D00695497 /* libBleManager.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libBleManager.a;
-			remoteRef = E195E8F520F7571D00695497 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		E195E8FE20F7592E00695497 /* libRNSpinkit.a */ = {
@@ -1499,7 +1529,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = Y99QWNW447;
+				DEVELOPMENT_TEAM = E7J65AP6DQ;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1539,7 +1569,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Y99QWNW447;
+				DEVELOPMENT_TEAM = E7J65AP6DQ;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
