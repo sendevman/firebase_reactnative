@@ -46,7 +46,7 @@ class ProductsNear extends Component {
     return (
       <View>
         {
-          customHeaderNav.heightScrolled ?
+          false ?
             <LinearGradient colors={['#2b3748', '#43597D']} height={100}>
               <TouchableOpacity onPress={this.props.zone}>
                 <Text style={styles.title}>PRODUCTS NEAR YOU ({(position && position.zone_id) ? position.zone_id : '---'})</Text>
@@ -163,7 +163,7 @@ class ProductsNear extends Component {
 const mapStateToProps = state => {
   const { current, common } = state;
 
-  return { areaData: current.allAreas[0], position: current.postition, customHeaderNav: common.customHeaderNav || {} };
+  return { areaData: current.allAreas[0], position: current.postition,  };
 }
 
 export default connect(mapStateToProps)(ProductsNear);
