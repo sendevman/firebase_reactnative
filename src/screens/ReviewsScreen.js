@@ -64,12 +64,12 @@ class ReviewsScreen extends Component {
     // if (!customHeaderNav.heightScrolled && value > 60) {
     if (value > 10) {
       let newValue = this.setNewValue(false, 0, false, 0, true);
-      dispatch(updateHeaderNav(newValue));
+      // dispatch(updateHeaderNav(newValue));
     }
     // if (customHeaderNav.heightScrolled && value < 60) {
     if (value <= 0) {
       let newValue = this.setNewValue(false, 0, false, 0, false);
-      dispatch(updateHeaderNav(newValue));
+      // dispatch(updateHeaderNav(newValue));
     }
     //   if ((value >= 0) && (value <= 56)) {
     //     let newValue = this.setNewValue(false, 56 - value, false, 166);
@@ -160,7 +160,7 @@ class ReviewsScreen extends Component {
 
   render() {
     return (
-      <ScrollView contentContainerStyle={styles.container} onScroll={this.handleScroll.bind(this)} scrollEventThrottle={16}>
+      <ScrollView contentContainerStyle={styles.container} scrollEventThrottle={16}>
         { this.renderContent() }
         <FeedbackSurvey />
       </ScrollView>
