@@ -38,10 +38,7 @@ const MyNavScreen = ({ navigation, banner }) => (
       <SafeAreaView forceInset={{ top: 'always' }}>
         <Text style={{ fontSize: 14 }}>{banner}</Text>
         <Button onPress={() => navigation.openDrawer()} title="Open drawer" />
-        <Button
-          onPress={() => navigation.navigate('Email')}
-          title="Open other screen"
-        />
+        <Text style={{ fontSize: 14}}></Text>
         <Button onPress={() => navigation.goBack(null)} title="Go back" />
       </SafeAreaView>
       <StatusBar barStyle="default" />
@@ -74,6 +71,12 @@ const DebugViews = () => (
 const SharedSession = ({ navigation }) => (
   <MyNavScreen banner={'Shared Session'} navigation={navigation} />
 );
+
+class Hidden extends Component {
+  render() {
+    return null;
+  }
+}
 
 const BottomTabNav = createBottomTabNavigator(
   {
@@ -109,7 +112,7 @@ const BottomTabNav = createBottomTabNavigator(
             return <Icon name="ExclusiveVodFill" width="22" height="18" viewBox="0 0 22 18" />;
         }
       }
-    },
+    }/*,
     SharedSession: {
       screen: SharedSession,
       navigationOptions: {
@@ -118,7 +121,7 @@ const BottomTabNav = createBottomTabNavigator(
           return <Icon name="SharedSession" width="22" height="22" fill={tintColor} viewBox="0 0 22 22" />;
         }
       }
-    }
+    }*/
   },
   {
     initialRouteName: 'Products',
@@ -130,7 +133,7 @@ const BottomTabNav = createBottomTabNavigator(
       labelStyle: {
         marginTop: -4,
         marginBottom: 8,
-        fontFamily: 'SF Pro Text',
+        // fontFamily: 'SF Pro Text',
         fontSize: 11,
         fontWeight: '500',
         letterSpacing: 0.13,
@@ -143,9 +146,9 @@ const BottomTabNav = createBottomTabNavigator(
 
 const DrawerNav = createDrawerNavigator(
   {
-    Home: {
+    Shopping: {
       screen: BottomTabNav,
-      navigationOptions: { title: 'Home' }
+      navigationOptions: { title: 'Shopping' }
     },
     AboutRetailCompanion: {
       screen: AboutRetailCompanion,
@@ -159,10 +162,6 @@ const DrawerNav = createDrawerNavigator(
       screen: Events,
       navigationOptions: { title: 'Events' }
     },
-    OnBoarding: {
-      screen: OnBoardingLayout,
-      navigationOptions: { title: 'OnBoarding' }
-    },
     AccountSettings: {
       screen: AccountSettings,
       navigationOptions: {
@@ -174,10 +173,17 @@ const DrawerNav = createDrawerNavigator(
     },
     DebugViews: {
       screen: DebugViews
+    },
+    OnBoarding: {
+      screen: OnBoardingLayout,
+      navigationOptions: {
+        title: 'OnBoarding',
+        drawerLabel: <Hidden />
+      }
     }
   },
   {
-    initialRouteName: 'Home',
+    initialRouteName: 'OnBoarding',
     contentOptions: {
       activeTintColor: '#1181FF',
       activeBackgroundColor: '#EEF1F4',

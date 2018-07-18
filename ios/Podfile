@@ -8,5 +8,4 @@ pod 'Firebase/Core'
 pod 'Firebase/Firestore'
 pod 'Firebase/Storage'
   pod 'RCTSystemSetting', :path => '../node_modules/react-native-system-setting'
-
 end

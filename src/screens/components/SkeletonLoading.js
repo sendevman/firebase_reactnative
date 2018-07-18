@@ -5,7 +5,7 @@
  */
 
 import React, { Component } from 'react';
-import { Animated } from 'react-native';
+import { Animated, Dimensions } from 'react-native';
 import PropTypes from 'prop-types';
 import {
   Svg, Circle, ClipPath, Defs, Ellipse, G,
@@ -13,6 +13,8 @@ import {
   Polyline, RadialGradient, Rect, Stop, Symbol,
   Text, TextPath, TSpan, Use
 } from 'react-native-svg';
+
+var { width } = Dimensions.get('window');
 
 const AnimatedSvg = Animated.createAnimatedComponent(Svg);
 const { interpolate } = require('d3-interpolate');
@@ -154,7 +156,7 @@ SkeletonLoading.defaultProps = {
   primaryColor: '#eeeeee',
   secondaryColor: '#dddddd',
   duration: 2000,
-  width: 300,
+  width: width - 20,
   height: 200,
   x1: '0',
   y1: '0',

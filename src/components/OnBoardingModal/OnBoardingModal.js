@@ -14,13 +14,16 @@ import styles from './OnBoardingModalCss';
 import Icon from '../../assets/images/Icon';
 import OpenSettings from 'react-native-open-settings';
 
+// My Actions
+import { updateBluetoothIsOn } from '../../actions/Common';
+
 class OnBoardingModal extends Component {
   constructor(props) {
     super(props);
   };
 
   render() {
-    const { onHideModal, showModal } = this.props;
+    const { dispatch, onHideModal, showModal } = this.props;
 
     return (
       <Modal

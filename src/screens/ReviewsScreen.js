@@ -5,7 +5,7 @@
  */
 
 import React, { Component } from 'react';
-import { Image, ScrollView, Text, View } from 'react-native';
+import { Dimensions, Image, ScrollView, Text, View } from 'react-native';
 import Svg, { Rect } from 'react-native-svg';
 import { connect } from 'react-redux';
 
@@ -17,15 +17,22 @@ import SkeletonLoading from './components/SkeletonLoading';
 import CustomerReview from './components/CustomerReview';
 import WebReview from './components/WebReview';
 import VideoContent from './components/VideoContent';
+import FeedbackSurvey from './components/FeedbackSurvey';
 
 // My Actions
 import { updateHeaderNav } from '../actions/Common';
 
+var { width } = Dimensions.get('window');
+
+const getWidth = (number) => {
+  return (((width - 20)/2) - number);
+};
+
 const ReviewsSkeleton = () => (
   <View style={styles.skeletonLoading}>
     <SkeletonLoading height={235}>
-      <Rect x="50" y="0" rx="3" ry="3" width="200" height="10"/>
-      <Rect x="60" y="15" rx="3" ry="3" width="180" height="10"/>
+      <Rect x={getWidth(100)} y="0" rx="3" ry="3" width="200" height="10"/>
+      <Rect x={getWidth(90)} y="15" rx="3" ry="3" width="180" height="10"/>
       <Rect x="0" y="40" rx="5" ry="5" width="100%" height="80"/>
 
       <Rect x="0" y="130" rx="3" ry="3" width="120" height="10"/>
@@ -60,12 +67,10 @@ class ReviewsScreen extends Component {
 
   setNewValue(a, b, c, d) {
     return {
-      customHeaderNav: {
-        hideHeader: a,
-        heightHeader: b,
-        hideSlide: c,
-        heightSlide: d
-      }
+      hideHeader: a,
+      heightHeader: b,
+      hideSlide: c,
+      heightSlide: d
     }
   }
 
@@ -74,16 +79,20 @@ class ReviewsScreen extends Component {
 
     if (typeof customerReviews != "undefined" && customerReviews.length > 0) {
       return (
-        <View style={[styles.cardContainer, { borderTopColor: '#1181FF' }]}>
-          <View style={styles.headerCard}>
-            <Image style={[styles.logoReview, { width: 60 }]} source={require('../assets/images/files/myAtt.jpg')} />
-            <Text style={[styles.titleReview, { marginTop: -4 }]}>Customer Reviews</Text>
-          </View>
+        <View>
+          <Text style={styles.webReviewTitle}>Reviews from myAT&T</Text>
 
-          { customerReviews.map((item, index) => {
-              return <CustomerReview key={index} index={index} item={item} />;
-            })
-          }
+          <View style={[styles.cardContainer, { borderTopColor: '#1181FF' }]}>
+            <View style={styles.headerCard}>
+              <Image style={[styles.logoReview, { width: 60 }]} source={require('../assets/images/files/myAtt.jpg')} />
+              <Text style={[styles.titleReview, { marginTop: -4 }]}>Customer Reviews</Text>
+            </View>
+
+            { customerReviews.map((item, index) => {
+                return <CustomerReview key={index} index={index} item={item} />;
+              })
+            }
+          </View>
         </View>
       );
     }
@@ -95,8 +104,6 @@ class ReviewsScreen extends Component {
     if (typeof webReviews != "undefined" && webReviews.length > 0) {
       return (
         <View>
-          <Text style={styles.webReviewTitle}>Reviews from around the web</Text>
-
           { webReviews.map((item, index) => {
               return <WebReview key={index} index={index} item={item} />;
             })
@@ -134,8 +141,8 @@ class ReviewsScreen extends Component {
             <Text style={styles.textSubtitle}>Read what the reviews are saying.</Text>
           </View>
 
-          { this.renderCustomerReviews() }
           { this.renderWebReviews() }
+          { this.renderCustomerReviews() }
           { this.renderVideoContent() }
         </View>
       );
@@ -146,6 +153,7 @@ class ReviewsScreen extends Component {
     return (
       <ScrollView contentContainerStyle={styles.container} onScroll={handleScroll.bind(this)} scrollEventThrottle={16}>
         { this.renderContent() }
+        <FeedbackSurvey />
       </ScrollView>
     );
   }

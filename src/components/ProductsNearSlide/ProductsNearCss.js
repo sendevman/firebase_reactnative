@@ -19,7 +19,11 @@ export default StyleSheet.create({
     marginBottom: 6,
     paddingHorizontal: 14
   },
-  itemContainer: { paddingHorizontal: 10 },
+  itemContainer: {
+    paddingHorizontal: 10,
+    flexDirection: 'column',
+    alignItems: 'center'
+  },
   itemBox: {
     backgroundColor: '#FFF',
     height: 120,
@@ -50,7 +54,14 @@ export default StyleSheet.create({
     borderColor: '#E3E9EF',
     borderRadius: 6,
     paddingTop: 14,
-    paddingHorizontal: 8
+    paddingHorizontal: 8,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  itemImage: {
+    borderRadius: 6,
+    height: '100%',
+    width: 98
   },
   detailsBox: {
     flex: 1,
@@ -85,11 +96,5 @@ export default StyleSheet.create({
     fontSize: 13,
     lineHeight: 15,
     marginLeft: 3
-  },
-  testpart1: {
-    color: '#ffffff',
-    fontSize: 11,
-    marginLeft: 10,
-    paddingTop: 3
   }
 });
