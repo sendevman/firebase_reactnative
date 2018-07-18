@@ -138,6 +138,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-system-setting')
   implementation project(':react-native-spinkit')
   implementation(project(':react-native-firebase')) {
     transitive = false
