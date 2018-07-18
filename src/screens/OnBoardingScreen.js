@@ -149,8 +149,7 @@ class OnBoardingScreen extends Component {
   showModal = () => { this.setState({ showModal: true }); }
 
   goProduct = () => {
-    alert('ble allowed')
-    // this.props.navigation.navigate('Products');
+    this.props.navigation.navigate('Home');
   }
 
   onShowModal = () => {
