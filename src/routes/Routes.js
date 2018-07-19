@@ -27,6 +27,8 @@ import { setLocationData } from '../actions/Current';
 
 // Walkbase Engage
 import BleManager from 'react-native-ble-manager';
+var DeviceInfo = require('react-native-device-info');
+const deviceId = DeviceInfo.getUniqueID();
 const BleManagerModule = NativeModules.BleManager;
 const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
 const ws = new WebSocket('wss://wai.walkbase.com/api/v2/subscribe/device');
@@ -267,9 +269,10 @@ class Routes extends Component {
   }
 
   webAPI() {
+    console.log(deviceId + "-----");
     ws.onopen = () => {
       // connection opened
-      ws.send('{"user_id": "office_dev", "api_key": "VZHkscRFhAjkScc"}'); // send a message
+      ws.send('{"user_id": "' + deviceId + '", "api_key": "VZHkscRFhAjkScc"}'); // send a message
     };
 
     var iii = 0;
