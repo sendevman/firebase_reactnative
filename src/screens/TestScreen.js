@@ -8,6 +8,8 @@ import React, { Component } from 'react';
 import { ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 import { connect } from 'react-redux';
+var DeviceInfo = require('react-native-device-info');
+const deviceId = DeviceInfo.getUniqueID();
 
 class TestScreen extends Component {
   render() {
@@ -22,6 +24,7 @@ class TestScreen extends Component {
             <Text>Floor ID  : {bledata.floor_id}</Text>
             <Text>Zone ID   : {bledata.zone_id}</Text>
             <Text>Time      : {bledata.ts}</Text>
+            <Text>Device ID : {deviceId}</Text>
           </ScrollView>
         </View>
     );
