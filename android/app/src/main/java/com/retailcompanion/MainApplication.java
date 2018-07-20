@@ -17,18 +17,11 @@ import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
-import com.reactlibrary.RNWalkbaseEngagePackage;
 
 import java.util.Arrays;
 import java.util.List;
 
 public class MainApplication extends Application implements ReactApplication {
-
-  private int PERMISSIONS_REQUEST_CODE = 1111;
-  //private val apiKey = "your api key goes here"
-  private String apiKey = "VZHkscRFhAjkScc";//"fiskpinnar"
-  private String TAG = "MainActivity";
-  private RNWalkbaseEngagePackage walkbase;
   private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
     @Override
     public boolean getUseDeveloperSupport() {
@@ -48,8 +41,7 @@ public class MainApplication extends Application implements ReactApplication {
             new RNFirebasePackage(),
 //            new RNBackgroundGeolocation(),
             new RNFirebaseFirestorePackage(),
-            new OpenSettingsPackage(),
-            new RNWalkbaseEngagePackage()
+            new OpenSettingsPackage()
       );
     }
 
