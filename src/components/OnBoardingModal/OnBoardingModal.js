@@ -12,7 +12,7 @@ import styles from './OnBoardingModalCss';
 
 // My Customs
 import Icon from '../../assets/images/Icon';
-import OpenSettings from 'react-native-open-settings';
+import OpenSettings from 'open-settings';
 
 // My Actions
 import { updateBluetoothIsOn } from '../../actions/Common';

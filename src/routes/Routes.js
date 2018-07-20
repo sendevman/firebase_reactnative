@@ -26,7 +26,7 @@ import TestScreen from '../screens/TestScreen';
 import { setLocationData } from '../actions/Current';
 
 // Walkbase Engage
-import BleManager from 'react-native-ble-manager';
+import BleManager from 'walkbase-sdk';
 var DeviceInfo = require('react-native-device-info');
 const deviceId = DeviceInfo.getUniqueID();
 const BleManagerModule = NativeModules.BleManager;
