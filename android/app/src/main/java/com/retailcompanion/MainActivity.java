@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-
+import android.provider.Settings.Secure;
 import com.facebook.react.ReactActivity;
 import com.walkbase.sdk.WalkbaseManager;
 
@@ -16,6 +16,7 @@ public class MainActivity extends ReactActivity {
     private WalkbaseManager walkbaseManager;
     private int PERMISION_REQUEST_CODE = 1111;
     private String apiKey = "VZHkscRFhAjkScc";
+    private String android_id;
     /**
      * Returns the name of the main component registered from JavaScript.
      * This is used to schedule rendering of the component.
@@ -29,12 +30,14 @@ public class MainActivity extends ReactActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        android_id = Secure.getString(getContentResolver(),
+                Secure.ANDROID_ID);
         walkbaseManager = new WalkbaseManager(this);
         if(havePermissions() != PackageManager.PERMISSION_GRANTED) {
             requestPermissions();;
         }else{
             walkbaseManager.startWithApiKey(apiKey);
+            walkbaseManager.setUserID(android_id);
         }
     }
 
@@ -79,6 +82,7 @@ public class MainActivity extends ReactActivity {
             if (grantResults.length > 0
                     && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 walkbaseManager.startWithApiKey(apiKey);
+                walkbaseManager.setUserID(android_id);
             }else{
                 String permission = permissions[0];
                 if (shouldShowRequestPermissionRationale(permission)) {
@@ -88,5 +92,22 @@ public class MainActivity extends ReactActivity {
                 }
             }
         }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        walkbaseManager.onResume();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        walkbaseManager.onStop();
     }
 }
