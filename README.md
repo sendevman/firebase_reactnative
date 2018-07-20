@@ -9,3 +9,7 @@ Retail Companion - React Native
  * pod install
  * open the RetailCompanion.xcworkspace
  
+#### Android
+
+ * open Android studio
+ * Run
