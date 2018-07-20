@@ -20,12 +20,12 @@
   
   NSURL *jsCodeLocation;
 
-//  jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
-  #ifdef DEBUG
-    jsCodeLocation = [NSURL URLWithString:@"http://172.16.2.101:8081/index.bundle?platform=ios&dev=true"];
-  #else
-    jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
-  #endif
+  jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
+//  #ifdef DEBUG
+//    jsCodeLocation = [NSURL URLWithString:@"http://172.16.2.101:8081/index.bundle?platform=ios&dev=true"];
+//  #else
+//    jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
+//  #endif
 
 //  jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
   [FIRApp configure];
@@ -46,6 +46,8 @@
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
   [[CBCentralManager alloc] initWithDelegate:self queue:nil];
+  UIDevice *currentDevice = [UIDevice currentDevice];
+  NSString *deviceId = [[currentDevice identifierForVendor] UUIDString];
   /* Set to display extra debugging information from the Engage SDK. */
   [WBEngageManager sharedInstance].debugMode = YES;
   
@@ -53,7 +55,7 @@
   [WBEngageManager startWithAPIKey:@"VZHkscRFhAjkScc"];
   
   /* A custom user id. Setting this is optional. */
-  [WBEngageManager setUserIdentifier:@"office_dev"];
+  [WBEngageManager setUserIdentifier:deviceId];
   
 //  [WBEngageManager sharedInstance].delegate = self;
   return YES;

@@ -13,11 +13,10 @@
     "react": "16.3.1",
     "react-native": "0.55.4",
     "react-native-carousel-view": "^0.5.1",
-    "react-native-device-info": "^0.21.5",
+    "react-native-device-info": "git+https://github.com/conexusTech/react-native-device-info.git",
     "react-native-elements": "^0.19.1",
     "react-native-firebase": "^4.2.0",
     "react-native-linear-gradient": "^2.4.0",
-    "react-native-open-settings": "^1.0.1",
     "react-native-ratings": "^5.3.0",
     "react-native-spinkit": "^1.1.1",
     "react-native-svg": "^6.3.1",
@@ -30,7 +29,9 @@
     "redux": "^4.0.0",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
-    "rn-viewpager": "^1.2.9"
+    "rn-viewpager": "^1.2.9",
+    "walkbase-sdk":"git+https://github.com/conexusTech/walkbase-sdk.git",
+    "open-settings":"git+https://github.com/conexusTech/open-settings.git"
   },
   "devDependencies": {
     "babel-jest": "23.0.1",
