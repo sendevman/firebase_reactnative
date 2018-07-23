@@ -47,25 +47,6 @@ class CostPlansScreen extends Component {
       viewMoreInsurance: false,
       viewMorePlans: false
     };
-
-    handleScroll = (event) => {
-      // const { dispatch, customHeaderNav } = this.props;
-      // var value = event.nativeEvent.contentOffset.y;
-
-      // if ((value >= 0) && (value <= 56)) {
-      //   let newValue = this.setNewValue(false, 56 - value, false, 166);
-      //   dispatch(updateHeaderNav(newValue));
-      //   return;
-      // } else if ((value >= 57) && (value <= 222)) {
-      //   let newValue = this.setNewValue(true, 0, false, 166 - (value - 56));
-      //   dispatch(updateHeaderNav(newValue));
-      //   return;
-      // } else {
-      //   let newValue = this.setNewValue(true, 0, true, 0);
-      //   dispatch(updateHeaderNav(newValue));
-      //   return;
-      // }
-    };
   }
 
   toggleViewMorePlans = () => {
@@ -76,13 +57,41 @@ class CostPlansScreen extends Component {
     this.setState({ viewMoreInsurance: !this.state.viewMoreInsurance });
   }
 
-  setNewValue(a, b, c, d) {
+  setNewValue(a, b, c, d, e) {
     return {
       hideHeader: a,
       heightHeader: b,
       hideSlide: c,
-      heightSlide: d
+      heightSlide: d,
+      heightScrolled: e
     }
+  }
+
+  handleScroll(event) {
+    console.log(event, event.nativeEvent.contentOffset)
+    const { dispatch, customHeaderNav } = this.props;
+    var value = event.nativeEvent.contentOffset.y;
+
+    // if (!customHeaderNav.heightScrolled && value > 60) {
+    if (value > 10) {
+      let newValue = this.setNewValue(false, 0, false, 0, true);
+      // dispatch(updateHeaderNav(newValue));
+    }
+    // if (customHeaderNav.heightScrolled && value < 60) {
+    if (value <= 0) {
+      let newValue = this.setNewValue(false, 0, false, 0, false);
+      // dispatch(updateHeaderNav(newValue));
+    }
+    //   if ((value >= 0) && (value <= 56)) {
+    //     let newValue = this.setNewValue(false, 56 - value, false, 166);
+    //     dispatch(updateHeaderNav(newValue));
+    //   } else if ((value >= 57) && (value <= 222)) {
+    //     let newValue = this.setNewValue(true, 0, false, 166 - (value - 56));
+    //     dispatch(updateHeaderNav(newValue));
+    //   } else {
+    //     let newValue = this.setNewValue(true, 0, true, 0);
+    //     dispatch(updateHeaderNav(newValue));
+    //   }
   }
 
   setFormatToNumber(number) {
@@ -386,7 +395,7 @@ class CostPlansScreen extends Component {
 
   render() {
     return (
-      <ScrollView contentContainerStyle={styles.container} onScroll={handleScroll.bind(this)} scrollEventThrottle={16}>
+      <ScrollView contentContainerStyle={styles.container}  scrollEventThrottle={16}>
         { this.renderContent() }
         { this.renderAccessories() }
         <FeedbackSurvey />

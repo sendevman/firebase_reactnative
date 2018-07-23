@@ -170,13 +170,15 @@ class ProductLayoutScreen extends Component {
 
     return (
       <SafeAreaView forceInset={{ top: 'always' }} style={{ backgroundColor: '#FFF' }}>
-        <View style={{ marginTop: this.props.customHeaderNav.heightSlide - 166 }}>
+        {/* <View style={{ marginTop: this.props.customHeaderNav.heightSlide - 166 }}> */}
+        <View>
           <ProductsNearSlide
             onProductIdChange={productId => this.setCurrentProduct(productId)}
             currentProducts={productsNear}
             zone={this.zone.bind(this)} />
         </View>
         <View style={{ width: '100%', height: height - 244 }}>
+        {/* <View > */}
           <RoutesProducts />
         </View>
       </SafeAreaView>
