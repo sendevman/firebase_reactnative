@@ -6,7 +6,7 @@
 
 import React, { Component } from 'react';
 import moment from 'moment';
-import { Image, Text, View, YellowBox, TouchableOpacity } from 'react-native';
+import { Animated, Image, Text, View, YellowBox, TouchableOpacity } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Carousel from 'react-native-carousel-view';
 import Spinkit from 'react-native-spinkit';
@@ -22,8 +22,8 @@ import ButtonCompare from './ButtonCompare';
 YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Class RCTCxxModule']);
 
 class ProductsNear extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
   };
 
   render() {
@@ -41,6 +41,68 @@ class ProductsNear extends Component {
       matching[element] = getProduct(element);
     });
 
+    let titleItem = {
+      transform: [
+        {
+          translateX: this.props.animatedValue.interpolate({
+            inputRange: [0, 166],
+            outputRange: [0, -108],
+            extrapolate: 'clamp'
+          })
+        },
+        {
+          translateY: this.props.animatedValue.interpolate({
+            inputRange: [0, 166],
+            outputRange: [0, 34],
+            extrapolate: 'clamp'
+          })
+        }
+      ],
+      width: this.props.animatedValue.interpolate({
+        inputRange: [0, 166],
+        outputRange: [216, 206],
+        extrapolate: 'clamp'
+      })
+    };
+
+    let btnBox = {
+      transform: [
+        {
+          translateX: this.props.animatedValue.interpolate({
+            inputRange: [0, 166],
+            outputRange: [0, 92],
+            extrapolate: 'clamp'
+          })
+        },
+        {
+          translateY: this.props.animatedValue.interpolate({
+            inputRange: [0, 166],
+            outputRange: [0, -33],
+            extrapolate: 'clamp'
+          })
+        }
+      ],
+      width: this.props.animatedValue.interpolate({
+        inputRange: [0, 166],
+        outputRange: [216, 140],
+        extrapolate: 'clamp'
+      })
+    };
+
+    let fastOpacity = {
+      opacity: this.props.animatedValue.interpolate({
+        inputRange: [0, 35],
+        outputRange: [1, 0],
+        extrapolate: 'clamp'
+      })
+    };
+
+    const headerHeight = this.props.animatedValue.interpolate({
+      inputRange: [0, 166],
+      outputRange: [120, 52],
+      extrapolate: 'clamp'
+    });
+
     return (
       <LinearGradient colors={['#2b3748', '#43597D']} height={166}>
         <TouchableOpacity onPress={this.props.zone}>
@@ -49,7 +111,7 @@ class ProductsNear extends Component {
         { (currentProducts || []).length > 0 ?
             <Carousel
               animate={false}
-              height={136}
+              // height={136}
               indicatorOffset={4}
               indicatorColor={'#FFF'}
               indicatorSize={6}
@@ -62,17 +124,17 @@ class ProductsNear extends Component {
             >
               { (areaData.products || []).map((productId, index) => (
                   <View style={styles.itemContainer} key={index}>
-                    <View style={styles.itemBox}>
-                      <View style={styles.imageBox}>
+                    <Animated.View style={[styles.itemBox, { height: headerHeight }]}>
+                      <Animated.View style={[styles.imageBox, fastOpacity]}>
                         <Image style={styles.itemImage} resizeMode={Image.resizeMode.contain} source={{ uri: matching[productId] ? matching[productId].img : "" }} />
-                      </View>
+                      </Animated.View>
 
                       <View style={styles.detailsBox}>
-                        <Text numberOfLines={1} style={styles.titleItem}>{matching[productId] ? matching[productId].manufacture + " " + matching[productId].model : ""}</Text>
+                        <Animated.Text numberOfLines={1} style={[styles.titleItem, titleItem]}>{matching[productId] ? matching[productId].manufacture + " " + matching[productId].model : ""}</Animated.Text>
 
-                        <View style={styles.hrDivider}></View>
+                        <Animated.View style={[styles.hrDivider, fastOpacity]}></Animated.View>
 
-                        <View style={styles.deviceOptionsBox}>
+                        <Animated.View style={[styles.deviceOptionsBox, fastOpacity]}>
                           <View style={styles.deviceOptionItem}>
                             <Icon height="14" width="14" name="Storage" viewBox="0 0 24 24" />
                             <Text style={styles.deviceOptionText}>{matching[productId] ? matching[productId].deviceOptions[0].storage : 0}GB</Text>
@@ -85,11 +147,13 @@ class ProductsNear extends Component {
                             <Icon height="14" width="14" name="Camera" viewBox="0 0 24 24" />
                             <Text style={styles.deviceOptionText}>{matching[productId] ? matching[productId].camera.front.sensor + " " + matching[productId].camera.rear.sensor : ""}</Text>
                           </View>
-                        </View>
+                        </Animated.View>
 
-                        <ButtonCompare />
+                        <Animated.View style={[ btnBox ]}>
+                          <ButtonCompare />
+                        </Animated.View>
                       </View>
-                    </View>
+                    </Animated.View>
                   </View>
                 ))
               }

@@ -5,7 +5,7 @@
  */
 
 import React, { Component } from 'react';
-import { Dimensions, Image, ScrollView, Text, View } from 'react-native';
+import { Animated, Dimensions, Image, ScrollView, Text, View } from 'react-native';
 import Svg, { Rect } from 'react-native-svg';
 import LinearGradient from 'react-native-linear-gradient';
 import { connect } from 'react-redux';
@@ -397,11 +397,22 @@ class InfoSpecsScreen extends Component {
 
   render() {
     return (
-      <ScrollView contentContainerStyle={styles.container} onScroll={handleScroll.bind(this)} scrollEventThrottle={16}>
+      <Animated.ScrollView contentContainerStyle={styles.container} scrollEventThrottle={1}
+        onScroll={Animated.event(
+          [{ nativeEvent: { contentOffset: { y: this.props.onScrollCustom } } }],
+          {
+            /*useNativeDriver: true*//*,
+            listener: event => {
+              const offsetY = event.nativeEvent.contentOffset.y
+              this.props.onScrollCustom(offsetY);
+            }*/
+          }
+        )}
+        >
         { this.renderContent() }
         { this.renderAccessories() }
         <FeedbackSurvey />
-      </ScrollView>
+      </Animated.ScrollView>
     );
   }
 }

@@ -30,7 +30,9 @@ class ProductLayoutScreen extends Component {
   constructor(props) {
     super(props);
 
-    this._animatedValue = new Animated.Value(0);
+    this.state = {
+      animatedValue: new Animated.Value(0)
+    }
   }
 
   getProductID(zone_id) {
@@ -100,20 +102,6 @@ class ProductLayoutScreen extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    /*if (this.props.customHeaderNav !== nextProps.customHeaderNav) {
-      const HEADER_MAX_HEIGHT = nextProps.customHeaderNav.heightHeader
-      const HEADER_MIN_HEIGHT = 0
-      const HEADER_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT
-
-      this.props.navigation.setParams({
-        heightHeader: this._animatedValue.interpolate({
-          inputRange: [0, HEADER_DISTANCE],
-          outputRange: [HEADER_MAX_HEIGHT, HEADER_MIN_HEIGHT],
-          extrapolate: 'clamp'
-        })
-      });
-    }*/
-
     if (this.props.locationData.zone_id !== nextProps.locationData.zone_id) {
       let zone_id = nextProps.locationData.zone_id;
       this.props.dispatch(setProductInfo({}));
@@ -168,17 +156,50 @@ class ProductLayoutScreen extends Component {
   render() {
     const { productsNear } = this.props;
 
+    const transform = [
+      {
+        translateY: this.state.animatedValue.interpolate({
+          inputRange: [0, 166],
+          outputRange: [0, -68],
+          extrapolate: 'clamp'
+        })
+      }
+    ];
+
+    let productsBox = {
+      transform: [
+        {
+          translateY: this.state.animatedValue.interpolate({
+            inputRange: [0, 166],
+            outputRange: [0, -68],
+            extrapolate: 'clamp'
+          })
+        }
+      ]/*,
+      height: this.state.animatedValue.interpolate({
+        inputRange: [0, 166],
+        outputRange: [height - 244, height - 176],
+        extrapolate: 'clamp'
+      })*/
+    };
+
+    const headerHeight = this.state.animatedValue.interpolate({
+      inputRange: [0, 166],
+      outputRange: [120, 52],
+      extrapolate: 'clamp'
+    });
+
     return (
       <SafeAreaView forceInset={{ top: 'always' }} style={{ backgroundColor: '#FFF' }}>
-        <View style={{ marginTop: this.props.customHeaderNav.heightSlide - 166 }}>
-          <ProductsNearSlide
-            onProductIdChange={productId => this.setCurrentProduct(productId)}
-            currentProducts={productsNear}
-            zone={this.zone.bind(this)} />
-        </View>
-        <View style={{ width: '100%', height: height - 244 }}>
-          <RoutesProducts />
-        </View>
+        <ProductsNearSlide
+          animatedValue={this.state.animatedValue}
+          onProductIdChange={productId => this.setCurrentProduct(productId)}
+          currentProducts={productsNear}
+          zone={this.zone.bind(this)} />
+
+        <Animated.View style={[{ width: '100%', height: height - 176 }, productsBox]}>
+          <RoutesProducts onScrollLayout={this.state.animatedValue} />
+        </Animated.View>
       </SafeAreaView>
     );
   }
