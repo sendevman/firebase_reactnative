@@ -12,6 +12,7 @@ import styles from './OnBoardingModalCss';
 
 // My Customs
 import Icon from '../../assets/images/Icon';
+import OpenSettings from 'react-native-open-settings';
 
 // My Actions
 import { updateBluetoothIsOn } from '../../actions/Common';
@@ -49,7 +50,8 @@ class OnBoardingModal extends Component {
                   'Turn On Bluetooth To Allow "AT&T Retail Companion" to Connect to Accessories',
                   'Go to Allow Action!',
                   [
-                    {text: 'Settings', onPress: () => dispatch(updateBluetoothIsOn(true))},
+                    {text: 'Settings', onPress: () => OpenSettings.openBluetooth()},
+                    // {text: 'Settings', onPress: () => dispatch(updateBluetoothIsOn(true))},
                     {text: 'Cancel', onPress: () => console.log('Go to Cancel'), style: 'cancel'}
                   ],
                   { cancelable: false }

@@ -5,11 +5,12 @@
  */
 
 import React, { Component } from 'react';
-import { Image, Text, View,
-  NativeEventEmitter,
-  NativeModules, } from 'react-native';
+import moment from 'moment';
+import { Animated, Image, Text, View, YellowBox, TouchableOpacity } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Carousel from 'react-native-carousel-view';
+import Spinkit from 'react-native-spinkit';
+import { connect } from 'react-redux';
 
 // My Styles
 import styles from './ProductsNearCss';
@@ -18,182 +19,165 @@ import styles from './ProductsNearCss';
 import Icon from '../../assets/images/Icon';
 import ButtonCompare from './ButtonCompare';
 
-// Walkbase Engage
-import BleManager from 'react-native-ble-manager';
-const BleManagerModule = NativeModules.BleManager;
-const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
+YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Class RCTCxxModule']);
 
 class ProductsNear extends Component {
-  constructor() {
-    super();
-    this.state = {
-      walkbaseState: '',
-      bleState: 0 // 0: off, 1: on
-    };
-    this.handleEventNotDetermined = this.handleEventNotDetermined.bind(this);
-    this.handleEventInitializing = this.handleEventInitializing.bind(this);
-    this.handleEventPause = this.handleEventPause.bind(this);
-    this.handleEventScanning = this.handleEventScanning.bind(this);
-    this.handleEventFailed = this.handleEventFailed.bind(this);
-    this.handleEventReceivedAdvertisement = this.handleEventReceivedAdvertisement.bind(this);
-    this.handleEventErrors = this.handleEventErrors.bind(this);
-  };
-
-  componentWillMount() {};
-
-  componentDidMount() {
-    this.handlerDiscover1 = bleManagerEmitter.addListener('WBEngageManagerStateNotDetermined', this.handleEventNotDetermined );
-    this.handlerDiscover2 = bleManagerEmitter.addListener('WBEngageManagerStateInitializing', this.handleEventInitializing );
-    this.handlerDiscover3 = bleManagerEmitter.addListener('WBEngageManagerStatePaused', this.handleEventPause );
-    this.handlerDiscover4 = bleManagerEmitter.addListener('WBEngageManagerStateScanning', this.handleEventScanning );
-    this.handlerDiscover5 = bleManagerEmitter.addListener('WBEngageManagerStateFailed', this.handleEventFailed );
-    this.handlerDiscover6 = bleManagerEmitter.addListener('WBEngageManagerReceivedAdvertisement', this.handleEventReceivedAdvertisement );
-    this.handlerDiscover7 = bleManagerEmitter.addListener('WBEngageManagerOff', this.handleEventErrors );
-  };
-
-  handleEventNotDetermined(data) { console.log("Not determined"); };
-  handleEventInitializing(data) { console.log("Initializing"); };
-  handleEventPause(data) { console.log("Pause"); };
-  handleEventScanning(data) { console.log("Scanning"); };
-  handleEventFailed(data) { console.log("Failed"); };
-
-  handleEventReceivedAdvertisement(data) {
-    console.log(data);
-    this.handleFetchData(data);
-  };
-
-  handleEventErrors(data) {
-    if(data.state === 'WBErrorUnknown') {
-      console.log(data);
-    } else if(data.state === 'WBErrorBluetoothOff') {
-      alert("Bluetooth is OFF. Please ON the Bluetooth");
-      this.setState({bleState:0})
-    } else if(data.state === 'Not error code') {
-      this.setState({bleState:1})
-    }
-  };
-
-  handleFetchData(data) { /* Analyzing the data */ };
-  
-  componentWillUnmount() {
-    this.handlerDiscover1.remove();
-    this.handlerDiscover2.remove();
-    this.handlerDiscover3.remove();
-    this.handlerDiscover4.remove();
-    this.handlerDiscover5.remove();
-    this.handlerDiscover6.remove();
-    this.handlerDiscover7.remove();
+  constructor(props) {
+    super(props);
   };
 
   render() {
+    const areaData = this.props.areaData || {};
+    const { currentProducts, position } = this.props;
+
+    const getProduct = (productId) => {
+      const match = currentProducts.filter(product => product.id === productId);
+      return match.length > 0 ? match[0] : null;
+    };
+
+    console.log("-=-=-=", currentProducts, this.props);
+    const matching = {};
+    (areaData.products || []).forEach(element => {
+      matching[element] = getProduct(element);
+    });
+
+    let titleItem = {
+      transform: [
+        {
+          translateX: this.props.animatedValue.interpolate({
+            inputRange: [0, 166],
+            outputRange: [0, -108],
+            extrapolate: 'clamp'
+          })
+        },
+        {
+          translateY: this.props.animatedValue.interpolate({
+            inputRange: [0, 166],
+            outputRange: [0, 34],
+            extrapolate: 'clamp'
+          })
+        }
+      ],
+      width: this.props.animatedValue.interpolate({
+        inputRange: [0, 166],
+        outputRange: [216, 206],
+        extrapolate: 'clamp'
+      })
+    };
+
+    let btnBox = {
+      transform: [
+        {
+          translateX: this.props.animatedValue.interpolate({
+            inputRange: [0, 166],
+            outputRange: [0, 92],
+            extrapolate: 'clamp'
+          })
+        },
+        {
+          translateY: this.props.animatedValue.interpolate({
+            inputRange: [0, 166],
+            outputRange: [0, -33],
+            extrapolate: 'clamp'
+          })
+        }
+      ],
+      width: this.props.animatedValue.interpolate({
+        inputRange: [0, 166],
+        outputRange: [216, 140],
+        extrapolate: 'clamp'
+      })
+    };
+
+    let fastOpacity = {
+      opacity: this.props.animatedValue.interpolate({
+        inputRange: [0, 35],
+        outputRange: [1, 0],
+        extrapolate: 'clamp'
+      })
+    };
+
+    const headerHeight = this.props.animatedValue.interpolate({
+      inputRange: [0, 166],
+      outputRange: [120, 52],
+      extrapolate: 'clamp'
+    });
+
     return (
       <LinearGradient colors={['#2b3748', '#43597D']} height={166}>
-        <Text style={styles.title}>PRODUCTS NEAR YOU</Text>
-        <Carousel
-          animate={false}
-          height={136}
-          indicatorOffset={4}
-          indicatorColor={'#FFF'}
-          indicatorSize={6}
-          inactiveIndicatorColor={'rgba(255, 255, 255, 0.3)'}
-          indicatorSpace={8}
-          >
-          <View style={styles.itemContainer}>
-            <View style={styles.itemBox}>
-              <View style={styles.imageBox}>
-                <Image style={styles.itemImage} resizeMode={Image.resizeMode.contain} source={{ uri: 'https://www.att.com/catalog/en/skus/Samsung/Samsung%20Galaxy%20S9+/hi_res_images/coral%20blue-hero-zoom.jpg' }} />
-              </View>
+        <TouchableOpacity onPress={this.props.zone}>
+          <Text style={styles.title}>PRODUCTS NEAR YOU ({(position && position.zone_id) ? position.zone_id : '---'})</Text>
+        </TouchableOpacity>
+        { (currentProducts || []).length > 0 ?
+            <Carousel
+              animate={false}
+              // height={136}
+              indicatorOffset={4}
+              indicatorColor={'#FFF'}
+              indicatorSize={6}
+              inactiveIndicatorColor={'rgba(255, 255, 255, 0.3)'}
+              indicatorSpace={8}
+              onPageChange={(index) =>
+                (areaData.products) ?
+                  this.props.onProductIdChange(areaData.products[index])
+                  : null}
+            >
+              { (areaData.products || []).map((productId, index) => (
+                  <View style={styles.itemContainer} key={index}>
+                    <Animated.View style={[styles.itemBox, { height: headerHeight }]}>
+                      <Animated.View style={[styles.imageBox, fastOpacity]}>
+                        <Image style={styles.itemImage} resizeMode={Image.resizeMode.contain} source={{ uri: matching[productId] ? matching[productId].img : "" }} />
+                      </Animated.View>
 
-              <View style={styles.detailsBox}>
-                <Text style={styles.titleItem}>Samsung Galaxy S9+</Text>
+                      <View style={styles.detailsBox}>
+                        <Animated.Text numberOfLines={1} style={[styles.titleItem, titleItem]}>{matching[productId] ? matching[productId].manufacture + " " + matching[productId].model : ""}</Animated.Text>
 
-                <View style={styles.hrDivider}></View>
+                        <Animated.View style={[styles.hrDivider, fastOpacity]}></Animated.View>
 
-                <View style={styles.deviceOptionsBox}>
-                  <View style={styles.deviceOptionItem}>
-                    <Icon height="14" width="14" name="Storage" viewBox="0 0 24 24" />
-                    <Text style={styles.deviceOptionText}>64GB</Text>
+                        <Animated.View style={[styles.deviceOptionsBox, fastOpacity]}>
+                          <View style={styles.deviceOptionItem}>
+                            <Icon height="14" width="14" name="Storage" viewBox="0 0 24 24" />
+                            <Text style={styles.deviceOptionText}>{matching[productId] ? matching[productId].deviceOptions[0].storage : 0}GB</Text>
+                          </View>
+                          <View style={styles.deviceOptionItem}>
+                            <Icon height="14" width="14" name="BatteryInclined" viewBox="0 0 20 20" />
+                            <Text style={styles.deviceOptionText}>{matching[productId] ? matching[productId].battery.life.video.replace(' ', '') : 0}</Text>
+                          </View>
+                          <View style={styles.deviceOptionItem}>
+                            <Icon height="14" width="14" name="Camera" viewBox="0 0 24 24" />
+                            <Text style={styles.deviceOptionText}>{matching[productId] ? matching[productId].camera.front.sensor + " " + matching[productId].camera.rear.sensor : ""}</Text>
+                          </View>
+                        </Animated.View>
+
+                        <Animated.View style={[ btnBox ]}>
+                          <ButtonCompare />
+                        </Animated.View>
+                      </View>
+                    </Animated.View>
                   </View>
-                  <View style={styles.deviceOptionItem}>
-                    <Icon height="14" width="14" name="BatteryInclined" viewBox="0 0 20 20" />
-                    <Text style={styles.deviceOptionText}>16hrs</Text>
+                ))
+              }
+            </Carousel>
+            :
+            <View style={styles.itemContainer}>
+              { !areaData.products ?
+                  null
+                  :
+                  <View style={styles.loadingBox}>
+                    <Spinkit isVisible={true} type={'Circle'} color={'gray'} size={20} />
                   </View>
-                  <View style={styles.deviceOptionItem}>
-                    <Icon height="14" width="14" name="Camera" viewBox="0 0 24 24" />
-                    <Text style={styles.deviceOptionText}>18MP + 8MP</Text>
-                  </View>
-                </View>
-
-                <ButtonCompare />
-              </View>
+              }
             </View>
-          </View>
-
-          <View style={styles.itemContainer}>
-            <View style={styles.itemBox}>
-              <View style={styles.imageBox}>
-                <Image style={styles.itemImage} resizeMode={Image.resizeMode.contain} source={{ uri: 'https://www.att.com/catalog/en/skus/Samsung/Samsung%20Galaxy%20S9+/hi_res_images/coral%20blue-hero-zoom.jpg' }} />
-              </View>
-
-              <View style={styles.detailsBox}>
-                <Text style={styles.titleItem}>Samsung Galaxy S9+</Text>
-
-                <View style={styles.hrDivider}></View>
-
-                <View style={styles.deviceOptionsBox}>
-                  <View style={styles.deviceOptionItem}>
-                    <Icon height="14" width="14" name="Storage" viewBox="0 0 24 24" />
-                    <Text style={styles.deviceOptionText}>64GB</Text>
-                  </View>
-                  <View style={styles.deviceOptionItem}>
-                    <Icon height="14" width="14" name="BatteryInclined" viewBox="0 0 20 20" />
-                    <Text style={styles.deviceOptionText}>16hrs</Text>
-                  </View>
-                  <View style={styles.deviceOptionItem}>
-                    <Icon height="14" width="14" name="Camera" viewBox="0 0 24 24" />
-                    <Text style={styles.deviceOptionText}>18MP + 8MP</Text>
-                  </View>
-                </View>
-
-                <ButtonCompare />
-              </View>
-            </View>
-          </View>
-
-          <View style={styles.itemContainer}>
-            <View style={styles.itemBox}>
-              <View style={styles.imageBox}>
-                <Image style={styles.itemImage} resizeMode={Image.resizeMode.contain} source={{ uri: 'https://www.att.com/catalog/en/skus/Samsung/Samsung%20Galaxy%20S9+/hi_res_images/coral%20blue-hero-zoom.jpg' }} />
-              </View>
-
-              <View style={styles.detailsBox}>
-                <Text style={styles.titleItem}>Samsung Galaxy S9+</Text>
-
-                <View style={styles.hrDivider}></View>
-
-                <View style={styles.deviceOptionsBox}>
-                  <View style={styles.deviceOptionItem}>
-                    <Icon height="14" width="14" name="Storage" viewBox="0 0 24 24" />
-                    <Text style={styles.deviceOptionText}>64GB</Text>
-                  </View>
-                  <View style={styles.deviceOptionItem}>
-                    <Icon height="14" width="14" name="BatteryInclined" viewBox="0 0 20 20" />
-                    <Text style={styles.deviceOptionText}>16hrs</Text>
-                  </View>
-                  <View style={styles.deviceOptionItem}>
-                    <Icon height="14" width="14" name="Camera" viewBox="0 0 24 24" />
-                    <Text style={styles.deviceOptionText}>18MP + 8MP</Text>
-                  </View>
-                </View>
-
-                <ButtonCompare />
-              </View>
-            </View>
-          </View>
-        </Carousel>
+        }
       </LinearGradient>
     );
   }
 }
 
-export default ProductsNear;
+const mapStateToProps = state => {
+  const { current } = state;
+
+  return { areaData: current.allAreas[0], position: current.postition };
+}
+
+export default connect(mapStateToProps)(ProductsNear);

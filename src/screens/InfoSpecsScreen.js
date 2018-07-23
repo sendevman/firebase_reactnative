@@ -5,7 +5,7 @@
  */
 
 import React, { Component } from 'react';
-import { Dimensions, Image, ScrollView, Text, View } from 'react-native';
+import { Animated, Dimensions, Image, ScrollView, Text, View } from 'react-native';
 import Svg, { Rect } from 'react-native-svg';
 import LinearGradient from 'react-native-linear-gradient';
 import { connect } from 'react-redux';
@@ -17,6 +17,7 @@ import styles from './css/InfoSpecsScreenCss';
 import Icon from '../assets/images/Icon';
 import SkeletonLoading from './components/SkeletonLoading';
 import Offer from '../components/LimitedTimeOffer/Offer';
+import FeedbackSurvey from './components/FeedbackSurvey';
 
 // My Routes
 import RoutesAccessories from '../routes/Accessories';
@@ -63,30 +64,28 @@ class InfoSpecsScreen extends Component {
     super(props);
 
     handleScroll = (event) => {
-      const { dispatch } = this.props;
-      var value = event.nativeEvent.contentOffset.y;
+      // const { dispatch } = this.props;
+      // var value = event.nativeEvent.contentOffset.y;
 
-      if ((value >= 0) && (value <= 56)) {
-        let newValue = this.setNewValue(false, 56 - value, false, 166);
-        dispatch(updateHeaderNav(newValue));
-      } else if ((value >= 57) && (value <= 222)) {
-        let newValue = this.setNewValue(true, 0, false, 166 - (value - 56));
-        dispatch(updateHeaderNav(newValue));
-      } else {
-        let newValue = this.setNewValue(true, 0, true, 0);
-        dispatch(updateHeaderNav(newValue));
-      }
+      // if ((value >= 0) && (value <= 56)) {
+      //   let newValue = this.setNewValue(false, 56 - value, false, 166);
+      //   dispatch(updateHeaderNav(newValue));
+      // } else if ((value >= 57) && (value <= 222)) {
+      //   let newValue = this.setNewValue(true, 0, false, 166 - (value - 56));
+      //   dispatch(updateHeaderNav(newValue));
+      // } else {
+      //   let newValue = this.setNewValue(true, 0, true, 0);
+      //   dispatch(updateHeaderNav(newValue));
+      // }
     };
   }
 
   setNewValue(a, b, c, d) {
     return {
-      customHeaderNav: {
-        hideHeader: a,
-        heightHeader: b,
-        hideSlide: c,
-        heightSlide: d
-      }
+      hideHeader: a,
+      heightHeader: b,
+      hideSlide: c,
+      heightSlide: d
     }
   }
 
@@ -398,10 +397,22 @@ class InfoSpecsScreen extends Component {
 
   render() {
     return (
-      <ScrollView contentContainerStyle={styles.container} onScroll={handleScroll.bind(this)} scrollEventThrottle={16}>
+      <Animated.ScrollView contentContainerStyle={styles.container} scrollEventThrottle={1}
+        onScroll={Animated.event(
+          [{ nativeEvent: { contentOffset: { y: this.props.onScrollCustom } } }],
+          {
+            /*useNativeDriver: true*//*,
+            listener: event => {
+              const offsetY = event.nativeEvent.contentOffset.y
+              this.props.onScrollCustom(offsetY);
+            }*/
+          }
+        )}
+        >
         { this.renderContent() }
         { this.renderAccessories() }
-      </ScrollView>
+        <FeedbackSurvey />
+      </Animated.ScrollView>
     );
   }
 }

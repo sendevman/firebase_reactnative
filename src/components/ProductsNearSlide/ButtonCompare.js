@@ -17,7 +17,7 @@ class ButtonCompare extends Component<props> {
       <Button
         raised
         icon={{name: 'compare-arrows', style: { marginRight: 8 }}}
-        title='Compare product'
+        title='Compare'
         color="#FFF"
         borderRadius={18}
         backgroundColor="#1181FF"
