@@ -10,7 +10,8 @@ const initialState = {
     hideHeader: false,
     heightHeader: 56,
     hideSlide: false,
-    heightSlide: 166
+    heightSlide: 166,
+    heightScrolled: false
   }
 }
 

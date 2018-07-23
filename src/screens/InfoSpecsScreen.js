@@ -34,27 +34,27 @@ const getWidth = (number) => {
 const InfoSpecsSkeleton = () => (
   <View style={styles.skeletonLoading}>
     <SkeletonLoading height={220}>
-      <Rect x="0" y="0" rx="3" ry="3" width="90%" height="10"/>
-      <Rect x="0" y="15" rx="3" ry="3" width="100%" height="10"/>
-      <Rect x="0" y="30" rx="3" ry="3" width="80%" height="10"/>
+      <Rect x="0" y="0" rx="3" ry="3" width="90%" height="10" />
+      <Rect x="0" y="15" rx="3" ry="3" width="100%" height="10" />
+      <Rect x="0" y="30" rx="3" ry="3" width="80%" height="10" />
 
-      <Rect x="0" y="50" rx="3" ry="3" width="40" height="10"/>
-      <Rect x="50" y="54" rx="2" ry="2" width={getWidth(50)} height="2"/>
+      <Rect x="0" y="50" rx="3" ry="3" width="40" height="10" />
+      <Rect x="50" y="54" rx="2" ry="2" width={getWidth(50)} height="2" />
 
-      <Rect x="40" y="70" rx="5" ry="5" width="40" height="70"/>
-      <Rect x="100" y="70" rx="5" ry="5" width="40" height="70"/>
-      <Rect x="160" y="70" rx="5" ry="5" width="40" height="70"/>
-      <Rect x="220" y="70" rx="5" ry="5" width="40" height="70"/>
+      <Rect x="40" y="70" rx="5" ry="5" width="40" height="70" />
+      <Rect x="100" y="70" rx="5" ry="5" width="40" height="70" />
+      <Rect x="160" y="70" rx="5" ry="5" width="40" height="70" />
+      <Rect x="220" y="70" rx="5" ry="5" width="40" height="70" />
 
-      <Rect x="0" y="150" rx="3" ry="3" width="60" height="10"/>
-      <Rect x="70" y="154" rx="2" ry="2" width={getWidth(70)} height="2"/>
+      <Rect x="0" y="150" rx="3" ry="3" width="60" height="10" />
+      <Rect x="70" y="154" rx="2" ry="2" width={getWidth(70)} height="2" />
 
-      <Rect x="0" y="170" rx="3" ry="3" width="80" height="10"/>
-      <Rect x="90" y="170" rx="3" ry="3" width="120" height="10"/>
-      <Rect x="220" y="170" rx="3" ry="3" width="80" height="10"/>
-      <Rect x="0" y="185" rx="3" ry="3" width="100%" height="10"/>
-      <Rect x="0" y="200" rx="3" ry="3" width="160" height="10"/>
-      <Rect x="170" y="200" rx="3" ry="3" width="130" height="10"/>
+      <Rect x="0" y="170" rx="3" ry="3" width="80" height="10" />
+      <Rect x="90" y="170" rx="3" ry="3" width="120" height="10" />
+      <Rect x="220" y="170" rx="3" ry="3" width="80" height="10" />
+      <Rect x="0" y="185" rx="3" ry="3" width="100%" height="10" />
+      <Rect x="0" y="200" rx="3" ry="3" width="160" height="10" />
+      <Rect x="170" y="200" rx="3" ry="3" width="130" height="10" />
     </SkeletonLoading>
   </View>
 );
@@ -62,31 +62,43 @@ const InfoSpecsSkeleton = () => (
 class InfoSpecsScreen extends Component {
   constructor(props) {
     super(props);
-
-    handleScroll = (event) => {
-      // const { dispatch } = this.props;
-      // var value = event.nativeEvent.contentOffset.y;
-
-      // if ((value >= 0) && (value <= 56)) {
-      //   let newValue = this.setNewValue(false, 56 - value, false, 166);
-      //   dispatch(updateHeaderNav(newValue));
-      // } else if ((value >= 57) && (value <= 222)) {
-      //   let newValue = this.setNewValue(true, 0, false, 166 - (value - 56));
-      //   dispatch(updateHeaderNav(newValue));
-      // } else {
-      //   let newValue = this.setNewValue(true, 0, true, 0);
-      //   dispatch(updateHeaderNav(newValue));
-      // }
-    };
   }
 
-  setNewValue(a, b, c, d) {
+  setNewValue(a, b, c, d, e) {
     return {
       hideHeader: a,
       heightHeader: b,
       hideSlide: c,
-      heightSlide: d
+      heightSlide: d,
+      heightScrolled: e
     }
+  }
+
+  handleScroll(event) {
+    console.log(event, event.nativeEvent.contentOffset)
+    const { dispatch, customHeaderNav } = this.props;
+    var value = event.nativeEvent.contentOffset.y;
+
+    // if (!customHeaderNav.heightScrolled && value > 60) {
+    if (value > 10) {
+      let newValue = this.setNewValue(false, 0, false, 0, true);
+      // dispatch(updateHeaderNav(newValue));
+    }
+    // if (customHeaderNav.heightScrolled && value < 60) {
+    if (value <= 0) {
+      let newValue = this.setNewValue(false, 0, false, 0, false);
+      // dispatch(updateHeaderNav(newValue));
+    }
+    //   if ((value >= 0) && (value <= 56)) {
+    //     let newValue = this.setNewValue(false, 56 - value, false, 166);
+    //     dispatch(updateHeaderNav(newValue));
+    //   } else if ((value >= 57) && (value <= 222)) {
+    //     let newValue = this.setNewValue(true, 0, false, 166 - (value - 56));
+    //     dispatch(updateHeaderNav(newValue));
+    //   } else {
+    //     let newValue = this.setNewValue(true, 0, true, 0);
+    //     dispatch(updateHeaderNav(newValue));
+    //   }
   }
 
   renderOffer() {
@@ -111,14 +123,14 @@ class InfoSpecsScreen extends Component {
           <Text style={styles.titleDivider}>Colors</Text>
 
           <View style={styles.colorItemBox}>
-            { colors.map((item, index) => {
-                return (
-                  <View key={index} style={styles.colorItem}>
-                    <Image style={styles.colorImage} source={{ uri: item.img }} />
-                    <Text style={styles.colorTitle}>{item.name}</Text>
-                  </View>
-                );
-              })
+            {colors.map((item, index) => {
+              return (
+                <View key={index} style={styles.colorItem}>
+                  <Image style={styles.colorImage} source={{ uri: item.img }} />
+                  <Text style={styles.colorTitle}>{item.name}</Text>
+                </View>
+              );
+            })
             }
           </View>
         </View>
@@ -162,9 +174,9 @@ class InfoSpecsScreen extends Component {
           <View style={styles.hrDivider}></View>
           <Text style={styles.titleDivider}>Camera</Text>
 
-          { (Object.keys(front).length !== 0 || Object.keys(rear).length !== 0) &&
+          {(Object.keys(front).length !== 0 || Object.keys(rear).length !== 0) &&
             <View style={styles.storageBox}>
-              { Object.keys(front).length !== 0 &&
+              {Object.keys(front).length !== 0 &&
                 <LinearGradient colors={['#FFAB00', '#FF9200']} style={styles.cameraItem}>
                   <Text style={styles.cameraTitle}>FRONT CAMERA</Text>
                   <Text style={styles.cameraText}>{front.sensor} sensor</Text>
@@ -172,7 +184,7 @@ class InfoSpecsScreen extends Component {
                 </LinearGradient>
               }
 
-              { Object.keys(rear).length !== 0 &&
+              {Object.keys(rear).length !== 0 &&
                 <LinearGradient colors={['#FFAB00', '#FF9200']} style={styles.cameraItem}>
                   <Text style={styles.cameraTitle}>REAR CAMERA</Text>
                   <Text style={styles.cameraText}>{rear.sensor} sensor</Text>
@@ -182,16 +194,16 @@ class InfoSpecsScreen extends Component {
             </View>
           }
 
-          { (features && features.length > 0) &&
+          {(features && features.length > 0) &&
             <View>
               <View style={styles.cameraList}>
-                { features.map((item, index) => {
-                    return (
-                      <LinearGradient key={index} colors={['#FFAB00', '#FF9200']} style={styles.cameraListItem}>
-                        <Text numberOfLines={4} style={[styles.cameraText, { maxWidth: 80, textAlign: 'center' }]}>{item}</Text>
-                      </LinearGradient>
-                    );
-                  })
+                {features.map((item, index) => {
+                  return (
+                    <LinearGradient key={index} colors={['#FFAB00', '#FF9200']} style={styles.cameraListItem}>
+                      <Text numberOfLines={4} style={[styles.cameraText, { maxWidth: 80, textAlign: 'center' }]}>{item}</Text>
+                    </LinearGradient>
+                  );
+                })
                 }
               </View>
             </View>
@@ -221,9 +233,9 @@ class InfoSpecsScreen extends Component {
         <View style={styles.hrDivider}></View>
         <Text style={styles.titleDivider}>Performance & Storage</Text>
 
-        { (!memoryEmpty || !processorEmpty) &&
+        {(!memoryEmpty || !processorEmpty) &&
           <View style={[styles.performanceStorageBox, changeStyle ? { marginBottom: 4 } : {}]}>
-            { !processorEmpty &&
+            {!processorEmpty &&
               <View style={styles.performanceStorageItem}>
                 <Icon name="ProcessorBlue" width="138" height="138" fill="#6F4EE6" viewBox="18 55 138 138" />
 
@@ -234,7 +246,7 @@ class InfoSpecsScreen extends Component {
               </View>
             }
 
-            { !memoryEmpty &&
+            {!memoryEmpty &&
               <View style={styles.performanceStorageItem}>
                 <Icon name="MemoryBlue" width="120" height="121" fill="#6F4EE6" viewBox="197 63 120 121" />
 
@@ -247,9 +259,9 @@ class InfoSpecsScreen extends Component {
           </View>
         }
 
-        { (isAvailable || doIsValid) &&
+        {(isAvailable || doIsValid) &&
           <View style={[styles.performanceStorageBox, mpChangeStyle ? {} : { marginTop: 20 }, { marginBottom: 6 }]}>
-            { isAvailable &&
+            {isAvailable &&
               <LinearGradient colors={['#6F4EE6', '#3D2AD1']} style={styles.storageBlueBox}>
                 <Image style={{ position: 'absolute', top: 0, left: 0 }} source={require('../assets/images/files/whiteCorner.png')} />
                 <Text style={styles.storageBlueTitle}>SD CARD SLOT</Text>
@@ -257,10 +269,10 @@ class InfoSpecsScreen extends Component {
               </LinearGradient>
             }
 
-            { doIsValid &&
+            {doIsValid &&
               <LinearGradient colors={['#6F4EE6', '#3D2AD1']} style={styles.storageBlueBox}>
                 <Text style={styles.storageBlueTitle}>STORAGE</Text>
-                <Text style={styles.storageBlueText}>{deviceOptions.map((obj) => {return `${obj.storage}Gb`}).join(' or ')}</Text>
+                <Text style={styles.storageBlueText}>{deviceOptions.map((obj) => { return `${obj.storage}Gb` }).join(' or ')}</Text>
               </LinearGradient>
             }
           </View>
@@ -292,9 +304,9 @@ class InfoSpecsScreen extends Component {
           <Text style={styles.titleDivider}>Battery</Text>
 
           <View style={[styles.featuresBox, styles.expandableBox]}>
-            { !batteryLifeEmpty &&
+            {!batteryLifeEmpty &&
               <View style={styles.featureBox}>
-                { !talkTimeEmpty &&
+                {!talkTimeEmpty &&
                   <LinearGradient colors={['#39E80E', '#00FFB4']} style={styles.featureItemBox}>
                     <Text style={styles.featureItemTitle}>CALLING</Text>
                     <Text style={styles.featureItemMount}>{life.talkTime.replace(' hrs', '')}</Text>
@@ -302,7 +314,7 @@ class InfoSpecsScreen extends Component {
                   </LinearGradient>
                 }
 
-                { !videoEmpty &&
+                {!videoEmpty &&
                   <LinearGradient colors={['#39E80E', '#00FFB4']} style={styles.featureItemBox}>
                     <Text style={styles.featureItemTitle}>VIDEO</Text>
                     <Text style={styles.featureItemMount}>{life.video.replace(' hrs', '')}</Text>
@@ -310,7 +322,7 @@ class InfoSpecsScreen extends Component {
                   </LinearGradient>
                 }
 
-                { !audioEmpty &&
+                {!audioEmpty &&
                   <LinearGradient colors={['#39E80E', '#00FFB4']} style={styles.featureItemBox}>
                     <Text style={styles.featureItemTitle}>AUDIO</Text>
                     <Text style={styles.featureItemMount}>{life.audio.replace(' hrs', '')}</Text>
@@ -318,7 +330,7 @@ class InfoSpecsScreen extends Component {
                   </LinearGradient>
                 }
 
-                { !internetWifiEmpty &&
+                {!internetWifiEmpty &&
                   <LinearGradient colors={['#39E80E', '#00FFB4']} style={styles.featureItemBox}>
                     <Text style={styles.featureItemTitle}>WI-FI</Text>
                     <Text style={styles.featureItemMount}>{life.internetWifi.replace(' hrs', '')}</Text>
@@ -326,7 +338,7 @@ class InfoSpecsScreen extends Component {
                   </LinearGradient>
                 }
 
-                { !internetL4GEmpty &&
+                {!internetL4GEmpty &&
                   <LinearGradient colors={['#39E80E', '#00FFB4']} style={styles.featureItemBox}>
                     <Text style={styles.featureItemTitle}>LTE</Text>
                     <Text style={styles.featureItemMount}>{life.internetL4G.replace(' hrs', '')}</Text>
@@ -336,16 +348,16 @@ class InfoSpecsScreen extends Component {
               </View>
             }
 
-            { chargingNoEmpty &&
+            {chargingNoEmpty &&
               <View style={styles.chagingTypeBox}>
-                { life.chargingWired &&
+                {life.chargingWired &&
                   <View style={styles.chagingItemBox}>
                     <Icon name="WiredCharging" width="34" height="34" viewBox="0 0 34 34" />
                     <Text style={styles.chagingItemText}>Wired charging</Text>
                   </View>
                 }
 
-                { life.chargingWireless &&
+                {life.chargingWireless &&
                   <View style={styles.chagingItemBox}>
                     <Icon name="WifiCharging" width="45" height="26" viewBox="0 0 45 26" />
                     <Text style={styles.chagingItemText}>Wireless charging</Text>
@@ -363,21 +375,21 @@ class InfoSpecsScreen extends Component {
     const { infoSpecs } = this.props;
 
     if (Object.keys(infoSpecs).length === 0 && infoSpecs.constructor === Object) {
-      return ( <InfoSpecsSkeleton /> );
+      return (<InfoSpecsSkeleton />);
     } else {
       return (
         <View style={styles.infoSpecBox}>
-          { this.renderOffer() }
+          {this.renderOffer()}
 
           <Text style={styles.description}>
-            { infoSpecs.description }
+            {infoSpecs.description}
           </Text>
 
-          { this.renderColors() }
-          { this.renderDisplay() }
-          { this.renderCamera() }
-          { this.renderPerformanceAndStorage() }
-          { this.renderBattery() }
+          {this.renderColors()}
+          {this.renderDisplay()}
+          {this.renderCamera()}
+          {this.renderPerformanceAndStorage()}
+          {this.renderBattery()}
         </View>
       );
     }
@@ -390,16 +402,16 @@ class InfoSpecsScreen extends Component {
 
     return (
       <View style={{ height: 204 }}>
-        { <RoutesAccessories /> }
+        {<RoutesAccessories />}
       </View>
     );
   }
 
   render() {
     return (
-      <ScrollView contentContainerStyle={styles.container} onScroll={handleScroll.bind(this)} scrollEventThrottle={16}>
-        { this.renderContent() }
-        { this.renderAccessories() }
+      <ScrollView contentContainerStyle={styles.container}  scrollEventThrottle={16}>
+        {this.renderContent()}
+        {this.renderAccessories()}
         <FeedbackSurvey />
       </ScrollView>
     );
