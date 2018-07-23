@@ -1,9 +1,3 @@
-/**
- * Conexus-Tech - Retail Companion AT&T
- * https://conexustech.com/
- * @flow
- */
-
 import React, { Component } from 'react';
 import { Alert, Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { connect } from 'react-redux';
@@ -44,7 +38,6 @@ const OnBoardingOne = () => (
     </View>
   </View>
 );
-
 const OnBoardingTwo = () => (
   <View>
     <View style={[styles.fiftyBox, { alignItems: 'flex-end' }]}>
@@ -54,7 +47,6 @@ const OnBoardingTwo = () => (
         </View>
       </View>
     </View>
-
     <View style={[styles.fiftyBox, { alignItems: 'flex-start' }]}>
       <View style={styles.containerText}>
         <Text style={styles.title}>Don't take our word for it</Text>

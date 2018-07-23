@@ -1,9 +1,3 @@
-/**
- * Conexus-Tech - Retail Companion AT&T
- * https://conexustech.com/
- * @flow
- */
-
 import { StyleSheet, Dimensions } from 'react-native';
 var { width } = Dimensions.get('window');
 
@@ -98,5 +92,24 @@ export default StyleSheet.create({
     fontWeight: '500',
     lineHeight: 19,
     textAlign: 'center'
+  },
+  modalView: {
+    marginHorizontal: 16,
+    backgroundColor: '#fff',
+    width: 343,
+    height: 389,
+    borderRadius: 16,
+    alignItems: 'center',
+    marginVertical: 139
+  },
+  modalInnerText: {
+    textAlign: 'center',
+    fontSize: 18,
+    color: '#3e3f42'
+  },
+  modalInnerTextView: {
+    width: 311,
+    height: 56,
+    justifyContent: 'center'
   }
 });
