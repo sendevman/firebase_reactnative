@@ -13,7 +13,7 @@ import { FakeProduct } from '../store/ProductFakeData';
 const initialState = {
   allAreas: [],
   postition: {},
-  product: FakeProduct,
+  product: {},
   compare: []
 };
 

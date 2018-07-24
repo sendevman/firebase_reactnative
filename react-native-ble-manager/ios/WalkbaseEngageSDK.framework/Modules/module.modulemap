@@ -1,6 +1,0 @@
-framework module WalkbaseEngageSDK {
-  umbrella header "WalkbaseEngageSDK.h"
-
-  export *
-  module * { export * }
-}

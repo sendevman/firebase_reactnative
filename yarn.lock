@@ -4058,6 +4058,10 @@ onetime@^2.0.0:
   dependencies:
     mimic-fn "^1.0.0"
 
+"open-settings@git+https://github.com/conexusTech/open-settings.git":
+  version "1.0.1"
+  resolved "git+https://github.com/conexusTech/open-settings.git#336431568d831158d95afe4b1b6d6a982c43419c"
+
 opencollective@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/opencollective/-/opencollective-1.0.3.tgz#aee6372bc28144583690c3ca8daecfc120dd0ef1"
@@ -4436,6 +4440,10 @@ react-native-carousel-view@^0.5.1:
     react-mixin "^3.0.5"
     react-timer-mixin "^0.13.3"
 
+"react-native-device-info@git+https://github.com/conexusTech/react-native-device-info.git":
+  version "0.21.5"
+  resolved "git+https://github.com/conexusTech/react-native-device-info.git#54f5c93d4a9a70a1fe21b0b359ae240edf8c8ddd"
+
 react-native-dismiss-keyboard@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/react-native-dismiss-keyboard/-/react-native-dismiss-keyboard-1.0.0.tgz#32886242b3f2317e121f3aeb9b0a585e2b879b49"
@@ -4474,10 +4482,6 @@ react-native-linear-gradient@^2.4.0:
   resolved "https://registry.yarnpkg.com/react-native-linear-gradient/-/react-native-linear-gradient-2.4.0.tgz#51d8ea12bb72a59bede9edc87b694b16b64cf435"
   dependencies:
     prop-types "^15.5.10"
-
-react-native-open-settings@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/react-native-open-settings/-/react-native-open-settings-1.0.1.tgz#1c0ae3d25fd3fd6de94b6d538333d47245cc5a0c"
 
 react-native-ratings@^5.3.0:
   version "5.3.0"
@@ -4518,6 +4522,10 @@ react-native-svg@^6.3.1:
     color "^2.0.1"
     lodash "^4.16.6"
     pegjs "^0.10.0"
+
+react-native-system-setting@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/react-native-system-setting/-/react-native-system-setting-1.5.0.tgz#067acb7e90b3c6a48e4577f6887c3ef378d84afb"
 
 react-native-tab-view@^0.0.77:
   version "0.0.77"
@@ -4930,6 +4938,10 @@ rimraf@^2.5.4, rimraf@^2.6.1:
 rimraf@~2.2.6:
   version "2.2.8"
   resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-2.2.8.tgz#e439be2aaee327321952730f99a8929e4fc50582"
+
+rn-viewpager@^1.2.9:
+  version "1.2.9"
+  resolved "https://registry.yarnpkg.com/rn-viewpager/-/rn-viewpager-1.2.9.tgz#7f06f898e23b296f3b5be7c98bd9101d94427779"
 
 rsvp@^3.3.3:
   version "3.6.2"
@@ -5598,6 +5610,10 @@ w3c-hr-time@^1.0.1:
   resolved "https://registry.yarnpkg.com/w3c-hr-time/-/w3c-hr-time-1.0.1.tgz#82ac2bff63d950ea9e3189a58a65625fedf19045"
   dependencies:
     browser-process-hrtime "^0.1.2"
+
+"walkbase-sdk@git+https://github.com/conexusTech/walkbase-sdk.git":
+  version "6.3.3"
+  resolved "git+https://github.com/conexusTech/walkbase-sdk.git#606ec708368557daf03393cf710e379cde999ad3"
 
 walker@~1.0.5:
   version "1.0.7"

@@ -24,12 +24,27 @@ export default StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center'
   },
+  itemContainer_small: {
+    paddingHorizontal: 10,
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
   itemBox: {
     backgroundColor: '#FFF',
     height: 120,
     maxWidth: 344,
     width: '100%',
     padding: 8,
+    borderRadius: 6,
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  itemBox_small: {
+    backgroundColor: '#FFF',
+    height: 50,
+    maxWidth: 344,
+    width: '100%',
+    padding: 2,
     borderRadius: 6,
     flexDirection: 'row',
     alignItems: 'center'
@@ -67,10 +82,22 @@ export default StyleSheet.create({
     flex: 1,
     paddingLeft: 8
   },
+  detailsBox_small: {
+    flexDirection: 'row',
+    flex: 1,
+    paddingLeft: 1,
+  },
   titleItem: {
     color: '#3E3F42',
     // fontFamily: 'Rubik',
     fontSize: 18,
+    lineHeight: 22,
+    paddingVertical: 6
+  },
+  titleItem_small: {
+    color: '#3E3F42',
+    // fontFamily: 'Rubik',
+    fontSize: 12,
     lineHeight: 22,
     paddingVertical: 6
   },

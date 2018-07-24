@@ -31,6 +31,9 @@ build/
 .gradle
 local.properties
 *.iml
+*.bundle*
+node_modules_*
+*_assets_*
 
 # node.js
 #
