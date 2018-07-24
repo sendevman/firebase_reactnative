@@ -1,1 +1,0 @@
-# react-native-ble-manager

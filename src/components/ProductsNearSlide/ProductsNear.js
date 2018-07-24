@@ -28,7 +28,7 @@ class ProductsNear extends Component {
 
   render() {
     const areaData = this.props.areaData || {};
-    const { currentProducts, position } = this.props;
+    const { currentProducts, position, customHeaderNav } = this.props;
 
     const getProduct = (productId) => {
       const match = currentProducts.filter(product => product.id === productId);
@@ -175,9 +175,9 @@ class ProductsNear extends Component {
 }
 
 const mapStateToProps = state => {
-  const { current } = state;
+  const { current, common } = state;
 
-  return { areaData: current.allAreas[0], position: current.postition };
+  return { areaData: current.allAreas[0], position: current.postition,  };
 }
 
 export default connect(mapStateToProps)(ProductsNear);
