@@ -18,3 +18,8 @@ export const setAreaInfo = (params) => ({
   type: 'UPDATE_AREA_INFO',
   payload: params
 })
+
+export const setWifiData = (params) => ({
+  type: 'UPDATE_WIFI',
+  payload: params
+})
