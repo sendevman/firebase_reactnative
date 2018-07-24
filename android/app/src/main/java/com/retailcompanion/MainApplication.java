@@ -10,7 +10,7 @@ import com.horcrux.svg.SvgPackage;
 import com.react.rnspinkit.RNSpinkitPackage;
 import com.opensettings.OpenSettingsPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
-//import com.transistorsoft.rnbackgroundgeolocation.RNBackgroundGeolocation;
+import com.pusherman.networkinfo.RNNetworkInfoPackage;
 import io.invertase.firebase.RNFirebasePackage;
 import io.invertase.firebase.firestore.RNFirebaseFirestorePackage;
 import com.facebook.react.ReactNativeHost;
@@ -32,16 +32,17 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new RNDeviceInfo(),
-            new SystemSettingPackage(),
-            new VectorIconsPackage(),
-            new SvgPackage(),
-            new RNSpinkitPackage(),
-            new LinearGradientPackage(),
-            new RNFirebasePackage(),
+          new RNDeviceInfo(),
+          new SystemSettingPackage(),
+          new VectorIconsPackage(),
+          new SvgPackage(),
+          new RNSpinkitPackage(),
+          new LinearGradientPackage(),
+          new RNFirebasePackage(),
 //            new RNBackgroundGeolocation(),
-            new RNFirebaseFirestorePackage(),
-            new OpenSettingsPackage()
+          new RNFirebaseFirestorePackage(),
+          new OpenSettingsPackage(),
+          new RNNetworkInfoPackage()
       );
     }
 

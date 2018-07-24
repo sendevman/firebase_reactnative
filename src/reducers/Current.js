@@ -14,7 +14,8 @@ const initialState = {
   allAreas: [],
   postition: {},
   product: {},
-  compare: []
+  compare: [],
+  network: {}
 };
 
 export default current = (state = initialState, action) => {
@@ -36,6 +37,12 @@ export default current = (state = initialState, action) => {
       return {
         ...state,
         allAreas: action.payload
+      }
+      break;
+    case 'UPDATE_WIFI':
+      return {
+        ...state,
+        network: action.payload
       }
       break;
     default:
