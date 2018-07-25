@@ -12,21 +12,31 @@ import { connect } from 'react-redux';
 // My Screens
 import OnBoardingScreen from '../screens/OnBoardingScreen';
 
+// My Customs
+import SystemSetting from 'react-native-system-setting';
+
+// My Actions
+import { updateBluetoothIsOn } from '../actions/Common';
+
 class OnBoardingLayoutScreen extends Component {
   constructor(props) {
     super(props);
 
+    SystemSetting.isBluetoothEnabled().then(enable => {
+      this.props.dispatch(updateBluetoothIsOn(enable));
+    });
+
     this.checkBluetoothIsOn(this.props.bluetoothIsOn);
   };
-
-  checkBluetoothIsOn(bluetoothIsOn) {
-    if (bluetoothIsOn) this.props.navigation.navigate('Shopping');
-  }
 
   componentWillReceiveProps(nextProps) {
     if (this.props.bluetoothIsOn !== nextProps.bluetoothIsOn) {
       this.checkBluetoothIsOn(nextProps.bluetoothIsOn);
     }
+  }
+
+  checkBluetoothIsOn(bluetoothIsOn) {
+    if (bluetoothIsOn) this.props.navigation.navigate('Shopping');
   }
 
   render() {

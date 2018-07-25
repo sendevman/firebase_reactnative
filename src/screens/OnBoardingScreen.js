@@ -1,8 +1,15 @@
+/**
+ * Conexus-Tech - Retail Companion AT&T
+ * https://conexustech.com/
+ * @flow
+ */
+
 import React, { Component } from 'react';
 import { Alert, Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
-import { connect } from 'react-redux';
 import LinearGradient from 'react-native-linear-gradient';
-import Carousel from 'react-native-carousel-view';
+import { PagerTabIndicator, IndicatorViewPager, PagerTitleIndicator, PagerDotIndicator } from 'rn-viewpager';
+import SystemSetting from 'react-native-system-setting';
+import { connect } from 'react-redux';
 
 // My Styles
 import styles from './css/OnBoardingScreenCss';
@@ -10,48 +17,41 @@ import styles from './css/OnBoardingScreenCss';
 // My Customs
 import Icon from '../assets/images/Icon';
 import OnBoardingModal from '../components/OnBoardingModal/OnBoardingModal';
-import { PagerTabIndicator, IndicatorViewPager, PagerTitleIndicator, PagerDotIndicator } from 'rn-viewpager';
-import SystemSetting from 'react-native-system-setting';
 
+// My Actions
+import { updateBluetoothIsOn } from '../actions/Common';
 
 class OnBoardingScreen extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      showModal: false,
-      ble_status: true
-    };
+    this.state = { showModal: false };
+
+    this.checkSwitchBluetooth = this.checkSwitchBluetooth.bind(this);
   };
 
   componentWillMount() {
-    SystemSetting.isBluetoothEnabled().then((enable) => {
-      const state = enable ? 'On' : 'Off';
-      this.setState({ble_status: state})
-      console.log('Current bluetooth is ' + state);
-    })
-
     // SystemSetting.switchBluetooth(() => {
     //   console.log('switch bluetooth successfully');
     // })
+
+    SystemSetting.addBluetoothListener(this.checkSwitchBluetooth);
   }
+
+  checkSwitchBluetooth() {
+    SystemSetting.isBluetoothEnabled().then((enable) => {
+      this.props.dispatch(updateBluetoothIsOn(enable));
+    })
+  }
+
   hideModal = () => { this.setState({ showModal: false }); }
   showModal = () => { this.setState({ showModal: true }); }
-
-  goProduct = () => {
-    this.props.navigation.navigate('Shopping');
-  }
-
-  onShowModal = () => {
-    this.setState({ showModal: true })
-  }
 
   _renderDotIndicator() {
     return <PagerDotIndicator pageCount={4} />;
   }
 
   render() {
-    const { ble_status } = this.state;
     return (
       <LinearGradient colors={['#222A33', '#43597D']} style={styles.container}>
         <IndicatorViewPager
@@ -148,7 +148,7 @@ class OnBoardingScreen extends Component {
                   <Text style={styles.subTitle}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu sodales ligula. Nunc sit amet massa sem. Sed venenatis velit commodo, mattis nulla ut, sodales eros.</Text>
                 </View>
 
-                <TouchableOpacity style={styles.getStartedBtn} onPress={() => { ble_status == 'On' ? this.goProduct() : this.onShowModal() }}>
+                <TouchableOpacity style={styles.getStartedBtn} onPress={this.showModal}>
                   <Text style={styles.getStartedBtnText}>Get started</Text>
                 </TouchableOpacity>
               </View>
@@ -161,8 +161,10 @@ class OnBoardingScreen extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return { OnBoardingOne: 0 };
+const mapStateToProps = state => {
+  const { common } = state;
+
+  return { bluetoothIsOn: common.bluetoothIsOn };
 }
 
 export default connect(mapStateToProps)(OnBoardingScreen);
