@@ -36,6 +36,15 @@ export default StyleSheet.create({
     lineHeight: 14,
     marginLeft: 8
   },
+  titleThin: {
+    width: 70,
+    color: '#536C88',
+    // fontFamily: 'DIN Alternate',
+    fontSize: 12,
+    fontWeight: 'bold',
+    lineHeight: 14,
+    marginTop: 4
+  },
   description: {
     color: '#3E3F42',
     // fontFamily: 'Rubik',
