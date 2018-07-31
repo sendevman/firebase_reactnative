@@ -38,15 +38,15 @@ const TestScreen = ({ navigation }) => (
 const TopTabNav = createMaterialTopTabNavigator(
   {
     InfoSpecs: {
-      screen: InfoSpecsScreen,
+      screen: props => <InfoSpecsScreen onScrollCustom={props.screenProps.onScrollCustom} />,
       navigationOptions: { title: 'Info & Specs' }
     },
     Reviews: {
-      screen: ReviewsScreen,
+      screen: props => <ReviewsScreen onScrollCustom={props.screenProps.onScrollCustom} />,
       navigationOptions: { title: 'Reviews' }
     },
     CostPlans: {
-      screen: CostPlansScreen,
+      screen: props => <CostPlansScreen onScrollCustom={props.screenProps.onScrollCustom} />,
       navigationOptions: { title: 'Cost & Plans' }
     }
   },
@@ -72,4 +72,16 @@ const TopTabNav = createMaterialTopTabNavigator(
   }
 );
 
-export default TopTabNav;
+class ProductStack extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
+      <TopTabNav screenProps={{ onScrollCustom: this.props.onScrollLayout }} />
+    );
+  }
+}
+
+export default ProductStack;

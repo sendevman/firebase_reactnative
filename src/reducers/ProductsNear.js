@@ -10,7 +10,7 @@
 import { FakeProduct } from '../store/ProductFakeData';
 
 const initialState = {
-    productsNear: []
+  productsNear: []
 };
 
 export default productsNear = (state = initialState, action) => {
@@ -20,7 +20,7 @@ export default productsNear = (state = initialState, action) => {
         ...state,
         productsNear: action.payload
       }
-      
+      break;
     default:
       return state;
   }
