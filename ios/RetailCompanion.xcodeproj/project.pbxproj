@@ -46,6 +46,7 @@
 		E16A700620FEF20F0091DCE2 /* libRCTSystemSetting.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E16A700520FEF1FE0091DCE2 /* libRCTSystemSetting.a */; };
 		E17D7E5920F3E86000636553 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E17D7E5820F3E86000636553 /* GoogleService-Info.plist */; };
 		E195E90120F7593D00695497 /* libRNSpinkit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E195E8FE20F7592E00695497 /* libRNSpinkit.a */; };
+		E1C10B2821077B27003B1ECF /* libRNNetworkInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E1C10B2221077B18003B1ECF /* libRNNetworkInfo.a */; };
 		E1E2DCB32102373100D8BD8C /* libBleManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E1E2DCAC210232D700D8BD8C /* libBleManager.a */; };
 		E1E2DCB4210237A000D8BD8C /* libReact Native Open Settings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E1E2DCB2210233D600D8BD8C /* libReact Native Open Settings.a */; };
 		E1FC9B4D20EE707800D49522 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1FC9B4B20EE707700D49522 /* CoreBluetooth.framework */; };
@@ -406,6 +407,13 @@
 			remoteGlobalIDString = 641194871EC9FD4A00D4FC03;
 			remoteInfo = "RNSpinkit-tvOS";
 		};
+		E1C10B2121077B18003B1ECF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E1C10AF021077B18003B1ECF /* RNNetworkInfo.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 045BEB3C1B52EA6A0013C1B9;
+			remoteInfo = RNNetworkInfo;
+		};
 		E1E2DCAB210232D700D8BD8C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E1E2DCA7210232D700D8BD8C /* BleManager.xcodeproj */;
@@ -493,6 +501,7 @@
 		E16A700020FEF1FD0091DCE2 /* RCTSystemSetting.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSystemSetting.xcodeproj; path = "../node_modules/react-native-system-setting/ios/RCTSystemSetting.xcodeproj"; sourceTree = "<group>"; };
 		E17D7E5820F3E86000636553 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E195E8F820F7592D00695497 /* RNSpinkit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNSpinkit.xcodeproj; path = "../node_modules/react-native-spinkit/ios/RNSpinkit.xcodeproj"; sourceTree = "<group>"; };
+		E1C10AF021077B18003B1ECF /* RNNetworkInfo.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNNetworkInfo.xcodeproj; path = "../node_modules/react-native-network-info/ios/RNNetworkInfo.xcodeproj"; sourceTree = "<group>"; };
 		E1E2DCA7210232D700D8BD8C /* BleManager.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BleManager.xcodeproj; path = "../node_modules/walkbase-sdk/ios/BleManager.xcodeproj"; sourceTree = "<group>"; };
 		E1E2DCAD210233D600D8BD8C /* React Native Open Settings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "React Native Open Settings.xcodeproj"; path = "../node_modules/open-settings/React Native Open Settings.xcodeproj"; sourceTree = "<group>"; };
 		E1FC9B4B20EE707700D49522 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
@@ -528,6 +537,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1C10B2821077B27003B1ECF /* libRNNetworkInfo.a in Frameworks */,
 				E1E2DCB4210237A000D8BD8C /* libReact Native Open Settings.a in Frameworks */,
 				E1E2DCB32102373100D8BD8C /* libBleManager.a in Frameworks */,
 				E1FEB40D2100295F00F66410 /* libRNDeviceInfo.a in Frameworks */,
@@ -767,6 +777,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				E1C10AF021077B18003B1ECF /* RNNetworkInfo.xcodeproj */,
 				E1E2DCAD210233D600D8BD8C /* React Native Open Settings.xcodeproj */,
 				E1E2DCA7210232D700D8BD8C /* BleManager.xcodeproj */,
 				E1FEB3D42100286000F66410 /* RNDeviceInfo.xcodeproj */,
@@ -903,6 +914,14 @@
 			children = (
 				E195E8FE20F7592E00695497 /* libRNSpinkit.a */,
 				E195E90020F7592E00695497 /* libRNSpinkit.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E1C10AF121077B18003B1ECF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E1C10B2221077B18003B1ECF /* libRNNetworkInfo.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1061,6 +1080,10 @@
 				{
 					ProductGroup = E17D7F8620F49C9900636553 /* Products */;
 					ProjectRef = 9C29040D5EAB40B48A02706B /* RNFirebase.xcodeproj */;
+				},
+				{
+					ProductGroup = E1C10AF121077B18003B1ECF /* Products */;
+					ProjectRef = E1C10AF021077B18003B1ECF /* RNNetworkInfo.xcodeproj */;
 				},
 				{
 					ProductGroup = E195E8F920F7592D00695497 /* Products */;
@@ -1410,6 +1433,13 @@
 			fileType = archive.ar;
 			path = libRNSpinkit.a;
 			remoteRef = E195E8FF20F7592E00695497 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		E1C10B2221077B18003B1ECF /* libRNNetworkInfo.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNNetworkInfo.a;
+			remoteRef = E1C10B2121077B18003B1ECF /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		E1E2DCAC210232D700D8BD8C /* libBleManager.a */ = {
