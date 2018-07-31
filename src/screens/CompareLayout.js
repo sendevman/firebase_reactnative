@@ -5,68 +5,45 @@
  */
 
 import React, { Component } from 'react';
-import { Button, ScrollView, StatusBar, Text, TouchableHighlight, View } from 'react-native';
+import { View } from 'react-native';
 import { createStackNavigator, SafeAreaView } from 'react-navigation';
 import { connect } from 'react-redux';
 
 // My Customs
-import Icon from '../assets/images/Icon';
-import LogoTitleCompare from './components/LogoTitleCompare';
-import GradientHeader from './components/GradientHeader';
+import CompareModal from '../components/CompareModal/CompareModal';
 
-class CompareLayoutScreen extends Component {
-  constructor(props) {
-    super(props);
-  };
+// My Screens
+import CompareScreen from '../screens/CompareScreen';
 
-  static navigationOptions = ({ navigation }) => {
-    return {
-      headerTitle: <LogoTitleCompare />,
-      header: props => <GradientHeader {...props} />,
-      headerStyle: { backgroundColor: 'transparent', overflow: 'hidden', height: 56 },
-      headerLeft: (
-        <TouchableHighlight style={{ marginLeft: 16 }} onPress={() => navigation.openDrawer()}>
-          <Icon name="Menu" width="24" height="24" fill="#FFF" viewBox="0 0 24 24" />
-        </TouchableHighlight>
-      ),
-      headerRight: (
-        <TouchableHighlight style={{ marginRight: 16 }} >
-          <Icon name="Menu" width="24" height="24" fill="transparent" viewBox="0 0 24 24" />
-        </TouchableHighlight>
-      )
-    };
-  };
-
-  render() {
-    return (
-      <View style={{ flex: 1 }}>
-        <ScrollView>
-          <SafeAreaView forceInset={{ top: 'always' }} style={{ backgroundColor: '#FFF' }}>
-            <Text style={{ fontSize: 14}}>Compare</Text>
-            <Button onPress={() => this.props.navigation.openDrawer()} title="Open drawer" />
-            <Text style={{ fontSize: 14}}></Text>
-            <Button onPress={() => this.props.navigation.goBack(null)} title="Go back" />
-          </SafeAreaView>
-          <StatusBar barStyle="default" />
-        </ScrollView>
-      </View>
-    );
-  }
-}
-
-const mapStateToProps = state => {
-  const { common } = state;
-
-  return { customHeaderNav: common.customHeaderNav };
-}
-
-const CompareLayout = createStackNavigator(
+const RoutesCompare = createStackNavigator(
   {
-    Root: { screen: connect(mapStateToProps)(CompareLayoutScreen) }
+    Root: { screen: props => <CompareScreen {...props} /> }
   },
   {
     headerMode: 'none'
   }
 );
 
-export default CompareLayout;
+class CompareLayout extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
+      <SafeAreaView forceInset={{ top: 'always' }} style={{ backgroundColor: '#FFF' }}>
+        <View style={{ width: '100%', height: '100%' }}>
+          <RoutesCompare />
+        </View>
+      </SafeAreaView>
+    );
+  }
+}
+
+const mapStateToProps = state => {
+  const { current, common } = state;
+
+  return { compareLayout: 0 };
+}
+
+export default connect(mapStateToProps)(CompareLayout);

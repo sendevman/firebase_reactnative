@@ -18,3 +18,8 @@ export const setAreaInfo = (params) => ({
   type: 'UPDATE_AREA_INFO',
   payload: params
 })
+
+export const setCompareInfo = (params) => ({
+  type: 'UPDATE_COMPARE_INFO',
+  payload: params
+})

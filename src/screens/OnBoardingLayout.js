@@ -10,7 +10,7 @@ import { createStackNavigator, SafeAreaView } from 'react-navigation';
 import { connect } from 'react-redux';
 
 // My Screens
-import OnBoardingScreen from '../screens/OnBoardingScreen';
+import OnBoardingScreen from './OnBoardingScreen';
 
 // My Customs
 import SystemSetting from 'react-native-system-setting';
