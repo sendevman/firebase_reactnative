@@ -8,7 +8,8 @@ import React, { Component } from 'react';
 import { Button, ScrollView, StatusBar, Text, View, NativeEventEmitter, NativeModules } from 'react-native';
 import { createDrawerNavigator, createBottomTabNavigator, SafeAreaView } from 'react-navigation';
 import { connect } from 'react-redux';
-
+import { NetworkInfo } from 'react-native-network-info';
+import {NetInfo} from 'react-native';
 // My Customs
 import MyDrawer from '../components/Drawer/Drawer';
 import Icon from '../assets/images/Icon';
@@ -23,7 +24,7 @@ import OnBoardingLayout from '../screens/OnBoardingLayout';
 import TestScreen from '../screens/TestScreen';
 
 // My Actions
-import { setLocationData } from '../actions/Current';
+import { setLocationData, setWifiData } from '../actions/Current';
 
 // Walkbase Engage
 import BleManager from 'walkbase-sdk';
@@ -218,6 +219,15 @@ class Routes extends Component {
     this.handleEventFailed = this.handleEventFailed.bind(this);
     this.handleEventReceivedAdvertisement = this.handleEventReceivedAdvertisement.bind(this);
     this.handleEventErrors = this.handleEventErrors.bind(this);
+    NetworkInfo.getSSID(ssid => {
+      let data = {
+        wifi:true,
+        ssid:ssid
+      }
+      this.props.dispatch(setWifiData(data));
+    });
+    
+    NetInfo.isConnected.addEventListener('connectionChange', this.handleConnectivityChange);
   }
 
   componentDidMount() {
@@ -230,6 +240,25 @@ class Routes extends Component {
     this.handlerDiscover7 = bleManagerEmitter.addListener("WBEngageManagerOff", this.handleEventErrors);
     this.webAPI();
   }
+  handleConnectivityChange = isConnected => {
+    if (isConnected) {
+      NetworkInfo.getSSID(ssid => {
+        let data = {
+          wifi:true,
+          ssid:ssid
+        }
+        this.props.dispatch(setWifiData(data));
+      });
+    } else {
+      NetworkInfo.getSSID(ssid => {
+        let data = {
+          wifi:false,
+          ssid:ssid
+        }
+        this.props.dispatch(setWifiData(data));
+      });
+    }
+  };
 
   handleEventNotDetermined(data) { console.log("Not determined");};
   handleEventInitializing(data) { console.log("Initializing"); };
@@ -389,6 +418,9 @@ function mapDispatchToProps(dispatch) {
   return {
     setLocationData: (data) => {
       return dispatch(setLocationData(data))
+    },
+    setWifiData:(data) => {
+      return dispatch(setWifiData(data))
     }
   };
 }
