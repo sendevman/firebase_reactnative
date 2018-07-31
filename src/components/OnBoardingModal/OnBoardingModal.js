@@ -14,6 +14,8 @@ import styles from './OnBoardingModalCss';
 import Icon from '../../assets/images/Icon';
 import OpenSettings from 'open-settings';
 
+import SystemSetting from 'react-native-system-setting';
+
 // My Actions
 import { updateBluetoothIsOn } from '../../actions/Common';
 
@@ -23,7 +25,7 @@ class OnBoardingModal extends Component {
   };
 
   render() {
-    const { dispatch, onHideModal, showModal } = this.props;
+    const { onHideModal, showModal } = this.props;
 
     return (
       <Modal
@@ -50,8 +52,7 @@ class OnBoardingModal extends Component {
                   'Turn On Bluetooth To Allow "AT&T Retail Companion" to Connect to Accessories',
                   'Go to Allow Action!',
                   [
-                    { text: 'Settings', onPress: () => OpenSettings.openSettings()},
-                    // { text: 'Settings', onPress: () => Platform.OS == 'ios' ? OpenSettings.openBluetooth(): OpenSettings.OpenSettings() },
+                    { text: 'Settings', onPress: () => Platform.OS == 'ios' ? OpenSettings.openBluetooth() : SystemSetting.switchBluetooth(() => console.log('switch bluetooth successfully')) },
                     { text: 'Cancel', onPress: () => console.log('Go to Cancel'), style: 'cancel' }
                   ],
                   { cancelable: false }

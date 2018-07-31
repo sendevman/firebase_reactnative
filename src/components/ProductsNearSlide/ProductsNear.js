@@ -6,7 +6,7 @@
 
 import React, { Component } from 'react';
 import moment from 'moment';
-import { Image, Text, View, YellowBox, TouchableOpacity } from 'react-native';
+import { Animated, Image, Text, View, YellowBox, TouchableOpacity } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Carousel from 'react-native-carousel-view';
 import Spinkit from 'react-native-spinkit';
@@ -24,8 +24,6 @@ YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Class RCTCxx
 class ProductsNear extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-    };
   };
 
   render() {
@@ -43,119 +41,135 @@ class ProductsNear extends Component {
       matching[element] = getProduct(element);
     });
 
-    return (
-      <View>
+    let titleItem = {
+      transform: [
         {
-          false ?
-            <LinearGradient colors={['#2b3748', '#43597D']} height={100}>
-              <TouchableOpacity onPress={this.props.zone}>
-                <Text style={styles.title}>PRODUCTS NEAR YOU ({(position && position.zone_id) ? position.zone_id : '---'})</Text>
-              </TouchableOpacity>
-              {(currentProducts || []).length > 0 ?
-                <Carousel
-                  animate={false}
-                  height={70}
-                  indicatorOffset={4}
-                  indicatorColor={'#FFF'}
-                  indicatorSize={6}
-                  inactiveIndicatorColor={'rgba(255, 255, 255, 0.3)'}
-                  indicatorSpace={8}
-                  onPageChange={(index) =>
-                    (areaData.products) ?
-                      this.props.onProductIdChange(areaData.products[index])
-                      : null}
-                >
-                  {(areaData.products || []).map((productId, index) => (
-                    <View style={styles.itemContainer_small} key={index}>
-                      <View style={styles.itemBox_small}>
-                        <View style={styles.detailsBox_small}>
-                          <Text numberOfLines={1} style={styles.titleItem_small}>{matching[productId] ? matching[productId].manufacture + " " + matching[productId].model : ""}</Text>
-                          <ButtonCompare />
-                        </View>
-                      </View>
-                    </View>
-                  ))
-                  }
-                </Carousel>
-                :
-                <View style={styles.itemContainer_small}>
-                  {!areaData.products ?
-                    null
-                    :
-                    <View style={styles.loadingBox}>
-                      <Spinkit isVisible={true} type={'Circle'} color={'gray'} size={20} />
-                    </View>
-                  }
-                </View>
-              }
-            </LinearGradient>
-            :
-            <LinearGradient colors={['#2b3748', '#43597D']} height={166}>
-              <TouchableOpacity onPress={this.props.zone}>
-                <Text style={styles.title}>PRODUCTS NEAR YOU ({(position && position.zone_id) ? position.zone_id : '---'})</Text>
-              </TouchableOpacity>
-              {(currentProducts || []).length > 0 ?
-                <Carousel
-                  animate={false}
-                  height={136}
-                  indicatorOffset={4}
-                  indicatorColor={'#FFF'}
-                  indicatorSize={6}
-                  inactiveIndicatorColor={'rgba(255, 255, 255, 0.3)'}
-                  indicatorSpace={8}
-                  onPageChange={(index) =>
-                    (areaData.products) ?
-                      this.props.onProductIdChange(areaData.products[index])
-                      : null}
-                >
-                  {(areaData.products || []).map((productId, index) => (
-                    <View style={styles.itemContainer} key={index}>
-                      <View style={styles.itemBox}>
-                        <View style={styles.imageBox}>
-                          <Image style={styles.itemImage} resizeMode={Image.resizeMode.contain} source={{ uri: matching[productId] ? matching[productId].img : "" }} />
-                        </View>
-
-                        <View style={styles.detailsBox}>
-                          <Text numberOfLines={1} style={styles.titleItem}>{matching[productId] ? matching[productId].manufacture + " " + matching[productId].model : ""}</Text>
-
-                          <View style={styles.hrDivider}></View>
-
-                          <View style={styles.deviceOptionsBox}>
-                            <View style={styles.deviceOptionItem}>
-                              <Icon height="14" width="14" name="Storage" viewBox="0 0 24 24" />
-                              <Text style={styles.deviceOptionText}>{matching[productId] ? matching[productId].deviceOptions[0].storage : 0}GB</Text>
-                            </View>
-                            <View style={styles.deviceOptionItem}>
-                              <Icon height="14" width="14" name="BatteryInclined" viewBox="0 0 20 20" />
-                              <Text style={styles.deviceOptionText}>{matching[productId] ? matching[productId].battery.life.video.replace(' ', '') : 0}</Text>
-                            </View>
-                            <View style={styles.deviceOptionItem}>
-                              <Icon height="14" width="14" name="Camera" viewBox="0 0 24 24" />
-                              <Text style={styles.deviceOptionText}>{matching[productId] ? matching[productId].camera.front.sensor + " " + matching[productId].camera.rear.sensor : ""}</Text>
-                            </View>
-                          </View>
-
-                          <ButtonCompare />
-                        </View>
-                      </View>
-                    </View>
-                  ))
-                  }
-                </Carousel>
-                :
-                <View style={styles.itemContainer}>
-                  {!areaData.products ?
-                    null
-                    :
-                    <View style={styles.loadingBox}>
-                      <Spinkit isVisible={true} type={'Circle'} color={'gray'} size={20} />
-                    </View>
-                  }
-                </View>
-              }
-            </LinearGradient>
+          translateX: this.props.animatedValue.interpolate({
+            inputRange: [0, 166],
+            outputRange: [0, -108],
+            extrapolate: 'clamp'
+          })
+        },
+        {
+          translateY: this.props.animatedValue.interpolate({
+            inputRange: [0, 166],
+            outputRange: [0, 34],
+            extrapolate: 'clamp'
+          })
         }
-      </View>
+      ],
+      width: this.props.animatedValue.interpolate({
+        inputRange: [0, 166],
+        outputRange: [216, 206],
+        extrapolate: 'clamp'
+      })
+    };
+
+    let btnBox = {
+      transform: [
+        {
+          translateX: this.props.animatedValue.interpolate({
+            inputRange: [0, 166],
+            outputRange: [0, 92],
+            extrapolate: 'clamp'
+          })
+        },
+        {
+          translateY: this.props.animatedValue.interpolate({
+            inputRange: [0, 166],
+            outputRange: [0, -33],
+            extrapolate: 'clamp'
+          })
+        }
+      ],
+      width: this.props.animatedValue.interpolate({
+        inputRange: [0, 166],
+        outputRange: [216, 140],
+        extrapolate: 'clamp'
+      })
+    };
+
+    let fastOpacity = {
+      opacity: this.props.animatedValue.interpolate({
+        inputRange: [0, 35],
+        outputRange: [1, 0],
+        extrapolate: 'clamp'
+      })
+    };
+
+    const headerHeight = this.props.animatedValue.interpolate({
+      inputRange: [0, 166],
+      outputRange: [120, 52],
+      extrapolate: 'clamp'
+    });
+
+    return (
+      <LinearGradient colors={['#2b3748', '#43597D']} height={166}>
+        <TouchableOpacity onPress={this.props.zone}>
+          <Text style={styles.title}>PRODUCTS NEAR YOU ({(position && position.zone_id) ? position.zone_id : '---'})</Text>
+        </TouchableOpacity>
+        { (currentProducts || []).length > 0 ?
+            <Carousel
+              animate={false}
+              // height={136}
+              indicatorOffset={4}
+              indicatorColor={'#FFF'}
+              indicatorSize={6}
+              inactiveIndicatorColor={'rgba(255, 255, 255, 0.3)'}
+              indicatorSpace={8}
+              onPageChange={(index) =>
+                (areaData.products) ?
+                  this.props.onProductIdChange(areaData.products[index])
+                  : null}
+            >
+              { (areaData.products || []).map((productId, index) => (
+                  <View style={styles.itemContainer} key={index}>
+                    <Animated.View style={[styles.itemBox, { height: headerHeight }]}>
+                      <Animated.View style={[styles.imageBox, fastOpacity]}>
+                        <Image style={styles.itemImage} resizeMode={Image.resizeMode.contain} source={{ uri: matching[productId] ? matching[productId].img : "" }} />
+                      </Animated.View>
+
+                      <View style={styles.detailsBox}>
+                        <Animated.Text numberOfLines={1} style={[styles.titleItem, titleItem]}>{matching[productId] ? matching[productId].manufacture + " " + matching[productId].model : ""}</Animated.Text>
+
+                        <Animated.View style={[styles.hrDivider, fastOpacity]}></Animated.View>
+
+                        <Animated.View style={[styles.deviceOptionsBox, fastOpacity]}>
+                          <View style={styles.deviceOptionItem}>
+                            <Icon height="14" width="14" name="Storage" viewBox="0 0 24 24" />
+                            <Text style={styles.deviceOptionText}>{matching[productId] ? matching[productId].deviceOptions[0].storage : 0}GB</Text>
+                          </View>
+                          <View style={styles.deviceOptionItem}>
+                            <Icon height="14" width="14" name="BatteryInclined" viewBox="0 0 20 20" />
+                            <Text style={styles.deviceOptionText}>{matching[productId] ? matching[productId].battery.life.video.replace(' ', '') : 0}</Text>
+                          </View>
+                          <View style={styles.deviceOptionItem}>
+                            <Icon height="14" width="14" name="Camera" viewBox="0 0 24 24" />
+                            <Text style={styles.deviceOptionText}>{matching[productId] ? matching[productId].camera.front.sensor + " " + matching[productId].camera.rear.sensor : ""}</Text>
+                          </View>
+                        </Animated.View>
+
+                        <Animated.View style={[ btnBox ]}>
+                          <ButtonCompare />
+                        </Animated.View>
+                      </View>
+                    </Animated.View>
+                  </View>
+                ))
+              }
+            </Carousel>
+            :
+            <View style={styles.itemContainer}>
+              { !areaData.products ?
+                  null
+                  :
+                  <View style={styles.loadingBox}>
+                    <Spinkit isVisible={true} type={'Circle'} color={'gray'} size={20} />
+                  </View>
+              }
+            </View>
+        }
+      </LinearGradient>
     );
   }
 }
