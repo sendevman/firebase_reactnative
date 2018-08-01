@@ -6,27 +6,25 @@
 
 const initialState = {
   bluetoothIsOn: false,
-  customHeaderNav: {
-    hideHeader: false,
-    heightHeader: 56,
-    hideSlide: false,
-    heightSlide: 166,
-    heightScrolled: false
+  network: {
+    connectionType: 'none',
+    isConnected: false,
+    ssid: '<unknown ssid>'
   }
 }
 
 export default common = (state = initialState, action) => {
   switch (action.type) {
-    case 'UPDATE_HEADERNAV':
-      // return state
-      return {
-        ...state,
-        customHeaderNav: action.payload
-      }
     case 'UPDATE_BLUETOOTH_IS_ON':
       return {
         ...state,
         bluetoothIsOn: action.payload
+      }
+      break;
+    case 'UPDATE_NETWORK':
+      return {
+        ...state,
+        network: action.payload
       }
       break;
     default:

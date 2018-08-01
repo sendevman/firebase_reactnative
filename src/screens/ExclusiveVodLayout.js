@@ -57,7 +57,7 @@ class ExclusiveVodLayoutScreen extends Component {
 const mapStateToProps = state => {
   const { common } = state;
 
-  return { customHeaderNav: common.customHeaderNav };
+  return { exclusiveVod: 0 };
 }
 
 const ExclusiveVodLayout = createStackNavigator(
