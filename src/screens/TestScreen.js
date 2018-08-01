@@ -12,8 +12,8 @@ const deviceId = DeviceInfo.getUniqueID();
 
 class TestScreen extends Component {
   render() {
-    const bledata = this.props.positionData ? (this.props.positionData.postition || {}) : {};
-    const wifi = this.props.positionData.network;
+    const { bledata, network } = this.props;
+
     return (
         <View style={{ flex: 1, marginTop:30 }}>
           <ScrollView>
@@ -25,7 +25,7 @@ class TestScreen extends Component {
             <Text>Zone ID   : {bledata.zone_id}</Text>
             <Text>Time      : {bledata.ts}</Text>
             <Text>Device ID : {deviceId}</Text>
-            <Text>SSID      : {wifi.ssid}</Text>
+            <Text>SSID      : {network.ssid}</Text>
           </ScrollView>
         </View>
     );
@@ -33,7 +33,9 @@ class TestScreen extends Component {
 }
 
 const mapStateToProps = state => {
-  return { positionData: state.current, network: state.current };
+  const { current, common } = state;
+
+  return { bledata: current.position, network: common.network };
 }
 
 export default connect(mapStateToProps)(TestScreen);
