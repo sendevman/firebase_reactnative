@@ -4,12 +4,12 @@
  * @flow
  */
 
-export const updateHeaderNav = (params) => ({
-  type: 'UPDATE_HEADERNAV',
+export const updateBluetoothIsOn = (params) => ({
+  type: 'UPDATE_BLUETOOTH_IS_ON',
   payload: params
 })
 
-export const updateBluetoothIsOn = (params) => ({
-  type: 'UPDATE_BLUETOOTH_IS_ON',
+export const setNetworkInfo = (params) => ({
+  type: 'UPDATE_NETWORK',
   payload: params
 })

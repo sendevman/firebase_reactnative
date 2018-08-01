@@ -208,7 +208,7 @@ class ProductLayoutScreen extends Component {
 const mapStateToProps = state => {
   const { common, current, productsNear } = state;
 
-  return { customHeaderNav: common.customHeaderNav, locationData: current.postition, productsNear: productsNear.productsNear };
+  return { locationData: current.position, productsNear: productsNear.productsNear };
 }
 
 const ProductLayout = createStackNavigator(

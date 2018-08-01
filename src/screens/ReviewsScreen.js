@@ -19,9 +19,6 @@ import WebReview from './components/WebReview';
 import VideoContent from './components/VideoContent';
 import FeedbackSurvey from './components/FeedbackSurvey';
 
-// My Actions
-import { updateHeaderNav } from '../actions/Common';
-
 var { width } = Dimensions.get('window');
 
 const getWidth = (number) => {
@@ -54,33 +51,6 @@ class ReviewsScreen extends Component {
       heightSlide: d,
       heightScrolled: e
     }
-  }
-
-  handleScroll(event) {
-    console.log(event, event.nativeEvent.contentOffset)
-    const { dispatch, customHeaderNav } = this.props;
-    var value = event.nativeEvent.contentOffset.y;
-
-    // if (!customHeaderNav.heightScrolled && value > 60) {
-    if (value > 10) {
-      let newValue = this.setNewValue(false, 0, false, 0, true);
-      // dispatch(updateHeaderNav(newValue));
-    }
-    // if (customHeaderNav.heightScrolled && value < 60) {
-    if (value <= 0) {
-      let newValue = this.setNewValue(false, 0, false, 0, false);
-      // dispatch(updateHeaderNav(newValue));
-    }
-    //   if ((value >= 0) && (value <= 56)) {
-    //     let newValue = this.setNewValue(false, 56 - value, false, 166);
-    //     dispatch(updateHeaderNav(newValue));
-    //   } else if ((value >= 57) && (value <= 222)) {
-    //     let newValue = this.setNewValue(true, 0, false, 166 - (value - 56));
-    //     dispatch(updateHeaderNav(newValue));
-    //   } else {
-    //     let newValue = this.setNewValue(true, 0, true, 0);
-    //     dispatch(updateHeaderNav(newValue));
-    //   }
   }
 
   renderCustomerReviews() {
@@ -182,7 +152,7 @@ class ReviewsScreen extends Component {
 const mapStateToProps = state => {
   const { current, common } = state;
 
-  return { reviews: current.product, customHeaderNav: common.customHeaderNav };
+  return { reviews: current.product };
 }
 
 export default connect(mapStateToProps)(ReviewsScreen);

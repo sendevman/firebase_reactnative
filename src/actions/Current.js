@@ -19,11 +19,6 @@ export const setAreaInfo = (params) => ({
   payload: params
 })
 
-export const setWifiData = (params) => ({
-  type: 'UPDATE_WIFI',
-  payload: params
-})
-
 export const setCompareInfo = (params) => ({
   type: 'UPDATE_COMPARE_INFO',
   payload: params

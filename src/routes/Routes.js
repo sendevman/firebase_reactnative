@@ -5,11 +5,11 @@
  */
 
 import React, { Component } from 'react';
-import { Button, ScrollView, StatusBar, Text, View, NativeEventEmitter, NativeModules } from 'react-native';
+import { Button, NetInfo, ScrollView, StatusBar, Text, View, NativeEventEmitter, NativeModules } from 'react-native';
 import { createDrawerNavigator, createBottomTabNavigator, SafeAreaView } from 'react-navigation';
-import { connect } from 'react-redux';
 import { NetworkInfo } from 'react-native-network-info';
-import {NetInfo} from 'react-native';
+import { connect } from 'react-redux';
+
 // My Customs
 import MyDrawer from '../components/Drawer/Drawer';
 import Icon from '../assets/images/Icon';
@@ -24,7 +24,8 @@ import OnBoardingLayout from '../screens/OnBoardingLayout';
 import TestScreen from '../screens/TestScreen';
 
 // My Actions
-import { setLocationData, setWifiData } from '../actions/Current';
+import { setLocationData } from '../actions/Current';
+import { setNetworkInfo } from '../actions/Common';
 
 // Walkbase Engage
 import BleManager from 'walkbase-sdk';
@@ -219,14 +220,7 @@ class Routes extends Component {
     this.handleEventFailed = this.handleEventFailed.bind(this);
     this.handleEventReceivedAdvertisement = this.handleEventReceivedAdvertisement.bind(this);
     this.handleEventErrors = this.handleEventErrors.bind(this);
-    NetworkInfo.getSSID(ssid => {
-      let data = {
-        wifi:true,
-        ssid:ssid
-      }
-      this.props.dispatch(setWifiData(data));
-    });
-    
+    // My Listeners
     NetInfo.isConnected.addEventListener('connectionChange', this.handleConnectivityChange);
   }
 
@@ -240,25 +234,22 @@ class Routes extends Component {
     this.handlerDiscover7 = bleManagerEmitter.addListener("WBEngageManagerOff", this.handleEventErrors);
     this.webAPI();
   }
-  handleConnectivityChange = isConnected => {
-    if (isConnected) {
+
+  handleConnectivityChange = isConnected => { this.setNetworkInfo(isConnected); }
+
+  setNetworkInfo(isConnected) {
+    NetInfo.getConnectionInfo()
+    .then(connectionInfo => {
       NetworkInfo.getSSID(ssid => {
         let data = {
-          wifi:true,
-          ssid:ssid
+          connectionType: connectionInfo.type,
+          isConnected: isConnected,
+          ssid: ssid
         }
-        this.props.dispatch(setWifiData(data));
+        this.props.dispatch(setNetworkInfo(data));
       });
-    } else {
-      NetworkInfo.getSSID(ssid => {
-        let data = {
-          wifi:false,
-          ssid:ssid
-        }
-        this.props.dispatch(setWifiData(data));
-      });
-    }
-  };
+    });
+  }
 
   handleEventNotDetermined(data) { console.log("Not determined");};
   handleEventInitializing(data) { console.log("Initializing"); };
@@ -419,8 +410,8 @@ function mapDispatchToProps(dispatch) {
     setLocationData: (data) => {
       return dispatch(setLocationData(data))
     },
-    setWifiData:(data) => {
-      return dispatch(setWifiData(data))
+    setNetworkInfo: (data) => {
+      return dispatch(setNetworkInfo(data))
     }
   };
 }
