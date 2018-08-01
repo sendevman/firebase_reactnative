@@ -24,9 +24,7 @@ class CompareScreen extends Component {
   }
 
   hideModal = () => { this.setState({ itemValue: 0, showModal: false }); }
-  showModal = (value) => {
-    console.log('value: ', value);
-    this.setState({ itemValue: value.item, showModal: true }); }
+  showModal = (value) => { this.setState({ itemValue: value.item, showModal: true }); }
 
   renderAddProduct(withData, item, img) {
     return (
@@ -45,8 +43,6 @@ class CompareScreen extends Component {
   }
 
   renderDetails(itemLeft, itemRight) {
-    console.log('itemLeft: ', itemLeft, 'itemRight: ', itemRight);
-
     return (
       <View>
         { this.renderTitleAndBtn(itemLeft, itemRight) }
