@@ -13,10 +13,9 @@ import { FakeCompare } from '../store/CompareFakeData';
 
 const initialState = {
   allAreas: [],
-  postition: {},
+  position: {},
   product: {},
-  compare: [],
-  network: {}
+  compare: []
 };
 
 const setCompareData = (state, payload) => {
@@ -45,7 +44,7 @@ export default current = (state = initialState, action) => {
     case 'UPDATE_LOCATION':
       return {
         ...state,
-        postition: action.payload
+        position: action.payload
       }
       break;
     case 'UPDATE_PRODUCT_INFO':
@@ -58,12 +57,6 @@ export default current = (state = initialState, action) => {
       return {
         ...state,
         allAreas: action.payload
-      }
-      break;
-    case 'UPDATE_WIFI':
-      return {
-        ...state,
-        network: action.payload
       }
       break;
     case 'UPDATE_COMPARE_INFO':
