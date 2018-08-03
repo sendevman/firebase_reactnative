@@ -9,6 +9,7 @@ import { Button, NetInfo, ScrollView, StatusBar, Text, View, NativeEventEmitter,
 import { createDrawerNavigator, createBottomTabNavigator, SafeAreaView } from 'react-navigation';
 import { NetworkInfo } from 'react-native-network-info';
 import { connect } from 'react-redux';
+import firebase from 'react-native-firebase';
 
 // My Customs
 import MyDrawer from '../components/Drawer/Drawer';
@@ -233,6 +234,15 @@ class Routes extends Component {
     this.handlerDiscover6 = bleManagerEmitter.addListener("WBEngageManagerReceivedAdvertisement", this.handleEventReceivedAdvertisement);
     this.handlerDiscover7 = bleManagerEmitter.addListener("WBEngageManagerOff", this.handleEventErrors);
     this.webAPI();
+    this.firebaseLogin();
+  }
+
+  firebaseLogin() {
+    firebase.auth().signInAnonymously()
+    .then(user => {
+      console.log("firebase user : ", user._user.uid);
+      firebase.analytics().setUserId(user._user.uid);
+    });
   }
 
   handleConnectivityChange = isConnected => { this.setNetworkInfo(isConnected); }

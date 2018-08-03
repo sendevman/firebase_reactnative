@@ -7,10 +7,13 @@
 import React, { Component } from 'react';
 import {
   Dimensions, Keyboard, Modal, SectionList, Text, TextInput,
-  TouchableOpacity, TouchableHighlight, View } from 'react-native';
+  TouchableOpacity, TouchableHighlight, View, Platform } from 'react-native';
 import Svg, { Rect } from 'react-native-svg';
 import { connect } from 'react-redux';
 
+//Analytics
+import firebase from 'react-native-firebase';
+// var Analytics = require('react-native-firebase-analytics');
 // My Styles
 import styles from './CompareModalCss';
 
@@ -61,6 +64,13 @@ class CompareModal extends Component {
     let product = this.props.productsNear.filter(obj => { return (obj.id == key) })[0];
     this.props.dispatch(setCompareInfo({ item: this.props.itemValue, product: product }));
     this.props.onHideModal();
+    console.log("compare select : ", product);
+    if (Platform.OS === 'ios') {
+      firebase.analytics().logEvent("Compare", {"id":product.id, "model":product.model});
+    } else {
+      firebase.analytics().logEvent("Compare", {"id":product.id, "model":product.model});
+      alert("android");
+    }
   }
 
   _onChangeText(text) {
