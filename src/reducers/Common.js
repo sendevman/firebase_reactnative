@@ -10,7 +10,8 @@ const initialState = {
     connectionType: 'none',
     isConnected: false,
     ssid: '<unknown ssid>'
-  }
+  },
+  firebaseid: ''
 }
 
 export default common = (state = initialState, action) => {
@@ -25,6 +26,12 @@ export default common = (state = initialState, action) => {
       return {
         ...state,
         network: action.payload
+      }
+      break;
+    case 'GET_FIREBASE_ID':
+      return {
+        ...state,
+        firebaseid: action.payload
       }
       break;
     default:

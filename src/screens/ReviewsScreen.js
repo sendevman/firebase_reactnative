@@ -54,7 +54,7 @@ class ReviewsScreen extends Component {
   }
 
   renderCustomerReviews() {
-    const { customerReviews } = this.props.reviews;
+    const { customerReviews, model, manufacture } = this.props.reviews;
 
     if (typeof customerReviews != "undefined" && customerReviews.length > 0) {
       return (
@@ -68,7 +68,7 @@ class ReviewsScreen extends Component {
             </View>
 
             { customerReviews.map((item, index) => {
-                return <CustomerReview key={index} index={index} item={item} />;
+                return <CustomerReview key={index} index={index} item={item} model={model} manufacture={manufacture}/>;
               })
             }
           </View>
@@ -78,13 +78,13 @@ class ReviewsScreen extends Component {
   }
 
   renderWebReviews() {
-    const { webReviews } = this.props.reviews;
+    const { webReviews,  model, manufacture } = this.props.reviews;
 
     if (typeof webReviews != "undefined" && webReviews.length > 0) {
       return (
         <View>
           { webReviews.map((item, index) => {
-              return <WebReview key={index} index={index} item={item} />;
+              return <WebReview key={index} index={index} item={item} model={model} manufacture={manufacture} publication={webReviews[index].publication}/>;
             })
           }
         </View>
@@ -93,13 +93,13 @@ class ReviewsScreen extends Component {
   }
 
   renderVideoContent() {
-    const { videoContent } = this.props.reviews;
+    const { videoContent,  model, manufacture } = this.props.reviews;
 
     if (typeof videoContent != "undefined" && videoContent.length > 0) {
       return (
         <View>
           { videoContent.map((item, index) => {
-              return <VideoContent key={index} index={index} item={item} />;
+              return <VideoContent key={index} index={index} item={item} model={model} manufacture={manufacture}/>;
             })
           }
         </View>
@@ -109,7 +109,6 @@ class ReviewsScreen extends Component {
 
   renderContent() {
     const { reviews } = this.props;
-
     if (Object.keys(reviews).length === 0 && reviews.constructor === Object) {
       return ( <ReviewsSkeleton /> );
     } else {

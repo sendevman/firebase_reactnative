@@ -5,8 +5,10 @@
  */
 
 import React, { Component } from 'react';
-import { Text, View, WebView } from 'react-native';
+import { Text, View, WebView, TouchableOpacity } from 'react-native';
 
+import { connect } from 'react-redux';
+import firebase from 'react-native-firebase';
 // My Styles
 import styles from '../css/ReviewsScreenCss';
 
@@ -14,18 +16,24 @@ class VideoContent extends Component<props> {
   constructor(props) {
     super(props);
   }
+  onPressfunc= () => {
+    console.log("reviewVideo ======= : ", {"pFirebaseId":this.props.firebaseid, "pDeviceModel":this.props.model, "pDeviceManufacture":this.props.manufacture,
+     "pReviewContentTitle":this.props.item.title, "pReviewContentUrl":this.props.item.src, "pReviewContentType":video_review});
+    firebase.analytics().logEvent("reviewVideo", {"pFirebaseId":this.props.firebaseid, "pDeviceModel":this.props.model,
+     "pDeviceManufacture":this.props.manufacture, "pReviewContentTitle":this.props.item.title, "pReviewContentUrl":this.props.item.src, "pReviewContentType":"video_review"});
 
+   }
   render() {
     const { item } = this.props;
 
     return (
       <View style={styles.videoContainer}>
-        <View style={styles.videoBox}>
+        <TouchableOpacity style={styles.videoBox} onPress={this.onPressfunc}>
           <WebView
             style={styles.videoItem}
             source={{uri: item.src}}
           />
-        </View>
+          </TouchableOpacity>
 
         <Text style={[styles.textReviewBig, { marginTop: 16 }]} numberOfLines={1}>
           {item.title}
@@ -36,4 +44,8 @@ class VideoContent extends Component<props> {
   }
 }
 
-export default VideoContent;
+const mapStateToProps = state => {
+  const { common } = state;
+  return { firebaseid: common.firebaseid };
+}
+export default connect(mapStateToProps)(VideoContent);

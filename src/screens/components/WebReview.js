@@ -7,6 +7,8 @@
 import React, { Component } from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 
+import { connect } from 'react-redux';
+import firebase from 'react-native-firebase';
 // My Styles
 import styles from '../css/ReviewsScreenCss';
 
@@ -22,6 +24,10 @@ class WebReview extends Component<props> {
 
   toggleReadMore = () => {
     this.setState({ readMore: !this.state.readMore });
+    if(!this.state.readMore){
+      console.log("reviewViewed ======= : ", {"pFirebaseId":this.props.firebaseid, "pDeviceModel":this.props.model, "pDeviceManufacture":this.props.manufacture, "pReviewType":this.props.publication});
+      firebase.analytics().logEvent("reviewViewed", {"pFirebaseId":this.props.firebaseid, "pDeviceModel":this.props.model, "pDeviceManufacture":this.props.manufacture, "pReviewType":this.props.publication});
+    }
   }
 
   renderLogo(publicationType) {
@@ -112,4 +118,8 @@ class WebReview extends Component<props> {
   }
 }
 
-export default WebReview;
+const mapStateToProps = state => {
+  const { common } = state;
+  return { firebaseid: common.firebaseid };
+}
+export default connect(mapStateToProps)(WebReview);

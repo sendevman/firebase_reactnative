@@ -16,8 +16,6 @@ import Icon from '../assets/images/Icon';
 import CompareModal from '../components/CompareModal/CompareModal';
 import { OfferThin } from '../components/LimitedTimeOffer/Offer';
 
-//Analytics
-var FIRAnalytics = NativeModules.RNFIRAnalytics;
 
 
 class CompareScreen extends Component {
