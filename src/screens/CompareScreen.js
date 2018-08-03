@@ -5,7 +5,7 @@
  */
 
 import React, { Component } from 'react';
-import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { Image, ScrollView, Text, TouchableOpacity, View, NativeModules } from 'react-native';
 import { connect } from 'react-redux';
 
 // My Styles
@@ -15,6 +15,10 @@ import styles from './css/CompareScreenCss';
 import Icon from '../assets/images/Icon';
 import CompareModal from '../components/CompareModal/CompareModal';
 import { OfferThin } from '../components/LimitedTimeOffer/Offer';
+
+//Analytics
+var FIRAnalytics = NativeModules.RNFIRAnalytics;
+
 
 class CompareScreen extends Component {
   constructor(props) {

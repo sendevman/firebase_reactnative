@@ -12,6 +12,8 @@ import com.opensettings.OpenSettingsPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.pusherman.networkinfo.RNNetworkInfoPackage;
 import io.invertase.firebase.RNFirebasePackage;
+import io.invertase.firebase.analytics.RNFirebaseAnalyticsPackage;
+import io.invertase.firebase.auth.RNFirebaseAuthPackage;
 import io.invertase.firebase.firestore.RNFirebaseFirestorePackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -39,6 +41,8 @@ public class MainApplication extends Application implements ReactApplication {
           new RNSpinkitPackage(),
           new LinearGradientPackage(),
           new RNFirebasePackage(),
+          new RNFirebaseAuthPackage(),
+          new RNFirebaseAnalyticsPackage(),
 //            new RNBackgroundGeolocation(),
           new RNFirebaseFirestorePackage(),
           new OpenSettingsPackage(),
