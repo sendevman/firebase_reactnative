@@ -26,7 +26,7 @@ import TestScreen from '../screens/TestScreen';
 
 // My Actions
 import { setLocationData } from '../actions/Current';
-import { setNetworkInfo } from '../actions/Common';
+import { setNetworkInfo, setFirebaseID } from '../actions/Common';
 
 // Walkbase Engage
 import BleManager from 'walkbase-sdk';
@@ -241,6 +241,7 @@ class Routes extends Component {
     firebase.auth().signInAnonymously()
     .then(user => {
       console.log("firebase user : ", user._user.uid);
+      this.props.dispatch(setFirebaseID(user._user.uid));
       firebase.analytics().setUserId(user._user.uid);
     });
   }

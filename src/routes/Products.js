@@ -29,7 +29,6 @@ const MyNavScreen = ({ navigation, banner }) => (
     </ScrollView>
   </View>
 );
-
 // Top Tab Navigator - Screens
 const TestScreen = ({ navigation }) => (
   <MyNavScreen banner={'Test Screen'} navigation={navigation} />
@@ -39,15 +38,15 @@ const TopTabNav = createMaterialTopTabNavigator(
   {
     InfoSpecs: {
       screen: props => <InfoSpecsScreen onScrollCustom={props.screenProps.onScrollCustom} />,
-      navigationOptions: { title: 'Info & Specs' }
+      navigationOptions: { title: 'Info & Specs'}
     },
     Reviews: {
       screen: props => <ReviewsScreen onScrollCustom={props.screenProps.onScrollCustom} />,
-      navigationOptions: { title: 'Reviews' }
+      navigationOptions: { title: 'Reviews'}
     },
     CostPlans: {
       screen: props => <CostPlansScreen onScrollCustom={props.screenProps.onScrollCustom} />,
-      navigationOptions: { title: 'Cost & Plans' }
+      navigationOptions: { title: 'Cost & Plans'}
     }
   },
   {
@@ -67,7 +66,7 @@ const TopTabNav = createMaterialTopTabNavigator(
         fontSize: 14,
         letterSpacing: 0.13
       },
-      indicatorStyle: { backgroundColor: '#1181FF' }
+      indicatorStyle: { backgroundColor: '#1181FF' },
     }
   }
 );
