@@ -10,11 +10,13 @@ import { combineReducers } from 'redux';
 import common from './Common';
 import current from './Current';
 import productsNear from './ProductsNear';
+import vod from './Vod';
 
 const rootReducer = combineReducers({
   common,
   current,
-  productsNear
+  productsNear,
+  vod
 });
 
 export default rootReducer;
