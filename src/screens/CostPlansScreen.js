@@ -48,9 +48,9 @@ class CostPlansScreen extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if(nextProps.selectedTab === 2 && this.props.costplans.model != undefined) {
-      console.log("log event ======= : ", {"pFirebaseId":this.props.firebaseid, "pDeviceModel":this.props.costplans.model, "pDeviceManufacture":this.props.costplans.manufacture, "pResearchTab":"price"});
-      firebase.analytics().logEvent("deviceViewed", {"pFirebaseId":this.props.firebaseid, "pDeviceModel":this.props.costplans.model, "pDeviceManufacture":this.props.costplans.manufacture, "pResearchTab":"price"});
+    if(nextProps.selectedTab === 2 && nextProps.costplans.model != undefined) {
+      console.log("log event ======= : ", {"pFirebaseId":this.props.firebaseid, "pDeviceModel":nextProps.costplans.model, "pDeviceManufacture":nextProps.costplans.manufacture, "pResearchTab":"price"});
+      firebase.analytics().logEvent("deviceViewed", {"pFirebaseId":this.props.firebaseid, "pDeviceModel":nextProps.costplans.model, "pDeviceManufacture":nextProps.costplans.manufacture, "pResearchTab":"price"});
   
     }
   }
