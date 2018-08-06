@@ -7,6 +7,8 @@
 import React, { Component } from 'react';
 import { Button, ScrollView, StatusBar, Text, View } from 'react-native';
 import { createMaterialTopTabNavigator, SafeAreaView } from 'react-navigation';
+import { connect } from 'react-redux';
+import { selectTabBar } from '../actions/Common';
 
 // My Screens
 import InfoSpecsScreen from '../screens/InfoSpecsScreen';
@@ -17,7 +19,7 @@ const MyNavScreen = ({ navigation, banner }) => (
   <View style={{}}>
     <ScrollView>
       <SafeAreaView forceInset={{ top: 'always' }}>
-        <Text style={{ fontSize: 14}}>{banner}</Text>
+        <Text style={{ fontSize: 14 }}>{banner}</Text>
         <Button onPress={() => navigation.openDrawer()} title="Open drawer" />
         <Button
           onPress={() => navigation.navigate('NotifSettings')}
@@ -29,6 +31,7 @@ const MyNavScreen = ({ navigation, banner }) => (
     </ScrollView>
   </View>
 );
+
 // Top Tab Navigator - Screens
 const TestScreen = ({ navigation }) => (
   <MyNavScreen banner={'Test Screen'} navigation={navigation} />
@@ -38,15 +41,17 @@ const TopTabNav = createMaterialTopTabNavigator(
   {
     InfoSpecs: {
       screen: props => <InfoSpecsScreen onScrollCustom={props.screenProps.onScrollCustom} />,
-      navigationOptions: { title: 'Info & Specs'}
+      navigationOptions: { title: 'Info & Specs' }
     },
     Reviews: {
       screen: props => <ReviewsScreen onScrollCustom={props.screenProps.onScrollCustom} />,
-      navigationOptions: { title: 'Reviews'}
+      navigationOptions: { title: 'Reviews' }
     },
     CostPlans: {
       screen: props => <CostPlansScreen onScrollCustom={props.screenProps.onScrollCustom} />,
-      navigationOptions: { title: 'Cost & Plans'}
+      navigationOptions: {
+        title: 'Cost & Plans'
+      }
     }
   },
   {
@@ -66,7 +71,7 @@ const TopTabNav = createMaterialTopTabNavigator(
         fontSize: 14,
         letterSpacing: 0.13
       },
-      indicatorStyle: { backgroundColor: '#1181FF' },
+      indicatorStyle: { backgroundColor: '#1181FF' }
     }
   }
 );
@@ -78,9 +83,16 @@ class ProductStack extends Component {
 
   render() {
     return (
-      <TopTabNav screenProps={{ onScrollCustom: this.props.onScrollLayout }} />
+      <TopTabNav screenProps={{ onScrollCustom: this.props.onScrollLayout }}
+        onNavigationStateChange={(prevState, newState) => {
+          this.props.dispatch(selectTabBar(newState.index));
+        }} />
     );
   }
 }
 
-export default ProductStack;
+function mapDispatchToProps(dispatch) {
+  return {
+  };
+}
+export default connect(mapDispatchToProps)(ProductStack);

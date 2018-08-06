@@ -8,6 +8,7 @@ import React, { Component } from 'react';
 import { Animated, Dimensions, Image, ScrollView, Text, View } from 'react-native';
 import Svg, { Rect } from 'react-native-svg';
 import { connect } from 'react-redux';
+import firebase from 'react-native-firebase';
 
 // My Styles
 import styles from './css/ReviewsScreenCss';
@@ -43,6 +44,13 @@ class ReviewsScreen extends Component {
     super(props);
   }
 
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.selectedTab === 1 && this.props.reviews.model != undefined) {
+      console.log("log event ======= : ", {"pFirebaseId":this.props.firebaseid, "pDeviceModel":this.props.reviews.model, "pDeviceManufacture":this.props.reviews.manufacture, "pResearchTab":"reviews"});
+      firebase.analytics().logEvent("deviceViewed", {"pFirebaseId":this.props.firebaseid, "pDeviceModel":this.props.reviews.model, "pDeviceManufacture":this.props.reviews.manufacture, "pResearchTab":"reviews"});
+  
+    }
+  }
   setNewValue(a, b, c, d, e) {
     return {
       hideHeader: a,
@@ -151,7 +159,7 @@ class ReviewsScreen extends Component {
 const mapStateToProps = state => {
   const { current, common } = state;
 
-  return { reviews: current.product };
+  return { reviews: current.product, selectedTab: common.selectedTab, firebaseid: common.firebaseid };
 }
 
 export default connect(mapStateToProps)(ReviewsScreen);
