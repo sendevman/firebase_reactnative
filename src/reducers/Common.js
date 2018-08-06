@@ -11,7 +11,8 @@ const initialState = {
     isConnected: false,
     ssid: '<unknown ssid>'
   },
-  firebaseid: ''
+  firebaseid: '',
+  selectedTab: 0
 }
 
 export default common = (state = initialState, action) => {
@@ -32,6 +33,12 @@ export default common = (state = initialState, action) => {
       return {
         ...state,
         firebaseid: action.payload
+      }
+      break;
+    case 'SELECT_TABBAR_ID':
+      return {
+        ...state,
+        selectedTab: action.payload
       }
       break;
     default:

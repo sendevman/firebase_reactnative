@@ -9,6 +9,7 @@ import { Animated, ScrollView, Text, TouchableWithoutFeedback, View } from 'reac
 import Svg, { Rect } from 'react-native-svg';
 import moment from 'moment';
 import { connect } from 'react-redux';
+import firebase from 'react-native-firebase';
 
 // My Styles
 import styles from './css/CostPlansScreenCss';
@@ -44,6 +45,14 @@ class CostPlansScreen extends Component {
       viewMoreInsurance: false,
       viewMorePlans: false
     };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.selectedTab === 2 && this.props.costplans.model != undefined) {
+      console.log("log event ======= : ", {"pFirebaseId":this.props.firebaseid, "pDeviceModel":this.props.costplans.model, "pDeviceManufacture":this.props.costplans.manufacture, "pResearchTab":"price"});
+      firebase.analytics().logEvent("deviceViewed", {"pFirebaseId":this.props.firebaseid, "pDeviceModel":this.props.costplans.model, "pDeviceManufacture":this.props.costplans.manufacture, "pResearchTab":"price"});
+  
+    }
   }
 
   toggleViewMorePlans = () => {
@@ -388,7 +397,7 @@ class CostPlansScreen extends Component {
 const mapStateToProps = state => {
   const { current, common } = state;
 
-  return { costplans: current.product };
+  return { costplans: current.product, selectedTab: common.selectedTab, firebaseid: common.firebaseid };
 }
 
 export default connect(mapStateToProps)(CostPlansScreen);
