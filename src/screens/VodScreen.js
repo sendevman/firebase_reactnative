@@ -5,140 +5,143 @@
  */
 
 import React, { Component } from 'react';
-import { Image, ScrollView, Text, View, WebView, Modal, TouchableHighlight } from 'react-native';
-import { connect } from 'react-redux';
+import {
+  Dimensions, Image, ScrollView,
+  Text, View, TouchableOpacity, TouchableWithoutFeedback
+} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import Svg, { Rect } from 'react-native-svg';
+import { connect } from 'react-redux';
 
 // My Styles
 import styles from './css/VodScreenCss';
 
 // My Customs
-import Icon from '../assets/images/Icon';
+import VodModal from '../components/VodModal/VodModal';
+import SkeletonLoading from './components/SkeletonLoading';
 
+var { width } = Dimensions.get('window');
+
+const VodSkeleton = () => (
+  <View style={styles.skeletonLoading}>
+    <SkeletonLoading height={520}>
+      <Rect x="0" y="0" rx="3" ry="3" width="50" height="10"/>
+      <Rect x="0" y="20" rx="6" ry="6" width={width - 30} height="170"/>
+
+      <Rect x="0" y="200" rx="3" ry="3" width={width - 80} height="10"/>
+      <Rect x="0" y="215" rx="3" ry="3" width={width - 120} height="10"/>
+
+      <Rect x="0" y="250" rx="3" ry="3" width="70" height="10"/>
+      <Rect x="0" y="270" rx="6" ry="6" width="85" height="100"/>
+      <Rect x="95" y="270" rx="6" ry="6" width="85" height="100"/>
+      <Rect x="190" y="270" rx="6" ry="6" width="85" height="100"/>
+      <Rect x="285" y="270" rx="6" ry="6" width="85" height="100"/>
+
+      <Rect x="0" y="395" rx="3" ry="3" width="100" height="10"/>
+      <Rect x="0" y="415" rx="6" ry="6" width="85" height="100"/>
+      <Rect x="95" y="415" rx="6" ry="6" width="85" height="100"/>
+      <Rect x="190" y="415" rx="6" ry="6" width="85" height="100"/>
+      <Rect x="285" y="415" rx="6" ry="6" width="85" height="100"/>
+    </SkeletonLoading>
+  </View>
+);
 
 class VodScreen extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = { vodInfo: {}, showModal: false };
+  }
+
+  getVodInfo(itemId, categoryId) {
+    const { featured, fullList } = this.props;
+
+    if (itemId == "featured") return featured;
+    let selectedCategory = fullList.filter((obj) => { return (obj.type === categoryId); })[0];
+    return selectedCategory.items.filter((obj) => { return (obj.id === itemId); })[0];
+  }
+
+  hideModal = () => { this.setState({ vodInfo: {}, showModal: false }); }
+  showModal = (value) => { this.setState({ vodInfo: this.getVodInfo(value.itemId, value.categoryId), showModal: true }); }
+
+  renderFeatured() {
+    const { featured } = this.props;
+
+    return (
+      <TouchableWithoutFeedback
+        style={[styles.sectionContainer, { paddingRight: 15 }]}
+        onPress={() => this.showModal({ itemId: featured.id, categoryId: featured.category })}>
+        <View>
+          <Text style={styles.featuredText}>FEATURED</Text>
+          <View style={styles.featuredBox}>
+            <Image style={styles.featuredImg} resizeMode={Image.resizeMode.cover} source={{ uri: featured ? featured.imgDetailUrl : "" }} />
+            <Text numberOfLines={1} style={styles.featuredTitle}>{featured.detailTitle}</Text>
+            <Text numberOfLines={1} style={styles.featuredSubTitle}>{featured.detailSubtitle}</Text>
+          </View>
+        </View>
+      </TouchableWithoutFeedback>
+    );
+  }
+
+  renderFullList() {
+    const { fullList } = this.props;
+
+    return (
+      <View>
+        { fullList.map((category, index) => {
+            return (
+              <View key={index} style={[styles.sectionContainer, { marginTop: 24, marginBottom: 10 }]}>
+                <Text style={styles.categoryText}>{category.name.toUpperCase()}</Text>
+
+                <ScrollView horizontal={true} contentContainerStyle={styles.horizontalScrollBox}>
+                  { category.items.map((item, indexItem) => {
+                      return (
+                        <TouchableOpacity key={indexItem} style={styles.categoryItemBox} onPress={() => this.showModal({ itemId: item.id, categoryId: item.category })} activeOpacity={0.75}>
+                          <Image style={styles.categoryImg} resizeMode={Image.resizeMode.cover} source={{ uri: item.imgListUrl }} />
+                          <Text numberOfLines={1} style={styles.categoryTitle}>{item.title}</Text>
+                        </TouchableOpacity>
+                      );
+                    })
+                  }
+                </ScrollView>
+              </View>
+            );
+          })
+        }
+      </View>
+    );
+  }
+
+  renderContent() {
+    const { featured, fullList } = this.props;
+
+    let featuredValid = (typeof featured != 'undefined' && Object.keys(featured).length !== 0 && featured.constructor === Object);
+    let fullListValid = (typeof fullList != 'undefined' && fullList.length > 0);
+
+    return (
+      <ScrollView>
+        { (!featuredValid && !fullListValid) && <VodSkeleton /> }
+        { featuredValid && this.renderFeatured() }
+        { fullListValid && this.renderFullList() }
+      </ScrollView>
+    );
+  }
+
   render() {
     return (
-      <LinearGradient colors={['#222A33', '#43597D']} >
-        <ScrollView contentContainerStyle={styles.container}>
-          <View>
-            <Text style={styles.textFeatured}>FEATURED</Text>
-              <ScrollView horizontal={true}>
-                <View style={styles.containerMovie}>
-                  <View style={styles.containerTrailer}>
-                    <View>
-                      <Image style={{height: 187, width: 332, borderRadius: 6, resizeMode: Image.resizeMode.contain, }} source={require('../assets/images/files/peakyBlinders.jpg')} />
-                    </View>
-                    <Text style={styles.textTitle}>Peaky Blinders Season 5 exclusive trailer</Text>
-                    <Text style={styles.textSubtitle}>Premieres on BBC Two, Monday May 30th</Text>
-                  </View>
-                  <View style={styles.containerTrailer}>
-                    <View>
-                      <Image style={{height: 187, width: 332, borderRadius: 6, resizeMode: Image.resizeMode.contain, }} source={require('../assets/images/files/peakyBlinders.jpg')} />
-                    </View>
-                    <Text style={styles.textTitle}>Peaky Blinders Season 5 exclusive trailer</Text>
-                    <Text style={styles.textSubtitle}>Premieres on BBC Two, Monday May 30th</Text>
-                  </View>
-                </View>
-              </ScrollView>
+      <LinearGradient colors={['#2b3748', '#43597D']} style={styles.linearGradient}>
+        { this.renderContent() }
 
-            <Text style={styles.textDirectv}>AT&T DIRECTV</Text>
-              <ScrollView horizontal={true}>
-                <View style={styles.containerAttDirectv}>
-                  <View style={styles.containerDirectv}>
-                    <View style={styles.containerVideo}>
-                      <Image style={{height: 132, width: 101, borderRadius: 6, resizeMode: Image.resizeMode.cover, }} source={require('../assets/images/files/fargo.jpg')} />
-                    </View>
-                    <Text style={styles.nameVideo}>Fargo</Text>
-                  </View>
-                  <View style={styles.containerDirectv}>
-                    <View style={styles.containerVideo}>
-                      <Image style={{height: 132, width: 101, borderRadius: 6, resizeMode: Image.resizeMode.cover, }} source={require('../assets/images/files/familyGuy.jpg')} />
-                    </View>
-                    <Text style={styles.nameVideo}>Family Guy</Text>
-                  </View>
-                  <View style={styles.containerDirectv}>
-                    <View style={styles.containerVideo}>
-                      <Image style={{height: 132, width: 101, borderRadius: 6, resizeMode: Image.resizeMode.cover, }} source={require('../assets/images/files/americanGods.jpg')} />
-                    </View>
-                    <Text style={styles.nameVideo}>American Gods</Text>
-                  </View>
-                  <View style={styles.containerDirectv}>
-                    <View style={styles.containerVideo}>
-                      <Image style={{height: 132, width: 101, borderRadius: 6, resizeMode: Image.resizeMode.cover, }} source={require('../assets/images/files/gameThrones.jpg')} />
-                    </View>
-                    <Text style={styles.nameVideo}>Game</Text>
-                  </View>
-                </View>
-              </ScrollView>
-
-            <Text style={styles.textDirectv}>ORIGINAL CONTENT</Text>
-              <ScrollView horizontal={true}>
-                <View style={styles.containerAttDirectv}>
-                  <View style={styles.containerDirectv}>
-                    <View style={styles.containerVideo}>
-                      <Image style={{height: 132, width: 101, borderRadius: 6, resizeMode: Image.resizeMode.cover, }} source={require('../assets/images/files/fargo.jpg')} />
-                    </View>
-                    <Text style={styles.nameVideo}>Fargo</Text>
-                  </View>
-                  <View style={styles.containerDirectv}>
-                    <View style={styles.containerVideo}>
-                      <Image style={{height: 132, width: 101, borderRadius: 6, resizeMode: Image.resizeMode.cover, }} source={require('../assets/images/files/familyGuy.jpg')} />
-                    </View>
-                    <Text style={styles.nameVideo}>Family Guy</Text>
-                  </View>
-                  <View style={styles.containerDirectv}>
-                    <View style={styles.containerVideo}>
-                      <Image style={{height: 132, width: 101, borderRadius: 6, resizeMode: Image.resizeMode.cover, }} source={require('../assets/images/files/americanGods.jpg')} />
-                    </View>
-                    <Text style={styles.nameVideo}>American Gods</Text>
-                  </View>
-                  <View style={styles.containerDirectv}>
-                    <View style={styles.containerVideo}>
-                      <Image style={{height: 132, width: 101, borderRadius: 6, resizeMode: Image.resizeMode.cover, }} source={require('../assets/images/files/gameThrones.jpg')} />
-                    </View>
-                    <Text style={styles.nameVideo}>Game</Text>
-                  </View>
-                </View>
-              </ScrollView>
-
-            <Text style={styles.textDirectv}>EXCLUSIVE TRAILERS</Text>
-              <ScrollView horizontal={true}>
-                <View style={styles.containerAttDirectv}>
-                  <View style={styles.containerDirectv}>
-                    <View style={styles.containerVideo}>
-                      <Image style={{height: 132, width: 101, borderRadius: 6, resizeMode: Image.resizeMode.cover, }} source={require('../assets/images/files/fargo.jpg')} />
-                    </View>
-                    <Text style={styles.nameVideo}>Fargo</Text>
-                  </View>
-                  <View style={styles.containerDirectv}>
-                    <View style={styles.containerVideo}>
-                      <Image style={{height: 132, width: 101, borderRadius: 6, resizeMode: Image.resizeMode.cover, }} source={require('../assets/images/files/familyGuy.jpg')} />
-                    </View>
-                    <Text style={styles.nameVideo}>Family Guy</Text>
-                  </View>
-                  <View style={styles.containerDirectv}>
-                    <View style={styles.containerVideo}>
-                      <Image style={{height: 132, width: 101, borderRadius: 6, resizeMode: Image.resizeMode.cover, }} source={require('../assets/images/files/americanGods.jpg')} />
-                    </View>
-                    <Text style={styles.nameVideo}>American Gods</Text>
-                  </View>
-                  <View style={styles.containerDirectv}>
-                    <View style={styles.containerVideo}>
-                      <Image style={{height: 132, width: 101, borderRadius: 6, resizeMode: Image.resizeMode.cover, }} source={require('../assets/images/files/gameThrones.jpg')} />
-                    </View>
-                    <Text style={styles.nameVideo}>Game</Text>
-                  </View>
-                </View>
-              </ScrollView>
-          </View>
-        </ScrollView>
+        <VodModal onHideModal={this.hideModal} showModal={this.state.showModal} vodInfo={this.state.vodInfo} />
       </LinearGradient>
     );
   }
 }
-function mapStateToProps(state) {
-  return { compare: 0 };
+
+const mapStateToProps = state => {
+  const { vod } = state;
+
+  return { featured: vod.featured, fullList: vod.fullList };
 }
 
 export default connect(mapStateToProps)(VodScreen);
