@@ -23,7 +23,7 @@ export default common = (state = initialState, action) => {
         bluetoothIsOn: action.payload
       }
       break;
-    case 'UPDATE_NETWORK':
+    case 'UPDATE_NETWORK_INFO':
       return {
         ...state,
         network: action.payload

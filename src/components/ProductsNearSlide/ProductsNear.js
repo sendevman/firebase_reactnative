@@ -177,7 +177,7 @@ class ProductsNear extends Component {
 const mapStateToProps = state => {
   const { current, common } = state;
 
-  return { areaData: current.allAreas[0], position: current.position,  };
+  return { areaData: current.allAreas[0], position: current.position };
 }
 
 export default connect(mapStateToProps)(ProductsNear);

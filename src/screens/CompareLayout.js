@@ -9,9 +9,6 @@ import { View } from 'react-native';
 import { createStackNavigator, SafeAreaView } from 'react-navigation';
 import { connect } from 'react-redux';
 
-// My Customs
-import CompareModal from '../components/CompareModal/CompareModal';
-
 // My Screens
 import CompareScreen from '../screens/CompareScreen';
 
