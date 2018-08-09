@@ -50,6 +50,7 @@ class VodModal extends Component {
 
     if (playerData.floor_id !== this.props.location.floor_id) this.setState({ playerInfo: {} });
     else this.setState({ playerInfo: playerData });
+    if (playerData.status === "available") this.setState({ canStop: false, notPlaying: true });
   }
 
   getNewMediaUrl(mediaURL) {
