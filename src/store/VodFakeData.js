@@ -1,0 +1,205 @@
+export const FakeVod = {
+  featured: {
+    id: 'featured',
+    category: 1,
+    categoryName: 'AT&T Directv',
+    detailDescription: "Britain is a mixture of despair and hedonism in 1919 in the aftermath of the Great War. Returning soldiers, newly minted revolutions and criminal gangs are fighting for survival in a nation rocked by economic upheaval.",
+    detailSubtitle: 'Premieres on BBC Two, Monday May 32th',
+    detailTitle: 'Peaky Blinders Season 5 exclusive trailer',
+    directURL: 'https://takeovers.fanexperience.co/player/category_2/list_title',
+    imgDetailUrl: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/img_content%2Fcategory_2%2FList%20Title%2FpeakyBlinders.jpg?alt=media&token=fd5f3027-fb08-43cc-96e1-df2c1897c5b3',
+    imgListUrl: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/peakyBlinders.jpg?alt=media&token=a26accd0-4e60-491a-86f5-b62323556d8e',
+    mediaURL: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/video_content%2Fcategory_3%2FTest%204?alt=media&token=9a170954-6fb2-445a-9a27-9c70c1856070',
+    playbackURL: 'test_4',
+    timestamp: '08-2-2018, 2:39 pm',
+    title: 'Peaky Blinders'
+  },
+  fullList: [
+    { name: 'AT&T Directv',
+      type: 1,
+      items: [
+        {
+          id: '002',
+          category: 1,
+          categoryName: 'AT&T Directv',
+          detailDescription: "Fargo is a mixture of despair and hedonism in 1919 in the aftermath of the Great War. Returning soldiers, newly minted revolutions and criminal gangs are fighting for survival in a nation rocked by economic upheaval.",
+          detailSubtitle: 'Premieres on BBC Two, Monday May 31th',
+          detailTitle: 'Fargo Season 5 exclusive trailer',
+          directURL: 'https://takeovers.fanexperience.co/player/category_2/list_title',
+          imgDetailUrl: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/fargo_Large.jpeg?alt=media&token=42cab3ed-e69c-4f65-9436-b0da4f94f362',
+          imgListUrl: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/fargo.jpg?alt=media&token=6d5e5999-8c5b-43e3-a2d3-975cb811b704',
+          mediaURL: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/sampleVideo.mp4?alt=media&token=58966bec-de9c-4600-a699-c6c699468492',
+          playbackURL: 'test_4',
+          timestamp: '08-2-2018, 2:39 pm',
+          title: 'Fargo'
+        }, {
+          id: '003',
+          category: 1,
+          categoryName: 'AT&T Directv',
+          detailDescription: "Family Guy is a mixture of despair and hedonism in 1919 in the aftermath of the Great War. Returning soldiers, newly minted revolutions and criminal gangs are fighting for survival in a nation rocked by economic upheaval.",
+          detailSubtitle: 'Premieres on BBC Two, Monday May 30th',
+          detailTitle: 'Family Guy Season 5 exclusive trailer',
+          directURL: 'https://takeovers.fanexperience.co/player/category_2/list_title',
+          imgDetailUrl: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/familyGuy_Large.jpg?alt=media&token=d929053a-4372-4822-9e70-e81132c0936b',
+          imgListUrl: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/familyGuy.jpg?alt=media&token=83260974-512c-47d0-addb-f59cfe0d5367',
+          mediaURL: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/video_content%2Fcategory_3%2FTest%204?alt=media&token=9a170954-6fb2-445a-9a27-9c70c1856070',
+          playbackURL: 'test_4',
+          timestamp: '08-2-2018, 2:39 pm',
+          title: 'Family Guy'
+        }, {
+          id: '004',
+          category: 1,
+          categoryName: 'AT&T Directv',
+          detailDescription: "American Gods is a mixture of despair and hedonism in 1919 in the aftermath of the Great War. Returning soldiers, newly minted revolutions and criminal gangs are fighting for survival in a nation rocked by economic upheaval.",
+          detailSubtitle: 'Premieres on BBC Two, Monday May 29th',
+          detailTitle: 'American Gods Season 5 exclusive trailer',
+          directURL: 'https://takeovers.fanexperience.co/player/category_2/list_title',
+          imgDetailUrl: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/americanGods_Large.jpg?alt=media&token=61688181-d64b-4fdd-a4cc-f006204cd1a7',
+          imgListUrl: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/americanGods.jpg?alt=media&token=f360b0c7-45ca-4121-9fc6-0a332593e05d',
+          mediaURL: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/sampleVideo.mp4?alt=media&token=58966bec-de9c-4600-a699-c6c699468492',
+          playbackURL: 'test_4',
+          timestamp: '08-2-2018, 2:39 pm',
+          title: 'American Gods'
+        }, {
+          id: '005',
+          category: 1,
+          categoryName: 'AT&T Directv',
+          detailDescription: "Game of Thrones is a mixture of despair and hedonism in 1919 in the aftermath of the Great War. Returning soldiers, newly minted revolutions and criminal gangs are fighting for survival in a nation rocked by economic upheaval.",
+          detailSubtitle: 'Premieres on BBC Two, Monday May 28th',
+          detailTitle: 'Game of Thrones Season 5 exclusive trailer',
+          directURL: 'https://takeovers.fanexperience.co/player/category_2/list_title',
+          imgDetailUrl: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/gameOfThrones_Large.jpg?alt=media&token=9c14cb75-6ccd-449f-bc3c-8f285dae289e',
+          imgListUrl: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/gameThrones.jpg?alt=media&token=4d027337-00bb-4ad7-aa88-a3fe9806486d',
+          mediaURL: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/video_content%2Fcategory_3%2FTest%204?alt=media&token=9a170954-6fb2-445a-9a27-9c70c1856070',
+          playbackURL: 'test_4',
+          timestamp: '08-2-2018, 2:39 pm',
+          title: 'Game of Thrones'
+        }
+      ]
+    },
+    { name: 'Original Content',
+      type: 2,
+      items: [
+        {
+          id: '002',
+          category: 2,
+          categoryName: 'Original Content',
+          detailDescription: "Fargo 1 is a mixture of despair and hedonism in 1919 in the aftermath of the Great War. Returning soldiers, newly minted revolutions and criminal gangs are fighting for survival in a nation rocked by economic upheaval.",
+          detailSubtitle: 'Premieres on BBC Two, Monday May 27th',
+          detailTitle: 'Fargo Season 5 exclusive trailer',
+          directURL: 'https://takeovers.fanexperience.co/player/category_2/list_title',
+          imgDetailUrl: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/fargo_Large.jpeg?alt=media&token=42cab3ed-e69c-4f65-9436-b0da4f94f362',
+          imgListUrl: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/fargo.jpg?alt=media&token=6d5e5999-8c5b-43e3-a2d3-975cb811b704',
+          mediaURL: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/sampleVideo.mp4?alt=media&token=58966bec-de9c-4600-a699-c6c699468492',
+          playbackURL: 'test_4',
+          timestamp: '08-2-2018, 2:39 pm',
+          title: 'Fargo 1'
+        }, {
+          id: '003',
+          category: 2,
+          categoryName: 'Original Content',
+          detailDescription: "Family Guy 1 is a mixture of despair and hedonism in 1919 in the aftermath of the Great War. Returning soldiers, newly minted revolutions and criminal gangs are fighting for survival in a nation rocked by economic upheaval.",
+          detailSubtitle: 'Premieres on BBC Two, Monday May 26th',
+          detailTitle: 'Family Guy Season 5 exclusive trailer',
+          directURL: 'https://takeovers.fanexperience.co/player/category_2/list_title',
+          imgDetailUrl: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/familyGuy_Large.jpg?alt=media&token=d929053a-4372-4822-9e70-e81132c0936b',
+          imgListUrl: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/familyGuy.jpg?alt=media&token=83260974-512c-47d0-addb-f59cfe0d5367',
+          mediaURL: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/video_content%2Fcategory_3%2FTest%204?alt=media&token=9a170954-6fb2-445a-9a27-9c70c1856070',
+          playbackURL: 'test_4',
+          timestamp: '08-2-2018, 2:39 pm',
+          title: 'Family Guy 1'
+        }, {
+          id: '004',
+          category: 2,
+          categoryName: 'Original Content',
+          detailDescription: "American Gods 1 is a mixture of despair and hedonism in 1919 in the aftermath of the Great War. Returning soldiers, newly minted revolutions and criminal gangs are fighting for survival in a nation rocked by economic upheaval.",
+          detailSubtitle: 'Premieres on BBC Two, Monday May 25th',
+          detailTitle: 'American Gods Season 5 exclusive trailer',
+          directURL: 'https://takeovers.fanexperience.co/player/category_2/list_title',
+          imgDetailUrl: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/americanGods_Large.jpg?alt=media&token=61688181-d64b-4fdd-a4cc-f006204cd1a7',
+          imgListUrl: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/americanGods.jpg?alt=media&token=f360b0c7-45ca-4121-9fc6-0a332593e05d',
+          mediaURL: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/sampleVideo.mp4?alt=media&token=58966bec-de9c-4600-a699-c6c699468492',
+          playbackURL: 'test_4',
+          timestamp: '08-2-2018, 2:39 pm',
+          title: 'American Gods 1'
+        }, {
+          id: '005',
+          category: 2,
+          categoryName: 'Original Content',
+          detailDescription: "Game of Thrones 1 is a mixture of despair and hedonism in 1919 in the aftermath of the Great War. Returning soldiers, newly minted revolutions and criminal gangs are fighting for survival in a nation rocked by economic upheaval.",
+          detailSubtitle: 'Premieres on BBC Two, Monday May 24th',
+          detailTitle: 'Game of Thrones Season 5 exclusive trailer',
+          directURL: 'https://takeovers.fanexperience.co/player/category_2/list_title',
+          imgDetailUrl: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/gameOfThrones_Large.jpg?alt=media&token=9c14cb75-6ccd-449f-bc3c-8f285dae289e',
+          imgListUrl: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/gameThrones.jpg?alt=media&token=4d027337-00bb-4ad7-aa88-a3fe9806486d',
+          mediaURL: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/video_content%2Fcategory_3%2FTest%204?alt=media&token=9a170954-6fb2-445a-9a27-9c70c1856070',
+          playbackURL: 'test_4',
+          timestamp: '08-2-2018, 2:39 pm',
+          title: 'Game of Thrones 1'
+        }
+      ]
+    },
+    { name: 'Exclusive Trailers',
+      type: 3,
+      items: [
+        {
+          id: '002',
+          category: 3,
+          categoryName: 'Exclusive Trailers',
+          detailDescription: "Fargo 2 is a mixture of despair and hedonism in 1919 in the aftermath of the Great War. Returning soldiers, newly minted revolutions and criminal gangs are fighting for survival in a nation rocked by economic upheaval.",
+          detailSubtitle: 'Premieres on BBC Two, Monday May 23th',
+          detailTitle: 'Fargo Season 5 exclusive trailer',
+          directURL: 'https://takeovers.fanexperience.co/player/category_2/list_title',
+          imgDetailUrl: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/fargo_Large.jpeg?alt=media&token=42cab3ed-e69c-4f65-9436-b0da4f94f362',
+          imgListUrl: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/fargo.jpg?alt=media&token=6d5e5999-8c5b-43e3-a2d3-975cb811b704',
+          mediaURL: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/sampleVideo.mp4?alt=media&token=58966bec-de9c-4600-a699-c6c699468492',
+          playbackURL: 'test_4',
+          timestamp: '08-2-2018, 2:39 pm',
+          title: 'Fargo 2'
+        }, {
+          id: '003',
+          category: 3,
+          categoryName: 'Exclusive Trailers',
+          detailDescription: "Family Guy 2 is a mixture of despair and hedonism in 1919 in the aftermath of the Great War. Returning soldiers, newly minted revolutions and criminal gangs are fighting for survival in a nation rocked by economic upheaval.",
+          detailSubtitle: 'Premieres on BBC Two, Monday May 22th',
+          detailTitle: 'Family Guy Season 5 exclusive trailer',
+          directURL: 'https://takeovers.fanexperience.co/player/category_2/list_title',
+          imgDetailUrl: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/familyGuy_Large.jpg?alt=media&token=d929053a-4372-4822-9e70-e81132c0936b',
+          imgListUrl: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/familyGuy.jpg?alt=media&token=83260974-512c-47d0-addb-f59cfe0d5367',
+          mediaURL: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/video_content%2Fcategory_3%2FTest%204?alt=media&token=9a170954-6fb2-445a-9a27-9c70c1856070',
+          playbackURL: 'test_4',
+          timestamp: '08-2-2018, 2:39 pm',
+          title: 'Family Guy 2'
+        }, {
+          id: '004',
+          category: 3,
+          categoryName: 'Exclusive Trailers',
+          detailDescription: "American Gods 2 is a mixture of despair and hedonism in 1919 in the aftermath of the Great War. Returning soldiers, newly minted revolutions and criminal gangs are fighting for survival in a nation rocked by economic upheaval.",
+          detailSubtitle: 'Premieres on BBC Two, Monday May 21th',
+          detailTitle: 'American Gods Season 5 exclusive trailer',
+          directURL: 'https://takeovers.fanexperience.co/player/category_2/list_title',
+          imgDetailUrl: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/americanGods_Large.jpg?alt=media&token=61688181-d64b-4fdd-a4cc-f006204cd1a7',
+          imgListUrl: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/americanGods.jpg?alt=media&token=f360b0c7-45ca-4121-9fc6-0a332593e05d',
+          mediaURL: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/sampleVideo.mp4?alt=media&token=58966bec-de9c-4600-a699-c6c699468492',
+          playbackURL: 'test_4',
+          timestamp: '08-2-2018, 2:39 pm',
+          title: 'American Gods 2'
+        }, {
+          id: '005',
+          category: 3,
+          categoryName: 'Exclusive Trailers',
+          detailDescription: "Game of Thrones 2 is a mixture of despair and hedonism in 1919 in the aftermath of the Great War. Returning soldiers, newly minted revolutions and criminal gangs are fighting for survival in a nation rocked by economic upheaval.",
+          detailSubtitle: 'Premieres on BBC Two, Monday May 20th',
+          detailTitle: 'Game of Thrones Season 5 exclusive trailer',
+          directURL: 'https://takeovers.fanexperience.co/player/category_2/list_title',
+          imgDetailUrl: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/gameOfThrones_Large.jpg?alt=media&token=9c14cb75-6ccd-449f-bc3c-8f285dae289e',
+          imgListUrl: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/gameThrones.jpg?alt=media&token=4d027337-00bb-4ad7-aa88-a3fe9806486d',
+          mediaURL: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/video_content%2Fcategory_3%2FTest%204?alt=media&token=9a170954-6fb2-445a-9a27-9c70c1856070',
+          playbackURL: 'test_4',
+          timestamp: '08-2-2018, 2:39 pm',
+          title: 'Game of Thrones 2'
+        }
+      ]
+    }
+  ]
+}

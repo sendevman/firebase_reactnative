@@ -7,21 +7,21 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>999185527919-d04poc42mcr9etpv1f0t4a8j3tgl8mcj.apps.googleusercontent.com</string>
+	<string>291038736394-792ccvthac8bjcpnfmhqq5nr7crnre9h.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.999185527919-d04poc42mcr9etpv1f0t4a8j3tgl8mcj</string>
+	<string>com.googleusercontent.apps.291038736394-792ccvthac8bjcpnfmhqq5nr7crnre9h</string>
 	<key>API_KEY</key>
-	<string>AIzaSyDlfQmz_faTantEhGWV0Bnu-Vrltp2ErAc</string>
+	<string>AIzaSyD6E8O_OwNuq01s33VHgBjXNCjOAJAp3GE</string>
 	<key>GCM_SENDER_ID</key>
-	<string>999185527919</string>
+	<string>291038736394</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.conexustech.rc</string>
 	<key>PROJECT_ID</key>
-	<string>fanexperience-dev</string>
+	<string>retail-companion-dev</string>
 	<key>STORAGE_BUCKET</key>
-	<string>fanexperience-dev.appspot.com</string>
+	<string>retail-companion-dev.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<true></true>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -33,8 +33,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:999185527919:ios:53bec50acf95c813</string>
+	<string>1:291038736394:ios:53bec50acf95c813</string>
 	<key>DATABASE_URL</key>
-	<string>https://fanexperience-dev.firebaseio.com</string>
+	<string>https://retail-companion-dev.firebaseio.com</string>
 </dict>
 </plist>
