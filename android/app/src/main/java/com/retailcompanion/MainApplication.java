@@ -3,6 +3,7 @@ package com.retailcompanion;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.brentvatne.react.ReactVideoPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.ninty.system.setting.SystemSettingPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
@@ -13,6 +14,7 @@ import com.BV.LinearGradient.LinearGradientPackage;
 import com.pusherman.networkinfo.RNNetworkInfoPackage;
 import io.invertase.firebase.RNFirebasePackage;
 import io.invertase.firebase.firestore.RNFirebaseFirestorePackage;
+import io.invertase.firebase.database.RNFirebaseDatabasePackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -32,6 +34,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+          new ReactVideoPackage(),
           new RNDeviceInfo(),
           new SystemSettingPackage(),
           new VectorIconsPackage(),
@@ -41,6 +44,7 @@ public class MainApplication extends Application implements ReactApplication {
           new RNFirebasePackage(),
 //            new RNBackgroundGeolocation(),
           new RNFirebaseFirestorePackage(),
+          new RNFirebaseDatabasePackage(),
           new OpenSettingsPackage(),
           new RNNetworkInfoPackage()
       );
