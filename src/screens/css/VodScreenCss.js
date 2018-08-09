@@ -8,77 +8,92 @@ import { StyleSheet, Dimensions } from 'react-native';
 var { width } = Dimensions.get('window');
 
 export default StyleSheet.create({
-  container: {
-    paddingLeft:15
+  linearGradient: {
+    flex: 1,
+    paddingLeft: 15,
+    paddingVertical: 8
   },
-  textFeatured: {
-    color: '#6B92BF',
-    fontFamily: 'Roboto',
-    fontSize: 12,
-    lineHeight: 14,
-    fontWeight: 'bold',
-    marginTop: 16,
-    textAlign: 'left',
-  },
-  containerMovie: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center'
-  },
-  containerTrailer: {
+  // - - Skeleton Loading Box - -
+  skeletonLoading: { height: '100%' },
+  sectionContainer: {
     flexDirection: 'column',
     justifyContent: 'center',
-    alignItems: 'flex-start',
-    marginRight: 8,
+    alignItems: 'flex-start'
   },
-  textTitle: {
-    marginTop: 8,
-    color: '#FFFFFF',
-    fontFamily: 'Rubik',
+  // Featured Section
+  featuredText: {
+    color: '#6B92BF',
+    // fontFamily: 'Roboto',
+    fontSize: 12,
+    fontWeight: 'bold',
+    lineHeight: 14,
+    marginTop: 2,
+    marginLeft: -1
+  },
+  featuredBox: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'flex-start'
+  },
+  /* If 375px of width
+    - height: 190 - width: 345
+    - if (375px = 100%) -> 190px = 50.666666667
+  */
+  featuredImg: {
+    height: width * 0.5,
+    width: width - 30,
+    borderRadius: 6,
+    marginVertical: 8
+  },
+  featuredTitle: {
+    color: '#FFF',
+    // fontFamily: 'Rubik',
     fontSize: 16,
     fontWeight: '300',
     lineHeight: 19,
-    marginLeft: 1
+    paddingHorizontal: 1
   },
-  textSubtitle: {
-    marginTop: 4,
-    fontFamily: 'Roboto',
+  featuredSubTitle: {
+    color: 'rgba(255, 255, 255, 0.29)',
+    // fontFamily: 'Roboto',
     fontSize: 14,
     lineHeight: 16,
-    color: 'rgba(255,255,255,0.29)',
-    marginLeft: 1
+    marginTop: 4,
+    paddingHorizontal: 1
   },
-  textDirectv: {
-    color: '#FFFFFF',
-    fontFamily: 'Roboto',
+  // Category Section
+  categoryText: {
+    color: '#FFF',
+    // fontFamily: 'Roboto',
     fontSize: 12,
-    lineHeight: 14,
     fontWeight: 'bold',
-    marginTop: 24,
-    textAlign: 'left',
+    lineHeight: 14
   },
-  containerAttDirectv: {
+  horizontalScrollBox: {
     flexDirection: 'row',
-    justifyContent: 'center'
-  },
-  containerDirectv: {
-    flexDirection: 'column',
     justifyContent: 'center',
-    alignItems: 'flex-start',
-    marginVertical: 8,
+    alignItems: 'center',
+    marginTop: 8
+  },
+  categoryItemBox: {
+    width: 101,
     marginRight: 8
   },
-  containerVideo: {
+  categoryItemFlex: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'flex-start'
+  },
+  categoryImg: {
     height: 132,
     width: 101,
     borderRadius: 6
   },
-  nameVideo: {
-    color: '#FFFFFF',
-    fontFamily: 'Rubik',
+  categoryTitle: {
+    color: '#FFF',
+    // fontFamily: 'Rubik',
     fontSize: 12,
     lineHeight: 14,
     marginTop: 8
-  },
-  
+  }
 });

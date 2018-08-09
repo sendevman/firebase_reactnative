@@ -1,27 +1,27 @@
 {
   "project_info": {
-    "project_number": "999185527919",
-    "firebase_url": "https://fanexperience-dev.firebaseio.com",
-    "project_id": "fanexperience-dev",
-    "storage_bucket": "fanexperience-dev.appspot.com"
+    "project_number": "291038736394",
+    "firebase_url": "https://retail-companion-dev.firebaseio.com",
+    "project_id": "retail-companion-dev",
+    "storage_bucket": "retail-companion-dev.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:999185527919:android:7a180eb2055b3b72",
+        "mobilesdk_app_id": "1:291038736394:android:7a180eb2055b3b72",
         "android_client_info": {
           "package_name": "com.retailcompanion"
         }
       },
       "oauth_client": [
         {
-          "client_id": "999185527919-347p23k30e1fv08o9ef3kciar51757k7.apps.googleusercontent.com",
+          "client_id": "291038736394-0tkpb0ehi7m0bls65kbno2600hj5ivkv.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCfS9zrQ35HNVyvngckW7JFNAD5pn1WF1s"
+          "current_key": "AIzaSyADPoXMWqTDAHQFGSkiaG1Ue03dsLnW0DM"
         }
       ],
       "services": {

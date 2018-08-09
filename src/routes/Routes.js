@@ -17,7 +17,7 @@ import Icon from '../assets/images/Icon';
 // My Layouts
 import ProductLayout from '../screens/ProductLayout';
 import CompareLayout from '../screens/CompareLayout';
-import ExclusiveVodLayout from '../screens/ExclusiveVodLayout';
+import VodLayout from '../screens/VodLayout';
 import OnBoardingLayout from '../screens/OnBoardingLayout';
 
 // My Screens
@@ -106,7 +106,7 @@ const BottomTabNav = createBottomTabNavigator(
       }
     },
     ExclusiveVod: {
-      screen: ExclusiveVodLayout,
+      screen: VodLayout,
       navigationOptions: {
         title: 'Exclusive VOD',
         tabBarIcon: ({ tintColor }) => {
@@ -128,7 +128,7 @@ const BottomTabNav = createBottomTabNavigator(
     }*/
   },
   {
-    initialRouteName: 'Products',
+    initialRouteName: 'ExclusiveVod',
     tabBarOptions: {
       activeTintColor: '#FFF',
       activeBackgroundColor: '#1181FF',
@@ -187,7 +187,7 @@ const DrawerNav = createDrawerNavigator(
     }
   },
   {
-    initialRouteName: 'OnBoarding',
+    initialRouteName: 'Shopping',
     contentOptions: {
       activeTintColor: '#1181FF',
       activeBackgroundColor: '#EEF1F4',
