@@ -8,6 +8,7 @@ import React, { Component } from 'react';
 import { Image, Modal, Text, TouchableOpacity, View } from 'react-native';
 import Spinkit from 'react-native-spinkit';
 import Video from 'react-native-video';
+import firebase from 'react-native-firebase';
 import { connect } from 'react-redux';
 
 // My Styles
@@ -23,17 +24,72 @@ class VodModal extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { pauseVideo: true, showSpinkit: false, showVideo: false };
+    this.state = {
+      canStop: false,
+      notPlaying: true,
+      pauseVideo: true,
+      playerInfo: {},
+      showSpinkit: false,
+      showVideo: false,
+      storeData: {},
+      vodPlayerIdRef: firebase.database().ref('vod/player_id')
+    };
   };
 
+  componentDidMount() {
+    firebase.database().ref('storeData/').once('value')
+    .then((snapshot) => { this.setState({ storeData: snapshot.val() }); });
+
+    this.state.vodPlayerIdRef.on('value', (snapshot) => { this.setVodPlayerInfo(snapshot); });
+  }
+
+  componentWillUnmount() { this.state.vodPlayerIdRef.off(); }
+
+  setVodPlayerInfo(snapshot) {
+    let playerData = snapshot.val();
+
+    if (playerData.floor_id !== this.props.location.floor_id) this.setState({ playerInfo: {} });
+    else this.setState({ playerInfo: playerData });
+  }
+
+  getNewMediaUrl(mediaURL) {
+    if (this.props.network.connectionType == "wifi" && this.props.network.ssid == this.state.storeData.ssid) {
+      return mediaURL.replace('https://firebasestorage.googleapis.com', this.state.storeData.superLumensUrl);
+    }
+    return mediaURL;
+  }
+
   _onWatchTrailer() { this.setState({ pauseVideo: false, showVideo: true }); }
-  _onWatchBigScreen() { console.log('Watch On The Big Screen'); }
+
+  _onWatchBigScreen(mediaURL) {
+    firebase.database().ref('vod/player_id').update({
+      firebase_id: "JxdUhtSKlGZzcwr9E2myvZ8CNKo2", // Place Auth User ID.
+      floor_id_app: this.props.location.floor_id,
+      status: "play",
+      url: this.getNewMediaUrl(mediaURL)
+    });
+
+    this.setState({ canStop: true, notPlaying: false });
+  }
+
+  _onStopVideo() {
+    firebase.database().ref('vod/player_id').update({
+      firebase_id: "",
+      floor_id_app: "",
+      status: "available",
+      url: ""
+    });
+
+    this.setState({ canStop: false, notPlaying: true });
+  }
 
   renderContent() {
     const { location, vodInfo } = this.props;
+    const { canStop, notPlaying, playerInfo } = this.state;
 
     let locationValid = (typeof location != 'undefined' && Object.keys(location).length !== 0 && location.constructor === Object);
-    let inAttStore = (locationValid && typeof location.floor_id != 'undefined')
+    let inAttStore = (locationValid && typeof location.floor_id != 'undefined' && location.floor_id === playerInfo.floor_id);
+    let playerAvailable = (playerInfo.status === "available") ? true : false;
 
     return (
       <View style={styles.containerDetail}>
@@ -78,10 +134,17 @@ class VodModal extends Component {
           </TouchableOpacity>
         }
 
-        { inAttStore &&
-          <TouchableOpacity style={styles.watchBigScreenBtn} onPress={() => this._onWatchBigScreen()} activeOpacity={0.4}>
-            <Icon name="Panorama" width="26" height="26" viewBox="0 0 24 24" fill="#FFF" />
-            <Text style={[styles.watchBtnText, { textDecorationLine: 'underline' }]}>Watch on the big screen</Text>
+        { (inAttStore && notPlaying) &&
+          <TouchableOpacity disabled={!playerAvailable} style={styles.watchBigScreenBtn} onPress={() => this._onWatchBigScreen(vodInfo.mediaURL)} activeOpacity={0.4}>
+            <Icon name="Panorama" width="26" height="26" viewBox="0 0 24 24" fill={playerAvailable ? "#FFF" : "#CF2A2A"} />
+            <Text style={[styles.watchBtnText, { textDecorationLine: 'underline', color: playerAvailable ? "#FFF" : "#CF2A2A" }]}>Watch on the big screen</Text>
+          </TouchableOpacity>
+        }
+
+        { (inAttStore && !notPlaying && canStop) &&
+          <TouchableOpacity style={styles.watchBigScreenBtn} onPress={() => this._onStopVideo()} activeOpacity={0.4}>
+            <Image style={styles.watchBtnIcon} source={require('../../assets/images/files/stopButton.png')} />
+            <Text style={[styles.watchBtnText, { textDecorationLine: 'underline' }]}>Stop</Text>
           </TouchableOpacity>
         }
 
@@ -109,8 +172,9 @@ class VodModal extends Component {
         <View style={styles.containerModal}>
           <View style={styles.headerBox}>
             <TouchableOpacity onPress={() => {
+              this._onStopVideo();
               this.setState({ pauseVideo: true, showSpinkit: false, showVideo: false });
-              this.props.onHideModal() }} style={styles.headerBtn}>
+              this.props.onHideModal(); }} style={styles.headerBtn}>
               <Icon name="CloseXWhite" width="14" height="14" viewBox="0 0 14 14" />
             </TouchableOpacity>
           </View>
@@ -123,9 +187,9 @@ class VodModal extends Component {
 }
 
 const mapStateToProps = state => {
-  const { current, vod } = state;
+  const { common, current, vod } = state;
 
-  return { featured: vod.featured, fullList: vod.fullList, location: current.position };
+  return { featured: vod.featured, fullList: vod.fullList, location: current.position, network: common.network };
 }
 
 export default connect(mapStateToProps)(VodModal);
