@@ -29,11 +29,11 @@ class VodLayout extends Component {
   constructor(props) {
     super(props);
 
-    // this.getVodInfo();
+    this.getVodInfo();
   }
 
   getVodInfo() {
-    const vodRef = firebase.firestore().collection('vods');
+    const vodRef = firebase.firestore().collection('vod');
 
     /* - - Get simple data - - */
     /*vodRef.doc('featured').get()
@@ -74,8 +74,29 @@ class VodLayout extends Component {
         vodItemData.id = doc.id;
         vodFullList.push(vodItemData);
       });
-      this.props.dispatch(setFullListInfo(vodFullList));
+      this.props.dispatch(setFullListInfo(this.orderFullList(vodFullList)));
     }, err => { console.log('Error getting documents', err); });
+  }
+
+  orderFullList(vodFullList) {
+    let withoutFeatured = vodFullList.filter(obj => { return obj.id !== "featured" });
+    let sortedList = withoutFeatured.sort((a, b) => {
+      if (a.category < b.category) return -1;
+      if (a.category > b.category) return 1;
+      return 0;
+    });
+    let newItems = [];
+    sortedList.forEach((obj,index) => {
+      if (index === 0) {
+        newItems.push({ name: obj.categoryName, type: obj.category, items: [obj] });
+      } else {
+        let last = newItems[newItems.length - 1];
+
+        if (obj.category === last.type) newItems[newItems.length - 1].items.push(obj);
+        else newItems.push({ name: obj.categoryName, type: obj.category, items: [obj] });
+      }
+    });
+    return newItems;
   }
 
   render() {
