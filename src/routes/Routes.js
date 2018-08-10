@@ -128,7 +128,7 @@ const BottomTabNav = createBottomTabNavigator(
     }*/
   },
   {
-    initialRouteName: 'ExclusiveVod',
+    initialRouteName: 'Products',
     tabBarOptions: {
       activeTintColor: '#FFF',
       activeBackgroundColor: '#1181FF',
@@ -187,7 +187,7 @@ const DrawerNav = createDrawerNavigator(
     }
   },
   {
-    initialRouteName: 'Shopping',
+    initialRouteName: 'OnBoarding',
     contentOptions: {
       activeTintColor: '#1181FF',
       activeBackgroundColor: '#EEF1F4',

@@ -9,7 +9,7 @@ export const FakeVod = {
     directURL: 'https://takeovers.fanexperience.co/player/category_2/list_title',
     imgDetailUrl: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/img_content%2Fcategory_2%2FList%20Title%2FpeakyBlinders.jpg?alt=media&token=fd5f3027-fb08-43cc-96e1-df2c1897c5b3',
     imgListUrl: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/peakyBlinders.jpg?alt=media&token=a26accd0-4e60-491a-86f5-b62323556d8e',
-    mediaURL: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/video_content%2Fcategory_3%2FTest%204?alt=media&token=9a170954-6fb2-445a-9a27-9c70c1856070',
+    mediaURL: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/video_content%2Fcategory_1%2FPeakyBlinders.mp4?alt=media&token=5a81c714-2ca2-4687-b850-c9e59c84baad',
     playbackURL: 'test_4',
     timestamp: '08-2-2018, 2:39 pm',
     title: 'Peaky Blinders'
@@ -28,7 +28,7 @@ export const FakeVod = {
           directURL: 'https://takeovers.fanexperience.co/player/category_2/list_title',
           imgDetailUrl: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/fargo_Large.jpeg?alt=media&token=42cab3ed-e69c-4f65-9436-b0da4f94f362',
           imgListUrl: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/fargo.jpg?alt=media&token=6d5e5999-8c5b-43e3-a2d3-975cb811b704',
-          mediaURL: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/sampleVideo.mp4?alt=media&token=58966bec-de9c-4600-a699-c6c699468492',
+          mediaURL: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/video_content%2Fcategory_2%2FFargo%201?alt=media&token=b23cf01e-2a5b-416a-858b-5c513fa71a55',
           playbackURL: 'test_4',
           timestamp: '08-2-2018, 2:39 pm',
           title: 'Fargo'
@@ -42,7 +42,7 @@ export const FakeVod = {
           directURL: 'https://takeovers.fanexperience.co/player/category_2/list_title',
           imgDetailUrl: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/familyGuy_Large.jpg?alt=media&token=d929053a-4372-4822-9e70-e81132c0936b',
           imgListUrl: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/familyGuy.jpg?alt=media&token=83260974-512c-47d0-addb-f59cfe0d5367',
-          mediaURL: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/video_content%2Fcategory_3%2FTest%204?alt=media&token=9a170954-6fb2-445a-9a27-9c70c1856070',
+          mediaURL: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/video_content%2Fcategory_2%2FFamily%20Guy%201?alt=media&token=be8e6dfc-19dc-4ed9-be86-49463bbcc244',
           playbackURL: 'test_4',
           timestamp: '08-2-2018, 2:39 pm',
           title: 'Family Guy'
@@ -56,7 +56,7 @@ export const FakeVod = {
           directURL: 'https://takeovers.fanexperience.co/player/category_2/list_title',
           imgDetailUrl: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/americanGods_Large.jpg?alt=media&token=61688181-d64b-4fdd-a4cc-f006204cd1a7',
           imgListUrl: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/americanGods.jpg?alt=media&token=f360b0c7-45ca-4121-9fc6-0a332593e05d',
-          mediaURL: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/sampleVideo.mp4?alt=media&token=58966bec-de9c-4600-a699-c6c699468492',
+          mediaURL: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/video_content%2Fcategory_2%2FAmerican%20Gods%201?alt=media&token=edb1f585-771e-4823-bb40-22e4122d522f',
           playbackURL: 'test_4',
           timestamp: '08-2-2018, 2:39 pm',
           title: 'American Gods'
@@ -70,7 +70,7 @@ export const FakeVod = {
           directURL: 'https://takeovers.fanexperience.co/player/category_2/list_title',
           imgDetailUrl: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/gameOfThrones_Large.jpg?alt=media&token=9c14cb75-6ccd-449f-bc3c-8f285dae289e',
           imgListUrl: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/gameThrones.jpg?alt=media&token=4d027337-00bb-4ad7-aa88-a3fe9806486d',
-          mediaURL: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/video_content%2Fcategory_3%2FTest%204?alt=media&token=9a170954-6fb2-445a-9a27-9c70c1856070',
+          mediaURL: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/video_content%2Fcategory_2%2FGame%20of%20Thrones%201?alt=media&token=dbee0b3f-29fd-4def-bf16-457a70b6882d',
           playbackURL: 'test_4',
           timestamp: '08-2-2018, 2:39 pm',
           title: 'Game of Thrones'
@@ -90,7 +90,7 @@ export const FakeVod = {
           directURL: 'https://takeovers.fanexperience.co/player/category_2/list_title',
           imgDetailUrl: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/fargo_Large.jpeg?alt=media&token=42cab3ed-e69c-4f65-9436-b0da4f94f362',
           imgListUrl: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/fargo.jpg?alt=media&token=6d5e5999-8c5b-43e3-a2d3-975cb811b704',
-          mediaURL: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/sampleVideo.mp4?alt=media&token=58966bec-de9c-4600-a699-c6c699468492',
+          mediaURL: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/video_content%2Fcategory_2%2FFargo%201?alt=media&token=b23cf01e-2a5b-416a-858b-5c513fa71a55',
           playbackURL: 'test_4',
           timestamp: '08-2-2018, 2:39 pm',
           title: 'Fargo 1'
@@ -104,7 +104,7 @@ export const FakeVod = {
           directURL: 'https://takeovers.fanexperience.co/player/category_2/list_title',
           imgDetailUrl: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/familyGuy_Large.jpg?alt=media&token=d929053a-4372-4822-9e70-e81132c0936b',
           imgListUrl: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/familyGuy.jpg?alt=media&token=83260974-512c-47d0-addb-f59cfe0d5367',
-          mediaURL: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/video_content%2Fcategory_3%2FTest%204?alt=media&token=9a170954-6fb2-445a-9a27-9c70c1856070',
+          mediaURL: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/video_content%2Fcategory_2%2FFamily%20Guy%201?alt=media&token=be8e6dfc-19dc-4ed9-be86-49463bbcc244',
           playbackURL: 'test_4',
           timestamp: '08-2-2018, 2:39 pm',
           title: 'Family Guy 1'
@@ -118,7 +118,7 @@ export const FakeVod = {
           directURL: 'https://takeovers.fanexperience.co/player/category_2/list_title',
           imgDetailUrl: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/americanGods_Large.jpg?alt=media&token=61688181-d64b-4fdd-a4cc-f006204cd1a7',
           imgListUrl: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/americanGods.jpg?alt=media&token=f360b0c7-45ca-4121-9fc6-0a332593e05d',
-          mediaURL: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/sampleVideo.mp4?alt=media&token=58966bec-de9c-4600-a699-c6c699468492',
+          mediaURL: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/video_content%2Fcategory_2%2FAmerican%20Gods%201?alt=media&token=edb1f585-771e-4823-bb40-22e4122d522f',
           playbackURL: 'test_4',
           timestamp: '08-2-2018, 2:39 pm',
           title: 'American Gods 1'
@@ -132,7 +132,7 @@ export const FakeVod = {
           directURL: 'https://takeovers.fanexperience.co/player/category_2/list_title',
           imgDetailUrl: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/gameOfThrones_Large.jpg?alt=media&token=9c14cb75-6ccd-449f-bc3c-8f285dae289e',
           imgListUrl: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/gameThrones.jpg?alt=media&token=4d027337-00bb-4ad7-aa88-a3fe9806486d',
-          mediaURL: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/video_content%2Fcategory_3%2FTest%204?alt=media&token=9a170954-6fb2-445a-9a27-9c70c1856070',
+          mediaURL: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/video_content%2Fcategory_2%2FGame%20of%20Thrones%201?alt=media&token=dbee0b3f-29fd-4def-bf16-457a70b6882d',
           playbackURL: 'test_4',
           timestamp: '08-2-2018, 2:39 pm',
           title: 'Game of Thrones 1'
@@ -152,7 +152,7 @@ export const FakeVod = {
           directURL: 'https://takeovers.fanexperience.co/player/category_2/list_title',
           imgDetailUrl: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/fargo_Large.jpeg?alt=media&token=42cab3ed-e69c-4f65-9436-b0da4f94f362',
           imgListUrl: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/fargo.jpg?alt=media&token=6d5e5999-8c5b-43e3-a2d3-975cb811b704',
-          mediaURL: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/sampleVideo.mp4?alt=media&token=58966bec-de9c-4600-a699-c6c699468492',
+          mediaURL: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/video_content%2Fcategory_2%2FFargo%201?alt=media&token=b23cf01e-2a5b-416a-858b-5c513fa71a55',
           playbackURL: 'test_4',
           timestamp: '08-2-2018, 2:39 pm',
           title: 'Fargo 2'
@@ -166,7 +166,7 @@ export const FakeVod = {
           directURL: 'https://takeovers.fanexperience.co/player/category_2/list_title',
           imgDetailUrl: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/familyGuy_Large.jpg?alt=media&token=d929053a-4372-4822-9e70-e81132c0936b',
           imgListUrl: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/familyGuy.jpg?alt=media&token=83260974-512c-47d0-addb-f59cfe0d5367',
-          mediaURL: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/video_content%2Fcategory_3%2FTest%204?alt=media&token=9a170954-6fb2-445a-9a27-9c70c1856070',
+          mediaURL: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/video_content%2Fcategory_2%2FFamily%20Guy%201?alt=media&token=be8e6dfc-19dc-4ed9-be86-49463bbcc244',
           playbackURL: 'test_4',
           timestamp: '08-2-2018, 2:39 pm',
           title: 'Family Guy 2'
@@ -180,7 +180,7 @@ export const FakeVod = {
           directURL: 'https://takeovers.fanexperience.co/player/category_2/list_title',
           imgDetailUrl: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/americanGods_Large.jpg?alt=media&token=61688181-d64b-4fdd-a4cc-f006204cd1a7',
           imgListUrl: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/americanGods.jpg?alt=media&token=f360b0c7-45ca-4121-9fc6-0a332593e05d',
-          mediaURL: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/sampleVideo.mp4?alt=media&token=58966bec-de9c-4600-a699-c6c699468492',
+          mediaURL: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/video_content%2Fcategory_2%2FAmerican%20Gods%201?alt=media&token=edb1f585-771e-4823-bb40-22e4122d522f',
           playbackURL: 'test_4',
           timestamp: '08-2-2018, 2:39 pm',
           title: 'American Gods 2'
@@ -194,7 +194,7 @@ export const FakeVod = {
           directURL: 'https://takeovers.fanexperience.co/player/category_2/list_title',
           imgDetailUrl: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/gameOfThrones_Large.jpg?alt=media&token=9c14cb75-6ccd-449f-bc3c-8f285dae289e',
           imgListUrl: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/gameThrones.jpg?alt=media&token=4d027337-00bb-4ad7-aa88-a3fe9806486d',
-          mediaURL: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/video_content%2Fcategory_3%2FTest%204?alt=media&token=9a170954-6fb2-445a-9a27-9c70c1856070',
+          mediaURL: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/video_content%2Fcategory_2%2FGame%20of%20Thrones%201?alt=media&token=dbee0b3f-29fd-4def-bf16-457a70b6882d',
           playbackURL: 'test_4',
           timestamp: '08-2-2018, 2:39 pm',
           title: 'Game of Thrones 2'
