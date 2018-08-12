@@ -86,6 +86,9 @@ class ProductLayoutScreen extends Component {
       .then(results => {
         this.props.dispatch(setProductsNearInfo(results));
         this.props.dispatch(setProductInfo(results[0]));
+        // console.log("log event ======= : ", {"pFirebaseId":this.props.firebaseid, "pDeviceModel":results[0].model, "pDeviceManufacture":results[0].manufacture, "pResearchTab":"info"});
+        // firebase.analytics().logEvent("deviceViewed", {"pFirebaseId":this.props.firebaseid, "pDeviceModel":results[0].model, "pDeviceManufacture":results[0].manufacture, "pResearchTab":"info"});
+      
         setTimeout(() => this.forceUpdate(), 300);
       })
       .catch(error => {})
@@ -99,6 +102,8 @@ class ProductLayoutScreen extends Component {
     if (!productsNear || productsNear.length === 0) return;
     const match = productsNear.filter(product => product.id === productId);
     this.props.dispatch(setProductInfo(match.length > 0 ? match[0] : {}));
+    // console.log("log event ======= : ", {"pFirebaseId":this.props.firebaseid, "pDeviceModel":match[0].model, "pDeviceManufacture":match[0].manufacture, "pResearchTab":"info"});
+    // firebase.analytics().logEvent("deviceViewed", {"pFirebaseId":this.props.firebaseid, "pDeviceModel":match[0].model, "pDeviceManufacture":match[0].manufacture, "pResearchTab":"info"});
   }
 
   componentWillReceiveProps(nextProps) {
@@ -114,7 +119,6 @@ class ProductLayoutScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     let heightPiv = navigation.getParam('heightHeader');
     let heightHeader = (typeof heightPiv === "undefined") ? 56 : heightPiv;
-
     return {
       headerTitle: <LogoTitle />,
       header: props => <GradientHeader {...props} />,
@@ -208,7 +212,7 @@ class ProductLayoutScreen extends Component {
 const mapStateToProps = state => {
   const { common, current, productsNear } = state;
 
-  return { locationData: current.position, productsNear: productsNear.productsNear };
+  return { locationData: current.position, productsNear: productsNear.productsNear, firebaseid: common.firebaseid };
 }
 
 const ProductLayout = createStackNavigator(

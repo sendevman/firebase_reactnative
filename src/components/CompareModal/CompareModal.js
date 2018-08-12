@@ -7,10 +7,13 @@
 import React, { Component } from 'react';
 import {
   Dimensions, Keyboard, Modal, SectionList, Text, TextInput,
-  TouchableOpacity, TouchableHighlight, View } from 'react-native';
+  TouchableOpacity, TouchableHighlight, View, Platform } from 'react-native';
 import Svg, { Rect } from 'react-native-svg';
 import { connect } from 'react-redux';
 
+//Analytics
+import firebase from 'react-native-firebase';
+// var Analytics = require('react-native-firebase-analytics');
 // My Styles
 import styles from './CompareModalCss';
 
@@ -58,9 +61,30 @@ class CompareModal extends Component {
   };
 
   _onPressButton(key) {
+    let selectedIndex = this.props.itemValue;
+    
+    let is_Update = true;
+    for(i=0; i < this.props.compares.length; i++){
+      let tmpCompare = this.props.compares[i];
+      if(tmpCompare.item === selectedIndex && key === tmpCompare.product.id){
+        is_Update = false;
+        this.props.onHideModal();
+        return;
+      }
+    }
+
     let product = this.props.productsNear.filter(obj => { return (obj.id == key) })[0];
     this.props.dispatch(setCompareInfo({ item: this.props.itemValue, product: product }));
     this.props.onHideModal();
+
+    if(this.props.compares.length === 2){
+      let product1 = this.props.compares.filter(obj => { return (obj.item === 1) })[0];
+      let product2 = this.props.compares.filter(obj => { return (obj.item === 2) })[0];
+      console.log("devicesCompared----------", {"pFirebaseId":this.props.firebaseid, "pDeviceModel1":product1.product.model, "pDeviceManufacture1":product1.product.manufacture,
+      "pDeviceModel2":product2.product.model, "pDeviceManufacture2":product2.product.manufacture});
+      firebase.analytics().logEvent("devicesCompared", {"pFirebaseId":this.props.firebaseid, "pDeviceModel1":product1.product.model, "pDeviceManufacture1":product1.product.manufacture,
+          "pDeviceModel2":product2.product.model, "pDeviceManufacture2":product2.product.manufacture});
+    }
   }
 
   _onChangeText(text) {
@@ -157,9 +181,9 @@ class CompareModal extends Component {
 }
 
 const mapStateToProps = state => {
-  const { productsNear } = state;
+  const { productsNear, current, common } = state;
 
-  return { productsNear: productsNear.productsNear };
+  return { productsNear: productsNear.productsNear, compares:current.compare, firebaseid: common.firebaseid  };
 }
 
 export default connect(mapStateToProps)(CompareModal);

@@ -6,8 +6,10 @@
 
 import React, { Component } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
+import { connect } from 'react-redux';
 import { Rating } from 'react-native-ratings';
 
+import firebase from 'react-native-firebase';
 // My Styles
 import styles from '../css/ReviewsScreenCss';
 
@@ -20,6 +22,10 @@ class CustomerReview extends Component<props> {
 
   toggleReadMore = () => {
     this.setState({ readMore: !this.state.readMore });
+    if(!this.state.readMore){
+      console.log("reviewViewed ======= : ", {"pFirebaseId":this.props.firebaseid, "pDeviceModel":this.props.model, "pDeviceManufacture":this.props.manufacture, "pReviewType":"customer"});
+      firebase.analytics().logEvent("reviewViewed", {"pFirebaseId":this.props.firebaseid, "pDeviceModel":this.props.model, "pDeviceManufacture":this.props.manufacture, "pReviewType":"customer"});
+    }
   }
 
   render() {
@@ -58,4 +64,9 @@ class CustomerReview extends Component<props> {
   }
 }
 
-export default CustomerReview;
+const mapStateToProps = state => {
+  const { common } = state;
+
+  return { firebaseid: common.firebaseid };
+}
+export default connect(mapStateToProps)(CustomerReview);

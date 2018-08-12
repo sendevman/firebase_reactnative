@@ -9,6 +9,7 @@ import { Animated, Dimensions, Image, ScrollView, Text, View } from 'react-nativ
 import Svg, { Rect } from 'react-native-svg';
 import LinearGradient from 'react-native-linear-gradient';
 import { connect } from 'react-redux';
+import firebase from 'react-native-firebase';
 
 // My Styles
 import styles from './css/InfoSpecsScreenCss';
@@ -61,6 +62,13 @@ class InfoSpecsScreen extends Component {
     super(props);
   }
 
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.selectedTab === 0 && nextProps.infoSpecs.model != undefined) {
+      console.log("log event ======= : ", {"pFirebaseId":this.props.firebaseid, "pDeviceModel":nextProps.infoSpecs.model, "pDeviceManufacture":nextProps.infoSpecs.manufacture, "pResearchTab":"info"});
+      firebase.analytics().logEvent("deviceViewed", {"pFirebaseId":this.props.firebaseid, "pDeviceModel":nextProps.infoSpecs.model, "pDeviceManufacture":nextProps.infoSpecs.manufacture, "pResearchTab":"info"});
+  
+    }
+  }
   setNewValue(a, b, c, d, e) {
     return {
       hideHeader: a,
@@ -402,7 +410,7 @@ class InfoSpecsScreen extends Component {
 const mapStateToProps = state => {
   const { current, common } = state;
 
-  return { infoSpecs: current.product };
+  return { infoSpecs: current.product, selectedTab: common.selectedTab, firebaseid: common.firebaseid  };
 }
 
 export default connect(mapStateToProps)(InfoSpecsScreen);
