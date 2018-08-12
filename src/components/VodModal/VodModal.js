@@ -10,7 +10,6 @@ import Spinkit from 'react-native-spinkit';
 import Video from 'react-native-video';
 import firebase from 'react-native-firebase';
 import { connect } from 'react-redux';
-import firebase from 'react-native-firebase';
 
 // My Styles
 import styles from './VodModalCss';
