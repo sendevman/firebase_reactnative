@@ -8,8 +8,8 @@
 import { FakeVod } from '../store/VodFakeData';
 
 const initialState = {
-  featured: FakeVod.featured, // {},
-  fullList: FakeVod.fullList// []
+  featured: {},
+  fullList: []
 };
 
 export default current = (state = initialState, action) => {
