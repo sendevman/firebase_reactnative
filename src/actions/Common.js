@@ -13,3 +13,13 @@ export const setNetworkInfo = (params) => ({
   type: 'UPDATE_NETWORK_INFO',
   payload: params
 })
+
+export const setFirebaseID = (params) => ({
+  type: 'GET_FIREBASE_ID',
+  payload: params
+})
+
+export const selectTabBar = (params) => ({
+  type: 'SELECT_TABBAR_ID',
+  payload: params
+})

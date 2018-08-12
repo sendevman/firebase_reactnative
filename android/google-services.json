@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "291038736394",
+    "firebase_url": "https://retail-companion-dev.firebaseio.com",
+    "project_id": "retail-companion-dev",
+    "storage_bucket": "retail-companion-dev.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:291038736394:android:7a180eb2055b3b72",
+        "android_client_info": {
+          "package_name": "com.retailcompanion"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "291038736394-0tkpb0ehi7m0bls65kbno2600hj5ivkv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADPoXMWqTDAHQFGSkiaG1Ue03dsLnW0DM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
