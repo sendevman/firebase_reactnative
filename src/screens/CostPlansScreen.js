@@ -356,6 +356,12 @@ class CostPlansScreen extends Component {
 
     if ((typeof compatibleAccessories == "undefined") || (Object.keys(compatibleAccessories).length === 0 && compatibleAccessories.constructor === Object)) return;
 
+    const { featured, fullList } = compatibleAccessories;
+    let featuredEmpty = (typeof featured == "undefined" || featured.length <= 0);
+    let fullListEmpty = (typeof fullList == "undefined" || fullList.length <= 0);
+
+    if (featuredEmpty && fullListEmpty) return false;
+
     return (
       <View style={{ height: 190 }}>
         { <RoutesAccessories /> }

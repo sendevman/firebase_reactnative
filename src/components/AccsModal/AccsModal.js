@@ -170,7 +170,7 @@ class AccsModal extends Component {
 
         <View style={styles.divider}></View>
 
-        <View style={styles.contentBox}>
+        <ScrollView contentContainerStyle={styles.contentBox}>
           <View style={styles.imageBox}>
             <Image style={styles.itemImageDetail} resizeMode={Image.resizeMode.contain} source={{ uri: item.img }} />
           </View>
@@ -205,7 +205,7 @@ class AccsModal extends Component {
               { cancelable: false }
             )}
           />
-        </View>
+        </ScrollView>
       </View>
     );
   }
