@@ -20,7 +20,7 @@ import ProductsNearSlide from '../components/ProductsNearSlide/ProductsNear';
 import RoutesProducts from '../routes/Products'
 
 // Action
-import { setProductInfo, setAreaInfo, setLocationData } from '../actions/Current';
+import { setAreaInfo, setLocationData, setProductInfo, setProductAccsInfo } from '../actions/Current';
 import { setProductsNearInfo } from '../actions/ProductsNear';
 
 var { height } = Dimensions.get('window');
@@ -86,6 +86,7 @@ class ProductLayoutScreen extends Component {
       .then(results => {
         this.props.dispatch(setProductsNearInfo(results));
         this.props.dispatch(setProductInfo(results[0]));
+        this.setCompatibleAccessories(results[0].accessories);
         setTimeout(() => this.forceUpdate(), 300);
       })
       .catch(error => {})
@@ -94,11 +95,54 @@ class ProductLayoutScreen extends Component {
     }
   }
 
+  setCompatibleAccessories(compatibleAccs) {
+    if (typeof compatibleAccs == "undefined" || compatibleAccs.length <= 0 ) return false;
+    const accsRef = firebase.firestore().collection('accessories');
+    Promise.all(
+      compatibleAccs.map(accessoryId => new Promise((resolve, reject) => {
+        accsRef.doc(accessoryId).get()
+        .then(accessory => {
+          if (!accessory.exists) resolve({});
+          const accessoryData = accessory.data();
+          accessoryData.id = accessoryId;
+          resolve(accessoryData);
+        })
+        .catch(err => { console.log('Error getting documents', err); });
+      }))
+    )
+    .then(results => {
+      let data = { featured: results.slice(0, 4), fullList: this.orderFullList(results) };
+      this.props.dispatch(setProductAccsInfo(data));
+    })
+    .catch(error => {});
+  }
+
+  orderFullList(accsFullList) {
+    let sortedList = accsFullList.sort((a, b) => {
+      if (a.category < b.category) return -1;
+      if (a.category > b.category) return 1;
+      return 0;
+    });
+    let newItems = [];
+    sortedList.forEach((obj,index) => {
+      if (index === 0) {
+        newItems.push({ name: obj.categoryName, type: obj.category, items: [obj] });
+      } else {
+        let last = newItems[newItems.length - 1];
+
+        if (obj.category === last.type) newItems[newItems.length - 1].items.push(obj);
+        else newItems.push({ name: obj.categoryName, type: obj.category, items: [obj] });
+      }
+    });
+    return newItems;
+  }
+
   setCurrentProduct(productId) {
     const { productsNear } = this.props;
     if (!productsNear || productsNear.length === 0) return;
     const match = productsNear.filter(product => product.id === productId);
     this.props.dispatch(setProductInfo(match.length > 0 ? match[0] : {}));
+    this.setCompatibleAccessories(match.length > 0 ? match[0].accessories : []);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -197,7 +241,7 @@ class ProductLayoutScreen extends Component {
           currentProducts={productsNear}
           zone={this.zone.bind(this)} />
 
-        <Animated.View style={[{ width: '100%', height: height - 176 }, productsBox]}>
+        <Animated.View style={[{ width: '100%', height: height - 172 }, productsBox]}>
           <RoutesProducts onScrollLayout={this.state.animatedValue} />
         </Animated.View>
       </SafeAreaView>
