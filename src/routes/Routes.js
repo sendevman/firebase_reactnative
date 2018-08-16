@@ -5,7 +5,7 @@
  */
 
 import React, { Component } from 'react';
-import { Button, NetInfo, ScrollView, StatusBar, Text, View, NativeEventEmitter, NativeModules } from 'react-native';
+import { Button, NetInfo, ScrollView, StatusBar, Text, View, NativeEventEmitter, NativeModules, AsyncStorage } from 'react-native';
 import { createDrawerNavigator, createBottomTabNavigator, SafeAreaView } from 'react-navigation';
 import { NetworkInfo } from 'react-native-network-info';
 import { connect } from 'react-redux';
@@ -35,7 +35,7 @@ const deviceId = DeviceInfo.getUniqueID();
 const BleManagerModule = NativeModules.BleManager;
 const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
 const ws = new WebSocket('wss://wai.walkbase.com/api/v2/subscribe/device');
-
+var cPassed = '0';
 // BEGIN Before --------------------------------------------------------------
 const MyNavScreen = ({ navigation, banner }) => (
   <View style={{ flex: 1 }}>
@@ -43,7 +43,7 @@ const MyNavScreen = ({ navigation, banner }) => (
       <SafeAreaView forceInset={{ top: 'always' }}>
         <Text style={{ fontSize: 14 }}>{banner}</Text>
         <Button onPress={() => navigation.openDrawer()} title="Open drawer" />
-        <Text style={{ fontSize: 14}}></Text>
+        <Text style={{ fontSize: 14 }}></Text>
         <Button onPress={() => navigation.goBack(null)} title="Go back" />
       </SafeAreaView>
       <StatusBar barStyle="default" />
@@ -149,7 +149,65 @@ const BottomTabNav = createBottomTabNavigator(
   }
 );
 
+
 const DrawerNav = createDrawerNavigator(
+  {
+    Shopping: {
+      screen: BottomTabNav,
+      navigationOptions: { title: 'Shopping' }
+    },
+    AboutRetailCompanion: {
+      screen: AboutRetailCompanion,
+      navigationOptions: { title: 'About Retail Companion' }
+    },
+    Experiences: {
+      screen: Experiences,
+      navigationOptions: { title: 'Experiences' }
+    },
+    Events: {
+      screen: Events,
+      navigationOptions: { title: 'Events' }
+    },
+    AccountSettings: {
+      screen: AccountSettings,
+      navigationOptions: {
+        title: 'Account Settings',
+        drawerIcon: ({ tintColor }) => (
+          <Icon name="SettingsApp" width="14" height="14" fill={tintColor} viewBox="3 1 20 20" />
+        )
+      }
+    },
+    DebugViews: {
+      screen: DebugViews
+    },
+    OnBoarding: {
+      screen: OnBoardingLayout,
+      navigationOptions: {
+        title: 'OnBoarding',
+        drawerLabel: <Hidden />
+      }
+    }
+  },
+  {
+    initialRouteName: 'Shopping',
+    contentOptions: {
+      activeTintColor: '#1181FF',
+      activeBackgroundColor: '#EEF1F4',
+      inactiveTintColor: '#3E3F42',
+      itemsContainerStyle: { marginTop: 26 },
+      iconContainerStyle: {
+        marginLeft: 0,
+        height: 16,
+        width: 16,
+        marginRight: 5
+      }
+    },
+    contentComponent: props => <MyDrawer {...props} />
+  }
+);
+
+
+const DrawerNav1 = createDrawerNavigator(
   {
     Shopping: {
       screen: BottomTabNav,
@@ -204,13 +262,32 @@ const DrawerNav = createDrawerNavigator(
     contentComponent: props => <MyDrawer {...props} />
   }
 );
-
 // export default DrawerNav;
 // END Before --------------------------------------------------------------
 
 class Routes extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      ispass: false
+    };
+    this.getStorageData();
+  }
+
+  getStorageData = async () => {
+    try {
+      AsyncStorage.getItem('passOnboarding', (err, result) => {
+        if (result != null && result === "passed") {
+          cPassed = '1';
+          console.log("===", cPassed);
+          this.setState({
+            ispass: true
+          })
+        }
+      });
+    } catch (error) {
+      // Error saving data
+    }
   }
 
   componentWillMount() {
@@ -239,39 +316,37 @@ class Routes extends Component {
 
   firebaseLogin() {
     firebase.auth().signInAnonymously()
-    .then(user => {
-      console.log("firebase user : ", user._user.uid);
-      this.props.dispatch(setFirebaseID(user._user.uid));
-      firebase.analytics().setUserId(user._user.uid);
-    });
+      .then(user => {
+        console.log("firebase user : ", user._user.uid);
+        this.props.dispatch(setFirebaseID(user._user.uid));
+        firebase.analytics().setUserId(user._user.uid);
+      });
   }
 
   handleConnectivityChange = isConnected => { this.setNetworkInfo(isConnected); }
 
   setNetworkInfo(isConnected) {
     NetInfo.getConnectionInfo()
-    .then(connectionInfo => {
-      NetworkInfo.getSSID(ssid => {
-        let data = {
-          connectionType: connectionInfo.type,
-          isConnected: isConnected,
-          ssid: ssid
-        }
-        this.props.dispatch(setNetworkInfo(data));
+      .then(connectionInfo => {
+        NetworkInfo.getSSID(ssid => {
+          let data = {
+            connectionType: connectionInfo.type,
+            isConnected: isConnected,
+            ssid: ssid
+          }
+          this.props.dispatch(setNetworkInfo(data));
+        });
       });
-    });
   }
 
-  handleEventNotDetermined(data) { console.log("Not determined");};
+  handleEventNotDetermined(data) { console.log("Not determined"); };
   handleEventInitializing(data) { console.log("Initializing"); };
   handleEventPause(data) { console.log("Pause"); };
-  handleEventScanning(data) { console.log("Scanning");};
+  handleEventScanning(data) { console.log("Scanning"); };
   handleEventFailed(data) { console.log("Failed"); };
 
   handleEventReceivedAdvertisement(data) {
     console.log(data);
-    // this.handleFetchData(data);
-    // alert(JSON.stringify(data));
   }
 
   handleEventErrors(data) {
@@ -314,60 +389,60 @@ class Routes extends Component {
     const maxLength = 5;
     ws.onmessage = (e) => {
       let isTest = false;
-      if(isTest) {
+      if (isTest) {
         iii++;
         let data = {
-          lat:"35.000",
-          lng:"-80.000",
-          height:"1",
-          ts:"2018-07-09",
-          floor_id:"1348",
+          lat: "35.000",
+          lng: "-80.000",
+          height: "1",
+          ts: "2018-07-09",
+          floor_id: "1348",
           zone_id: 3902
         }
         let data1 = {
-          lat:"-35.000",
-          lng:"-80.000",
-          height:"-1",
-          ts:"2018-07-09",
-          floor_id:"-1348",
-          zone_id:3903
+          lat: "-35.000",
+          lng: "-80.000",
+          height: "-1",
+          ts: "2018-07-09",
+          floor_id: "-1348",
+          zone_id: 3903
         }
-        if(iii % 10 === 0){
+        if (iii % 10 === 0) {
           this.props.dispatch(setLocationData(data));
-        }else if(iii % 60 === 30){
+        } else if (iii % 60 === 30) {
           // this.props.dispatch(setLocationData(data1));
         }
-      }else {
+      } else {
         if (e.data !== "") {
           locationdata = JSON.parse(e.data);
-          if(locationdata.zone_id === null) zone_id = -1;
+          if (locationdata.zone_id === null) zone_id = -1;
           else zone_id = locationdata.zone_id;
 
-          if(zoneData.length > 5) zoneData.shift();
-        
+          if (zoneData.length > 5) zoneData.shift();
+
           zoneData.push(zone_id);
 
-          if(zoneData.length === 6){
+          if (zoneData.length === 6) {
             console.log("zonData===", JSON.stringify(zoneData));
-            if(zoneData[5] === zoneData[4] || zoneData[5] === zoneData[3]){
+            if (zoneData[5] === zoneData[4] || zoneData[5] === zoneData[3]) {
               for (let i = 0; i < 5; i++) {
-                if(zoneData[5] === zoneData[i]) errorCheck += (i + 1);
+                if (zoneData[5] === zoneData[i]) errorCheck += (i + 1);
               }
-              if(errorCheck >= 4) {
-                if(last_zone_id != locationdata.zone_id){
+              if (errorCheck >= 4) {
+                if (last_zone_id != locationdata.zone_id) {
                   this.props.dispatch(setLocationData(locationdata));
                 }
                 last_zone_id = locationdata.zone_id;
                 errorCheck = 0;
               }
-              
+
             }
-            else if(zoneData[4] === zoneData[3]){
+            else if (zoneData[4] === zoneData[3]) {
               for (let i = 0; i < 4; i++) {
-                if(zoneData[4] === zoneData[i]) errorCheck += (i + 1);
+                if (zoneData[4] === zoneData[i]) errorCheck += (i + 1);
               }
-              if(errorCheck >= 3) {
-                if(last_zone_id != locationdata.zone_id){
+              if (errorCheck >= 3) {
+                if (last_zone_id != locationdata.zone_id) {
                   this.props.dispatch(setLocationData(locationdata));
                 }
                 last_zone_id = locationdata.zone_id;
@@ -375,24 +450,7 @@ class Routes extends Component {
               }
             }
           }
-          
-
-
-          // if(zone_id === locationdata.zone_id || locationdata.zone_id === null){
-          // }else {
-          //   this.props.dispatch(setLocationData(locationdata));
-          //   zone_id = locationdata.zone_id;
-
-          // }
-          // if(zoneData.length >= 5){
-          //   zoneData.pop(0);
-          //   arrData.push(locationdata);
-          // }else{
-          //   arrData.push(locationdata);
-          // }
-          // this.props.dispatch(setLocationData(arrData));
         }
-
       }
     };
 
@@ -410,8 +468,10 @@ class Routes extends Component {
   }
 
   render() {
+    console.log("====---=====", cPassed);
+    const ispass = this.state.ispass;
     return (
-      <DrawerNav />
+      ispass ? <DrawerNav /> : <DrawerNav1 />
     );
   }
 }
