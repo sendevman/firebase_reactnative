@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="86px" height="164px" viewBox="0 0 86 164" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>C0705882-12B9-461B-80AD-E84182678C60</title>
+    <desc>Created with sketchtool.</desc>
+    <defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#222A33" offset="0%"></stop>
+            <stop stop-color="#43597D" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Onboarding-1" transform="translate(-145.000000, -183.000000)">
+            <rect id="Rectangle" fill="url(#linearGradient-1)" x="0" y="0" width="375" height="667"></rect>
+            <g id="Illustration" transform="translate(-14.000000, 181.000000)">
+                <g id="Phone" transform="translate(159.000000, 2.000000)">
+                    <rect id="Rectangle-2" stroke="#FFFFFF" stroke-width="3" x="1.5" y="1.5" width="83" height="161" rx="8"></rect>
+                    <path d="M26,2 L60,2 L60,4.5132009 C60,6.07335869 59.8375552,6.63910961 59.5325178,7.20947998 C59.2274804,7.77985035 58.7798504,8.22748036 58.20948,8.53251777 C57.6391096,8.83755518 57.0733587,9 55.5132009,9 L30.4867991,9 C28.9266413,9 28.3608904,8.83755518 27.79052,8.53251777 C27.2201496,8.22748036 26.7725196,7.77985035 26.4674822,7.20947998 C26.1624448,6.63910961 26,6.07335869 26,4.5132009 L26,2 Z" id="Rectangle-3" fill="#FFFFFF"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
