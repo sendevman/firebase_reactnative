@@ -8,12 +8,14 @@ import React, { Component } from 'react';
 import { Button, ScrollView, StatusBar, Text, View } from 'react-native';
 import { createMaterialTopTabNavigator, SafeAreaView } from 'react-navigation';
 import { connect } from 'react-redux';
-import { selectTabBar } from '../actions/Common';
 
 // My Screens
 import InfoSpecsScreen from '../screens/InfoSpecsScreen';
 import ReviewsScreen from '../screens/ReviewsScreen';
 import CostPlansScreen from '../screens/CostPlansScreen';
+
+// My Actions
+import { selectTabBar } from '../actions/Common';
 
 const MyNavScreen = ({ navigation, banner }) => (
   <View style={{}}>
@@ -49,9 +51,7 @@ const TopTabNav = createMaterialTopTabNavigator(
     },
     CostPlans: {
       screen: props => <CostPlansScreen onScrollCustom={props.screenProps.onScrollCustom} />,
-      navigationOptions: {
-        title: 'Cost & Plans'
-      }
+      navigationOptions: { title: 'Cost & Plans' }
     }
   },
   {
@@ -92,7 +92,7 @@ class ProductStack extends Component {
 }
 
 function mapDispatchToProps(dispatch) {
-  return {
-  };
+  return {};
 }
+
 export default connect(mapDispatchToProps)(ProductStack);

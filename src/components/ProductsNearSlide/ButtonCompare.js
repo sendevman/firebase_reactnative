@@ -5,18 +5,20 @@
  */
 
 import React, { Component } from 'react';
-import { Alert } from 'react-native';
+import { Alert, Dimensions } from 'react-native';
 import { Button } from 'react-native-elements';
 
 // My Customs
 import Icon from '../../assets/images/Icon';
+
+const { width: viewportWidth } = Dimensions.get('window');
 
 class ButtonCompare extends Component<props> {
   render() {
     return (
       <Button
         raised
-        icon={{name: 'compare-arrows', style: { marginRight: 8 }}}
+        icon={ (viewportWidth <= 340 ? null : { name: 'compare-arrows', style: { marginRight: 8 } }) }
         title='Compare'
         color="#FFF"
         borderRadius={18}
