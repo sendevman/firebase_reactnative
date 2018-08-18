@@ -5,11 +5,11 @@
  */
 
 import React, { Component } from 'react';
-import { Button, NetInfo, ScrollView, StatusBar, Text, View, NativeEventEmitter, NativeModules, AsyncStorage } from 'react-native';
+import { AsyncStorage, Button, NetInfo, ScrollView, StatusBar, Text, View, NativeEventEmitter, NativeModules } from 'react-native';
 import { createDrawerNavigator, createBottomTabNavigator, SafeAreaView } from 'react-navigation';
 import { NetworkInfo } from 'react-native-network-info';
-import { connect } from 'react-redux';
 import firebase from 'react-native-firebase';
+import { connect } from 'react-redux';
 
 // My Customs
 import MyDrawer from '../components/Drawer/Drawer';
@@ -26,7 +26,7 @@ import TestScreen from '../screens/TestScreen';
 
 // My Actions
 import { setLocationData } from '../actions/Current';
-import { setNetworkInfo, setFirebaseID } from '../actions/Common';
+import { setFirebaseID, setNetworkInfo } from '../actions/Common';
 
 // Walkbase Engage
 import BleManager from 'walkbase-sdk';
@@ -36,6 +36,7 @@ const BleManagerModule = NativeModules.BleManager;
 const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
 const ws = new WebSocket('wss://wai.walkbase.com/api/v2/subscribe/device');
 var cPassed = '0';
+
 // BEGIN Before --------------------------------------------------------------
 const MyNavScreen = ({ navigation, banner }) => (
   <View style={{ flex: 1 }}>
@@ -149,7 +150,6 @@ const BottomTabNav = createBottomTabNavigator(
   }
 );
 
-
 const DrawerNav = createDrawerNavigator(
   {
     Shopping: {
@@ -189,7 +189,7 @@ const DrawerNav = createDrawerNavigator(
     }
   },
   {
-    initialRouteName: 'Shopping',
+    initialRouteName: 'OnBoarding',
     contentOptions: {
       activeTintColor: '#1181FF',
       activeBackgroundColor: '#EEF1F4',
@@ -205,7 +205,6 @@ const DrawerNav = createDrawerNavigator(
     contentComponent: props => <MyDrawer {...props} />
   }
 );
-
 
 const DrawerNav1 = createDrawerNavigator(
   {
@@ -316,27 +315,27 @@ class Routes extends Component {
 
   firebaseLogin() {
     firebase.auth().signInAnonymously()
-      .then(user => {
-        console.log("firebase user : ", user._user.uid);
-        this.props.dispatch(setFirebaseID(user._user.uid));
-        firebase.analytics().setUserId(user._user.uid);
-      });
+    .then(user => {
+      console.log("firebase user : ", user._user.uid);
+      this.props.dispatch(setFirebaseID(user._user.uid));
+      firebase.analytics().setUserId(user._user.uid);
+    });
   }
 
   handleConnectivityChange = isConnected => { this.setNetworkInfo(isConnected); }
 
   setNetworkInfo(isConnected) {
     NetInfo.getConnectionInfo()
-      .then(connectionInfo => {
-        NetworkInfo.getSSID(ssid => {
-          let data = {
-            connectionType: connectionInfo.type,
-            isConnected: isConnected,
-            ssid: ssid
-          }
-          this.props.dispatch(setNetworkInfo(data));
-        });
+    .then(connectionInfo => {
+      NetworkInfo.getSSID(ssid => {
+        let data = {
+          connectionType: connectionInfo.type,
+          isConnected: isConnected,
+          ssid: ssid
+        }
+        this.props.dispatch(setNetworkInfo(data));
       });
+    });
   }
 
   handleEventNotDetermined(data) { console.log("Not determined"); };
@@ -435,7 +434,6 @@ class Routes extends Component {
                 last_zone_id = locationdata.zone_id;
                 errorCheck = 0;
               }
-
             }
             else if (zoneData[4] === zoneData[3]) {
               for (let i = 0; i < 4; i++) {

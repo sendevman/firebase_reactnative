@@ -113,5 +113,4 @@ public class MainActivity extends ReactActivity {
         super.onStop();
         walkbaseManager.onStop();
     }
-    
 }

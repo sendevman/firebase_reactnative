@@ -7,8 +7,8 @@
 import React, { Component } from 'react';
 import { Animated, Dimensions, Image, ScrollView, Text, View } from 'react-native';
 import Svg, { Rect } from 'react-native-svg';
-import { connect } from 'react-redux';
 import firebase from 'react-native-firebase';
+import { connect } from 'react-redux';
 
 // My Styles
 import styles from './css/ReviewsScreenCss';
@@ -48,9 +48,9 @@ class ReviewsScreen extends Component {
     if(nextProps.selectedTab === 1 && nextProps.reviews.model != undefined) {
       console.log("log event ======= : ", {"pFirebaseId":this.props.firebaseid, "pDeviceModel":nextProps.reviews.model, "pDeviceManufacture":nextProps.reviews.manufacture, "pResearchTab":"reviews"});
       firebase.analytics().logEvent("deviceViewed", {"pFirebaseId":this.props.firebaseid, "pDeviceModel":nextProps.reviews.model, "pDeviceManufacture":nextProps.reviews.manufacture, "pResearchTab":"reviews"});
-  
     }
   }
+
   setNewValue(a, b, c, d, e) {
     return {
       hideHeader: a,
@@ -86,7 +86,7 @@ class ReviewsScreen extends Component {
   }
 
   renderWebReviews() {
-    const { webReviews,  model, manufacture } = this.props.reviews;
+    const { manufacture, model, webReviews } = this.props.reviews;
 
     if (typeof webReviews != "undefined" && webReviews.length > 0) {
       return (
@@ -101,7 +101,7 @@ class ReviewsScreen extends Component {
   }
 
   renderVideoContent() {
-    const { videoContent,  model, manufacture } = this.props.reviews;
+    const { manufacture, model, videoContent } = this.props.reviews;
 
     if (typeof videoContent != "undefined" && videoContent.length > 0) {
       return (
@@ -117,6 +117,7 @@ class ReviewsScreen extends Component {
 
   renderContent() {
     const { reviews } = this.props;
+
     if (Object.keys(reviews).length === 0 && reviews.constructor === Object) {
       return ( <ReviewsSkeleton /> );
     } else {
@@ -136,6 +137,10 @@ class ReviewsScreen extends Component {
   }
 
   render() {
+    const { reviews } = this.props;
+
+    let reviewsEmpty = ((typeof reviews == "undefined") || (Object.keys(reviews).length === 0 && reviews.constructor === Object));
+
     return (
       <Animated.ScrollView contentContainerStyle={styles.container} scrollEventThrottle={1}
         onScroll={Animated.event(
@@ -150,7 +155,7 @@ class ReviewsScreen extends Component {
         )}
         >
         { this.renderContent() }
-        <FeedbackSurvey />
+        { !reviewsEmpty && <FeedbackSurvey /> }
       </Animated.ScrollView>
     );
   }
@@ -159,7 +164,7 @@ class ReviewsScreen extends Component {
 const mapStateToProps = state => {
   const { current, common } = state;
 
-  return { reviews: current.product, selectedTab: common.selectedTab, firebaseid: common.firebaseid };
+  return { firebaseid: common.firebaseid, reviews: current.product, selectedTab: common.selectedTab };
 }
 
 export default connect(mapStateToProps)(ReviewsScreen);

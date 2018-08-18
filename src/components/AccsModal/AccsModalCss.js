@@ -4,14 +4,14 @@
  * @flow
  */
 
-import { StyleSheet, Dimensions } from 'react-native';
+import { Dimensions, Platform, StyleSheet } from 'react-native';
 var { height, width } = Dimensions.get('window');
 
 export default StyleSheet.create({
   // Container Box
   containerModal: {
     flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.6)',
+    backgroundColor: 'rgba(0, 0, 0, 0.7)',
     flexDirection: 'column',
     justifyContent: 'flex-end',
     alignItems: 'center'
@@ -60,7 +60,10 @@ export default StyleSheet.create({
     borderStyle: 'solid'
   },
   // Content Box
-  verticalScroll: { marginTop: 12 },
+  verticalScroll: {
+    marginTop: 12,
+    width: width
+  },
   categoryBox: {
     marginTop: 4,
     flexDirection: 'column',
@@ -96,7 +99,15 @@ export default StyleSheet.create({
     backgroundColor: '#FFFFFF',
     elevation: 2,
     shadowColor: '#AEBECD',
-    marginHorizontal: 6
+    marginHorizontal: 6,
+    ...Platform.select({
+      ios: {
+        borderWidth: 1,
+        borderStyle: 'solid',
+        borderColor: '#E3E9EF'
+      },
+      android: {}
+    })
   },
   frameImage: {
     height: 86,

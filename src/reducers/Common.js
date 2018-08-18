@@ -6,12 +6,12 @@
 
 const initialState = {
   bluetoothIsOn: false,
+  firebaseid: '',
   network: {
     connectionType: 'none',
     isConnected: false,
     ssid: '<unknown ssid>'
   },
-  firebaseid: '',
   selectedTab: 0
 }
 
