@@ -185,9 +185,9 @@ class InfoSpecsScreen extends Component {
             </View>
           }
           {(features && features.length > 0) &&
-              <View style={styles.cameraDetails}>
-                <Text numberOfLines={0} style={[styles.cameraText, { maxWidth: '80%', textAlign: 'left' }]}>{featuretext}</Text>
-              </View>
+            <View style={styles.cameraDetails}>
+              <Text numberOfLines={0} style={[styles.cameraText, { maxWidth: '80%', textAlign: 'left' }]}>{featuretext}</Text>
+            </View>
           }
         </View>
       );
@@ -407,7 +407,9 @@ class InfoSpecsScreen extends Component {
             {this.renderCamera()}
             {this.renderPerformanceAndStorage()}
             {this.renderBattery()}
+            {this.renderAccessories()}
           </View>
+        <FeedbackSurvey />
         </View>
       );
     }
@@ -415,11 +417,13 @@ class InfoSpecsScreen extends Component {
 
   renderAccessories() {
     const { compatibleAccessories } = this.props.infoSpecs;
+    const viewWidth = width - 20;
 
     if ((typeof compatibleAccessories == "undefined") || (Object.keys(compatibleAccessories).length === 0 && compatibleAccessories.constructor === Object)) return;
 
     return (
-      <View style={{ height: 204 }}>
+      <View style={{ height: 250 }}>
+        <Icon name="Heading_accessories" width={viewWidth} height={viewWidth / 1080 * 210} fill="#1181FF" viewBox="0 0 1080 210" />
         {<RoutesAccessories />}
       </View>
     );
@@ -440,8 +444,6 @@ class InfoSpecsScreen extends Component {
         )}
       >
         {this.renderContent()}
-        {this.renderAccessories()}
-        <FeedbackSurvey />
       </Animated.ScrollView>
     );
   }
