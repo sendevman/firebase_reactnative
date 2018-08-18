@@ -4,66 +4,104 @@
  * @flow
  */
 
-import { StyleSheet, Dimensions } from 'react-native';
-import { white } from 'ansi-colors';
-var { width } = Dimensions.get('window');
+import { Dimensions, Platform, StyleSheet } from 'react-native';
+
+const { width: viewportWidth, height: viewportHeight } = Dimensions.get('window');
+
+function wp (percentage) {
+  const value = (percentage * (viewportWidth > 400 ? 400 : viewportWidth)) / 100;
+  return Math.round(value);
+};
+
+const IS_IOS = Platform.OS === 'ios';
+const slideWidth = wp(85);
+const itemHorizontalMargin = wp(1);
+
+export const sliderWidth = (viewportWidth > 400 ? 400 : viewportWidth);
+export const itemWidth = slideWidth + itemHorizontalMargin * 2;
 
 export default StyleSheet.create({
+  // Wraper Gradient
+  gradient: { ...StyleSheet.absoluteFillObject },
+  // TitleCard Section
+  bgImage: {
+    ...StyleSheet.absoluteFillObject,
+    resizeMode: 'cover',
+    borderRadius: IS_IOS ? 6 : 0,
+    borderTopLeftRadius: 6,
+    borderTopRightRadius: 6,
+    opacity: 1
+  },
+  titleCardArrow: {
+    ...StyleSheet.absoluteFillObject,
+    borderRadius: IS_IOS ? 6 : 0,
+    borderTopLeftRadius: 6,
+    borderTopRightRadius: 6,
+    width: itemWidth
+  },
+  titleCardBox: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    paddingHorizontal: 10
+  },
   title: {
-    color: '#6B92BF',
+    color: '#FFF',
     // fontFamily: 'Roboto',
     fontSize: 12,
     fontWeight: 'bold',
     lineHeight: 14,
-    marginTop: 10,
-    marginBottom: 6,
+    marginVertical: 10,
     paddingHorizontal: 14
   },
+  titleCard: {
+    color: '#009FDB',
+    // fontFamily: 'Roboto',
+    fontSize: 35,
+    fontWeight: 'bold',
+    lineHeight: 35,
+    marginTop: 3,
+    marginLeft: 4
+  },
+  subTitleCard: {
+    color: '#5A5A5A',
+    // fontFamily: 'Roboto',
+    fontSize: 10,
+    fontWeight: 'bold',
+    lineHeight: 14,
+    paddingHorizontal: 8,
+    marginTop: -5
+  },
+  // Item Section
   itemContainer: {
-    paddingHorizontal: 10,
+    paddingHorizontal: 0,
     flexDirection: 'column',
     alignItems: 'center'
-  },
-  itemContainer_small: {
-    paddingHorizontal: 10,
-    flexDirection: 'column',
-    alignItems: 'center',
   },
   itemBox: {
     backgroundColor: '#FFF',
-    height: 120,
-    maxWidth: 344,
+    maxHeight: 180,
+    height: '100%',
+    maxWidth: 400,
     width: '100%',
     padding: 8,
-    borderRadius: 6,
-    flexDirection: 'row',
-    alignItems: 'center'
-  },
-  itemBox_small: {
-    backgroundColor: '#FFF',
-    height: 50,
-    maxWidth: 344,
-    width: '100%',
-    padding: 2,
     borderRadius: 6,
     flexDirection: 'row',
     alignItems: 'center'
   },
   loadingBox: {
-    backgroundColor: '#FFF',
-    height: 120,
-    maxWidth: 344,
+    height: '100%',
+    maxWidth: 400,
     width: '100%',
     padding: 8,
     borderRadius: 6,
     justifyContent: 'center',
-    flexDirection: 'row',
+    flexDirection: 'column',
     alignItems: 'center'
   },
   imageBox: {
     backgroundColor: 'transparent',
-    height: '100%',
-    width: 100,
+    height: 164,
+    width: 164,
     borderWidth: 1,
     borderStyle: 'solid',
     borderColor: '#E3E9EF',
@@ -71,35 +109,25 @@ export default StyleSheet.create({
     paddingTop: 14,
     paddingHorizontal: 8,
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   itemImage: {
+    ...StyleSheet.absoluteFillObject,
     borderRadius: 6,
-    height: '100%',
-    width: 98
+    resizeMode: 'cover'
   },
   detailsBox: {
-    flex: 1,
-    paddingLeft: 8
-  },
-  detailsBox_small: {
-    flexDirection: 'row',
-    flex: 1,
-    paddingLeft: 1,
+    flexGrow: 1,
+    paddingLeft: 8,
+    height: 164,
+    width: itemWidth - 180
   },
   titleItem: {
     color: '#3E3F42',
     // fontFamily: 'Rubik',
     fontSize: 18,
     lineHeight: 22,
-    paddingVertical: 6
-  },
-  titleItem_small: {
-    color: '#3E3F42',
-    // fontFamily: 'Rubik',
-    fontSize: 12,
-    lineHeight: 22,
-    paddingVertical: 6
+    width: itemWidth - 188
   },
   hrDivider: {
     borderTopWidth: 1,
@@ -123,5 +151,16 @@ export default StyleSheet.create({
     fontSize: 13,
     lineHeight: 15,
     marginLeft: 3
+  },
+  // Slide Pagination Section
+  paginationContainer: {
+    paddingTop: 8,
+    paddingBottom: 0
+  },
+  paginationDot: {
+    width: 14,
+    height: 14,
+    borderRadius: 7,
+    marginHorizontal: 0
   }
 });

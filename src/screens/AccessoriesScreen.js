@@ -26,13 +26,13 @@ class AccessoriesScreen extends Component {
     const { compatibleAccessories } = product;
 
     if ((typeof compatibleAccessories == "undefined") || (Object.keys(compatibleAccessories).length === 0 && compatibleAccessories.constructor === Object)) return false;
-    const items = compatibleAccessories.featured;
+    const { featured, fullList } = compatibleAccessories;
 
-    if (typeof items == "undefined" || items.length <= 0) return false;
+    if (typeof featured == "undefined" || featured.length <= 0) return false;
 
     return (
       <View style={styles.containerBox}>
-        { items.map((item, index) => {
+        { featured.map((item, index) => {
             return (
               <TouchableWithoutFeedback key={index} onPress={() => navigation.navigate('AccsModal', { isDetail: true, fromScreen: true, itemId: item.id, itemCategory: item.category })} style={styles.containerItem}>
                 <View style={styles.itemBox}>
@@ -49,12 +49,14 @@ class AccessoriesScreen extends Component {
           })
         }
 
-        <TouchableWithoutFeedback onPress={() => navigation.navigate('AccsModal', { isDetail: false })}>
-          <View style={styles.containerAdd}>
-            <Icon height="37" width="37" name="AddBtn" viewBox="0 0 37 37" fill="#1181FF" />
-            <Text style={styles.addText}>View more accessories</Text>
-          </View>
-        </TouchableWithoutFeedback>
+        { (typeof fullList != "undefined" && fullList.length > 0) &&
+          <TouchableWithoutFeedback onPress={() => navigation.navigate('AccsModal', { isDetail: false })}>
+            <View style={styles.containerAdd}>
+              <Icon height="37" width="37" name="AddBtn" viewBox="0 0 37 37" fill="#1181FF" />
+              <Text style={styles.addText}>View more accessories</Text>
+            </View>
+          </TouchableWithoutFeedback>
+        }
       </View>
     );
   }

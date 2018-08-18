@@ -8,6 +8,7 @@ import React, { Component } from 'react';
 import { Animated, Dimensions, Image, ScrollView, Text, View } from 'react-native';
 import Svg, { Rect } from 'react-native-svg';
 import LinearGradient from 'react-native-linear-gradient';
+import firebase from 'react-native-firebase';
 import { connect } from 'react-redux';
 
 // My Styles
@@ -59,6 +60,13 @@ const InfoSpecsSkeleton = () => (
 class InfoSpecsScreen extends Component {
   constructor(props) {
     super(props);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.selectedTab === 0 && nextProps.infoSpecs.model != undefined) {
+      console.log("log event ======= : ", {"pFirebaseId":this.props.firebaseid, "pDeviceModel":nextProps.infoSpecs.model, "pDeviceManufacture":nextProps.infoSpecs.manufacture, "pResearchTab":"info"});
+      firebase.analytics().logEvent("deviceViewed", {"pFirebaseId":this.props.firebaseid, "pDeviceModel":nextProps.infoSpecs.model, "pDeviceManufacture":nextProps.infoSpecs.manufacture, "pResearchTab":"info"});
+    }
   }
 
   setNewValue(a, b, c, d, e) {
@@ -370,6 +378,12 @@ class InfoSpecsScreen extends Component {
 
     if ((typeof compatibleAccessories == "undefined") || (Object.keys(compatibleAccessories).length === 0 && compatibleAccessories.constructor === Object)) return;
 
+    const { featured, fullList } = compatibleAccessories;
+    let featuredEmpty = (typeof featured == "undefined" || featured.length <= 0);
+    let fullListEmpty = (typeof fullList == "undefined" || fullList.length <= 0);
+
+    if (featuredEmpty && fullListEmpty) return false;
+
     return (
       <View style={{ height: 204 }}>
         {<RoutesAccessories />}
@@ -378,6 +392,10 @@ class InfoSpecsScreen extends Component {
   }
 
   render() {
+    const { infoSpecs } = this.props;
+
+    let infoSpecsEmpty = ((typeof infoSpecs == "undefined") || (Object.keys(infoSpecs).length === 0 && infoSpecs.constructor === Object));
+
     return (
       <Animated.ScrollView contentContainerStyle={styles.container} scrollEventThrottle={1}
         onScroll={Animated.event(
@@ -393,7 +411,7 @@ class InfoSpecsScreen extends Component {
         >
         { this.renderContent() }
         { this.renderAccessories() }
-        <FeedbackSurvey />
+        { !infoSpecsEmpty && <FeedbackSurvey /> }
       </Animated.ScrollView>
     );
   }
@@ -402,7 +420,7 @@ class InfoSpecsScreen extends Component {
 const mapStateToProps = state => {
   const { current, common } = state;
 
-  return { infoSpecs: current.product };
+  return { infoSpecs: current.product, firebaseid: common.firebaseid, selectedTab: common.selectedTab };
 }
 
 export default connect(mapStateToProps)(InfoSpecsScreen);
