@@ -32,7 +32,7 @@ class ProductLayoutScreen extends Component {
 
     this.state = {
       animatedValue: new Animated.Value(0)
-    }
+    };
   }
 
   getProductID(zone_id) {
@@ -85,8 +85,10 @@ class ProductLayoutScreen extends Component {
       )
       .then(results => {
         this.props.dispatch(setProductsNearInfo(results));
-        this.props.dispatch(setProductInfo(results[0]));
-        this.setCompatibleAccessories(results[0].accessories);
+        this.props.dispatch(setProductInfo(results[1]));
+        this.setCompatibleAccessories(results[1].accessories);
+        // console.log("log event ======= : ", {"pFirebaseId":this.props.firebaseid, "pDeviceModel":results[0].model, "pDeviceManufacture":results[0].manufacture, "pResearchTab":"info"});
+        // firebase.analytics().logEvent("deviceViewed", {"pFirebaseId":this.props.firebaseid, "pDeviceModel":results[0].model, "pDeviceManufacture":results[0].manufacture, "pResearchTab":"info"});
         setTimeout(() => this.forceUpdate(), 300);
       })
       .catch(error => {})
@@ -143,6 +145,8 @@ class ProductLayoutScreen extends Component {
     const match = productsNear.filter(product => product.id === productId);
     this.props.dispatch(setProductInfo(match.length > 0 ? match[0] : {}));
     this.setCompatibleAccessories(match.length > 0 ? match[0].accessories : []);
+    // console.log("log event ======= : ", {"pFirebaseId":this.props.firebaseid, "pDeviceModel":match[0].model, "pDeviceManufacture":match[0].manufacture, "pResearchTab":"info"});
+    // firebase.analytics().logEvent("deviceViewed", {"pFirebaseId":this.props.firebaseid, "pDeviceModel":match[0].model, "pDeviceManufacture":match[0].manufacture, "pResearchTab":"info"});
   }
 
   componentWillReceiveProps(nextProps) {
@@ -178,20 +182,20 @@ class ProductLayoutScreen extends Component {
 
   zone() {
     let data = {
-      lat:"35.000",
-      lng:"-80.000",
-      height:"1",
-      ts:"2018-07-09",
-      floor_id:"1348",
+      lat: "35.000",
+      lng: "-80.000",
+      height: "1",
+      ts: "2018-07-09",
+      floor_id: "1348",
       zone_id: 3902
     }
     let data1 = {
-      lat:"-35.000",
-      lng:"-80.000",
-      height:"-1",
-      ts:"2018-07-09",
-      floor_id:"-1348",
-      zone_id:3903
+      lat: "-35.000",
+      lng: "-80.000",
+      height: "-1",
+      ts: "2018-07-09",
+      floor_id: "-1348",
+      zone_id: 3903
     }
     count++;
     this.props.dispatch(setLocationData(count%2 === 0 ? data : data1));
@@ -199,39 +203,6 @@ class ProductLayoutScreen extends Component {
 
   render() {
     const { productsNear } = this.props;
-
-    const transform = [
-      {
-        translateY: this.state.animatedValue.interpolate({
-          inputRange: [0, 166],
-          outputRange: [0, -68],
-          extrapolate: 'clamp'
-        })
-      }
-    ];
-
-    let productsBox = {
-      transform: [
-        {
-          translateY: this.state.animatedValue.interpolate({
-            inputRange: [0, 166],
-            outputRange: [0, -68],
-            extrapolate: 'clamp'
-          })
-        }
-      ]/*,
-      height: this.state.animatedValue.interpolate({
-        inputRange: [0, 166],
-        outputRange: [height - 244, height - 176],
-        extrapolate: 'clamp'
-      })*/
-    };
-
-    const headerHeight = this.state.animatedValue.interpolate({
-      inputRange: [0, 166],
-      outputRange: [120, 52],
-      extrapolate: 'clamp'
-    });
 
     return (
       <SafeAreaView forceInset={{ top: 'always' }} style={{ backgroundColor: '#FFF' }}>
@@ -241,7 +212,7 @@ class ProductLayoutScreen extends Component {
           currentProducts={productsNear}
           zone={this.zone.bind(this)} />
 
-        <Animated.View style={[{ width: '100%', height: height - 172 }, productsBox]}>
+        <Animated.View style={{ width: '100%', height: height - 174 }}>
           <RoutesProducts onScrollLayout={this.state.animatedValue} />
         </Animated.View>
       </SafeAreaView>
@@ -252,7 +223,7 @@ class ProductLayoutScreen extends Component {
 const mapStateToProps = state => {
   const { common, current, productsNear } = state;
 
-  return { locationData: current.position, productsNear: productsNear.productsNear };
+  return { firebaseid: common.firebaseid, locationData: current.position, productsNear: productsNear.productsNear };
 }
 
 const ProductLayout = createStackNavigator(

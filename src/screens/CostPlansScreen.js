@@ -8,6 +8,7 @@ import React, { Component } from 'react';
 import { Animated, ScrollView, Text, TouchableWithoutFeedback, View } from 'react-native';
 import Svg, { Rect } from 'react-native-svg';
 import moment from 'moment';
+import firebase from 'react-native-firebase';
 import { connect } from 'react-redux';
 
 // My Styles
@@ -44,6 +45,13 @@ class CostPlansScreen extends Component {
       viewMoreInsurance: false,
       viewMorePlans: false
     };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.selectedTab === 2 && nextProps.costplans.model != undefined) {
+      console.log("log event ======= : ", {"pFirebaseId":this.props.firebaseid, "pDeviceModel":nextProps.costplans.model, "pDeviceManufacture":nextProps.costplans.manufacture, "pResearchTab":"price"});
+      firebase.analytics().logEvent("deviceViewed", {"pFirebaseId":this.props.firebaseid, "pDeviceModel":nextProps.costplans.model, "pDeviceManufacture":nextProps.costplans.manufacture, "pResearchTab":"price"});
+    }
   }
 
   toggleViewMorePlans = () => {
@@ -370,6 +378,10 @@ class CostPlansScreen extends Component {
   }
 
   render() {
+    const { costplans } = this.props;
+
+    let costplansEmpty = ((typeof costplans == "undefined") || (Object.keys(costplans).length === 0 && costplans.constructor === Object));
+
     return (
       <Animated.ScrollView contentContainerStyle={styles.container} scrollEventThrottle={1}
         onScroll={Animated.event(
@@ -385,7 +397,7 @@ class CostPlansScreen extends Component {
         >
         { this.renderContent() }
         { this.renderAccessories() }
-        <FeedbackSurvey />
+        { !costplansEmpty && <FeedbackSurvey /> }
       </Animated.ScrollView>
     );
   }
@@ -394,7 +406,7 @@ class CostPlansScreen extends Component {
 const mapStateToProps = state => {
   const { current, common } = state;
 
-  return { costplans: current.product };
+  return { costplans: current.product, firebaseid: common.firebaseid, selectedTab: common.selectedTab };
 }
 
 export default connect(mapStateToProps)(CostPlansScreen);
