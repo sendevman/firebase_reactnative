@@ -13,7 +13,7 @@ var { height, width } = Dimensions.get('window');
 const styles = StyleSheet.create({
   viewBox: {
     width: width,
-    backgroundColor: '#EEF1F4',
+    backgroundColor: 'transparent',
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center'

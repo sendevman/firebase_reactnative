@@ -9,8 +9,9 @@ var { width } = Dimensions.get('window');
 
 export default StyleSheet.create({
   container: {
-    backgroundColor: '#EEF1F4',
-    position: 'absolute',
+    backgroundColor: '#FFFFFF5F',
+    // backgroundColor: 'transparent',
+    // position: 'absolute',
     bottom: 0
   },
   // Accesories Box
@@ -42,7 +43,7 @@ export default StyleSheet.create({
     height: 149,
     width: 120,
     borderRadius: 6,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#FFFFFFB3',
     elevation: 2,
     shadowColor: '#AEBECD',
     marginHorizontal: 6
