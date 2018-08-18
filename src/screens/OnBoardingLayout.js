@@ -23,7 +23,9 @@ class OnBoardingLayoutScreen extends Component {
     super(props);
 
     SystemSetting.isBluetoothEnabled().then(enable => {
-      this.props.dispatch(updateBluetoothIsOn(enable));
+      if (this.props.bluetoothIsOn != enable) {
+        this.props.dispatch(updateBluetoothIsOn(enable));
+      }
     });
 
     this.checkBluetoothIsOn(this.props.bluetoothIsOn);

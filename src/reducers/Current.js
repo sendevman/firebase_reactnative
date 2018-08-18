@@ -11,18 +11,9 @@
 import { FakeProduct } from '../store/ProductFakeData';
 import { FakeCompare } from '../store/CompareFakeData';
 
-let data = {
-  lat: "35.000",
-  lng: "-80.000",
-  height: "1",
-  ts: "2018-07-09",
-  floor_id: 123,
-  zone_id: 3902
-};
-
 const initialState = {
   allAreas: [],
-  position: data,
+  position: {},
   product: {},
   compare: []
 };
@@ -60,6 +51,15 @@ export default current = (state = initialState, action) => {
       return {
         ...state,
         product: action.payload
+      }
+      break;
+    case 'UPDATE_PRODUCT_ACCS_INFO':
+      return {
+        ...state,
+        product: {
+          ...state.product,
+          compatibleAccessories: action.payload
+        }
       }
       break;
     case 'UPDATE_AREA_INFO':

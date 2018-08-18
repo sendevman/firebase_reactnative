@@ -7,17 +7,21 @@
 import React, { Component } from 'react';
 import { Button, ScrollView, StatusBar, Text, View } from 'react-native';
 import { createMaterialTopTabNavigator, SafeAreaView } from 'react-navigation';
+import { connect } from 'react-redux';
 
 // My Screens
 import InfoSpecsScreen from '../screens/InfoSpecsScreen';
 import ReviewsScreen from '../screens/ReviewsScreen';
 import CostPlansScreen from '../screens/CostPlansScreen';
 
+// My Actions
+import { selectTabBar } from '../actions/Common';
+
 const MyNavScreen = ({ navigation, banner }) => (
   <View style={{}}>
     <ScrollView>
       <SafeAreaView forceInset={{ top: 'always' }}>
-        <Text style={{ fontSize: 14}}>{banner}</Text>
+        <Text style={{ fontSize: 14 }}>{banner}</Text>
         <Button onPress={() => navigation.openDrawer()} title="Open drawer" />
         <Button
           onPress={() => navigation.navigate('NotifSettings')}
@@ -79,9 +83,16 @@ class ProductStack extends Component {
 
   render() {
     return (
-      <TopTabNav screenProps={{ onScrollCustom: this.props.onScrollLayout }} />
+      <TopTabNav screenProps={{ onScrollCustom: this.props.onScrollLayout }}
+        onNavigationStateChange={(prevState, newState) => {
+          this.props.dispatch(selectTabBar(newState.index));
+        }} />
     );
   }
 }
 
-export default ProductStack;
+function mapDispatchToProps(dispatch) {
+  return {};
+}
+
+export default connect(mapDispatchToProps)(ProductStack);
