@@ -5,7 +5,7 @@
  */
 
 import React, { Component } from 'react';
-import { Animated, Dimensions, TouchableHighlight, View } from 'react-native';
+import { Animated, AsyncStorage, Dimensions, TouchableHighlight } from 'react-native';
 import { createStackNavigator, SafeAreaView } from 'react-navigation';
 import { connect } from 'react-redux';
 import firebase from 'react-native-firebase';
@@ -33,6 +33,12 @@ class ProductLayoutScreen extends Component {
     this.state = {
       animatedValue: new Animated.Value(0)
     };
+  
+    try {
+      AsyncStorage.setItem('passOnboarding', 'passed');
+    } catch (error) {
+      // Error saving data
+    }
   }
 
   getProductID(zone_id) {
