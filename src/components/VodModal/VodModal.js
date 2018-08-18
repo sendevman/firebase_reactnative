@@ -60,7 +60,15 @@ class VodModal extends Component {
     return mediaURL;
   }
 
-  _onWatchTrailer() { this.setState({ pauseVideo: false, showVideo: true }); }
+  eventlog(method) {
+    console.log("log event ======= : ", {"pFirebaseId":this.props.firebaseid, "pVodContentTitle":this.props.vodInfo.title, "pVodContentUrl":this.props.vodInfo.mediaURL, "pVodContentType":this.props.vodInfo.categoryName, "pVodViewedOn":method});
+    firebase.analytics().logEvent("vodPlayed", {"pFirebaseId":this.props.firebaseid, "pVodContentTitle":this.props.vodInfo.title, "pVodContentUrl":this.props.vodInfo.mediaURL, "pVodContentType":this.props.vodInfo.categoryName, "pVodViewedOn":method});
+  }
+
+  _onWatchTrailer() {
+    this.setState({ pauseVideo: false, showVideo: true });
+    this.eventlog('device');
+  }
 
   _onWatchBigScreen(mediaURL) {
     firebase.database().ref('vod/player_id').update({
@@ -71,6 +79,7 @@ class VodModal extends Component {
     });
 
     this.setState({ canStop: true, notPlaying: false });
+    this.eventlog('cast');
   }
 
   _onStopVideo() {
@@ -190,7 +199,7 @@ class VodModal extends Component {
 const mapStateToProps = state => {
   const { common, current, vod } = state;
 
-  return { featured: vod.featured, fullList: vod.fullList, location: current.position, network: common.network };
+  return { featured: vod.featured, firebaseid: common.firebaseid, fullList: vod.fullList, location: current.position, network: common.network };
 }
 
 export default connect(mapStateToProps)(VodModal);

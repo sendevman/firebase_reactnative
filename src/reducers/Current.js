@@ -11,18 +11,9 @@
 import { FakeProduct } from '../store/ProductFakeData';
 import { FakeCompare } from '../store/CompareFakeData';
 
-let data = {
-  lat: "35.000",
-  lng: "-80.000",
-  height: "1",
-  ts: "2018-07-09",
-  floor_id: 123,
-  zone_id: 3902
-};
-
 const initialState = {
   allAreas: [],
-  position: data,
+  position: {},
   product: {},
   compare: []
 };

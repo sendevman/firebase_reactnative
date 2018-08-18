@@ -8,6 +8,7 @@ import React, { Component } from 'react';
 import { Button, NetInfo, ScrollView, StatusBar, Text, View, NativeEventEmitter, NativeModules } from 'react-native';
 import { createDrawerNavigator, createBottomTabNavigator, SafeAreaView } from 'react-navigation';
 import { NetworkInfo } from 'react-native-network-info';
+import firebase from 'react-native-firebase';
 import { connect } from 'react-redux';
 
 // My Customs
@@ -25,7 +26,7 @@ import TestScreen from '../screens/TestScreen';
 
 // My Actions
 import { setLocationData } from '../actions/Current';
-import { setNetworkInfo } from '../actions/Common';
+import { setFirebaseID, setNetworkInfo } from '../actions/Common';
 
 // Walkbase Engage
 import BleManager from 'walkbase-sdk';
@@ -233,6 +234,16 @@ class Routes extends Component {
     this.handlerDiscover6 = bleManagerEmitter.addListener("WBEngageManagerReceivedAdvertisement", this.handleEventReceivedAdvertisement);
     this.handlerDiscover7 = bleManagerEmitter.addListener("WBEngageManagerOff", this.handleEventErrors);
     this.webAPI();
+    this.firebaseLogin();
+  }
+
+  firebaseLogin() {
+    firebase.auth().signInAnonymously()
+    .then(user => {
+      console.log("firebase user : ", user._user.uid);
+      this.props.dispatch(setFirebaseID(user._user.uid));
+      firebase.analytics().setUserId(user._user.uid);
+    });
   }
 
   handleConnectivityChange = isConnected => { this.setNetworkInfo(isConnected); }

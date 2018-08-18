@@ -6,11 +6,13 @@
 
 const initialState = {
   bluetoothIsOn: false,
+  firebaseid: '',
   network: {
     connectionType: 'none',
     isConnected: false,
     ssid: '<unknown ssid>'
-  }
+  },
+  selectedTab: 0
 }
 
 export default common = (state = initialState, action) => {
@@ -25,6 +27,18 @@ export default common = (state = initialState, action) => {
       return {
         ...state,
         network: action.payload
+      }
+      break;
+    case 'GET_FIREBASE_ID':
+      return {
+        ...state,
+        firebaseid: action.payload
+      }
+      break;
+    case 'SELECT_TABBAR_ID':
+      return {
+        ...state,
+        selectedTab: action.payload
       }
       break;
     default:

@@ -10,10 +10,12 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.provider.Settings.Secure;
 import com.facebook.react.ReactActivity;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.walkbase.sdk.WalkbaseManager;
 
 public class MainActivity extends ReactActivity {
     private WalkbaseManager walkbaseManager;
+    private FirebaseAnalytics mFirebaseAnalytics;
     private int PERMISION_REQUEST_CODE = 1111;
     private String apiKey = "VZHkscRFhAjkScc";
     private String android_id;
@@ -32,6 +34,7 @@ public class MainActivity extends ReactActivity {
         super.onCreate(savedInstanceState);
         android_id = Secure.getString(getContentResolver(),
                 Secure.ANDROID_ID);
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         walkbaseManager = new WalkbaseManager(this);
         if(havePermissions() != PackageManager.PERMISSION_GRANTED) {
             requestPermissions();;

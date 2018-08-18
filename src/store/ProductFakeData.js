@@ -24,10 +24,10 @@ export const FakeProduct = {
     rear: { aperture: 'F1.5', sensor: '12MP AF' }
   },
   colors: [
-    { name: 'Lilac Purple', img: 'https://firebasestorage.googleapis.com/v0/b/fanexperience-dev.appspot.com/o/products%2FnaUkEQFqUAh8FcheyXLL%2Fcolors%2FLilac_Purple.png?alt=media&token=13bb4c0d-d426-4633-bfb1-47de2367540d' },
-    { name: 'Midnight Black', img: 'https://firebasestorage.googleapis.com/v0/b/fanexperience-dev.appspot.com/o/products%2FnaUkEQFqUAh8FcheyXLL%2Fcolors%2FMidnight_Black.png?alt=media&token=070a6206-e152-45c0-add7-c2470fc1c5a7' },
-    { name: 'Titanium Gray', img: 'https://firebasestorage.googleapis.com/v0/b/fanexperience-dev.appspot.com/o/products%2FnaUkEQFqUAh8FcheyXLL%2Fcolors%2FTitanium_Gray.png?alt=media&token=e84baa0d-9b67-4247-9f46-b1298fd929c1' },
-    { name: 'Coral Blue', img: 'https://firebasestorage.googleapis.com/v0/b/fanexperience-dev.appspot.com/o/products%2FnaUkEQFqUAh8FcheyXLL%2Fcolors%2FCoral_Blue.png?alt=media&token=eaeccdf2-ecf2-4344-8d8a-9eeb0b555a9a' }
+    { name: 'Lilac Purple', img: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/products%2FnaUkEQFqUAh8FcheyXLL%2Fcolors%2FLilac_Purple.png?alt=media&token=13bb4c0d-d426-4633-bfb1-47de2367540d' },
+    { name: 'Midnight Black', img: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/products%2FnaUkEQFqUAh8FcheyXLL%2Fcolors%2FMidnight_Black.png?alt=media&token=070a6206-e152-45c0-add7-c2470fc1c5a7' },
+    { name: 'Titanium Gray', img: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/products%2FnaUkEQFqUAh8FcheyXLL%2Fcolors%2FTitanium_Gray.png?alt=media&token=e84baa0d-9b67-4247-9f46-b1298fd929c1' },
+    { name: 'Coral Blue', img: 'https://firebasestorage.googleapis.com/v0/b/retail-companion-dev.appspot.com/o/products%2FnaUkEQFqUAh8FcheyXLL%2Fcolors%2FCoral_Blue.png?alt=media&token=eaeccdf2-ecf2-4344-8d8a-9eeb0b555a9a' }
   ],
   compatibleAccessories: {
     featured: [
