@@ -9,8 +9,8 @@ var { width } = Dimensions.get('window');
 
 export default StyleSheet.create({
   container: {
-    backgroundColor: '#FFFFFF5F',
-    // backgroundColor: 'transparent',
+    // backgroundColor: '#00000000',
+    backgroundColor: 'transparent',
     // position: 'absolute',
     bottom: 0
   },

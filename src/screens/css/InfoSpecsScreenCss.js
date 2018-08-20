@@ -42,7 +42,7 @@ export default StyleSheet.create({
     lineHeight: 22
   },
   hrDivider: {
-    borderTopWidth: 1,
+    borderTopWidth: 0,
     borderStyle: 'solid',
     borderTopColor: '#1181FF',
     marginTop: 10,
@@ -145,12 +145,12 @@ export default StyleSheet.create({
     lineHeight: 22
   },
   displayTextItem: {
-    height: 50,
+    height: 70,
+    maxWidth: '76%',
     justifyContent: 'center'
   },
   displayText: {
     color: '#3E3F42',
-    width: '80%',
     // fontFamily: 'Roboto',
     fontSize: 14,
     letterSpacing: 0.12,
@@ -158,7 +158,7 @@ export default StyleSheet.create({
   },
   // - - Camera Box - -
   cameraBox: {
-    marginTop:100,
+    marginTop:80,
     width:'100%',
     position: 'absolute',
     flexDirection: 'row',
@@ -166,7 +166,7 @@ export default StyleSheet.create({
     alignItems: 'center'
   },
   cameraItem: {
-    width: '40%',
+    width: '35%',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 6
@@ -191,17 +191,22 @@ export default StyleSheet.create({
     color: '#000',
     // fontFamily: 'Roboto',
     fontSize: 14,
-    letterSpacing: 0.12,
-    lineHeight: 16
+    letterSpacing: 0.10,
+    lineHeight: 13
   },
   cameraDetails: {
-    marginTop:145,
+    marginTop:120,
     width:'100%',
+    paddingHorizontal:30,
     position: 'absolute',
-    flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center'
 
+  },
+  cameraDetailsDivide: {
+    height:2,
+    width:'100%',
+    backgroundColor:'red'
   },
   // - - Camera Box - List - -
   cameraList: {
@@ -264,7 +269,7 @@ export default StyleSheet.create({
   // - - Expandable Storage Box - -
   expandableBox: {
     backgroundColor: '#FFFFFFBF',
-    marginTop: 0
+    marginTop: -0.2
   },
   expandableViewText: { marginBottom: 8 },
   // Feature Box
@@ -383,9 +388,9 @@ export default StyleSheet.create({
     alignItems: 'center'
   },
   performanceStorageTitle: {
-    color: '#3E3F42',
+    color: '#000000',
     // fontFamily: 'Roboto',
-    fontSize: 12,
+    fontSize: 13,
     fontWeight: 'bold',
     letterSpacing: 0.12,
     lineHeight: 20

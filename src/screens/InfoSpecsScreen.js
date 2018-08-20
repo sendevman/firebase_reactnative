@@ -165,7 +165,7 @@ class InfoSpecsScreen extends Component {
         <View style={{ paddingBottom: 5 }}>
           <View style={styles.hrDivider}></View>
           {/* <Text style={styles.titleDivider}>Camera</Text> */}
-          <Icon name="Heading_camera" width={viewWidth} height={viewWidth / 1080 * 531} fill="#1181FF" viewBox="0 0 1080 531" />
+          <Icon name="Heading_camera" width={viewWidth} height={viewWidth / 1080 * 450} fill="#1181FF" viewBox="0 0 1080 531" />
 
           {(Object.keys(front).length !== 0 || Object.keys(rear).length !== 0) &&
             <View style={styles.cameraBox}>
@@ -247,7 +247,7 @@ class InfoSpecsScreen extends Component {
           <View style={[styles.performanceStorageBox, mpChangeStyle ? {} : { marginTop: 20 }, { marginBottom: 6 }]}>
             {isAvailable &&
               <LinearGradient colors={['#00000088', '#00000088']} style={styles.storageBlueBox}>
-                <Image style={{ position: 'absolute', top: 0, left: 0 }} source={require('../assets/images/files/whiteCorner.png')} />
+                {/* <Image style={{ position: 'absolute', top: 0, left: 0 }} source={require('../assets/images/files/whiteCorner.png')} /> */}
                 <Text style={styles.storageBlueTitle}>SD CARD SLOT</Text>
                 <Text style={styles.storageBlueText}>Available</Text>
               </LinearGradient>
@@ -288,7 +288,7 @@ class InfoSpecsScreen extends Component {
           {/* <Text style={styles.titleDivider}>Battery</Text> */}
           <Icon name="Heading_battery" width={viewWidth} height={viewWidth / 1080 * 210} fill="#1181FF" viewBox="0 0 1080 210" />
 
-          <View style={[styles.featuresBox, styles.expandableBox, { width: viewWidth / 1080 * 906, marginLeft: viewWidth / 1080 * (1080 - 906) / 2 }]}>
+          <View style={[styles.featuresBox, styles.expandableBox, { width: viewWidth / 1080 * 903, marginLeft: viewWidth / 1080 * (1080 - 903) / 2 }]}>
             {!batteryLifeEmpty &&
               <View style={styles.featureBox}>
                 {!talkTimeEmpty &&
@@ -409,7 +409,7 @@ class InfoSpecsScreen extends Component {
             {this.renderBattery()}
             {this.renderAccessories()}
           </View>
-        <FeedbackSurvey />
+          <FeedbackSurvey />
         </View>
       );
     }
@@ -422,9 +422,11 @@ class InfoSpecsScreen extends Component {
     if ((typeof compatibleAccessories == "undefined") || (Object.keys(compatibleAccessories).length === 0 && compatibleAccessories.constructor === Object)) return;
 
     return (
-      <View style={{ height: 250 }}>
+      <View>
         <Icon name="Heading_accessories" width={viewWidth} height={viewWidth / 1080 * 210} fill="#1181FF" viewBox="0 0 1080 210" />
-        {<RoutesAccessories />}
+        <View style={{ height: 165, width: viewWidth / 1080 * 906, marginLeft: viewWidth / 1080 * (1080 - 906) / 2, backgroundColor:'transparent' }}>
+          {<RoutesAccessories />}
+        </View>
       </View>
     );
   }
