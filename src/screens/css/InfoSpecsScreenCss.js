@@ -292,7 +292,7 @@ export default StyleSheet.create({
     backgroundColor:'#4CA90C',
     width: 38,
     height: 8,
-    marginLeft:12,
+    marginLeft:8,
   },
   featureItemBox: {
     borderColor:'#4CA90C',
@@ -301,8 +301,8 @@ export default StyleSheet.create({
     marginTop: 0,
     flexGrow: 1,
     height: 85,
-    minWidth: 56,
-    maxWidth: 56,
+    minWidth: 50,
+    maxWidth: 50,
     borderRadius: 0,
     flexDirection: 'column',
     justifyContent: 'center',
@@ -311,7 +311,7 @@ export default StyleSheet.create({
   featureItemTitle: {
     color: '#3E3F42',
     // fontFamily: 'Roboto',
-    fontSize: 11,
+    fontSize: 10,
     fontWeight: 'bold',
     letterSpacing: 0.12,
     lineHeight: 14
@@ -345,10 +345,10 @@ export default StyleSheet.create({
     alignItems: 'center'
   },
   chagingItemText: {
-    marginLeft: 8,
+    marginLeft: 5,
     color: '#3E3F42',
     // fontFamily: 'Roboto',
-    fontSize: 14,
+    fontSize: 11,
     letterSpacing: 0.12,
     lineHeight: 20,
     textAlign: 'center'
