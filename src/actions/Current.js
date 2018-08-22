@@ -14,6 +14,11 @@ export const setProductInfo = (params) => ({
   payload: params
 })
 
+export const setProductAccsInfo = (params) => ({
+  type: 'UPDATE_PRODUCT_ACCS_INFO',
+  payload: params
+})
+
 export const setAreaInfo = (params) => ({
   type: 'UPDATE_AREA_INFO',
   payload: params

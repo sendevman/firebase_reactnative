@@ -6,9 +6,9 @@
 
 import React, { Component } from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
-
-import { connect } from 'react-redux';
 import firebase from 'react-native-firebase';
+import { connect } from 'react-redux';
+
 // My Styles
 import styles from '../css/ReviewsScreenCss';
 
@@ -120,6 +120,8 @@ class WebReview extends Component<props> {
 
 const mapStateToProps = state => {
   const { common } = state;
+
   return { firebaseid: common.firebaseid };
 }
+
 export default connect(mapStateToProps)(WebReview);
