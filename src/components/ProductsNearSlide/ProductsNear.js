@@ -212,7 +212,7 @@ class ProductsNear extends Component {
               dotColor={'#FFF'}
               dotStyle={styles.paginationDot}
               inactiveDotColor={'rgba(255, 255, 255, 0.5)'}
-              inactiveDotOpacity={0.4}
+              inactiveDotOpacity={0.9}
               inactiveDotScale={0.6}
               carouselRef={this._carouselRef}
               tappableDots={!!this._carouselRef} />

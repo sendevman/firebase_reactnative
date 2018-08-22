@@ -65,7 +65,7 @@ export default StyleSheet.create({
   subTitleCard: {
     color: '#5A5A5A',
     // fontFamily: 'Roboto',
-    fontSize: 10,
+    fontSize: 12,
     fontWeight: 'bold',
     lineHeight: 14,
     paddingHorizontal: 8,

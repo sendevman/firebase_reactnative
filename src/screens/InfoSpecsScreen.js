@@ -103,14 +103,14 @@ class InfoSpecsScreen extends Component {
 
   renderColors() {
     const { colors } = this.props.infoSpecs;
-    const viewWidth = width+30;
+    const viewWidth = width + 30;
 
     if (typeof colors != "undefined" && colors.length > 0) {
       return (
         <View style={[{ paddingBottom: 20, paddingTop: 20 }]}>
-          <Icon name="Heading_colors" width={viewWidth} height={viewWidth / 1080 * 210} fill="#1181FF" viewBox="0 0 1080 210" style={{marginLeft: -25}}/>
+          <Icon name="Heading_colors" width={viewWidth} height={viewWidth / 1080 * 210} fill="#1181FF" viewBox="0 0 1080 210" style={{ marginLeft: -25 }} />
 
-          <View style={[styles.colorItemBox, { width: viewWidth / 1080 * 906, marginLeft: viewWidth / 1080 * (1080 - 906) / 2 -25 }]}>
+          <View style={[styles.colorItemBox, { width: viewWidth / 1080 * 906, marginLeft: viewWidth / 1080 * (1080 - 906) / 2 - 25 }]}>
             {colors.map((item, index) => {
               return (
                 <View key={index} style={styles.colorItem}>
@@ -133,9 +133,9 @@ class InfoSpecsScreen extends Component {
     if (Object.keys(display).length !== 0 && display.constructor === Object) {
       return (
         <View style={{ paddingBottom: 10 }}>
-          <Icon name="Heading_display" width={viewWidth} height={viewWidth / 1080 * 210} fill="#1181FF" viewBox="0 0 1080 210" style={{marginLeft: -25}} />
+          <Icon name="Heading_display" width={viewWidth} height={viewWidth / 1080 * 210} fill="#1181FF" viewBox="0 0 1080 210" style={{ marginLeft: -25 }} />
 
-          <View style={[styles.storageBox, { width: viewWidth / 1080 * 906, marginLeft: viewWidth / 1080 * (1080 - 906) / 2 -25 }]}>
+          <View style={[styles.storageBox, { width: viewWidth / 1080 * 906, marginLeft: viewWidth / 1080 * (1080 - 906) / 2 - 25 }]}>
             <View style={styles.displaySizeItem}>
               <View style={styles.displaySizeHr}></View>
               <Text style={styles.displaySize}>{display.size}"</Text>
@@ -160,7 +160,7 @@ class InfoSpecsScreen extends Component {
       return (
         <View style={{ paddingBottom: 0 }}>
           <View style={styles.hrDivider}></View>
-          <Icon name="Heading_camera" width={viewWidth} height={viewWidth / 1080 * 446} fill="#1181FF" viewBox="0 0 1080 531" style={{marginLeft: -25}} />
+          <Icon name="Heading_camera" width={viewWidth} height={viewWidth / 1080 * 446} fill="#1181FF" viewBox="0 0 1080 531" style={{ marginLeft: -25 }} />
 
           {(Object.keys(front).length !== 0 || Object.keys(rear).length !== 0) &&
             <View style={styles.cameraBox}>
@@ -209,7 +209,7 @@ class InfoSpecsScreen extends Component {
       <View style={{ paddingBottom: 8 }}>
         <View style={styles.hrDivider}></View>
         {/* <Text style={styles.titleDivider}>Performance & Storage</Text>  */}
-        <Icon name="Heading_performance" width={viewWidth} height={viewWidth / 1080 * 210} fill="#1181FF" viewBox="0 0 1080 210" style={{marginLeft: -25}} />
+        <Icon name="Heading_performance" width={viewWidth} height={viewWidth / 1080 * 210} fill="#1181FF" viewBox="0 0 1080 210" style={{ marginLeft: -25 }} />
 
 
         {(!memoryEmpty || !processorEmpty) &&
@@ -282,9 +282,9 @@ class InfoSpecsScreen extends Component {
         <View style={{ paddingBottom: 10 }}>
           <View style={styles.hrDivider}></View>
           {/* <Text style={styles.titleDivider}>Battery</Text> */}
-          <Icon name="Heading_battery" width={viewWidth} height={viewWidth / 1080 * 210} fill="#1181FF" viewBox="0 0 1080 210" style={{marginLeft: -25}} />
+          <Icon name="Heading_battery" width={viewWidth} height={viewWidth / 1080 * 210} fill="#1181FF" viewBox="0 0 1080 210" style={{ marginLeft: -25 }} />
 
-          <View style={[styles.featuresBox, styles.expandableBox, { width: viewWidth / 1080 * 907, marginLeft: viewWidth / 1080 * (1080 - 907) / 2-25 }]}>
+          <View style={[styles.featuresBox, styles.expandableBox, { width: viewWidth / 1080 * 907, marginLeft: viewWidth / 1080 * (1080 - 907) / 2 - 25 }]}>
             {!batteryLifeEmpty &&
               <View style={styles.featureBox}>
                 {!talkTimeEmpty &&
@@ -393,7 +393,7 @@ class InfoSpecsScreen extends Component {
             {this.renderOffer()}
 
             <View style={[styles.descriptionItemBox, { width: viewWidth / 1080 * 906, marginLeft: viewWidth / 1080 * (1080 - 906) / 2 - 25 }]}>
-              <Text style={[styles.description, {width: viewWidth / 1080 * 906 - 30}]}>
+              <Text style={[styles.description, { width: viewWidth / 1080 * 906 - 30 }]}>
                 {infoSpecs.description}
               </Text>
             </View>
@@ -404,8 +404,8 @@ class InfoSpecsScreen extends Component {
             {this.renderPerformanceAndStorage()}
             {this.renderBattery()}
             {this.renderAccessories()}
+            <FeedbackSurvey />
           </View>
-          <FeedbackSurvey />
         </View>
       );
     }
@@ -425,7 +425,7 @@ class InfoSpecsScreen extends Component {
 
     return (
       <View>
-        <Icon name="Heading_accessories" width={viewWidth} height={viewWidth / 1080 * 210} fill="#1181FF" viewBox="0 0 1080 210" style={{marginLeft: -25}} />
+        <Icon name="Heading_accessories" width={viewWidth} height={viewWidth / 1080 * 210} fill="#1181FF" viewBox="0 0 1080 210" style={{ marginLeft: -25 }} />
         <View style={{ height: 165, width: viewWidth / 1080 * 906, marginLeft: viewWidth / 1080 * (1080 - 906) / 2 - 25, backgroundColor: 'transparent' }}>
           {<RoutesAccessories />}
         </View>

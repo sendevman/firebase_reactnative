@@ -8,7 +8,7 @@ import { StyleSheet, Dimensions } from 'react-native';
 var { width } = Dimensions.get('window');
 
 export default StyleSheet.create({
-  container: { backgroundColor: '#EEF1F4' },
+  container: { backgroundColor: '#009FDB' },
   reviewsBox: { paddingHorizontal: 10 },
   // - - Skeleton Loading Box - -
   skeletonLoading: {
@@ -24,18 +24,18 @@ export default StyleSheet.create({
   },
   textTitleUno: {
     textAlign: 'center',
-    color: '#3E3F42',
+    color: '#FFF',
     // fontFamily: 'Rubik',
-    fontSize: 18,
-    fontWeight: '300',
+    fontSize: 20,
+    fontWeight: 'bold',
     letterSpacing: 0.12,
     lineHeight: 22
   },
   textSubtitle: {
     textAlign: 'center',
-    color: '#3E3F42',
+    color: '#FFF',
     // fontFamily: 'Roboto',
-    fontSize: 14,
+    fontSize: 16,
     letterSpacing: 0.12,
     lineHeight: 25
   },
@@ -114,9 +114,9 @@ export default StyleSheet.create({
   webReviewTitle: {
     marginTop: 2,
     marginBottom: 8,
-    color: '#1181FF',
+    color: '#FFF',
     // fontFamily: 'Rubik',
-    fontSize: 14,
+    fontSize: 18,
     letterSpacing: 0.12,
     lineHeight: 17
   },
