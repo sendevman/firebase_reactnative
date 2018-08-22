@@ -64,9 +64,9 @@ class AccessoriesScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.textTitle}>Compatible accessories</Text>
-
-        <ScrollView horizontal={true}>
+        {/* <Text style={styles.textTitle}>Compatible accessories</Text> */}
+        
+        <ScrollView horizontal={true} style={{backgroundColor:'#ffffff5f'}}>
           { this.renderContent() }
         </ScrollView>
       </View>
