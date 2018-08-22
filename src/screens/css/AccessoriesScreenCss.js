@@ -4,12 +4,11 @@
  * @flow
  */
 
-import { StyleSheet, Dimensions } from 'react-native';
+import { Dimensions, Platform, StyleSheet } from 'react-native';
 var { width } = Dimensions.get('window');
 
 export default StyleSheet.create({
   container: {
-    // backgroundColor: '#00000000',
     backgroundColor: 'transparent',
     // position: 'absolute',
     bottom: 0
@@ -46,7 +45,15 @@ export default StyleSheet.create({
     backgroundColor: '#FFFFFFB3',
     elevation: 2,
     shadowColor: '#AEBECD',
-    marginHorizontal: 6
+    marginHorizontal: 6,
+    ...Platform.select({
+      ios: {
+        borderWidth: 1,
+        borderStyle: 'solid',
+        borderColor: '#E3E9EF'
+      },
+      android: {}
+    })
   },
   frameImage: {
     height: 86,
@@ -87,7 +94,7 @@ export default StyleSheet.create({
     alignItems: 'center'
   },
   addText: {
-    width: 68,
+    width: 70,
     color: '#3E3F42',
     // fontFamily: 'Rubik',
     fontSize: 12,

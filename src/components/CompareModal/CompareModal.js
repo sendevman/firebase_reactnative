@@ -6,14 +6,14 @@
 
 import React, { Component } from 'react';
 import {
-  Dimensions, Keyboard, Modal, SectionList, Text, TextInput,
-  TouchableOpacity, TouchableHighlight, View, Platform } from 'react-native';
+  Dimensions, Keyboard, Modal, Platform, SectionList, Text,
+  TextInput, TouchableOpacity, TouchableHighlight, View } from 'react-native';
 import Svg, { Rect } from 'react-native-svg';
+import firebase from 'react-native-firebase';
 import { connect } from 'react-redux';
 
-//Analytics
-import firebase from 'react-native-firebase';
 // var Analytics = require('react-native-firebase-analytics');
+
 // My Styles
 import styles from './CompareModalCss';
 
@@ -181,9 +181,9 @@ class CompareModal extends Component {
 }
 
 const mapStateToProps = state => {
-  const { productsNear, current, common } = state;
+  const { common, current, productsNear } = state;
 
-  return { productsNear: productsNear.productsNear, compares:current.compare, firebaseid: common.firebaseid  };
+  return { compares: current.compare, firebaseid: common.firebaseid, productsNear: productsNear.productsNear };
 }
 
 export default connect(mapStateToProps)(CompareModal);

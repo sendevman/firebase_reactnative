@@ -6,10 +6,10 @@
 
 import React, { Component } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
-import { connect } from 'react-redux';
 import { Rating } from 'react-native-ratings';
-
 import firebase from 'react-native-firebase';
+import { connect } from 'react-redux';
+
 // My Styles
 import styles from '../css/ReviewsScreenCss';
 
@@ -69,4 +69,5 @@ const mapStateToProps = state => {
 
   return { firebaseid: common.firebaseid };
 }
+
 export default connect(mapStateToProps)(CustomerReview);

@@ -8,8 +8,8 @@ import React, { Component } from 'react';
 import { Animated, Dimensions, Image, ScrollView, Text, View } from 'react-native';
 import Svg, { Rect } from 'react-native-svg';
 import LinearGradient from 'react-native-linear-gradient';
-import { connect } from 'react-redux';
 import firebase from 'react-native-firebase';
+import { connect } from 'react-redux';
 
 // My Styles
 import styles from './css/InfoSpecsScreenCss';
@@ -63,12 +63,12 @@ class InfoSpecsScreen extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.selectedTab === 0 && nextProps.infoSpecs.model != undefined) {
-      console.log("log event ======= : ", { "pFirebaseId": this.props.firebaseid, "pDeviceModel": nextProps.infoSpecs.model, "pDeviceManufacture": nextProps.infoSpecs.manufacture, "pResearchTab": "info" });
-      firebase.analytics().logEvent("deviceViewed", { "pFirebaseId": this.props.firebaseid, "pDeviceModel": nextProps.infoSpecs.model, "pDeviceManufacture": nextProps.infoSpecs.manufacture, "pResearchTab": "info" });
-
+    if(nextProps.selectedTab === 0 && nextProps.infoSpecs.model != undefined) {
+      console.log("log event ======= : ", {"pFirebaseId":this.props.firebaseid, "pDeviceModel":nextProps.infoSpecs.model, "pDeviceManufacture":nextProps.infoSpecs.manufacture, "pResearchTab":"info"});
+      firebase.analytics().logEvent("deviceViewed", {"pFirebaseId":this.props.firebaseid, "pDeviceModel":nextProps.infoSpecs.model, "pDeviceManufacture":nextProps.infoSpecs.manufacture, "pResearchTab":"info"});
     }
   }
+
   setNewValue(a, b, c, d, e) {
     return {
       hideHeader: a,
@@ -417,6 +417,12 @@ class InfoSpecsScreen extends Component {
 
     if ((typeof compatibleAccessories == "undefined") || (Object.keys(compatibleAccessories).length === 0 && compatibleAccessories.constructor === Object)) return;
 
+    const { featured, fullList } = compatibleAccessories;
+    let featuredEmpty = (typeof featured == "undefined" || featured.length <= 0);
+    let fullListEmpty = (typeof fullList == "undefined" || fullList.length <= 0);
+
+    if (featuredEmpty && fullListEmpty) return false;
+
     return (
       <View>
         <Icon name="Heading_accessories" width={viewWidth} height={viewWidth / 1080 * 210} fill="#1181FF" viewBox="0 0 1080 210" />
@@ -428,6 +434,10 @@ class InfoSpecsScreen extends Component {
   }
 
   render() {
+    const { infoSpecs } = this.props;
+
+    let infoSpecsEmpty = ((typeof infoSpecs == "undefined") || (Object.keys(infoSpecs).length === 0 && infoSpecs.constructor === Object));
+
     return (
       <Animated.ScrollView contentContainerStyle={styles.container} scrollEventThrottle={1}
         onScroll={Animated.event(
@@ -450,7 +460,7 @@ class InfoSpecsScreen extends Component {
 const mapStateToProps = state => {
   const { current, common } = state;
 
-  return { infoSpecs: current.product, selectedTab: common.selectedTab, firebaseid: common.firebaseid };
+  return { infoSpecs: current.product, firebaseid: common.firebaseid, selectedTab: common.selectedTab };
 }
 
 export default connect(mapStateToProps)(InfoSpecsScreen);
