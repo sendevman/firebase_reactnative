@@ -396,7 +396,7 @@ class Routes extends Component {
           height: "1",
           ts: "2018-07-09",
           floor_id: "1348",
-          zone_id: 3902
+          zone_id: 3928
         }
         let data1 = {
           lat: "-35.000",

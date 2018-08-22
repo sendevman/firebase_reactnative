@@ -8,7 +8,10 @@ import { StyleSheet, Dimensions } from 'react-native';
 var { width } = Dimensions.get('window');
 
 export default StyleSheet.create({
-  container: { backgroundColor: '#FFF' },
+  container: { 
+    // backgroundColor: '#009FDB',
+    backgroundColor: 'transparent',
+  },
   infoSpecBox: { paddingHorizontal: 10 },
   // - - Skeleton Loading Box - -
   skeletonLoading: {
@@ -19,7 +22,16 @@ export default StyleSheet.create({
     paddingTop: 10
   },
   // - - Description Box - -
+  descriptionItemBox: {
+    backgroundColor: '#FFFFFFBF',
+    marginTop:10,
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
   description: {
+    backgroundColor: 'transparent',
+    marginLeft:10,
     marginTop: 16,
     marginBottom: 14,
     textAlign: 'left',
@@ -30,7 +42,7 @@ export default StyleSheet.create({
     lineHeight: 22
   },
   hrDivider: {
-    borderTopWidth: 1,
+    borderTopWidth: 0,
     borderStyle: 'solid',
     borderTopColor: '#1181FF',
     marginTop: 10,
@@ -49,10 +61,10 @@ export default StyleSheet.create({
   },
   // - - Color Box - -
   colorItemBox: {
-    marginTop: 5,
+    backgroundColor: '#FFFFFFBF',
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   colorItem: {
     alignItems: 'center',
@@ -77,10 +89,10 @@ export default StyleSheet.create({
   },
   // - - Storage Box - -
   storageBox: {
-    marginTop: 15,
-    flex: 1,
+    backgroundColor: '#FFFFFFBF',
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   storageItem: {
     justifyContent: 'center',
@@ -107,7 +119,8 @@ export default StyleSheet.create({
   },
   // - - Display Box - -
   displayBox: {
-    marginTop: 8,
+    backgroundColor: '#FFFFFFBF',
+    marginTop: 0,
     justifyContent: 'space-evenly'
   },
   displaySizeItem: {
@@ -124,7 +137,7 @@ export default StyleSheet.create({
     transform: [{ rotate: '45deg' }]
   },
   displaySize: {
-    backgroundColor: 'white',
+    // backgroundColor: 'white',
     color: '#3E3F42',
     // fontFamily: 'Rubik',
     fontSize: 20,
@@ -132,7 +145,8 @@ export default StyleSheet.create({
     lineHeight: 22
   },
   displayTextItem: {
-    height: 50,
+    height: 70,
+    maxWidth: '76%',
     justifyContent: 'center'
   },
   displayText: {
@@ -143,11 +157,18 @@ export default StyleSheet.create({
     lineHeight: 20
   },
   // - - Camera Box - -
+  cameraBox: {
+    marginTop:80,
+    width:'100%',
+    position: 'absolute',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
   cameraItem: {
+    width: '35%',
     justifyContent: 'center',
     alignItems: 'center',
-    height: 85,
-    minWidth: '48%',
     borderRadius: 6
   },
   cameraTitle: {
@@ -158,12 +179,34 @@ export default StyleSheet.create({
     letterSpacing: 0.12,
     lineHeight: 20
   },
-  cameraText: {
-    color: '#FFF',
+  cameraTextBold: {
+    color: '#000',
     // fontFamily: 'Roboto',
     fontSize: 14,
+    fontWeight: 'bold',
     letterSpacing: 0.12,
-    lineHeight: 20
+    lineHeight: 16
+  },
+  cameraText: {
+    color: '#000',
+    // fontFamily: 'Roboto',
+    fontSize: 14,
+    letterSpacing: 0.10,
+    lineHeight: 13
+  },
+  cameraDetails: {
+    marginTop:120,
+    width:'100%',
+    paddingHorizontal:30,
+    position: 'absolute',
+    justifyContent: 'center',
+    alignItems: 'center'
+
+  },
+  cameraDetailsDivide: {
+    height:2,
+    width:'100%',
+    backgroundColor:'red'
   },
   // - - Camera Box - List - -
   cameraList: {
@@ -224,7 +267,10 @@ export default StyleSheet.create({
     fontWeight: 'bold'
   },
   // - - Expandable Storage Box - -
-  expandableBox: { marginTop: 10 },
+  expandableBox: {
+    backgroundColor: '#FFFFFFBF',
+    marginTop: -0.2
+  },
   expandableViewText: { marginBottom: 8 },
   // Feature Box
   featuresBox: {
@@ -235,19 +281,29 @@ export default StyleSheet.create({
     alignItems: 'center'
   },
   featureBox: {
+    marginTop:10,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
     flexWrap: 'wrap'
   },
   // Feature Item Box
+  featureItemBattery: {
+    backgroundColor:'#4CA90C',
+    width: 38,
+    height: 8,
+    marginLeft:8,
+  },
   featureItemBox: {
+    borderColor:'#4CA90C',
+    borderWidth:2,
     margin: 2,
+    marginTop: 0,
     flexGrow: 1,
     height: 85,
-    minWidth: 56,
-    maxWidth: 66,
-    borderRadius: 6,
+    minWidth: 50,
+    maxWidth: 50,
+    borderRadius: 0,
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center'
@@ -255,7 +311,7 @@ export default StyleSheet.create({
   featureItemTitle: {
     color: '#3E3F42',
     // fontFamily: 'Roboto',
-    fontSize: 12,
+    fontSize: 10,
     fontWeight: 'bold',
     letterSpacing: 0.12,
     lineHeight: 14
@@ -289,10 +345,10 @@ export default StyleSheet.create({
     alignItems: 'center'
   },
   chagingItemText: {
-    marginLeft: 8,
+    marginLeft: 5,
     color: '#3E3F42',
     // fontFamily: 'Roboto',
-    fontSize: 14,
+    fontSize: 11,
     letterSpacing: 0.12,
     lineHeight: 20,
     textAlign: 'center'
@@ -311,16 +367,30 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
+  performanceProcessorContentBox: {
+    backgroundColor: '#FFFFFFBF',
+    width:118,
+    height:120,
+    borderRadius:6,
+    position: 'absolute',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
   performanceStorageContentBox: {
+    backgroundColor: '#FFFFFFBF',
+    width:118,
+    height:77,
+    borderRadius:6,
     position: 'absolute',
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center'
   },
   performanceStorageTitle: {
-    color: '#3E3F42',
+    color: '#000000',
     // fontFamily: 'Roboto',
-    fontSize: 12,
+    fontSize: 13,
     fontWeight: 'bold',
     letterSpacing: 0.12,
     lineHeight: 20
