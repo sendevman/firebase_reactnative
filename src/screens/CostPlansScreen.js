@@ -5,7 +5,7 @@
  */
 
 import React, { Component } from 'react';
-import { Animated, ScrollView, Text, TouchableWithoutFeedback, View } from 'react-native';
+import { Animated, ScrollView, Text, TouchableWithoutFeedback, View, Image } from 'react-native';
 import Svg, { Rect } from 'react-native-svg';
 import moment from 'moment';
 import firebase from 'react-native-firebase';
@@ -25,14 +25,14 @@ import RoutesAccessories from '../routes/Accessories';
 const CostPlansSkeleton = () => (
   <View style={styles.skeletonLoading}>
     <SkeletonLoading height={240}>
-      <Rect x="0" y="0" rx="5" ry="5" width="100%" height="80"/>
+      <Rect x="0" y="0" rx="5" ry="5" width="100%" height="80" />
 
-      <Rect x="0" y="95" rx="3" ry="3" width="30" height="30"/>
-      <Rect x="40" y="95" rx="3" ry="3" width="180" height="10"/>
-      <Rect x="40" y="115" rx="3" ry="3" width="150" height="10"/>
-      <Rect x="0" y="140" rx="3" ry="3" width="100" height="10"/>
+      <Rect x="0" y="95" rx="3" ry="3" width="30" height="30" />
+      <Rect x="40" y="95" rx="3" ry="3" width="180" height="10" />
+      <Rect x="40" y="115" rx="3" ry="3" width="150" height="10" />
+      <Rect x="0" y="140" rx="3" ry="3" width="100" height="10" />
 
-      <Rect x="0" y="155" rx="5" ry="5" width="100%" height="80"/>
+      <Rect x="0" y="155" rx="5" ry="5" width="100%" height="80" />
     </SkeletonLoading>
   </View>
 );
@@ -48,9 +48,9 @@ class CostPlansScreen extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if(nextProps.selectedTab === 2 && nextProps.costplans.model != undefined) {
-      console.log("log event ======= : ", {"pFirebaseId":this.props.firebaseid, "pDeviceModel":nextProps.costplans.model, "pDeviceManufacture":nextProps.costplans.manufacture, "pResearchTab":"price"});
-      firebase.analytics().logEvent("deviceViewed", {"pFirebaseId":this.props.firebaseid, "pDeviceModel":nextProps.costplans.model, "pDeviceManufacture":nextProps.costplans.manufacture, "pResearchTab":"price"});
+    if (nextProps.selectedTab === 2 && nextProps.costplans.model != undefined) {
+      console.log("log event ======= : ", { "pFirebaseId": this.props.firebaseid, "pDeviceModel": nextProps.costplans.model, "pDeviceManufacture": nextProps.costplans.manufacture, "pResearchTab": "price" });
+      firebase.analytics().logEvent("deviceViewed", { "pFirebaseId": this.props.firebaseid, "pDeviceModel": nextProps.costplans.model, "pDeviceManufacture": nextProps.costplans.manufacture, "pResearchTab": "price" });
     }
   }
 
@@ -109,12 +109,12 @@ class CostPlansScreen extends Component {
             }
           </View>
 
-          { isAvailable &&
+          {/* {isAvailable &&
             <View style={styles.sdCardBox}>
               <Icon name="SDCard" width="18" height="23" viewBox="0 0 18 23" />
               <Text style={styles.sdCardText}>SD card slot available</Text>
             </View>
-          }
+          } */}
         </View>
       );
     }
@@ -127,7 +127,7 @@ class CostPlansScreen extends Component {
     if ((typeof cost.next == "undefined") || (Object.keys(cost.next).length === 0 && (cost.next).constructor === Object)) return;
 
     return (
-      <View style={[ styles.cardBox, { marginTop: 16 }]}>
+      <View style={[styles.cardBox, { marginTop: 16 }]}>
         <Text style={styles.titleCard}>{cost.next.title}</Text>
         <Text style={styles.subTitleCard}>{cost.next.description}</Text>
 
@@ -166,7 +166,7 @@ class CostPlansScreen extends Component {
     let preNextEmpty = ((typeof cost.next == "undefined") || (Object.keys(cost.next).length === 0 && (cost.next).constructor === Object));
 
     return (
-      <View style={[ styles.cardBox, { marginTop: preNextEmpty ? 16 : 8 }]}>
+      <View style={[styles.cardBox, { marginTop: preNextEmpty ? 16 : 8 }]}>
         <Text style={styles.titleCard}>{cost.nextEveryYear.title}</Text>
         <Text style={styles.subTitleCard}>{cost.nextEveryYear.description}</Text>
 
@@ -207,7 +207,7 @@ class CostPlansScreen extends Component {
     let newValue = (preNextEmpty && preNextTEmpty) ? 16 : 8;
 
     return (
-      <View style={[ styles.cardBox, { marginTop: newValue }]}>
+      <View style={[styles.cardBox, { marginTop: newValue }]}>
         <Text style={styles.titleCard}>{cost.noContract.title}</Text>
         <Text style={styles.subTitleCard}>{cost.noContract.description}</Text>
 
@@ -243,16 +243,16 @@ class CostPlansScreen extends Component {
 
     return (
       <View style={styles.cardBox}>
-        { (key == "mobileInsurance") && <Text style={styles.titleCard}>AT&T Mobile Insurance</Text> }
-        { (key == "mobileProtection") && <Text style={styles.titleCard}>AT&T Mobile Protection Pack</Text> }
-        { (key == "mobileProtectionMulit") && <Text style={styles.titleCard}>AT&T Multi-Device Protection Pack</Text> }
+        {(key == "mobileInsurance") && <Text style={styles.titleCard}>AT&T Mobile Insurance</Text>}
+        {(key == "mobileProtection") && <Text style={styles.titleCard}>AT&T Mobile Protection Pack</Text>}
+        {(key == "mobileProtectionMulit") && <Text style={styles.titleCard}>AT&T Multi-Device Protection Pack</Text>}
 
         <View style={styles.separatorCard}></View>
 
         <View style={styles.dataCardBox}>
           <View style={styles.dataBox}>
             <Text style={styles.dataValue}>{mount}</Text>
-            <Text style={styles.dataText}>DEVICE{ (key == "mobileProtectionMulit") && "S" } PROTECTED</Text>
+            <Text style={styles.dataText}>DEVICE{(key == "mobileProtectionMulit") && "S"} PROTECTED</Text>
           </View>
 
           <View style={styles.dataDivisor}></View>
@@ -288,12 +288,12 @@ class CostPlansScreen extends Component {
       <View>
         <Text style={styles.titleDevice}>Device protection</Text>
 
-        { !mInsuranceEmpty && this.setItem('mobileInsurance', mInsurance) }
+        {!mInsuranceEmpty && this.setItem('mobileInsurance', mInsurance)}
 
-        { showInsurance &&
+        {showInsurance &&
           <View>
-            { !mProtectionEmpty && this.setItem('mobileProtection', mProtection) }
-            { !mProtectionMultiEmpty && this.setItem('mobileProtectionMulit', mProtectionMulti) }
+            {!mProtectionEmpty && this.setItem('mobileProtection', mProtection)}
+            {!mProtectionMultiEmpty && this.setItem('mobileProtectionMulit', mProtectionMulti)}
           </View>
         }
 
@@ -314,11 +314,11 @@ class CostPlansScreen extends Component {
     const dateRelease = moment(releaseDate).format("ll");
     const dateInAdvance = moment(releaseDate).add(4, 'days').format("ll");
 
-    return(
+    return (
       <View style={styles.shippingBox}>
-        <Icon name="ShippingTruck" width="18" height="13" viewBox="0 0 18 13" />
+        <Icon name="ShippingTruck" width="18" height="13" viewBox="0 0 18 13" fill="#FFF" />
         <View>
-          <Text style={[styles.availableText, { fontWeight: '300' }]}>Available in-store on {dateRelease}</Text>
+          <Text style={[styles.availableText, { fontWeight: 'bold' }]}>Available in-store on {dateRelease}</Text>
         </View>
       </View>
     );
@@ -330,30 +330,47 @@ class CostPlansScreen extends Component {
 
     let viewMorePlansText = viewMorePlans ? "- Collapse" : "+ View more plans";
     let showPlans = viewMorePlans;
+    let costplansEmpty = ((typeof costplans == "undefined") || (Object.keys(costplans).length === 0 && costplans.constructor === Object));
 
     if (Object.keys(costplans).length === 0 && costplans.constructor === Object) {
-      return ( <CostPlansSkeleton /> );
+      return (<CostPlansSkeleton />);
     } else {
       return (
-        <View style={styles.costPlansBox}>
-          { this.renderStorage() }
-          { this.renderCostNext() }
+        <View>
+          <Image
+            style={{
+              backgroundColor: '#ccc',
+              flex: 1,
+              position: 'absolute',
+              width: '100%',
+              height: '100%',
+              justifyContent: 'center',
+            }}
+            source={require('../assets/images/files/backgroundHD.png')}
+          />
+          <View style={styles.costPlansBox}>
 
-          { showPlans &&
-            <View>
-              { this.renderCostNextYear() }
-              { this.renderCostNoContract() }
-            </View>
-          }
+            {this.renderStorage()}
+            {this.renderCostNext()}
 
-          <TouchableWithoutFeedback onPress={this.toggleViewMorePlans}>
-            <View style={styles.contentReadMore}>
-              <Text style={styles.textReadMore}>{viewMorePlansText}</Text>
-            </View>
-          </TouchableWithoutFeedback>
+            {showPlans &&
+              <View>
+                {this.renderCostNextYear()}
+                {this.renderCostNoContract()}
+              </View>
+            }
 
-          { this.renderShippingInfo() }
-          { this.renderDeviceProtection() }
+            <TouchableWithoutFeedback onPress={this.toggleViewMorePlans}>
+              <View style={styles.contentReadMore}>
+                <Text style={styles.textReadMore}>{viewMorePlansText}</Text>
+              </View>
+            </TouchableWithoutFeedback>
+
+            {this.renderShippingInfo()}
+            {this.renderDeviceProtection()}
+            {this.renderAccessories()}
+            {!costplansEmpty && <FeedbackSurvey />}
+          </View>
         </View>
       );
     }
@@ -371,8 +388,8 @@ class CostPlansScreen extends Component {
     if (featuredEmpty && fullListEmpty) return false;
 
     return (
-      <View style={{ height: 190 }}>
-        { <RoutesAccessories /> }
+      <View style={{ height: 190, marginTop: 20, marginBottom: 10 }}>
+        {<RoutesAccessories />}
       </View>
     );
   }
@@ -380,7 +397,6 @@ class CostPlansScreen extends Component {
   render() {
     const { costplans } = this.props;
 
-    let costplansEmpty = ((typeof costplans == "undefined") || (Object.keys(costplans).length === 0 && costplans.constructor === Object));
 
     return (
       <Animated.ScrollView contentContainerStyle={styles.container} scrollEventThrottle={1}
@@ -394,10 +410,8 @@ class CostPlansScreen extends Component {
             }*/
           }
         )}
-        >
-        { this.renderContent() }
-        { this.renderAccessories() }
-        { !costplansEmpty && <FeedbackSurvey /> }
+      >
+        {this.renderContent()}
       </Animated.ScrollView>
     );
   }

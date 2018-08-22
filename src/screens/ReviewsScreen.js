@@ -117,12 +117,24 @@ class ReviewsScreen extends Component {
 
   renderContent() {
     const { reviews } = this.props;
+    let reviewsEmpty = ((typeof reviews == "undefined") || (Object.keys(reviews).length === 0 && reviews.constructor === Object));
 
     if (Object.keys(reviews).length === 0 && reviews.constructor === Object) {
       return ( <ReviewsSkeleton /> );
     } else {
       return (
         <View style={styles.reviewsBox}>
+        <Image
+          style={{
+            backgroundColor: '#ccc',
+            flex: 1,
+            position: 'absolute',
+            width: '100%',
+            height: '100%',
+            justifyContent: 'center',
+          }}
+          source={require('../assets/images/files/backgroundHD.png')}
+        />
           <View style={styles.headerPrincipal}>
             <Text style={styles.textTitleUno}>Make an informed decision.</Text>
             <Text style={styles.textSubtitle}>Read what the reviews are saying.</Text>
@@ -131,6 +143,7 @@ class ReviewsScreen extends Component {
           { this.renderWebReviews() }
           { this.renderCustomerReviews() }
           { this.renderVideoContent() }
+        { !reviewsEmpty && <FeedbackSurvey /> }
         </View>
       );
     }
@@ -139,7 +152,6 @@ class ReviewsScreen extends Component {
   render() {
     const { reviews } = this.props;
 
-    let reviewsEmpty = ((typeof reviews == "undefined") || (Object.keys(reviews).length === 0 && reviews.constructor === Object));
 
     return (
       <Animated.ScrollView contentContainerStyle={styles.container} scrollEventThrottle={1}
@@ -155,7 +167,6 @@ class ReviewsScreen extends Component {
         )}
         >
         { this.renderContent() }
-        { !reviewsEmpty && <FeedbackSurvey /> }
       </Animated.ScrollView>
     );
   }
