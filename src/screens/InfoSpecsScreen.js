@@ -63,9 +63,9 @@ class InfoSpecsScreen extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if(nextProps.selectedTab === 0 && nextProps.infoSpecs.model != undefined) {
-      console.log("log event ======= : ", {"pFirebaseId":this.props.firebaseid, "pDeviceModel":nextProps.infoSpecs.model, "pDeviceManufacture":nextProps.infoSpecs.manufacture, "pResearchTab":"info"});
-      firebase.analytics().logEvent("deviceViewed", {"pFirebaseId":this.props.firebaseid, "pDeviceModel":nextProps.infoSpecs.model, "pDeviceManufacture":nextProps.infoSpecs.manufacture, "pResearchTab":"info"});
+    if (nextProps.selectedTab === 0 && nextProps.infoSpecs.model != undefined) {
+      console.log("log event ======= : ", { "pFirebaseId": this.props.firebaseid, "pDeviceModel": nextProps.infoSpecs.model, "pDeviceManufacture": nextProps.infoSpecs.manufacture, "pResearchTab": "info" });
+      firebase.analytics().logEvent("deviceViewed", { "pFirebaseId": this.props.firebaseid, "pDeviceModel": nextProps.infoSpecs.model, "pDeviceManufacture": nextProps.infoSpecs.manufacture, "pResearchTab": "info" });
     }
   }
 
@@ -103,14 +103,14 @@ class InfoSpecsScreen extends Component {
 
   renderColors() {
     const { colors } = this.props.infoSpecs;
-    const viewWidth = width - 20;
+    const viewWidth = width+30;
 
     if (typeof colors != "undefined" && colors.length > 0) {
       return (
-        <View style={[{ paddingBottom: 10, paddingTop: 10 }]}>
-          <Icon name="Heading_colors" width={viewWidth} height={viewWidth / 1080 * 210} fill="#1181FF" viewBox="0 0 1080 210" />
+        <View style={[{ paddingBottom: 20, paddingTop: 20 }]}>
+          <Icon name="Heading_colors" width={viewWidth} height={viewWidth / 1080 * 210} fill="#1181FF" viewBox="0 0 1080 210" style={{marginLeft: -25}}/>
 
-          <View style={[styles.colorItemBox, { width: viewWidth / 1080 * 906, marginLeft: viewWidth / 1080 * (1080 - 906) / 2 }]}>
+          <View style={[styles.colorItemBox, { width: viewWidth / 1080 * 906, marginLeft: viewWidth / 1080 * (1080 - 906) / 2 -25 }]}>
             {colors.map((item, index) => {
               return (
                 <View key={index} style={styles.colorItem}>
@@ -128,14 +128,14 @@ class InfoSpecsScreen extends Component {
 
   renderDisplay() {
     const { display } = this.props.infoSpecs;
-    const viewWidth = width - 20;
+    const viewWidth = width + 30;
 
     if (Object.keys(display).length !== 0 && display.constructor === Object) {
       return (
-        <View style={{ paddingBottom: 14 }}>
-          <Icon name="Heading_display" width={viewWidth} height={viewWidth / 1080 * 210} fill="#1181FF" viewBox="0 0 1080 210" />
+        <View style={{ paddingBottom: 10 }}>
+          <Icon name="Heading_display" width={viewWidth} height={viewWidth / 1080 * 210} fill="#1181FF" viewBox="0 0 1080 210" style={{marginLeft: -25}} />
 
-          <View style={[styles.storageBox, { width: viewWidth / 1080 * 906, marginLeft: viewWidth / 1080 * (1080 - 906) / 2 }]}>
+          <View style={[styles.storageBox, { width: viewWidth / 1080 * 906, marginLeft: viewWidth / 1080 * (1080 - 906) / 2 -25 }]}>
             <View style={styles.displaySizeItem}>
               <View style={styles.displaySizeHr}></View>
               <Text style={styles.displaySize}>{display.size}"</Text>
@@ -152,16 +152,15 @@ class InfoSpecsScreen extends Component {
 
   renderCamera() {
     const { camera } = this.props.infoSpecs;
-    const viewWidth = width - 20;
+    const viewWidth = width + 30;
 
     if (typeof camera != "undefined" && (Object.keys(camera).length !== 0 && camera.constructor === Object)) {
       const { features, front, rear } = camera;
       const featuretext = this.makeCameraFeatureTest(features);
       return (
-        <View style={{ paddingBottom: 5 }}>
+        <View style={{ paddingBottom: 0 }}>
           <View style={styles.hrDivider}></View>
-          {/* <Text style={styles.titleDivider}>Camera</Text> */}
-          <Icon name="Heading_camera" width={viewWidth} height={viewWidth / 1080 * 450} fill="#1181FF" viewBox="0 0 1080 531" />
+          <Icon name="Heading_camera" width={viewWidth} height={viewWidth / 1080 * 446} fill="#1181FF" viewBox="0 0 1080 531" style={{marginLeft: -25}} />
 
           {(Object.keys(front).length !== 0 || Object.keys(rear).length !== 0) &&
             <View style={styles.cameraBox}>
@@ -182,7 +181,7 @@ class InfoSpecsScreen extends Component {
           }
           {(features && features.length > 0) &&
             <View style={styles.cameraDetails}>
-              <Text numberOfLines={0} style={[styles.cameraText, { maxWidth: '80%', textAlign: 'left' }]}>{featuretext}</Text>
+              <Text numberOfLines={0} style={[styles.cameraText, { maxWidth: '86%', textAlign: 'left' }]}>{featuretext}</Text>
             </View>
           }
         </View>
@@ -192,7 +191,7 @@ class InfoSpecsScreen extends Component {
 
   renderPerformanceAndStorage() {
     const { deviceOptions, expandableStorage, memory, processor } = this.props.infoSpecs;
-    const viewWidth = width - 20;
+    const viewWidth = width + 30;
 
     const memoryEmpty = (!memory || !memory.trim() || 0 === memory.length);
     const processorEmpty = (typeof processor == "undefined" || (Object.keys(processor).length === 0 && processor.constructor === Object));
@@ -210,7 +209,7 @@ class InfoSpecsScreen extends Component {
       <View style={{ paddingBottom: 8 }}>
         <View style={styles.hrDivider}></View>
         {/* <Text style={styles.titleDivider}>Performance & Storage</Text>  */}
-        <Icon name="Heading_performance" width={viewWidth} height={viewWidth / 1080 * 210} fill="#1181FF" viewBox="0 0 1080 210" />
+        <Icon name="Heading_performance" width={viewWidth} height={viewWidth / 1080 * 210} fill="#1181FF" viewBox="0 0 1080 210" style={{marginLeft: -25}} />
 
 
         {(!memoryEmpty || !processorEmpty) &&
@@ -240,20 +239,21 @@ class InfoSpecsScreen extends Component {
         }
 
         {(isAvailable || doIsValid) &&
-          <View style={[styles.performanceStorageBox, mpChangeStyle ? {} : { marginTop: 20 }, { marginBottom: 6 }]}>
+          <View style={[styles.performanceStorageBox, mpChangeStyle ? {} : { marginTop: 20 }, { marginBottom: 20 }]}>
             {isAvailable &&
-              <LinearGradient colors={['#00000088', '#00000088']} style={styles.storageBlueBox}>
-                {/* <Image style={{ position: 'absolute', top: 0, left: 0 }} source={require('../assets/images/files/whiteCorner.png')} /> */}
+              <View style={styles.storageBlueBox}>
+                <Icon name="StorageBackground" width="135" height="90" fill="#FFFFFFBB" viewBox="0 0 270 180" />
                 <Text style={styles.storageBlueTitle}>SD CARD SLOT</Text>
                 <Text style={styles.storageBlueText}>Available</Text>
-              </LinearGradient>
+              </View>
             }
 
             {doIsValid &&
-              <LinearGradient colors={['#00000088', '#00000088']} style={styles.storageBlueBox}>
+              <View style={styles.storageBlueBox}>
+                <Icon name="SDCardBackground" width="135" height="90" fill="#FFFFFFBB" viewBox="0 0 270 180" />
                 <Text style={styles.storageBlueTitle}>STORAGE</Text>
                 <Text style={styles.storageBlueText}>{deviceOptions.map((obj) => { return `${obj.storage}Gb` }).join(' or ')}</Text>
-              </LinearGradient>
+              </View>
             }
           </View>
         }
@@ -263,7 +263,7 @@ class InfoSpecsScreen extends Component {
 
   renderBattery() {
     const { battery } = this.props.infoSpecs;
-    const viewWidth = width - 20;
+    const viewWidth = width + 30;
 
     if (Object.keys(battery).length !== 0 && battery.constructor === Object) {
       const { capacity, life } = battery;
@@ -279,12 +279,12 @@ class InfoSpecsScreen extends Component {
         (life.chargingWired || life.chargingWireless ||
           (life.wirelesChargingType && life.wirelesChargingType.length > 0)));
       return (
-        <View style={{ paddingBottom: 12 }}>
+        <View style={{ paddingBottom: 10 }}>
           <View style={styles.hrDivider}></View>
           {/* <Text style={styles.titleDivider}>Battery</Text> */}
-          <Icon name="Heading_battery" width={viewWidth} height={viewWidth / 1080 * 210} fill="#1181FF" viewBox="0 0 1080 210" />
+          <Icon name="Heading_battery" width={viewWidth} height={viewWidth / 1080 * 210} fill="#1181FF" viewBox="0 0 1080 210" style={{marginLeft: -25}} />
 
-          <View style={[styles.featuresBox, styles.expandableBox, { width: viewWidth / 1080 * 903, marginLeft: viewWidth / 1080 * (1080 - 903) / 2 }]}>
+          <View style={[styles.featuresBox, styles.expandableBox, { width: viewWidth / 1080 * 907, marginLeft: viewWidth / 1080 * (1080 - 907) / 2-25 }]}>
             {!batteryLifeEmpty &&
               <View style={styles.featureBox}>
                 {!talkTimeEmpty &&
@@ -370,7 +370,7 @@ class InfoSpecsScreen extends Component {
 
   renderContent() {
     const { infoSpecs } = this.props;
-    const viewWidth = width - 20;
+    const viewWidth = width + 30;
 
     if (Object.keys(infoSpecs).length === 0 && infoSpecs.constructor === Object) {
       return (<InfoSpecsSkeleton />);
@@ -392,8 +392,8 @@ class InfoSpecsScreen extends Component {
 
             {this.renderOffer()}
 
-            <View style={[styles.descriptionItemBox, { width: viewWidth / 1080 * 906, marginLeft: viewWidth / 1080 * (1080 - 906) / 2 }]}>
-              <Text style={[styles.description]}>
+            <View style={[styles.descriptionItemBox, { width: viewWidth / 1080 * 906, marginLeft: viewWidth / 1080 * (1080 - 906) / 2 - 25 }]}>
+              <Text style={[styles.description, {width: viewWidth / 1080 * 906 - 30}]}>
                 {infoSpecs.description}
               </Text>
             </View>
@@ -413,7 +413,7 @@ class InfoSpecsScreen extends Component {
 
   renderAccessories() {
     const { compatibleAccessories } = this.props.infoSpecs;
-    const viewWidth = width - 20;
+    const viewWidth = width + 30;
 
     if ((typeof compatibleAccessories == "undefined") || (Object.keys(compatibleAccessories).length === 0 && compatibleAccessories.constructor === Object)) return;
 
@@ -425,8 +425,8 @@ class InfoSpecsScreen extends Component {
 
     return (
       <View>
-        <Icon name="Heading_accessories" width={viewWidth} height={viewWidth / 1080 * 210} fill="#1181FF" viewBox="0 0 1080 210" />
-        <View style={{ height: 165, width: viewWidth / 1080 * 906, marginLeft: viewWidth / 1080 * (1080 - 906) / 2, backgroundColor:'transparent' }}>
+        <Icon name="Heading_accessories" width={viewWidth} height={viewWidth / 1080 * 210} fill="#1181FF" viewBox="0 0 1080 210" style={{marginLeft: -25}} />
+        <View style={{ height: 165, width: viewWidth / 1080 * 906, marginLeft: viewWidth / 1080 * (1080 - 906) / 2 - 25, backgroundColor: 'transparent' }}>
           {<RoutesAccessories />}
         </View>
       </View>
