@@ -193,7 +193,7 @@ class ProductLayoutScreen extends Component {
       height: "1",
       ts: "2018-07-09",
       floor_id: "1348",
-      zone_id: 3928
+      zone_id: 3903
     }
     let data1 = {
       lat: "-35.000",
@@ -201,7 +201,7 @@ class ProductLayoutScreen extends Component {
       height: "-1",
       ts: "2018-07-09",
       floor_id: "-1348",
-      zone_id: 3929
+      zone_id: 3902
     }
     count++;
     this.props.dispatch(setLocationData(count%2 === 0 ? data : data1));
