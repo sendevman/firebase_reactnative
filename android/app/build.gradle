@@ -168,7 +168,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:16.0.2'
     implementation 'com.google.firebase:firebase-database:15.0.0'
 
-    implementation(name: 'walkbase-sdk-1.1-release', ext: 'aar')
+    implementation(name: 'walkbase-sdk-2.3', ext: 'aar')
     implementation 'org.jetbrains.anko:anko-commons:0.10.4'
     api "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'com.squareup.okhttp3:logging-interceptor:3.9.1'
