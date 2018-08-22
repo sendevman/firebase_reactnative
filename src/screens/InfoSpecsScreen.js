@@ -108,9 +108,7 @@ class InfoSpecsScreen extends Component {
     if (typeof colors != "undefined" && colors.length > 0) {
       return (
         <View style={[{ paddingBottom: 10, paddingTop: 10 }]}>
-          {/* <View style={styles.hrDivider}></View> */}
           <Icon name="Heading_colors" width={viewWidth} height={viewWidth / 1080 * 210} fill="#1181FF" viewBox="0 0 1080 210" />
-          {/* <Text style={styles.titleDivider}>Colors</Text> */}
 
           <View style={[styles.colorItemBox, { width: viewWidth / 1080 * 906, marginLeft: viewWidth / 1080 * (1080 - 906) / 2 }]}>
             {colors.map((item, index) => {
@@ -135,8 +133,6 @@ class InfoSpecsScreen extends Component {
     if (Object.keys(display).length !== 0 && display.constructor === Object) {
       return (
         <View style={{ paddingBottom: 14 }}>
-          {/* <View style={styles.hrDivider}></View>
-          <Text style={styles.titleDivider}>Display</Text> */}
           <Icon name="Heading_display" width={viewWidth} height={viewWidth / 1080 * 210} fill="#1181FF" viewBox="0 0 1080 210" />
 
           <View style={[styles.storageBox, { width: viewWidth / 1080 * 906, marginLeft: viewWidth / 1080 * (1080 - 906) / 2 }]}>
