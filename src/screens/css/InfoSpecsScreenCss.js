@@ -158,7 +158,7 @@ export default StyleSheet.create({
   },
   // - - Camera Box - -
   cameraBox: {
-    marginTop:80,
+    marginTop:75,
     width:'100%',
     position: 'absolute',
     flexDirection: 'row',
@@ -195,7 +195,8 @@ export default StyleSheet.create({
     lineHeight: 16
   },
   cameraDetails: {
-    marginTop:120,
+    marginTop:110,
+    backgroundColor: '#FFFFFFBF',
     width:'100%',
     paddingHorizontal:30,
     position: 'absolute',
