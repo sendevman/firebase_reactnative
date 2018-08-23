@@ -63,9 +63,9 @@ class InfoSpecsScreen extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if(nextProps.selectedTab === 0 && nextProps.infoSpecs.model != undefined) {
-      console.log("log event ======= : ", {"pFirebaseId":this.props.firebaseid, "pDeviceModel":nextProps.infoSpecs.model, "pDeviceManufacture":nextProps.infoSpecs.manufacture, "pResearchTab":"info"});
-      firebase.analytics().logEvent("deviceViewed", {"pFirebaseId":this.props.firebaseid, "pDeviceModel":nextProps.infoSpecs.model, "pDeviceManufacture":nextProps.infoSpecs.manufacture, "pResearchTab":"info"});
+    if (nextProps.selectedTab === 0 && nextProps.infoSpecs.model != undefined) {
+      console.log("log event ======= : ", { "pFirebaseId": this.props.firebaseid, "pDeviceModel": nextProps.infoSpecs.model, "pDeviceManufacture": nextProps.infoSpecs.manufacture, "pResearchTab": "info" });
+      firebase.analytics().logEvent("deviceViewed", { "pFirebaseId": this.props.firebaseid, "pDeviceModel": nextProps.infoSpecs.model, "pDeviceManufacture": nextProps.infoSpecs.manufacture, "pResearchTab": "info" });
     }
   }
 
@@ -77,6 +77,16 @@ class InfoSpecsScreen extends Component {
       heightSlide: d,
       heightScrolled: e
     }
+  }
+
+  makeCameraFeatureTest(features) {
+    var result = "";
+    features.map((item, index) => {
+      if (index === 1) result += " or ";
+      if (index === 2) result += ". with ";
+      result += item;
+    });
+    return result;
   }
 
   renderOffer() {
@@ -93,14 +103,14 @@ class InfoSpecsScreen extends Component {
 
   renderColors() {
     const { colors } = this.props.infoSpecs;
+    const viewWidth = width - 34;
 
     if (typeof colors != "undefined" && colors.length > 0) {
       return (
-        <View style={{ paddingBottom: 10 }}>
-          <View style={styles.hrDivider}></View>
-          <Text style={styles.titleDivider}>Colors</Text>
+        <View style={[{ paddingBottom: 20, paddingTop: 20 }]}>
+          <Icon name="Heading_colors" width={viewWidth} height={viewWidth / 1080 * 210} fill="#1181FF" viewBox="0 0 1080 210" style={{ marginLeft: 6 }} />
 
-          <View style={styles.colorItemBox}>
+          <View style={[styles.colorItemBox, { width: viewWidth, marginLeft: 6}]}>
             {colors.map((item, index) => {
               return (
                 <View key={index} style={styles.colorItem}>
@@ -118,22 +128,21 @@ class InfoSpecsScreen extends Component {
 
   renderDisplay() {
     const { display } = this.props.infoSpecs;
+    const viewWidth = width - 34;
 
     if (Object.keys(display).length !== 0 && display.constructor === Object) {
       return (
-        <View style={{ paddingBottom: 14 }}>
-          <View style={styles.hrDivider}></View>
-          <Text style={styles.titleDivider}>Display</Text>
+        <View style={{ paddingBottom: 10 }}>
+          <Icon name="Heading_display" width={viewWidth} height={viewWidth / 1080 * 210} fill="#1181FF" viewBox="0 0 1080 210" style={{ marginLeft: 6 }} />
 
-          <View style={[styles.storageBox, styles.displayBox]}>
+          <View style={[styles.storageBox, { width: viewWidth, marginLeft: 6 }]}>
             <View style={styles.displaySizeItem}>
               <View style={styles.displaySizeHr}></View>
               <Text style={styles.displaySize}>{display.size}"</Text>
             </View>
-
             <View style={styles.displayTextItem}>
-              <Text style={styles.displayText}>{display.description} ({display.resolution})</Text>
-              <Text style={styles.displayText}>{display.ppi} ppi</Text>
+              <Text style={styles.displayText}>{display.description} ({display.resolution}) {display.ppi} ppi</Text>
+              {/* <Text style={styles.displayText}>{display.ppi} ppi</Text> */}
             </View>
           </View>
         </View>
@@ -143,47 +152,36 @@ class InfoSpecsScreen extends Component {
 
   renderCamera() {
     const { camera } = this.props.infoSpecs;
+    const viewWidth = width - 34;
 
     if (typeof camera != "undefined" && (Object.keys(camera).length !== 0 && camera.constructor === Object)) {
       const { features, front, rear } = camera;
-
+      const featuretext = this.makeCameraFeatureTest(features);
       return (
-        <View style={{ paddingBottom: 5 }}>
+        <View style={{ paddingBottom: 0 }}>
           <View style={styles.hrDivider}></View>
-          <Text style={styles.titleDivider}>Camera</Text>
+          <Icon name="Heading_camera" width={viewWidth} height={viewWidth / 1080 * 347} fill="#1181FF" viewBox="0 0 1080 347" style={{ marginLeft: 6 }} />
 
           {(Object.keys(front).length !== 0 || Object.keys(rear).length !== 0) &&
-            <View style={styles.storageBox}>
+            <View style={styles.cameraBox}>
               {Object.keys(front).length !== 0 &&
-                <LinearGradient colors={['#FFAB00', '#FF9200']} style={styles.cameraItem}>
-                  <Text style={styles.cameraTitle}>FRONT CAMERA</Text>
-                  <Text style={styles.cameraText}>{front.sensor} sensor</Text>
-                  <Text style={styles.cameraText}>{front.aperture} aperture</Text>
-                </LinearGradient>
+                <View style={styles.cameraItem}>
+                  <Text style={styles.cameraTextBold}>{front.sensor} sensor</Text>
+                  <Text style={styles.cameraTextBold}>{front.aperture} aperture</Text>
+                </View>
               }
 
               {Object.keys(rear).length !== 0 &&
-                <LinearGradient colors={['#FFAB00', '#FF9200']} style={styles.cameraItem}>
-                  <Text style={styles.cameraTitle}>REAR CAMERA</Text>
-                  <Text style={styles.cameraText}>{rear.sensor} sensor</Text>
-                  <Text style={styles.cameraText}>{rear.aperture} aperture</Text>
-                </LinearGradient>
+                <View style={styles.cameraItem}>
+                  <Text style={styles.cameraTextBold}>{rear.sensor} sensor</Text>
+                  <Text style={styles.cameraTextBold}>{rear.aperture} aperture</Text>
+                </View>
               }
             </View>
           }
-
           {(features && features.length > 0) &&
-            <View>
-              <View style={styles.cameraList}>
-                {features.map((item, index) => {
-                  return (
-                    <LinearGradient key={index} colors={['#FFAB00', '#FF9200']} style={styles.cameraListItem}>
-                      <Text numberOfLines={4} style={[styles.cameraText, { maxWidth: 80, textAlign: 'center' }]}>{item}</Text>
-                    </LinearGradient>
-                  );
-                })
-                }
-              </View>
+            <View style={[styles.storageBox, { width: viewWidth, marginLeft: 6, marginTop: -10.07, marginBottom: 10 }]}>
+              <Text numberOfLines={0} style={[styles.cameraText, { maxWidth: '75%', textAlign: 'left', marginBottom: 10, marginTop: 6 }]}>{featuretext}</Text>
             </View>
           }
         </View>
@@ -193,6 +191,7 @@ class InfoSpecsScreen extends Component {
 
   renderPerformanceAndStorage() {
     const { deviceOptions, expandableStorage, memory, processor } = this.props.infoSpecs;
+    const viewWidth = width - 34;
 
     const memoryEmpty = (!memory || !memory.trim() || 0 === memory.length);
     const processorEmpty = (typeof processor == "undefined" || (Object.keys(processor).length === 0 && processor.constructor === Object));
@@ -209,15 +208,17 @@ class InfoSpecsScreen extends Component {
     return (
       <View style={{ paddingBottom: 8 }}>
         <View style={styles.hrDivider}></View>
-        <Text style={styles.titleDivider}>Performance & Storage</Text>
+        {/* <Text style={styles.titleDivider}>Performance & Storage</Text>  */}
+        <Icon name="Heading_performance" width={viewWidth} height={viewWidth / 1080 * 210} fill="#1181FF" viewBox="0 0 1080 210" style={{ marginLeft: 6 }} />
+
 
         {(!memoryEmpty || !processorEmpty) &&
           <View style={[styles.performanceStorageBox, changeStyle ? { marginBottom: 4 } : {}]}>
             {!processorEmpty &&
               <View style={styles.performanceStorageItem}>
-                <Icon name="ProcessorBlue" width="138" height="138" fill="#6F4EE6" viewBox="18 55 138 138" />
+                <Icon name="ProcessorBlue" width="138" height="138" fill="#FFFFFF73" viewBox="18 55 138 138" />
 
-                <View style={styles.performanceStorageContentBox}>
+                <View style={styles.performanceProcessorContentBox}>
                   <Text style={styles.performanceStorageTitle}>PROCESSOR</Text>
                   <Text style={styles.performanceStorageText} numberOfLines={4}>{processor.short}</Text>
                 </View>
@@ -226,7 +227,7 @@ class InfoSpecsScreen extends Component {
 
             {!memoryEmpty &&
               <View style={styles.performanceStorageItem}>
-                <Icon name="MemoryBlue" width="120" height="121" fill="#6F4EE6" viewBox="197 63 120 121" />
+                <Icon name="MemoryBlue" width="120" height="121" fill="#FFFFFF73" viewBox="197 63 120 121" />
 
                 <View style={styles.performanceStorageContentBox}>
                   <Text style={styles.performanceStorageTitle}>MEMORY</Text>
@@ -238,20 +239,21 @@ class InfoSpecsScreen extends Component {
         }
 
         {(isAvailable || doIsValid) &&
-          <View style={[styles.performanceStorageBox, mpChangeStyle ? {} : { marginTop: 20 }, { marginBottom: 6 }]}>
+          <View style={[styles.performanceStorageBox, mpChangeStyle ? {} : { marginTop: 20 }, { marginBottom: 20 }]}>
             {isAvailable &&
-              <LinearGradient colors={['#6F4EE6', '#3D2AD1']} style={styles.storageBlueBox}>
-                <Image style={{ position: 'absolute', top: 0, left: 0 }} source={require('../assets/images/files/whiteCorner.png')} />
+              <View style={styles.storageBlueBox}>
+                <Icon name="StorageBackground" width="135" height="90" fill="#FFFFFFBB" viewBox="0 0 270 180" />
                 <Text style={styles.storageBlueTitle}>SD CARD SLOT</Text>
                 <Text style={styles.storageBlueText}>Available</Text>
-              </LinearGradient>
+              </View>
             }
 
             {doIsValid &&
-              <LinearGradient colors={['#6F4EE6', '#3D2AD1']} style={styles.storageBlueBox}>
+              <View style={styles.storageBlueBox}>
+                <Icon name="SDCardBackground" width="135" height="90" fill="#FFFFFFBB" viewBox="0 0 270 180" />
                 <Text style={styles.storageBlueTitle}>STORAGE</Text>
                 <Text style={styles.storageBlueText}>{deviceOptions.map((obj) => { return `${obj.storage}Gb` }).join(' or ')}</Text>
-              </LinearGradient>
+              </View>
             }
           </View>
         }
@@ -261,6 +263,7 @@ class InfoSpecsScreen extends Component {
 
   renderBattery() {
     const { battery } = this.props.infoSpecs;
+    const viewWidth = width - 34;
 
     if (Object.keys(battery).length !== 0 && battery.constructor === Object) {
       const { capacity, life } = battery;
@@ -275,53 +278,69 @@ class InfoSpecsScreen extends Component {
       const chargingNoEmpty = (!lifeEmpty &&
         (life.chargingWired || life.chargingWireless ||
           (life.wirelesChargingType && life.wirelesChargingType.length > 0)));
-
       return (
-        <View style={{ paddingBottom: 12 }}>
+        <View style={{ paddingBottom: 10 }}>
           <View style={styles.hrDivider}></View>
-          <Text style={styles.titleDivider}>Battery</Text>
+          {/* <Text style={styles.titleDivider}>Battery</Text> */}
+          <Icon name="Heading_battery" width={viewWidth} height={viewWidth / 1080 * 210} fill="#1181FF" viewBox="0 0 1080 210" style={{ marginLeft: 6 }} />
 
-          <View style={[styles.featuresBox, styles.expandableBox]}>
+          <View style={[styles.featuresBox, styles.expandableBox, { width: viewWidth, marginLeft: 6 }]}>
             {!batteryLifeEmpty &&
               <View style={styles.featureBox}>
                 {!talkTimeEmpty &&
-                  <LinearGradient colors={['#39E80E', '#00FFB4']} style={styles.featureItemBox}>
-                    <Text style={styles.featureItemTitle}>CALLING</Text>
-                    <Text style={styles.featureItemMount}>{life.talkTime.replace(' hrs', '')}</Text>
-                    <Text style={styles.featureItemHour}>hours</Text>
-                  </LinearGradient>
+                  <View>
+                    <View style={styles.featureItemBattery}></View>
+                    <View style={styles.featureItemBox}>
+                      <Text style={styles.featureItemTitle}>CALLING</Text>
+                      <Text style={styles.featureItemMount}>{life.talkTime.replace(' hrs', '')}</Text>
+                      <Text style={styles.featureItemHour}>hours</Text>
+                    </View>
+                  </View>
                 }
 
                 {!videoEmpty &&
-                  <LinearGradient colors={['#39E80E', '#00FFB4']} style={styles.featureItemBox}>
-                    <Text style={styles.featureItemTitle}>VIDEO</Text>
-                    <Text style={styles.featureItemMount}>{life.video.replace(' hrs', '')}</Text>
-                    <Text style={styles.featureItemHour}>hours</Text>
-                  </LinearGradient>
+                  <View>
+                    <View style={styles.featureItemBattery}></View>
+                    <View style={styles.featureItemBox}>
+                      <Text style={styles.featureItemTitle}>VIDEO</Text>
+                      <Text style={styles.featureItemMount}>{life.video.replace(' hrs', '')}</Text>
+                      <Text style={styles.featureItemHour}>hours</Text>
+                    </View>
+                  </View>
                 }
 
                 {!audioEmpty &&
-                  <LinearGradient colors={['#39E80E', '#00FFB4']} style={styles.featureItemBox}>
-                    <Text style={styles.featureItemTitle}>AUDIO</Text>
-                    <Text style={styles.featureItemMount}>{life.audio.replace(' hrs', '')}</Text>
-                    <Text style={styles.featureItemHour}>hours</Text>
-                  </LinearGradient>
+                  <View>
+                    <View style={styles.featureItemBattery}></View>
+                    <View style={styles.featureItemBox}>
+                      <Text style={styles.featureItemTitle}>AUDIO</Text>
+                      <Text style={styles.featureItemMount}>{life.audio.replace(' hrs', '')}</Text>
+                      <Text style={styles.featureItemHour}>hours</Text>
+                    </View>
+                  </View>
                 }
 
                 {!internetWifiEmpty &&
-                  <LinearGradient colors={['#39E80E', '#00FFB4']} style={styles.featureItemBox}>
-                    <Text style={styles.featureItemTitle}>WI-FI</Text>
-                    <Text style={styles.featureItemMount}>{life.internetWifi.replace(' hrs', '')}</Text>
-                    <Text style={styles.featureItemHour}>hours</Text>
-                  </LinearGradient>
+                  <View>
+                    <View style={styles.featureItemBattery}></View>
+                    <View style={styles.featureItemBox}>
+                      <Text style={styles.featureItemTitle}>WI-FI</Text>
+                      <Text style={styles.featureItemMount}>{life.internetWifi.replace(' hrs', '')}</Text>
+                      <Text style={styles.featureItemHour}>hours</Text>
+                    </View>
+                  </View>
                 }
 
                 {!internetL4GEmpty &&
-                  <LinearGradient colors={['#39E80E', '#00FFB4']} style={styles.featureItemBox}>
-                    <Text style={styles.featureItemTitle}>LTE</Text>
-                    <Text style={styles.featureItemMount}>{life.internetL4G.replace(' hrs', '')}</Text>
-                    <Text style={styles.featureItemHour}>hours</Text>
-                  </LinearGradient>
+                  <View>
+                    <View style={styles.featureItemBattery}></View>
+                    <View style={styles.featureItemBox}>
+                      {/* <LinearGradient colors={['#39E80E', '#00FFB4']} style={styles.featureItemBox}> */}
+                      <Text style={styles.featureItemTitle}>LTE</Text>
+                      <Text style={styles.featureItemMount}>{life.internetL4G.replace(' hrs', '')}</Text>
+                      <Text style={styles.featureItemHour}>hours</Text>
+                    </View>
+                  </View>
                 }
               </View>
             }
@@ -351,23 +370,42 @@ class InfoSpecsScreen extends Component {
 
   renderContent() {
     const { infoSpecs } = this.props;
+    const viewWidth = width + 30;
 
     if (Object.keys(infoSpecs).length === 0 && infoSpecs.constructor === Object) {
       return (<InfoSpecsSkeleton />);
     } else {
       return (
-        <View style={styles.infoSpecBox}>
-          {this.renderOffer()}
+        <View>
+          <Image
+            style={{
+              backgroundColor: '#ccc',
+              flex: 1,
+              position: 'absolute',
+              width: '100%',
+              height: '100%',
+              justifyContent: 'center',
+            }}
+            source={require('../assets/images/files/backgroundHD.png')}
+          />
+          <View style={styles.infoSpecBox}>
 
-          <Text style={styles.description}>
-            {infoSpecs.description}
-          </Text>
+            {this.renderOffer()}
 
-          {this.renderColors()}
-          {this.renderDisplay()}
-          {this.renderCamera()}
-          {this.renderPerformanceAndStorage()}
-          {this.renderBattery()}
+            <View style={[styles.descriptionItemBox, { width: viewWidth / 1080 * 906, marginLeft: viewWidth / 1080 * (1080 - 906) / 2 - 25 }]}>
+              <Text style={[styles.description, { width: viewWidth / 1080 * 906 - 30 }]}>
+                {infoSpecs.description}
+              </Text>
+            </View>
+
+            {this.renderColors()}
+            {this.renderDisplay()}
+            {this.renderCamera()}
+            {this.renderPerformanceAndStorage()}
+            {this.renderBattery()}
+            {this.renderAccessories()}
+            <FeedbackSurvey />
+          </View>
         </View>
       );
     }
@@ -375,6 +413,7 @@ class InfoSpecsScreen extends Component {
 
   renderAccessories() {
     const { compatibleAccessories } = this.props.infoSpecs;
+    const viewWidth = width - 34;
 
     if ((typeof compatibleAccessories == "undefined") || (Object.keys(compatibleAccessories).length === 0 && compatibleAccessories.constructor === Object)) return;
 
@@ -385,8 +424,11 @@ class InfoSpecsScreen extends Component {
     if (featuredEmpty && fullListEmpty) return false;
 
     return (
-      <View style={{ height: 204 }}>
-        {<RoutesAccessories />}
+      <View>
+        <Icon name="Heading_accessories" width={viewWidth} height={viewWidth / 1080 * 210} fill="#1181FF" viewBox="0 0 1080 210" style={{ marginLeft: 6 }} />
+        <View style={{ height: 165, width: viewWidth, marginLeft: 6, backgroundColor: 'transparent' }}>
+          {<RoutesAccessories />}
+        </View>
       </View>
     );
   }
@@ -408,10 +450,8 @@ class InfoSpecsScreen extends Component {
             }*/
           }
         )}
-        >
-        { this.renderContent() }
-        { this.renderAccessories() }
-        { !infoSpecsEmpty && <FeedbackSurvey /> }
+      >
+        {this.renderContent()}
       </Animated.ScrollView>
     );
   }

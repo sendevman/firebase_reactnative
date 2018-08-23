@@ -173,7 +173,7 @@ class ProductsNear extends Component {
   get gradient() {
     return (
       <LinearGradient
-        colors={['#009FDB', '#009FDB']}
+        colors={['#000000', '#000000']}
         startPoint={{ x: 1, y: 0 }}
         endPoint={{ x: 0, y: 1 }}
         style={styles.gradient}
@@ -212,7 +212,7 @@ class ProductsNear extends Component {
               dotColor={'#FFF'}
               dotStyle={styles.paginationDot}
               inactiveDotColor={'rgba(255, 255, 255, 0.5)'}
-              inactiveDotOpacity={0.4}
+              inactiveDotOpacity={0.9}
               inactiveDotScale={0.6}
               carouselRef={this._carouselRef}
               tappableDots={!!this._carouselRef} />
