@@ -8,11 +8,11 @@ import { StyleSheet, Dimensions } from 'react-native';
 var { width } = Dimensions.get('window');
 
 export default StyleSheet.create({
-  container: { backgroundColor: '#EEF1F4' },
+  container: { backgroundColor: '#009FDB' },
   costPlansBox: {
     paddingHorizontal: 10,
     marginBottom: 14,
-    marginTop: 24,
+    marginTop: 10,
   },
   // - - Skeleton Loading Box - -
   skeletonLoading: {
@@ -99,38 +99,35 @@ export default StyleSheet.create({
   },
   availableText: {
     marginLeft: 8,
-    color: '#3E3F42',
+    color: '#FFF',
     // fontFamily: 'Rubik',
-    fontSize: 12,
+    fontSize: 14,
     fontWeight: '500',
     letterSpacing: 0.15,
     lineHeight: 18
   },
   titleDevice: {
     marginTop: 16,
-    color: '#1181FF',
+    color: '#FFF',
+    fontWeight: 'bold',
     // fontFamily: 'Rubik',
-    fontSize: 14,
+    fontSize: 18,
     letterSpacing: 0.12,
     lineHeight: 17,
     textAlign: 'left'
   },
   // Divider Line
   hrDivider: {
-    borderTopWidth: 1,
-    borderStyle: 'solid',
-    borderTopColor: '#1181FF',
     marginTop: 10,
     marginBottom: 10
   },
   titleDivider: {
     position: 'absolute',
-    top: 1,
+    top: 10,
     paddingRight: 10,
-    backgroundColor: '#EEF1F4',
-    color: '#1181FF',
+    color: '#FFF',
     // fontFamily: 'Rubik',
-    fontSize: 14,
+    fontSize: 18,
     letterSpacing: 0.12,
     lineHeight: 17
   },
