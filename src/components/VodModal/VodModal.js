@@ -1,9 +1,3 @@
-/**
- * Conexus-Tech - Retail Companion AT&T
- * https://conexustech.com/
- * @flow
- */
-
 import React, { Component } from 'react';
 import { Image, Modal, Text, TouchableOpacity, View } from 'react-native';
 import Spinkit from 'react-native-spinkit';
@@ -48,8 +42,9 @@ class VodModal extends Component {
   setVodPlayerInfo(snapshot) {
     let playerData = snapshot.val();
 
-    if (playerData.floor_id !== this.props.location.floor_id) this.setState({ playerInfo: {} });
-    else this.setState({ playerInfo: playerData });
+    // if (playerData.floor_id !== this.props.location.floor_id) this.setState({ playerInfo: {} });
+    // else this.setState({ playerInfo: playerData });
+    this.setState({ playerInfo: playerData });
     if (playerData.status === "available") this.setState({ canStop: false, notPlaying: true });
   }
 
@@ -98,7 +93,7 @@ class VodModal extends Component {
     const { canStop, notPlaying, playerInfo } = this.state;
 
     let locationValid = (typeof location != 'undefined' && Object.keys(location).length !== 0 && location.constructor === Object);
-    let inAttStore = (locationValid && typeof location.floor_id != 'undefined' && location.floor_id === playerInfo.floor_id);
+    let inAttStore = true; // (locationValid && typeof location.floor_id != 'undefined' && location.floor_id === playerInfo.floor_id);
     let playerAvailable = (playerInfo.status === "available") ? true : false;
 
     return (

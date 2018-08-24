@@ -110,7 +110,7 @@ class InfoSpecsScreen extends Component {
         <View style={[{ paddingBottom: 20, paddingTop: 20 }]}>
           <Icon name="Heading_colors" width={viewWidth} height={viewWidth / 1080 * 210} fill="#1181FF" viewBox="0 0 1080 210" style={{ marginLeft: 6 }} />
 
-          <View style={[styles.colorItemBox, { width: viewWidth, marginLeft: 6}]}>
+          <View style={[styles.colorItemBox, { width: viewWidth, marginLeft: 6, marginTop: -0.05}]}>
             {colors.map((item, index) => {
               return (
                 <View key={index} style={styles.colorItem}>
@@ -133,9 +133,9 @@ class InfoSpecsScreen extends Component {
     if (Object.keys(display).length !== 0 && display.constructor === Object) {
       return (
         <View style={{ paddingBottom: 10 }}>
-          <Icon name="Heading_display" width={viewWidth} height={viewWidth / 1080 * 211} fill="#1181FF" viewBox="0 0 1080 210" style={{ marginLeft: 6 }} />
+          <Icon name="Heading_display" width={viewWidth} height={viewWidth / 1080 * 210} fill="#1181FF" viewBox="0 0 1080 210" style={{ marginLeft: 6 }} />
 
-          <View style={[styles.storageBox, { width: viewWidth, marginLeft: 6, marginTop: -0.2 }]}>
+          <View style={[styles.storageBox, { width: viewWidth, marginLeft: 6, marginTop: -0.05 }]}>
             <View style={styles.displaySizeItem}>
               <View style={styles.displaySizeHr}></View>
               <Text style={styles.displaySize}>{display.size}"</Text>
@@ -160,7 +160,7 @@ class InfoSpecsScreen extends Component {
       return (
         <View style={{ paddingBottom: 0 }}>
           <View style={styles.hrDivider}></View>
-          <Icon name="Heading_camera" width={viewWidth} height={viewWidth / 1080 * 347} fill="#1181FF" viewBox="0 0 1080 347" style={{ marginLeft: 6 }} />
+          <Icon name="Heading_camera" width={viewWidth} height={viewWidth / 1080 * 315} fill="#1181FF" viewBox="0 0 1080 315" style={{ marginLeft: 6 }} />
 
           {(Object.keys(front).length !== 0 || Object.keys(rear).length !== 0) &&
             <View style={styles.cameraBox}>
@@ -180,7 +180,7 @@ class InfoSpecsScreen extends Component {
             </View>
           }
           {(features && features.length > 0) &&
-            <View style={[styles.storageBox, { width: viewWidth, marginLeft: 6, marginTop: -11.5, marginBottom: 10 }]}>
+            <View style={[styles.storageBox, { width: viewWidth, marginLeft: 6, marginTop: 0, marginBottom: 10 }]}>
               <Text numberOfLines={0} style={[styles.cameraText, { maxWidth: '75%', textAlign: 'left', marginBottom: 10, marginTop: 6 }]}>{featuretext}</Text>
             </View>
           }
@@ -282,9 +282,9 @@ class InfoSpecsScreen extends Component {
         <View style={{ paddingBottom: 10 }}>
           <View style={styles.hrDivider}></View>
           {/* <Text style={styles.titleDivider}>Battery</Text> */}
-          <Icon name="Heading_battery" width={viewWidth} height={viewWidth / 1080 * 211} fill="#1181FF" viewBox="0 0 1080 210" style={{ marginLeft: 6 }} />
+          <Icon name="Heading_battery" width={viewWidth} height={viewWidth / 1080 * 210} fill="#1181FF" viewBox="0 0 1080 210" style={{ marginLeft: 6 }} />
 
-          <View style={[styles.featuresBox, styles.expandableBox, { width: viewWidth, marginLeft: 6, marginTop: -0.1 }]}>
+          <View style={[styles.featuresBox, styles.expandableBox, { width: viewWidth, marginLeft: 6, marginTop: -0.05 }]}>
             {!batteryLifeEmpty &&
               <View style={styles.featureBox}>
                 {!talkTimeEmpty &&
