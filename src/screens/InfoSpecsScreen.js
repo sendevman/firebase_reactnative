@@ -183,7 +183,7 @@ class InfoSpecsScreen extends Component {
           }
           {(features && features.length > 0) &&
             <View style={[styles.storageBox, { width: viewWidth, marginLeft: 6, marginTop:-viewWidth / 1080 * (490-315), marginBottom: 10 }]}>
-              <Text numberOfLines={0} style={[styles.cameraText, { maxWidth: '75%', textAlign: 'left', marginBottom: 10, marginTop: 6 }]}>{featuretext}</Text>
+              <Text numberOfLines={0} style={[styles.cameraText, { maxWidth: '80%', textAlign: 'left', marginBottom: 10, marginTop: 6 }]}>{featuretext}</Text>
             </View>
           }
         </View>
