@@ -59,9 +59,18 @@ export default StyleSheet.create({
     letterSpacing: 0.12,
     lineHeight: 17
   },
+  accessoriesBackground1: {
+    borderTopLeftRadius: 6,
+    borderTopRightRadius: 6,
+    overflow: 'hidden',
+  },
+  accessoriesBackground: {
+  },
   // - - Color Box - -
+  colorBackground: {
+    borderRadius: 6
+  }, 
   colorItemBox: {
-    backgroundColor: '#FFFFFFBF',
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'center',
@@ -89,7 +98,6 @@ export default StyleSheet.create({
   },
   // - - Storage Box - -
   storageBox: {
-    backgroundColor: '#FFFFFFBF',
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center'
@@ -269,7 +277,7 @@ export default StyleSheet.create({
   },
   // - - Expandable Storage Box - -
   expandableBox: {
-    backgroundColor: '#FFFFFFBF',
+    // backgroundColor: '#FFFFFFBF',
     marginTop: 0
   },
   expandableViewText: { marginBottom: 8 },
