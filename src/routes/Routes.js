@@ -189,7 +189,7 @@ const DrawerNav = createDrawerNavigator(
     }
   },
   {
-    initialRouteName: 'OnBoarding',
+    initialRouteName: 'Shopping',
     contentOptions: {
       activeTintColor: '#1181FF',
       activeBackgroundColor: '#EEF1F4',
