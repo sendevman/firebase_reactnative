@@ -98,7 +98,7 @@ export default StyleSheet.create({
     borderColor: '#E3E9EF',
     borderTopWidth: 1,
     borderStyle: 'solid',
-    borderBottomWidth: 1,
+    borderBottomWidth: 0,
     paddingVertical: 11
   },
   textReadMore: {
