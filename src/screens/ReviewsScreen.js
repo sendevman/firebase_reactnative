@@ -123,7 +123,7 @@ class ReviewsScreen extends Component {
       return ( <ReviewsSkeleton /> );
     } else {
       return (
-        <View style={styles.reviewsBox}>
+        <View>
         <Image
           style={{
             backgroundColor: '#ccc',
@@ -135,6 +135,7 @@ class ReviewsScreen extends Component {
           }}
           source={require('../assets/images/files/backgroundHD.png')}
         />
+        <View style={styles.reviewsBox}>
           <View style={styles.headerPrincipal}>
             <Text style={styles.textTitleUno}>Make an informed decision.</Text>
             <Text style={styles.textSubtitle}>Read what the reviews are saying.</Text>
@@ -144,6 +145,7 @@ class ReviewsScreen extends Component {
           { this.renderCustomerReviews() }
           { this.renderVideoContent() }
         { !reviewsEmpty && <FeedbackSurvey /> }
+        </View>
         </View>
       );
     }
