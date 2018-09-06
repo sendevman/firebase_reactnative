@@ -25,7 +25,8 @@ const AccessoriesStack = createStackNavigator(
   {
     initialRouteName: 'Accs',
     mode: 'modal',
-    headerMode: 'none'
+    headerMode: 'none',
+    cardStyle: { backgroundColor: 'transparent' }
   }
 );
 

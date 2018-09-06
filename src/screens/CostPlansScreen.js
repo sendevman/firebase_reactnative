@@ -388,7 +388,7 @@ class CostPlansScreen extends Component {
     if (featuredEmpty && fullListEmpty) return false;
 
     return (
-      <View style={{ height: 190, marginTop: 20, marginBottom: 10 }}>
+      <View style={styles.accessoriesBox}>
         {<RoutesAccessories />}
       </View>
     );
