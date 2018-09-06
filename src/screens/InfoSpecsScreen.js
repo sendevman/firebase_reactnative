@@ -431,9 +431,9 @@ class InfoSpecsScreen extends Component {
       <View>
         {/* <Icon name="Heading_accessories" width={viewWidth} height={viewWidth / 1080 * 210} fill="#1181FF" viewBox="0 0 1080 210" style={{ marginLeft: 6 }} /> */}
         <View style={[styles.accessoriesBackground1, {width : viewWidth, marginLeft: 6}]}>
-        <Image style={[styles.accessoriesBackground, {width : viewWidth, height: viewWidth*210/1080, marginLeft: 0}]} source={require('../assets/images/files/accessories.png')}/>
-         </View>
-        <View style={{ height: 165, width: viewWidth, marginLeft: 6, marginTop: -1, backgroundColor: 'transparent' }}>
+          <Image style={[styles.accessoriesBackground, {width : viewWidth, height: viewWidth*210/1080, marginLeft: 0}]} source={require('../assets/images/files/accessories.png')}/>
+        </View>
+        <View style={[styles.accessoriesBox, { width: viewWidth }]}>
           {<RoutesAccessories />}
         </View>
       </View>
