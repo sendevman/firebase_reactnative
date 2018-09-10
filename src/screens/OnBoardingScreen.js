@@ -73,15 +73,16 @@ class OnBoardingScreen extends Component {
 
             <View style={[styles.fiftyBox, { alignItems: 'flex-start' }]}>
               <View style={styles.containerText}>
-                <Text style={styles.title}>Relevant information at a glance</Text>
+                <Text style={styles.title}>Relevant Information at a Glance</Text>
 
-                <View style={{}}>
-                  <Text style={styles.subTitle}>AT&T Retail Companion allows you to make informed decisions when shopping for a new device.</Text>
-                  <Text style={styles.subTitle}>Simply walk around the store and we'll show you relevant information about nearby products.</Text>
+                <View style={{ marginHorizontal: 5 }}>
+                  <Text style={styles.subTitle}>Retail Insider gives you an inside look at participating AT&T retail stores based on your location.</Text>
+                  <Text style={styles.subTitle}>Simply walk around the store and we'll share information about nearby products and experiences.</Text>
                 </View>
               </View>
             </View>
           </View>
+
           <View>
             <View style={[styles.fiftyBox, { alignItems: 'flex-end' }]}>
               <View style={[styles.containerPhone, { justifyContent: 'center' }]}>
@@ -90,16 +91,18 @@ class OnBoardingScreen extends Component {
                 </View>
               </View>
             </View>
+
             <View style={[styles.fiftyBox, { alignItems: 'flex-start' }]}>
               <View style={styles.containerText}>
-                <Text style={styles.title}>Don't take our word for it</Text>
+                <Text style={styles.title}>Hear What Others are Saying</Text>
 
                 <View style={{ maxWidth: 314 }}>
-                  <Text style={styles.subTitle}>Every device comes with curated reviews from reputable reviewer. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu sodales ligula.</Text>
+                  <Text style={styles.subTitle}>Discover unbiased reviews from CNET, Consumer Reports and more!</Text>
                 </View>
               </View>
             </View>
           </View>
+
           <View>
             <View style={[styles.fiftyBox, { alignItems: 'flex-end' }]}>
               <View style={[styles.containerPhone, { justifyContent: 'center' }]}>
@@ -117,14 +120,15 @@ class OnBoardingScreen extends Component {
 
             <View style={[styles.fiftyBox, { alignItems: 'flex-start' }]}>
               <View style={styles.containerText}>
-                <Text style={styles.title}>Compare products</Text>
+                <Text style={styles.title}>Compare</Text>
 
                 <View style={{ maxWidth: 314 }}>
-                  <Text style={styles.subTitle}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu sodales ligula. Nunc sit amet massa sem. Sed venenatis velit commodo, mattis nulla ut, sodales eros.</Text>
+                  <Text style={styles.subTitle}>Can't decide? Get a side by side comparison of key features from your favorite selections.</Text>
                 </View>
               </View>
             </View>
           </View>
+
           <View>
             <View style={[styles.fiftyBox, { alignItems: 'flex-end' }]}>
               <View style={styles.containerPhone}>
@@ -142,10 +146,10 @@ class OnBoardingScreen extends Component {
 
             <View style={[styles.fiftyBox, { alignItems: 'flex-start' }]}>
               <View style={styles.containerText}>
-                <Text style={styles.title}>Exclusive video-on-demand</Text>
+                <Text style={styles.title}>Watch While You Wait</Text>
 
                 <View style={{ maxWidth: 314 }}>
-                  <Text style={styles.subTitle}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu sodales ligula. Nunc sit amet massa sem. Sed venenatis velit commodo, mattis nulla ut, sodales eros.</Text>
+                  <Text style={styles.subTitle}>Discover a selection of AT&T original content, movie trailers, and more.</Text>
                 </View>
 
                 <TouchableOpacity style={styles.getStartedBtn} onPress={this.showModal}>
