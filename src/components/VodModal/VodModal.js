@@ -5,6 +5,7 @@ import Video from 'react-native-video';
 import firebase from 'react-native-firebase';
 import { connect } from 'react-redux';
 
+import { setReplaceURL } from '../../actions/Common';
 // My Styles
 import styles from './VodModalCss';
 
@@ -32,7 +33,7 @@ class VodModal extends Component {
 
   componentDidMount() {
     firebase.database().ref('storeData/').once('value')
-    .then((snapshot) => { this.setState({ storeData: snapshot.val() }); });
+      .then((snapshot) => { this.setState({ storeData: snapshot.val() }); });
 
     this.state.vodPlayerIdRef.on('value', (snapshot) => { this.setVodPlayerInfo(snapshot); });
   }
@@ -48,16 +49,18 @@ class VodModal extends Component {
     if (playerData.status === "available") this.setState({ canStop: false, notPlaying: true });
   }
 
-  getNewMediaUrl(mediaURL) {
+  getNewMediaUrl(mediaURL) {    
     if (this.props.network.connectionType == "wifi" && this.props.network.ssid == this.state.storeData.ssid) {
-      return mediaURL.replace('https://firebasestorage.googleapis.com', this.state.storeData.superLumensUrl);
+      const replaceURL = mediaURL.replace('https://firebasestorage.googleapis.com', this.state.storeData.superLumensUrl);  
+      this.props.setReplaceURL(replaceURL);
+      return replaceURL;
     }
     return mediaURL;
   }
 
   eventlog(method) {
-    console.log("log event ======= : ", {"pFirebaseId":this.props.firebaseid, "pVodContentTitle":this.props.vodInfo.title, "pVodContentUrl":this.props.vodInfo.mediaURL, "pVodContentType":this.props.vodInfo.categoryName, "pVodViewedOn":method});
-    firebase.analytics().logEvent("vodPlayed", {"pFirebaseId":this.props.firebaseid, "pVodContentTitle":this.props.vodInfo.title, "pVodContentUrl":this.props.vodInfo.mediaURL, "pVodContentType":this.props.vodInfo.categoryName, "pVodViewedOn":method});
+    console.log("log event ======= : ", { "pFirebaseId": this.props.firebaseid, "pVodContentTitle": this.props.vodInfo.title, "pVodContentUrl": this.props.vodInfo.mediaURL, "pVodContentType": this.props.vodInfo.categoryName, "pVodViewedOn": method });
+    firebase.analytics().logEvent("vodPlayed", { "pFirebaseId": this.props.firebaseid, "pVodContentTitle": this.props.vodInfo.title, "pVodContentUrl": this.props.vodInfo.mediaURL, "pVodContentType": this.props.vodInfo.categoryName, "pVodViewedOn": method });
   }
 
   _onWatchTrailer() {
@@ -132,28 +135,28 @@ class VodModal extends Component {
           <Text numberOfLines={6} style={styles.detailDescription}>{vodInfo.detailDescription}</Text>
         </View>
 
-        { inAttStore &&
+        {inAttStore &&
           <TouchableOpacity style={styles.watchBtn} onPress={() => this._onWatchTrailer()} activeOpacity={0.4}>
             <Image style={styles.watchBtnIcon} source={require('../../assets/images/files/playButton.png')} />
             <Text style={styles.watchBtnText}>Watch trailer</Text>
           </TouchableOpacity>
         }
 
-        { (inAttStore && notPlaying) &&
+        {(inAttStore && notPlaying) &&
           <TouchableOpacity disabled={!playerAvailable} style={styles.watchBigScreenBtn} onPress={() => this._onWatchBigScreen(vodInfo.mediaURL)} activeOpacity={0.4}>
             <Icon name="Panorama" width="26" height="26" viewBox="0 0 24 24" fill={playerAvailable ? "#FFF" : "#CF2A2A"} />
             <Text style={[styles.watchBtnText, { textDecorationLine: 'underline', color: playerAvailable ? "#FFF" : "#CF2A2A" }]}>Watch on the big screen</Text>
           </TouchableOpacity>
         }
 
-        { (inAttStore && !notPlaying && canStop) &&
+        {(inAttStore && !notPlaying && canStop) &&
           <TouchableOpacity style={styles.watchBigScreenBtn} onPress={() => this._onStopVideo()} activeOpacity={0.4}>
             <Image style={styles.watchBtnIcon} source={require('../../assets/images/files/stopButton.png')} />
             <Text style={[styles.watchBtnText, { textDecorationLine: 'underline' }]}>Stop</Text>
           </TouchableOpacity>
         }
 
-        { !inAttStore &&
+        {!inAttStore &&
           <View style={styles.noInAttStoreBox}>
             <Text style={styles.noInAttStoreText}>Sorry, you have to be at AT&T to see this exclusive content</Text>
           </View>
@@ -179,22 +182,30 @@ class VodModal extends Component {
             <TouchableOpacity onPress={() => {
               this._onStopVideo();
               this.setState({ pauseVideo: true, showSpinkit: false, showVideo: false });
-              this.props.onHideModal(); }} style={styles.headerBtn}>
+              this.props.onHideModal();
+            }} style={styles.headerBtn}>
               <Icon name="CloseXWhite" width="14" height="14" viewBox="0 0 14 14" />
             </TouchableOpacity>
           </View>
 
-          { vodInfoValid && this.renderContent() }
+          {vodInfoValid && this.renderContent()}
         </View>
       </Modal>
     );
   }
 }
 
+const mapDispatchToProps = dispatch => {
+  return {
+    setReplaceURL: (data) => {
+      return dispatch(setReplaceURL(data))
+    }
+  };
+}
 const mapStateToProps = state => {
   const { common, current, vod } = state;
 
   return { featured: vod.featured, firebaseid: common.firebaseid, fullList: vod.fullList, location: current.position, network: common.network };
 }
 
-export default connect(mapStateToProps)(VodModal);
+export default connect(mapStateToProps, mapDispatchToProps)(VodModal);
