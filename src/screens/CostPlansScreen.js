@@ -388,28 +388,34 @@ class CostPlansScreen extends Component {
     if (featuredEmpty && fullListEmpty) return false;
 
     return (
-      <View style={{ height: 190, marginTop: 20, marginBottom: 10 }}>
+      <View style={styles.accessoriesBox}>
         {<RoutesAccessories />}
       </View>
     );
   }
 
+  _onScrollEndSnapToEdge = (event) => {
+    const y = event.nativeEvent.contentOffset.y;
+    if (y < 60) this.props.onScrollCustom.setValue(0);
+    else this.props.onScrollCustom.setValue(120);
+  }
+
   render() {
     const { costplans } = this.props;
 
-
     return (
       <Animated.ScrollView contentContainerStyle={styles.container} scrollEventThrottle={1}
-        onScroll={Animated.event(
+        /*onScroll={Animated.event(
           [{ nativeEvent: { contentOffset: { y: this.props.onScrollCustom } } }],
           {
             /*useNativeDriver: true*//*,
             listener: event => {
               const offsetY = event.nativeEvent.contentOffset.y
               this.props.onScrollCustom(offsetY);
-            }*/
+            }* /
           }
-        )}
+        )}*/
+        onScrollEndDrag={this._onScrollEndSnapToEdge}
       >
         {this.renderContent()}
       </Animated.ScrollView>

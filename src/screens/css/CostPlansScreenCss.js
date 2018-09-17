@@ -201,5 +201,13 @@ export default StyleSheet.create({
     lineHeight: 15,
     fontWeight: '500',
     textAlign: 'center'
+  },
+  // - - Accessories Box - -
+  accessoriesBox: {
+    height: 165,
+    marginTop: 20,
+    marginBottom: 10,
+    backgroundColor: 'rgba(255, 255, 255, 0.75)',
+    borderRadius: 6
   }
 });
