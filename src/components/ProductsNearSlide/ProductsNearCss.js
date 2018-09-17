@@ -30,6 +30,8 @@ export default StyleSheet.create({
     borderRadius: IS_IOS ? 6 : 0,
     borderTopLeftRadius: 6,
     borderTopRightRadius: 6,
+    borderBottomLeftRadius: 6,
+    borderBottomRightRadius: 6,
     opacity: 1
   },
   titleCardArrow: {
@@ -37,7 +39,10 @@ export default StyleSheet.create({
     borderRadius: IS_IOS ? 6 : 0,
     borderTopLeftRadius: 6,
     borderTopRightRadius: 6,
-    width: itemWidth
+    borderBottomLeftRadius: 6,
+    borderBottomRightRadius: 6,
+    width: itemWidth,
+    height: null
   },
   titleCardBox: {
     flexDirection: 'row',
