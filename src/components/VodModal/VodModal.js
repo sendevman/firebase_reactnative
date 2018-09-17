@@ -1,9 +1,3 @@
-/**
- * Conexus-Tech - Retail Companion AT&T
- * https://conexustech.com/
- * @flow
- */
-
 import React, { Component } from 'react';
 import { Image, Modal, Text, TouchableOpacity, View } from 'react-native';
 import Spinkit from 'react-native-spinkit';
@@ -25,6 +19,8 @@ class VodModal extends Component {
     super(props);
 
     this.state = {
+      fullScreen: false,
+      showFullScreenBtn: false,
       canStop: false,
       notPlaying: true,
       pauseVideo: true,
@@ -48,8 +44,9 @@ class VodModal extends Component {
   setVodPlayerInfo(snapshot) {
     let playerData = snapshot.val();
 
-    if (playerData.floor_id !== this.props.location.floor_id) this.setState({ playerInfo: {} });
-    else this.setState({ playerInfo: playerData });
+    // if (playerData.floor_id !== this.props.location.floor_id) this.setState({ playerInfo: {} });
+    // else this.setState({ playerInfo: playerData });
+    this.setState({ playerInfo: playerData });
     if (playerData.status === "available") this.setState({ canStop: false, notPlaying: true });
   }
 
@@ -66,7 +63,7 @@ class VodModal extends Component {
   }
 
   _onWatchTrailer() {
-    this.setState({ pauseVideo: false, showVideo: true });
+    this.setState({ pauseVideo: false, showFullScreenBtn: true, showVideo: true });
     this.eventlog('device');
   }
 
@@ -93,13 +90,18 @@ class VodModal extends Component {
     this.setState({ canStop: false, notPlaying: true });
   }
 
+  _onFullScreen(prevState) {
+    this.setState({ fullScreen: !prevState });
+  }
+
   renderContent() {
     const { location, vodInfo } = this.props;
-    const { canStop, notPlaying, playerInfo } = this.state;
+    const { canStop, fullScreen, notPlaying, playerInfo, showFullScreenBtn } = this.state;
 
     let locationValid = (typeof location != 'undefined' && Object.keys(location).length !== 0 && location.constructor === Object);
-    let inAttStore = (locationValid && typeof location.floor_id != 'undefined' && location.floor_id === playerInfo.floor_id);
+    let inAttStore = true; // (locationValid && typeof location.floor_id != 'undefined' && location.floor_id === playerInfo.floor_id);
     let playerAvailable = (playerInfo.status === "available") ? true : false;
+    let fullScreenStyle = fullScreen ? styles.fullScreenStyle : styles.normalScreenStyle;
 
     return (
       <View style={styles.containerDetail}>
@@ -120,31 +122,38 @@ class VodModal extends Component {
               }}
               onEnd={() => {
                 // Callback when playback finishes
-                this.setState({ pauseVideo: true, showSpinkit: false, showVideo: false });
+                this.setState({ fullScreen: false, showFullScreenBtn: false, pauseVideo: true, showSpinkit: false, showVideo: false });
               }}
               onError={() => {
                 // Callback when video cannot be loaded
-                this.setState({ pauseVideo: true, showSpinkit: false, showVideo: false });
+                this.setState({ fullScreen: false, showFullScreenBtn: false, pauseVideo: true, showSpinkit: false, showVideo: false });
               }}
               resizeMode="cover"
-              style={[styles.backgroundVideo, { opacity: this.state.showVideo ? 1 : 0 }]} />
+              style={[styles.backgroundVideo, { opacity: this.state.showVideo ? 1 : 0 }, fullScreenStyle]} />
             <Spinkit style={styles.spinner} isVisible={this.state.showSpinkit} type={'Circle'} color={'#1181FF'} size={30} />
 
             <Image style={[styles.detailImg, { opacity: !this.state.showVideo ? 1 : 0 }]} resizeMode={Image.resizeMode.cover} source={{ uri: vodInfo.imgDetailUrl }} />
+
+            { showFullScreenBtn &&
+              <TouchableOpacity style={[styles.fullScreenBtn, { right: fullScreen ? -13 : 2 }]} onPress={() => this._onFullScreen(fullScreen)} activeOpacity={0.4}>
+                {!fullScreen && <Icon name="ToFullScreen" width="18" height="18" viewBox="0 0 357 357" />}
+                {fullScreen && <Icon name="ToFullScreenExit" width="18" height="18" viewBox="0 0 357 357" />}
+              </TouchableOpacity>
+            }
           </View>
-          <Text numberOfLines={1} style={styles.detailTitle}>{vodInfo.detailTitle}</Text>
-          <Text numberOfLines={1} style={styles.detailSubTitle}>{vodInfo.detailSubtitle}</Text>
-          <Text numberOfLines={6} style={styles.detailDescription}>{vodInfo.detailDescription}</Text>
+          { !fullScreen && <Text numberOfLines={1} style={styles.detailTitle}>{vodInfo.detailTitle}</Text> }
+          { !fullScreen && <Text numberOfLines={1} style={styles.detailSubTitle}>{vodInfo.detailSubtitle}</Text> }
+          { !fullScreen && <Text numberOfLines={6} style={styles.detailDescription}>{vodInfo.detailDescription}</Text> }
         </View>
 
-        { inAttStore &&
+        { (!fullScreen && inAttStore) &&
           <TouchableOpacity style={styles.watchBtn} onPress={() => this._onWatchTrailer()} activeOpacity={0.4}>
             <Image style={styles.watchBtnIcon} source={require('../../assets/images/files/playButton.png')} />
             <Text style={styles.watchBtnText}>Watch trailer</Text>
           </TouchableOpacity>
         }
 
-        { (inAttStore && notPlaying) &&
+        { (!fullScreen && inAttStore && notPlaying) &&
           <TouchableOpacity disabled={!playerAvailable} style={styles.watchBigScreenBtn} onPress={() => this._onWatchBigScreen(vodInfo.mediaURL)} activeOpacity={0.4}>
             <Icon name="Panorama" width="26" height="26" viewBox="0 0 24 24" fill={playerAvailable ? "#FFF" : "#CF2A2A"} />
             <Text style={[styles.watchBtnText, { textDecorationLine: 'underline', color: playerAvailable ? "#FFF" : "#CF2A2A" }]}>Watch on the big screen</Text>
@@ -183,7 +192,7 @@ class VodModal extends Component {
           <View style={styles.headerBox}>
             <TouchableOpacity onPress={() => {
               this._onStopVideo();
-              this.setState({ pauseVideo: true, showSpinkit: false, showVideo: false });
+              this.setState({ fullScreen: false, showFullScreenBtn: false, pauseVideo: true, showSpinkit: false, showVideo: false });
               this.props.onHideModal(); }} style={styles.headerBtn}>
               <Icon name="CloseXWhite" width="14" height="14" viewBox="0 0 14 14" />
             </TouchableOpacity>

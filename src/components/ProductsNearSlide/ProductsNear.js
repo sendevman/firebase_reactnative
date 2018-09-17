@@ -112,8 +112,8 @@ class ProductsNear extends Component {
             <Image style={styles.bgImage} source={{ uri: areaData.titleCard.img }} />
 
             <Animated.Image
-              style={[styles.titleCardArrow, { height: itemBoxHeight }]}
-              resizeMode={Image.resizeMode.center}
+              style={styles.titleCardArrow}
+              resizeMode={Image.resizeMode.cover}
               source={ require("../../assets/images/files/titleCardArrow.png") } />
 
             <TouchableOpacity onPress={this.props.zone}>

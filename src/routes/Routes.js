@@ -89,7 +89,7 @@ const BottomTabNav = createBottomTabNavigator(
     Products: {
       screen: ProductLayout,
       navigationOptions: {
-        title: 'Shopping',
+        title: 'Discover',
         tabBarIcon: ({ tintColor }) => {
           if (tintColor === "#3E3F42")
             return <Icon name="ProductsUnFill" width="23" height="18" viewBox="0 0 23 18" />;
@@ -110,7 +110,7 @@ const BottomTabNav = createBottomTabNavigator(
     ExclusiveVod: {
       screen: VodLayout,
       navigationOptions: {
-        title: 'Exclusive VOD',
+        title: 'Entertainment',
         tabBarIcon: ({ tintColor }) => {
           if (tintColor === "#3E3F42")
             return <Icon name="ExclusiveVodUnFill" width="22" height="18" viewBox="0 0 22 18" />;
@@ -189,7 +189,7 @@ const DrawerNav = createDrawerNavigator(
     }
   },
   {
-    initialRouteName: 'OnBoarding',
+    initialRouteName: 'Shopping',
     contentOptions: {
       activeTintColor: '#1181FF',
       activeBackgroundColor: '#EEF1F4',

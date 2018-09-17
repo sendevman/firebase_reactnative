@@ -158,5 +158,31 @@ export default StyleSheet.create({
     position: 'absolute',
     top: ((width * 0.5)/2) - 5,
     left: ((width - 30)/2) - 15
+  },
+  // - - Full Screen Video - -
+  normalScreenStyle: {
+    height: width * 0.5,
+    width: width - 30
+  },
+  fullScreenStyle: {
+    width: width,
+    height: width * 0.55,
+    marginLeft: -15,
+    borderRadius: 0,
+    top: 0,
+    left: 0
+  },
+  fullScreenBtn: {
+    position: 'absolute',
+    top: 10,
+    width: 24,
+    height: 24,
+    backgroundColor: '#2E2F32',
+    borderWidth: 1,
+    borderStyle: 'solid',
+    borderColor: 'rgba(255, 255, 255, 0.12)',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 });
