@@ -87,7 +87,7 @@ export default StyleSheet.create({
   },
   colorTitle: {
     height: 28,
-    width: 50,
+    width: 52,
     color: '#3E3F42',
     // fontFamily: 'Roboto',
     fontSize: 12,

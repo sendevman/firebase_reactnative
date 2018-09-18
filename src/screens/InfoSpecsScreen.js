@@ -110,11 +110,11 @@ class InfoSpecsScreen extends Component {
         <View style={[{ paddingBottom: 20, paddingTop: 20 }]}>
           {/* <Icon name="Heading_colors" width={viewWidth} height={viewWidth / 1080 * 210} fill="#1181FF" viewBox="0 0 1080 210" style={{ marginLeft: 6 }} /> */}
           <Image style={[styles.colorBackground, {width : viewWidth, height: viewWidth*610/1080, marginLeft: 6,}]} source={require('../assets/images/files/color.png')}/>
-          <View style={[styles.colorItemBox, { width: viewWidth, marginLeft: 6, marginTop: -viewWidth / 1080 * (610-210)}]}>
+          <View style={[styles.colorItemBox, { width: viewWidth, marginLeft: 6, marginTop: -viewWidth / 1080 * (610-200)}]}>
             {colors.map((item, index) => {
               return (
                 <View key={index} style={styles.colorItem}>
-                  <Image style={styles.colorImage} source={{ uri: item.img }} />
+                  <Image style={styles.colorImage} resizeMode={Image.resizeMode.contain} source={{ uri: item.img }} />
                   <Text style={styles.colorTitle}>{item.name}</Text>
                 </View>
               );
