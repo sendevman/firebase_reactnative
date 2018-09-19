@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Svg, { Rect } from 'react-native-svg';
+import firebase from 'react-native-firebase';
 import { connect } from 'react-redux';
 
 // My Styles
@@ -50,15 +51,31 @@ class VodScreen extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { vodInfo: {}, showModal: false };
+    this.state = { vodInfo: {}, showModal: false, superLumensUrl: "" };
+  }
+
+  componentDidMount() {
+    firebase.database().ref('storeData/superLumensUrl').once('value')
+    .then((snapshot) => { this.setState({ superLumensUrl: snapshot.val() }); });
+  }
+
+  setSuperLumensUrl(item) {
+    return item.mediaURL.replace('https://firebasestorage.googleapis.com', this.state.superLumensUrl);
   }
 
   getVodInfo(itemId, categoryId) {
     const { featured, fullList } = this.props;
 
-    if (itemId == "featured") return featured;
+    if (itemId == "featured") {
+      featured.superLumensUrl = this.setSuperLumensUrl(featured);
+      return featured;
+    }
+
     let selectedCategory = fullList.filter((obj) => { return (obj.type === categoryId); })[0];
-    return selectedCategory.items.filter((obj) => { return (obj.id === itemId); })[0];
+    // return selectedCategory.items.filter((obj) => { return (obj.id === itemId); })[0];
+    let vodInfoPivot = selectedCategory.items.filter((obj) => { return (obj.id === itemId); })[0];
+    vodInfoPivot.superLumensUrl = this.setSuperLumensUrl(vodInfoPivot);
+    return vodInfoPivot;
   }
 
   hideModal = () => { this.setState({ vodInfo: {}, showModal: false }); }
