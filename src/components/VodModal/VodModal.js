@@ -57,6 +57,10 @@ class VodModal extends Component {
     return mediaURL;
   }
 
+  inStore() {
+    return (this.props.network.connectionType == "wifi" && this.props.network.ssid == this.state.storeData.ssid);
+  }
+
   eventlog(method) {
     console.log("log event ======= : ", {"pFirebaseId":this.props.firebaseid, "pVodContentTitle":this.props.vodInfo.title, "pVodContentUrl":this.props.vodInfo.mediaURL, "pVodContentType":this.props.vodInfo.categoryName, "pVodViewedOn":method});
     firebase.analytics().logEvent("vodPlayed", {"pFirebaseId":this.props.firebaseid, "pVodContentTitle":this.props.vodInfo.title, "pVodContentUrl":this.props.vodInfo.mediaURL, "pVodContentType":this.props.vodInfo.categoryName, "pVodViewedOn":method});
@@ -72,7 +76,7 @@ class VodModal extends Component {
       firebase_id: "JxdUhtSKlGZzcwr9E2myvZ8CNKo2", // Place Auth User ID.
       floor_id_app: this.props.location.floor_id,
       status: "play",
-      url: this.getNewMediaUrl(mediaURL)
+      url: mediaURL
     });
 
     this.setState({ canStop: true, notPlaying: false });
@@ -94,6 +98,8 @@ class VodModal extends Component {
     this.setState({ fullScreen: !prevState });
   }
 
+  isEmpty(str) { return (!str || !str.trim() || 0 === str.length); }
+
   renderContent() {
     const { location, vodInfo } = this.props;
     const { canStop, fullScreen, notPlaying, playerInfo, showFullScreenBtn } = this.state;
@@ -102,13 +108,14 @@ class VodModal extends Component {
     let inAttStore = true; // (locationValid && typeof location.floor_id != 'undefined' && location.floor_id === playerInfo.floor_id);
     let playerAvailable = (playerInfo.status === "available") ? true : false;
     let fullScreenStyle = fullScreen ? styles.fullScreenStyle : styles.normalScreenStyle;
+    let videoSource = this.inStore() ? (this.isEmpty(vodInfo.superLumensUrl) ? vodInfo.mediaURL : vodInfo.superLumensUrl) : vodInfo.mediaURL;
 
     return (
       <View style={styles.containerDetail}>
         <View style={styles.detailBox}>
           <View style={styles.imgAndVideoBox}>
             <Video
-              source={{ uri: vodInfo.mediaURL }}
+              source={{ uri: videoSource }}
               ref={(ref) => { this.player = ref }} // Store reference
               paused={this.state.pauseVideo}
               repeat={true}
