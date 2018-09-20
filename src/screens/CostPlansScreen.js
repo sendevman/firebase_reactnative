@@ -96,18 +96,20 @@ class CostPlansScreen extends Component {
           <View style={styles.hrDivider}></View>
           <Text style={styles.titleDivider}>Device options</Text>
 
-          <View style={styles.storageBox}>
-            {
-              deviceOptions.map((item, index) => {
-                return (
-                  <View key={index} style={styles.storageItem}>
-                    <Text style={styles.storageGB}>{item.storage}GB</Text>
-                    <Text style={styles.storagePrice}>${item.price}</Text>
-                  </View>
-                );
-              })
-            }
-          </View>
+          <ScrollView horizontal={true} contentContainerStyle={styles.storageScrollViewBox}>
+            <View style={styles.storageBox}>
+              {
+                deviceOptions.map((item, index) => {
+                  return (
+                    <View key={index} style={styles.storageItem}>
+                      <Text style={styles.storageGB}>{item.storage}GB</Text>
+                      <Text style={styles.storagePrice}>${item.price}</Text>
+                    </View>
+                  );
+                })
+              }
+            </View>
+          </ScrollView>
 
           {/* {isAvailable &&
             <View style={styles.sdCardBox}>

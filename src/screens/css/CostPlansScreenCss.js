@@ -132,6 +132,7 @@ export default StyleSheet.create({
     lineHeight: 17
   },
   // - - Storage Box - -
+  storageScrollViewBox: {},
   storageBox: {
     marginTop: 15,
     flex: 1,
@@ -142,12 +143,13 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     height: 65,
-    minWidth: '48%',
+    minWidth: (width - 20) * 0.48,
     borderWidth: 1,
     borderStyle: 'solid',
     borderColor: '#E3E9EF',
     borderRadius: 6,
-    backgroundColor: '#FFFFFF'
+    backgroundColor: '#FFFFFF',
+    marginHorizontal: (width - 20) * 0.01
   },
   storageGB: {
     color: '#3E3F42',
