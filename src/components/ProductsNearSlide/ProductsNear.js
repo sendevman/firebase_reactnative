@@ -27,9 +27,9 @@ class ProductsNear extends Component {
     super(props);
 
     this.state = { sliderActiveSlide: 0 };
-  };
+  }
 
-  _renderItem ({item, index}) {
+  _renderItem({item, index}) {
     const { areaData, currentProducts } = this.props;
 
     const getProduct = (productId) => {
@@ -161,7 +161,7 @@ class ProductsNear extends Component {
               </Animated.View>
 
               <Animated.View style={[ btnBox ]}>
-                <ButtonCompare />
+                <ButtonCompare onGoToCompareBtn={() => this.props.onGoToCompare()} />
               </Animated.View>
             </View>
           </Animated.View>
