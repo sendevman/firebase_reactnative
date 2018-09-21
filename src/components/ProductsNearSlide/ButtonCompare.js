@@ -29,16 +29,7 @@ class ButtonCompare extends Component<props> {
           lineHeight: 17
         }}
         buttonStyle={{ paddingTop: 10, paddingBottom: 9 }}
-        onPress={() => Alert.alert(
-          'Alert Title',
-          'Go To Compare',
-          [
-            {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
-            {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-            {text: 'OK', onPress: () => console.log('OK Pressed')},
-          ],
-          { cancelable: false }
-        )}
+        onPress={() => this.props.onGoToCompareBtn()}
       />
     );
   }
