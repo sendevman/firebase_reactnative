@@ -216,7 +216,8 @@ class ProductLayoutScreen extends Component {
           animatedValue={this.state.animatedValue}
           onProductIdChange={productId => this.setCurrentProduct(productId)}
           currentProducts={productsNear}
-          zone={this.zone.bind(this)} />
+          zone={this.zone.bind(this)}
+          onGoToCompare={() => this.props.navigation.navigate('Compare')} />
 
         <Animated.View style={{ width: '100%', height: height - 174 }}>
           <RoutesProducts onScrollLayout={this.state.animatedValue} />
