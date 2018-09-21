@@ -111,7 +111,8 @@ class CompareModal extends Component {
   renderProductList() {
     const { productsNear } = this.props;
     const allItems = this.searchItems(productsNear);
-    const items = allItems.map((obj) => { return { key: obj.id, fullName: obj.manufacture + " " + obj.model, data: [''] }})
+    let allItemsWithoutEmpty = allItems.filter(item => { return (typeof item != "undefined" && Object.keys(item).length !== 0); });
+    const items = allItemsWithoutEmpty.map((obj) => { return { key: obj.id, fullName: obj.manufacture + " " + obj.model, data: [''] }})
 
     if (typeof items != "undefined" && items.length > 0) {
       return (
