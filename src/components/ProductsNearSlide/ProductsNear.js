@@ -202,7 +202,7 @@ class ProductsNear extends Component {
               layout={'default'}
               onSnapToItem={index => {
                 this.setState({ sliderActiveSlide: index });
-                index === 0 ? null : this.props.onProductIdChange(areaData.products[index]);
+                index === 0 ? this.props.onFirstSelect() : this.props.onProductIdChange(areaData.products[index]);
               }} />
 
             <Pagination
