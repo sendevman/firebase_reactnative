@@ -23,7 +23,7 @@ import FeedbackSurvey from './components/FeedbackSurvey';
 // My Routes
 import RoutesAccessories from '../routes/Accessories';
 
-var { width } = Dimensions.get('window');
+var { width, height } = Dimensions.get('window');
 
 const getWidth = (number) => {
   return ((width - 20) - number);
@@ -109,8 +109,8 @@ class InfoSpecsScreen extends Component {
       return (
         <View style={[{ paddingBottom: 20, paddingTop: 20 }]}>
           {/* <Icon name="Heading_colors" width={viewWidth} height={viewWidth / 1080 * 210} fill="#1181FF" viewBox="0 0 1080 210" style={{ marginLeft: 6 }} /> */}
-          <Image style={[styles.colorBackground, {width : viewWidth, height: viewWidth*610/1080, marginLeft: 6,}]} source={require('../assets/images/files/color.png')}/>
-          <View style={[styles.colorItemBox, { width: viewWidth, marginLeft: 6, marginTop: -viewWidth / 1080 * (610-200)}]}>
+          <Image style={[styles.colorBackground, { width: viewWidth, height: viewWidth * 610 / 1080, marginLeft: 6, }]} source={require('../assets/images/files/color.png')} />
+          <View style={[styles.colorItemBox, { width: viewWidth, marginLeft: 6, marginTop: -viewWidth / 1080 * (610 - 200) }]}>
             {colors.map((item, index) => {
               return (
                 <View key={index} style={styles.colorItem}>
@@ -135,8 +135,8 @@ class InfoSpecsScreen extends Component {
         <View style={{ paddingBottom: 10 }}>
           {/* <Icon name="Heading_display" width={viewWidth} height={viewWidth / 1080 * 210} fill="#1181FF" viewBox="0 0 1080 210" style={{ marginLeft: 6 }} /> */}
 
-          <Image style={[styles.colorBackground, {width : viewWidth, height: viewWidth*410/1080, marginLeft: 6,}]} source={require('../assets/images/files/display.png')}/>
-          <View style={[styles.storageBox, { width: viewWidth-1, marginLeft: 6, marginTop:-viewWidth / 1080 * (410-210)}]}>
+          <Image style={[styles.colorBackground, { width: viewWidth, height: viewWidth * 410 / 1080, marginLeft: 6, }]} source={require('../assets/images/files/display.png')} />
+          <View style={[styles.storageBox, { width: viewWidth - 1, marginLeft: 6, marginTop: -viewWidth / 1080 * (410 - 210) }]}>
             <View style={styles.displaySizeItem}>
               <View style={styles.displaySizeHr}></View>
               <Text style={styles.displaySize}>{display.size}"</Text>
@@ -162,8 +162,8 @@ class InfoSpecsScreen extends Component {
         <View style={{ paddingBottom: 0 }}>
           <View style={styles.hrDivider}></View>
           {/* <Icon name="Heading_camera" width={viewWidth} height={viewWidth / 1080 * 315} fill="#1181FF" viewBox="0 0 1080 315" style={{ marginLeft: 6 }} /> */}
-          <Image style={[styles.colorBackground, {width : viewWidth, height: viewWidth*490/1080, marginLeft: 6,}]} source={require('../assets/images/files/camera.png')}/>
-         
+          <Image style={[styles.colorBackground, { width: viewWidth, height: viewWidth * 490 / 1080, marginLeft: 6, }]} source={require('../assets/images/files/camera.png')} />
+
           {(Object.keys(front).length !== 0 || Object.keys(rear).length !== 0) &&
             <View style={styles.cameraBox}>
               {Object.keys(front).length !== 0 &&
@@ -182,8 +182,8 @@ class InfoSpecsScreen extends Component {
             </View>
           }
           {(features && features.length > 0) &&
-            <View style={[styles.storageBox, { width: viewWidth, marginLeft: 6, marginTop:-viewWidth / 1080 * (490-315), marginBottom: 10 }]}>
-              <Text numberOfLines={0} style={[styles.cameraText, { maxWidth: '80%', textAlign: 'left', marginBottom: 10, marginTop: 6 }]}>{featuretext}</Text>
+            <View style={[styles.storageBox, { width: viewWidth, marginLeft: 6, marginTop: -viewWidth / 1080 * (490 - 315), marginBottom: 10 }]}>
+              <Text numberOfLines={0} style={[styles.cameraText, { maxWidth: '88%', textAlign: 'left', marginBottom: 10, marginTop: 6 }]}>{featuretext}</Text>
             </View>
           }
         </View>
@@ -212,8 +212,8 @@ class InfoSpecsScreen extends Component {
         <View style={styles.hrDivider}></View>
         {/* <Text style={styles.titleDivider}>Performance & Storage</Text>  */}
         {/* <Icon name="Heading_performance" width={viewWidth} height={viewWidth / 1080 * 210} fill="#1181FF" viewBox="0 0 1080 210" style={{ marginLeft: 6 }} /> */}
-        <Image style={[styles.colorBackground, {width : viewWidth, height: viewWidth*210/1080, marginLeft: 6,}]} source={require('../assets/images/files/performance.png')}/>
-         
+        <Image style={[styles.colorBackground, { width: viewWidth, height: viewWidth * 210 / 1080, marginLeft: 6, }]} source={require('../assets/images/files/performance.png')} />
+
 
         {(!memoryEmpty || !processorEmpty) &&
           <View style={[styles.performanceStorageBox, changeStyle ? { marginBottom: 4 } : {}]}>
@@ -286,9 +286,9 @@ class InfoSpecsScreen extends Component {
           <View style={styles.hrDivider}></View>
           {/* <Text style={styles.titleDivider}>Battery</Text> */}
           {/* <Icon name="Heading_battery" width={viewWidth} height={viewWidth / 1080 * 210} fill="#1181FF" viewBox="0 0 1080 210" style={{ marginLeft: 6 }} /> */}
-          <Image style={[styles.colorBackground, {width : viewWidth, height: viewWidth*670/1080, marginLeft: 6,}]} source={require('../assets/images/files/battery.png')}/>
-         
-          <View style={[styles.featuresBox, styles.expandableBox, { width: viewWidth, marginLeft: 6, marginTop:-viewWidth / 1080 * (670 - 210) }]}>
+          <Image style={[styles.colorBackground, { width: viewWidth, height: viewWidth * 670 / 1080 + 30, marginLeft: 6, }]} source={require('../assets/images/files/battery.png')} />
+
+          <View style={[styles.featuresBox, styles.expandableBox, { width: viewWidth, marginLeft: 6, marginTop: -viewWidth / 1080 * (670 - 210) - 30 }]}>
             {!batteryLifeEmpty &&
               <View style={styles.featureBox}>
                 {!talkTimeEmpty &&
@@ -374,7 +374,28 @@ class InfoSpecsScreen extends Component {
 
   renderContent() {
     const { infoSpecs } = this.props;
-    const viewWidth = width-34;
+    const viewWidth = width - 34;
+    const isTitle = infoSpecs.title === "title" ? true : false;
+    if (isTitle) {
+      return (
+        <View style={{
+          width: width,
+          height: height,
+          backgroundColor: 'black'}}>
+          <Image
+            style={{
+              backgroundColor: '#ccc',
+              flex: 1,
+              position: 'absolute',
+              width: '100%',
+              height: '100%',
+              justifyContent: 'center',
+            }}
+            source={require('../assets/images/files/backgroundHD.png')}
+          />
+        </View>
+      );
+    }
 
     if (Object.keys(infoSpecs).length === 0 && infoSpecs.constructor === Object) {
       return (<InfoSpecsSkeleton />);
@@ -396,7 +417,7 @@ class InfoSpecsScreen extends Component {
 
             {this.renderOffer()}
 
-            <View style={[styles.descriptionItemBox, { width: viewWidth , marginLeft: 6 }]}>
+            <View style={[styles.descriptionItemBox, { width: viewWidth, marginLeft: 6 }]}>
               <Text style={[styles.description, { width: viewWidth - 30 }]}>
                 {infoSpecs.description}
               </Text>
@@ -430,8 +451,8 @@ class InfoSpecsScreen extends Component {
     return (
       <View>
         {/* <Icon name="Heading_accessories" width={viewWidth} height={viewWidth / 1080 * 210} fill="#1181FF" viewBox="0 0 1080 210" style={{ marginLeft: 6 }} /> */}
-        <View style={[styles.accessoriesBackground1, {width : viewWidth, marginLeft: 6}]}>
-          <Image style={[styles.accessoriesBackground, {width : viewWidth, height: viewWidth*210/1080, marginLeft: 0}]} source={require('../assets/images/files/accessories.png')}/>
+        <View style={[styles.accessoriesBackground1, { width: viewWidth, marginLeft: 6, marginTop: 10 }]}>
+          <Image style={[styles.accessoriesBackground, { width: viewWidth, height: viewWidth * 210 / 1080, marginLeft: 0 }]} source={require('../assets/images/files/accessories.png')} />
         </View>
         <View style={[styles.accessoriesBox, { width: viewWidth }]}>
           {<RoutesAccessories />}
@@ -457,12 +478,12 @@ class InfoSpecsScreen extends Component {
           [{ nativeEvent: { contentOffset: { y: this.props.onScrollCustom } } }],
           {
             /*useNativeDriver: true*//*,
-            listener: event => {
-              const offsetY = event.nativeEvent.contentOffset.y
-              this.props.onScrollCustom(offsetY);
-            }* /
-          }
-        )}*/
+listener: event => {
+  const offsetY = event.nativeEvent.contentOffset.y
+  this.props.onScrollCustom(offsetY);
+}* /
+}
+)}*/
         onScrollEndDrag={this._onScrollEndSnapToEdge}
       >
         {this.renderContent()}

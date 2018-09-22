@@ -414,7 +414,7 @@ class Routes extends Component {
       } else {
         if (e.data !== "") {
           locationdata = JSON.parse(e.data);
-          if (locationdata.zone_id === null) zone_id = -1;
+          if (locationdata.zone_id === null) {}//zone_id = -1;
           else zone_id = locationdata.zone_id;
 
           if (zoneData.length > 5) zoneData.shift();
