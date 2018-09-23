@@ -349,7 +349,7 @@ class CostPlansScreen extends Component {
               position: 'absolute',
               width: '100%',
               height: '100%',
-              justifyContent: 'center',
+              justifyContent: 'flex-start',
             }}
             source={require('../assets/images/files/backgroundHD.png')}
           />
