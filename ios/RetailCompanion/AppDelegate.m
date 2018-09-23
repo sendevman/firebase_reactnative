@@ -67,4 +67,8 @@
     //Bluetooth is disabled. ios pops-up an alert automatically
   }
 }
+- (void) applicationDidFinishLaunching:(UIApplication *)application
+{
+  [NSThread sleepForTimeInterval:3.0];
+}
 @end
