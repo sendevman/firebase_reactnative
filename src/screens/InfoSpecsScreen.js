@@ -354,14 +354,14 @@ class InfoSpecsScreen extends Component {
               <View style={styles.chagingTypeBox}>
                 {life.chargingWired &&
                   <View style={styles.chagingItemBox}>
-                    <Icon name="WiredCharging" width="34" height="34" viewBox="0 0 34 34" />
+                    <Icon name="WiredCharging" width="30" height="30" viewBox="0 0 34 34" />
                     <Text style={styles.chagingItemText}>Wired charging</Text>
                   </View>
                 }
 
                 {life.chargingWireless &&
                   <View style={styles.chagingItemBox}>
-                    <Icon name="WifiCharging" width="45" height="26" viewBox="0 0 45 26" />
+                    <Icon name="WifiCharging" width="40" height="23" viewBox="0 0 45 26" />
                     <Text style={styles.chagingItemText}>Wireless charging</Text>
                   </View>
                 }
@@ -415,7 +415,6 @@ class InfoSpecsScreen extends Component {
             source={require('../assets/images/files/backgroundHD.png')}
           />
           <View style={styles.infoSpecBox}>
-
             {this.renderOffer()}
 
             <View style={[styles.descriptionItemBox, { width: viewWidth, marginLeft: 6 }]}>

@@ -146,7 +146,7 @@ class VodScreen extends Component {
 
   render() {
     return (
-      <LinearGradient colors={['#2b3748', '#43597D']} style={styles.linearGradient}>
+      <LinearGradient colors={['#000', '#000']} style={styles.linearGradient}>
         { this.renderContent() }
 
         <VodModal onHideModal={this.hideModal} showModal={this.state.showModal} vodInfo={this.state.vodInfo} />
