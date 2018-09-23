@@ -466,7 +466,6 @@ class Routes extends Component {
   }
 
   render() {
-    console.log("====---=====", cPassed);
     const ispass = this.state.ispass;
     return (
       ispass ? <DrawerNav /> : <DrawerNav1 />
