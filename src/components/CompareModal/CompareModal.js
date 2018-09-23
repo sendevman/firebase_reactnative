@@ -102,7 +102,9 @@ class CompareModal extends Component {
         let fullName = (obj.manufacture + " " + obj.model).toLowerCase();
         return fullName.indexOf(this.state.searchText) > -1;
       });
-    } else { return this.props.productsNear; }
+    } else { return this.props.productsNear.filter(item => {
+      if(item.title === "title") return false;
+      return (typeof item != "undefined" && Object.keys(item).length !== 0); }); }
   }
 
   renderProductItem(section) {
