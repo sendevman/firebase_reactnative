@@ -5,7 +5,7 @@
  */
 
 import React, { Component } from 'react';
-import { Animated, ScrollView, Text, TouchableWithoutFeedback, View, Image } from 'react-native';
+import { Animated, ScrollView, Text, TouchableWithoutFeedback, View, Image, Dimensions } from 'react-native';
 import Svg, { Rect } from 'react-native-svg';
 import moment from 'moment';
 import firebase from 'react-native-firebase';
@@ -19,6 +19,7 @@ import Icon from '../assets/images/Icon';
 import SkeletonLoading from './components/SkeletonLoading';
 import FeedbackSurvey from './components/FeedbackSurvey';
 
+var { width, height } = Dimensions.get('window');
 // My Routes
 import RoutesAccessories from '../routes/Accessories';
 
@@ -334,6 +335,27 @@ class CostPlansScreen extends Component {
     let showPlans = viewMorePlans;
     let costplansEmpty = ((typeof costplans == "undefined") || (Object.keys(costplans).length === 0 && costplans.constructor === Object));
 
+    const isTitle = costplans.title === "title" ? true : false;
+    if (isTitle) {
+      return (
+        <View style={{
+          width: width,
+          height: height,
+          backgroundColor: 'black'}}>
+          <Image
+            style={{
+              backgroundColor: '#ccc',
+              flex: 1,
+              position: 'absolute',
+              width: '100%',
+              height: '100%',
+              justifyContent: 'center',
+            }}
+            source={require('../assets/images/files/backgroundHD.png')}
+          />
+        </View>
+      );
+    }
     if (Object.keys(costplans).length === 0 && costplans.constructor === Object) {
       return (<CostPlansSkeleton />);
     } else {
