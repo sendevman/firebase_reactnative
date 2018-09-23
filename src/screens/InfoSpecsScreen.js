@@ -157,7 +157,8 @@ class InfoSpecsScreen extends Component {
 
     if (typeof camera != "undefined" && (Object.keys(camera).length !== 0 && camera.constructor === Object)) {
       const { features, front, rear } = camera;
-      const featuretext = this.makeCameraFeatureTest(features);
+      const featuretext = features.join(' | ');
+
       return (
         <View style={{ paddingBottom: 0 }}>
           <View style={styles.hrDivider}></View>
@@ -255,7 +256,7 @@ class InfoSpecsScreen extends Component {
               <View style={styles.storageBlueBox}>
                 <Icon name="SDCardBackground" width="135" height="90" fill="#FFFFFFBB" viewBox="0 0 270 180" />
                 <Text style={styles.storageBlueTitle}>STORAGE</Text>
-                <Text style={styles.storageBlueText}>{deviceOptions.map((obj) => { return `${obj.storage}Gb` }).join(' or ')}</Text>
+                <Text style={[styles.storageBlueText, { fontSize: (deviceOptions.length < 3 ? 14 : 12) }]}>{deviceOptions.map((obj) => { return `${obj.storage}Gb` }).join(' | ')}</Text>
               </View>
             }
           </View>
