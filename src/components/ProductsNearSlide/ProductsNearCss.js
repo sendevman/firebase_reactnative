@@ -56,7 +56,7 @@ export default StyleSheet.create({
     fontWeight: 'bold',
     lineHeight: 14,
     marginVertical: 10,
-    paddingHorizontal: 14
+    paddingHorizontal: 10
   },
   titleCard: {
     color: '#009FDB',
@@ -97,7 +97,8 @@ export default StyleSheet.create({
     height: '100%',
     maxWidth: 400,
     width: '100%',
-    padding: 8,
+    paddingVertical: 8,
+    paddingHorizontal: 4,
     borderRadius: 6,
     justifyContent: 'center',
     flexDirection: 'column',

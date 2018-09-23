@@ -221,7 +221,7 @@ class ProductsNear extends Component {
           <View style={[styles.itemContainer, { maxHeight: 202, width: itemWidth, marginHorizontal: (viewportWidth - itemWidth) / 2 }]}>
             { areaDataEmpty &&
               <TouchableOpacity style={styles.loadingBox} onPress={this.props.zone}>
-                <Text style={styles.title}>Tap to search for products near you</Text>
+                <Text style={styles.title}>Explore the store and we will show you what’s near</Text>
               </TouchableOpacity>
             }
             { !areaDataEmpty &&
