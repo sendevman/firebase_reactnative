@@ -85,7 +85,7 @@ class CostPlansScreen extends Component {
 
   renderStorage() {
     const { deviceOptions, expandableStorage } = this.props.costplans;
-    const esIsValid = (typeof expandableStorage == "undefined" || Object.keys(expandableStorage).length === 0) ? false : true;
+    const esIsValid = (typeof expandableStorage == "undefined") ? false : true;// || Object.keys(expandableStorage).length === 0) ? false : true;
 
     var isAvailable = false;
     if (esIsValid) isAvailable = (typeof expandableStorage.available == "undefined") ? false : expandableStorage.available;
@@ -126,8 +126,8 @@ class CostPlansScreen extends Component {
   renderCostNext() {
     const { cost } = this.props.costplans;
 
-    if ((typeof cost == "undefined") || (Object.keys(cost).length === 0 && cost.constructor === Object)) return;
-    if ((typeof cost.next == "undefined") || (Object.keys(cost.next).length === 0 && (cost.next).constructor === Object)) return;
+    if ((typeof cost == "undefined")) return false;// || (Object.keys(cost).length === 0 && cost.constructor === Object)) return;
+    if ((typeof cost.next == "undefined")) return false;// || (Object.keys(cost.next).length === 0 && (cost.next).constructor === Object)) return;
 
     return (
       <View style={[styles.cardBox, { marginTop: 16 }]}>
@@ -163,10 +163,10 @@ class CostPlansScreen extends Component {
   renderCostNextYear() {
     const { cost } = this.props.costplans;
 
-    if ((typeof cost == "undefined") || (Object.keys(cost).length === 0 && cost.constructor === Object)) return;
-    if ((typeof cost.nextEveryYear == "undefined") || (Object.keys(cost.nextEveryYear).length === 0 && (cost.nextEveryYear).constructor === Object)) return;
+    if ((typeof cost == "undefined")) return false;// || (Object.keys(cost).length === 0 && cost.constructor === Object)) return;
+    if ((typeof cost.nextEveryYear == "undefined")) return false;// || (Object.keys(cost.nextEveryYear).length === 0 && (cost.nextEveryYear).constructor === Object)) return;
 
-    let preNextEmpty = ((typeof cost.next == "undefined") || (Object.keys(cost.next).length === 0 && (cost.next).constructor === Object));
+    let preNextEmpty = ((typeof cost.next == "undefined"));// || (Object.keys(cost.next).length === 0 && (cost.next).constructor === Object));
 
     return (
       <View style={[styles.cardBox, { marginTop: preNextEmpty ? 16 : 8 }]}>
@@ -202,11 +202,11 @@ class CostPlansScreen extends Component {
   renderCostNoContract() {
     const { cost } = this.props.costplans;
 
-    if ((typeof cost == "undefined") || (Object.keys(cost).length === 0 && cost.constructor === Object)) return;
-    if ((typeof cost.noContract == "undefined") || (Object.keys(cost.noContract).length === 0 && (cost.noContract).constructor === Object)) return;
+    if ((typeof cost == "undefined")) return false;// || (Object.keys(cost).length === 0 && cost.constructor === Object)) return;
+    if ((typeof cost.noContract == "undefined")) return false;// || (Object.keys(cost.noContract).length === 0 && (cost.noContract).constructor === Object)) return;
 
-    let preNextEmpty = ((typeof cost.next == "undefined") || (Object.keys(cost.next).length === 0 && (cost.next).constructor === Object));
-    let preNextTEmpty = ((typeof cost.nextEveryYear == "undefined") || (Object.keys(cost.nextEveryYear).length === 0 && (cost.nextEveryYear).constructor === Object));
+    let preNextEmpty = ((typeof cost.next == "undefined"));// || (Object.keys(cost.next).length === 0 && (cost.next).constructor === Object));
+    let preNextTEmpty = ((typeof cost.nextEveryYear == "undefined"));// || (Object.keys(cost.nextEveryYear).length === 0 && (cost.nextEveryYear).constructor === Object));
     let newValue = (preNextEmpty && preNextTEmpty) ? 16 : 8;
 
     return (
@@ -273,16 +273,16 @@ class CostPlansScreen extends Component {
     const { insurance } = this.props.costplans;
     const { viewMoreInsurance } = this.state;
 
-    if ((typeof insurance == "undefined") || (Object.keys(insurance).length === 0 && insurance.constructor === Object)) return;
+    if ((typeof insurance == "undefined")) return false;// || (Object.keys(insurance).length === 0 && insurance.constructor === Object)) return;
 
     let mInsurance = insurance.mobileInsurance;
-    let mInsuranceEmpty = ((typeof mInsurance == "undefined") || (Object.keys(mInsurance).length === 0 && mInsurance.constructor === Object));
+    let mInsuranceEmpty = ((typeof mInsurance == "undefined"));// || (Object.keys(mInsurance).length === 0 && mInsurance.constructor === Object));
 
     let mProtection = insurance.mobileProtection;
-    let mProtectionEmpty = ((typeof mProtection == "undefined") || (Object.keys(mProtection).length === 0 && mProtection.constructor === Object));
+    let mProtectionEmpty = ((typeof mProtection == "undefined"));// || (Object.keys(mProtection).length === 0 && mProtection.constructor === Object));
 
     let mProtectionMulti = insurance.mobileProtectionMulit;
-    let mProtectionMultiEmpty = ((typeof mProtectionMulti == "undefined") || (Object.keys(mProtectionMulti).length === 0 && mProtectionMulti.constructor === Object));
+    let mProtectionMultiEmpty = ((typeof mProtectionMulti == "undefined"));// || (Object.keys(mProtectionMulti).length === 0 && mProtectionMulti.constructor === Object));
 
     let viewMoreInsuranceText = viewMoreInsurance ? "- Collapse" : "+ View more plans";
     let showInsurance = viewMoreInsurance;
@@ -333,7 +333,7 @@ class CostPlansScreen extends Component {
 
     let viewMorePlansText = viewMorePlans ? "- Collapse" : "+ View more plans";
     let showPlans = viewMorePlans;
-    let costplansEmpty = ((typeof costplans == "undefined") || (Object.keys(costplans).length === 0 && costplans.constructor === Object));
+    let costplansEmpty = ((typeof costplans == "undefined"));// || (Object.keys(costplans).length === 0 && costplans.constructor === Object));
 
     const isTitle = costplans.title === "title" ? true : false;
     if (isTitle) {
@@ -356,7 +356,8 @@ class CostPlansScreen extends Component {
         </View>
       );
     }
-    if (Object.keys(costplans).length === 0 && costplans.constructor === Object) {
+    if (costplans.constructor === Object) {
+      // if (Object.keys(costplans).length === 0 && costplans.constructor === Object) {
       return (<CostPlansSkeleton />);
     } else {
       return (
@@ -403,7 +404,7 @@ class CostPlansScreen extends Component {
   renderAccessories() {
     const { compatibleAccessories } = this.props.costplans;
 
-    if ((typeof compatibleAccessories == "undefined") || (Object.keys(compatibleAccessories).length === 0 && compatibleAccessories.constructor === Object)) return;
+    if ((typeof compatibleAccessories == "undefined")) return false;// || (Object.keys(compatibleAccessories).length === 0 && compatibleAccessories.constructor === Object)) return;
 
     const { featured, fullList } = compatibleAccessories;
     let featuredEmpty = (typeof featured == "undefined" || featured.length <= 0);

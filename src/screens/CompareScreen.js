@@ -98,7 +98,7 @@ class CompareScreen extends Component {
         <View style={styles.detailBox}>
           { itemLeft &&
             <View style={styles.detailFlex}>
-              { ((typeof itemLeft.product.offer != "undefined") && (Object.keys(itemLeft.product.offer).length > 0)) &&
+              { (typeof itemLeft.product.offer != "undefined") && //(Object.keys(itemLeft.product.offer).length > 0)) &&
                 <OfferThin offer={itemLeft.product.offer} />
               }
             </View>
@@ -110,7 +110,7 @@ class CompareScreen extends Component {
         <View style={styles.detailBox}>
           { itemRight &&
             <View style={styles.detailFlex}>
-              { ((typeof itemRight.product.offer != "undefined") && (Object.keys(itemRight.product.offer).length > 0)) &&
+              { (typeof itemRight.product.offer != "undefined") && //(Object.keys(itemRight.product.offer).length > 0)) &&
                 <OfferThin offer={itemRight.product.offer} />
               }
             </View>

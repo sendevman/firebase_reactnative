@@ -92,7 +92,7 @@ class InfoSpecsScreen extends Component {
   renderOffer() {
     const { offer } = this.props.infoSpecs;
 
-    if (typeof offer == "undefined" || (Object.keys(offer).length === 0 && offer.constructor === Object)) return false;
+    if (typeof offer == "undefined") return false;// || (Object.keys(offer).length === 0 && offer.constructor === Object)) return false;
 
     return (
       <View style={{ marginTop: 16 }}>
@@ -130,7 +130,7 @@ class InfoSpecsScreen extends Component {
     const { display } = this.props.infoSpecs;
     const viewWidth = width - 34;
 
-    if (Object.keys(display).length !== 0 && display.constructor === Object) {
+    if (display.constructor === Object) { //Object.keys(display).length !== 0 && 
       return (
         <View style={{ paddingBottom: 10 }}>
           {/* <Icon name="Heading_display" width={viewWidth} height={viewWidth / 1080 * 210} fill="#1181FF" viewBox="0 0 1080 210" style={{ marginLeft: 6 }} /> */}
@@ -155,9 +155,11 @@ class InfoSpecsScreen extends Component {
     const { camera } = this.props.infoSpecs;
     const viewWidth = width - 34;
 
-    if (typeof camera != "undefined" && (Object.keys(camera).length !== 0 && camera.constructor === Object)) {
+    if (typeof camera != "undefined") { // && (Object.keys(camera).length !== 0 && camera.constructor === Object)) {
       const { features, front, rear } = camera;
       const featuretext = features.join(' | ');
+      const ifFront = (typeof front != "undefined") ? true : false;
+      const ifRear = (typeof rear != "undefined") ? true : false;
 
       return (
         <View style={{ paddingBottom: 0 }}>
@@ -165,16 +167,16 @@ class InfoSpecsScreen extends Component {
           {/* <Icon name="Heading_camera" width={viewWidth} height={viewWidth / 1080 * 315} fill="#1181FF" viewBox="0 0 1080 315" style={{ marginLeft: 6 }} /> */}
           <Image style={[styles.colorBackground, { width: viewWidth, height: viewWidth * 490 / 1080, marginLeft: 6, }]} source={require('../assets/images/files/camera.png')} />
 
-          {(Object.keys(front).length !== 0 || Object.keys(rear).length !== 0) &&
+          {ifFront || ifRear &&
             <View style={styles.cameraBox}>
-              {Object.keys(front).length !== 0 &&
+              {ifFront &&
                 <View style={styles.cameraItem}>
                   <Text style={styles.cameraTextBold}>{front.sensor} sensor</Text>
                   <Text style={styles.cameraTextBold}>{front.aperture} aperture</Text>
                 </View>
               }
 
-              {Object.keys(rear).length !== 0 &&
+              {ifRear &&
                 <View style={styles.cameraItem}>
                   <Text style={styles.cameraTextBold}>{rear.sensor} sensor</Text>
                   <Text style={styles.cameraTextBold}>{rear.aperture} aperture</Text>
@@ -197,9 +199,9 @@ class InfoSpecsScreen extends Component {
     const viewWidth = width - 34;
 
     const memoryEmpty = (!memory || !memory.trim() || 0 === memory.length);
-    const processorEmpty = (typeof processor == "undefined" || (Object.keys(processor).length === 0 && processor.constructor === Object));
+    const processorEmpty = (typeof processor == "undefined");// || (Object.keys(processor).length === 0 && processor.constructor === Object));
     const doIsValid = (typeof deviceOptions == "undefined" || deviceOptions.length <= 0) ? false : true;
-    const esIsValid = (typeof expandableStorage == "undefined" || Object.keys(expandableStorage).length === 0) ? false : true;
+    const esIsValid = (typeof expandableStorage == "undefined") ? false : true; // || Object.keys(expandableStorage).length === 0) ? false : true;
 
     var isAvailable = false;
     if (esIsValid) isAvailable = (typeof expandableStorage.available == "undefined") ? false : expandableStorage.available;
@@ -269,10 +271,10 @@ class InfoSpecsScreen extends Component {
     const { battery } = this.props.infoSpecs;
     const viewWidth = width - 34;
 
-    if (Object.keys(battery).length !== 0 && battery.constructor === Object) {
+    if (battery.constructor === Object) { //Object.keys(battery).length !== 0 && 
       const { capacity, life } = battery;
       const capacityEmpty = (!capacity || !capacity.trim() || 0 === capacity.length);
-      const lifeEmpty = (Object.keys(life).length === 0 && life.constructor === Object);
+      const lifeEmpty = (life.constructor === Object); //Object.keys(life).length === 0 && 
       const talkTimeEmpty = (!life.talkTime || !life.talkTime.trim() || 0 === life.talkTime.length);
       const videoEmpty = (!life.video || !life.video.trim() || 0 === life.video.length);
       const audioEmpty = (!life.audio || !life.audio.trim() || 0 === life.audio.length);
@@ -398,7 +400,7 @@ class InfoSpecsScreen extends Component {
       );
     }
 
-    if (Object.keys(infoSpecs).length === 0 && infoSpecs.constructor === Object) {
+    if (infoSpecs.constructor === Object) { //Object.keys(infoSpecs).length === 0 && 
       return (<InfoSpecsSkeleton />);
     } else {
       return (
@@ -440,7 +442,7 @@ class InfoSpecsScreen extends Component {
     const { compatibleAccessories } = this.props.infoSpecs;
     const viewWidth = width - 34;
 
-    if ((typeof compatibleAccessories == "undefined") || (Object.keys(compatibleAccessories).length === 0 && compatibleAccessories.constructor === Object)) return;
+    if ((typeof compatibleAccessories == "undefined")) return;//  || (Object.keys(compatibleAccessories).length === 0 && compatibleAccessories.constructor === Object)) return;
 
     const { featured, fullList } = compatibleAccessories;
     let featuredEmpty = (typeof featured == "undefined" || featured.length <= 0);
@@ -470,7 +472,7 @@ class InfoSpecsScreen extends Component {
   render() {
     const { infoSpecs } = this.props;
 
-    let infoSpecsEmpty = ((typeof infoSpecs == "undefined") || (Object.keys(infoSpecs).length === 0 && infoSpecs.constructor === Object));
+    let infoSpecsEmpty = ((typeof infoSpecs == "undefined"));// || (Object.keys(infoSpecs).length === 0 && infoSpecs.constructor === Object));
 
     return (
       <Animated.ScrollView contentContainerStyle={styles.container} scrollEventThrottle={1}
