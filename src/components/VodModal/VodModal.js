@@ -110,7 +110,7 @@ class VodModal extends Component {
     const { location, vodInfo } = this.props;
     const { canStop, fullScreen, notPlaying, playerInfo, showFullScreenBtn } = this.state;
 
-    let locationValid = (typeof location != 'undefined' && Object.keys(location).length !== 0 && location.constructor === Object);
+    let locationValid = (typeof location != 'undefined');// && Object.keys(location).length !== 0 && location.constructor === Object);
     let inAttStore = true; // (locationValid && typeof location.floor_id != 'undefined' && location.floor_id === playerInfo.floor_id);
     let playerAvailable = (playerInfo.status === "available") ? true : false;
     let fullScreenStyle = fullScreen ? styles.fullScreenStyle : styles.normalScreenStyle;
@@ -201,7 +201,7 @@ class VodModal extends Component {
   render() {
     const { onHideModal, showModal, vodInfo } = this.props;
 
-    let vodInfoValid = (typeof vodInfo != 'undefined' && Object.keys(vodInfo).length !== 0 && vodInfo.constructor === Object);
+    let vodInfoValid = (typeof vodInfo != 'undefined');// && Object.keys(vodInfo).length !== 0 && vodInfo.constructor === Object);
 
     return (
       <Modal

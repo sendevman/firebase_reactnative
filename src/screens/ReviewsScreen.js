@@ -117,7 +117,7 @@ class ReviewsScreen extends Component {
 
   renderContent() {
     const { reviews } = this.props;
-    let reviewsEmpty = ((typeof reviews == "undefined") || (Object.keys(reviews).length === 0 && reviews.constructor === Object));
+    let reviewsEmpty = ((typeof reviews == "undefined"));// || (Object.keys(reviews).length === 0 && reviews.constructor === Object));
 
     const isTitle = reviews.title === "title" ? true : false;
     if (isTitle) {
@@ -140,7 +140,7 @@ class ReviewsScreen extends Component {
         </View>
       );
     }
-    if (Object.keys(reviews).length === 0 && reviews.constructor === Object) {
+    if (reviews.constructor === Object) { //Object.keys(reviews).length === 0 && 
       return ( <ReviewsSkeleton /> );
     } else {
       return (

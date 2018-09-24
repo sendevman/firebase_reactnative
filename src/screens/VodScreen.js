@@ -132,7 +132,7 @@ class VodScreen extends Component {
   renderContent() {
     const { featured, fullList } = this.props;
 
-    let featuredValid = (typeof featured != 'undefined' && Object.keys(featured).length !== 0 && featured.constructor === Object);
+    let featuredValid = (typeof featured != 'undefined');// && Object.keys(featured).length !== 0 && featured.constructor === Object);
     let fullListValid = (typeof fullList != 'undefined' && fullList.length > 0);
 
     return (
