@@ -174,12 +174,12 @@ class VodModal extends Component {
           </TouchableOpacity>
         }
 
-        {/* {(!fullScreen && inAttStore && notPlaying) &&
+        {(!fullScreen && inAttStore && notPlaying) &&
           <TouchableOpacity disabled={!playerAvailable} style={styles.watchBigScreenBtn} onPress={() => this._onWatchBigScreen(vodInfo.mediaURL)} activeOpacity={0.4}>
             <Icon name="Panorama" width="26" height="26" viewBox="0 0 24 24" fill={playerAvailable ? "#FFF" : "#CF2A2A"} />
             <Text style={[styles.watchBtnText, { textDecorationLine: 'underline', color: playerAvailable ? "#FFF" : "#CF2A2A" }]}>Watch on the big screen</Text>
           </TouchableOpacity>
-        } */}
+        }
 
             {/* <Text style={[styles.watchBtnText, { textDecorationLine: 'underline', color: playerAvailable ? "#FFF" : "#CF2A2A" }]}>{videoSource}</Text> */}
         {(inAttStore && !notPlaying && canStop) &&

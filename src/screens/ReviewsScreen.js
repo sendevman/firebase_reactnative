@@ -135,7 +135,7 @@ class ReviewsScreen extends Component {
               height: '100%',
               justifyContent: 'center',
             }}
-            source={require('../assets/images/files/backgroundHD.png')}
+            source={require('../assets/images/files/backgroundSD.png')}
           />
         </View>
       );
