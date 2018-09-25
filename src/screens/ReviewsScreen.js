@@ -140,7 +140,7 @@ class ReviewsScreen extends Component {
         </View>
       );
     }
-    if (reviews.constructor === Object) { //Object.keys(reviews).length === 0 && 
+    if (Object.keys(reviews).length === 0 ){
       return ( <ReviewsSkeleton /> );
     } else {
       return (
