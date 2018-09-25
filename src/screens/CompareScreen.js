@@ -285,7 +285,7 @@ class CompareScreen extends Component {
     return (
       <View style={[styles.compareItemBox, styles.whitBorder]}>
         <View style={styles.detailBox}>
-          { (itemLeft && (typeof itemLeft.product.battery != "undefined")) &&
+          { (itemLeft && (typeof itemLeft.product.battery !== "undefined")) &&
             <View style={styles.detailFlex}>
               <Text style={styles.featureSubTitle}>CAPACITY</Text>
               <Text style={styles.featureDescription}>{itemLeft.product.battery.capacity}</Text>
@@ -304,7 +304,7 @@ class CompareScreen extends Component {
         </View>
 
         <View style={styles.detailBox}>
-          { (itemRight && (typeof itemRight.product.battery != "undefined")) &&
+          { (itemRight && (typeof itemRight.product.battery !== "undefined")) &&
             <View style={styles.detailFlex}>
               <Text style={styles.featureSubTitle}>CAPACITY</Text>
               <Text style={styles.featureDescription}>{itemRight.product.battery.capacity}</Text>

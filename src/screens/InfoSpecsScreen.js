@@ -130,7 +130,8 @@ class InfoSpecsScreen extends Component {
     const { display } = this.props.infoSpecs;
     const viewWidth = width - 34;
 
-    if (display.constructor === Object) { //Object.keys(display).length !== 0 && 
+
+    if (typeof display !== "undefined") { //Object.keys(display).length !== 0 && 
       return (
         <View style={{ paddingBottom: 10 }}>
           {/* <Icon name="Heading_display" width={viewWidth} height={viewWidth / 1080 * 210} fill="#1181FF" viewBox="0 0 1080 210" style={{ marginLeft: 6 }} /> */}
@@ -271,10 +272,10 @@ class InfoSpecsScreen extends Component {
     const { battery } = this.props.infoSpecs;
     const viewWidth = width - 34;
 
-    if (battery.constructor === Object) { //Object.keys(battery).length !== 0 && 
+    if (typeof battery !== "undefined") { //Object.keys(battery).length !== 0 && 
       const { capacity, life } = battery;
       const capacityEmpty = (!capacity || !capacity.trim() || 0 === capacity.length);
-      const lifeEmpty = (life.constructor === Object); //Object.keys(life).length === 0 && 
+      const lifeEmpty = (life !== "undefined"); //Object.keys(life).length === 0 && 
       const talkTimeEmpty = (!life.talkTime || !life.talkTime.trim() || 0 === life.talkTime.length);
       const videoEmpty = (!life.video || !life.video.trim() || 0 === life.video.length);
       const audioEmpty = (!life.audio || !life.audio.trim() || 0 === life.audio.length);
@@ -289,9 +290,9 @@ class InfoSpecsScreen extends Component {
           <View style={styles.hrDivider}></View>
           {/* <Text style={styles.titleDivider}>Battery</Text> */}
           {/* <Icon name="Heading_battery" width={viewWidth} height={viewWidth / 1080 * 210} fill="#1181FF" viewBox="0 0 1080 210" style={{ marginLeft: 6 }} /> */}
-          <Image style={[styles.colorBackground, { width: viewWidth, height: viewWidth * 670 / 1080 + 30, marginLeft: 6, }]} source={require('../assets/images/files/battery.png')} />
+          <Image style={[styles.colorBackground, { width: viewWidth, height: viewWidth * 670 / 1080, marginLeft: 6, }]} source={require('../assets/images/files/battery.png')} />
 
-          <View style={[styles.featuresBox, styles.expandableBox, { width: viewWidth, marginLeft: 6, marginTop: -viewWidth / 1080 * (670 - 210) - 30 }]}>
+          <View style={[styles.featuresBox, styles.expandableBox, { width: viewWidth, marginLeft: 6, marginTop: -viewWidth / 1080 * (670 - 210) - 10 }]}>
             {!batteryLifeEmpty &&
               <View style={styles.featureBox}>
                 {!talkTimeEmpty &&
@@ -379,6 +380,7 @@ class InfoSpecsScreen extends Component {
     const { infoSpecs } = this.props;
     const viewWidth = width - 34;
     const isTitle = infoSpecs.title === "title" ? true : false;
+
     if (isTitle) {
       return (
         <View style={{
@@ -400,7 +402,7 @@ class InfoSpecsScreen extends Component {
       );
     }
 
-    if (infoSpecs.constructor === Object) { //Object.keys(infoSpecs).length === 0 && 
+    if (Object.keys(infoSpecs).length === 0) { //Object.keys(infoSpecs).length === 0 && 
       return (<InfoSpecsSkeleton />);
     } else {
       return (
@@ -453,7 +455,7 @@ class InfoSpecsScreen extends Component {
     return (
       <View>
         {/* <Icon name="Heading_accessories" width={viewWidth} height={viewWidth / 1080 * 210} fill="#1181FF" viewBox="0 0 1080 210" style={{ marginLeft: 6 }} /> */}
-        <View style={[styles.accessoriesBackground1, { width: viewWidth, marginLeft: 6, marginTop: 10 }]}>
+        <View style={[styles.accessoriesBackground1, { width: viewWidth, marginLeft: 6, marginTop: 40 }]}>
           <Image style={[styles.accessoriesBackground, { width: viewWidth, height: viewWidth * 210 / 1080, marginLeft: 0 }]} source={require('../assets/images/files/accessories.png')} />
         </View>
         <View style={[styles.accessoriesBox, { width: viewWidth }]}>

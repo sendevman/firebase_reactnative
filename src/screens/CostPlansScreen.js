@@ -356,7 +356,7 @@ class CostPlansScreen extends Component {
         </View>
       );
     }
-    if (costplans.constructor === Object) {
+    if (Object.keys(costplans).length === 0) {
       // if (Object.keys(costplans).length === 0 && costplans.constructor === Object) {
       return (<CostPlansSkeleton />);
     } else {
