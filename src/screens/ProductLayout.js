@@ -21,7 +21,7 @@ import RoutesProducts from '../routes/Products'
 
 // Action
 import { setAreaInfo, setLocationData, setProductInfo, setProductAccsInfo } from '../actions/Current';
-import { setProductsNearInfo } from '../actions/ProductsNear';
+import { setProductsNearInfo, setProductsAllInfo } from '../actions/ProductsNear';
 
 var { height } = Dimensions.get('window');
 var count = 0;
@@ -34,10 +34,22 @@ class ProductLayoutScreen extends Component {
       animatedValue: new Animated.Value(0)
     };
   
+    // try {
+    //   AsyncStorage.setItem('passOnboarding', true);
+    // } catch (error) {
+    //   // Error saving data
+    // }
+    this.getAllProductDetail();
+    this.setStorageData();
+  }
+
+  setStorageData = async () => {
     try {
-      AsyncStorage.setItem('passOnboarding', 'passed');
+      console.log("======--=====------=========");
+      await AsyncStorage.setItem('passOnboarding', "1");
     } catch (error) {
       // Error saving data
+      console.log("======--=====------=========", error);
     }
   }
 
@@ -51,6 +63,23 @@ class ProductLayoutScreen extends Component {
         this.getFirstProductDetail(arrAreas);
       }
     });
+  }
+
+  getAllProductDetail() {
+    const productRef = firebase.firestore().collection('products');
+    productRef.get()
+    .then(snapshot => {
+      const ref_path = snapshot.docs.map(doc => doc.ref.path);
+      const productList = snapshot.docs.map(doc => doc.data());
+      var products = [];
+      for(i=0; i < productList.length; i++){
+        var data = productList[i];
+        data.id = ref_path[i].split("/")[1];
+        products.push(data);
+      }
+      this.props.dispatch(setProductsAllInfo(products));
+    })
+
   }
 
   getFirstProductDetail(arrAreas) {
@@ -90,8 +119,11 @@ class ProductLayoutScreen extends Component {
         }))
       )
       .then(results => {
+        console.log("****", results);
         this.props.dispatch(setProductsNearInfo(results));
-        this.props.dispatch(setProductInfo(results[1]));
+        let tmpData = results[1];
+        tmpData.title = "title";
+        this.props.dispatch(setProductInfo(tmpData));
         this.setCompatibleAccessories(results[1].accessories);
         // console.log("log event ======= : ", {"pFirebaseId":this.props.firebaseid, "pDeviceModel":results[0].model, "pDeviceManufacture":results[0].manufacture, "pResearchTab":"info"});
         // firebase.analytics().logEvent("deviceViewed", {"pFirebaseId":this.props.firebaseid, "pDeviceModel":results[0].model, "pDeviceManufacture":results[0].manufacture, "pResearchTab":"info"});
@@ -144,12 +176,27 @@ class ProductLayoutScreen extends Component {
     });
     return newItems;
   }
-
+  setTitleProduct() {
+    const { productsNear } = this.props;
+    if (!productsNear || productsNear.length === 0) return;
+    console.log("*****************************", productsNear);
+    let tmpData = productsNear[0];
+    tmpData.title = "title";
+    this.props.dispatch(setProductInfo(tmpData));
+    this.setCompatibleAccessories(productsNear.length > 0 ? productsNear[0].accessories : []);
+  }
   setCurrentProduct(productId) {
     const { productsNear } = this.props;
     if (!productsNear || productsNear.length === 0) return;
     const match = productsNear.filter(product => product.id === productId);
-    this.props.dispatch(setProductInfo(match.length > 0 ? match[0] : {}));
+    if(match.length > 0){
+      let tmpData = match[0];
+      tmpData.title = "no";
+      this.props.dispatch(setProductInfo(tmpData));
+    } else{
+      this.props.dispatch(setProductInfo({}));
+    }
+    // this.props.dispatch(setProductInfo(match.length > 0 ? match[0] : {}));
     this.setCompatibleAccessories(match.length > 0 ? match[0].accessories : []);
     // console.log("log event ======= : ", {"pFirebaseId":this.props.firebaseid, "pDeviceModel":match[0].model, "pDeviceManufacture":match[0].manufacture, "pResearchTab":"info"});
     // firebase.analytics().logEvent("deviceViewed", {"pFirebaseId":this.props.firebaseid, "pDeviceModel":match[0].model, "pDeviceManufacture":match[0].manufacture, "pResearchTab":"info"});
@@ -215,6 +262,7 @@ class ProductLayoutScreen extends Component {
         <ProductsNearSlide
           animatedValue={this.state.animatedValue}
           onProductIdChange={productId => this.setCurrentProduct(productId)}
+          onFirstSelect={() => this.setTitleProduct()}
           currentProducts={productsNear}
           zone={this.zone.bind(this)}
           onGoToCompare={() => this.props.navigation.navigate('Compare')} />

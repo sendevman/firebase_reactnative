@@ -270,22 +270,20 @@ class Routes extends Component {
     this.state = {
       ispass: false
     };
-    this.getStorageData();
-  }
-
-  getStorageData = async () => {
-    try {
-      AsyncStorage.getItem('passOnboarding', (err, result) => {
-        if (result != null && result === "passed") {
-          cPassed = '1';
-          console.log("===", cPassed);
-          this.setState({
-            ispass: true
-          })
-        }
-      });
-    } catch (error) {
-      // Error saving data
+    const a = async () => {
+      try {
+        const result = await AsyncStorage.getItem('passOnboarding');
+        return result;
+      } catch (error) {
+        console.log("===", error);
+        return null;
+      }
+    }
+    console.log("===========------=========", a);
+    if( a !== null) {
+      this.setState({
+        ispass: true
+      })
     }
   }
 
@@ -414,7 +412,7 @@ class Routes extends Component {
       } else {
         if (e.data !== "") {
           locationdata = JSON.parse(e.data);
-          if (locationdata.zone_id === null) zone_id = -1;
+          if (locationdata.zone_id === null) {}//zone_id = -1;
           else zone_id = locationdata.zone_id;
 
           if (zoneData.length > 5) zoneData.shift();
@@ -466,8 +464,7 @@ class Routes extends Component {
   }
 
   render() {
-    console.log("====---=====", cPassed);
-    const ispass = this.state.ispass;
+    const { ispass } = this.state;
     return (
       ispass ? <DrawerNav /> : <DrawerNav1 />
     );

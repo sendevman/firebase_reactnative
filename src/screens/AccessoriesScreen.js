@@ -22,10 +22,10 @@ class AccessoriesScreen extends Component {
   renderContent() {
     const { product, navigation } = this.props;
 
-    if ((typeof product == "undefined") || (Object.keys(product).length === 0 && product.constructor === Object)) return false;
+    if ((typeof product == "undefined")) return false;// || (Object.keys(product).length === 0 && product.constructor === Object)) return false;
     const { compatibleAccessories } = product;
 
-    if ((typeof compatibleAccessories == "undefined") || (Object.keys(compatibleAccessories).length === 0 && compatibleAccessories.constructor === Object)) return false;
+    if ((typeof compatibleAccessories == "undefined")) return false;// || (Object.keys(compatibleAccessories).length === 0 && compatibleAccessories.constructor === Object)) return false;
     const { featured, fullList } = compatibleAccessories;
 
     if (typeof featured == "undefined" || featured.length <= 0) return false;
