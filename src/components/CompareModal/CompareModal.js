@@ -85,8 +85,6 @@ class CompareModal extends Component {
     if(this.props.compares.length === 2){
       let product1 = this.props.compares.filter(obj => { return (obj.item === 1) })[0];
       let product2 = this.props.compares.filter(obj => { return (obj.item === 2) })[0];
-      console.log("devicesCompared----------", {"pFirebaseId":this.props.firebaseid, "pDeviceModel1":product1.product.model, "pDeviceManufacture1":product1.product.manufacture,
-      "pDeviceModel2":product2.product.model, "pDeviceManufacture2":product2.product.manufacture});
       firebase.analytics().logEvent("devicesCompared", {"pFirebaseId":this.props.firebaseid, "pDeviceModel1":product1.product.model, "pDeviceManufacture1":product1.product.manufacture,
           "pDeviceModel2":product2.product.model, "pDeviceManufacture2":product2.product.manufacture});
     }
@@ -117,7 +115,6 @@ class CompareModal extends Component {
 
   renderProductList() {
     const allItems = this.searchItems();
-    console.log("------search----", allItems);
     let allItemsWithoutEmpty = allItems.filter(item => { return (typeof item != "undefined"); });// && Object.keys(item).length !== 0); });
     const items = allItemsWithoutEmpty.map((obj) => { return { key: obj.id, fullName: obj.manufacture + " " + obj.model, data: [''] }})
 

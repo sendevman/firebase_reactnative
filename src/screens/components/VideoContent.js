@@ -18,8 +18,6 @@ class VideoContent extends Component<props> {
   }
 
   onPressfunc = () => {
-    console.log("reviewVideo ======= : ", {"pFirebaseId":this.props.firebaseid, "pDeviceModel":this.props.model, "pDeviceManufacture":this.props.manufacture,
-     "pReviewContentTitle":this.props.item.title, "pReviewContentUrl":this.props.item.src, "pReviewContentType":"video_review"});
     firebase.analytics().logEvent("reviewVideo", {"pFirebaseId":this.props.firebaseid, "pDeviceModel":this.props.model,
      "pDeviceManufacture":this.props.manufacture, "pReviewContentTitle":this.props.item.title, "pReviewContentUrl":this.props.item.src, "pReviewContentType":"video_review"});
   }

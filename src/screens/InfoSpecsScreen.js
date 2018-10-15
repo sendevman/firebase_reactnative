@@ -64,7 +64,6 @@ class InfoSpecsScreen extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.selectedTab === 0 && nextProps.infoSpecs.model != undefined) {
-      console.log("log event ======= : ", { "pFirebaseId": this.props.firebaseid, "pDeviceModel": nextProps.infoSpecs.model, "pDeviceManufacture": nextProps.infoSpecs.manufacture, "pResearchTab": "info" });
       firebase.analytics().logEvent("deviceViewed", { "pFirebaseId": this.props.firebaseid, "pDeviceModel": nextProps.infoSpecs.model, "pDeviceManufacture": nextProps.infoSpecs.manufacture, "pResearchTab": "info" });
     }
   }

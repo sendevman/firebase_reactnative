@@ -35,7 +35,6 @@ const deviceId = DeviceInfo.getUniqueID();
 const BleManagerModule = NativeModules.BleManager;
 const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
 const ws = new WebSocket('wss://wai.walkbase.com/api/v2/subscribe/device');
-var cPassed = '0';
 
 // BEGIN Before --------------------------------------------------------------
 const MyNavScreen = ({ navigation, banner }) => (
@@ -270,22 +269,18 @@ class Routes extends Component {
     this.state = {
       ispass: false
     };
-    this.getStorageData();
+    this.getStoreData();
   }
-
-  getStorageData = async () => {
+  getStoreData = async () => {
     try {
-      AsyncStorage.getItem('passOnboarding', (err, result) => {
-        if (result != null && result === "passed") {
-          cPassed = '1';
-          console.log("===", cPassed);
-          this.setState({
-            ispass: true
-          })
-        }
-      });
+      const result = await AsyncStorage.getItem('passOnboarding');
+      if( result === "passed") {
+        this.setState({
+          ispass: true
+        })
+      }
     } catch (error) {
-      // Error saving data
+      console.log("===", error);
     }
   }
 
@@ -374,7 +369,6 @@ class Routes extends Component {
   }
 
   webAPI() {
-    console.log(deviceId + "-----");
     ws.onopen = () => {
       // connection opened
       ws.send('{"user_id": "' + deviceId + '", "api_key": "VZHkscRFhAjkScc"}'); // send a message
