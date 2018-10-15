@@ -62,19 +62,24 @@ class CompareModal extends Component {
 
   _onPressButton(key) {
     let selectedIndex = this.props.itemValue;
-    
     let is_Update = true;
     for(i=0; i < this.props.compares.length; i++){
       let tmpCompare = this.props.compares[i];
       if(tmpCompare.item === selectedIndex && key === tmpCompare.product.id){
         is_Update = false;
+        this.setState({searchText : ''});
         this.props.onHideModal();
         return;
       }
     }
-
-    let product = this.props.productsNear.filter(obj => { return (obj.id == key) })[0];
+    let product;
+    if(this.state.searchText){
+      product = this.props.productsAll.filter(obj => { return (obj.id == key) })[0];
+    } else {
+      product = this.props.productsNear.filter(obj => { return (obj.id == key) })[0];
+    }
     this.props.dispatch(setCompareInfo({ item: this.props.itemValue, product: product }));
+    this.setState({searchText : ''});
     this.props.onHideModal();
 
     if(this.props.compares.length === 2){
@@ -93,11 +98,13 @@ class CompareModal extends Component {
 
   searchItems() {
     if (this.state.searchText) {
-      return this.props.productsNear.filter(obj => {
+      return this.props.productsAll.filter(obj => {
         let fullName = (obj.manufacture + " " + obj.model).toLowerCase();
         return fullName.indexOf(this.state.searchText) > -1;
       });
-    } else { return this.props.productsNear; }
+    } else { return this.props.productsNear.filter(item => {
+      if( JSON.stringify(item) === "{}") return false;
+      return (typeof item != "undefined"); }); } // && Object.keys(item).length !== 0); }); }
   }
 
   renderProductItem(section) {
@@ -109,9 +116,9 @@ class CompareModal extends Component {
   }
 
   renderProductList() {
-    const { productsNear } = this.props;
-    const allItems = this.searchItems(productsNear);
-    let allItemsWithoutEmpty = allItems.filter(item => { return (typeof item != "undefined" && Object.keys(item).length !== 0); });
+    const allItems = this.searchItems();
+    console.log("------search----", allItems);
+    let allItemsWithoutEmpty = allItems.filter(item => { return (typeof item != "undefined"); });// && Object.keys(item).length !== 0); });
     const items = allItemsWithoutEmpty.map((obj) => { return { key: obj.id, fullName: obj.manufacture + " " + obj.model, data: [''] }})
 
     if (typeof items != "undefined" && items.length > 0) {
@@ -183,8 +190,7 @@ class CompareModal extends Component {
 
 const mapStateToProps = state => {
   const { common, current, productsNear } = state;
-
-  return { compares: current.compare, firebaseid: common.firebaseid, productsNear: productsNear.productsNear };
+  return { compares: current.compare, firebaseid: common.firebaseid, productsNear: productsNear.productsNear, productsAll: productsNear.productsAll };
 }
 
 export default connect(mapStateToProps)(CompareModal);

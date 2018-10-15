@@ -20,7 +20,7 @@ import WebReview from './components/WebReview';
 import VideoContent from './components/VideoContent';
 import FeedbackSurvey from './components/FeedbackSurvey';
 
-var { width } = Dimensions.get('window');
+var { width, height } = Dimensions.get('window');
 
 const getWidth = (number) => {
   return (((width - 20)/2) - number);
@@ -117,9 +117,30 @@ class ReviewsScreen extends Component {
 
   renderContent() {
     const { reviews } = this.props;
-    let reviewsEmpty = ((typeof reviews == "undefined") || (Object.keys(reviews).length === 0 && reviews.constructor === Object));
+    let reviewsEmpty = ((typeof reviews == "undefined"));// || (Object.keys(reviews).length === 0 && reviews.constructor === Object));
 
-    if (Object.keys(reviews).length === 0 && reviews.constructor === Object) {
+    const isTitle = reviews.title === "title" ? true : false;
+    if (isTitle) {
+      return (
+        <View style={{
+          width: width,
+          height: height,
+          backgroundColor: 'black'}}>
+          <Image
+            style={{
+              backgroundColor: '#ccc',
+              flex: 1,
+              position: 'absolute',
+              width: '100%',
+              height: '100%',
+              justifyContent: 'center',
+            }}
+            source={require('../assets/images/files/backgroundSD.png')}
+          />
+        </View>
+      );
+    }
+    if (Object.keys(reviews).length === 0 ){
       return ( <ReviewsSkeleton /> );
     } else {
       return (
