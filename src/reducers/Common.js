@@ -12,6 +12,7 @@ const initialState = {
     isConnected: false,
     ssid: '<unknown ssid>'
   },
+  replaceurl: '',
   selectedTab: 0
 }
 
@@ -27,6 +28,12 @@ export default common = (state = initialState, action) => {
       return {
         ...state,
         network: action.payload
+      }
+      break;
+    case 'UPDATE_REPLACE_URL':
+      return {
+        ...state,
+        replaceurl: action.payload
       }
       break;
     case 'GET_FIREBASE_ID':
