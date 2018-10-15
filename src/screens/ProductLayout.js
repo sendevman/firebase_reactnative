@@ -40,6 +40,16 @@ class ProductLayoutScreen extends Component {
       // Error saving data
     }
     this.getAllProductDetail();
+    this.setStorageData();
+  }
+  setStorageData = async () => {
+    try {
+      console.log("======--=====------=========");
+      await AsyncStorage.setItem('passOnboarding', "1");
+    } catch (error) {
+      // Error saving data
+      console.log("======--=====------=========", error);
+    }
   }
 
   getProductID(zone_id) {
@@ -114,7 +124,6 @@ class ProductLayoutScreen extends Component {
         tmpData.title = "title";
         this.props.dispatch(setProductInfo(tmpData));
         this.setCompatibleAccessories(results[1].accessories);
-        // console.log("log event ======= : ", {"pFirebaseId":this.props.firebaseid, "pDeviceModel":results[0].model, "pDeviceManufacture":results[0].manufacture, "pResearchTab":"info"});
         // firebase.analytics().logEvent("deviceViewed", {"pFirebaseId":this.props.firebaseid, "pDeviceModel":results[0].model, "pDeviceManufacture":results[0].manufacture, "pResearchTab":"info"});
         setTimeout(() => this.forceUpdate(), 300);
       })
@@ -168,7 +177,6 @@ class ProductLayoutScreen extends Component {
   setTitleProduct() {
     const { productsNear } = this.props;
     if (!productsNear || productsNear.length === 0) return;
-    console.log("*****************************", productsNear);
     let tmpData = productsNear[0];
     tmpData.title = "title";
     this.props.dispatch(setProductInfo(tmpData));
@@ -187,7 +195,6 @@ class ProductLayoutScreen extends Component {
     }
     // this.props.dispatch(setProductInfo(match.length > 0 ? match[0] : {}));
     this.setCompatibleAccessories(match.length > 0 ? match[0].accessories : []);
-    // console.log("log event ======= : ", {"pFirebaseId":this.props.firebaseid, "pDeviceModel":match[0].model, "pDeviceManufacture":match[0].manufacture, "pResearchTab":"info"});
     // firebase.analytics().logEvent("deviceViewed", {"pFirebaseId":this.props.firebaseid, "pDeviceModel":match[0].model, "pDeviceManufacture":match[0].manufacture, "pResearchTab":"info"});
   }
 

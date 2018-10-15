@@ -50,7 +50,6 @@ class CostPlansScreen extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.selectedTab === 2 && nextProps.costplans.model != undefined) {
-      console.log("log event ======= : ", { "pFirebaseId": this.props.firebaseid, "pDeviceModel": nextProps.costplans.model, "pDeviceManufacture": nextProps.costplans.manufacture, "pResearchTab": "price" });
       firebase.analytics().logEvent("deviceViewed", { "pFirebaseId": this.props.firebaseid, "pDeviceModel": nextProps.costplans.model, "pDeviceManufacture": nextProps.costplans.manufacture, "pResearchTab": "price" });
     }
   }
