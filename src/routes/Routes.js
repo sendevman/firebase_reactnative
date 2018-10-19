@@ -15,6 +15,7 @@ import { connect } from 'react-redux';
 import Icon from '../assets/images/Icon';
 
 // My Layouts
+import ProductLayout from '../screens/ProductLayout';
 import VodLayout from '../screens/VodLayout';
 
 // My Actions
