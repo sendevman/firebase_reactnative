@@ -34,7 +34,6 @@ class VodModal extends Component {
   };
 
   componentDidMount() {
-    console.log("-- -- component did mount -- -- ");
     firebase.database().ref('storeData/').once('value')
       .then((snapshot) => { this.setState({ storeData: snapshot.val() }); });
 
@@ -42,7 +41,6 @@ class VodModal extends Component {
   }
 
   componentWillUnmount() {
-    console.log("-- -- component will unmount -- -- ");
     this.state.vodPlayerIdRef.off();
   }
 
@@ -68,7 +66,6 @@ class VodModal extends Component {
   }
 
   eventlog(method) {
-    console.log("log event ======= : ", { "pFirebaseId": this.props.firebaseid, "pVodContentTitle": this.props.vodInfo.title, "pVodContentUrl": this.props.vodInfo.mediaURL, "pVodContentType": this.props.vodInfo.categoryName, "pVodViewedOn": method });
     firebase.analytics().logEvent("vodPlayed", { "pFirebaseId": this.props.firebaseid, "pVodContentTitle": this.props.vodInfo.title, "pVodContentUrl": this.props.vodInfo.mediaURL, "pVodContentType": this.props.vodInfo.categoryName, "pVodViewedOn": method });
   }
 
