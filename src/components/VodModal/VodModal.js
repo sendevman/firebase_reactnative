@@ -5,6 +5,7 @@ import Video from 'react-native-video';
 import firebase from 'react-native-firebase';
 import { connect } from 'react-redux';
 
+import { setReplaceURL } from '../../actions/Common';
 // My Styles
 import styles from './VodModalCss';
 
@@ -178,7 +179,8 @@ class VodModal extends Component {
           </TouchableOpacity>
         }
 
-            {/* <Text style={[styles.watchBtnText, { textDecorationLine: 'underline', color: playerAvailable ? "#FFF" : "#CF2A2A" }]}>{videoSource}</Text> */}
+        {/* <Text style={[styles.watchBtnText, { textDecorationLine: 'underline', color: playerAvailable ? "#FFF" : "#CF2A2A" }]}>{videoSource}</Text> */}
+
         {(inAttStore && !notPlaying && canStop) &&
           <TouchableOpacity style={styles.watchBigScreenBtn} onPress={() => this._onStopVideo()} activeOpacity={0.4}>
             <Image style={styles.watchBtnIcon} source={require('../../assets/images/files/stopButton.png')} />
@@ -225,6 +227,13 @@ class VodModal extends Component {
   }
 }
 
+const mapDispatchToProps = dispatch => {
+  return {
+    setReplaceURL: (data) => {
+      return dispatch(setReplaceURL(data))
+    }
+  };
+}
 const mapStateToProps = state => {
   const { common, current, vod } = state;
 
