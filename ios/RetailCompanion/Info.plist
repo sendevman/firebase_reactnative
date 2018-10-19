@@ -34,7 +34,21 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>5</string>
+	<string>14</string>
+	<key>Fabric</key>
+	<dict>
+		<key>APIKey</key>
+		<string>b283a0fcd9d5b13d229b558485cdd85b168c72b2</string>
+		<key>Kits</key>
+		<array>
+			<dict>
+				<key>KitInfo</key>
+				<dict/>
+				<key>KitName</key>
+				<string>Crashlytics</string>
+			</dict>
+		</array>
+	</dict>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -107,6 +121,8 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
+	<key>firebase_crashlytics_collection_enabled</key>
 	<false/>
 </dict>
 </plist>

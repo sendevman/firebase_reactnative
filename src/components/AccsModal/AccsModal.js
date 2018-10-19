@@ -59,10 +59,10 @@ class AccsModal extends Component {
   renderCategories() {
     const { product } = this.props;
 
-    if ((typeof product == "undefined") || (Object.keys(product).length === 0 && product.constructor === Object)) return false;
+    if ((typeof product == "undefined")) return false;// || (Object.keys(product).length === 0 && product.constructor === Object)) return false;
     const { compatibleAccessories } = product;
 
-    if ((typeof compatibleAccessories == "undefined") || (Object.keys(compatibleAccessories).length === 0 && compatibleAccessories.constructor === Object)) return false;
+    if ((typeof compatibleAccessories == "undefined")) return false;// || (Object.keys(compatibleAccessories).length === 0 && compatibleAccessories.constructor === Object)) return false;
     const items = compatibleAccessories.fullList;
 
     if (typeof items == "undefined" || items.length <= 0) return false;
@@ -111,13 +111,13 @@ class AccsModal extends Component {
     const itemCategory = navigation.getParam('itemCategory');
 
     const { compatibleAccessories } = this.props.product;
-    if ((typeof compatibleAccessories == "undefined") || (Object.keys(compatibleAccessories).length === 0 && compatibleAccessories.constructor === Object)) return false;
+    if ((typeof compatibleAccessories == "undefined")) return false;// || (Object.keys(compatibleAccessories).length === 0 && compatibleAccessories.constructor === Object)) return false;
 
     const fullList = compatibleAccessories.fullList;
     if (typeof fullList == "undefined" || fullList.length <= 0) return false;
 
     let byCategory = fullList.filter((obj) => { return (obj.type === itemCategory); });
-    if ((typeof byCategory == "undefined") || (Object.keys(byCategory).length === 0 && byCategory.constructor === Object)) return false;
+    if ((typeof byCategory == "undefined") ) return false;//|| (Object.keys(byCategory).length === 0 && byCategory.constructor === Object)) return false;
 
     const items = byCategory[0].items;
     if (typeof items == "undefined" || items.length <= 0) return false;

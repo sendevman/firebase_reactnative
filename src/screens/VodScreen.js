@@ -132,7 +132,7 @@ class VodScreen extends Component {
   renderContent() {
     const { featured, fullList } = this.props;
 
-    let featuredValid = (typeof featured != 'undefined' && Object.keys(featured).length !== 0 && featured.constructor === Object);
+    let featuredValid = (typeof featured != 'undefined');// && Object.keys(featured).length !== 0 && featured.constructor === Object);
     let fullListValid = (typeof fullList != 'undefined' && fullList.length > 0);
 
     return (
@@ -146,7 +146,7 @@ class VodScreen extends Component {
 
   render() {
     return (
-      <LinearGradient colors={['#2b3748', '#43597D']} style={styles.linearGradient}>
+      <LinearGradient colors={['#000', '#000']} style={styles.linearGradient}>
         { this.renderContent() }
 
         <VodModal onHideModal={this.hideModal} showModal={this.state.showModal} vodInfo={this.state.vodInfo} />

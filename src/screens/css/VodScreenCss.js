@@ -22,12 +22,13 @@ export default StyleSheet.create({
   },
   // Featured Section
   featuredText: {
-    color: '#6B92BF',
+    color: '#009fdb',
     // fontFamily: 'Roboto',
-    fontSize: 12,
+    fontSize: 40,
     fontWeight: 'bold',
-    lineHeight: 14,
+    lineHeight: 40,
     marginTop: 2,
+    marginBottom: -8,
     marginLeft: -1
   },
   featuredBox: {

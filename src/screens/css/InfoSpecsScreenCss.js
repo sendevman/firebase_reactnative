@@ -342,8 +342,7 @@ export default StyleSheet.create({
   },
   // Charging Type Box
   chagingTypeBox: {
-    marginTop: 16,
-    marginBottom: 10,
+    marginTop: 8,
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     alignItems: 'center'

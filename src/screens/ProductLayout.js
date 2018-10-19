@@ -34,12 +34,23 @@ class ProductLayoutScreen extends Component {
       animatedValue: new Animated.Value(0)
     };
   
+    // try {
+    //   AsyncStorage.setItem('passOnboarding', true);
+    // } catch (error) {
+    //   // Error saving data
+    // }
+    this.getAllProductDetail();
+    this.setStorageData();
+  }
+
+  setStorageData = async () => {
     try {
-      AsyncStorage.setItem('passOnboarding', 'passed');
+      console.log("======--=====------=========");
+      await AsyncStorage.setItem('passOnboarding', "1");
     } catch (error) {
       // Error saving data
+      console.log("======--=====------=========", error);
     }
-    this.getAllProductDetail();
   }
 
   getProductID(zone_id) {

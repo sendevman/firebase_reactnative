@@ -12,6 +12,8 @@
 #import <React/RCTRootView.h>
 #import <CoreBluetooth/CoreBluetooth.h>
 #import <Firebase.h>
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
 
 @implementation AppDelegate
 
@@ -22,13 +24,14 @@
 
 //  jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
   #ifdef DEBUG
-    jsCodeLocation = [NSURL URLWithString:@"http://192.168.0.10:8081/index.bundle?platform=ios&dev=true"];
+    jsCodeLocation = [NSURL URLWithString:@"http://192.168.1.116:8081/index.bundle?platform=ios&dev=true"];
   #else
     jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
   #endif
 
 //  jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
   [FIRApp configure];
+  [Fabric with:@[[Crashlytics class]]];
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
                                                       moduleName:@"RetailCompanion"
                                                initialProperties:nil

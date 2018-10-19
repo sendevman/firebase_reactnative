@@ -103,8 +103,8 @@ class CompareModal extends Component {
         return fullName.indexOf(this.state.searchText) > -1;
       });
     } else { return this.props.productsNear.filter(item => {
-      if(item.title === "title") return false;
-      return (typeof item != "undefined" && Object.keys(item).length !== 0); }); }
+      if( JSON.stringify(item) === "{}") return false;
+      return (typeof item != "undefined"); }); } // && Object.keys(item).length !== 0); }); }
   }
 
   renderProductItem(section) {
@@ -117,7 +117,8 @@ class CompareModal extends Component {
 
   renderProductList() {
     const allItems = this.searchItems();
-    let allItemsWithoutEmpty = allItems.filter(item => { return (typeof item != "undefined" && Object.keys(item).length !== 0); });
+    console.log("------search----", allItems);
+    let allItemsWithoutEmpty = allItems.filter(item => { return (typeof item != "undefined"); });// && Object.keys(item).length !== 0); });
     const items = allItemsWithoutEmpty.map((obj) => { return { key: obj.id, fullName: obj.manufacture + " " + obj.model, data: [''] }})
 
     if (typeof items != "undefined" && items.length > 0) {
