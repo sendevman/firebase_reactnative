@@ -117,7 +117,7 @@ class ReviewsScreen extends Component {
 
   renderContent() {
     const { reviews } = this.props;
-    let reviewsEmpty = ((typeof reviews == "undefined") || (Object.keys(reviews).length === 0 && reviews.constructor === Object));
+    let reviewsEmpty = ((typeof reviews == "undefined"));// || (Object.keys(reviews).length === 0 && reviews.constructor === Object));
 
     const isTitle = reviews.title === "title" ? true : false;
     if (isTitle) {
@@ -135,12 +135,12 @@ class ReviewsScreen extends Component {
               height: '100%',
               justifyContent: 'center',
             }}
-            source={require('../assets/images/files/backgroundHD.png')}
+            source={require('../assets/images/files/backgroundSD.png')}
           />
         </View>
       );
     }
-    if (Object.keys(reviews).length === 0 && reviews.constructor === Object) {
+    if (Object.keys(reviews).length === 0 ){
       return ( <ReviewsSkeleton /> );
     } else {
       return (

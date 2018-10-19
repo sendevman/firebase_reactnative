@@ -12,22 +12,23 @@ const deviceId = DeviceInfo.getUniqueID();
 
 class TestScreen extends Component {
   render() {
-    const { bledata, network } = this.props;
+    const { bledata, network, replaceurl } = this.props;
 
     return (
-        <View style={{ flex: 1, marginTop:30 }}>
-          <ScrollView>
-            <Text>PRODUCTS NEAR YOU</Text>
-            <Text>Latitude  : {bledata.lat}</Text>
-            <Text>Longitude : {bledata.lng}</Text>
-            <Text>Height    : {bledata.height}</Text>
-            <Text>Floor ID  : {bledata.floor_id}</Text>
-            <Text>Zone ID   : {bledata.zone_id}</Text>
-            <Text>Time      : {bledata.ts}</Text>
-            <Text>Device ID : {deviceId}</Text>
-            <Text>SSID      : {network.ssid}</Text>
-          </ScrollView>
-        </View>
+      <View style={{ flex: 1, marginTop: 30 }}>
+        <ScrollView>
+          <Text>PRODUCTS NEAR YOU</Text>
+          <Text>Latitude  : {bledata.lat}</Text>
+          <Text>Longitude : {bledata.lng}</Text>
+          <Text>Height    : {bledata.height}</Text>
+          <Text>Floor ID  : {bledata.floor_id}</Text>
+          <Text>Zone ID   : {bledata.zone_id}</Text>
+          <Text>Time      : {bledata.ts}</Text>
+          <Text>Device ID : {deviceId}</Text>
+          <Text>SSID      : {network.ssid}</Text>
+          <Text>Replace URL      : {replaceurl}</Text>
+        </ScrollView>
+      </View>
     );
   }
 }
@@ -35,7 +36,7 @@ class TestScreen extends Component {
 const mapStateToProps = state => {
   const { current, common } = state;
 
-  return { bledata: current.position, network: common.network };
+  return { bledata: current.position, network: common.network, replaceurl: common.replaceurl };
 }
 
 export default connect(mapStateToProps)(TestScreen);
