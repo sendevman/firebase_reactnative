@@ -5,7 +5,7 @@
  */
 
 import React, { Component } from 'react';
-import { View, Image, Text } from 'react-native';
+import { View, Image, Text, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 import { connect } from 'react-redux';
 import firebase from 'react-native-firebase';
@@ -20,9 +20,19 @@ import styles, { itemWidth, sliderWidth } from './css/MainScreenCss';
 class MainLayout extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      sliderActiveSlide: 0,
+      locationData: null
+    }
     this.getCurrentLocationData();
   }
 
+  componentWillReceiveProps(nextProps) {
+    console.log("==", nextProps.locations)
+    if (this.props.locationData !== nextProps.locations) {
+      console.log("==", nextProps.locationData)
+    }
+  }
   getCurrentLocationData() {
     const locationtRef = firebase.firestore().collection('locations');
     locationtRef.get()
@@ -63,37 +73,57 @@ class MainLayout extends Component {
       )
     ).then(results => {
       this.props.dispatch(setLocationAllInfo(results));
+      this.setState({ locationData: results })
       console.log("****", results);
     })
       .catch(error => { })
   }
 
+  gotoZone = (index) => {
+    this.props.navigation.navigate('ProductLayout');
+  }
+
   _renderItem({ item, index }) {
-    console.log(item);
     return (
       <View style={styles.itemContainer} key={index}>
-        <View style={styles.itemImgBG}>
-          <Image style={styles.bgImage} source={{ uri: item.img }} />
-        </View>
+        <TouchableOpacity onPress={() => this.gotoZone(index)}>
+          <View style={styles.itemImgBG}>
+            <Image style={styles.bgImage} source={{ uri: item.titleCard.img }} />
+          </View>
+        </TouchableOpacity>
         <View style={styles.itemRight}>
-          <Text>{item.title}</Text>
+          <Text style={styles.textTitle}>{item.titleCard.title}</Text>
+          <Text style={styles.textSubTitle}>{item.titleCard.subtitle}</Text>
         </View>
       </View>
     );
   }
 
   render() {
+    const { locationData, sliderActiveSlide } = this.state;
+    console.log(locationData);
+    let currentLocationsData = null;
+    let bgImg = require('../assets/images/files/splash.png');
+    if (locationData !== null) {
+      currentLocationsData = locationData[0].zones;
+      bgImg = {uri: locationData[0].zones[sliderActiveSlide].homeCard.img};
+    }
     return (
       <SafeAreaView forceInset={{ top: 'always' }} style={{ backgroundColor: '#FFF' }}>
         <View style={{ width: '100%', height: '100%' }}>
-          <Image style={styles.backImage} source={require('../assets/images/files/splash.png')} />
+          <Image style={styles.backImage} source={bgImg} />
           <View style={styles.sliderView}>
-            <Carousel
-              ref={c => this._carouselRef = c}
-              data={FakeAreas}
-              renderItem={this._renderItem.bind(this)}
-              sliderWidth={sliderWidth}
-              itemWidth={itemWidth} />
+            {currentLocationsData &&
+              <Carousel
+                ref={c => this._carouselRef = c}
+                data={currentLocationsData}
+                renderItem={this._renderItem.bind(this)}
+                sliderWidth={sliderWidth}
+                itemWidth={itemWidth}
+                onSnapToItem={index => {
+                  this.setState({ sliderActiveSlide: index });
+                }} />
+            }
           </View>
         </View>
       </SafeAreaView>
@@ -102,9 +132,9 @@ class MainLayout extends Component {
 }
 
 const mapStateToProps = state => {
-  const { common, current, productsNear } = state;
+  const { common, current, productsNear, locaitons } = state;
 
-  return { firebaseid: common.firebaseid, locationData: current.position, productsNear: productsNear.productsNear };
+  return { firebaseid: common.firebaseid, currentPosition: current.position, productsNear: productsNear.productsNear, locationData: locations.locationAll };
 }
 
 export default connect(mapStateToProps)(MainLayout);

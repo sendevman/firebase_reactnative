@@ -6,7 +6,7 @@
 
 import React, { Component } from 'react';
 import { AsyncStorage, Button, NetInfo, ScrollView, StatusBar, Text, View, NativeEventEmitter, NativeModules } from 'react-native';
-import { createDrawerNavigator, createBottomTabNavigator, SafeAreaView } from 'react-navigation';
+import { createDrawerNavigator, createBottomTabNavigator, SafeAreaView, createStackNavigator } from 'react-navigation';
 import { NetworkInfo } from 'react-native-network-info';
 import firebase from 'react-native-firebase';
 import { connect } from 'react-redux';
@@ -33,17 +33,18 @@ const BleManagerModule = NativeModules.BleManager;
 // const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
 const ws = new WebSocket('wss://wai.walkbase.com/api/v2/subscribe/device');
 
+
 const BottomTabNav = createBottomTabNavigator(
   {
-    Home: {
-      screen: MainLayout,
-      navigationOptions: {
-        title: 'Home',
-        tabBarIcon: ({ tintColor }) => {
-          return <Icon name="SharedSession" width="22" height="22" fill={tintColor} viewBox="0 0 22 22" />;
-        }
-      }
-    },
+    // Home: {
+    //   screen: MainLayout,
+    //   navigationOptions: {
+    //     title: 'Home',
+    //     tabBarIcon: ({ tintColor }) => {
+    //       return <Icon name="SharedSession" width="22" height="22" fill={tintColor} viewBox="0 0 22 22" />;
+    //     }
+    //   }
+    // },
     ExclusiveVod: {
       screen: VodLayout,
       navigationOptions: {
@@ -79,7 +80,7 @@ const BottomTabNav = createBottomTabNavigator(
     },
   },
   {
-    initialRouteName: 'Home',
+    initialRouteName: 'ExclusiveVod',
     tabBarOptions: {
       activeTintColor: '#FFF',
       activeBackgroundColor: '#1181FF',
@@ -99,6 +100,23 @@ const BottomTabNav = createBottomTabNavigator(
   }
 );
 
+const MainNav = createStackNavigator(
+  {
+    Home: {
+      screen: MainLayout,
+    },
+    TabNav: {
+      screen: BottomTabNav
+    },
+    ProductLayout: {
+      screen: ProductLayout
+    }
+  },
+  {
+    initialRouteName: 'Home',
+    headerMode: 'none',
+  }
+)
 // export default DrawerNav;
 // END Before --------------------------------------------------------------
 
@@ -247,7 +265,7 @@ class Routes extends Component {
 
   render() {
     return (
-      <BottomTabNav />
+      <MainNav />
     )
   }
 }
