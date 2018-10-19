@@ -285,7 +285,7 @@ class InfoSpecsScreen extends Component {
         (life.chargingWired || life.chargingWireless ||
           (life.wirelesChargingType && life.wirelesChargingType.length > 0)));
       return (
-        <View style={{ paddingBottom: 10 }}>
+        <View style={{ height: viewWidth * 670 / 1080}}>
           <View style={styles.hrDivider}></View>
           {/* <Text style={styles.titleDivider}>Battery</Text> */}
           {/* <Icon name="Heading_battery" width={viewWidth} height={viewWidth / 1080 * 210} fill="#1181FF" viewBox="0 0 1080 210" style={{ marginLeft: 6 }} /> */}
@@ -454,7 +454,7 @@ class InfoSpecsScreen extends Component {
     return (
       <View>
         {/* <Icon name="Heading_accessories" width={viewWidth} height={viewWidth / 1080 * 210} fill="#1181FF" viewBox="0 0 1080 210" style={{ marginLeft: 6 }} /> */}
-        <View style={[styles.accessoriesBackground1, { width: viewWidth, marginLeft: 6, marginTop: 40 }]}>
+        <View style={[styles.accessoriesBackground1, { width: viewWidth, marginLeft: 6, marginTop: 30 }]}>
           <Image style={[styles.accessoriesBackground, { width: viewWidth, height: viewWidth * 210 / 1080, marginLeft: 0 }]} source={require('../assets/images/files/accessories.png')} />
         </View>
         <View style={[styles.accessoriesBox, { width: viewWidth }]}>

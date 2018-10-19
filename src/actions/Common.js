@@ -14,6 +14,11 @@ export const setNetworkInfo = (params) => ({
   payload: params
 })
 
+export const setReplaceURL = (params) => ({
+  type: 'UPDATE_REPLACE_URL',
+  payload: params
+})
+
 export const setFirebaseID = (params) => ({
   type: 'GET_FIREBASE_ID',
   payload: params
