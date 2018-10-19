@@ -46,7 +46,6 @@ class ReviewsScreen extends Component {
 
   componentWillReceiveProps(nextProps) {
     if(nextProps.selectedTab === 1 && nextProps.reviews.model != undefined) {
-      console.log("log event ======= : ", {"pFirebaseId":this.props.firebaseid, "pDeviceModel":nextProps.reviews.model, "pDeviceManufacture":nextProps.reviews.manufacture, "pResearchTab":"reviews"});
       firebase.analytics().logEvent("deviceViewed", {"pFirebaseId":this.props.firebaseid, "pDeviceModel":nextProps.reviews.model, "pDeviceManufacture":nextProps.reviews.manufacture, "pResearchTab":"reviews"});
     }
   }

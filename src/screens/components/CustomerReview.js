@@ -23,7 +23,6 @@ class CustomerReview extends Component<props> {
   toggleReadMore = () => {
     this.setState({ readMore: !this.state.readMore });
     if(!this.state.readMore){
-      console.log("reviewViewed ======= : ", {"pFirebaseId":this.props.firebaseid, "pDeviceModel":this.props.model, "pDeviceManufacture":this.props.manufacture, "pReviewType":"customer"});
       firebase.analytics().logEvent("reviewViewed", {"pFirebaseId":this.props.firebaseid, "pDeviceModel":this.props.model, "pDeviceManufacture":this.props.manufacture, "pReviewType":"customer"});
     }
   }
