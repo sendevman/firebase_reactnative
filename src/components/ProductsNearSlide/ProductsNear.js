@@ -29,7 +29,7 @@ class ProductsNear extends Component {
     this.state = { sliderActiveSlide: 0 };
   }
 
-  _renderItem({item, index}) {
+  _renderItem({ item, index }) {
     const { areaData, currentProducts } = this.props;
 
     const getProduct = (productId) => {
@@ -37,7 +37,7 @@ class ProductsNear extends Component {
       return match.length > 0 ? match[0] : null;
     };
 
-    // console.log("-=-=-=", currentProducts, this.props);
+    console.log("-=-=-=", currentProducts, this.props);
     const matching = {};
     ((!this.props.areaData ? [] : this.props.areaData.products) || []).forEach(element => {
       matching[element] = getProduct(element);
@@ -105,6 +105,11 @@ class ProductsNear extends Component {
       extrapolate: 'clamp'
     });
 
+    // let titleItem = { width: 120 }
+    // let btnBox = { width: itemWidth - 188 }
+
+    // let fastOpacity = { opacity: 1};
+    // const itemBoxHeight = 180;
     if (item === 'titleCard') {
       return (
         <View style={styles.itemContainer} key={index}>
@@ -114,7 +119,7 @@ class ProductsNear extends Component {
             <Animated.Image
               style={styles.titleCardArrow}
               resizeMode={Image.resizeMode.cover}
-              source={ require("../../assets/images/files/titleCardArrow.png") } />
+              source={require("../../assets/images/files/titleCardArrow.png")} />
 
             <TouchableOpacity onPress={this.props.zone}>
               <View style={styles.titleCardBox}>
@@ -128,7 +133,7 @@ class ProductsNear extends Component {
         </View>
       );
     } else {
-      return(
+      return (
         <View style={styles.itemContainer} key={index}>
           <Animated.View style={[styles.itemBox, { height: itemBoxHeight }]}>
             <Animated.View style={[styles.imageBox, fastOpacity]}>
@@ -160,7 +165,7 @@ class ProductsNear extends Component {
                 </View>
               </Animated.View>
 
-              <Animated.View style={[ btnBox ]}>
+              <Animated.View style={[btnBox]}>
                 <ButtonCompare onGoToCompareBtn={() => this.props.onGoToCompare()} />
               </Animated.View>
             </View>
@@ -189,9 +194,9 @@ class ProductsNear extends Component {
 
     return (
       <View style={{ width: viewportWidth, paddingVertical: 10, flexDirection: 'row', justifyContent: 'center' }}>
-        { this.gradient }
+        {this.gradient}
 
-        { (currentProducts || []).length > 0 ?
+        {(currentProducts || []).length > 0 ?
           <View>
             <Carousel
               ref={c => this._carouselRef = c}
@@ -199,32 +204,21 @@ class ProductsNear extends Component {
               renderItem={this._renderItem.bind(this)}
               sliderWidth={sliderWidth}
               itemWidth={itemWidth}
-              layout={'default'}
+              layout={'stack'}
+              removeClippedSubviews={false}
               onSnapToItem={index => {
                 this.setState({ sliderActiveSlide: index });
                 index === 0 ? this.props.onFirstSelect() : this.props.onProductIdChange(areaData.products[index]);
               }} />
-
-            <Pagination
-              dotsLength={areaData.products.length}
-              activeDotIndex={sliderActiveSlide}
-              containerStyle={styles.paginationContainer}
-              dotColor={'#FFF'}
-              dotStyle={styles.paginationDot}
-              inactiveDotColor={'rgba(255, 255, 255, 0.5)'}
-              inactiveDotOpacity={0.9}
-              inactiveDotScale={0.6}
-              carouselRef={this._carouselRef}
-              tappableDots={!!this._carouselRef} />
           </View>
           :
           <View style={[styles.itemContainer, { maxHeight: 202, width: itemWidth, marginHorizontal: (viewportWidth - itemWidth) / 2 }]}>
-            { areaDataEmpty &&
+            {areaDataEmpty &&
               <TouchableOpacity style={styles.loadingBox} onPress={this.props.zone}>
                 <Text style={styles.title}>Explore the store and we will show you what’s near</Text>
               </TouchableOpacity>
             }
-            { !areaDataEmpty &&
+            {!areaDataEmpty &&
               <View style={styles.loadingBox}>
                 <Spinkit isVisible={true} type={'Circle'} color={'#FFF'} size={20} />
               </View>
