@@ -5,7 +5,7 @@
  */
 
 import React, { Component } from 'react';
-import { Animated, AsyncStorage, Dimensions, TouchableHighlight } from 'react-native';
+import { Animated, AsyncStorage, Dimensions, TouchableHighlight, TouchableOpacity, View, Text } from 'react-native';
 import { createStackNavigator, SafeAreaView } from 'react-navigation';
 import { connect } from 'react-redux';
 import firebase from 'react-native-firebase';
@@ -263,7 +263,7 @@ class ProductLayoutScreen extends Component {
   }
 
   render() {
-    const { productsNear } = this.props;
+    const { productsNear, navigation } = this.props;
 
     return (
       <SafeAreaView forceInset={{ top: 'always' }} style={{ backgroundColor: '#FFF' }}>
@@ -274,7 +274,11 @@ class ProductLayoutScreen extends Component {
           currentProducts={productsNear}
           zone={this.zone.bind(this)}
           onGoToCompare={() => this.props.navigation.navigate('Compare')} />
-
+        <View style={{position: 'absolute', top:40, left:10}}>
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('Home')}>
+            <Icon name="ArrowLeft" width="10" height="16" viewBox="0 0 10 16" fill="#FFFFFF" />
+          </TouchableOpacity>
+        </View>
         <Animated.View style={{ width: '100%', height: height - 174 }}>
           <RoutesProducts onScrollLayout={this.state.animatedValue} />
         </Animated.View>
