@@ -14,7 +14,7 @@ function wp (percentage) {
 };
 
 const IS_IOS = Platform.OS === 'ios';
-const slideWidth = wp(85);
+const slideWidth = wp(80);
 const itemHorizontalMargin = wp(1);
 
 export const sliderWidth = (viewportWidth > 400 ? 400 : viewportWidth);
