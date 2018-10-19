@@ -121,7 +121,7 @@ class ProductsNear extends Component {
               resizeMode={Image.resizeMode.cover}
               source={require("../../assets/images/files/titleCardArrow.png")} />
 
-            <TouchableOpacity onPress={this.props.zone}>
+            <TouchableOpacity >
               <View style={styles.titleCardBox}>
                 <Icon height="30" width="30" name="ManIcon" viewBox="0 0 127 125" fill="#000" />
                 <Text numberOfLines={1} style={styles.titleCard}>{areaData.titleCard.title}</Text>

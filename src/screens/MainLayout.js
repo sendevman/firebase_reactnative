@@ -80,7 +80,10 @@ class MainLayout extends Component {
   }
 
   gotoZone = (index) => {
-    this.props.navigation.navigate('ProductLayout');
+    const arrAreas = this.state.locationData[0].zones[index];
+    this.props.navigation.navigate('ProductLayout', {
+      areaData: arrAreas
+    });
   }
 
   _renderItem({ item, index }) {
