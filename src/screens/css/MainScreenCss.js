@@ -24,14 +24,13 @@ export default StyleSheet.create({
   backImage: {
     height: height,
     width: width,
-    resizeMode: 'contain',
-    opacity: 0.2
+    resizeMode: 'stretch',
+    opacity: 0.8
   },
   sliderView: {
     height: 200,
     width: width,
-    resizeMode: 'contain',
-    marginTop: -280
+    marginTop: -240
   },
   // Item Section
   itemContainer: {
@@ -49,20 +48,39 @@ export default StyleSheet.create({
     width: 140,
     height: 180,
     borderRadius: 10,
-    backgroundColor: 'white'
+    borderWidth: 2,
+    borderColor: '#8d8'
+    // backgroundColor: 'white'
   },
   bgImage: {
     // ...StyleSheet.absoluteFillObject,
-    width: 140,
-    height: 180,
-    resizeMode: 'contain',
-    opacity: 1
+    resizeMode: 'stretch',
+    width: 136,
+    height: 176,
+    opacity: 1,
+    borderRadius: 10,
   },
   itemRight: {
     flexDirection: 'column',
     marginLeft: 20,
     borderRadius: 10,
-    alignItems: 'center',
+    alignItems: 'flex-start',
+    height: 160
     // backgroundColor: 'white'
+  },
+  textTitle: {
+    height: 32,
+    color: '#FFF',
+    fontSize: 24,
+    fontWeight: 'bold',
+    letterSpacing: 0.1,
+    lineHeight: 26,
+  },
+  textSubTitle: {
+    // height: 32,
+    color: '#FFF',
+    fontSize: 20,
+    letterSpacing: 0.1,
+    lineHeight: 22,
   }
 })
