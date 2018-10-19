@@ -249,12 +249,6 @@ class Routes extends Component {
       <BottomTabNav />
     )
   }
-  render1() {
-    const ispass = this.state.ispass;
-    return (
-      ispass ? <DrawerNav /> : <DrawerNav1 />
-    );
-  }
 }
 
 function mapDispatchToProps(dispatch) {

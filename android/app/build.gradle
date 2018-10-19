@@ -1,4 +1,19 @@
+buildscript {
+    repositories {
+        maven { url 'https://maven.fabric.io/public' }
+    }
+
+    dependencies {
+        // These docs use an open ended version so that our plugin
+        // can be updated quickly in response to Android tooling updates
+
+        // We recommend changing it to the latest version from our changelog:
+        // https://docs.fabric.io/android/changelog.html#fabric-gradle-plugin
+        classpath 'io.fabric.tools:gradle:1.25.4'
+    }
+}
 apply plugin: "com.android.application"
+apply plugin: 'io.fabric'
 
 import com.android.build.OutputFile
 
@@ -141,6 +156,7 @@ android {
         flatDir {
             dirs 'lib'
         }
+        maven { url 'https://maven.fabric.io/public' }
     }
 
 }
@@ -164,10 +180,11 @@ dependencies {
     implementation "com.facebook.react:react-native:+"  // From node_modules
 
     implementation 'com.android.support:multidex:1.0.3'
-    implementation 'com.google.firebase:firebase-core:16.0.1'
+    implementation 'com.google.firebase:firebase-core:16.0.3'
     implementation 'com.google.firebase:firebase-firestore:17.1.0'
     implementation 'com.google.firebase:firebase-auth:16.0.3'
-    implementation 'com.google.firebase:firebase-database:16.0.1'
+    implementation 'com.google.firebase:firebase-database:16.0.2'
+    implementation 'com.crashlytics.sdk.android:crashlytics:2.9.5'
 
     implementation(name: 'walkbase-sdk-2.3', ext: 'aar')
     implementation 'org.jetbrains.anko:anko-commons:0.10.4'
@@ -188,3 +205,4 @@ task copyDownloadableDepsToLibs(type: Copy) {
 }
 
 apply plugin: 'com.google.gms.google-services'
+com.google.gms.googleservices.GoogleServicesPlugin.config.disableVersionCheck = true
