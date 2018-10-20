@@ -274,7 +274,7 @@ class ProductLayoutScreen extends Component {
                 <Icon height="50" width="50" name="ManIcon" viewBox="0 0 127 125" fill="#000" />
               </View>
               <Text style={{ textAlign: 'center', color: "#000000DD", fontSize: 20, marginLeft: 20 }}>Samsung</Text>
-              <View style={{ position: 'absolute', right: -20, top: 5 }}>
+              <View style={{ position: 'absolute', right: -20, top: 6 }}>
                 <TouchableOpacity onPress={() => this.setState({ enterZone: false })} style={{ width: 46, height: 52, borderTopRightRadius: 16 }}>
                   <Icon name="CloseX" width="14" height="14" viewBox="0 0 14 14" fill="#1181FF" />
                 </TouchableOpacity>
@@ -302,7 +302,7 @@ class ProductLayoutScreen extends Component {
             <Icon name="ArrowLeft" width="10" height="16" viewBox="0 0 10 16" fill="#FFFFFF" />
           </TouchableOpacity>
         </View>
-        <Animated.View style={{ width: '100%', height: height - 174 }}>
+        <Animated.View style={{ width: '100%', height: height - 100 }}>
           <RoutesProducts onScrollLayout={this.state.animatedValue} />
         </Animated.View>
         {this.showEnterZoneDialog()}
