@@ -115,6 +115,7 @@ const MainNav = createStackNavigator(
   {
     initialRouteName: 'Home',
     headerMode: 'none',
+    gesturesEnabled: false,
   }
 )
 // export default DrawerNav;
