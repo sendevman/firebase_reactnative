@@ -5,8 +5,9 @@
  */
 
 import React, { Component } from 'react';
-import { Animated, AsyncStorage, Dimensions, TouchableHighlight, TouchableOpacity, View, Text, Image, TouchableWithoutFeedback, Modal } from 'react-native';
+import { Animated, AsyncStorage, Dimensions, TouchableHighlight, TouchableOpacity, View, Text, Image, TouchableWithoutFeedback } from 'react-native';
 import { createStackNavigator, SafeAreaView } from 'react-navigation';
+import Modal from "react-native-modal";
 import { connect } from 'react-redux';
 import firebase from 'react-native-firebase';
 
@@ -15,7 +16,7 @@ import Icon from '../assets/images/Icon';
 import LogoTitle from './components/LogoTitle';
 import GradientHeader from './components/GradientHeader';
 import ProductsNearSlide from '../components/ProductsNearSlide/ProductsNear';
-
+import styles from './css/ProductSceenCss';
 // My Routes
 import RoutesProducts from '../routes/Products'
 
@@ -249,6 +250,9 @@ class ProductLayoutScreen extends Component {
       )
     };
   };
+  onShouldClose() {
+
+  }
   _renderOutsideTouchable() {
     const view = <View style={{ flex: 1, width: '100%' }} />
 
@@ -262,42 +266,21 @@ class ProductLayoutScreen extends Component {
   }
   showEnterZoneDialog() {
     return (
-      <Modal transparent={true} visible={this.state.enterZone}>
-        <View style={{ flex: 1, backgroundColor: "#000000AA", padding: 4 }}>
-          {/* {this._renderOutsideTouchable()} */}
-          <View style={{
-            position: 'absolute',
-            width: width - 20,
-            height: 60,
-            bottom: 10,
-            left: 10,
-          }}>
-            <TouchableOpacity onPress={() => this.setState({ enterZone: true })}>
-              <View style={[{
-                backgroundColor: '#e8e8e8',
-                width: width - 20,
-                height: 60,
-                shadowOpacity: 0.24,
-                borderRadius: 5,
-                elevation: 4,flexDirection: 'row', alignItems: 'center', 
-                shadowOffset: {
-                  height: 4,
-                  width: 2
-                }
-              }]}>
-                <View style={{ marginLeft: 20, alignItems: 'center', }}>
-                  <Icon height="50" width="50" name="ManIcon" viewBox="0 0 127 125" fill="#000" />
-                </View>
-                <Text style={{ textAlign: 'center', color: "#000000DD", fontSize: 20, marginLeft: 20 }}>Samsung</Text>
-                <View style={{position:'absolute', right: -20, top: 5}}>
-                  <TouchableOpacity onPress={() => this.setState({ enterZone: false })} style={{ width: 46, height: 52, borderTopRightRadius: 16 }}>
-                    <Icon name="CloseX" width="14" height="14" viewBox="0 0 14 14" fill="#1181FF" />
-                  </TouchableOpacity>
-                </View>
+      <Modal style={[styles.modalContent, styles.bottomModal]} isVisible={this.state.enterZone} onSwipe={() => this.setState({ enterZone: true })} swipeDirection="left">
+        <View style={{ flex: 1, position: 'absolute', bottom: 10}}>
+          <TouchableOpacity onPress={() => this.setState({ enterZone: true })}>
+            <View style={styles.bottomModalView}>
+              <View style={{ marginLeft: 20, alignItems: 'center', }}>
+                <Icon height="50" width="50" name="ManIcon" viewBox="0 0 127 125" fill="#000" />
               </View>
-            </TouchableOpacity>
-          </View>
-          {/* {this._renderOutsideTouchable()} */}
+              <Text style={{ textAlign: 'center', color: "#000000DD", fontSize: 20, marginLeft: 20 }}>Samsung</Text>
+              <View style={{ position: 'absolute', right: -20, top: 5 }}>
+                <TouchableOpacity onPress={() => this.setState({ enterZone: false })} style={{ width: 46, height: 52, borderTopRightRadius: 16 }}>
+                  <Icon name="CloseX" width="14" height="14" viewBox="0 0 14 14" fill="#1181FF" />
+                </TouchableOpacity>
+              </View>
+            </View>
+          </TouchableOpacity>
         </View>
       </Modal>
     )
