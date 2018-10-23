@@ -285,7 +285,7 @@ class InfoSpecsScreen extends Component {
         (life.chargingWired || life.chargingWireless ||
           (life.wirelesChargingType && life.wirelesChargingType.length > 0)));
       return (
-        <View style={{ height: viewWidth * 670 / 1080}}>
+        <View style={{ height: viewWidth * 670 / 1080 }}>
           <View style={styles.hrDivider}></View>
           {/* <Text style={styles.titleDivider}>Battery</Text> */}
           {/* <Icon name="Heading_battery" width={viewWidth} height={viewWidth / 1080 * 210} fill="#1181FF" viewBox="0 0 1080 210" style={{ marginLeft: 6 }} /> */}
@@ -385,7 +385,8 @@ class InfoSpecsScreen extends Component {
         <View style={{
           width: width,
           height: height,
-          backgroundColor: 'black'}}>
+          backgroundColor: 'black'
+        }}>
           <Image
             style={{
               backgroundColor: '#ccc',
@@ -464,6 +465,11 @@ class InfoSpecsScreen extends Component {
     );
   }
 
+  _animateScroll = (event) => {
+    const y = event.nativeEvent.contentOffset.y;
+    if (y < 60) this.props.onScrollCustom.setValue(y*2);
+    else this.props.onScrollCustom.setValue(120);
+  }
   _onScrollEndSnapToEdge = (event) => {
     const y = event.nativeEvent.contentOffset.y;
     if (y < 60) this.props.onScrollCustom.setValue(0);
@@ -477,17 +483,18 @@ class InfoSpecsScreen extends Component {
 
     return (
       <Animated.ScrollView contentContainerStyle={styles.container} scrollEventThrottle={1}
-        /*onScroll={Animated.event(
-          [{ nativeEvent: { contentOffset: { y: this.props.onScrollCustom } } }],
-          {
-            /*useNativeDriver: true*//*,
-listener: event => {
-  const offsetY = event.nativeEvent.contentOffset.y
-  this.props.onScrollCustom(offsetY);
-}* /
-}
-)}*/
-        onScrollEndDrag={this._onScrollEndSnapToEdge}
+        // onScroll={Animated.event(
+        //   [{ nativeEvent: { contentOffset: { y: this.props.onScrollCustom } } }],
+        //   {
+        //     useNativeDriver: true,
+        //     listener: event => {
+        //       const offsetY = event.nativeEvent.contentOffset.y
+        //       this.props.onScrollCustom(offsetY);
+        //     }
+        //   }
+        // )}
+        onScroll={this._animateScroll}
+        // onScrollEndDrag={this._onScrollEndSnapToEdge}
       >
         {this.renderContent()}
       </Animated.ScrollView>
