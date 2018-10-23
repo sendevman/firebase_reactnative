@@ -323,7 +323,19 @@ export default StyleSheet.create({
     fontSize: 10,
     fontWeight: 'bold',
     letterSpacing: 0.12,
-    lineHeight: 14
+    lineHeight: 14,
+    textAlign: 'center',
+    height: 22
+  },
+  featureItemTitleSmall: {
+    color: '#3E3F42',
+    height: 22,
+    // fontFamily: 'Roboto',
+    fontSize: 10,
+    fontWeight: 'bold',
+    letterSpacing: 0.12,
+    lineHeight: 10,
+    textAlign: 'center'
   },
   featureItemMount: {
     color: '#3E3F42',

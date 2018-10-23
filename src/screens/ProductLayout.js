@@ -163,8 +163,11 @@ class ProductLayoutScreen extends Component {
         accsRef.doc(accessoryId).get()
           .then(accessory => {
             if (!accessory.exists) resolve({});
-            const accessoryData = accessory.data();
-            accessoryData.id = accessoryId;
+            let accessoryData = accessory.data();
+            if(accessoryData !== undefined){
+              console.log(accessoryData);
+              accessoryData.id = accessoryId;
+            }
             resolve(accessoryData);
           })
           .catch(err => { console.log('Error getting documents', err); });
@@ -267,7 +270,7 @@ class ProductLayoutScreen extends Component {
   showEnterZoneDialog() {
     return (
       <Modal style={[styles.modalContent, styles.bottomModal]} isVisible={this.state.enterZone} onSwipe={() => this.setState({ enterZone: true })} swipeDirection="left">
-        <View style={{ flex: 1, position: 'absolute', bottom: 10}}>
+        <View style={{ flex: 1, position: 'absolute', bottom: 10 }}>
           <TouchableOpacity onPress={() => this.setState({ enterZone: true })}>
             <View style={styles.bottomModalView}>
               <View style={{ marginLeft: 20, alignItems: 'center', }}>
@@ -305,7 +308,7 @@ class ProductLayoutScreen extends Component {
         <Animated.View style={{ width: '100%', height: height - 100 }}>
           <RoutesProducts onScrollLayout={this.state.animatedValue} />
         </Animated.View>
-        {this.showEnterZoneDialog()}
+        {/* {this.showEnterZoneDialog()} */}
       </SafeAreaView>
     );
   }

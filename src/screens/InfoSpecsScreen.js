@@ -150,6 +150,28 @@ class InfoSpecsScreen extends Component {
       );
     }
   }
+  renderFitness() {
+    const { fitness } = this.props.infoSpecs;
+    const viewWidth = width - 34;
+
+    if (typeof fitness !== "undefined") { //Object.keys(display).length !== 0 && 
+      return (
+        <View style={{ paddingBottom: 10 }}>
+          <Image style={[styles.colorBackground, { width: viewWidth, height: viewWidth * 410 / 1080, marginLeft: 6, }]} source={require('../assets/images/files/display.png')} />
+          <View style={[styles.storageBox, { width: viewWidth - 1, marginLeft: 6, marginTop: -viewWidth / 1080 * (410 - 210) }]}>
+            <View style={styles.displaySizeItem}>
+              <View style={styles.displaySizeHr}></View>
+              <Text style={styles.displaySize}>{display.size}"</Text>
+            </View>
+            <View style={styles.displayTextItem}>
+              <Text style={styles.displayText}>{display.description} ({display.resolution}) {display.ppi} ppi</Text>
+              {/* <Text style={styles.displayText}>{display.ppi} ppi</Text> */}
+            </View>
+          </View>
+        </View>
+      );
+    }
+  }
 
   renderCamera() {
     const { camera } = this.props.infoSpecs;
@@ -195,14 +217,14 @@ class InfoSpecsScreen extends Component {
   }
 
   renderPerformanceAndStorage() {
-    const { deviceOptions, expandableStorage, memory, processor } = this.props.infoSpecs;
+    const { deviceOptions, expandableStorage, memory, processor, subType } = this.props.infoSpecs;
     const viewWidth = width - 34;
 
     const memoryEmpty = (!memory || !memory.trim() || 0 === memory.length);
     const processorEmpty = (typeof processor == "undefined");// || (Object.keys(processor).length === 0 && processor.constructor === Object));
     const doIsValid = (typeof deviceOptions == "undefined" || deviceOptions.length <= 0) ? false : true;
     const esIsValid = (typeof expandableStorage == "undefined") ? false : true; // || Object.keys(expandableStorage).length === 0) ? false : true;
-
+    
     var isAvailable = false;
     if (esIsValid) isAvailable = (typeof expandableStorage.available == "undefined") ? false : expandableStorage.available;
     else isAvailable = false;
@@ -268,7 +290,7 @@ class InfoSpecsScreen extends Component {
   }
 
   renderBattery() {
-    const { battery } = this.props.infoSpecs;
+    const { battery, subType } = this.props.infoSpecs;
     const viewWidth = width - 34;
 
     if (typeof battery !== "undefined") { //Object.keys(battery).length !== 0 && 
@@ -277,6 +299,8 @@ class InfoSpecsScreen extends Component {
       const lifeEmpty = (life !== "undefined"); //Object.keys(life).length === 0 && 
       const talkTimeEmpty = (!life.talkTime || !life.talkTime.trim() || 0 === life.talkTime.length);
       const videoEmpty = (!life.video || !life.video.trim() || 0 === life.video.length);
+      const talkEmpty = (!life.talk || !life.talk.trim() || 0 === life.talk.length);
+      const workoutEmpty = (!life.workout || !life.workout.trim() || 0 === life.workout.length);
       const audioEmpty = (!life.audio || !life.audio.trim() || 0 === life.audio.length);
       const internetWifiEmpty = (!life.internetWifi || !life.internetWifi.trim() || 0 === life.internetWifi.length);
       const internetL4GEmpty = (!life.internetL4G || !life.internetL4G.trim() || 0 === life.internetL4G.length);
@@ -285,7 +309,7 @@ class InfoSpecsScreen extends Component {
         (life.chargingWired || life.chargingWireless ||
           (life.wirelesChargingType && life.wirelesChargingType.length > 0)));
       return (
-        <View style={{ height: viewWidth * 670 / 1080}}>
+        <View style={{ height: viewWidth * 670 / 1080 }}>
           <View style={styles.hrDivider}></View>
           {/* <Text style={styles.titleDivider}>Battery</Text> */}
           {/* <Icon name="Heading_battery" width={viewWidth} height={viewWidth / 1080 * 210} fill="#1181FF" viewBox="0 0 1080 210" style={{ marginLeft: 6 }} /> */}
@@ -298,7 +322,11 @@ class InfoSpecsScreen extends Component {
                   <View>
                     <View style={styles.featureItemBattery}></View>
                     <View style={styles.featureItemBox}>
-                      <Text style={styles.featureItemTitle}>CALLING</Text>
+                      {subType === 'phone' ?
+                        <Text style={styles.featureItemTitle}>CALLING</Text>
+                        :
+                        <Text style={styles.featureItemTitleSmall}>GENERAL USE</Text>
+                      }
                       <Text style={styles.featureItemMount}>{life.talkTime.replace(' hrs', '')}</Text>
                       <Text style={styles.featureItemHour}>hours</Text>
                     </View>
@@ -315,6 +343,16 @@ class InfoSpecsScreen extends Component {
                     </View>
                   </View>
                 }
+                {!talkEmpty &&
+                  <View>
+                    <View style={styles.featureItemBattery}></View>
+                    <View style={styles.featureItemBox}>
+                      <Text style={styles.featureItemTitle}>TALK</Text>
+                      <Text style={styles.featureItemMount}>{life.talk.replace(' hrs', '')}</Text>
+                      <Text style={styles.featureItemHour}>hours</Text>
+                    </View>
+                  </View>
+                }
 
                 {!audioEmpty &&
                   <View>
@@ -322,6 +360,18 @@ class InfoSpecsScreen extends Component {
                     <View style={styles.featureItemBox}>
                       <Text style={styles.featureItemTitle}>AUDIO</Text>
                       <Text style={styles.featureItemMount}>{life.audio.replace(' hrs', '')}</Text>
+                      <Text style={styles.featureItemHour}>hours</Text>
+                    </View>
+                  </View>
+                }
+
+
+                {!workoutEmpty &&
+                  <View>
+                    <View style={styles.featureItemBattery}></View>
+                    <View style={styles.featureItemBox}>
+                      <Text style={styles.featureItemTitle}>WORKOUT</Text>
+                      <Text style={styles.featureItemMount}>{life.workout.replace(' hrs', '')}</Text>
                       <Text style={styles.featureItemHour}>hours</Text>
                     </View>
                   </View>
@@ -385,7 +435,8 @@ class InfoSpecsScreen extends Component {
         <View style={{
           width: width,
           height: height,
-          backgroundColor: 'black'}}>
+          backgroundColor: 'black'
+        }}>
           <Image
             style={{
               backgroundColor: '#ccc',
@@ -428,6 +479,7 @@ class InfoSpecsScreen extends Component {
 
             {this.renderColors()}
             {this.renderDisplay()}
+            {this.renderFitness()}
             {this.renderCamera()}
             {this.renderPerformanceAndStorage()}
             {this.renderBattery()}
@@ -482,8 +534,8 @@ class InfoSpecsScreen extends Component {
           {
             /*useNativeDriver: true*//*,
 listener: event => {
-  const offsetY = event.nativeEvent.contentOffset.y
-  this.props.onScrollCustom(offsetY);
+const offsetY = event.nativeEvent.contentOffset.y
+this.props.onScrollCustom(offsetY);
 }* /
 }
 )}*/
