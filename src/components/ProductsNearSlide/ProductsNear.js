@@ -37,7 +37,6 @@ class ProductsNear extends Component {
       return match.length > 0 ? match[0] : null;
     };
 
-    console.log("-=-=-=", currentProducts, this.props);
     const matching = {};
     ((!this.props.areaData ? [] : this.props.areaData.products) || []).forEach(element => {
       matching[element] = getProduct(element);
@@ -48,23 +47,23 @@ class ProductsNear extends Component {
         {
           translateX: this.props.animatedValue.interpolate({
             inputRange: [0, 120],
-            outputRange: [0, -172],
+            outputRange: [0, 0],
             extrapolate: 'clamp'
           })
         },
         {
           translateY: this.props.animatedValue.interpolate({
             inputRange: [0, 120],
-            outputRange: [0, 60],
+            outputRange: [0, 40],
             extrapolate: 'clamp'
           })
         }
       ],
-      width: this.props.animatedValue.interpolate({
-        inputRange: [0, 120],
-        outputRange: [itemWidth - 188, 160],
-        extrapolate: 'clamp'
-      })
+      // width: this.props.animatedValue.interpolate({
+      //   inputRange: [0, 120],
+      //   outputRange: [itemWidth - 188, 160],
+      //   extrapolate: 'clamp'
+      // })
     };
 
     let btnBox = {
@@ -72,23 +71,33 @@ class ProductsNear extends Component {
         {
           translateX: this.props.animatedValue.interpolate({
             inputRange: [0, 120],
-            outputRange: [-13, -25],
+            outputRange: [-13, 0],
             extrapolate: 'clamp'
           })
         },
         {
           translateY: this.props.animatedValue.interpolate({
             inputRange: [0, 120],
-            outputRange: [0, -63],
+            outputRange: [0, -40],
             extrapolate: 'clamp'
           })
         }
       ],
       width: this.props.animatedValue.interpolate({
         inputRange: [0, 120],
-        outputRange: [itemWidth - 162, itemWidth - 150],
+        outputRange: [itemWidth - 162, itemWidth - 122],
         extrapolate: 'clamp'
-      })
+      }),
+      height:this.props.animatedValue.interpolate({
+        inputRange: [0, 120],
+        outputRange: [40, 30],
+        extrapolate: 'clamp'
+      }),
+      padding:this.props.animatedValue.interpolate({
+        inputRange: [0, 120],
+        outputRange: [3, 1],
+        extrapolate: 'clamp'
+      }),
     };
 
     let fastOpacity = {
@@ -101,15 +110,30 @@ class ProductsNear extends Component {
 
     const itemBoxHeight = this.props.animatedValue.interpolate({
       inputRange: [0, 120],
-      outputRange: [180, 60],
+      outputRange: [180, 100],
       extrapolate: 'clamp'
     });
+
+    const imageBox1 = {      
+      width: this.props.animatedValue.interpolate({
+        inputRange: [0, 120],
+        outputRange: [164, 80],
+        extrapolate: 'clamp'
+      }),
+      height: this.props.animatedValue.interpolate({
+        inputRange: [0, 120],
+        outputRange: [164, 80],
+        extrapolate: 'clamp'
+      }),
+
+    }
 
     // let titleItem = { width: 120 }
     // let btnBox = { width: itemWidth - 188 }
 
     // let fastOpacity = { opacity: 1};
     // const itemBoxHeight = 180;
+    // console.log("---item box height---", itemBoxHeight)
     if (item === 'titleCard') {
       return (
         <View style={styles.itemContainer} key={index}>
@@ -136,7 +160,7 @@ class ProductsNear extends Component {
       return (
         <View style={styles.itemContainer} key={index}>
           <Animated.View style={[styles.itemBox, { height: itemBoxHeight }]}>
-            <Animated.View style={[styles.imageBox, fastOpacity]}>
+            <Animated.View style={[styles.imageBox, imageBox1]}>
               <Image style={styles.itemImage} resizeMode={Image.resizeMode.contain} source={{ uri: matching[item] ? matching[item].img : "" }} />
             </Animated.View>
 

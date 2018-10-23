@@ -5,7 +5,7 @@
  */
 
 import React, { Component } from 'react';
-import { Button, ScrollView, StatusBar, Text, View } from 'react-native';
+import { Button, ScrollView, StatusBar, Text, View, YellowBox } from 'react-native';
 import { createMaterialTopTabNavigator, SafeAreaView } from 'react-navigation';
 import { connect } from 'react-redux';
 
@@ -16,6 +16,8 @@ import CostPlansScreen from '../screens/CostPlansScreen';
 
 // My Actions
 import { selectTabBar } from '../actions/Common';
+
+YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Class RCTCxxModule']);
 
 const MyNavScreen = ({ navigation, banner }) => (
   <View style={{}}>
