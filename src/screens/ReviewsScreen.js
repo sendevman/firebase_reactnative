@@ -6,6 +6,7 @@
 
 import React, { Component } from 'react';
 import { Animated, Dimensions, Image, ScrollView, Text, View } from 'react-native';
+import { Rating } from 'react-native-ratings';
 import Svg, { Rect } from 'react-native-svg';
 import firebase from 'react-native-firebase';
 import { connect } from 'react-redux';
@@ -23,18 +24,18 @@ import FeedbackSurvey from './components/FeedbackSurvey';
 var { width, height } = Dimensions.get('window');
 
 const getWidth = (number) => {
-  return (((width - 20)/2) - number);
+  return (((width - 20) / 2) - number);
 };
 
 const ReviewsSkeleton = () => (
   <View style={styles.skeletonLoading}>
     <SkeletonLoading height={235}>
-      <Rect x={getWidth(100)} y="0" rx="3" ry="3" width="200" height="10"/>
-      <Rect x={getWidth(90)} y="15" rx="3" ry="3" width="180" height="10"/>
-      <Rect x="0" y="40" rx="5" ry="5" width="100%" height="80"/>
+      <Rect x={getWidth(100)} y="0" rx="3" ry="3" width="200" height="10" />
+      <Rect x={getWidth(90)} y="15" rx="3" ry="3" width="180" height="10" />
+      <Rect x="0" y="40" rx="5" ry="5" width="100%" height="80" />
 
-      <Rect x="0" y="130" rx="3" ry="3" width="120" height="10"/>
-      <Rect x="0" y="145" rx="5" ry="5" width="100%" height="80"/>
+      <Rect x="0" y="130" rx="3" ry="3" width="120" height="10" />
+      <Rect x="0" y="145" rx="5" ry="5" width="100%" height="80" />
     </SkeletonLoading>
   </View>
 );
@@ -45,8 +46,8 @@ class ReviewsScreen extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if(nextProps.selectedTab === 1 && nextProps.reviews.model != undefined) {
-      firebase.analytics().logEvent("deviceViewed", {"pFirebaseId":this.props.firebaseid, "pDeviceModel":nextProps.reviews.model, "pDeviceManufacture":nextProps.reviews.manufacture, "pResearchTab":"reviews"});
+    if (nextProps.selectedTab === 1 && nextProps.reviews.model != undefined) {
+      firebase.analytics().logEvent("deviceViewed", { "pFirebaseId": this.props.firebaseid, "pDeviceModel": nextProps.reviews.model, "pDeviceManufacture": nextProps.reviews.manufacture, "pResearchTab": "reviews" });
     }
   }
 
@@ -64,6 +65,17 @@ class ReviewsScreen extends Component {
     const { customerReviews, model, manufacture } = this.props.reviews;
 
     if (typeof customerReviews != "undefined" && customerReviews.length > 0) {
+      let star5 = 0; let star4 = 0; let star3 = 0; let star2 = 0; let star1 = 0;
+      let starTotal = 0; let starFinal = 0; let starCount = customerReviews.length;
+      for (i = 0; i < starCount; i++) {
+        starTotal += parseInt(customerReviews[i].stars);
+        if (parseInt(customerReviews[i].stars) === 5) star5++;
+        else if (parseInt(customerReviews[i].stars) === 4) star4++;
+        else if (parseInt(customerReviews[i].stars) === 3) star3++;
+        else if (parseInt(customerReviews[i].stars) === 2) star2++;
+        else star1++;
+      }
+      starFinal = (starTotal / starCount).toFixed(2);
       return (
         <View>
           <Text style={styles.webReviewTitle}>Reviews from myAT&T</Text>
@@ -73,11 +85,62 @@ class ReviewsScreen extends Component {
               <Image style={[styles.logoReview, { width: 60 }]} source={require('../assets/images/files/myAtt.jpg')} />
               <Text style={[styles.titleReview, { marginTop: -4 }]}>Customer Reviews</Text>
             </View>
-
-            { customerReviews.map((item, index) => {
-                return <CustomerReview key={index} index={index} item={item} model={model} manufacture={manufacture}/>;
-              })
-            }
+            <View style={styles.ratingView}>
+              <View style={{ flexDirection: 'row' }}>
+                <Rating
+                  type='custom'
+                  ratingColor='#fd650b'
+                  ratingBackgroundColor='#c8c7c8'
+                  ratingCount={5}
+                  imageSize={20}
+                  readonly
+                  startingValue={starFinal}
+                />
+                <Text style={styles.ratingStar}>{starFinal} stars</Text>
+              </View>
+              <Text style={styles.ratingDescription}>Rating Description ({starCount}reviews)</Text>
+              <View style={{ flexDirection: 'row', marginTop: 5 }}>
+                <Text style={styles.ratingText}>5 Star</Text>
+                <View style={styles.ratingBarBackground}>
+                  <View style={[styles.ratingBar, { width: 200 * star5 / starCount }]} />
+                </View>
+                <Text style={styles.ratingCountText}>{star5}</Text>
+              </View>
+              <View style={{ flexDirection: 'row', marginTop: 5 }}>
+                <Text style={styles.ratingText}>4 Star</Text>
+                <View style={styles.ratingBarBackground}>
+                  <View style={[styles.ratingBar, { width: 200 * star4 / starCount }]} />
+                </View>
+                <Text style={styles.ratingCountText}>{star4}</Text>
+              </View>
+              <View style={{ flexDirection: 'row', marginTop: 5 }}>
+                <Text style={styles.ratingText}>3 Star</Text>
+                <View style={styles.ratingBarBackground}>
+                  <View style={[styles.ratingBar, { width: 200 * star3 / starCount }]} />
+                </View>
+                <Text style={styles.ratingCountText}>{star3}</Text>
+              </View>
+              <View style={{ flexDirection: 'row', marginTop: 5 }}>
+                <Text style={styles.ratingText}>2 Star</Text>
+                <View style={styles.ratingBarBackground}>
+                  <View style={[styles.ratingBar, { width: 200 * star2 / starCount }]} />
+                </View>
+                <Text style={styles.ratingCountText}>{star2}</Text>
+              </View>
+              <View style={{ flexDirection: 'row', marginTop: 5 }}>
+                <Text style={styles.ratingText}>1 Star</Text>
+                <View style={styles.ratingBarBackground}>
+                  <View style={[styles.ratingBar, { width: 200 * star1 / starCount }]} />
+                </View>
+                <Text style={styles.ratingCountText}>{star1}</Text>
+              </View>
+              <Text style={styles.recommendText}>8 out of 10 (80%) of reviewers would recommed this product to a friend</Text>
+            </View>
+            
+            {/* {customerReviews.map((item, index) => {
+              return <CustomerReview key={index} index={index} item={item} model={model} manufacture={manufacture} />;
+            })
+            } */}
           </View>
         </View>
       );
@@ -90,9 +153,9 @@ class ReviewsScreen extends Component {
     if (typeof webReviews != "undefined" && webReviews.length > 0) {
       return (
         <View>
-          { webReviews.map((item, index) => {
-              return <WebReview key={index} index={index} item={item} model={model} manufacture={manufacture} publication={webReviews[index].publication}/>;
-            })
+          {webReviews.map((item, index) => {
+            return <WebReview key={index} index={index} item={item} model={model} manufacture={manufacture} publication={webReviews[index].publication} />;
+          })
           }
         </View>
       );
@@ -105,9 +168,9 @@ class ReviewsScreen extends Component {
     if (typeof videoContent != "undefined" && videoContent.length > 0) {
       return (
         <View>
-          { videoContent.map((item, index) => {
-              return <VideoContent key={index} index={index} item={item} model={model} manufacture={manufacture}/>;
-            })
+          {videoContent.map((item, index) => {
+            return <VideoContent key={index} index={index} item={item} model={model} manufacture={manufacture} />;
+          })
           }
         </View>
       );
@@ -124,7 +187,8 @@ class ReviewsScreen extends Component {
         <View style={{
           width: width,
           height: height,
-          backgroundColor: 'black'}}>
+          backgroundColor: 'black'
+        }}>
           <Image
             style={{
               backgroundColor: '#ccc',
@@ -139,33 +203,33 @@ class ReviewsScreen extends Component {
         </View>
       );
     }
-    if (Object.keys(reviews).length === 0 ){
-      return ( <ReviewsSkeleton /> );
+    if (Object.keys(reviews).length === 0) {
+      return (<ReviewsSkeleton />);
     } else {
       return (
         <View>
-        <Image
-          style={{
-            backgroundColor: '#ccc',
-            flex: 1,
-            position: 'absolute',
-            width: '100%',
-            height: '100%',
-            justifyContent: 'center',
-          }}
-          source={require('../assets/images/files/backgroundHD.png')}
-        />
-        <View style={styles.reviewsBox}>
-          <View style={styles.headerPrincipal}>
-            <Text style={styles.textTitleUno}>Make an informed decision.</Text>
-            <Text style={styles.textSubtitle}>Read what the reviews are saying.</Text>
-          </View>
+          <Image
+            style={{
+              backgroundColor: '#ccc',
+              flex: 1,
+              position: 'absolute',
+              width: '100%',
+              height: '100%',
+              justifyContent: 'center',
+            }}
+            source={require('../assets/images/files/backgroundHD.png')}
+          />
+          <View style={styles.reviewsBox}>
+            <View style={styles.headerPrincipal}>
+              <Text style={styles.textTitleUno}>Make an informed decision.</Text>
+              <Text style={styles.textSubtitle}>Read what the reviews are saying.</Text>
+            </View>
 
-          { this.renderWebReviews() }
-          { this.renderCustomerReviews() }
-          { this.renderVideoContent() }
-        { !reviewsEmpty && <FeedbackSurvey /> }
-        </View>
+            {this.renderCustomerReviews()}
+            {this.renderWebReviews()}
+            {this.renderVideoContent()}
+            {!reviewsEmpty && <FeedbackSurvey />}
+          </View>
         </View>
       );
     }
@@ -187,15 +251,15 @@ class ReviewsScreen extends Component {
           [{ nativeEvent: { contentOffset: { y: this.props.onScrollCustom } } }],
           {
             /*useNativeDriver: true*//*,
-            listener: event => {
-              const offsetY = event.nativeEvent.contentOffset.y
-              this.props.onScrollCustom(offsetY);
-            }* /
-          }
-        )}*/
+listener: event => {
+const offsetY = event.nativeEvent.contentOffset.y
+this.props.onScrollCustom(offsetY);
+}* /
+}
+)}*/
         onScrollEndDrag={this._onScrollEndSnapToEdge}
       >
-        { this.renderContent() }
+        {this.renderContent()}
       </Animated.ScrollView>
     );
   }
