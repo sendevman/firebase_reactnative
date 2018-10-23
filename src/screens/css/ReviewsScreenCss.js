@@ -198,5 +198,64 @@ export default StyleSheet.create({
     lineHeight: 14,
     marginBottom: 12,
     marginHorizontal: 16
+  },
+  ratingView: {
+    marginHorizontal: 16,
+    marginTop: 10,
+    marginBottom: 20
+  },
+  ratingStar: {
+    color: '#0a0a0a',
+    // fontFamily: 'Roboto',
+    fontSize: 16,
+    letterSpacing: 0.12,
+    marginLeft: 8
+  },
+  ratingDescription: {
+    color: '#0a0a0a',
+    // fontFamily: 'Roboto',
+    fontSize: 16,
+    letterSpacing: 0.12,
+    lineHeight: 25,
+    marginTop: 8
+  },
+  ratingBarBackground: {
+    width: 200,
+    height: 20,
+    marginLeft: 15,
+    borderColor: '#3E3F42',
+    borderWidth: 1,
+    backgroundColor: '#FFF'
+  },
+  ratingBar: {
+    height: 18,
+    marginLeft: 0,
+    marginTop: 0,
+    backgroundColor: '#fd650b'
+  },
+  ratingText: {
+    width: 42,
+    color: '#3E3F42',
+    // fontFamily: 'Roboto',
+    fontSize: 14,
+    letterSpacing: 0.12,
+    lineHeight: 20,
+  },
+  ratingCountText: {
+    color: '#3E3F42',
+    // fontFamily: 'Roboto',
+    fontSize: 14,
+    letterSpacing: 0.12,
+    lineHeight: 20,
+    marginLeft: 10
+  },
+  recommendText: {
+    color: '#3E3F42',
+    // fontFamily: 'Roboto',
+    fontSize: 14,
+    letterSpacing: 0.12,
+    lineHeight: 20,
+    marginTop: 10
+
   }
 });

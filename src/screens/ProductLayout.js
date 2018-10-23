@@ -163,8 +163,11 @@ class ProductLayoutScreen extends Component {
         accsRef.doc(accessoryId).get()
           .then(accessory => {
             if (!accessory.exists) resolve({});
-            const accessoryData = accessory.data();
-            accessoryData.id = accessoryId;
+            let accessoryData = accessory.data();
+            if(accessoryData !== undefined){
+              console.log(accessoryData);
+              accessoryData.id = accessoryId;
+            }
             resolve(accessoryData);
           })
           .catch(err => { console.log('Error getting documents', err); });
