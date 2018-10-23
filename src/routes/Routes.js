@@ -5,7 +5,7 @@
  */
 
 import React, { Component } from 'react';
-import { AsyncStorage, Button, NetInfo, ScrollView, StatusBar, Text, View, NativeEventEmitter, NativeModules } from 'react-native';
+import { AsyncStorage, Button, NetInfo, ScrollView, StatusBar, Text, View, NativeEventEmitter, NativeModules, YellowBox } from 'react-native';
 import { createDrawerNavigator, createBottomTabNavigator, SafeAreaView, createStackNavigator } from 'react-navigation';
 import { NetworkInfo } from 'react-native-network-info';
 import firebase from 'react-native-firebase';
@@ -33,6 +33,7 @@ const BleManagerModule = NativeModules.BleManager;
 // const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
 const ws = new WebSocket('wss://wai.walkbase.com/api/v2/subscribe/device');
 
+YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Class RCTCxxModule']);
 
 const BottomTabNav = createBottomTabNavigator(
   {
