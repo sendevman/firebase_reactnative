@@ -13,7 +13,7 @@ import Icon from '../../assets/images/Icon';
 
 const { width: viewportWidth } = Dimensions.get('window');
 
-class ButtonCompare extends Component<props> {
+class ButtonCompare extends Component {
   render() {
     return (
       <Button
@@ -28,7 +28,7 @@ class ButtonCompare extends Component<props> {
           fontSize: 14,
           lineHeight: 17
         }}
-        buttonStyle={{ paddingTop: 10, paddingBottom: 9 }}
+        buttonStyle={{ padding: 6}}
         onPress={() => this.props.onGoToCompareBtn()}
       />
     );
