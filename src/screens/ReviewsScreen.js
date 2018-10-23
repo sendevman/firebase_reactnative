@@ -235,6 +235,11 @@ class ReviewsScreen extends Component {
     }
   }
 
+  _animateScroll = (event) => {
+    const y = event.nativeEvent.contentOffset.y;
+    if (y < 60) this.props.onScrollCustom.setValue(y*2);
+    else this.props.onScrollCustom.setValue(120);
+  }
   _onScrollEndSnapToEdge = (event) => {
     const y = event.nativeEvent.contentOffset.y;
     if (y < 60) this.props.onScrollCustom.setValue(0);
@@ -251,13 +256,14 @@ class ReviewsScreen extends Component {
           [{ nativeEvent: { contentOffset: { y: this.props.onScrollCustom } } }],
           {
             /*useNativeDriver: true*//*,
-listener: event => {
-const offsetY = event.nativeEvent.contentOffset.y
-this.props.onScrollCustom(offsetY);
-}* /
-}
-)}*/
-        onScrollEndDrag={this._onScrollEndSnapToEdge}
+            listener: event => {
+              const offsetY = event.nativeEvent.contentOffset.y
+              this.props.onScrollCustom(offsetY);
+            }* /
+          }
+        )}*/
+        onScroll={this._animateScroll}
+        // onScrollEndDrag={this._onScrollEndSnapToEdge}
       >
         {this.renderContent()}
       </Animated.ScrollView>
