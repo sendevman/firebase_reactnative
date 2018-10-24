@@ -420,15 +420,24 @@ class CostPlansScreen extends Component {
 
   _animateScroll = (event) => {
     const y = event.nativeEvent.contentOffset.y;
-    if (y < 60) this.props.onScrollCustom.setValue(y*2);
-    else this.props.onScrollCustom.setValue(120);
+    if (y < -3) {
+      let yy = y * y / 80;
+      if (yy > 40) yy = 40;
+      this.props.onScrollCustom.setValue(-yy)
+    }
+    else if (y > -3 && y < 3) {
+    }
+    else {
+      let yy = y * y / 300;
+      if (yy > 120) yy = 120;
+      this.props.onScrollCustom.setValue(yy);
+    }
   }
   _onScrollEndSnapToEdge = (event) => {
     const y = event.nativeEvent.contentOffset.y;
-    if (y < 60) this.props.onScrollCustom.setValue(0);
+    if (y < 80) this.props.onScrollCustom.setValue(0);
     else this.props.onScrollCustom.setValue(120);
   }
-
   render() {
     const { costplans } = this.props;
 
@@ -445,7 +454,7 @@ class CostPlansScreen extends Component {
           }
         )}*/
         onScroll={this._animateScroll}
-        // onScrollEndDrag={this._onScrollEndSnapToEdge}
+        onScrollEndDrag={this._onScrollEndSnapToEdge}
       >
         {this.renderContent()}
       </Animated.ScrollView>

@@ -467,12 +467,22 @@ class InfoSpecsScreen extends Component {
 
   _animateScroll = (event) => {
     const y = event.nativeEvent.contentOffset.y;
-    if (y < 60) this.props.onScrollCustom.setValue(y*2);
-    else this.props.onScrollCustom.setValue(120);
+    if (y < -3) {
+      let yy = y * y / 80;
+      if (yy > 40) yy = 40;
+      this.props.onScrollCustom.setValue(-yy)
+    }
+    else if (y > -3 && y < 3) {
+    }
+    else {
+      let yy = y * y / 300;
+      if (yy > 120) yy = 120;
+      this.props.onScrollCustom.setValue(yy);
+    }
   }
   _onScrollEndSnapToEdge = (event) => {
     const y = event.nativeEvent.contentOffset.y;
-    if (y < 60) this.props.onScrollCustom.setValue(0);
+    if (y < 80) this.props.onScrollCustom.setValue(0);
     else this.props.onScrollCustom.setValue(120);
   }
 
@@ -482,19 +492,9 @@ class InfoSpecsScreen extends Component {
     let infoSpecsEmpty = ((typeof infoSpecs == "undefined"));// || (Object.keys(infoSpecs).length === 0 && infoSpecs.constructor === Object));
 
     return (
-      <Animated.ScrollView contentContainerStyle={styles.container} scrollEventThrottle={1}
-        // onScroll={Animated.event(
-        //   [{ nativeEvent: { contentOffset: { y: this.props.onScrollCustom } } }],
-        //   {
-        //     useNativeDriver: true,
-        //     listener: event => {
-        //       const offsetY = event.nativeEvent.contentOffset.y
-        //       this.props.onScrollCustom(offsetY);
-        //     }
-        //   }
-        // )}
+      <Animated.ScrollView contentContainerStyle={styles.container} scrollEventThrottle={16}
         onScroll={this._animateScroll}
-        // onScrollEndDrag={this._onScrollEndSnapToEdge}
+        onScrollEndDrag={this._onScrollEndSnapToEdge}
       >
         {this.renderContent()}
       </Animated.ScrollView>

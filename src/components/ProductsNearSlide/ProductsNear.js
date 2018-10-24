@@ -109,8 +109,8 @@ class ProductsNear extends Component {
     };
 
     const itemBoxHeight = this.props.animatedValue.interpolate({
-      inputRange: [0, 120],
-      outputRange: [180, 100],
+      inputRange: [-40, 0, 120],
+      outputRange: [200, 180, 100],
       extrapolate: 'clamp'
     });
 
