@@ -374,6 +374,8 @@ class CostPlansScreen extends Component {
           />
           <View style={styles.costPlansBox}>
 
+            {this.renderShippingInfo()}
+
             {this.renderStorage()}
             {this.renderCostNext()}
 
@@ -389,8 +391,6 @@ class CostPlansScreen extends Component {
                 <Text style={styles.textReadMore}>{viewMorePlansText}</Text>
               </View>
             </TouchableWithoutFeedback>
-
-            {this.renderShippingInfo()}
             {this.renderDeviceProtection()}
             {this.renderAccessories()}
             {!costplansEmpty && <FeedbackSurvey />}
