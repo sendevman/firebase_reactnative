@@ -31,9 +31,6 @@ export default StyleSheet.create({
     backgroundColor: 'grey'
   },
 
-
-
-
   headerBox: {
     backgroundColor: 'grey',
     flex: 1,

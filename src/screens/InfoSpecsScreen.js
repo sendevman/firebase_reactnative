@@ -151,21 +151,51 @@ class InfoSpecsScreen extends Component {
     }
   }
   renderFitness() {
-    const { fitness } = this.props.infoSpecs;
+    const { display } = this.props.infoSpecs;
     const viewWidth = width - 34;
 
-    if (typeof fitness !== "undefined") { //Object.keys(display).length !== 0 && 
+    if (typeof display !== "undefined") { //Object.keys(display).length !== 0 && 
       return (
         <View style={{ paddingBottom: 10 }}>
-          <Image style={[styles.colorBackground, { width: viewWidth, height: viewWidth * 410 / 1080, marginLeft: 6, }]} source={require('../assets/images/files/display.png')} />
-          <View style={[styles.storageBox, { width: viewWidth - 1, marginLeft: 6, marginTop: -viewWidth / 1080 * (410 - 210) }]}>
-            <View style={styles.displaySizeItem}>
-              <View style={styles.displaySizeHr}></View>
-              <Text style={styles.displaySize}>{display.size}"</Text>
-            </View>
-            <View style={styles.displayTextItem}>
-              <Text style={styles.displayText}>{display.description} ({display.resolution}) {display.ppi} ppi</Text>
-              {/* <Text style={styles.displayText}>{display.ppi} ppi</Text> */}
+          <Image style={[styles.colorBackground, { width: viewWidth, height: viewWidth * 680 / 1080, marginLeft: 6, }]} source={require('../assets/images/files/fitness.png')} />
+          <View style={[styles.storageBox, { width: viewWidth - 1, marginLeft: 6, marginTop: -viewWidth / 1080 * (680 - 210) }]}>
+            <View style={{ flexDirection: 'column' }}>
+              <View style={styles.fitnessRowView}>
+                <View style={styles.fitnessRowItem}>
+                  <Image style={styles.fitnessRowImage} source={require('../assets/images/files/pedometer.png')} />
+                  <Text style={styles.fitnessRowText}>Pedometer</Text>
+                </View>
+                <View style={styles.fitnessRowItem}>
+                  <Image style={styles.fitnessRowImage} source={require('../assets/images/files/run.png')} />
+                  <Text style={styles.fitnessRowText}>Run Tracking</Text>
+                </View>
+                <View style={styles.fitnessRowItem}>
+                  <Image style={styles.fitnessRowImage} source={require('../assets/images/files/heart.png')} />
+                  <Text style={styles.fitnessRowText}>Heart Rate Monitor</Text>
+                </View>
+                <View style={styles.fitnessRowItem}>
+                  <Image style={styles.fitnessRowImage} source={require('../assets/images/files/activity.png')} />
+                  <Text style={styles.fitnessRowText}>Activity Tracker</Text>
+                </View>
+              </View>
+              <View style={styles.fitnessRowView}>
+                <View style={styles.fitnessRowItem}>
+                  <Image style={styles.fitnessRowImage} source={require('../assets/images/files/gps.png')} />
+                  <Text style={styles.fitnessRowText}>GPS Tracking</Text>
+                </View>
+                <View style={styles.fitnessRowItem}>
+                  <Image style={styles.fitnessRowImage} source={require('../assets/images/files/music.png')} />
+                  <Text style={styles.fitnessRowText}>Stand Alone Music</Text>
+                </View>
+                <View style={styles.fitnessRowItem}>
+                  <Image style={styles.fitnessRowImage} source={require('../assets/images/files/heart.png')} />
+                  <Text style={styles.fitnessRowText}>EKG</Text>
+                </View>
+                <View style={styles.fitnessRowItem}>
+                  <Image style={styles.fitnessRowImage} source={require('../assets/images/files/tracking.png')} />
+                  <Text style={styles.fitnessRowText}>Fitness Tracking</Text>
+                </View>
+              </View>
             </View>
           </View>
         </View>
@@ -224,7 +254,7 @@ class InfoSpecsScreen extends Component {
     const processorEmpty = (typeof processor == "undefined");// || (Object.keys(processor).length === 0 && processor.constructor === Object));
     const doIsValid = (typeof deviceOptions == "undefined" || deviceOptions.length <= 0) ? false : true;
     const esIsValid = (typeof expandableStorage == "undefined") ? false : true; // || Object.keys(expandableStorage).length === 0) ? false : true;
-    
+
     var isAvailable = false;
     if (esIsValid) isAvailable = (typeof expandableStorage.available == "undefined") ? false : expandableStorage.available;
     else isAvailable = false;
@@ -518,7 +548,7 @@ class InfoSpecsScreen extends Component {
 
   _animateScroll = (event) => {
     const y = event.nativeEvent.contentOffset.y;
-    if (y < 60) this.props.onScrollCustom.setValue(y*2);
+    if (y < 60) this.props.onScrollCustom.setValue(y * 2);
     else this.props.onScrollCustom.setValue(120);
   }
   _onScrollEndSnapToEdge = (event) => {
@@ -545,7 +575,7 @@ class InfoSpecsScreen extends Component {
         //   }
         // )}
         onScroll={this._animateScroll}
-        // onScrollEndDrag={this._onScrollEndSnapToEdge}
+      // onScrollEndDrag={this._onScrollEndSnapToEdge}
       >
         {this.renderContent()}
       </Animated.ScrollView>
