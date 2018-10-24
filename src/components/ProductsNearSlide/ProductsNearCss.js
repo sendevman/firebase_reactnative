@@ -84,8 +84,8 @@ export default StyleSheet.create({
   },
   itemBox: {
     backgroundColor: '#FFF',
-    maxHeight: 180,
-    height: '100%',
+    maxHeight: 200,
+    // height: '100%',
     maxWidth: 400,
     width: '100%',
     padding: 8,
@@ -152,6 +152,7 @@ export default StyleSheet.create({
     marginRight: 10
   },
   deviceOptionText: {
+    width: 120,
     color: '#3E3F42',
     // fontFamily: 'Roboto',
     fontSize: 13,
