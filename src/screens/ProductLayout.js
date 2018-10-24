@@ -163,8 +163,11 @@ class ProductLayoutScreen extends Component {
         accsRef.doc(accessoryId).get()
           .then(accessory => {
             if (!accessory.exists) resolve({});
-            const accessoryData = accessory.data();
-            accessoryData.id = accessoryId;
+            let accessoryData = accessory.data();
+            if(accessoryData !== undefined){
+              console.log(accessoryData);
+              accessoryData.id = accessoryId;
+            }
             resolve(accessoryData);
           })
           .catch(err => { console.log('Error getting documents', err); });
@@ -302,7 +305,7 @@ class ProductLayoutScreen extends Component {
             <Icon name="ArrowLeft" width="10" height="16" viewBox="0 0 10 16" fill="#FFFFFF" />
           </TouchableOpacity>
         </View>
-        <Animated.View style={{ width: '100%', height: height - 100 }}>
+        <Animated.View style={{ width: '100%', height: height - 140 }}>
           <RoutesProducts onScrollLayout={this.state.animatedValue} />
         </Animated.View>
         {/* {this.showEnterZoneDialog()} */}

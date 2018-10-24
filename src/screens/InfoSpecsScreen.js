@@ -150,6 +150,58 @@ class InfoSpecsScreen extends Component {
       );
     }
   }
+  renderFitness() {
+    const { display } = this.props.infoSpecs;
+    const viewWidth = width - 34;
+
+    if (typeof display !== "undefined") { //Object.keys(display).length !== 0 && 
+      return (
+        <View style={{ paddingBottom: 10 }}>
+          <Image style={[styles.colorBackground, { width: viewWidth, height: viewWidth * 680 / 1080, marginLeft: 6, }]} source={require('../assets/images/files/fitness.png')} />
+          <View style={[styles.storageBox, { width: viewWidth - 1, marginLeft: 6, marginTop: -viewWidth / 1080 * (680 - 210) }]}>
+            <View style={{ flexDirection: 'column' }}>
+              <View style={styles.fitnessRowView}>
+                <View style={styles.fitnessRowItem}>
+                  <Image style={styles.fitnessRowImage} source={require('../assets/images/files/pedometer.png')} />
+                  <Text style={styles.fitnessRowText}>Pedometer</Text>
+                </View>
+                <View style={styles.fitnessRowItem}>
+                  <Image style={styles.fitnessRowImage} source={require('../assets/images/files/run.png')} />
+                  <Text style={styles.fitnessRowText}>Run Tracking</Text>
+                </View>
+                <View style={styles.fitnessRowItem}>
+                  <Image style={styles.fitnessRowImage} source={require('../assets/images/files/heart.png')} />
+                  <Text style={styles.fitnessRowText}>Heart Rate Monitor</Text>
+                </View>
+                <View style={styles.fitnessRowItem}>
+                  <Image style={styles.fitnessRowImage} source={require('../assets/images/files/activity.png')} />
+                  <Text style={styles.fitnessRowText}>Activity Tracker</Text>
+                </View>
+              </View>
+              <View style={styles.fitnessRowView}>
+                <View style={styles.fitnessRowItem}>
+                  <Image style={styles.fitnessRowImage} source={require('../assets/images/files/gps.png')} />
+                  <Text style={styles.fitnessRowText}>GPS Tracking</Text>
+                </View>
+                <View style={styles.fitnessRowItem}>
+                  <Image style={styles.fitnessRowImage} source={require('../assets/images/files/music.png')} />
+                  <Text style={styles.fitnessRowText}>Stand Alone Music</Text>
+                </View>
+                <View style={styles.fitnessRowItem}>
+                  <Image style={styles.fitnessRowImage} source={require('../assets/images/files/heart.png')} />
+                  <Text style={styles.fitnessRowText}>EKG</Text>
+                </View>
+                <View style={styles.fitnessRowItem}>
+                  <Image style={styles.fitnessRowImage} source={require('../assets/images/files/tracking.png')} />
+                  <Text style={styles.fitnessRowText}>Fitness Tracking</Text>
+                </View>
+              </View>
+            </View>
+          </View>
+        </View>
+      );
+    }
+  }
 
   renderCamera() {
     const { camera } = this.props.infoSpecs;
@@ -195,7 +247,7 @@ class InfoSpecsScreen extends Component {
   }
 
   renderPerformanceAndStorage() {
-    const { deviceOptions, expandableStorage, memory, processor } = this.props.infoSpecs;
+    const { deviceOptions, expandableStorage, memory, processor, subType } = this.props.infoSpecs;
     const viewWidth = width - 34;
 
     const memoryEmpty = (!memory || !memory.trim() || 0 === memory.length);
@@ -268,7 +320,7 @@ class InfoSpecsScreen extends Component {
   }
 
   renderBattery() {
-    const { battery } = this.props.infoSpecs;
+    const { battery, subType } = this.props.infoSpecs;
     const viewWidth = width - 34;
 
     if (typeof battery !== "undefined") { //Object.keys(battery).length !== 0 && 
@@ -277,6 +329,8 @@ class InfoSpecsScreen extends Component {
       const lifeEmpty = (life !== "undefined"); //Object.keys(life).length === 0 && 
       const talkTimeEmpty = (!life.talkTime || !life.talkTime.trim() || 0 === life.talkTime.length);
       const videoEmpty = (!life.video || !life.video.trim() || 0 === life.video.length);
+      const talkEmpty = (!life.talk || !life.talk.trim() || 0 === life.talk.length);
+      const workoutEmpty = (!life.workout || !life.workout.trim() || 0 === life.workout.length);
       const audioEmpty = (!life.audio || !life.audio.trim() || 0 === life.audio.length);
       const internetWifiEmpty = (!life.internetWifi || !life.internetWifi.trim() || 0 === life.internetWifi.length);
       const internetL4GEmpty = (!life.internetL4G || !life.internetL4G.trim() || 0 === life.internetL4G.length);
@@ -298,7 +352,11 @@ class InfoSpecsScreen extends Component {
                   <View>
                     <View style={styles.featureItemBattery}></View>
                     <View style={styles.featureItemBox}>
-                      <Text style={styles.featureItemTitle}>CALLING</Text>
+                      {subType === 'phone' ?
+                        <Text style={styles.featureItemTitle}>CALLING</Text>
+                        :
+                        <Text style={styles.featureItemTitleSmall}>GENERAL USE</Text>
+                      }
                       <Text style={styles.featureItemMount}>{life.talkTime.replace(' hrs', '')}</Text>
                       <Text style={styles.featureItemHour}>hours</Text>
                     </View>
@@ -315,6 +373,16 @@ class InfoSpecsScreen extends Component {
                     </View>
                   </View>
                 }
+                {!talkEmpty &&
+                  <View>
+                    <View style={styles.featureItemBattery}></View>
+                    <View style={styles.featureItemBox}>
+                      <Text style={styles.featureItemTitle}>TALK</Text>
+                      <Text style={styles.featureItemMount}>{life.talk.replace(' hrs', '')}</Text>
+                      <Text style={styles.featureItemHour}>hours</Text>
+                    </View>
+                  </View>
+                }
 
                 {!audioEmpty &&
                   <View>
@@ -322,6 +390,18 @@ class InfoSpecsScreen extends Component {
                     <View style={styles.featureItemBox}>
                       <Text style={styles.featureItemTitle}>AUDIO</Text>
                       <Text style={styles.featureItemMount}>{life.audio.replace(' hrs', '')}</Text>
+                      <Text style={styles.featureItemHour}>hours</Text>
+                    </View>
+                  </View>
+                }
+
+
+                {!workoutEmpty &&
+                  <View>
+                    <View style={styles.featureItemBattery}></View>
+                    <View style={styles.featureItemBox}>
+                      <Text style={styles.featureItemTitle}>WORKOUT</Text>
+                      <Text style={styles.featureItemMount}>{life.workout.replace(' hrs', '')}</Text>
                       <Text style={styles.featureItemHour}>hours</Text>
                     </View>
                   </View>
@@ -429,6 +509,7 @@ class InfoSpecsScreen extends Component {
 
             {this.renderColors()}
             {this.renderDisplay()}
+            {this.renderFitness()}
             {this.renderCamera()}
             {this.renderPerformanceAndStorage()}
             {this.renderBattery()}
@@ -467,18 +548,8 @@ class InfoSpecsScreen extends Component {
 
   _animateScroll = (event) => {
     const y = event.nativeEvent.contentOffset.y;
-    if (y < -3) {
-      let yy = y * y / 80;
-      if (yy > 40) yy = 40;
-      this.props.onScrollCustom.setValue(-yy)
-    }
-    else if (y > -3 && y < 3) {
-    }
-    else {
-      let yy = y * y / 300;
-      if (yy > 120) yy = 120;
-      this.props.onScrollCustom.setValue(yy);
-    }
+    if (y < 60) this.props.onScrollCustom.setValue(y * 2);
+    else this.props.onScrollCustom.setValue(120);
   }
   _onScrollEndSnapToEdge = (event) => {
     const y = event.nativeEvent.contentOffset.y;
@@ -494,7 +565,7 @@ class InfoSpecsScreen extends Component {
     return (
       <Animated.ScrollView contentContainerStyle={styles.container} scrollEventThrottle={16}
         onScroll={this._animateScroll}
-        onScrollEndDrag={this._onScrollEndSnapToEdge}
+      // onScrollEndDrag={this._onScrollEndSnapToEdge}
       >
         {this.renderContent()}
       </Animated.ScrollView>
