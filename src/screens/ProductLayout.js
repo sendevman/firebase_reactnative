@@ -305,7 +305,7 @@ class ProductLayoutScreen extends Component {
             <Icon name="ArrowLeft" width="10" height="16" viewBox="0 0 10 16" fill="#FFFFFF" />
           </TouchableOpacity>
         </View>
-        <Animated.View style={{ width: '100%', height: height - 100 }}>
+        <Animated.View style={{ width: '100%', height: height - 140 }}>
           <RoutesProducts onScrollLayout={this.state.animatedValue} />
         </Animated.View>
         {/* {this.showEnterZoneDialog()} */}

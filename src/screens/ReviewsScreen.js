@@ -94,6 +94,7 @@ class ReviewsScreen extends Component {
                   ratingCount={5}
                   imageSize={20}
                   readonly
+                  fractions = {1}
                   startingValue={starFinal}
                 />
                 <Text style={styles.ratingStar}>{starFinal} stars</Text>
