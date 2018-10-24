@@ -457,5 +457,33 @@ export default StyleSheet.create({
     backgroundColor: 'rgba(255, 255, 255, 0.75)',
     borderBottomLeftRadius: 6,
     borderBottomRightRadius: 6
+  },
+  // - - FITNESS Box --
+  fitnessRowView: {
+    height: 80,
+    marginTop: 2,
+    marginLeft: 6,
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
+  fitnessRowItem: {
+    flexDirection: 'column',
+    width: (width - 60)/4,
+    height: 55,
+    alignItems: 'center',
+    paddingHorizontal: 5
+
+  },
+  fitnessRowImage: {
+    width: 40,
+    height: 40,
+    resizeMode: 'contain'
+  },
+  fitnessRowText: {
+    // width: 80,
+    textAlign: 'center',
+    color: '#3E3F42',
+    fontSize: 11,
   }
+
 });
