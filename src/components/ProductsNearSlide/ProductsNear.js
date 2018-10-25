@@ -213,13 +213,13 @@ class ProductsNear extends Component {
   render() {
     const { areaData, currentProducts } = this.props;
     const { sliderActiveSlide } = this.state;
+    console.log("=====", areaData);
 
     let areaDataEmpty = (typeof areaData == "undefined");/// || (Object.keys(areaData).length === 0 && areaData.constructor === Object));
 
     return (
       <View style={{ width: viewportWidth, paddingVertical: 10, flexDirection: 'row', justifyContent: 'center' }}>
         {this.gradient}
-
         {(currentProducts || []).length > 0 ?
           <View>
             <Carousel

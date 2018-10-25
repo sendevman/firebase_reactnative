@@ -75,7 +75,7 @@ class ReviewsScreen extends Component {
         else if (parseInt(customerReviews[i].stars) === 2) star2++;
         else star1++;
       }
-      starFinal = (starTotal / starCount).toFixed(2);
+      starFinal = parseFloat((starTotal / starCount).toFixed(2));
       return (
         <View>
           <Text style={styles.webReviewTitle}>Reviews from myAT&T</Text>
@@ -94,7 +94,7 @@ class ReviewsScreen extends Component {
                   ratingCount={5}
                   imageSize={20}
                   readonly
-                  fractions = {1}
+                  fractions = {2}
                   startingValue={starFinal}
                 />
                 <Text style={styles.ratingStar}>{starFinal} stars</Text>

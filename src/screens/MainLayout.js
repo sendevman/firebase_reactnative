@@ -10,7 +10,7 @@ import { SafeAreaView } from 'react-navigation';
 import { connect } from 'react-redux';
 import firebase from 'react-native-firebase';
 // Action
-import { setLocationAllInfo } from '../actions/Locations';
+import { setLocationAllInfo, setLocationSelectItem } from '../actions/Locations';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 
 import { FakeAreas } from '../store/AreaFakeData';
@@ -81,9 +81,13 @@ class MainLayout extends Component {
 
   gotoZone = (index) => {
     const arrAreas = this.state.locationData[0].zones[index];
-    this.props.navigation.navigate('ProductLayout', {
+    this.props.dispatch(setLocationSelectItem(arrAreas));
+    this.props.navigation.navigate('TabNav', {
       areaData: arrAreas
     });
+  }
+  gotoService = (index) => {
+    this.props.navigation.navigate('ServiceZone');
   }
 
   _renderItem({ item, index }) {

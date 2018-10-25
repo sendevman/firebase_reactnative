@@ -42,8 +42,10 @@ class ProductLayoutScreen extends Component {
     this.getAreaData();
   }
   getAreaData() {
-    const { navigation } = this.props;
-    const area = navigation.getParam('areaData');
+    // const { navigation } = this.props;
+    // const area = navigation.getParam('areaData');
+    const area = this.props.locationItem;
+    console.log("-----", area);
     const arrAreas = [];
     arrAreas.push(area);
     this.props.dispatch(setProductInfo({}));
@@ -305,7 +307,7 @@ class ProductLayoutScreen extends Component {
             <Icon name="ArrowLeft" width="10" height="16" viewBox="0 0 10 16" fill="#FFFFFF" />
           </TouchableOpacity>
         </View>
-        <Animated.View style={{ width: '100%', height: height - 140 }}>
+        <Animated.View style={{ width: '100%', height: height - 195 }}>
           <RoutesProducts onScrollLayout={this.state.animatedValue} />
         </Animated.View>
         {/* {this.showEnterZoneDialog()} */}
@@ -315,9 +317,9 @@ class ProductLayoutScreen extends Component {
 }
 
 const mapStateToProps = state => {
-  const { common, current, productsNear } = state;
+  const { common, current, productsNear, locations } = state;
 
-  return { firebaseid: common.firebaseid, locationData: current.position, productsNear: productsNear.productsNear };
+  return { firebaseid: common.firebaseid, locationData: current.position, productsNear: productsNear.productsNear, locationItem: locations.locationItem };
 }
 
 const ProductLayout = createStackNavigator(
