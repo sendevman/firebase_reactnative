@@ -25,7 +25,7 @@ import { setFirebaseID, setNetworkInfo } from '../actions/Common';
 // Walkbase Engage
 // import BleManager from 'walkbase-sdk';
 import MainLayout from '../screens/MainLayout';
-import DirecTVLayout from '../screens/DirecTVLayout';
+import DiscoverServiceLayout from '../screens/DiscoverServiceLayout';
 import ExperienceLayout from '../screens/ExperienceLayout';
 var DeviceInfo = require('react-native-device-info');
 const deviceId = DeviceInfo.getUniqueID();
@@ -37,19 +37,31 @@ YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Class RCTCxx
 
 const BottomTabNav = createBottomTabNavigator(
   {
-    // Home: {
-    //   screen: MainLayout,
+    Home: {
+      screen: ProductLayout,
+      navigationOptions: {
+        title: 'Home',
+        tabBarIcon: ({ tintColor }) => {
+          return <Icon name="SharedSession" width="22" height="22" fill={tintColor} viewBox="0 0 22 22" />;
+        }
+      }
+    },
+    // ExclusiveVod: {
+    //   screen: VodLayout,
     //   navigationOptions: {
-    //     title: 'Home',
+    //     title: 'VOD',
     //     tabBarIcon: ({ tintColor }) => {
-    //       return <Icon name="SharedSession" width="22" height="22" fill={tintColor} viewBox="0 0 22 22" />;
+    //       if (tintColor === "#3E3F42")
+    //         return <Icon name="ExclusiveVodUnFill" width="22" height="18" viewBox="0 0 22 18" />;
+    //       else
+    //         return <Icon name="ExclusiveVodFill" width="22" height="18" viewBox="0 0 22 18" />;
     //     }
     //   }
     // },
-    ExclusiveVod: {
-      screen: VodLayout,
+    Discover: {
+      screen: DiscoverServiceLayout,
       navigationOptions: {
-        title: 'VOD',
+        title: 'Discover',
         tabBarIcon: ({ tintColor }) => {
           if (tintColor === "#3E3F42")
             return <Icon name="ExclusiveVodUnFill" width="22" height="18" viewBox="0 0 22 18" />;
@@ -58,30 +70,18 @@ const BottomTabNav = createBottomTabNavigator(
         }
       }
     },
-    DirecTV: {
-      screen: DirecTVLayout,
-      navigationOptions: {
-        title: 'DirecTV',
-        tabBarIcon: ({ tintColor }) => {
-          if (tintColor === "#3E3F42")
-            return <Icon name="ExclusiveVodUnFill" width="22" height="18" viewBox="0 0 22 18" />;
-          else
-            return <Icon name="ExclusiveVodFill" width="22" height="18" viewBox="0 0 22 18" />;
-        }
-      }
-    },
-    Experience: {
-      screen: ExperienceLayout,
-      navigationOptions: {
-        title: 'Experience',
-        tabBarIcon: ({ tintColor }) => {
-          return <Icon name="Compare" width="22" height="22" fill={tintColor} viewBox="0 0 22 22" />;
-        }
-      }
-    },
+    // Experience: {
+    //   screen: ExperienceLayout,
+    //   navigationOptions: {
+    //     title: 'Experience',
+    //     tabBarIcon: ({ tintColor }) => {
+    //       return <Icon name="Compare" width="22" height="22" fill={tintColor} viewBox="0 0 22 22" />;
+    //     }
+    //   }
+    // },
   },
   {
-    initialRouteName: 'ExclusiveVod',
+    initialRouteName: 'Home',
     tabBarOptions: {
       activeTintColor: '#FFF',
       activeBackgroundColor: '#1181FF',
@@ -111,6 +111,9 @@ const MainNav = createStackNavigator(
     },
     ProductLayout: {
       screen: ProductLayout
+    },
+    ServiceZone: {
+      screen: DiscoverServiceLayout
     }
   },
   {

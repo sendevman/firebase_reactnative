@@ -8,4 +8,9 @@
     type: 'STORE_LOCATION_ALL_INFO',
     payload: params
   })
+
+  export const setLocationSelectItem = (params) => ({
+    type: 'STORE_LOCATION_ITEM',
+    payload: params
+  })
   
