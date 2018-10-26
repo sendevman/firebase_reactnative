@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 
 import ServiceZoneSlide  from '../components/ServiceZoneSlide/ServiceZoneHead';
 import DirecTVLayout from './DirecTVLayout';
+import DirecTVNowLayout from './DirecTVNowLayout';
 var { height, width } = Dimensions.get('window');
 
 class DiscoverServiceLayout extends Component {
@@ -24,7 +25,7 @@ class DiscoverServiceLayout extends Component {
         <View style={{ width: '100%', height: '100%' }}>
           <ServiceZoneSlide />
           <View style={{backgroundColor:'white', width: '100%', height: height - 270 }}>
-            <DirecTVLayout />
+            <DirecTVNowLayout />
           </View>
         </View>
       </SafeAreaView>
