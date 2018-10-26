@@ -14,6 +14,8 @@ import { connect } from 'react-redux';
 import DirecTVHeader from './DirecTVHeader';
 import DirecTVNowHeader from './DirecTVNowHeader';
 import WatchTVHeader from './WatchTVHeader';
+
+import {setSelectDiscover} from '../../actions/Current';
 // My Styles
 import styles, { itemWidth, sliderWidth } from './ServiceZoneSlideCss';
 
@@ -72,6 +74,7 @@ class ServiceZoneHeader extends Component {
             removeClippedSubviews={false}
             onSnapToItem={index => {
               this.setState({ sliderActiveSlide: index });
+              this.props.dispatch(setSelectDiscover(index));
             }}
           />
         </View>
