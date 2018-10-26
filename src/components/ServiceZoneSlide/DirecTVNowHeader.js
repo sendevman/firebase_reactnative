@@ -29,10 +29,12 @@ class DirecTVNOWHeader extends Component {
           <View style={styles.imageBackground}>
             <Image style={styles.itemImage} source={require('../../assets/images/files/directvnow.png')} />
           </View>
-          <View style={styles.detailsBox}>
-            <Text numberOfLines={1} style={[styles.titleItem]}>65+ LIVE CHANNELS</Text>
-            <Text numberOfLines={1} style={[styles.titleItem, { paddingBottom: 6 }]}>$40/MONTH</Text>
-            <Text numberOfLines={0} style={styles.titleDetailItem}>
+          <View style={styles.detailsNowBox}>
+          <Text numberOfLines={1} style={[styles.titleNowItem]}>65+ LIVE CHANNELS</Text>
+          <Text numberOfLines={1} style={[styles.titleNowItem, { paddingBottom: 6 }]}>$40/MONTH</Text>
+            <Text numberOfLines={1} style={[styles.titleNowItem, { color: '#0d9FDB' }]}>65+ LIVE CHANNELS</Text>
+            <Text numberOfLines={1} style={[styles.titleNowItem, { color: '#0d9FDB', paddingBottom: 6 }]}>$40/MONTH</Text>
+            <Text numberOfLines={0} style={[styles.titleDetailItem, {width: itemWidth-180}]}>
               Stream breaking news, sports, live events and thousands of on-demand titles.
             </Text>
           </View>

@@ -27,7 +27,7 @@ export default StyleSheet.create({
     height: '100%',
     width: '100%',
     borderRadius: 6,
-    resizeMode: 'cover'
+    // resizeMode: 'cover'
   },
   // TitleCard Section
   bgImage: {
@@ -121,7 +121,7 @@ export default StyleSheet.create({
     position: 'absolute',
     top: 20,
     flexGrow: 1,
-    paddingLeft: 20,
+    paddingLeft: 15,
     height: 164,
     width: itemWidth - 180
   },
@@ -207,7 +207,23 @@ export default StyleSheet.create({
     fontSize: 14,
     lineHeight: 22,
   },
-  watchbg: {
-    color: '#009fdb'
-  }
+  detailsNowBox: {
+    position: 'absolute',
+    top: 20,
+    flexGrow: 1,
+    paddingLeft: 15,
+    width: itemWidth - 100
+  },
+  titleNowItem: {
+    color: '#FFF',
+    fontSize: 16,
+    fontWeight: '500',
+    lineHeight: 18,
+  },
+  titleNowItem1: {
+    color: '#0d9FDB',
+    fontSize: 16,
+    fontWeight: '500',
+    lineHeight: 18,
+  },
 });

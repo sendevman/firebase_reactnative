@@ -10,6 +10,7 @@ import { SafeAreaView } from 'react-navigation';
 import { connect } from 'react-redux';
 
 import ServiceZoneSlide  from '../components/ServiceZoneSlide/ServiceZoneHead';
+import DirecTVLayout from './DirecTVLayout';
 var { height, width } = Dimensions.get('window');
 
 class DiscoverServiceLayout extends Component {
@@ -22,7 +23,8 @@ class DiscoverServiceLayout extends Component {
       <SafeAreaView forceInset={{ top: 'always' }} style={{ backgroundColor: '#FFF' }}>
         <View style={{ width: '100%', height: '100%' }}>
           <ServiceZoneSlide />
-          <View style={{backgroundColor:'white', width: '100%', height: height - 195 }}>
+          <View style={{backgroundColor:'white', width: '100%', height: height - 270 }}>
+            <DirecTVLayout />
           </View>
         </View>
       </SafeAreaView>
