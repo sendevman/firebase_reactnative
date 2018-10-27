@@ -5,13 +5,14 @@
  */
 
 import React, { Component } from 'react';
-import { View, Dimensions } from 'react-native';
+import { View, Dimensions, Image } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 import { connect } from 'react-redux';
 
 import ServiceZoneSlide from '../components/ServiceZoneSlide/ServiceZoneHead';
 import DirecTVLayout from './DirecTVLayout';
 import DirecTVNowLayout from './DirecTVNowLayout';
+import DirecTVWatchLayout from './DirecTVWatchLayout';
 var { height, width } = Dimensions.get('window');
 
 class DiscoverServiceLayout extends Component {
@@ -33,9 +34,20 @@ class DiscoverServiceLayout extends Component {
         <View style={{ width: '100%', height: '100%' }}>
           <ServiceZoneSlide />
           <View style={{ backgroundColor: 'white', width: '100%', height: height - 270 }}>
+            <Image
+              style={{
+                backgroundColor: '#ccc',
+                flex: 1,
+                position: 'absolute',
+                width: '100%',
+                height: '100%',
+                justifyContent: 'center',
+              }}
+              source={require('../assets/images/files/backgroundHD.png')}
+            />
             {discoverNum === 0 ? <DirecTVLayout />
               : discoverNum === 1 ? <DirecTVNowLayout />
-                : <DirecTVLayout />
+                : <DirecTVWatchLayout />
             }
           </View>
         </View>
