@@ -51,17 +51,6 @@ Plus, DIRECTV has been named as an ENERGY STAR® Partner of the Year for the 3rd
   renderContents() {
     return (
       <View style={{ width: '100%', alignItems: 'center' }}>
-        <Image
-          style={{
-            backgroundColor: '#ccc',
-            flex: 1,
-            position: 'absolute',
-            width: '100%',
-            height: '100%',
-            justifyContent: 'center',
-          }}
-          source={require('../assets/images/files/backgroundHD.png')}
-        />
         <Text style={styles.txtTitle}>DIRECTV</Text>
         {this._renderDirecTVCard()}
         <Text style={styles.txtTitle}>Find the Package that is right for you</Text>
