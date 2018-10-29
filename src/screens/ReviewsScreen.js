@@ -6,7 +6,6 @@
 
 import React, { Component } from 'react';
 import { Animated, Dimensions, Image, ScrollView, Text, View } from 'react-native';
-import { Rating } from 'react-native-ratings';
 import Svg, { Rect } from 'react-native-svg';
 import firebase from 'react-native-firebase';
 import { connect } from 'react-redux';
@@ -15,6 +14,7 @@ import { connect } from 'react-redux';
 import styles from './css/ReviewsScreenCss';
 
 // My Customs
+import CustomerReviewComponent from '../components/DeviceComponents/CustomerReviewComponent';
 import SkeletonLoading from './components/SkeletonLoading';
 import CustomerReview from './components/CustomerReview';
 import WebReview from './components/WebReview';
@@ -64,86 +64,9 @@ class ReviewsScreen extends Component {
   renderCustomerReviews() {
     const { customerReviews, model, manufacture } = this.props.reviews;
 
-    if (typeof customerReviews != "undefined" && customerReviews.length > 0) {
-      let star5 = 0; let star4 = 0; let star3 = 0; let star2 = 0; let star1 = 0;
-      let starTotal = 0; let starFinal = 0; let starCount = customerReviews.length;
-      for (i = 0; i < starCount; i++) {
-        starTotal += parseInt(customerReviews[i].stars);
-        if (parseInt(customerReviews[i].stars) === 5) star5++;
-        else if (parseInt(customerReviews[i].stars) === 4) star4++;
-        else if (parseInt(customerReviews[i].stars) === 3) star3++;
-        else if (parseInt(customerReviews[i].stars) === 2) star2++;
-        else star1++;
-      }
-      starFinal = parseFloat((starTotal / starCount).toFixed(2));
+    if (typeof customerReviews != "undefined" && customerReviews.length > 0) {      
       return (
-        <View>
-          <Text style={styles.webReviewTitle}>Reviews from myAT&T</Text>
-
-          <View style={[styles.cardContainer, { borderTopColor: '#1181FF' }]}>
-            <View style={styles.headerCard}>
-              <Image style={[styles.logoReview, { width: 60 }]} source={require('../assets/images/files/myAtt.jpg')} />
-              <Text style={[styles.titleReview, { marginTop: -4 }]}>Customer Reviews</Text>
-            </View>
-            <View style={styles.ratingView}>
-              <View style={{ flexDirection: 'row' }}>
-                <Rating
-                  type='custom'
-                  ratingColor='#fd650b'
-                  ratingBackgroundColor='#c8c7c8'
-                  ratingCount={5}
-                  imageSize={20}
-                  readonly
-                  fractions = {2}
-                  startingValue={starFinal}
-                />
-                <Text style={styles.ratingStar}>{starFinal} stars</Text>
-              </View>
-              <Text style={styles.ratingDescription}>Rating Description ({starCount}reviews)</Text>
-              <View style={{ flexDirection: 'row', marginTop: 5 }}>
-                <Text style={styles.ratingText}>5 Star</Text>
-                <View style={styles.ratingBarBackground}>
-                  <View style={[styles.ratingBar, { width: 200 * star5 / starCount }]} />
-                </View>
-                <Text style={styles.ratingCountText}>{star5}</Text>
-              </View>
-              <View style={{ flexDirection: 'row', marginTop: 5 }}>
-                <Text style={styles.ratingText}>4 Star</Text>
-                <View style={styles.ratingBarBackground}>
-                  <View style={[styles.ratingBar, { width: 200 * star4 / starCount }]} />
-                </View>
-                <Text style={styles.ratingCountText}>{star4}</Text>
-              </View>
-              <View style={{ flexDirection: 'row', marginTop: 5 }}>
-                <Text style={styles.ratingText}>3 Star</Text>
-                <View style={styles.ratingBarBackground}>
-                  <View style={[styles.ratingBar, { width: 200 * star3 / starCount }]} />
-                </View>
-                <Text style={styles.ratingCountText}>{star3}</Text>
-              </View>
-              <View style={{ flexDirection: 'row', marginTop: 5 }}>
-                <Text style={styles.ratingText}>2 Star</Text>
-                <View style={styles.ratingBarBackground}>
-                  <View style={[styles.ratingBar, { width: 200 * star2 / starCount }]} />
-                </View>
-                <Text style={styles.ratingCountText}>{star2}</Text>
-              </View>
-              <View style={{ flexDirection: 'row', marginTop: 5 }}>
-                <Text style={styles.ratingText}>1 Star</Text>
-                <View style={styles.ratingBarBackground}>
-                  <View style={[styles.ratingBar, { width: 200 * star1 / starCount }]} />
-                </View>
-                <Text style={styles.ratingCountText}>{star1}</Text>
-              </View>
-              <Text style={styles.recommendText}>8 out of 10 (80%) of reviewers would recommed this product to a friend</Text>
-            </View>
-            
-            {/* {customerReviews.map((item, index) => {
-              return <CustomerReview key={index} index={index} item={item} model={model} manufacture={manufacture} />;
-            })
-            } */}
-          </View>
-        </View>
+        <CustomerReviewComponent customerReviews = {customerReviews} model = {model} manufacture = {manufacture} />
       );
     }
   }
@@ -260,19 +183,8 @@ class ReviewsScreen extends Component {
   render() {
     const { reviews } = this.props;
 
-
     return (
       <Animated.ScrollView contentContainerStyle={styles.container} scrollEventThrottle={1}
-        /*onScroll={Animated.event(
-          [{ nativeEvent: { contentOffset: { y: this.props.onScrollCustom } } }],
-          {
-            /*useNativeDriver: true*//*,
-            listener: event => {
-              const offsetY = event.nativeEvent.contentOffset.y
-              this.props.onScrollCustom(offsetY);
-            }* /
-          }
-        )}*/
         onScroll={this._animateScroll}
         onScrollEndDrag={this._onScrollEndSnapToEdge}
       >
