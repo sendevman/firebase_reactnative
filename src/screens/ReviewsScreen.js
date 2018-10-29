@@ -183,19 +183,8 @@ class ReviewsScreen extends Component {
   render() {
     const { reviews } = this.props;
 
-
     return (
       <Animated.ScrollView contentContainerStyle={styles.container} scrollEventThrottle={1}
-        /*onScroll={Animated.event(
-          [{ nativeEvent: { contentOffset: { y: this.props.onScrollCustom } } }],
-          {
-            /*useNativeDriver: true*//*,
-            listener: event => {
-              const offsetY = event.nativeEvent.contentOffset.y
-              this.props.onScrollCustom(offsetY);
-            }* /
-          }
-        )}*/
         onScroll={this._animateScroll}
         onScrollEndDrag={this._onScrollEndSnapToEdge}
       >
