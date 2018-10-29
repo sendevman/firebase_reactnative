@@ -49,18 +49,18 @@ const BottomTabNav = createBottomTabNavigator(
         }
       }
     },
-    // ExclusiveVod: {
-    //   screen: VodLayout,
-    //   navigationOptions: {
-    //     title: 'VOD',
-    //     tabBarIcon: ({ tintColor }) => {
-    //       if (tintColor === "#3E3F42")
-    //         return <Icon name="ExclusiveVodUnFill" width="22" height="18" viewBox="0 0 22 18" />;
-    //       else
-    //         return <Icon name="ExclusiveVodFill" width="22" height="18" viewBox="0 0 22 18" />;
-    //     }
-    //   }
-    // },
+    ExclusiveVod: {
+      screen: VodLayout,
+      navigationOptions: {
+        title: 'VOD',
+        tabBarIcon: ({ tintColor }) => {
+          if (tintColor === "#3E3F42")
+            return <Icon name="ExclusiveVodUnFill" width="22" height="18" viewBox="0 0 22 18" />;
+          else
+            return <Icon name="ExclusiveVodFill" width="22" height="18" viewBox="0 0 22 18" />;
+        }
+      }
+    },
     Discover: {
       screen: DiscoverServiceLayout,
       navigationOptions: {
