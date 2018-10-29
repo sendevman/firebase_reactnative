@@ -11,6 +11,14 @@ import LinearGradient from 'react-native-linear-gradient';
 import firebase from 'react-native-firebase';
 import { connect } from 'react-redux';
 
+//Device Components
+import ColorComponent from '../components/DeviceComponents/ColorComponent';
+import DisplayComponent from '../components/DeviceComponents/DisplayComponent';
+import FitnessComponent from '../components/DeviceComponents/FitnessComponent';
+import CameraComponent from '../components/DeviceComponents/CameraComponent';
+import BatteryComponent from '../components/DeviceComponents/BatteryComponent';
+import PerformanceComponent from '../components/DeviceComponents/PerformanceComponent';
+import AccessoriesComponent from '../components/DeviceComponents/AccessoriesComponent';
 // My Styles
 import styles from './css/InfoSpecsScreenCss';
 
@@ -19,9 +27,6 @@ import Icon from '../assets/images/Icon';
 import SkeletonLoading from './components/SkeletonLoading';
 import Offer from '../components/LimitedTimeOffer/Offer';
 import FeedbackSurvey from './components/FeedbackSurvey';
-
-// My Routes
-import RoutesAccessories from '../routes/Accessories';
 
 var { width, height } = Dimensions.get('window');
 
@@ -102,358 +107,71 @@ class InfoSpecsScreen extends Component {
 
   renderColors() {
     const { colors } = this.props.infoSpecs;
-    const viewWidth = width - 34;
 
     if (typeof colors != "undefined" && colors.length > 0) {
       return (
-        <View style={[{ paddingBottom: 20, paddingTop: 20 }]}>
-          {/* <Icon name="Heading_colors" width={viewWidth} height={viewWidth / 1080 * 210} fill="#1181FF" viewBox="0 0 1080 210" style={{ marginLeft: 6 }} /> */}
-          <Image style={[styles.colorBackground, { width: viewWidth, height: viewWidth * 610 / 1080, marginLeft: 6, }]} source={require('../assets/images/files/color.png')} />
-          <View style={[styles.colorItemBox, { width: viewWidth, marginLeft: 6, marginTop: -viewWidth / 1080 * (610 - 200) }]}>
-            {colors.map((item, index) => {
-              return (
-                <View key={index} style={styles.colorItem}>
-                  <Image style={styles.colorImage} resizeMode={Image.resizeMode.contain} source={{ uri: item.img }} />
-                  <Text style={styles.colorTitle}>{item.name}</Text>
-                </View>
-              );
-            })
-            }
-          </View>
-        </View>
+        <ColorComponent colors={colors} />
       );
     }
   }
 
   renderDisplay() {
     const { display } = this.props.infoSpecs;
-    const viewWidth = width - 34;
-
 
     if (typeof display !== "undefined") { //Object.keys(display).length !== 0 && 
       return (
-        <View style={{ paddingBottom: 10 }}>
-          {/* <Icon name="Heading_display" width={viewWidth} height={viewWidth / 1080 * 210} fill="#1181FF" viewBox="0 0 1080 210" style={{ marginLeft: 6 }} /> */}
-
-          <Image style={[styles.colorBackground, { width: viewWidth, height: viewWidth * 410 / 1080, marginLeft: 6, }]} source={require('../assets/images/files/display.png')} />
-          <View style={[styles.storageBox, { width: viewWidth - 1, marginLeft: 6, marginTop: -viewWidth / 1080 * (410 - 210) }]}>
-            <View style={styles.displaySizeItem}>
-              <View style={styles.displaySizeHr}></View>
-              <Text style={styles.displaySize}>{display.size}"</Text>
-            </View>
-            <View style={styles.displayTextItem}>
-              <Text style={styles.displayText}>{display.description} ({display.resolution}) {display.ppi} ppi</Text>
-              {/* <Text style={styles.displayText}>{display.ppi} ppi</Text> */}
-            </View>
-          </View>
-        </View>
+        <DisplayComponent display={display} />
       );
     }
   }
   renderFitness() {
-    const { display } = this.props.infoSpecs;
-    const viewWidth = width - 34;
+    const { fitness } = this.props.infoSpecs;
 
-    if (typeof display !== "undefined") { //Object.keys(display).length !== 0 && 
+    if (typeof fitness !== "undefined") { //Object.keys(display).length !== 0 && 
       return (
-        <View style={{ paddingBottom: 10 }}>
-          <Image style={[styles.colorBackground, { width: viewWidth, height: viewWidth * 680 / 1080, marginLeft: 6, }]} source={require('../assets/images/files/fitness.png')} />
-          <View style={[styles.storageBox, { width: viewWidth - 1, marginLeft: 6, marginTop: -viewWidth / 1080 * (680 - 210) }]}>
-            <View style={{ flexDirection: 'column' }}>
-              <View style={styles.fitnessRowView}>
-                <View style={styles.fitnessRowItem}>
-                  <Image style={styles.fitnessRowImage} source={require('../assets/images/files/pedometer.png')} />
-                  <Text style={styles.fitnessRowText}>Pedometer</Text>
-                </View>
-                <View style={styles.fitnessRowItem}>
-                  <Image style={styles.fitnessRowImage} source={require('../assets/images/files/run.png')} />
-                  <Text style={styles.fitnessRowText}>Run Tracking</Text>
-                </View>
-                <View style={styles.fitnessRowItem}>
-                  <Image style={styles.fitnessRowImage} source={require('../assets/images/files/heart.png')} />
-                  <Text style={styles.fitnessRowText}>Heart Rate Monitor</Text>
-                </View>
-                <View style={styles.fitnessRowItem}>
-                  <Image style={styles.fitnessRowImage} source={require('../assets/images/files/activity.png')} />
-                  <Text style={styles.fitnessRowText}>Activity Tracker</Text>
-                </View>
-              </View>
-              <View style={styles.fitnessRowView}>
-                <View style={styles.fitnessRowItem}>
-                  <Image style={styles.fitnessRowImage} source={require('../assets/images/files/gps.png')} />
-                  <Text style={styles.fitnessRowText}>GPS Tracking</Text>
-                </View>
-                <View style={styles.fitnessRowItem}>
-                  <Image style={styles.fitnessRowImage} source={require('../assets/images/files/music.png')} />
-                  <Text style={styles.fitnessRowText}>Stand Alone Music</Text>
-                </View>
-                <View style={styles.fitnessRowItem}>
-                  <Image style={styles.fitnessRowImage} source={require('../assets/images/files/heart.png')} />
-                  <Text style={styles.fitnessRowText}>EKG</Text>
-                </View>
-                <View style={styles.fitnessRowItem}>
-                  <Image style={styles.fitnessRowImage} source={require('../assets/images/files/tracking.png')} />
-                  <Text style={styles.fitnessRowText}>Fitness Tracking</Text>
-                </View>
-              </View>
-            </View>
-          </View>
-        </View>
+        <FitnessComponent fitness={fitness} />
       );
     }
   }
 
   renderCamera() {
     const { camera } = this.props.infoSpecs;
-    const viewWidth = width - 34;
 
     if (typeof camera != "undefined") { // && (Object.keys(camera).length !== 0 && camera.constructor === Object)) {
-      const { features, front, rear } = camera;
-      const featuretext = features.join(' | ');
-      const ifFront = (typeof front != "undefined") ? true : false;
-      const ifRear = (typeof rear != "undefined") ? true : false;
-
       return (
-        <View style={{ paddingBottom: 0 }}>
-          <View style={styles.hrDivider}></View>
-          {/* <Icon name="Heading_camera" width={viewWidth} height={viewWidth / 1080 * 315} fill="#1181FF" viewBox="0 0 1080 315" style={{ marginLeft: 6 }} /> */}
-          <Image style={[styles.colorBackground, { width: viewWidth, height: viewWidth * 490 / 1080, marginLeft: 6, }]} source={require('../assets/images/files/camera.png')} />
-
-          {ifFront || ifRear &&
-            <View style={styles.cameraBox}>
-              {ifFront &&
-                <View style={styles.cameraItem}>
-                  <Text style={styles.cameraTextBold}>{front.sensor} sensor</Text>
-                  <Text style={styles.cameraTextBold}>{front.aperture} aperture</Text>
-                </View>
-              }
-
-              {ifRear &&
-                <View style={styles.cameraItem}>
-                  <Text style={styles.cameraTextBold}>{rear.sensor} sensor</Text>
-                  <Text style={styles.cameraTextBold}>{rear.aperture} aperture</Text>
-                </View>
-              }
-            </View>
-          }
-          {(features && features.length > 0) &&
-            <View style={[styles.storageBox, { width: viewWidth, marginLeft: 6, marginTop: -viewWidth / 1080 * (490 - 315), marginBottom: 10 }]}>
-              <Text numberOfLines={0} style={[styles.cameraText, { maxWidth: '88%', textAlign: 'left', marginBottom: 10, marginTop: 6 }]}>{featuretext}</Text>
-            </View>
-          }
-        </View>
+        <CameraComponent camera={camera} />
       );
     }
   }
 
   renderPerformanceAndStorage() {
     const { deviceOptions, expandableStorage, memory, processor, subType } = this.props.infoSpecs;
-    const viewWidth = width - 34;
-
-    const memoryEmpty = (!memory || !memory.trim() || 0 === memory.length);
-    const processorEmpty = (typeof processor == "undefined");// || (Object.keys(processor).length === 0 && processor.constructor === Object));
-    const doIsValid = (typeof deviceOptions == "undefined" || deviceOptions.length <= 0) ? false : true;
-    const esIsValid = (typeof expandableStorage == "undefined") ? false : true; // || Object.keys(expandableStorage).length === 0) ? false : true;
-
-    var isAvailable = false;
-    if (esIsValid) isAvailable = (typeof expandableStorage.available == "undefined") ? false : expandableStorage.available;
-    else isAvailable = false;
-
-    const mpChangeStyle = (memoryEmpty && processorEmpty);
-    const changeStyle = (!isAvailable && !doIsValid);
-
     return (
-      <View style={{ paddingBottom: 8 }}>
-        <View style={styles.hrDivider}></View>
-        {/* <Text style={styles.titleDivider}>Performance & Storage</Text>  */}
-        {/* <Icon name="Heading_performance" width={viewWidth} height={viewWidth / 1080 * 210} fill="#1181FF" viewBox="0 0 1080 210" style={{ marginLeft: 6 }} /> */}
-        <Image style={[styles.colorBackground, { width: viewWidth, height: viewWidth * 210 / 1080, marginLeft: 6, }]} source={require('../assets/images/files/performance.png')} />
-
-
-        {(!memoryEmpty || !processorEmpty) &&
-          <View style={[styles.performanceStorageBox, changeStyle ? { marginBottom: 4 } : {}]}>
-            {!processorEmpty &&
-              <View style={styles.performanceStorageItem}>
-                <Icon name="ProcessorBlue" width="138" height="138" fill="#FFFFFF73" viewBox="18 55 138 138" />
-
-                <View style={styles.performanceProcessorContentBox}>
-                  <Text style={styles.performanceStorageTitle}>PROCESSOR</Text>
-                  <Text style={styles.performanceStorageText} numberOfLines={4}>{processor.short}</Text>
-                </View>
-              </View>
-            }
-
-            {!memoryEmpty &&
-              <View style={styles.performanceStorageItem}>
-                <Icon name="MemoryBlue" width="120" height="121" fill="#FFFFFF73" viewBox="197 63 120 121" />
-
-                <View style={styles.performanceStorageContentBox}>
-                  <Text style={styles.performanceStorageTitle}>MEMORY</Text>
-                  <Text style={styles.performanceStorageText}>{memory}GB</Text>
-                </View>
-              </View>
-            }
-          </View>
-        }
-
-        {(isAvailable || doIsValid) &&
-          <View style={[styles.performanceStorageBox, mpChangeStyle ? {} : { marginTop: 20 }, { marginBottom: 20 }]}>
-            {isAvailable &&
-              <View style={styles.storageBlueBox}>
-                <Icon name="StorageBackground" width="135" height="90" fill="#FFFFFFBB" viewBox="0 0 270 180" />
-                <Text style={styles.storageBlueTitle}>SD CARD SLOT</Text>
-                <Text style={styles.storageBlueText}>Available</Text>
-              </View>
-            }
-
-            {doIsValid &&
-              <View style={styles.storageBlueBox}>
-                <Icon name="SDCardBackground" width="135" height="90" fill="#FFFFFFBB" viewBox="0 0 270 180" />
-                <Text style={styles.storageBlueTitle}>STORAGE</Text>
-                <Text style={[styles.storageBlueText, { fontSize: (deviceOptions.length < 3 ? 14 : 12) }]}>{deviceOptions.map((obj) => { return `${obj.storage}Gb` }).join(' | ')}</Text>
-              </View>
-            }
-          </View>
-        }
-      </View>
-    );
+      <PerformanceComponent deviceOptions={deviceOptions} expandableStorage={expandableStorage} memory={memory} processor={processor} subType={subType} />
+    )
   }
 
   renderBattery() {
     const { battery, subType } = this.props.infoSpecs;
-    const viewWidth = width - 34;
 
     if (typeof battery !== "undefined") { //Object.keys(battery).length !== 0 && 
-      const { capacity, life } = battery;
-      const capacityEmpty = (!capacity || !capacity.trim() || 0 === capacity.length);
-      const lifeEmpty = (life !== "undefined"); //Object.keys(life).length === 0 && 
-      const talkTimeEmpty = (!life.talkTime || !life.talkTime.trim() || 0 === life.talkTime.length);
-      const videoEmpty = (!life.video || !life.video.trim() || 0 === life.video.length);
-      const talkEmpty = (!life.talk || !life.talk.trim() || 0 === life.talk.length);
-      const workoutEmpty = (!life.workout || !life.workout.trim() || 0 === life.workout.length);
-      const audioEmpty = (!life.audio || !life.audio.trim() || 0 === life.audio.length);
-      const internetWifiEmpty = (!life.internetWifi || !life.internetWifi.trim() || 0 === life.internetWifi.length);
-      const internetL4GEmpty = (!life.internetL4G || !life.internetL4G.trim() || 0 === life.internetL4G.length);
-      const batteryLifeEmpty = (talkTimeEmpty && videoEmpty && audioEmpty && internetWifiEmpty && internetL4GEmpty);
-      const chargingNoEmpty = (!lifeEmpty &&
-        (life.chargingWired || life.chargingWireless ||
-          (life.wirelesChargingType && life.wirelesChargingType.length > 0)));
+
       return (
-        <View style={{ height: viewWidth * 670 / 1080 }}>
-          <View style={styles.hrDivider}></View>
-          {/* <Text style={styles.titleDivider}>Battery</Text> */}
-          {/* <Icon name="Heading_battery" width={viewWidth} height={viewWidth / 1080 * 210} fill="#1181FF" viewBox="0 0 1080 210" style={{ marginLeft: 6 }} /> */}
-          <Image style={[styles.colorBackground, { width: viewWidth, height: viewWidth * 670 / 1080, marginLeft: 6, }]} source={require('../assets/images/files/battery.png')} />
-
-          <View style={[styles.featuresBox, styles.expandableBox, { width: viewWidth, marginLeft: 6, marginTop: -viewWidth / 1080 * (670 - 210) - 10 }]}>
-            {!batteryLifeEmpty &&
-              <View style={styles.featureBox}>
-                {!talkTimeEmpty &&
-                  <View>
-                    <View style={styles.featureItemBattery}></View>
-                    <View style={styles.featureItemBox}>
-                      {subType === 'phone' ?
-                        <Text style={styles.featureItemTitle}>CALLING</Text>
-                        :
-                        <Text style={styles.featureItemTitleSmall}>GENERAL USE</Text>
-                      }
-                      <Text style={styles.featureItemMount}>{life.talkTime.replace(' hrs', '')}</Text>
-                      <Text style={styles.featureItemHour}>hours</Text>
-                    </View>
-                  </View>
-                }
-
-                {!videoEmpty &&
-                  <View>
-                    <View style={styles.featureItemBattery}></View>
-                    <View style={styles.featureItemBox}>
-                      <Text style={styles.featureItemTitle}>VIDEO</Text>
-                      <Text style={styles.featureItemMount}>{life.video.replace(' hrs', '')}</Text>
-                      <Text style={styles.featureItemHour}>hours</Text>
-                    </View>
-                  </View>
-                }
-                {!talkEmpty &&
-                  <View>
-                    <View style={styles.featureItemBattery}></View>
-                    <View style={styles.featureItemBox}>
-                      <Text style={styles.featureItemTitle}>TALK</Text>
-                      <Text style={styles.featureItemMount}>{life.talk.replace(' hrs', '')}</Text>
-                      <Text style={styles.featureItemHour}>hours</Text>
-                    </View>
-                  </View>
-                }
-
-                {!audioEmpty &&
-                  <View>
-                    <View style={styles.featureItemBattery}></View>
-                    <View style={styles.featureItemBox}>
-                      <Text style={styles.featureItemTitle}>AUDIO</Text>
-                      <Text style={styles.featureItemMount}>{life.audio.replace(' hrs', '')}</Text>
-                      <Text style={styles.featureItemHour}>hours</Text>
-                    </View>
-                  </View>
-                }
-
-
-                {!workoutEmpty &&
-                  <View>
-                    <View style={styles.featureItemBattery}></View>
-                    <View style={styles.featureItemBox}>
-                      <Text style={styles.featureItemTitle}>WORKOUT</Text>
-                      <Text style={styles.featureItemMount}>{life.workout.replace(' hrs', '')}</Text>
-                      <Text style={styles.featureItemHour}>hours</Text>
-                    </View>
-                  </View>
-                }
-
-                {!internetWifiEmpty &&
-                  <View>
-                    <View style={styles.featureItemBattery}></View>
-                    <View style={styles.featureItemBox}>
-                      <Text style={styles.featureItemTitle}>WI-FI</Text>
-                      <Text style={styles.featureItemMount}>{life.internetWifi.replace(' hrs', '')}</Text>
-                      <Text style={styles.featureItemHour}>hours</Text>
-                    </View>
-                  </View>
-                }
-
-                {!internetL4GEmpty &&
-                  <View>
-                    <View style={styles.featureItemBattery}></View>
-                    <View style={styles.featureItemBox}>
-                      {/* <LinearGradient colors={['#39E80E', '#00FFB4']} style={styles.featureItemBox}> */}
-                      <Text style={styles.featureItemTitle}>LTE</Text>
-                      <Text style={styles.featureItemMount}>{life.internetL4G.replace(' hrs', '')}</Text>
-                      <Text style={styles.featureItemHour}>hours</Text>
-                    </View>
-                  </View>
-                }
-              </View>
-            }
-
-            {chargingNoEmpty &&
-              <View style={styles.chagingTypeBox}>
-                {life.chargingWired &&
-                  <View style={styles.chagingItemBox}>
-                    <Icon name="WiredCharging" width="30" height="30" viewBox="0 0 34 34" />
-                    <Text style={styles.chagingItemText}>Wired charging</Text>
-                  </View>
-                }
-
-                {life.chargingWireless &&
-                  <View style={styles.chagingItemBox}>
-                    <Icon name="WifiCharging" width="40" height="23" viewBox="0 0 45 26" />
-                    <Text style={styles.chagingItemText}>Wireless charging</Text>
-                  </View>
-                }
-              </View>
-            }
-          </View>
-        </View>
+        <BatteryComponent battery={battery} subType={subType} />
       );
     }
   }
+
+  renderAccessories() {
+    const { compatibleAccessories } = this.props.infoSpecs;
+
+    if ((typeof compatibleAccessories == "undefined")) return;//  || (Object.keys(compatibleAccessories).length === 0 && compatibleAccessories.constructor === Object)) return;
+
+    return (
+      <AccessoriesComponent compatibleAccessories={compatibleAccessories} />
+    );
+  }
+
 
   renderContent() {
     const { infoSpecs } = this.props;
@@ -519,31 +237,6 @@ class InfoSpecsScreen extends Component {
         </View>
       );
     }
-  }
-
-  renderAccessories() {
-    const { compatibleAccessories } = this.props.infoSpecs;
-    const viewWidth = width - 34;
-
-    if ((typeof compatibleAccessories == "undefined")) return;//  || (Object.keys(compatibleAccessories).length === 0 && compatibleAccessories.constructor === Object)) return;
-
-    const { featured, fullList } = compatibleAccessories;
-    let featuredEmpty = (typeof featured == "undefined" || featured.length <= 0);
-    let fullListEmpty = (typeof fullList == "undefined" || fullList.length <= 0);
-
-    if (featuredEmpty && fullListEmpty) return false;
-
-    return (
-      <View>
-        {/* <Icon name="Heading_accessories" width={viewWidth} height={viewWidth / 1080 * 210} fill="#1181FF" viewBox="0 0 1080 210" style={{ marginLeft: 6 }} /> */}
-        <View style={[styles.accessoriesBackground1, { width: viewWidth, marginLeft: 6, marginTop: 30 }]}>
-          <Image style={[styles.accessoriesBackground, { width: viewWidth, height: viewWidth * 210 / 1080, marginLeft: 0 }]} source={require('../assets/images/files/accessories.png')} />
-        </View>
-        <View style={[styles.accessoriesBox, { width: viewWidth }]}>
-          {<RoutesAccessories />}
-        </View>
-      </View>
-    );
   }
 
   _animateScroll = (event) => {
