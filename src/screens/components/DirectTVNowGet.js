@@ -32,7 +32,7 @@ class DirecTVNowGet extends Component {
         <View style={{ flexDirection: 'row', marginTop: 10 }}>
           <View style={{ width: width / 2 - 40, borderWidth: 0, borderColor: '#FFF', margin: 4 }}>
             <Image style={styles.imgReimagned} source={require('../../assets/images/files/reimagned1.png')} />
-            <Text style={{ color: '#FFF', margintop: 20, fontSize: 18, }}>PREMIUM CHANNELS</Text>
+            <Text style={{ color: '#FFF', marginTop: 20, fontSize: 18, }}>PREMIUM CHANNELS</Text>
             <Text style={{ color: '#FFF', marginTop: 20, fontSize: 13, }}>Load up on premium networks at an unbelievable price. Add HBO® or Cinemax® for $5/mo and SHOWTIME® or STARZ® for $8/mo!</Text>
           </View>
           <View style={{ width: width / 2 - 40, borderWidth: 0, borderColor: '#FFF', margin: 4 }}>
@@ -44,7 +44,7 @@ class DirecTVNowGet extends Component {
         <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10 }}>
           <View style={{ width: width / 2 - 40, borderWidth: 0, borderColor: '#FFF', margin: 4 }}>
             <Image style={[styles.imgReimagned, { width: 66, height: 47 }]} source={require('../../assets/images/files/reimagned3.png')} />
-            <Text style={{ color: '#FFF', margintop: 20, fontSize: 18, }}>TRUE CLOUD DVR </Text>
+            <Text style={{ color: '#FFF', marginTop: 20, fontSize: 18, }}>TRUE CLOUD DVR </Text>
             <Text style={{ color: '#FFF', marginTop: 20, fontSize: 13, }}>BETA{"\n\n"}Get the true DVR experience! Record up to 20 hours and watch, fast forward, or rewind from anywhere.</Text>
           </View>
           <View style={{ width: width / 2 - 40, borderWidth: 0, borderColor: '#FFF', margin: 4 }}>
