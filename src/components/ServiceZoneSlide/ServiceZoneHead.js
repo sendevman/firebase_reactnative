@@ -8,7 +8,6 @@ import React, { Component } from 'react';
 import { Animated, Dimensions, Image, Platform, Text, View, TouchableOpacity, YellowBox } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
-import Spinkit from 'react-native-spinkit';
 import { connect } from 'react-redux';
 //
 import DirecTVHeader from './DirecTVHeader';
@@ -78,7 +77,6 @@ class ServiceZoneHeader extends Component {
             }}
           />
         </View>
-        }
       </View>
     );
   }

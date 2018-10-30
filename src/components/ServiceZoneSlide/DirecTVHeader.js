@@ -29,19 +29,14 @@ class DirecTVHeader extends Component {
       <View style={styles.itemContainer}>
         <View style={styles.itemBox}>
           <View style={styles.imageBackground}>
-          <Image style={styles.itemImage} source={require('../../assets/images/files/directv.png')} />
+            <Image style={styles.itemImage} source={require('../../assets/images/files/directv.png')} />
           </View>
           <View style={styles.detailsBox}>
             <Text numberOfLines={1} style={[styles.titleItem]}>DIRECTV is TV.</Text>
             <Text numberOfLines={1} style={[styles.titleItem, { paddingBottom: 6 }]}>Evolved.</Text>
-            <Text numberOfLines={0} style={styles.titleDetailItem}>
-              Watch live TV and 45,000 shows and movies On Demand on up to 5 screens at once-anytime, anywhere-on the DIRECTV app.
-              Or use our whole-home Genie HD DVR for 21st Century. 99% reliable TV and get with the times.
-            </Text>
+            <Text numberOfLines={0} style={styles.titleDetailItem}>Watch live TV and 45,000 shows and movies On Demand on up to 5 screens at once-anytime, anywhere-on the DIRECTV app. Or use our whole-home Genie HD DVR for 21st Century. 99% reliable TV and get with the times.</Text>
             <Text numberOfLines={1} style={[styles.titleItem]}>$35/mo</Text>
-            <Text numberOfLines={0} style={styles.titleDetailItem}>
-              w/24-mo. agmt. AutoPay & Paperless bill req'd. $78/mo. in months 13-24 (subject to change)
-            </Text>
+            <Text numberOfLines={0} style={styles.titleDetailItem}>w/24-mo. agmt. AutoPay & Paperless bill req'd. $78/mo. in months 13-24 (subject to change)</Text>
           </View>
         </View>
       </View>

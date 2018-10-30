@@ -2,7 +2,6 @@ package com.retailcompanion;
 
 import android.app.Application;
 
-import com.crashlytics.android.Crashlytics;
 import com.facebook.react.ReactApplication;
 import com.brentvatne.react.ReactVideoPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
@@ -13,7 +12,6 @@ import com.react.rnspinkit.RNSpinkitPackage;
 import com.opensettings.OpenSettingsPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.pusherman.networkinfo.RNNetworkInfoPackage;
-import io.fabric.sdk.android.Fabric;
 import io.invertase.firebase.RNFirebasePackage;
 import io.invertase.firebase.analytics.RNFirebaseAnalyticsPackage;
 import io.invertase.firebase.auth.RNFirebaseAuthPackage;
@@ -70,7 +68,6 @@ public class MainApplication extends Application implements ReactApplication {
   @Override
   public void onCreate() {
     super.onCreate();
-    Fabric.with(this, new Crashlytics());
     SoLoader.init(this, /* native exopackage */ false);
   }
 }
