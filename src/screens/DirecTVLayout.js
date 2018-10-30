@@ -39,11 +39,11 @@ class DirecTVLayout extends Component {
     return (
       <View style={[styles.directvCardView, { marginTop: 20, marginBottom: 40 }]}>
         <Image style={styles.imgReliability} source={require('../assets/images/files/reliability.png')} />
-        <Text style={[styles.txtSaveDescription,{marginTop: -10}]}>Get piece of mind with DIRECTV</Text>
-        <Text style={[styles.txtSaveDetail, {marginBottom: 20}]}>
-          <Text>Stop settling for cable. For the 18th year in a row, DIRECTV is rated higher in customer satisfaction
+        <Text style={[styles.txtSaveDescription, { marginTop: -10 }]}>Get piece of mind with DIRECTV</Text>
+        <Text style={[styles.txtSaveDetail, { marginBottom: 20 }]}>
+          Stop settling for cable. For the 18th year in a row, DIRECTV is rated higher in customer satisfaction
 than Cable4. And with our 99% worry-free signal reliability, you get a TV experience you can depend on.
-Plus, DIRECTV has been named as an ENERGY STAR® Partner of the Year for the 3rd year in a row.</Text>
+Plus, DIRECTV has been named as an ENERGY STAR® Partner of the Year for the 3rd year in a row.
         </Text>
       </View>
     );

@@ -27,9 +27,9 @@ class WatchTVHeader extends Component {
   render() {
     return (
       <View style={styles.itemContainer}>
-        <View style={[styles.itemBox, {borderWidth: 0}]}>
+        <View style={[styles.itemBox, { borderWidth: 0 }]}>
           <View style={styles.imageWatchBackground}>
-          <Image style={styles.itemWatchImage} source={require('../../assets/images/files/watchBG1.png')} />
+            <Image style={styles.itemWatchImage} source={require('../../assets/images/files/watchBG1.png')} />
           </View>
           <View style={styles.detailsWatchBox}>
             <Text numberOfLines={1} style={[styles.titleWatchItem]}>Get 30+ live TV channels</Text>
