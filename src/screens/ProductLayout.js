@@ -273,7 +273,7 @@ class ProductLayoutScreen extends Component {
     return (
       <Modal style={[styles.modalContent, styles.bottomModal]} isVisible={this.state.enterZone} onSwipe={() => this.setState({ enterZone: true })} swipeDirection="left">
         <View style={{ flex: 1, position: 'absolute', bottom: 10 }}>
-          <TouchableOpacity onPress={() => this.setState({ enterZone: true })}>
+          <TouchableOpacity onPress={() => this.setState({ enterZone: false })}>
             <View style={styles.bottomModalView}>
               <View style={{ marginLeft: 20, alignItems: 'center', }}>
                 <Icon height="50" width="50" name="ManIcon" viewBox="0 0 127 125" fill="#000" />

@@ -10,12 +10,12 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.provider.Settings.Secure;
 
-import com.crashlytics.android.Crashlytics;
+//import com.crashlytics.android.Crashlytics;
 import com.facebook.react.ReactActivity;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.walkbase.sdk.WalkbaseManager;
 
-import io.fabric.sdk.android.Fabric;
+//import io.fabric.sdk.android.Fabric;
 
 public class MainActivity extends ReactActivity {
     private WalkbaseManager walkbaseManager;
@@ -38,7 +38,7 @@ public class MainActivity extends ReactActivity {
         super.onCreate(savedInstanceState);
         android_id = Secure.getString(getContentResolver(),
                 Secure.ANDROID_ID);
-        Fabric.with(this, new Crashlytics());
+//        Fabric.with(this, new Crashlytics());
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         walkbaseManager = new WalkbaseManager(this);
         if(havePermissions() != PackageManager.PERMISSION_GRANTED) {
