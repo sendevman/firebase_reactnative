@@ -27,6 +27,9 @@ ios/Podfile.lock
 # Android/IntelliJ
 #
 build/
+debug/
+release/
+bin/
 .idea
 .gradle
 local.properties
@@ -34,6 +37,12 @@ local.properties
 *.bundle*
 node_modules_*
 *_assets_*
+.classpath
+.project
+.settings
+
+# Android/IntelliJ
+#
 
 # node.js
 #
