@@ -279,7 +279,9 @@ class Routes extends Component {
 
     var last_zone_id = -1;
     var zone_id = -1;
+    let confidence = 0;
     var zoneData = new Array();
+    var confidenceData = new Array();
     var errorCheck = 0;
     const maxLength = 5;
     ws.onmessage = (e) => {
@@ -287,39 +289,57 @@ class Routes extends Component {
       if (e.data !== "") {
         locationdata = JSON.parse(e.data);
         if (locationdata.zone_id === null) { }//zone_id = -1;
-        else zone_id = locationdata.zone_id;
+        else {
+          zone_id = locationdata.zone_id;
+          confidence = locationdata.confidence;
+        }
 
-        if (zoneData.length > 5) zoneData.shift();
+        if (zoneData.length > 5) {
+          zoneData.shift();
+          confidenceData.shift();
+        }
 
         zoneData.push(zone_id);
+        confidenceData.push(confidence);
 
-        if (zoneData.length === 6) {
-          console.log("zonData===", JSON.stringify(zoneData));
-          if (zoneData[5] === zoneData[4] || zoneData[5] === zoneData[3]) {
-            for (let i = 0; i < 5; i++) {
-              if (zoneData[5] === zoneData[i]) errorCheck += (i + 1);
-            }
-            if (errorCheck >= 4) {
+        if(zoneData.length === 6) {
+          if(confidenceData[5] > 0.9 && confidenceData[4] > 0.9 && confidenceData[3] > 0.9 && confidenceData[2] > 0.9) {
+            if(zoneData[5] === zoneData[4] && zoneData[5] === zoneData[3] && zoneData[5] === zoneData[2]){
               if (last_zone_id != locationdata.zone_id) {
                 this.props.dispatch(setLocationData(locationdata));
               }
               last_zone_id = locationdata.zone_id;
-              errorCheck = 0;
-            }
-          }
-          else if (zoneData[4] === zoneData[3]) {
-            for (let i = 0; i < 4; i++) {
-              if (zoneData[4] === zoneData[i]) errorCheck += (i + 1);
-            }
-            if (errorCheck >= 3) {
-              if (last_zone_id != locationdata.zone_id) {
-                this.props.dispatch(setLocationData(locationdata));
-              }
-              last_zone_id = locationdata.zone_id;
-              errorCheck = 0;
             }
           }
         }
+
+        // if (zoneData.length === 6) {
+        //   console.log("zonData===", JSON.stringify(zoneData));
+        //   if (zoneData[5] === zoneData[4] || zoneData[5] === zoneData[3]) {
+        //     for (let i = 0; i < 5; i++) {
+        //       if (zoneData[5] === zoneData[i]) errorCheck += (i + 1);
+        //     }
+        //     if (errorCheck >= 4) {
+        //       if (last_zone_id != locationdata.zone_id) {
+        //         this.props.dispatch(setLocationData(locationdata));
+        //       }
+        //       last_zone_id = locationdata.zone_id;
+        //       errorCheck = 0;
+        //     }
+        //   }
+        //   else if (zoneData[4] === zoneData[3]) {
+        //     for (let i = 0; i < 4; i++) {
+        //       if (zoneData[4] === zoneData[i]) errorCheck += (i + 1);
+        //     }
+        //     if (errorCheck >= 3) {
+        //       if (last_zone_id != locationdata.zone_id) {
+        //         this.props.dispatch(setLocationData(locationdata));
+        //       }
+        //       last_zone_id = locationdata.zone_id;
+        //       errorCheck = 0;
+        //     }
+        //   }
+        // }
       }
 
     };
