@@ -33,7 +33,7 @@ class ProductLayoutScreen extends Component {
 
     this.state = {
       animatedValue: new Animated.Value(0),
-      enterZone: true,
+      enterZone: false,
       walkbaseId: 0
     };
 
@@ -58,8 +58,8 @@ class ProductLayoutScreen extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.walkbaseId !== this.state.walkbaseId) {
-
+    if (nextProps.locationData !== this.state.locationData) {
+      this.setState({enterZone: true});
     }
   }
 
@@ -310,7 +310,7 @@ class ProductLayoutScreen extends Component {
         <Animated.View style={{ width: '100%', height: height - 195 }}>
           <RoutesProducts onScrollLayout={this.state.animatedValue} />
         </Animated.View>
-        {/* {this.showEnterZoneDialog()} */}
+        {this.showEnterZoneDialog()}
       </SafeAreaView>
     );
   }
