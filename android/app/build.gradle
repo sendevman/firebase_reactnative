@@ -100,7 +100,7 @@ android {
 
     defaultConfig {
         applicationId "com.retailcompanion"
-        minSdkVersion 25
+        minSdkVersion 24
         targetSdkVersion 25
         multiDexEnabled true
         versionCode 1
