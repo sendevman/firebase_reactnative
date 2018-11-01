@@ -13,7 +13,7 @@ import { connect } from 'react-redux';
 // My Styles
 import styles from '../css/ReviewsScreenCss';
 
-class CustomerReview extends Component<props> {
+class CustomerReview extends Component{
   constructor(props) {
     super(props);
 
@@ -31,7 +31,7 @@ class CustomerReview extends Component<props> {
     const { item } = this.props;
     const { readMore } = this.state;
 
-    let readMoreText = readMore ? "- Collapse" : "+ Read more";
+    let readMoreText = readMore ? "- Collapse" : "+ Full Review";
     let numberOfLines = readMore ? 0 : 3;
 
     return (
@@ -55,7 +55,7 @@ class CustomerReview extends Component<props> {
           </Text>
         </View>
 
-        <TouchableOpacity style={styles.contentReadMore} onPress={this.toggleReadMore}>
+        <TouchableOpacity onPress={this.toggleReadMore}>
           <Text style={styles.textReadMore}>{readMoreText}</Text>
         </TouchableOpacity>
       </View>

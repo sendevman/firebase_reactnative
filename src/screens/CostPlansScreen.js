@@ -289,12 +289,12 @@ class CostPlansScreen extends Component {
     return (
       <View>
         <Text style={styles.titleDevice}>Device protection</Text>
-
-        {!mProtectionMultiEmpty && this.setItem('mobileProtectionMulit', mProtectionMulti)}
+        {!mProtectionEmpty && this.setItem('mobileProtection', mProtection)}
+        
 
         {showInsurance &&
           <View>
-            {!mProtectionEmpty && this.setItem('mobileProtection', mProtection)}
+           {!mProtectionMultiEmpty && this.setItem('mobileProtectionMulit', mProtectionMulti)}
             {!mInsuranceEmpty && this.setItem('mobileInsurance', mInsurance)}
           </View>
         }
