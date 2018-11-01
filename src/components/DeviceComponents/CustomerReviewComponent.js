@@ -5,8 +5,9 @@
  */
 
 import React, { Component } from 'react';
-import { Image, View, Text, StyleSheet, Dimensions } from 'react-native';
+import { Image, View, Text, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
 import { Rating } from 'react-native-ratings';
+import CustomerReview from '../../screens/components/CustomerReview';
 import { Button } from 'react-native-elements';
 var { width } = Dimensions.get('window');
 
@@ -16,8 +17,17 @@ import Icon from '../../assets/images/Icon';
 class CustomerReviewComponent extends Component {
   constructor(props) {
     super(props);
+    this.state = { readMore: false };
+  }
+  toggleReadMore = () => {
+    this.setState({ readMore: !this.state.readMore });
   }
   render() {
+    const { item } = this.props;
+    const { readMore } = this.state;
+
+    let readMoreText = readMore ? "- Collapse" : "+ Read more";
+    let numberOfLines = readMore ? 0 : 3;
     const { customerReviews, model, manufacture } = this.props;
     let star5 = 0; let star4 = 0; let star3 = 0; let star2 = 0; let star1 = 0;
     let starTotal = 0; let starFinal = 0; let starCount = customerReviews.length;
@@ -92,10 +102,14 @@ class CustomerReviewComponent extends Component {
             <Text style={styles.recommendText}>8 out of 10 (80%) of reviewers would recommed this product to a friend</Text>
           </View>
 
-          {/* {customerReviews.map((item, index) => {
+
+        <TouchableOpacity style={styles.contentReadMore} onPress={this.toggleReadMore}>
+          <Text style={styles.textReadMore}>{readMoreText}</Text>
+        </TouchableOpacity>
+          {readMore && customerReviews.map((item, index) => {
             return <CustomerReview key={index} index={index} item={item} model={model} manufacture={manufacture} />;
-          })
-          } */}
+            })
+          }
         </View>
       </View>
     );
@@ -104,6 +118,22 @@ class CustomerReviewComponent extends Component {
 
 const styles = StyleSheet.create({
 
+  contentReadMore: {
+    borderColor: '#E3E9EF',
+    borderTopWidth: 1,
+    borderStyle: 'solid',
+    borderBottomWidth: 0,
+    paddingVertical: 11
+  },
+  textReadMore: {
+    color: '#1181FF',
+    // fontFamily: 'Roboto',
+    fontSize: 13,
+    letterSpacing: 0.09,
+    lineHeight: 15,
+    fontWeight: '500',
+    textAlign: 'center'
+  },
   cardContainer: {
     backgroundColor: '#FFFFFF',
     borderTopWidth: 5,

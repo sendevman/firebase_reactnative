@@ -43,7 +43,7 @@ const BottomTabNav = createBottomTabNavigator(
     HomeProduct: {
       screen: ProductLayout,
       navigationOptions: {
-        title: 'Home',
+        title: 'Discover',
         tabBarIcon: ({ tintColor }) => {
           return <Icon name="SharedSession" width="22" height="22" fill={tintColor} viewBox="0 0 22 22" />;
         }
@@ -52,7 +52,7 @@ const BottomTabNav = createBottomTabNavigator(
     ExclusiveVod: {
       screen: VodLayout,
       navigationOptions: {
-        title: 'VOD',
+        title: 'Entertain',
         tabBarIcon: ({ tintColor }) => {
           if (tintColor === "#3E3F42")
             return <Icon name="ExclusiveVodUnFill" width="22" height="18" viewBox="0 0 22 18" />;
@@ -61,18 +61,18 @@ const BottomTabNav = createBottomTabNavigator(
         }
       }
     },
-    Discover: {
-      screen: DiscoverServiceLayout,
-      navigationOptions: {
-        title: 'Discover',
-        tabBarIcon: ({ tintColor }) => {
-          if (tintColor === "#3E3F42")
-            return <Icon name="ExclusiveVodUnFill" width="22" height="18" viewBox="0 0 22 18" />;
-          else
-            return <Icon name="ExclusiveVodFill" width="22" height="18" viewBox="0 0 22 18" />;
-        }
-      }
-    },
+    // Discover: {
+    //   screen: DiscoverServiceLayout,
+    //   navigationOptions: {
+    //     title: 'Discover',
+    //     tabBarIcon: ({ tintColor }) => {
+    //       if (tintColor === "#3E3F42")
+    //         return <Icon name="ExclusiveVodUnFill" width="22" height="18" viewBox="0 0 22 18" />;
+    //       else
+    //         return <Icon name="ExclusiveVodFill" width="22" height="18" viewBox="0 0 22 18" />;
+    //     }
+    //   }
+    // },
     // Experience: {
     //   screen: ExperienceLayout,
     //   navigationOptions: {
@@ -117,6 +117,9 @@ const MainNav = createStackNavigator(
     },
     ProductLayout: {
       screen: ProductLayout
+    },
+    Discover: {
+      screen: DiscoverServiceLayout,
     },
     ServiceZone: {
       screen: DiscoverServiceLayout
