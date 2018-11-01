@@ -16,7 +16,6 @@ import styles from './css/ReviewsScreenCss';
 // My Customs
 import CustomerReviewComponent from '../components/DeviceComponents/CustomerReviewComponent';
 import SkeletonLoading from './components/SkeletonLoading';
-import CustomerReview from './components/CustomerReview';
 import WebReview from './components/WebReview';
 import VideoContent from './components/VideoContent';
 import FeedbackSurvey from './components/FeedbackSurvey';
