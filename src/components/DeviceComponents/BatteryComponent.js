@@ -127,21 +127,21 @@ class BatteryComponent extends Component {
             </View>
           }
 
-          {/* {chargingNoEmpty && */}
+          {chargingNoEmpty &&
             <View style={styles.chagingTypeBox}>
-              {/* {life.chargingWired && */}
+              {life.chargingWired &&
                 <View style={styles.chagingItemBox}>
                   <Icon name="WiredCharging" width="30" height="30" viewBox="0 0 34 34" />
                   <Text style={styles.chagingItemText}>Wired charging</Text>
                 </View>
-              {/* } */}
+              }
 
-              {/* {life.chargingWireless && */}
+              {life.chargingWireless &&
                 <View style={styles.chagingItemBox}>
                   <Icon name="WifiCharging" width="40" height="23" viewBox="0 0 45 26" />
                   <Text style={styles.chagingItemText}>Wireless charging</Text>
                 </View>
-              {/* } */}
+              }
             </View>
           }
         </View>
