@@ -49,8 +49,6 @@
 		E195E90120F7593D00695497 /* libRNSpinkit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E195E8FE20F7592E00695497 /* libRNSpinkit.a */; };
 		E1A5DACD2118CDFD00D6059D /* libRCTVideo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E1A5DAAC2118CDED00D6059D /* libRCTVideo.a */; };
 		E1C10B2821077B27003B1ECF /* libRNNetworkInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E1C10B2221077B18003B1ECF /* libRNNetworkInfo.a */; };
-		E1E2DCB32102373100D8BD8C /* libBleManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E1E2DCAC210232D700D8BD8C /* libBleManager.a */; };
-		E1E2DCB4210237A000D8BD8C /* libReact Native Open Settings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E1E2DCB2210233D600D8BD8C /* libReact Native Open Settings.a */; };
 		E1FC9B4D20EE707800D49522 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1FC9B4B20EE707700D49522 /* CoreBluetooth.framework */; };
 		E1FC9B4E20EE707800D49522 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1FC9B4C20EE707700D49522 /* CoreLocation.framework */; };
 		E1FC9B5020EE70ED00D49522 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1FC9B4F20EE70ED00D49522 /* MobileCoreServices.framework */; };
@@ -451,20 +449,6 @@
 			remoteGlobalIDString = 045BEB3C1B52EA6A0013C1B9;
 			remoteInfo = RNNetworkInfo;
 		};
-		E1E2DCAB210232D700D8BD8C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E1E2DCA7210232D700D8BD8C /* BleManager.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 134814201AA4EA6300B7C361;
-			remoteInfo = BleManager;
-		};
-		E1E2DCB1210233D600D8BD8C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E1E2DCAD210233D600D8BD8C /* React Native Open Settings.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 190C8BAA1BEAADCC00CD505E;
-			remoteInfo = "React Native Open Settings";
-		};
 		E1FEB4032100286000F66410 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E1FEB3D42100286000F66410 /* RNDeviceInfo.xcodeproj */;
@@ -541,8 +525,6 @@
 		E195E8F820F7592D00695497 /* RNSpinkit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNSpinkit.xcodeproj; path = "../node_modules/react-native-spinkit/ios/RNSpinkit.xcodeproj"; sourceTree = "<group>"; };
 		E1A5DA912118CDED00D6059D /* RCTVideo.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTVideo.xcodeproj; path = "../node_modules/react-native-video/ios/RCTVideo.xcodeproj"; sourceTree = "<group>"; };
 		E1C10AF021077B18003B1ECF /* RNNetworkInfo.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNNetworkInfo.xcodeproj; path = "../node_modules/react-native-network-info/ios/RNNetworkInfo.xcodeproj"; sourceTree = "<group>"; };
-		E1E2DCA7210232D700D8BD8C /* BleManager.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BleManager.xcodeproj; path = "../node_modules/walkbase-sdk/ios/BleManager.xcodeproj"; sourceTree = "<group>"; };
-		E1E2DCAD210233D600D8BD8C /* React Native Open Settings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "React Native Open Settings.xcodeproj"; path = "../node_modules/open-settings/React Native Open Settings.xcodeproj"; sourceTree = "<group>"; };
 		E1FC9B4B20EE707700D49522 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		E1FC9B4C20EE707700D49522 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		E1FC9B4F20EE70ED00D49522 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -578,8 +560,6 @@
 			files = (
 				E1A5DACD2118CDFD00D6059D /* libRCTVideo.a in Frameworks */,
 				E1C10B2821077B27003B1ECF /* libRNNetworkInfo.a in Frameworks */,
-				E1E2DCB4210237A000D8BD8C /* libReact Native Open Settings.a in Frameworks */,
-				E1E2DCB32102373100D8BD8C /* libBleManager.a in Frameworks */,
 				E1FEB40D2100295F00F66410 /* libRNDeviceInfo.a in Frameworks */,
 				E16A700620FEF20F0091DCE2 /* libRCTSystemSetting.a in Frameworks */,
 				E195E90120F7593D00695497 /* libRNSpinkit.a in Frameworks */,
@@ -820,8 +800,6 @@
 			children = (
 				E1A5DA912118CDED00D6059D /* RCTVideo.xcodeproj */,
 				E1C10AF021077B18003B1ECF /* RNNetworkInfo.xcodeproj */,
-				E1E2DCAD210233D600D8BD8C /* React Native Open Settings.xcodeproj */,
-				E1E2DCA7210232D700D8BD8C /* BleManager.xcodeproj */,
 				E1FEB3D42100286000F66410 /* RNDeviceInfo.xcodeproj */,
 				E16A700020FEF1FD0091DCE2 /* RCTSystemSetting.xcodeproj */,
 				E195E8F820F7592D00695497 /* RNSpinkit.xcodeproj */,
@@ -988,22 +966,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		E1E2DCA8210232D700D8BD8C /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				E1E2DCAC210232D700D8BD8C /* libBleManager.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		E1E2DCAE210233D600D8BD8C /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				E1E2DCB2210233D600D8BD8C /* libReact Native Open Settings.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		E1FEB3D52100286000F66410 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -1068,10 +1030,6 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = E1E2DCA8210232D700D8BD8C /* Products */;
-					ProjectRef = E1E2DCA7210232D700D8BD8C /* BleManager.xcodeproj */;
-				},
-				{
 					ProductGroup = E1621E9220E15EB600776A66 /* Products */;
 					ProjectRef = F7E7043250064637A12355E7 /* BVLinearGradient.xcodeproj */;
 				},
@@ -1134,10 +1092,6 @@
 				{
 					ProductGroup = 139FDEE71B06529A00C62182 /* Products */;
 					ProjectRef = 139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */;
-				},
-				{
-					ProductGroup = E1E2DCAE210233D600D8BD8C /* Products */;
-					ProjectRef = E1E2DCAD210233D600D8BD8C /* React Native Open Settings.xcodeproj */;
 				},
 				{
 					ProductGroup = 146834001AC3E56700842450 /* Products */;
@@ -1547,20 +1501,6 @@
 			remoteRef = E1C10B2121077B18003B1ECF /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E1E2DCAC210232D700D8BD8C /* libBleManager.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libBleManager.a;
-			remoteRef = E1E2DCAB210232D700D8BD8C /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		E1E2DCB2210233D600D8BD8C /* libReact Native Open Settings.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libReact Native Open Settings.a";
-			remoteRef = E1E2DCB1210233D600D8BD8C /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		E1FEB4042100286000F66410 /* libRNDeviceInfo.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1720,7 +1660,7 @@
 					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
-					"$(SRCROOT)/../node_modules/react-native-open-settings",
+					"$(SRCROOT)/../node_modules/react-native-system-setting/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
 				);
 				INFOPLIST_FILE = RetailCompanion/Info.plist;
@@ -1759,7 +1699,7 @@
 					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
-					"$(SRCROOT)/../node_modules/react-native-open-settings",
+					"$(SRCROOT)/../node_modules/react-native-system-setting/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
 				);
 				INFOPLIST_FILE = RetailCompanion/Info.plist;

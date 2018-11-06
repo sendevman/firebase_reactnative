@@ -9,7 +9,6 @@ import com.ninty.system.setting.SystemSettingPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.horcrux.svg.SvgPackage;
 import com.react.rnspinkit.RNSpinkitPackage;
-import com.opensettings.OpenSettingsPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.pusherman.networkinfo.RNNetworkInfoPackage;
 import io.invertase.firebase.RNFirebasePackage;
@@ -49,7 +48,6 @@ public class MainApplication extends Application implements ReactApplication {
 //            new RNBackgroundGeolocation(),
           new RNFirebaseFirestorePackage(),
           new RNFirebaseDatabasePackage(),
-          new OpenSettingsPackage(),
           new RNNetworkInfoPackage()
       );
     }
