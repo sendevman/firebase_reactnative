@@ -17,6 +17,7 @@ const initialState = {
   product: {},
   compare: [],
   discoverNum: 0,
+  location: null
 };
 
 const setCompareData = (state, payload) => {
@@ -42,6 +43,12 @@ const setCompareData = (state, payload) => {
 export default current = (state = initialState, action) => {
   let newState = Object.assign({}, state); // _.merge({}, state)
   switch (action.type) {
+    
+    case 'SET_CURRENT_LOCATION':
+      return {
+        ...state,
+        location: action.payload
+      }
     case 'UPDATE_LOCATION':
       return {
         ...state,
