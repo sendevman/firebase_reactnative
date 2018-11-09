@@ -156,6 +156,8 @@ dependencies {
     implementation(project(':react-native-firebase')) {
         transitive = false
     }
+
+    implementation project(':open-settings')
     implementation project(':react-native-vector-icons')
     implementation project(':react-native-linear-gradient')
 

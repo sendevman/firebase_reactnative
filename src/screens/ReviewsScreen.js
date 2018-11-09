@@ -22,8 +22,8 @@ import FeedbackSurvey from './components/FeedbackSurvey';
 
 var { width, height } = Dimensions.get('window');
 
-const getWidth = (number) => {
-  return (((width - 20) / 2) - number);
+const getWidth = number => {
+  return (width - 20) / 2 - number;
 };
 
 const ReviewsSkeleton = () => (
@@ -46,7 +46,14 @@ class ReviewsScreen extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.selectedTab === 1 && nextProps.reviews.model != undefined) {
-      firebase.analytics().logEvent("deviceViewed", { "pFirebaseId": this.props.firebaseid, "pDeviceModel": nextProps.reviews.model, "pDeviceManufacture": nextProps.reviews.manufacture, "pResearchTab": "reviews" });
+      firebase
+        .analytics()
+        .logEvent('deviceViewed', {
+          pFirebaseId: this.props.firebaseid,
+          pDeviceModel: nextProps.reviews.model,
+          pDeviceManufacture: nextProps.reviews.manufacture,
+          pResearchTab: 'reviews',
+        });
     }
   }
 
@@ -56,30 +63,36 @@ class ReviewsScreen extends Component {
       heightHeader: b,
       hideSlide: c,
       heightSlide: d,
-      heightScrolled: e
-    }
+      heightScrolled: e,
+    };
   }
 
   renderCustomerReviews() {
     const { customerReviews, model, manufacture } = this.props.reviews;
 
-    if (typeof customerReviews != "undefined" && customerReviews.length > 0) {      
-      return (
-        <CustomerReviewComponent customerReviews = {customerReviews} model = {model} manufacture = {manufacture} />
-      );
+    if (typeof customerReviews != 'undefined' && customerReviews.length > 0) {
+      return <CustomerReviewComponent customerReviews={customerReviews} model={model} manufacture={manufacture} />;
     }
   }
 
   renderWebReviews() {
     const { manufacture, model, webReviews } = this.props.reviews;
 
-    if (typeof webReviews != "undefined" && webReviews.length > 0) {
+    if (typeof webReviews != 'undefined' && webReviews.length > 0) {
       return (
         <View>
           {webReviews.map((item, index) => {
-            return <WebReview key={index} index={index} item={item} model={model} manufacture={manufacture} publication={webReviews[index].publication} />;
-          })
-          }
+            return (
+              <WebReview
+                key={index}
+                index={index}
+                item={item}
+                model={model}
+                manufacture={manufacture}
+                publication={webReviews[index].publication}
+              />
+            );
+          })}
         </View>
       );
     }
@@ -88,13 +101,12 @@ class ReviewsScreen extends Component {
   renderVideoContent() {
     const { manufacture, model, videoContent } = this.props.reviews;
 
-    if (typeof videoContent != "undefined" && videoContent.length > 0) {
+    if (typeof videoContent != 'undefined' && videoContent.length > 0) {
       return (
         <View>
           {videoContent.map((item, index) => {
             return <VideoContent key={index} index={index} item={item} model={model} manufacture={manufacture} />;
-          })
-          }
+          })}
         </View>
       );
     }
@@ -102,16 +114,18 @@ class ReviewsScreen extends Component {
 
   renderContent() {
     const { reviews } = this.props;
-    let reviewsEmpty = ((typeof reviews == "undefined"));// || (Object.keys(reviews).length === 0 && reviews.constructor === Object));
+    let reviewsEmpty = typeof reviews == 'undefined'; // || (Object.keys(reviews).length === 0 && reviews.constructor === Object));
 
-    const isTitle = reviews.title === "title" ? true : false;
+    const isTitle = reviews.title === 'title' ? true : false;
     if (isTitle) {
       return (
-        <View style={{
-          width: width,
-          height: height,
-          backgroundColor: 'black'
-        }}>
+        <View
+          style={{
+            width: width,
+            height: height,
+            backgroundColor: 'black',
+          }}
+        >
           <Image
             style={{
               backgroundColor: '#ccc',
@@ -127,7 +141,7 @@ class ReviewsScreen extends Component {
       );
     }
     if (Object.keys(reviews).length === 0) {
-      return (<ReviewsSkeleton />);
+      return <ReviewsSkeleton />;
     } else {
       return (
         <View>
@@ -158,34 +172,34 @@ class ReviewsScreen extends Component {
     }
   }
 
-  _animateScroll = (event) => {
+  _animateScroll = event => {
     const y = event.nativeEvent.contentOffset.y;
     if (y < -3) {
       let yy = y * y / 80;
       if (yy > 40) yy = 40;
-      this.props.onScrollCustom.setValue(-yy)
-    }
-    else if (y > -3 && y < 3) {
-    }
-    else {
+      this.props.onScrollCustom.setValue(-yy);
+    } else if (y > -3 && y < 3) {
+    } else {
       let yy = y * y / 300;
       if (yy > 120) yy = 120;
       this.props.onScrollCustom.setValue(yy);
     }
-  }
-  _onScrollEndSnapToEdge = (event) => {
+  };
+  _onScrollEndSnapToEdge = event => {
     const y = event.nativeEvent.contentOffset.y;
     if (y < 80) this.props.onScrollCustom.setValue(0);
     else this.props.onScrollCustom.setValue(120);
-  }
+  };
 
   render() {
     const { reviews } = this.props;
 
     return (
-      <Animated.ScrollView contentContainerStyle={styles.container} scrollEventThrottle={1}
-        onScroll={this._animateScroll}
-        onScrollEndDrag={this._onScrollEndSnapToEdge}
+      <Animated.ScrollView
+        contentContainerStyle={styles.container}
+        scrollEventThrottle={1}
+        //onScroll={this._animateScroll}
+        //onScrollEndDrag={this._onScrollEndSnapToEdge}
       >
         {this.renderContent()}
       </Animated.ScrollView>
@@ -197,6 +211,6 @@ const mapStateToProps = state => {
   const { current, common } = state;
 
   return { firebaseid: common.firebaseid, reviews: current.product, selectedTab: common.selectedTab };
-}
+};
 
 export default connect(mapStateToProps)(ReviewsScreen);
