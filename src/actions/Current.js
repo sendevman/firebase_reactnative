@@ -38,3 +38,18 @@ export const setCurrentLocation = (params) => ({
   type: 'SET_CURRENT_LOCATION',
   payload: params
 })
+
+export const setCurrentZone = (params) => ({
+  type: 'SET_CURRENT_ZONE',
+  payload: params
+})
+
+export const setCurrentZonePopUp = (params) => ({
+  type: 'SET_CURRENT_ZONE_POPUP',
+  payload: params
+})
+
+export const setAutomaticZoneEntry = (params) => ({
+  type: 'SET_AUTOMATIC_ZONE_ENTRY',
+  payload: params
+})

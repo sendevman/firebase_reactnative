@@ -5,15 +5,16 @@
  */
 
 import React, { Component } from 'react';
-import { AsyncStorage, Button, NativeEventEmitter, NativeModules, NetInfo, ScrollView, StatusBar, Text, View, YellowBox } from 'react-native';
-import { createBottomTabNavigator, createStackNavigator } from 'react-navigation';
+import { AsyncStorage, Button, NetInfo, ScrollView, StatusBar, Text, View, NativeEventEmitter, NativeModules, YellowBox, TouchableOpacity } from 'react-native';
+import { createDrawerNavigator, createBottomTabNavigator, SafeAreaView, createStackNavigator } from 'react-navigation';
+
 import { NetworkInfo } from 'react-native-network-info';
 import firebase from 'react-native-firebase';
 import { connect } from 'react-redux';
 
 // My Actions
-import { setFirebaseID, setNetworkInfo } from '../actions/Common';
-import { setCurrentLocation, setLocationData } from '../actions/Current';
+import { setFirebaseID } from '../actions/Common';
+import { setCurrentLocation } from '../actions/Current';
 
 // My Customs
 import Icon from '../assets/images/Icon';
@@ -26,11 +27,17 @@ import MainLayout from '../screens/MainLayout';
 import ProductLayout from '../screens/ProductLayout';
 import VodLayout from '../screens/VodLayout';
 
-// My Screens
-import BottomTabNav from '../screens/BottomTabNav';
+// Walkbase Engage
+// import BleManager from 'walkbase-sdk';
+
+// My Actions
+import { setCurrentZonePopUp } from '../actions/Current';
+import { setNetworkInfo } from '../actions/Common';
 
 // Walkbase Engage
 // import BleManager from 'walkbase-sdk';
+import { setCurrentZone } from '../actions/Current';
+
 var DeviceInfo = require('react-native-device-info');
 const deviceId = DeviceInfo.getUniqueID();
 const BleManagerModule = NativeModules.BleManager;
@@ -39,7 +46,74 @@ const BleManagerModule = NativeModules.BleManager;
 // const ws = new WebSocket('wss://wai.walkbase.com/api/v2/subscribe');
 const ws = new WebSocket('wss://wai.walkbase.com/api/v2/subscribe/device/zones');
 
-YellowBox.ignoreWarnings([ 'Warning: isMounted(...) is deprecated', 'Class RCTCxxModule' ]);
+
+console.disableYellowBox = true;
+
+const BottomTabNav = createBottomTabNavigator(
+  {
+    HomeProduct: {
+      screen: ProductLayout,
+      navigationOptions: {
+        title: 'Discover',
+        tabBarIcon: ({ tintColor }) => {
+          return <Icon name="SharedSession" width="22" height="22" fill={tintColor} viewBox="0 0 22 22" />;
+        }
+      }
+    },
+    ExclusiveVod: {
+      screen: VodLayout,
+      navigationOptions: {
+        title: 'Entertain',
+        tabBarIcon: ({ tintColor }) => {
+          if (tintColor === "#3E3F42")
+            return <Icon name="ExclusiveVodUnFill" width="22" height="18" viewBox="0 0 22 18" />;
+          else
+            return <Icon name="ExclusiveVodFill" width="22" height="18" viewBox="0 0 22 18" />;
+        }
+      }
+    },
+    // Discover: {
+    //   screen: DiscoverServiceLayout,
+    //   navigationOptions: {
+    //     title: 'Discover',
+    //     tabBarIcon: ({ tintColor }) => {
+    //       if (tintColor === "#3E3F42")
+    //         return <Icon name="ExclusiveVodUnFill" width="22" height="18" viewBox="0 0 22 18" />;
+    //       else
+    //         return <Icon name="ExclusiveVodFill" width="22" height="18" viewBox="0 0 22 18" />;
+    //     }
+    //   }
+    // },
+    // Experience: {
+    //   screen: ExperienceLayout,
+    //   navigationOptions: {
+    //     title: 'Experience',
+    //     tabBarIcon: ({ tintColor }) => {
+    //       return <Icon name="Compare" width="22" height="22" fill={tintColor} viewBox="0 0 22 22" />;
+    //     }
+    //   }
+    // },
+  },
+  {
+    initialRouteName: 'HomeProduct',
+    tabBarOptions: {
+      activeTintColor: '#FFF',
+      activeBackgroundColor: '#1181FF',
+      inactiveTintColor: '#3E3F42',
+      style: { height: 55 },
+      labelStyle: {
+        marginTop: -4,
+        marginBottom: 8,
+        // fontFamily: 'SF Pro Text',
+        fontSize: 11,
+        fontWeight: '500',
+        letterSpacing: 0.13,
+        lineHeight: 13,
+        textAlign: 'center'
+      }
+    }
+  }
+);
 
 const MainNav = createStackNavigator(
   {
@@ -75,9 +149,17 @@ class Routes extends Component {
 
     this.state = {
       ispass: false,
+      visible: false
     };
-
+    
     this.getStoreData();
+
+    // setTimeout(() => {
+    //   this.setState({
+    //     visible: true
+    //   })
+    // }, 5000);
+
   }
 
   componentWillMount() {
@@ -145,6 +227,20 @@ class Routes extends Component {
         }, 10000);
         */
 
+
+        setTimeout(() => {
+          this.props.dispatch(setCurrentZone(10011));
+          this.props.dispatch(setCurrentZonePopUp(true));
+        }, 8000);
+
+        /*
+        setTimeout(() => {
+          this.props.dispatch(setCurrentZone(10011));
+          this.props.dispatch(setCurrentZonePopUp(true));
+        }, 15000);
+        */
+    
+
         this.webPresenceAPI();
       });
   };
@@ -168,8 +264,34 @@ class Routes extends Component {
       let locationdata = null;
       try {
         locationdata = JSON.parse(e.data);
-      } catch (e) {}
+      } catch (e) {
+      }
+      
+      if (locationdata) {
+        const {site_id, floor_id, zone_inferences} = locationdata;
 
+        // not doing anything with floor_id at the moment.
+
+        if (this.props.current.location.storeId !== site_id) {
+          this.fetchSiteData(site_id);
+          // for zone_inferences, filter zones that has confidence >= .9 (threshold)
+          const zones = zone_inferences.filter(zone => zone.confidence >= 0.9)
+          if (zones.length === 1) {
+            if (this.props.current.zoneId !== zones[0].zone_id) {
+              this.props.dispatch(setCurrentZone(zones[0].zone_id));
+              this.props.dispatch(setCurrentZonePopUp(true));
+            }
+          }  else {
+            // we dont wanna do anything for more than one zones that has confidence > .9. we are taking it as a wrong output from walkbase. 
+          }
+        }
+      } else {
+        if (!this.props.current.location || this.props.current.location.storeId !== 'off_site') {
+          this.fetchSiteData('off_site');
+        }
+      }
+
+      /*
       if (locationdata) {
         if (locationdata.zone_id === null) {} // zone_id = -1;
         else {
@@ -192,6 +314,10 @@ class Routes extends Component {
                 // this.props.dispatch(setLocationData(locationdata));
                 if (this.props.current.location.storeId !== locationdata.site_id) {
                   this.fetchSiteData(locationdata.site_id);
+                  if (this.props.current.zoneId !== locationdata.zone_inferences[0].zone_id) {
+                    this.props.dispatch(setCurrentZone(locationdata.zone_inferences[0].zone_id));
+                    this.props.dispatch(setCurrentZonePopUp(true));
+                  }
                 }
               }
               last_zone_id = locationdata.zone_id;
@@ -203,6 +329,7 @@ class Routes extends Component {
           this.fetchSiteData('off_site');
         }
       }
+      */
     };
 
     ws.onerror = (e) => {
