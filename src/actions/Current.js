@@ -33,3 +33,8 @@ export const setSelectDiscover = (params) => ({
   type: 'UPDATE_DISCOVER_NUMBER',
   payload: params
 })
+
+export const setCurrentLocation = (params) => ({
+  type: 'SET_CURRENT_LOCATION',
+  payload: params
+})
