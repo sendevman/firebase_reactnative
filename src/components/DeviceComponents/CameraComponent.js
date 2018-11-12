@@ -5,7 +5,7 @@
  */
 
 import React, { Component } from 'react';
-import { Image, View, Text, StyleSheet, Dimensions } from 'react-native';
+import { Image, View, Text, StyleSheet, Dimensions, ImageBackground } from 'react-native';
 import { Button } from 'react-native-elements';
 var { width } = Dimensions.get('window');
 
@@ -56,23 +56,15 @@ class CameraComponent extends Component {
           )}
           {features &&
           features.length > 0 && (
-            <View
-              style={[
-                styles.storageBox,
-                {
-                  width: viewWidth,
-                  paddingHorizontal: 5,
-                  position: 'relative',
-                  // backgroundColor: 'white',
-                  // opacity: 0.5,
-                },
-              ]}
+            <ImageBackground
+              style={{
+                width: viewWidth,
+                paddingHorizontal: 5,
+                paddingBottom: 10,
+              }}
+              source={require('../../assets/images/files/empty.png')}
+              resizeMode="stretch"
             >
-              <Image
-                style={{ width: viewWidth, position: 'absolute', top: 0, height: features.length * 16 + 20 }}
-                source={require('../../assets/images/files/empty.png')}
-                resizeMode="stretch"
-              />
               {features.map(feature => (
                 <Text
                   key={feature}
@@ -84,7 +76,7 @@ class CameraComponent extends Component {
                   {'\u2022 ' + feature}
                 </Text>
               ))}
-            </View>
+            </ImageBackground>
           )}
         </View>
       </View>
