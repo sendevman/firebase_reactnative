@@ -5,29 +5,30 @@
  */
 
 import React, { Component } from 'react';
-import { AsyncStorage, Button, NetInfo, ScrollView, StatusBar, Text, View, NativeEventEmitter, NativeModules, YellowBox } from 'react-native';
-import { createDrawerNavigator, createBottomTabNavigator, SafeAreaView, createStackNavigator } from 'react-navigation';
+import { AsyncStorage, Button, NativeEventEmitter, NativeModules, NetInfo, ScrollView, StatusBar, Text, View, YellowBox } from 'react-native';
+import { createBottomTabNavigator, createStackNavigator } from 'react-navigation';
 import { NetworkInfo } from 'react-native-network-info';
 import firebase from 'react-native-firebase';
 import { connect } from 'react-redux';
+
+// My Actions
+import { setFirebaseID, setNetworkInfo } from '../actions/Common';
+import { setCurrentLocation } from '../actions/Current';
+import { setLocationData } from '../actions/Current';
 
 // My Customs
 import Icon from '../assets/images/Icon';
 
 // My Layouts
-import ProductLayout from '../screens/ProductLayout';
 import CompareLayout from '../screens/CompareLayout';
+import DiscoverServiceLayout from '../screens/DiscoverServiceLayout';
+import ExperienceLayout from '../screens/ExperienceLayout';
+import MainLayout from '../screens/MainLayout';
+import ProductLayout from '../screens/ProductLayout';
 import VodLayout from '../screens/VodLayout';
-
-// My Actions
-import { setLocationData } from '../actions/Current';
-import { setFirebaseID, setNetworkInfo } from '../actions/Common';
 
 // Walkbase Engage
 // import BleManager from 'walkbase-sdk';
-import MainLayout from '../screens/MainLayout';
-import DiscoverServiceLayout from '../screens/DiscoverServiceLayout';
-import ExperienceLayout from '../screens/ExperienceLayout';
 var DeviceInfo = require('react-native-device-info');
 const deviceId = DeviceInfo.getUniqueID();
 const BleManagerModule = NativeModules.BleManager;
@@ -142,6 +143,7 @@ class Routes extends Component {
     };
     this.getStoreData();
   }
+
   getStoreData = async () => {
     try {
       const result = await AsyncStorage.getItem('passOnboarding');
@@ -161,7 +163,6 @@ class Routes extends Component {
   }
 
   componentDidMount() {
-    this.webAPI();
     this.firebaseLogin();
   }
 
@@ -170,12 +171,30 @@ class Routes extends Component {
     navigator.geolocation.clearWatch(this.watchID);
   }
   
-  firebaseLogin() {
-    firebase.auth().signInAnonymously()
+  firebaseLogin = () => {
+    const user = firebase.auth().signInAnonymously()
       .then(user => {
         console.log("firebase user : ", user._user.uid);
         this.props.dispatch(setFirebaseID(user._user.uid));
         firebase.analytics().setUserId(user._user.uid);
+
+        /**
+         * This function is called when walkbase sends us a site id.
+         * Mimicing that walkbase onmessage receives a call with the site id after 10 seconds.
+         * and here it goes...
+         */
+        /*
+        setTimeout(() => {
+          console.log('FIRING LOCATION');
+          this.fetchSiteData('p9ZRp6uaLCjJiT9zJSDd');
+          setTimeout(() => {
+            console.log('FIRING OFFSITE');
+            this.fetchSiteData('off_site');
+          }, 20000);
+        }, 10000);
+        */
+
+        this.webPresenceAPI();
       });
   }
 
@@ -210,69 +229,7 @@ class Routes extends Component {
     }
   }
 
-  webAPI() {
-    console.log("====", deviceId);
-    ws.onopen = () => {
-      // connection opened
-      // NearbyAuthRequest
-      ws.send('{"user_id": "' + deviceId + '", "api_key": "VZHkscRFhAjkScc"}'); // send a message
-      // ws.send('{"device_id": "' + deviceId + '", "api_key": "VZHkscRFhAjkScc"}'); // send a message
-    };
-
-    var last_zone_id = -1;
-    var zone_id = -1;
-    var zoneData = new Array();
-    var errorCheck = 0;
-    const maxLength = 5;
-    ws.onmessage = (e) => {
-      console.log("====", e);
-      if (e.data !== "") {
-        locationdata = JSON.parse(e.data);
-        if (locationdata.zone_id === null) { }//zone_id = -1;
-        else zone_id = locationdata.zone_id;
-
-        if (zoneData.length > 5) zoneData.shift();
-
-        zoneData.push(zone_id);
-
-        if (zoneData.length === 6) {
-          console.log("zonData===", JSON.stringify(zoneData));
-          if (zoneData[5] === zoneData[4] || zoneData[5] === zoneData[3]) {
-            for (let i = 0; i < 5; i++) {
-              if (zoneData[5] === zoneData[i]) errorCheck += (i + 1);
-            }
-            if (errorCheck >= 4) {
-              if (last_zone_id != locationdata.zone_id) {
-                this.props.dispatch(setLocationData(locationdata));
-              }
-              last_zone_id = locationdata.zone_id;
-              errorCheck = 0;
-            }
-          }
-          else if (zoneData[4] === zoneData[3]) {
-            for (let i = 0; i < 4; i++) {
-              if (zoneData[4] === zoneData[i]) errorCheck += (i + 1);
-            }
-            if (errorCheck >= 3) {
-              if (last_zone_id != locationdata.zone_id) {
-                this.props.dispatch(setLocationData(locationdata));
-              }
-              last_zone_id = locationdata.zone_id;
-              errorCheck = 0;
-            }
-          }
-        }
-      }
-
-    };
-
-    ws.onerror = (e) => {
-      // an error occurred
-      console.log(e.message);
-    };
-  }
-
-  webAPI1() {
+  webPresenceAPI() {
     ws.onopen = () => {
       // connection opened
       // NearbyAuthRequest
@@ -289,8 +246,14 @@ class Routes extends Component {
     const maxLength = 5;
     ws.onmessage = (e) => {
 
-      if (e.data !== "") {
+      // implement the codes from webAPI() and remove webAPI after that.
+      let locationdata = null;
+      try {
         locationdata = JSON.parse(e.data);
+      } catch (e) {
+      }
+
+      if (locationdata) {
         if (locationdata.zone_id === null) { }//zone_id = -1;
         else {
           zone_id = locationdata.zone_id;
@@ -309,42 +272,20 @@ class Routes extends Component {
           if(confidenceData[5] > 0.9 && confidenceData[4] > 0.9 && confidenceData[3] > 0.9 && confidenceData[2] > 0.9) {
             if(zoneData[5] === zoneData[4] && zoneData[5] === zoneData[3] && zoneData[5] === zoneData[2]){
               if (last_zone_id != locationdata.zone_id) {
-                this.props.dispatch(setLocationData(locationdata));
+                // this.props.dispatch(setLocationData(locationdata));
+                if (this.props.current.location.storeId !== locationdata.site_id) {
+                  this.fetchSiteData(locationdata.site_id);
+                }
               }
               last_zone_id = locationdata.zone_id;
             }
           }
         }
-
-        // if (zoneData.length === 6) {
-        //   console.log("zonData===", JSON.stringify(zoneData));
-        //   if (zoneData[5] === zoneData[4] || zoneData[5] === zoneData[3]) {
-        //     for (let i = 0; i < 5; i++) {
-        //       if (zoneData[5] === zoneData[i]) errorCheck += (i + 1);
-        //     }
-        //     if (errorCheck >= 4) {
-        //       if (last_zone_id != locationdata.zone_id) {
-        //         this.props.dispatch(setLocationData(locationdata));
-        //       }
-        //       last_zone_id = locationdata.zone_id;
-        //       errorCheck = 0;
-        //     }
-        //   }
-        //   else if (zoneData[4] === zoneData[3]) {
-        //     for (let i = 0; i < 4; i++) {
-        //       if (zoneData[4] === zoneData[i]) errorCheck += (i + 1);
-        //     }
-        //     if (errorCheck >= 3) {
-        //       if (last_zone_id != locationdata.zone_id) {
-        //         this.props.dispatch(setLocationData(locationdata));
-        //       }
-        //       last_zone_id = locationdata.zone_id;
-        //       errorCheck = 0;
-        //     }
-        //   }
-        // }
+      } else {
+        if (!this.props.current.location || this.props.current.location.storeId !== 'off_site') {
+          this.fetchSiteData('off_site');
+        }
       }
-
     };
 
     ws.onerror = (e) => {
@@ -360,6 +301,29 @@ class Routes extends Component {
     };
   }
 
+  fetchSiteData(siteId) {
+      Promise.all([
+        firebase.firestore().collection(`locations/${siteId}/zones`).get(),
+        firebase.firestore().collection(`locations/${siteId}/vod`).get(),
+        firebase.firestore().collection(`locations/${siteId}/directv-preview`).get()
+      ]).then(snapshots => {
+        snapshots = snapshots.map(snapshot => {
+          return snapshot.docs.map(doc => doc.data())
+        });
+  
+        firebase.firestore().collection('locations').doc(siteId).get().then(siteInfoSnapshot => {
+          const siteData = {
+            siteInfo: siteInfoSnapshot.data(),
+            zones: snapshots[0],
+            vod: snapshots[1],
+            directvPreview: snapshots[2],
+          };
+
+          this.props.dispatch(setCurrentLocation(siteData));
+        });
+      });
+  }
+
   render() {
     return (
       <MainNav />
@@ -367,15 +331,23 @@ class Routes extends Component {
   }
 }
 
-function mapDispatchToProps(dispatch) {
+// function mapDispatchToProps(dispatch) {
+//   return {
+//     setLocationData: (data) => {
+//       return dispatch(setLocationData(data))
+//     },
+//     setNetworkInfo: (data) => {
+//       return dispatch(setNetworkInfo(data))
+//     }
+//   };
+// }
+
+const mapStateToProps = state => {
+  const { current } = state;
+
   return {
-    setLocationData: (data) => {
-      return dispatch(setLocationData(data))
-    },
-    setNetworkInfo: (data) => {
-      return dispatch(setNetworkInfo(data))
-    }
+    current
   };
 }
 
-export default connect(mapDispatchToProps)(Routes);
+export default connect(mapStateToProps)(Routes);
