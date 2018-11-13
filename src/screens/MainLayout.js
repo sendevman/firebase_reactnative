@@ -103,9 +103,9 @@ class MainLayout extends Component {
             <TouchableOpacity {...this.setTestId("MainLayoutGoToZone")} onPress={() => this.gotoZone(index)}>
               <View style={[styles.titleCardBox]}>
                 <Icon height="30" width="30" name="ManIcon" viewBox="0 0 127 125" fill="#000" />
-                <Text numberOfLines={1} style={styles.titleCard}>{item.titleCard.title}</Text>
+                <Text numberOfLines={1} style={styles.titleCard}>{item.homeCard.title}</Text>
               </View>
-              <Text numberOfLines={1} style={styles.subTitleCard}>{item.titleCard.subtitle}</Text>
+              <Text numberOfLines={1} style={styles.subTitleCard}>{item.homeCard.subtitle}</Text>
             </TouchableOpacity>
           </View>
         </View>
