@@ -101,7 +101,7 @@ class InfoSpecsScreen extends Component {
   renderOffer() {
     const { offer } = this.props.infoSpecs;
 
-    if (typeof offer == 'undefined') return false; // || (Object.keys(offer).length === 0 && offer.constructor === Object)) return false;
+    if (typeof offer == 'undefined') return false;
 
     return (
       <View style={{ marginTop: 16 }}>
@@ -112,7 +112,6 @@ class InfoSpecsScreen extends Component {
 
   renderColors() {
     const { colors } = this.props.infoSpecs;
-
     if (typeof colors != 'undefined' && colors.length > 0) {
       return <ColorComponent colors={colors} />;
     }
@@ -122,7 +121,6 @@ class InfoSpecsScreen extends Component {
     const { display } = this.props.infoSpecs;
 
     if (typeof display !== 'undefined') {
-      //Object.keys(display).length !== 0 &&
       return <DisplayComponent display={display} />;
     }
   }
@@ -130,16 +128,13 @@ class InfoSpecsScreen extends Component {
     const { fitness } = this.props.infoSpecs;
 
     if (typeof fitness !== 'undefined') {
-      //Object.keys(display).length !== 0 &&
       return <FitnessComponent fitness={fitness} />;
     }
   }
 
   renderCamera() {
     const { camera } = this.props.infoSpecs;
-
     if (typeof camera != 'undefined') {
-      // && (Object.keys(camera).length !== 0 && camera.constructor === Object)) {
       return <CameraComponent camera={camera} />;
     }
   }
@@ -160,12 +155,7 @@ class InfoSpecsScreen extends Component {
   renderBattery() {
     const { battery, subType } = this.props.infoSpecs;
 
-    console.log('---bbb---');
-    console.log(battery, subType);
-
     if (typeof battery !== 'undefined') {
-      //Object.keys(battery).length !== 0 &&
-
       return <BatteryComponent battery={battery} subType={subType} />;
     }
   }
@@ -173,7 +163,7 @@ class InfoSpecsScreen extends Component {
   renderAccessories() {
     const { compatibleAccessories } = this.props.infoSpecs;
 
-    if (typeof compatibleAccessories == 'undefined') return; //  || (Object.keys(compatibleAccessories).length === 0 && compatibleAccessories.constructor === Object)) return;
+    if (typeof compatibleAccessories == 'undefined') return;
 
     return <AccessoriesComponent compatibleAccessories={compatibleAccessories} />;
   }
@@ -181,9 +171,7 @@ class InfoSpecsScreen extends Component {
   renderContent() {
     const { infoSpecs } = this.props;
     const viewWidth = width - 34;
-    const isTitle = infoSpecs.title === 'title' ? true : false;
-
-    console.log('infospecs', infoSpecs);
+    const isTitle = infoSpecs.title !== 'title' ? true : false;
 
     if (!isTitle) {
       return (
@@ -210,7 +198,6 @@ class InfoSpecsScreen extends Component {
     }
 
     if (Object.keys(infoSpecs).length === 0) {
-      //Object.keys(infoSpecs).length === 0 &&
       return <InfoSpecsSkeleton />;
     } else {
       return (
@@ -264,12 +251,7 @@ class InfoSpecsScreen extends Component {
     let infoSpecsEmpty = typeof infoSpecs == 'undefined'; // || (Object.keys(infoSpecs).length === 0 && infoSpecs.constructor === Object));
 
     return (
-      <Animated.ScrollView
-        contentContainerStyle={styles.container}
-        scrollEventThrottle={16}
-        // onScroll={this._animateScroll}
-        // onScrollEndDrag={this._onScrollEndSnapToEdge}
-      >
+      <Animated.ScrollView contentContainerStyle={styles.container} scrollEventThrottle={16}>
         {this.renderContent()}
       </Animated.ScrollView>
     );

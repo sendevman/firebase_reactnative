@@ -94,7 +94,7 @@ class MainLayout extends Component {
   };
 
   gotoZone = index => {
-    const arrAreas = this.state.locationData[2].zones[index];
+    const arrAreas = this.state.locationData[1].zones[index];
     this.props.dispatch(setLocationSelectItem(arrAreas));
     this.props.navigation.navigate('TabNav', {
       areaData: arrAreas,
@@ -181,13 +181,13 @@ class MainLayout extends Component {
     let currentLocationsData = null;
     let bgImg = require('../assets/images/files/splash.png');
     if (locationData !== null) {
-      currentLocationsData = locationData[2].zones;
+      currentLocationsData = locationData[1].zones;
       if (sliderActiveSlide < currentLocationsData.length) {
-        bgImg = { uri: locationData[2].zones[sliderActiveSlide].homeCard.backgroundImg };
+        bgImg = { uri: locationData[1].zones[sliderActiveSlide].homeCard.backgroundImg };
       }
     }
-    console.log('----', locationData);
-    console.log('-locationdata-', currentLocationsData);
+    console.log(locationData);
+    console.log(currentLocationsData);
     return (
       <SafeAreaView forceInset={{ top: 'always' }} style={{ backgroundColor: '#FFF' }}>
         <View style={{ width: '100%', height: '100%' }}>
