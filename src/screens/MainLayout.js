@@ -5,7 +5,7 @@
  */
 
 import React, { Component } from 'react';
-import { View, Image, Text, TouchableOpacity } from 'react-native';
+import { View, Image, Platform, Text, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 import { connect } from 'react-redux';
 import firebase from 'react-native-firebase';
@@ -97,33 +97,34 @@ class MainLayout extends Component {
 
   _renderItem({ item, index }) {
     if (item === 'DirecTV') {
-      return (<View style={styles.itemContainer} key={index}>
-        <View style={[styles.itemBox, { height: 200 }]}>
-          <Image style={styles.bgImage} source={require("../assets/images/files/titleCardArrow.png")} />
-          <Image
-            style={styles.titleCardArrow}
-            resizeMode={Image.resizeMode.cover}
-            source={require("../assets/images/files/titleCardArrow.png")} />
-          <TouchableOpacity onPress={() => this.gotoDirecTV()}>
-            <View style={[styles.titleCardBox]}>
-              <Icon height="30" width="30" name="ManIcon" viewBox="0 0 127 125" fill="#000" />
-              <Text numberOfLines={1} style={styles.titleCard}>DirecTV</Text>
-            </View>
-            {/* <Text numberOfLines={1} style={styles.subTitleCard}>{item.titleCard.subtitle}</Text> */}
-          </TouchableOpacity>
+      return (
+        <View {...this.setTestId("MainLayoutCarouselItemCard")} style={styles.itemContainer} key={index}>
+          <View style={[styles.itemBox, { height: 200 }]}>
+            <Image style={styles.bgImage} source={require("../assets/images/files/titleCardArrow.png")} />
+            <Image
+              style={styles.titleCardArrow}
+              resizeMode={Image.resizeMode.cover}
+              source={require("../assets/images/files/titleCardArrow.png")} />
+            <TouchableOpacity {...this.setTestId("MainLayoutGoToZone")} onPress={() => this.gotoDirecTV()}>
+              <View style={[styles.titleCardBox]}>
+                <Icon height="30" width="30" name="ManIcon" viewBox="0 0 127 125" fill="#000" />
+                <Text numberOfLines={1} style={styles.titleCard}>DirecTV</Text>
+              </View>
+              {/* <Text numberOfLines={1} style={styles.subTitleCard}>{item.titleCard.subtitle}</Text> */}
+            </TouchableOpacity>
+          </View>
         </View>
-      </View>
-      )
+      );
     } else {
       return (
-        <View style={styles.itemContainer} key={index}>
+        <View {...this.setTestId("MainLayoutCarouselItemCard")} style={styles.itemContainer} key={index}>
           <View style={[styles.itemBox, { height: 200 }]}>
             <Image style={styles.bgImage} source={{ uri: item.homeCard.img }} />
             <Image
               style={styles.titleCardArrow}
               resizeMode={Image.resizeMode.cover}
               source={require("../assets/images/files/titleCardArrow.png")} />
-            <TouchableOpacity onPress={() => this.gotoZone(index)}>
+            <TouchableOpacity {...this.setTestId("MainLayoutGoToZone")} onPress={() => this.gotoZone(index)}>
               <View style={[styles.titleCardBox]}>
                 <Icon height="30" width="30" name="ManIcon" viewBox="0 0 127 125" fill="#000" />
                 <Text numberOfLines={1} style={styles.titleCard}>{item.titleCard.title}</Text>
@@ -132,7 +133,7 @@ class MainLayout extends Component {
             </TouchableOpacity>
           </View>
         </View>
-      )
+      );
     }
   }
 
@@ -152,6 +153,11 @@ class MainLayout extends Component {
     );
   }
 
+  setTestId = (identifier) => {
+    if (Platform.OS === 'ios') return { testID: identifier };
+    else return { accessible: true, accessibilityLabel: identifier };
+  }
+
   render() {
     const { locationData, sliderActiveSlide } = this.state;
     let currentLocationsData = null;
@@ -162,11 +168,12 @@ class MainLayout extends Component {
         bgImg = { uri: locationData[0].zones[sliderActiveSlide].homeCard.img };
       }
     }
+
     return (
       <SafeAreaView forceInset={{ top: 'always' }} style={{ backgroundColor: '#FFF' }}>
-        <View style={{ width: '100%', height: '100%' }}>
-          <Image style={styles.backImage} source={bgImg} />
-          <View style={styles.sliderView}>
+        <View {...this.setTestId("MainLayoutBox")} style={{ width: '100%', height: '100%' }}>
+          <Image {...this.setTestId("MainLayoutImg")} style={styles.backImage} source={bgImg} />
+          <View {...this.setTestId("MainLayoutCarousel")} style={styles.sliderView}>
             {currentLocationsData &&
               <Carousel
                 data={[...currentLocationsData, 'DirecTV']}
