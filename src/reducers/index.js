@@ -18,7 +18,7 @@ const rootReducer = combineReducers({
   locations,
   current,
   productsNear,
-  vod
+  vod,
 });
 
 export default rootReducer;
