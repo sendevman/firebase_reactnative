@@ -30,8 +30,8 @@ import FeedbackSurvey from './components/FeedbackSurvey';
 
 var { width, height } = Dimensions.get('window');
 
-const getWidth = (number) => {
-  return ((width - 20) - number);
+const getWidth = number => {
+  return width - 20 - number;
 };
 
 const InfoSpecsSkeleton = () => (
@@ -69,7 +69,12 @@ class InfoSpecsScreen extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.selectedTab === 0 && nextProps.infoSpecs.model != undefined) {
-      firebase.analytics().logEvent("deviceViewed", { "pFirebaseId": this.props.firebaseid, "pDeviceModel": nextProps.infoSpecs.model, "pDeviceManufacture": nextProps.infoSpecs.manufacture, "pResearchTab": "info" });
+      firebase.analytics().logEvent('deviceViewed', {
+        pFirebaseId: this.props.firebaseid,
+        pDeviceModel: nextProps.infoSpecs.model,
+        pDeviceManufacture: nextProps.infoSpecs.manufacture,
+        pResearchTab: 'info',
+      });
     }
   }
 
@@ -79,15 +84,15 @@ class InfoSpecsScreen extends Component {
       heightHeader: b,
       hideSlide: c,
       heightSlide: d,
-      heightScrolled: e
-    }
+      heightScrolled: e,
+    };
   }
 
   makeCameraFeatureTest(features) {
-    var result = "";
+    var result = '';
     features.map((item, index) => {
-      if (index === 1) result += " or ";
-      if (index === 2) result += ". with ";
+      if (index === 1) result += ' or ';
+      if (index === 2) result += '. with ';
       result += item;
     });
     return result;
@@ -96,7 +101,7 @@ class InfoSpecsScreen extends Component {
   renderOffer() {
     const { offer } = this.props.infoSpecs;
 
-    if (typeof offer == "undefined") return false;// || (Object.keys(offer).length === 0 && offer.constructor === Object)) return false;
+    if (typeof offer == 'undefined') return false;
 
     return (
       <View style={{ marginTop: 16 }}>
@@ -107,84 +112,76 @@ class InfoSpecsScreen extends Component {
 
   renderColors() {
     const { colors } = this.props.infoSpecs;
-
-    if (typeof colors != "undefined" && colors.length > 0) {
-      return (
-        <ColorComponent colors={colors} />
-      );
+    if (typeof colors != 'undefined' && colors.length > 0) {
+      return <ColorComponent colors={colors} />;
     }
   }
 
   renderDisplay() {
     const { display } = this.props.infoSpecs;
 
-    if (typeof display !== "undefined") { //Object.keys(display).length !== 0 && 
-      return (
-        <DisplayComponent display={display} />
-      );
+    if (typeof display !== 'undefined') {
+      return <DisplayComponent display={display} />;
     }
   }
   renderFitness() {
     const { fitness } = this.props.infoSpecs;
 
-    if (typeof fitness !== "undefined") { //Object.keys(display).length !== 0 && 
-      return (
-        <FitnessComponent fitness={fitness} />
-      );
+    if (typeof fitness !== 'undefined') {
+      return <FitnessComponent fitness={fitness} />;
     }
   }
 
   renderCamera() {
     const { camera } = this.props.infoSpecs;
-
-    if (typeof camera != "undefined") { // && (Object.keys(camera).length !== 0 && camera.constructor === Object)) {
-      return (
-        <CameraComponent camera={camera} />
-      );
+    if (typeof camera != 'undefined') {
+      return <CameraComponent camera={camera} />;
     }
   }
 
   renderPerformanceAndStorage() {
     const { deviceOptions, expandableStorage, memory, processor, subType } = this.props.infoSpecs;
     return (
-      <PerformanceComponent deviceOptions={deviceOptions} expandableStorage={expandableStorage} memory={memory} processor={processor} subType={subType} />
-    )
+      <PerformanceComponent
+        deviceOptions={deviceOptions}
+        expandableStorage={expandableStorage}
+        memory={memory}
+        processor={processor}
+        subType={subType}
+      />
+    );
   }
 
   renderBattery() {
     const { battery, subType } = this.props.infoSpecs;
 
-    if (typeof battery !== "undefined") { //Object.keys(battery).length !== 0 && 
-
-      return (
-        <BatteryComponent battery={battery} subType={subType} />
-      );
+    if (typeof battery !== 'undefined') {
+      return <BatteryComponent battery={battery} subType={subType} />;
     }
   }
 
   renderAccessories() {
     const { compatibleAccessories } = this.props.infoSpecs;
 
-    if ((typeof compatibleAccessories == "undefined")) return;//  || (Object.keys(compatibleAccessories).length === 0 && compatibleAccessories.constructor === Object)) return;
+    if (typeof compatibleAccessories == 'undefined') return;
 
-    return (
-      <AccessoriesComponent compatibleAccessories={compatibleAccessories} />
-    );
+    return <AccessoriesComponent compatibleAccessories={compatibleAccessories} />;
   }
-
 
   renderContent() {
     const { infoSpecs } = this.props;
     const viewWidth = width - 34;
-    const isTitle = infoSpecs.title === "title" ? true : false;
+    const isTitle = infoSpecs.title !== 'title' ? true : false;
 
-    if (isTitle) {
+    if (!isTitle) {
       return (
-        <View style={{
-          width: width,
-          height: height,
-          backgroundColor: 'black'
-        }}>
+        <View
+          style={{
+            width: width,
+            height: height,
+            backgroundColor: 'black',
+          }}
+        >
           <Image
             style={{
               backgroundColor: '#ccc',
@@ -200,8 +197,8 @@ class InfoSpecsScreen extends Component {
       );
     }
 
-    if (Object.keys(infoSpecs).length === 0) { //Object.keys(infoSpecs).length === 0 && 
-      return (<InfoSpecsSkeleton />);
+    if (Object.keys(infoSpecs).length === 0) {
+      return <InfoSpecsSkeleton />;
     } else {
       return (
         <View>
@@ -219,10 +216,8 @@ class InfoSpecsScreen extends Component {
           <View style={styles.infoSpecBox}>
             {this.renderOffer()}
 
-            <View style={[styles.descriptionItemBox, { width: viewWidth, marginLeft: 6 }]}>
-              <Text style={[styles.description, { width: viewWidth - 30 }]}>
-                {infoSpecs.description}
-              </Text>
+            <View style={[ styles.descriptionItemBox, { width: viewWidth, marginLeft: 6 } ]}>
+              <Text style={[ styles.description, { width: viewWidth - 30 } ]}>{infoSpecs.description}</Text>
             </View>
 
             {this.renderColors()}
@@ -239,27 +234,24 @@ class InfoSpecsScreen extends Component {
     }
   }
 
-  _animateScroll = (event) => {
+  _animateScroll = event => {
     const y = event.nativeEvent.contentOffset.y;
     if (y < 60) this.props.onScrollCustom.setValue(y * 2);
     else this.props.onScrollCustom.setValue(120);
-  }
-  _onScrollEndSnapToEdge = (event) => {
+  };
+  _onScrollEndSnapToEdge = event => {
     const y = event.nativeEvent.contentOffset.y;
     if (y < 80) this.props.onScrollCustom.setValue(0);
     else this.props.onScrollCustom.setValue(120);
-  }
+  };
 
   render() {
     const { infoSpecs } = this.props;
 
-    let infoSpecsEmpty = ((typeof infoSpecs == "undefined"));// || (Object.keys(infoSpecs).length === 0 && infoSpecs.constructor === Object));
+    let infoSpecsEmpty = typeof infoSpecs == 'undefined'; // || (Object.keys(infoSpecs).length === 0 && infoSpecs.constructor === Object));
 
     return (
-      <Animated.ScrollView contentContainerStyle={styles.container} scrollEventThrottle={16}
-        onScroll={this._animateScroll}
-      // onScrollEndDrag={this._onScrollEndSnapToEdge}
-      >
+      <Animated.ScrollView contentContainerStyle={styles.container} scrollEventThrottle={16}>
         {this.renderContent()}
       </Animated.ScrollView>
     );
@@ -270,6 +262,6 @@ const mapStateToProps = state => {
   const { current, common } = state;
 
   return { infoSpecs: current.product, firebaseid: common.firebaseid, selectedTab: common.selectedTab };
-}
+};
 
 export default connect(mapStateToProps)(InfoSpecsScreen);

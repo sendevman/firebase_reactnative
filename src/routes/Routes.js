@@ -13,8 +13,7 @@ import { connect } from 'react-redux';
 
 // My Actions
 import { setFirebaseID, setNetworkInfo } from '../actions/Common';
-import { setCurrentLocation } from '../actions/Current';
-import { setLocationData } from '../actions/Current';
+import { setCurrentLocation, setLocationData } from '../actions/Current';
 
 // My Customs
 import Icon from '../assets/images/Icon';
@@ -27,6 +26,9 @@ import MainLayout from '../screens/MainLayout';
 import ProductLayout from '../screens/ProductLayout';
 import VodLayout from '../screens/VodLayout';
 
+// My Screens
+import BottomTabNav from '../screens/BottomTabNav';
+
 // Walkbase Engage
 // import BleManager from 'walkbase-sdk';
 var DeviceInfo = require('react-native-device-info');
@@ -37,73 +39,7 @@ const BleManagerModule = NativeModules.BleManager;
 // const ws = new WebSocket('wss://wai.walkbase.com/api/v2/subscribe');
 const ws = new WebSocket('wss://wai.walkbase.com/api/v2/subscribe/device/zones');
 
-YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Class RCTCxxModule']);
-
-const BottomTabNav = createBottomTabNavigator(
-  {
-    HomeProduct: {
-      screen: ProductLayout,
-      navigationOptions: {
-        title: 'Discover',
-        tabBarIcon: ({ tintColor }) => {
-          return <Icon name="SharedSession" width="22" height="22" fill={tintColor} viewBox="0 0 22 22" />;
-        }
-      }
-    },
-    ExclusiveVod: {
-      screen: VodLayout,
-      navigationOptions: {
-        title: 'Entertain',
-        tabBarIcon: ({ tintColor }) => {
-          if (tintColor === "#3E3F42")
-            return <Icon name="ExclusiveVodUnFill" width="22" height="18" viewBox="0 0 22 18" />;
-          else
-            return <Icon name="ExclusiveVodFill" width="22" height="18" viewBox="0 0 22 18" />;
-        }
-      }
-    },
-    // Discover: {
-    //   screen: DiscoverServiceLayout,
-    //   navigationOptions: {
-    //     title: 'Discover',
-    //     tabBarIcon: ({ tintColor }) => {
-    //       if (tintColor === "#3E3F42")
-    //         return <Icon name="ExclusiveVodUnFill" width="22" height="18" viewBox="0 0 22 18" />;
-    //       else
-    //         return <Icon name="ExclusiveVodFill" width="22" height="18" viewBox="0 0 22 18" />;
-    //     }
-    //   }
-    // },
-    // Experience: {
-    //   screen: ExperienceLayout,
-    //   navigationOptions: {
-    //     title: 'Experience',
-    //     tabBarIcon: ({ tintColor }) => {
-    //       return <Icon name="Compare" width="22" height="22" fill={tintColor} viewBox="0 0 22 22" />;
-    //     }
-    //   }
-    // },
-  },
-  {
-    initialRouteName: 'HomeProduct',
-    tabBarOptions: {
-      activeTintColor: '#FFF',
-      activeBackgroundColor: '#1181FF',
-      inactiveTintColor: '#3E3F42',
-      style: { height: 55 },
-      labelStyle: {
-        marginTop: -4,
-        marginBottom: 8,
-        // fontFamily: 'SF Pro Text',
-        fontSize: 11,
-        fontWeight: '500',
-        letterSpacing: 0.13,
-        lineHeight: 13,
-        textAlign: 'center'
-      }
-    }
-  }
-);
+YellowBox.ignoreWarnings([ 'Warning: isMounted(...) is deprecated', 'Class RCTCxxModule' ]);
 
 const MainNav = createStackNavigator(
   {
@@ -111,50 +47,37 @@ const MainNav = createStackNavigator(
       screen: MainLayout,
     },
     TabNav: {
-      screen: BottomTabNav
+      screen: BottomTabNav,
     },
     Compare: {
-      screen: CompareLayout
+      screen: CompareLayout,
     },
     ProductLayout: {
-      screen: ProductLayout
+      screen: ProductLayout,
     },
     Discover: {
       screen: DiscoverServiceLayout,
     },
     ServiceZone: {
-      screen: DiscoverServiceLayout
-    }
+      screen: DiscoverServiceLayout,
+    },
   },
   {
     initialRouteName: 'Home',
     headerMode: 'none',
     gesturesEnabled: false,
-  }
-)
-// export default DrawerNav;
-// END Before --------------------------------------------------------------
+  },
+);
 
 class Routes extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      ispass: false
-    };
-    this.getStoreData();
-  }
 
-  getStoreData = async () => {
-    try {
-      const result = await AsyncStorage.getItem('passOnboarding');
-      if (result === "passed") {
-        this.setState({
-          ispass: true
-        })
-      }
-    } catch (error) {
-      console.log("===", error);
-    }
+    this.state = {
+      ispass: false,
+    };
+
+    this.getStoreData();
   }
 
   componentWillMount() {
@@ -170,9 +93,37 @@ class Routes extends Component {
     this.websocketClose();
     navigator.geolocation.clearWatch(this.watchID);
   }
-  
+
+  getStoreData = async () => {
+    try {
+      const result = await AsyncStorage.getItem('passOnboarding');
+      if (result === 'passed') {
+        this.setState({ ispass: true });
+      }
+    } catch (error) {
+      console.log('===', error);
+    }
+  };
+
+  handleConnectivityChange = (isConnected) => {
+    this.setNetworkInfo(isConnected);
+  };
+
+  setNetworkInfo = (isConnected) => {
+    NetInfo.getConnectionInfo().then(connectionInfo => {
+      NetworkInfo.getSSID(ssid => {
+        let data = {
+          connectionType: connectionInfo.type,
+          isConnected: isConnected,
+          ssid: ssid,
+        };
+        this.props.dispatch(setNetworkInfo(data));
+      });
+    });
+  };
+
   firebaseLogin = () => {
-    const user = firebase.auth().signInAnonymously()
+    firebase.auth().signInAnonymously()
       .then(user => {
         console.log("firebase user : ", user._user.uid);
         this.props.dispatch(setFirebaseID(user._user.uid));
@@ -196,40 +147,9 @@ class Routes extends Component {
 
         this.webPresenceAPI();
       });
-  }
+  };
 
-  handleConnectivityChange = isConnected => { this.setNetworkInfo(isConnected); }
-
-  setNetworkInfo(isConnected) {
-    NetInfo.getConnectionInfo()
-      .then(connectionInfo => {
-        NetworkInfo.getSSID(ssid => {
-          let data = {
-            connectionType: connectionInfo.type,
-            isConnected: isConnected,
-            ssid: ssid
-          }
-          this.props.dispatch(setNetworkInfo(data));
-        });
-      });
-  }
-
-  handleEventReceivedAdvertisement(data) {
-    console.log(data);
-  }
-
-  handleEventErrors(data) {
-    if (data.state === 'WBErrorUnknown') {
-      console.log(data);
-    } else if (data.state === 'WBErrorBluetoothOff') {
-      alert("Bluetooth is OFF. Please ON the Bluetooth");
-      // this.setState({ bleState: 0 })
-    } else if (data.state === 'Not error code') {
-      // this.setState({ bleState: 1 })
-    }
-  }
-
-  webPresenceAPI() {
+  webPresenceAPI = () => {
     ws.onopen = () => {
       // connection opened
       // NearbyAuthRequest
@@ -242,19 +162,16 @@ class Routes extends Component {
     let confidence = 0;
     var zoneData = new Array();
     var confidenceData = new Array();
-    var errorCheck = 0;
-    const maxLength = 5;
-    ws.onmessage = (e) => {
 
+    ws.onmessage = (e) => {
       // implement the codes from webAPI() and remove webAPI after that.
       let locationdata = null;
       try {
         locationdata = JSON.parse(e.data);
-      } catch (e) {
-      }
+      } catch (e) {}
 
       if (locationdata) {
-        if (locationdata.zone_id === null) { }//zone_id = -1;
+        if (locationdata.zone_id === null) {} // zone_id = -1;
         else {
           zone_id = locationdata.zone_id;
           confidence = locationdata.confidence;
@@ -268,9 +185,9 @@ class Routes extends Component {
         zoneData.push(zone_id);
         confidenceData.push(confidence);
 
-        if(zoneData.length === 6) {
-          if(confidenceData[5] > 0.9 && confidenceData[4] > 0.9 && confidenceData[3] > 0.9 && confidenceData[2] > 0.9) {
-            if(zoneData[5] === zoneData[4] && zoneData[5] === zoneData[3] && zoneData[5] === zoneData[2]){
+        if (zoneData.length === 6) {
+          if (confidenceData[5] > 0.9 && confidenceData[4] > 0.9 && confidenceData[3] > 0.9 && confidenceData[2] > 0.9) {
+            if (zoneData[5] === zoneData[4] && zoneData[5] === zoneData[3] && zoneData[5] === zoneData[2]) {
               if (last_zone_id != locationdata.zone_id) {
                 // this.props.dispatch(setLocationData(locationdata));
                 if (this.props.current.location.storeId !== locationdata.site_id) {
@@ -292,55 +209,71 @@ class Routes extends Component {
       // an error occurred
       console.log(e.message);
     };
-  }
+  };
 
-  websocketClose() {
+  fetchSiteData = (siteId) => {
+    Promise.all([
+      firebase.firestore().collection(`locations/${siteId}/zones`).get(),
+      firebase.firestore().collection(`locations/${siteId}/vod`).get(),
+      firebase.firestore().collection(`locations/${siteId}/directv-preview`).get()
+    ]).then(snapshots => {
+      snapshots = snapshots.map(snapshot => {
+        return snapshot.docs.map(doc => doc.data())
+      });
+
+      firebase.firestore().collection('locations').doc(siteId).get().then(siteInfoSnapshot => {
+        const siteData = {
+          siteInfo: siteInfoSnapshot.data(),
+          zones: snapshots[0],
+          vod: snapshots[1],
+          directvPreview: snapshots[2],
+        };
+
+        this.props.dispatch(setCurrentLocation(siteData));
+      });
+    });
+  };
+
+  websocketClose = () => {
     ws.onclose = (e) => {
       // connection closed
       console.log(e.code, e.reason);
     };
-  }
+  };
 
-  fetchSiteData(siteId) {
-      Promise.all([
-        firebase.firestore().collection(`locations/${siteId}/zones`).get(),
-        firebase.firestore().collection(`locations/${siteId}/vod`).get(),
-        firebase.firestore().collection(`locations/${siteId}/directv-preview`).get()
-      ]).then(snapshots => {
-        snapshots = snapshots.map(snapshot => {
-          return snapshot.docs.map(doc => doc.data())
-        });
-  
-        firebase.firestore().collection('locations').doc(siteId).get().then(siteInfoSnapshot => {
-          const siteData = {
-            siteInfo: siteInfoSnapshot.data(),
-            zones: snapshots[0],
-            vod: snapshots[1],
-            directvPreview: snapshots[2],
-          };
+  handleEventReceivedAdvertisement = (data) => {
+    console.log(data);
+  };
 
-          this.props.dispatch(setCurrentLocation(siteData));
-        });
-      });
-  }
+  handleEventErrors = (data) => {
+    if (data.state === 'WBErrorUnknown') {
+      console.log(data);
+    } else if (data.state === 'WBErrorBluetoothOff') {
+      alert('Bluetooth is OFF. Please ON the Bluetooth');
+      // this.setState({ bleState: 0 })
+    } else if (data.state === 'Not error code') {
+      // this.setState({ bleState: 1 })
+    }
+  };
 
   render() {
     return (
       <MainNav />
-    )
+    );
   }
 }
 
-// function mapDispatchToProps(dispatch) {
-//   return {
-//     setLocationData: (data) => {
-//       return dispatch(setLocationData(data))
-//     },
-//     setNetworkInfo: (data) => {
-//       return dispatch(setNetworkInfo(data))
-//     }
-//   };
-// }
+function mapDispatchToProps(dispatch) {
+  return {
+    setLocationData: data => {
+      return dispatch(setLocationData(data));
+    },
+    setNetworkInfo: data => {
+      return dispatch(setNetworkInfo(data));
+    },
+    dispatch,
+  };
+}
 
 const mapStateToProps = state => {
   const { current } = state;
@@ -350,4 +283,4 @@ const mapStateToProps = state => {
   };
 }
 
-export default connect(mapStateToProps)(Routes);
+export default connect(mapDispatchToProps, mapStateToProps)(Routes);

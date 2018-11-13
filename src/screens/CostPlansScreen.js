@@ -44,23 +44,30 @@ class CostPlansScreen extends Component {
 
     this.state = {
       viewMoreInsurance: false,
-      viewMorePlans: false
+      viewMorePlans: false,
     };
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.selectedTab === 2 && nextProps.costplans.model != undefined) {
-      firebase.analytics().logEvent("deviceViewed", { "pFirebaseId": this.props.firebaseid, "pDeviceModel": nextProps.costplans.model, "pDeviceManufacture": nextProps.costplans.manufacture, "pResearchTab": "price" });
+      firebase
+        .analytics()
+        .logEvent('deviceViewed', {
+          pFirebaseId: this.props.firebaseid,
+          pDeviceModel: nextProps.costplans.model,
+          pDeviceManufacture: nextProps.costplans.manufacture,
+          pResearchTab: 'price',
+        });
     }
   }
 
   toggleViewMorePlans = () => {
     this.setState({ viewMorePlans: !this.state.viewMorePlans });
-  }
+  };
 
   toggleViewMoreInsurance = () => {
     this.setState({ viewMoreInsurance: !this.state.viewMoreInsurance });
-  }
+  };
 
   setNewValue(a, b, c, d, e) {
     return {
@@ -68,8 +75,8 @@ class CostPlansScreen extends Component {
       heightHeader: b,
       hideSlide: c,
       heightSlide: d,
-      heightScrolled: e
-    }
+      heightScrolled: e,
+    };
   }
 
   setFormatToNumber(number) {
@@ -84,30 +91,29 @@ class CostPlansScreen extends Component {
 
   renderStorage() {
     const { deviceOptions, expandableStorage } = this.props.costplans;
-    const esIsValid = (typeof expandableStorage == "undefined") ? false : true;// || Object.keys(expandableStorage).length === 0) ? false : true;
+    const esIsValid = typeof expandableStorage == 'undefined' ? false : true; // || Object.keys(expandableStorage).length === 0) ? false : true;
 
     var isAvailable = false;
-    if (esIsValid) isAvailable = (typeof expandableStorage.available == "undefined") ? false : expandableStorage.available;
+    if (esIsValid)
+      isAvailable = typeof expandableStorage.available == 'undefined' ? false : expandableStorage.available;
     else isAvailable = false;
 
     if (deviceOptions && deviceOptions.length > 0) {
       return (
         <View style={{ paddingBottom: 0 }}>
-          <View style={styles.hrDivider}></View>
+          <View style={styles.hrDivider} />
           <Text style={styles.titleDivider}>Device options</Text>
 
           <ScrollView horizontal={true} contentContainerStyle={styles.storageScrollViewBox}>
             <View style={styles.storageBox}>
-              {
-                deviceOptions.map((item, index) => {
-                  return (
-                    <View key={index} style={styles.storageItem}>
-                      <Text style={styles.storageGB}>{item.storage}GB</Text>
-                      <Text style={styles.storagePrice}>${item.price}</Text>
-                    </View>
-                  );
-                })
-              }
+              {deviceOptions.map((item, index) => {
+                return (
+                  <View key={index} style={styles.storageItem}>
+                    <Text style={styles.storageGB}>{item.storage}GB</Text>
+                    <Text style={styles.storagePrice}>${item.price}</Text>
+                  </View>
+                );
+              })}
             </View>
           </ScrollView>
 
@@ -125,15 +131,15 @@ class CostPlansScreen extends Component {
   renderCostNext() {
     const { cost } = this.props.costplans;
 
-    if ((typeof cost == "undefined")) return false;// || (Object.keys(cost).length === 0 && cost.constructor === Object)) return;
-    if ((typeof cost.next == "undefined")) return false;// || (Object.keys(cost.next).length === 0 && (cost.next).constructor === Object)) return;
+    if (typeof cost == 'undefined') return false; // || (Object.keys(cost).length === 0 && cost.constructor === Object)) return;
+    if (typeof cost.next == 'undefined') return false; // || (Object.keys(cost.next).length === 0 && (cost.next).constructor === Object)) return;
 
     return (
-      <View style={[styles.cardBox, { marginTop: 16 }]}>
+      <View style={[ styles.cardBox, { marginTop: 16 } ]}>
         <Text style={styles.titleCard}>{cost.next.title}</Text>
         <Text style={styles.subTitleCard}>{cost.next.description}</Text>
 
-        <View style={styles.separatorCard}></View>
+        <View style={styles.separatorCard} />
 
         <View style={styles.dataCardBox}>
           <View style={styles.dataBox}>
@@ -141,14 +147,14 @@ class CostPlansScreen extends Component {
             <Text style={styles.dataText}>DUE TODAY</Text>
           </View>
 
-          <View style={styles.dataDivisor}></View>
+          <View style={styles.dataDivisor} />
 
           <View style={styles.dataBox}>
             <Text style={styles.dataValue}>${this.setFormatToNumber(cost.next.monthly)}</Text>
             <Text style={styles.dataText}>MONTHLY</Text>
           </View>
 
-          <View style={styles.dataDivisor}></View>
+          <View style={styles.dataDivisor} />
 
           <View style={styles.dataBox}>
             <Text style={styles.dataValue}>{cost.next.tradeIn}</Text>
@@ -162,17 +168,17 @@ class CostPlansScreen extends Component {
   renderCostNextYear() {
     const { cost } = this.props.costplans;
 
-    if ((typeof cost == "undefined")) return false;// || (Object.keys(cost).length === 0 && cost.constructor === Object)) return;
-    if ((typeof cost.nextEveryYear == "undefined")) return false;// || (Object.keys(cost.nextEveryYear).length === 0 && (cost.nextEveryYear).constructor === Object)) return;
+    if (typeof cost == 'undefined') return false; // || (Object.keys(cost).length === 0 && cost.constructor === Object)) return;
+    if (typeof cost.nextEveryYear == 'undefined') return false; // || (Object.keys(cost.nextEveryYear).length === 0 && (cost.nextEveryYear).constructor === Object)) return;
 
-    let preNextEmpty = ((typeof cost.next == "undefined"));// || (Object.keys(cost.next).length === 0 && (cost.next).constructor === Object));
+    let preNextEmpty = typeof cost.next == 'undefined'; // || (Object.keys(cost.next).length === 0 && (cost.next).constructor === Object));
 
     return (
-      <View style={[styles.cardBox, { marginTop: preNextEmpty ? 16 : 8 }]}>
+      <View style={[ styles.cardBox, { marginTop: preNextEmpty ? 16 : 8 } ]}>
         <Text style={styles.titleCard}>{cost.nextEveryYear.title}</Text>
         <Text style={styles.subTitleCard}>{cost.nextEveryYear.description}</Text>
 
-        <View style={styles.separatorCard}></View>
+        <View style={styles.separatorCard} />
 
         <View style={styles.dataCardBox}>
           <View style={styles.dataBox}>
@@ -180,14 +186,14 @@ class CostPlansScreen extends Component {
             <Text style={styles.dataText}>DUE TODAY</Text>
           </View>
 
-          <View style={styles.dataDivisor}></View>
+          <View style={styles.dataDivisor} />
 
           <View style={styles.dataBox}>
             <Text style={styles.dataValue}>${this.setFormatToNumber(cost.nextEveryYear.monthly)}</Text>
             <Text style={styles.dataText}>MONTHLY</Text>
           </View>
 
-          <View style={styles.dataDivisor}></View>
+          <View style={styles.dataDivisor} />
 
           <View style={styles.dataBox}>
             <Text style={styles.dataValue}>{cost.nextEveryYear.tradeIn}</Text>
@@ -201,19 +207,19 @@ class CostPlansScreen extends Component {
   renderCostNoContract() {
     const { cost } = this.props.costplans;
 
-    if ((typeof cost == "undefined")) return false;// || (Object.keys(cost).length === 0 && cost.constructor === Object)) return;
-    if ((typeof cost.noContract == "undefined")) return false;// || (Object.keys(cost.noContract).length === 0 && (cost.noContract).constructor === Object)) return;
+    if (typeof cost == 'undefined') return false; // || (Object.keys(cost).length === 0 && cost.constructor === Object)) return;
+    if (typeof cost.noContract == 'undefined') return false; // || (Object.keys(cost.noContract).length === 0 && (cost.noContract).constructor === Object)) return;
 
-    let preNextEmpty = ((typeof cost.next == "undefined"));// || (Object.keys(cost.next).length === 0 && (cost.next).constructor === Object));
-    let preNextTEmpty = ((typeof cost.nextEveryYear == "undefined"));// || (Object.keys(cost.nextEveryYear).length === 0 && (cost.nextEveryYear).constructor === Object));
-    let newValue = (preNextEmpty && preNextTEmpty) ? 16 : 8;
+    let preNextEmpty = typeof cost.next == 'undefined'; // || (Object.keys(cost.next).length === 0 && (cost.next).constructor === Object));
+    let preNextTEmpty = typeof cost.nextEveryYear == 'undefined'; // || (Object.keys(cost.nextEveryYear).length === 0 && (cost.nextEveryYear).constructor === Object));
+    let newValue = preNextEmpty && preNextTEmpty ? 16 : 8;
 
     return (
-      <View style={[styles.cardBox, { marginTop: newValue }]}>
+      <View style={[ styles.cardBox, { marginTop: newValue } ]}>
         <Text style={styles.titleCard}>{cost.noContract.title}</Text>
         <Text style={styles.subTitleCard}>{cost.noContract.description}</Text>
 
-        <View style={styles.separatorCard}></View>
+        <View style={styles.separatorCard} />
 
         <View style={styles.dataCardBox}>
           <View style={styles.dataBox}>
@@ -221,14 +227,14 @@ class CostPlansScreen extends Component {
             <Text style={styles.dataText}>DUE TODAY</Text>
           </View>
 
-          <View style={styles.dataDivisor}></View>
+          <View style={styles.dataDivisor} />
 
           <View style={styles.dataBox}>
             <Text style={styles.dataValue}>${this.setFormatToNumber(cost.noContract.monthly)}</Text>
             <Text style={styles.dataText}>MONTHLY</Text>
           </View>
 
-          <View style={styles.dataDivisor}></View>
+          <View style={styles.dataDivisor} />
 
           <View style={styles.dataBox}>
             <Text style={styles.dataText}>UPGRADE</Text>
@@ -245,19 +251,19 @@ class CostPlansScreen extends Component {
 
     return (
       <View style={styles.cardBox}>
-        {(key == "mobileInsurance") && <Text style={styles.titleCard}>AT&T Mobile Insurance</Text>}
-        {(key == "mobileProtection") && <Text style={styles.titleCard}>AT&T Mobile Protection Pack</Text>}
-        {(key == "mobileProtectionMulit") && <Text style={styles.titleCard}>AT&T Multi-Device Protection Pack</Text>}
+        {key == 'mobileInsurance' && <Text style={styles.titleCard}>AT&T Mobile Insurance</Text>}
+        {key == 'mobileProtection' && <Text style={styles.titleCard}>AT&T Mobile Protection Pack</Text>}
+        {key == 'mobileProtectionMulit' && <Text style={styles.titleCard}>AT&T Multi-Device Protection Pack</Text>}
 
-        <View style={styles.separatorCard}></View>
+        <View style={styles.separatorCard} />
 
         <View style={styles.dataCardBox}>
           <View style={styles.dataBox}>
             <Text style={styles.dataValue}>{mount}</Text>
-            <Text style={styles.dataText}>DEVICE{(key == "mobileProtectionMulit") && "S"} PROTECTED</Text>
+            <Text style={styles.dataText}>DEVICE{key == 'mobileProtectionMulit' && 'S'} PROTECTED</Text>
           </View>
 
-          <View style={styles.dataDivisor}></View>
+          <View style={styles.dataDivisor} />
 
           <View style={styles.dataBox}>
             <Text style={styles.dataValue}>${this.setFormatToNumber(price)}</Text>
@@ -272,32 +278,31 @@ class CostPlansScreen extends Component {
     const { insurance } = this.props.costplans;
     const { viewMoreInsurance } = this.state;
 
-    if ((typeof insurance == "undefined")) return false;// || (Object.keys(insurance).length === 0 && insurance.constructor === Object)) return;
+    if (typeof insurance == 'undefined') return false; // || (Object.keys(insurance).length === 0 && insurance.constructor === Object)) return;
 
     let mInsurance = insurance.mobileInsurance;
-    let mInsuranceEmpty = ((typeof mInsurance == "undefined"));// || (Object.keys(mInsurance).length === 0 && mInsurance.constructor === Object));
+    let mInsuranceEmpty = typeof mInsurance == 'undefined'; // || (Object.keys(mInsurance).length === 0 && mInsurance.constructor === Object));
 
     let mProtection = insurance.mobileProtection;
-    let mProtectionEmpty = ((typeof mProtection == "undefined"));// || (Object.keys(mProtection).length === 0 && mProtection.constructor === Object));
+    let mProtectionEmpty = typeof mProtection == 'undefined'; // || (Object.keys(mProtection).length === 0 && mProtection.constructor === Object));
 
     let mProtectionMulti = insurance.mobileProtectionMulit;
-    let mProtectionMultiEmpty = ((typeof mProtectionMulti == "undefined"));// || (Object.keys(mProtectionMulti).length === 0 && mProtectionMulti.constructor === Object));
+    let mProtectionMultiEmpty = typeof mProtectionMulti == 'undefined'; // || (Object.keys(mProtectionMulti).length === 0 && mProtectionMulti.constructor === Object));
 
-    let viewMoreInsuranceText = viewMoreInsurance ? "- Collapse" : "+ View more plans";
+    let viewMoreInsuranceText = viewMoreInsurance ? '- Collapse' : '+ View more plans';
     let showInsurance = viewMoreInsurance;
 
     return (
       <View>
         <Text style={styles.titleDevice}>Device protection</Text>
         {!mProtectionEmpty && this.setItem('mobileProtection', mProtection)}
-        
 
-        {showInsurance &&
+        {showInsurance && (
           <View>
-           {!mProtectionMultiEmpty && this.setItem('mobileProtectionMulit', mProtectionMulti)}
+            {!mProtectionMultiEmpty && this.setItem('mobileProtectionMulit', mProtectionMulti)}
             {!mInsuranceEmpty && this.setItem('mobileInsurance', mInsurance)}
           </View>
-        }
+        )}
 
         <TouchableWithoutFeedback onPress={this.toggleViewMoreInsurance}>
           <View style={styles.contentReadMore}>
@@ -311,16 +316,16 @@ class CostPlansScreen extends Component {
   renderShippingInfo() {
     const { releaseDate } = this.props.costplans;
 
-    if (typeof releaseDate == "undefined" || !releaseDate.trim() || releaseDate.length === 0) return;
+    if (typeof releaseDate == 'undefined' || !releaseDate.trim() || releaseDate.length === 0) return;
 
-    const dateRelease = moment(releaseDate).format("ll");
-    const dateInAdvance = moment(releaseDate).add(4, 'days').format("ll");
+    const dateRelease = moment(releaseDate).format('ll');
+    const dateInAdvance = moment(releaseDate).add(4, 'days').format('ll');
 
     return (
       <View style={styles.shippingBox}>
         <Icon name="ShippingTruck" width="18" height="13" viewBox="0 0 18 13" fill="#FFF" />
         <View>
-          <Text style={[styles.availableText, { fontWeight: 'bold' }]}>Available in-store on {dateRelease}</Text>
+          <Text style={[ styles.availableText, { fontWeight: 'bold' } ]}>Available in-store on {dateRelease}</Text>
         </View>
       </View>
     );
@@ -330,17 +335,20 @@ class CostPlansScreen extends Component {
     const { costplans } = this.props;
     const { viewMoreInsurance, viewMorePlans } = this.state;
 
-    let viewMorePlansText = viewMorePlans ? "- Collapse" : "+ View more plans";
+    let viewMorePlansText = viewMorePlans ? '- Collapse' : '+ View more plans';
     let showPlans = viewMorePlans;
-    let costplansEmpty = ((typeof costplans == "undefined"));// || (Object.keys(costplans).length === 0 && costplans.constructor === Object));
+    let costplansEmpty = typeof costplans == 'undefined'; // || (Object.keys(costplans).length === 0 && costplans.constructor === Object));
 
-    const isTitle = costplans.title === "title" ? true : false;
+    const isTitle = costplans.title === 'title' ? true : false;
     if (isTitle) {
       return (
-        <View style={{
-          width: width,
-          height: height,
-          backgroundColor: 'black'}}>
+        <View
+          style={{
+            width: width,
+            height: height,
+            backgroundColor: 'black',
+          }}
+        >
           <Image
             style={{
               backgroundColor: '#ccc',
@@ -357,7 +365,7 @@ class CostPlansScreen extends Component {
     }
     if (Object.keys(costplans).length === 0) {
       // if (Object.keys(costplans).length === 0 && costplans.constructor === Object) {
-      return (<CostPlansSkeleton />);
+      return <CostPlansSkeleton />;
     } else {
       return (
         <View>
@@ -373,18 +381,17 @@ class CostPlansScreen extends Component {
             source={require('../assets/images/files/backgroundHD.png')}
           />
           <View style={styles.costPlansBox}>
-
             {this.renderShippingInfo()}
 
             {this.renderStorage()}
             {this.renderCostNext()}
 
-            {showPlans &&
+            {showPlans && (
               <View>
                 {this.renderCostNextYear()}
                 {this.renderCostNoContract()}
               </View>
-            }
+            )}
 
             <TouchableWithoutFeedback onPress={this.toggleViewMorePlans}>
               <View style={styles.contentReadMore}>
@@ -403,58 +410,56 @@ class CostPlansScreen extends Component {
   renderAccessories() {
     const { compatibleAccessories } = this.props.costplans;
 
-    if ((typeof compatibleAccessories == "undefined")) return false;// || (Object.keys(compatibleAccessories).length === 0 && compatibleAccessories.constructor === Object)) return;
+    if (typeof compatibleAccessories == 'undefined') return false; // || (Object.keys(compatibleAccessories).length === 0 && compatibleAccessories.constructor === Object)) return;
 
     const { featured, fullList } = compatibleAccessories;
-    let featuredEmpty = (typeof featured == "undefined" || featured.length <= 0);
-    let fullListEmpty = (typeof fullList == "undefined" || fullList.length <= 0);
+    let featuredEmpty = typeof featured == 'undefined' || featured.length <= 0;
+    let fullListEmpty = typeof fullList == 'undefined' || fullList.length <= 0;
 
     if (featuredEmpty && fullListEmpty) return false;
 
-    return (
-      <View style={styles.accessoriesBox}>
-        {<RoutesAccessories />}
-      </View>
-    );
+    return <View style={styles.accessoriesBox}>{<RoutesAccessories />}</View>;
   }
 
-  _animateScroll = (event) => {
+  _animateScroll = event => {
     const y = event.nativeEvent.contentOffset.y;
     if (y < -3) {
       let yy = y * y / 80;
       if (yy > 40) yy = 40;
-      this.props.onScrollCustom.setValue(-yy)
-    }
-    else if (y > -3 && y < 3) {
-    }
-    else {
+      this.props.onScrollCustom.setValue(-yy);
+    } else if (y > -3 && y < 3) {
+    } else {
       let yy = y * y / 300;
       if (yy > 120) yy = 120;
       this.props.onScrollCustom.setValue(yy);
     }
-  }
-  _onScrollEndSnapToEdge = (event) => {
+  };
+  _onScrollEndSnapToEdge = event => {
     const y = event.nativeEvent.contentOffset.y;
     if (y < 80) this.props.onScrollCustom.setValue(0);
     else this.props.onScrollCustom.setValue(120);
-  }
+  };
   render() {
     const { costplans } = this.props;
 
     return (
-      <Animated.ScrollView contentContainerStyle={styles.container} scrollEventThrottle={1}
-        /*onScroll={Animated.event(
-          [{ nativeEvent: { contentOffset: { y: this.props.onScrollCustom } } }],
-          {
-            /*useNativeDriver: true*//*,
+      <Animated.ScrollView
+        contentContainerStyle={styles.container}
+        scrollEventThrottle={
+          1
+        } /*,
             listener: event => {
               const offsetY = event.nativeEvent.contentOffset.y
               this.props.onScrollCustom(offsetY);
             }* /
           }
         )}*/
-        onScroll={this._animateScroll}
-        onScrollEndDrag={this._onScrollEndSnapToEdge}
+        /*onScroll={Animated.event(
+          [{ nativeEvent: { contentOffset: { y: this.props.onScrollCustom } } }],
+          {
+            /*useNativeDriver: true*/
+        //onScroll={this._animateScroll}
+        //onScrollEndDrag={this._onScrollEndSnapToEdge}
       >
         {this.renderContent()}
       </Animated.ScrollView>
@@ -466,6 +471,6 @@ const mapStateToProps = state => {
   const { current, common } = state;
 
   return { costplans: current.product, firebaseid: common.firebaseid, selectedTab: common.selectedTab };
-}
+};
 
 export default connect(mapStateToProps)(CostPlansScreen);

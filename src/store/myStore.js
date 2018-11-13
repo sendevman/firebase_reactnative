@@ -12,9 +12,8 @@ import { createLogger } from 'redux-logger';
 import rootReducer from '../reducers/index';
 
 const logger = createLogger();
-const enhancer = compose(
-  applyMiddleware(thunk, logger)
-);
+const middleware = [ thunk, logger ];
+const enhancer = compose(applyMiddleware(...middleware));
 
 const myStore = createStore(rootReducer, enhancer);
 
