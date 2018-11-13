@@ -120,7 +120,7 @@ class MainLayout extends Component {
     let bgImg = require('../assets/images/files/splash.png');
 
     if (zones.length && index < (zones.length - 1)) {
-      bgImg = { uri: zones[index].homeCard.img };
+      bgImg = { uri: zones[index].homeCard.bgImg };
     }
 
     return (
