@@ -4,11 +4,16 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest"
+    "test": "jest",
+    "test:mocha:android": "mocha --timeout 6000000 test/Home-android.test.js",
+    "test:mocha:ios": "mocha --timeout 6000000 test/Home-ios.test.js"
   },
   "dependencies": {
+    "appium-uiautomator2-driver": "^1.23.1",
+    "chai": "^4.2.0",
     "d3-interpolate": "^1.2.0",
     "lodash": "^4.17.10",
+    "mocha": "^5.2.0",
     "moment": "^2.22.2",
     "open-settings": "git+https://github.com/conexusTech/open-settings.git",
     "react": "16.3.1",
@@ -36,7 +41,8 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
     "rn-viewpager": "^1.2.9",
-    "walkbase-sdk": "git+https://github.com/conexusTech/walkbase-sdk.git"
+    "walkbase-sdk": "git+https://github.com/conexusTech/walkbase-sdk.git",
+    "webdriverio": "^4.14.0"
   },
   "devDependencies": {
     "babel-jest": "23.0.1",
