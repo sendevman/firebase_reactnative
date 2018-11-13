@@ -5,79 +5,30 @@
  */
 
 import React, { Component } from 'react';
-import { View, Image, Platform, Text, TouchableOpacity } from 'react-native';
+import { Image, Platform, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
+import Carousel from 'react-native-snap-carousel';
 import { connect } from 'react-redux';
-import firebase from 'react-native-firebase';
-import Icon from '../assets/images/Icon';
-// Action
-import { setLocationAllInfo, setLocationSelectItem } from '../actions/Locations';
-import Carousel, { Pagination } from 'react-native-snap-carousel';
 
-import { FakeAreas } from '../store/AreaFakeData';
+// My Actions
+import { setLocationSelectItem } from '../actions/Locations';
+
+// My Customs
+import Icon from '../assets/images/Icon';
+
+// My FakeData
+// import { FakeAreas } from '../store/AreaFakeData';
+
 // My Styles
 import styles, { itemWidth, sliderWidth } from './css/MainScreenCss';
 
 class MainLayout extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       sliderActiveSlide: 0,
-      locationData: null
     }
-    this.getCurrentLocationData();
-  }
-
-  componentWillReceiveProps(nextProps) {
-    console.log("==", nextProps.locations)
-    if (this.props.locationData !== nextProps.locations) {
-      console.log("==", nextProps.locationData)
-    }
-  }
-  getCurrentLocationData() {
-    const locationtRef = firebase.firestore().collection('locations');
-    locationtRef.get()
-      .then(snapshot => {
-        const ref_path = snapshot.docs.map(doc => doc.ref.path);
-        const locationList = snapshot.docs.map(doc => doc.data());
-        var locations = [];
-        for (i = 0; i < locationList.length; i++) {
-          var data = locationList[i];
-          data.id = ref_path[i].split("/")[1];
-          locations.push(data);
-        }
-        this.getLocationCollectionData(locations);
-      })
-  }
-
-  getLocationCollectionData = (locations) => {
-    Promise.all(
-      locations.map(location => new Promise((resolve, reject) => {
-        Promise.all(
-          ['zones', 'directv-preview', 'vod'].map(property => new Promise((resolve1, reject1) => {
-            const zoneid = 'locations/' + location.id + '/' + property;
-            const zonesRef = firebase.firestore().collection(zoneid);
-            zonesRef.get()
-              .then(snapshot1 => {
-                const propertyList = snapshot1.docs.map(doc => doc.data());
-                location[property] = propertyList;
-                resolve1(propertyList);
-              })
-              .catch(err => { console.log('Error getting documents', err); });
-          }))
-        )
-          .then(propertis => {
-            resolve(location);
-          })
-          .catch(err => { console.log('Error getting documents', err); });
-      })
-      )
-    ).then(results => {
-      this.props.dispatch(setLocationAllInfo(results));
-      this.setState({ locationData: results })
-      console.log("****", results);
-    })
-      .catch(error => { })
   }
 
   gotoDirecTV = () => {
@@ -85,14 +36,20 @@ class MainLayout extends Component {
   }
 
   gotoZone = (index) => {
-    const arrAreas = this.state.locationData[0].zones[index];
+    const arrAreas = this.props.location.zones[index];
     this.props.dispatch(setLocationSelectItem(arrAreas));
     this.props.navigation.navigate('TabNav', {
       areaData: arrAreas
     });
   }
+
   gotoService = (index) => {
     this.props.navigation.navigate('ServiceZone');
+  }
+
+  setTestId = (identifier) => {
+    if (Platform.OS === 'ios') return { testID: identifier };
+    else return { accessible: true, accessibilityLabel: identifier };
   }
 
   _renderItem({ item, index }) {
@@ -137,36 +94,14 @@ class MainLayout extends Component {
     }
   }
 
-  _renderItem1({ item, index }) {
-    return (
-      <View style={styles.itemContainer} key={index}>
-        <TouchableOpacity onPress={() => this.gotoZone(index)}>
-          <View style={styles.itemImgBG}>
-            <Image style={styles.bgImage} source={{ uri: item.titleCard.img }} />
-          </View>
-        </TouchableOpacity>
-        <View style={styles.itemRight}>
-          <Text style={styles.textTitle}>{item.titleCard.title}</Text>
-          <Text style={styles.textSubTitle}>{item.titleCard.subtitle}</Text>
-        </View>
-      </View>
-    );
-  }
-
-  setTestId = (identifier) => {
-    if (Platform.OS === 'ios') return { testID: identifier };
-    else return { accessible: true, accessibilityLabel: identifier };
-  }
-
   render() {
-    const { locationData, sliderActiveSlide } = this.state;
-    let currentLocationsData = null;
+    const zones = this.props.location ? [...this.props.location.zones, 'DirecTV'] : ['DirecTV'];
+    const index = this.state.sliderActiveSlide;
+
     let bgImg = require('../assets/images/files/splash.png');
-    if (locationData !== null) {
-      currentLocationsData = locationData[0].zones;
-      if(sliderActiveSlide < currentLocationsData.length){
-        bgImg = { uri: locationData[0].zones[sliderActiveSlide].homeCard.img };
-      }
+
+    if (zones.length && index < (zones.length - 1)) {
+      bgImg = { uri: zones[index].homeCard.img };
     }
 
     return (
@@ -174,16 +109,14 @@ class MainLayout extends Component {
         <View {...this.setTestId("MainLayoutBox")} style={{ width: '100%', height: '100%' }}>
           <Image {...this.setTestId("MainLayoutImg")} style={styles.backImage} source={bgImg} />
           <View {...this.setTestId("MainLayoutCarousel")} style={styles.sliderView}>
-            {currentLocationsData &&
-              <Carousel
-                data={[...currentLocationsData, 'DirecTV']}
-                renderItem={this._renderItem.bind(this)}
-                sliderWidth={sliderWidth}
-                itemWidth={itemWidth}
-                onSnapToItem={index => {
-                  this.setState({ sliderActiveSlide: index });
-                }} />
-            }
+            <Carousel
+              data={zones}
+              renderItem={this._renderItem.bind(this)}
+              sliderWidth={sliderWidth}
+              itemWidth={itemWidth}
+              onSnapToItem={index => {
+                this.setState({ sliderActiveSlide: index });
+              }} />
           </View>
         </View>
       </SafeAreaView>
@@ -192,9 +125,11 @@ class MainLayout extends Component {
 }
 
 const mapStateToProps = state => {
-  const { common, current, productsNear, locaitons } = state;
+  const { current } = state;
 
-  return { firebaseid: common.firebaseid, currentPosition: current.position, productsNear: productsNear.productsNear, locationData: locations.locationAll };
+  return {
+    ...current
+  };
 }
 
 export default connect(mapStateToProps)(MainLayout);
