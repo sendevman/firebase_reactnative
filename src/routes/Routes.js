@@ -263,17 +263,17 @@ class Routes extends Component {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    setLocationData: data => {
-      return dispatch(setLocationData(data));
-    },
-    setNetworkInfo: data => {
-      return dispatch(setNetworkInfo(data));
-    },
-    dispatch,
-  };
-}
+// function mapDispatchToProps(dispatch) {
+//   return {
+//     setLocationData: data => {
+//       return dispatch(setLocationData(data));
+//     },
+//     setNetworkInfo: data => {
+//       return dispatch(setNetworkInfo(data));
+//     },
+//     dispatch,
+//   };
+// }
 
 const mapStateToProps = state => {
   const { current } = state;
@@ -283,4 +283,5 @@ const mapStateToProps = state => {
   };
 }
 
-export default connect(mapDispatchToProps, mapStateToProps)(Routes);
+// export default connect(mapDispatchToProps, mapStateToProps)(Routes);
+export default connect(mapStateToProps)(Routes);

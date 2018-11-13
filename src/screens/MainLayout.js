@@ -11,7 +11,7 @@ import Carousel from 'react-native-snap-carousel';
 import { connect } from 'react-redux';
 
 // My Actions
-import { setLocationAllInfo, setLocationSelectItem } from '../actions/Locations';
+import { setLocationSelectItem } from '../actions/Locations';
 
 // My Customs
 import Icon from '../assets/images/Icon';
@@ -28,80 +28,15 @@ class MainLayout extends Component {
 
     this.state = {
       sliderActiveSlide: 0,
-      locationData: null,
     };
-
-    this.getCurrentLocationData();
   }
-
-  componentWillReceiveProps(nextProps) {
-    console.log('==', nextProps.locations);
-    if (this.props.locationData !== nextProps.locations) {
-      console.log('==', nextProps.locationData);
-    }
-  }
-
-  getCurrentLocationData = () => {
-    const locationtRef = firebase.firestore().collection('locations');
-    locationtRef.get().then(snapshot => {
-      const ref_path = snapshot.docs.map(doc => doc.ref.path);
-      const locationList = snapshot.docs.map(doc => doc.data());
-      var locations = [];
-      for (i = 0; i < locationList.length; i++) {
-        var data = locationList[i];
-        data.id = ref_path[i].split('/')[1];
-        locations.push(data);
-      }
-      this.getLocationCollectionData(locations);
-    });
-  };
-
-  getLocationCollectionData = (locations) => {
-    Promise.all(
-      locations.map(
-        location =>
-          new Promise((resolve, reject) => {
-            Promise.all(
-              [ 'zones', 'directv-preview', 'vod' ].map(
-                property =>
-                  new Promise((resolve1, reject1) => {
-                    const zoneid = 'locations/' + location.id + '/' + property;
-                    const zonesRef = firebase.firestore().collection(zoneid);
-                    zonesRef
-                      .get()
-                      .then(snapshot1 => {
-                        const propertyList = snapshot1.docs.map(doc => doc.data());
-                        location[property] = propertyList;
-                        resolve1(propertyList);
-                      })
-                      .catch(err => {
-                        console.log('Error getting documents', err);
-                      });
-                  }),
-              ),
-            )
-              .then(propertis => {
-                resolve(location);
-              })
-              .catch(err => {
-                console.log('Error getting documents', err);
-              });
-          }),
-      ),
-    )
-      .then(results => {
-        this.props.dispatch(setLocationAllInfo(results));
-        this.setState({ locationData: results });
-      })
-      .catch(error => {});
-  };
 
   gotoDirecTV = () => {
     this.props.navigation.navigate('Discover');
   };
 
   gotoZone = (index) => {
-    const arrAreas = this.state.locationData[1].zones[index];
+    const arrAreas = this.props.location.zones[index];
     this.props.dispatch(setLocationSelectItem(arrAreas));
     this.props.navigation.navigate('TabNav', {
       areaData: arrAreas,
