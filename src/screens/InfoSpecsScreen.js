@@ -140,7 +140,8 @@ class InfoSpecsScreen extends Component {
   }
 
   renderPerformanceAndStorage() {
-    const { deviceOptions, expandableStorage, memory, processor, subType } = this.props.infoSpecs;
+    const { deviceOptions, expandableStorage, memory, processor, subType, performance } = this.props.infoSpecs;
+
     return (
       <PerformanceComponent
         deviceOptions={deviceOptions}
@@ -148,6 +149,7 @@ class InfoSpecsScreen extends Component {
         memory={memory}
         processor={processor}
         subType={subType}
+        performance={performance}
       />
     );
   }
