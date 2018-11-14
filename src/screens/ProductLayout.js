@@ -9,35 +9,58 @@ import {
   Animated,
   AsyncStorage,
   Dimensions,
+  Text,
   TouchableHighlight,
   TouchableOpacity,
-  View,
-  Text,
-  Image,
   TouchableWithoutFeedback,
+  View,
 } from 'react-native';
 import { createStackNavigator, SafeAreaView } from 'react-navigation';
 import Modal from 'react-native-modal';
-import { connect } from 'react-redux';
 import firebase from 'react-native-firebase';
+import { connect } from 'react-redux';
+
+// My Actions
+import { setAreaInfo, setProductAccsInfo, setProductInfo } from '../actions/Current';
+import { setProductsNearInfo, setProductsAllInfo } from '../actions/ProductsNear';
 
 // My Customs
+import GradientHeader from './components/GradientHeader';
 import Icon from '../assets/images/Icon';
 import LogoTitle from './components/LogoTitle';
-import GradientHeader from './components/GradientHeader';
 import ProductsNearSlide from '../components/ProductsNearSlide/ProductsNear';
-import styles from './css/ProductSceenCss';
+
 // My Routes
 import RoutesProducts from '../routes/Products';
 
-// Action
-import { setAreaInfo, setLocationData, setProductInfo, setProductAccsInfo } from '../actions/Current';
-import { setProductsNearInfo, setProductsAllInfo } from '../actions/ProductsNear';
+// My Styles
+import styles from './css/ProductSceenCss';
 
 var { height, width } = Dimensions.get('window');
 var count = 0;
 
 class ProductLayoutScreen extends Component {
+  static navigationOptions = ({ navigation }) => {
+    let heightPiv = navigation.getParam('heightHeader');
+    let heightHeader = typeof heightPiv === 'undefined' ? 56 : heightPiv;
+
+    return {
+      headerTitle: <LogoTitle />,
+      header: props => <GradientHeader {...props} />,
+      headerStyle: { backgroundColor: 'transparent', overflow: 'hidden', height: heightHeader },
+      headerLeft: (
+        <TouchableHighlight style={{ marginLeft: 16 }} onPress={() => navigation.openDrawer()}>
+          <Icon name="Menu" width="24" height="24" fill="#FFF" viewBox="0 0 24 24" />
+        </TouchableHighlight>
+      ),
+      headerRight: (
+        <TouchableHighlight style={{ marginRight: 16 }}>
+          <Icon name="Menu" width="24" height="24" fill="transparent" viewBox="0 0 24 24" />
+        </TouchableHighlight>
+      ),
+    };
+  };
+
   constructor(props) {
     super(props);
 
@@ -51,7 +74,61 @@ class ProductLayoutScreen extends Component {
     // this.setStorageData();
     this.getAreaData();
   }
-  getAreaData() {
+
+  componentWillReceiveProps(nextProps) {
+    // First code
+    // if (nextProps.locationData !== this.state.locationData) {
+    //   this.setState({ enterZone: true });
+    // }
+
+    // Second code
+    if (this.props.locationData.zone_id !== nextProps.locationData.zone_id) {
+      let zone_id = nextProps.locationData.zone_id;
+      this.props.dispatch(setProductInfo({}));
+      this.props.dispatch(setProductsNearInfo([]));
+      // setTimeout(() => this.forceUpdate(), 100);
+      // this.getProductID(zone_id);
+    }
+  }
+
+  getProductID = (zone_id) => {
+    const areasRef = firebase.firestore().collection('areas');
+    areasRef.where('id', '==', zone_id).get().then(snapshot => {
+      const arrAreas = snapshot.docs.map(doc => doc.data());
+      this.props.dispatch(setAreaInfo(arrAreas));
+      if (arrAreas.length > 0) {
+        this.getFirstProductDetail(arrAreas);
+      }
+    });
+  };
+
+  getAllProductDetail = () => {
+    const productRef = firebase.firestore().collection('products');
+    productRef.get().then(snapshot => {
+      const ref_path = snapshot.docs.map(doc => doc.ref.path);
+      const productList = snapshot.docs.map(doc => doc.data());
+      var products = [];
+      for (i = 0; i < productList.length; i++) {
+        var data = productList[i];
+        data.id = ref_path[i].split('/')[1];
+        products.push(data);
+      }
+      this.props.dispatch(setProductsAllInfo(products));
+    });
+  };
+
+  setStorageData = async () => {
+    try {
+      await AsyncStorage.setItem('passOnboarding', '1');
+    } catch (error) {
+      // Error saving data
+      console.log(error);
+    }
+    this.getAllProductDetail();
+    this.setStorageData();
+  };
+
+  getAreaData = () => {
     // const { navigation } = this.props;
     // const area = navigation.getParam('areaData');
     const area = this.props.locationItem;
@@ -65,52 +142,9 @@ class ProductLayoutScreen extends Component {
     if (arrAreas.length > 0) {
       this.getFirstProductDetail(arrAreas);
     }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.locationData !== this.state.locationData) {
-      this.setState({ enterZone: true });
-    }
-  }
-
-  setStorageData = async () => {
-    try {
-      await AsyncStorage.setItem('passOnboarding', '1');
-    } catch (error) {
-      // Error saving data
-      console.log(error);
-    }
-    this.getAllProductDetail();
-    this.setStorageData();
   };
 
-  getProductID(zone_id) {
-    const areasRef = firebase.firestore().collection('areas');
-    areasRef.where('id', '==', zone_id).get().then(snapshot => {
-      const arrAreas = snapshot.docs.map(doc => doc.data());
-      this.props.dispatch(setAreaInfo(arrAreas));
-      if (arrAreas.length > 0) {
-        this.getFirstProductDetail(arrAreas);
-      }
-    });
-  }
-
-  getAllProductDetail() {
-    const productRef = firebase.firestore().collection('products');
-    productRef.get().then(snapshot => {
-      const ref_path = snapshot.docs.map(doc => doc.ref.path);
-      const productList = snapshot.docs.map(doc => doc.data());
-      var products = [];
-      for (i = 0; i < productList.length; i++) {
-        var data = productList[i];
-        data.id = ref_path[i].split('/')[1];
-        products.push(data);
-      }
-      this.props.dispatch(setProductsAllInfo(products));
-    });
-  }
-
-  getFirstProductDetail(arrAreas) {
+  getFirstProductDetail = (arrAreas) => {
     if (arrAreas[0] != undefined) {
       console.log('---1----', arrAreas);
       const arrproducts = arrAreas[0].products;
@@ -172,11 +206,11 @@ class ProductLayoutScreen extends Component {
     } else {
       // Set Null for Non-Zone
     }
-  }
+  };
 
-  setCompatibleAccessories(compatibleAccs) {
+  setCompatibleAccessories = (compatibleAccs) => {
     if (typeof compatibleAccs == 'undefined' || compatibleAccs.length <= 0) return false;
-    const accsRef = firebase.firestore().collection('accessories');
+    const accsRef = firebase.firestore().collection('products');
     Promise.all(
       compatibleAccs.map(
         accessoryId =>
@@ -204,9 +238,9 @@ class ProductLayoutScreen extends Component {
         this.props.dispatch(setProductAccsInfo(data));
       })
       .catch(error => {});
-  }
+  };
 
-  orderFullList(accsFullList) {
+  orderFullList = (accsFullList) => {
     let sortedList = accsFullList.sort((a, b) => {
       if (a.category < b.category) return -1;
       if (a.category > b.category) return 1;
@@ -224,16 +258,9 @@ class ProductLayoutScreen extends Component {
       }
     });
     return newItems;
-  }
-  setTitleProduct() {
-    const { productsNear } = this.props;
-    if (!productsNear || productsNear.length === 0) return;
-    let tmpData = productsNear[0];
-    tmpData.title = 'title';
-    this.props.dispatch(setProductInfo(tmpData));
-    this.setCompatibleAccessories(productsNear.length > 0 ? productsNear[0].accessories : []);
-  }
-  setCurrentProduct(productId) {
+  };
+
+  setCurrentProduct = (productId) => {
     const { productsNear } = this.props;
     if (!productsNear || productsNear.length === 0) return;
     const match = productsNear.filter(product => product.id === productId);
@@ -247,39 +274,22 @@ class ProductLayoutScreen extends Component {
     // this.props.dispatch(setProductInfo(match.length > 0 ? match[0] : {}));
     this.setCompatibleAccessories(match.length > 0 ? match[0].accessories : []);
     // firebase.analytics().logEvent("deviceViewed", {"pFirebaseId":this.props.firebaseid, "pDeviceModel":match[0].model, "pDeviceManufacture":match[0].manufacture, "pResearchTab":"info"});
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (this.props.locationData.zone_id !== nextProps.locationData.zone_id) {
-      let zone_id = nextProps.locationData.zone_id;
-      this.props.dispatch(setProductInfo({}));
-      this.props.dispatch(setProductsNearInfo([]));
-      // setTimeout(() => this.forceUpdate(), 100);
-      // this.getProductID(zone_id);
-    }
-  }
-
-  static navigationOptions = ({ navigation }) => {
-    let heightPiv = navigation.getParam('heightHeader');
-    let heightHeader = typeof heightPiv === 'undefined' ? 56 : heightPiv;
-
-    return {
-      headerTitle: <LogoTitle />,
-      header: props => <GradientHeader {...props} />,
-      headerStyle: { backgroundColor: 'transparent', overflow: 'hidden', height: heightHeader },
-      headerLeft: (
-        <TouchableHighlight style={{ marginLeft: 16 }} onPress={() => navigation.openDrawer()}>
-          <Icon name="Menu" width="24" height="24" fill="#FFF" viewBox="0 0 24 24" />
-        </TouchableHighlight>
-      ),
-      headerRight: (
-        <TouchableHighlight style={{ marginRight: 16 }}>
-          <Icon name="Menu" width="24" height="24" fill="transparent" viewBox="0 0 24 24" />
-        </TouchableHighlight>
-      ),
-    };
   };
-  onShouldClose() {}
+
+  setTitleProduct = () => {
+    const { productsNear } = this.props;
+    if (!productsNear || productsNear.length === 0) return;
+    let tmpData = productsNear[0];
+    tmpData.title = 'title';
+    this.props.dispatch(setProductInfo(tmpData));
+    this.setCompatibleAccessories(productsNear.length > 0 ? productsNear[0].accessories : []);
+  };
+
+  setTestId = (identifier) => {
+    if (Platform.OS === 'ios') return { testID: identifier };
+    else return { accessible: true, accessibilityLabel: identifier };
+  };
+
   _renderOutsideTouchable() {
     const view = <View style={{ flex: 1, width: '100%' }} />;
 
@@ -291,6 +301,7 @@ class ProductLayoutScreen extends Component {
       </TouchableWithoutFeedback>
     );
   }
+
   showEnterZoneDialog() {
     return (
       <Modal
