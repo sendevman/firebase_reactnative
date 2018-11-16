@@ -129,16 +129,17 @@ export default StyleSheet.create({
     width: itemWidth - 164
   },
   titleItem: {
-    color: '#3E3F42',
+    color: '#FFF',
     // fontFamily: 'Rubik',
-    fontSize: 18,
+    fontWeight: 'bold',
+    fontSize: 17,
     lineHeight: 22,
     width: itemWidth - 172
   },
   hrDivider: {
     borderTopWidth: 1,
     borderStyle: 'solid',
-    borderTopColor: '#E3E9EF',
+    borderTopColor: 'transparent',
     marginBottom: 7
   },
   deviceOptionsBox: {
@@ -147,10 +148,10 @@ export default StyleSheet.create({
     marginBottom: 8
   },
   deviceOptionText: {
-    width: 152,
-    color: '#3E3F42',
+    width: 136,
+    color: '#FFF',
     // fontFamily: 'Roboto',
-    fontSize: 13,
+    fontSize: 12,
     lineHeight: 15,
     marginLeft: 3
   },
