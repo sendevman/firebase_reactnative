@@ -5,43 +5,87 @@
  */
 
 import React, { Component } from 'react';
-import { Image, Text, TouchableOpacity, View, ScrollView } from 'react-native';
-import { FakeDirecTVPackages } from '../../store/DirecTVPackageFakeData';
-import { FakeDirecTVChannel } from '../../store/DirecTVChannelFakeData';
-
+import { Image, Text, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
+import { connect } from 'react-redux';
+
+// My FakeData
+// import { FakeDirecTv } from '../../store/DirecTvFakeData';
+
 // My Styles
-import styles from '../css/DirecTVCarouselCss';
-import { itemWidth, sliderWidth } from '../css/MainScreenCss';
+import styles, { itemWidth, sliderWidth } from '../css/DirecTVCarouselCss';
+
 class DirecTVCarousel extends Component {
-  _renderItem(e) {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      currentSlide: 0,
+      readMoreBody: false,
+    };
+  }
+
+  toggleReadMoreBody = () => {
+    this.setState({ readMoreBody: !this.state.readMoreBody });
+  };
+
+  _renderItem({ item, index }) {
+    const { readMoreBody } = this.state;
+
+    let readMoreBodyText = readMoreBody ? '- View less' : '+ View more';
+
     return (
-      <View style={styles.container}>
-        <Image
-          source={require('../../assets/images/files/directv_save.png')}
-          style={styles.image}
-          resizeMode="contain"
-        />
+      <View key={index}>
+        <Image style={styles.hangOffImg} resizeMode="contain" source={{ uri: item.heroImg }} />
         <View style={styles.cardContainer}>
-          <Text style={styles.txtTitle}>Title ...{e.item} </Text>
-          <Text style={styles.txtSmall}>Content{'\nsfjiwjighijef\n'}wjiowhjighef</Text>
+          <Text style={styles.txtTitle}>{item.title}</Text>
+
+          <Text numberOfLines={readMoreBody ? 0 : 3} style={styles.txtBody}>{item.body}</Text>
+
+          <TouchableWithoutFeedback onPress={this.toggleReadMoreBody}>
+            <View style={styles.readMoreBox}>
+              <Text style={styles.readMoreText}>{readMoreBodyText}</Text>
+            </View>
+          </TouchableWithoutFeedback>
         </View>
-        <Text style={styles.txtSaveTitle}>jghwijfiwoehfiowef</Text>
       </View>
     );
   }
   render() {
-    const slides = [ 1, 2, 3, 4 ];
+    const { product } = this.props;
+    const { currentSlide } = this.state;
+
+    const carouselData = (Object.keys(product).length === 0) ? [] : product.carouselData;
+    const legalText = (carouselData.length > 0) ? carouselData[currentSlide].legal : '';
+
+    // To use fake data, comment lines 58 & 59, and uncomment lines 13 & 62 & 63.
+    // const carouselData = FakeDirecTv.carouselData;
+    // const legalText = (carouselData.length > 0) ? carouselData[currentSlide].legal : '';
+
     return (
-      <Carousel
-        data={slides}
-        renderItem={this._renderItem.bind(this)}
-        sliderWidth={sliderWidth}
-        itemWidth={itemWidth}
-        onSnapToItem={index => {}}
-      />
+      <View style={styles.container}>
+        <Carousel
+          data={carouselData}
+          renderItem={this._renderItem.bind(this)}
+          sliderWidth={sliderWidth}
+          itemWidth={itemWidth}
+          onSnapToItem={(index) => this.setState({ currentSlide: index })}
+        />
+
+        <View style={styles.legalBox}>
+          <Text style={styles.txtLegal}>{legalText}</Text>
+        </View>
+      </View>
     );
   }
 }
 
-export default DirecTVCarousel;
+const mapStateToProps = state => {
+  const { current } = state;
+
+  return {
+    product: current.product,
+  };
+}
+
+export default connect(mapStateToProps)(DirecTVCarousel);

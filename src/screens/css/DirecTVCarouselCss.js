@@ -1,28 +1,87 @@
-import { StyleSheet, Dimensions } from 'react-native';
-var { width } = Dimensions.get('window');
+/**
+ * Conexus-Tech - Retail Companion AT&T
+ * https://conexustech.com/
+ * @flow
+ */
+
+import { Dimensions, StyleSheet } from 'react-native';
+
+const { width, height } = Dimensions.get('window');
+
+function wp (percentage) {
+  const value = (percentage * (width > 400 ? 400 : width)) / 100;
+  return Math.round(value);
+};
+
+const slideWidth = wp(85);
+const itemHorizontalMargin = wp(1);
+
+export const sliderWidth = (width > 400 ? 400 : width);
+export const itemWidth = slideWidth + itemHorizontalMargin * 2;
 
 export default StyleSheet.create({
   container: {
     backgroundColor: 'transparent',
     width: width,
     position: 'relative',
+    marginTop: 15,
+  },
+  hangOffImg: {
+    position: 'absolute',
+    width: itemWidth - 20,
+    height: (itemWidth - 60) / 2,
+    left: 10,
+    zIndex: 1
   },
   cardContainer: {
     backgroundColor: '#FFFFFF',
-    elevation: 2,
-    borderRadius: 6,
-    marginBottom: 10,
-    width: width - 60,
-    marginTop: (width - 60) / 2 / 3,
+    width: itemWidth,
+    marginTop: ((itemWidth - 60) / 6),
     padding: 10,
-    paddingTop: (width - 60) / 3 + 10,
+    paddingTop: ((itemWidth - 60) / 3),
+    // elevation: 2,
+    borderRadius: 6,
+    borderTopLeftRadius: 6,
+    borderTopRightRadius: 6,
+    borderBottomLeftRadius: 6,
+    borderBottomRightRadius: 6,
   },
-  image: {
-    width: width - 60,
-    height: (width - 60) / 2,
-    position: 'absolute',
-    left: 20,
-    zIndex: 100,
+  txtTitle: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginVertical: 5,
+    textAlign: 'center',
+  },
+  txtBody: {
+    fontSize: 18,
+    color: '#3E3F42',
+  },
+  legalBox: {
+    width: width,
+    paddingHorizontal: 10,
+  },
+  txtLegal: {
+    color: '#FFF',
+    fontSize: 12,
+    marginVertical: 20,
+  },
+  // View More Plans
+  readMoreBox: {
+    backgroundColor: 'rgba(0,0,0,0.1)',
+    marginTop: 4,
+    borderTopRightRadius: 6,
+    borderTopLeftRadius: 6,
+    borderBottomRightRadius: 6,
+    borderBottomLeftRadius: 6,
+    paddingVertical: 11
+  },
+  readMoreText: {
+    color: '#1181FF',
+    fontSize: 13,
+    letterSpacing: 0.09,
+    lineHeight: 15,
+    fontWeight: '500',
+    textAlign: 'center'
   },
   directvCardView: {
     width: width - 20,
@@ -35,32 +94,11 @@ export default StyleSheet.create({
     marginTop: 10,
     marginBottom: 14,
   },
-  txtTitle: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    lineHeight: 26,
-    marginTop: 20,
-    paddingHorizontal: 30,
-    textAlign: 'center',
-  },
-  txtSmall: {
-    width: width - 60,
-    color: '#3E3F42',
-    fontSize: 18,
-  },
   imgSave: {
     // width: width - 60,
     height: 200,
     marginTop: 10,
     resizeMode: 'contain',
-  },
-  txtSaveTitle: {
-    color: '#FFF',
-    fontSize: 18,
-    fontWeight: 'bold',
-    lineHeight: 26,
-    marginTop: 10,
-    marginBottom: 10,
   },
   txtSaveDescription: {
     color: '#333',

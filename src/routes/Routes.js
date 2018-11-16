@@ -20,7 +20,8 @@ import Icon from '../assets/images/Icon';
 
 // My Layouts
 import CompareLayout from '../screens/CompareLayout';
-import DiscoverServiceLayout from '../screens/DiscoverServiceLayout';
+// import DiscoverServiceLayout from '../screens/DiscoverServiceLayout';
+import DiscoverServiceLayoutNew from '../screens/DiscoverServiceLayoutNew';
 import ExperienceLayout from '../screens/ExperienceLayout';
 import MainLayout from '../screens/MainLayout';
 import ProductLayout from '../screens/ProductLayout';
@@ -56,10 +57,10 @@ const MainNav = createStackNavigator(
       screen: ProductLayout,
     },
     Discover: {
-      screen: DiscoverServiceLayout,
+      screen: DiscoverServiceLayoutNew,
     },
     ServiceZone: {
-      screen: DiscoverServiceLayout,
+      screen: DiscoverServiceLayoutNew,
     },
   },
   {

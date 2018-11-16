@@ -35,7 +35,9 @@ class MainLayout extends Component {
     };
   }
 
-  gotoDirecTV = () => {
+  gotoDirecTV = (index) => {
+    const arrAreas = this.props.location.zones[index];
+    this.props.dispatch(setLocationSelectItem(arrAreas));
     this.props.navigation.navigate('Discover');
   };
 
@@ -79,7 +81,7 @@ class MainLayout extends Component {
             resizeMode={Image.resizeMode.cover}
             source={require('../assets/images/files/titleCardArrow.png')} />
           <TouchableOpacity {...this.setTestId("MainLayoutGoToZone")} onPress={() => {
-            (item.name === 'DirecTV') ? this.gotoDirecTV() : this.gotoZone(index)
+            (item.name === 'DirecTV') ? this.gotoDirecTV(index) : this.gotoZone(index)
           }}>
             <View style={styles.titleCardBox}>
               <Icon height="30" width="30" name="ManIcon" viewBox="0 0 127 125" fill="#000" />
