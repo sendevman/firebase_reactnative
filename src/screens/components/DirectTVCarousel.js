@@ -40,13 +40,13 @@ class DirecTVCarousel extends Component {
         <View style={styles.cardContainer}>
           <Text style={styles.txtTitle}>{item.title}</Text>
 
-          <Text numberOfLines={readMoreBody ? 0 : 3} style={styles.txtBody}>{item.body}</Text>
+          <Text style={styles.txtBody}>{item.body}</Text>
 
-          <TouchableWithoutFeedback onPress={this.toggleReadMoreBody}>
+          {/* numberOfLines={readMoreBody ? 0 : 3} <TouchableWithoutFeedback onPress={this.toggleReadMoreBody}>
             <View style={styles.readMoreBox}>
               <Text style={styles.readMoreText}>{readMoreBodyText}</Text>
             </View>
-          </TouchableWithoutFeedback>
+          </TouchableWithoutFeedback> */}
         </View>
       </View>
     );

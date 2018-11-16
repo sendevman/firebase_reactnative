@@ -111,19 +111,6 @@ class ServicesSlide extends Component {
       extrapolate: 'clamp',
     });
 
-    const imageBox1 = {
-      width: this.props.animatedValue.interpolate({
-        inputRange: [ 0, 120 ],
-        outputRange: [ 148, 80 ],
-        extrapolate: 'clamp',
-      }),
-      height: this.props.animatedValue.interpolate({
-        inputRange: [ 0, 120 ],
-        outputRange: [ 164, 80 ],
-        extrapolate: 'clamp',
-      }),
-    };
-
     if (item === 'titleCard') {
       return (
         <View style={styles.itemContainer} key={index}>
@@ -155,13 +142,7 @@ class ServicesSlide extends Component {
       return (
         <View style={styles.itemContainer} key={index}>
           <Animated.View style={[ styles.itemBox, { height: itemBoxHeight } ]}>
-            <Animated.View style={[ styles.imageBox, imageBox1 ]}>
-              <Image
-                style={styles.itemImage}
-                resizeMode={Image.resizeMode.cover}
-                source={{ uri: matching[item] ? matching[item].pnyCard.img : '' }}
-              />
-            </Animated.View>
+            <Image style={styles.bgImage} source={{ uri: matching[item] ? matching[item].pnyCard.img : '' }} />
 
             <View style={styles.detailsBox}>
               <Animated.Text numberOfLines={2} style={[ styles.titleItem, { paddingBottom: 6 }, titleItem ]}>
