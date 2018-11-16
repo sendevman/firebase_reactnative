@@ -53,7 +53,7 @@ export default StyleSheet.create({
     textAlign: 'center',
   },
   txtBody: {
-    fontSize: 18,
+    fontSize: 14,
     color: '#3E3F42',
   },
   legalBox: {
