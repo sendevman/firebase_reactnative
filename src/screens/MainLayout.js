@@ -105,7 +105,9 @@ class MainLayout extends Component {
     }
 
     if (zones.length > 1 && !this.props.enteredZoneAutomaticallyForFirstTime) {
-      this.gotoZone(0);
+      // Commented at Joseph's request!
+      // 2. When the app opens it should open to the home page not the discover page
+      // this.gotoZone(0);
       this.props.dispatch(setCurrentZone(zones[0].walkbaseId))
       this.props.dispatch(setAutomaticZoneEntry(true))
     }
