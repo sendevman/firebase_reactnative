@@ -54,7 +54,7 @@ class DirecTVLayout extends Component {
     const slides = [ 1, 2, 3, 4 ];
     return (
       <View style={{ width: '100%', alignItems: 'center' }}>
-        <Text style={styles.txtTitle}>DIRECTV</Text>
+        <Text style={styles.txtTitle}>DirecTV</Text>
         {/* {this._renderDirecTVCard()} */}
         <DirecTVCarousel />
         <Text style={styles.txtTitle}>Find the Package that is right for you</Text>

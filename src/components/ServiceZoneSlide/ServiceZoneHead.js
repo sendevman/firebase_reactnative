@@ -5,32 +5,37 @@
  */
 
 import React, { Component } from 'react';
-import { Animated, Dimensions, Image, Platform, Text, View, TouchableOpacity, YellowBox } from 'react-native';
+import { View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import Carousel, { Pagination } from 'react-native-snap-carousel';
+import Carousel from 'react-native-snap-carousel';
 import { connect } from 'react-redux';
-//
+
+// My Actions
+import { setSelectDiscover } from '../../actions/Current';
+
+// My Customs
 import DirecTVHeader from './DirecTVHeader';
 import DirecTVNowHeader from './DirecTVNowHeader';
 import WatchTVHeader from './WatchTVHeader';
 
-import {setSelectDiscover} from '../../actions/Current';
 // My Styles
-import styles, { itemWidth, sliderWidth } from './ServiceZoneSlideCss';
+import styles, { itemWidth, sliderWidth, viewportWidth } from './ServiceZoneSlideCss';
 
-// My Customs
+console.disableYellowBox = true;
 
-const { width: viewportWidth } = Dimensions.get('window');
-
-YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Class RCTCxxModule']);
-
-class ServiceZoneHeader extends Component {
+class ServiceZoneHead extends Component {
   constructor(props) {
     super(props);
-    this.state = { sliderActiveSlide: 0, headerArr: [DirecTVHeader, DirecTVNowHeader, WatchTVHeader] };
+
+    this.state = {
+      sliderActiveSlide: 0,
+      headerArr: [ DirecTVHeader, DirecTVNowHeader, WatchTVHeader ]
+    };
   }
+
   _renderItem() {
     const { sliderActiveSlide } = this.state;
+
     return (
       <View>
         {
@@ -83,9 +88,9 @@ class ServiceZoneHeader extends Component {
 }
 
 const mapStateToProps = state => {
-  const { current, common } = state;
+  const { current } = state;
 
-  return { areaData: current.allAreas[0], position: current.position };
+  return { position: current.position };
 }
 
-export default connect(mapStateToProps)(ServiceZoneHeader);
+export default connect(mapStateToProps)(ServiceZoneHead);

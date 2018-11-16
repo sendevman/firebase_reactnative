@@ -5,44 +5,49 @@
  */
 
 import React, { Component } from 'react';
-import { Dimensions, Image, TouchableOpacity, View} from 'react-native';
+import { Animated, Image, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 import firebase from 'react-native-firebase';
 import { connect } from 'react-redux';
 
 // My Actions
-import { setAreaInfo, setProductAccsInfo, setProductInfo } from '../actions/Current';
-import { setProductsAllInfo, setProductsNearInfo } from '../actions/ProductsNear';
+import { setAreaInfo, setProductInfo } from '../actions/Current';
+import { setProductsNearInfo } from '../actions/ProductsNear';
 
 // My Customs
 import Icon from '../assets/images/Icon';
-import ServiceZoneSlide from '../components/ServiceZoneSlide/ServiceZoneHead';
+import ServicesSlide from '../components/ServicesSlide/ServicesSlide';
 
 // My Layouts
 import DirecTVLayout from './DirecTVLayout';
 import DirecTVNowLayout from './DirecTVNowLayout';
 import DirecTVWatchLayout from './DirecTVWatchLayout';
 
-var { height, width } = Dimensions.get('window');
+// My Styles
+import styles from './css/ProductSceenCss';
 
-class DiscoverServiceLayout extends Component {
+class DiscoverServiceLayoutNew extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { discoverNum: 0 };
+    this.state = {
+      animatedValue: new Animated.Value(0),
+      showService: false,
+    };
 
     this.getAreaData();
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.state.discoverNum !== nextProps.currentDiscover) {
-      this.setState({ discoverNum: nextProps.currentDiscover });
+    if (this.props.locationData.zone_id !== nextProps.locationData.zone_id) {
+      let zone_id = nextProps.locationData.zone_id;
+      this.props.dispatch(setProductInfo({}));
+      this.props.dispatch(setProductsNearInfo([]));
     }
   }
 
   getAreaData = () => {
     const area = this.props.locationItem;
-    console.log('Service Area: ', area);
     const arrAreas = [];
     arrAreas.push(area);
     this.props.dispatch(setProductInfo({}));
@@ -94,47 +99,61 @@ class DiscoverServiceLayout extends Component {
         ),
       )
       .then(results => {
-        console.log('Service Area: - Results -', results);
         this.props.dispatch(setProductsNearInfo(results));
         let tmpData = results[1];
         tmpData.title = 'title';
         this.props.dispatch(setProductInfo(tmpData));
-        // firebase.analytics().logEvent("deviceViewed", {"pFirebaseId":this.props.firebaseid, "pDeviceModel":results[0].model, "pDeviceManufacture":results[0].manufacture, "pResearchTab":"info"});
         setTimeout(() => this.forceUpdate(), 300);
       })
       .catch(error => {});
     } else { /* Set Null for Non-Zone */ }
   };
 
+  setCurrentProduct = (productId) => {
+    const { productsNear } = this.props;
+    if (!productsNear || productsNear.length === 0) return;
+    const match = productsNear.filter(product => product.id === productId);
+    this.props.dispatch(setProductInfo(match.length > 0 ? match[0] : {}));
+    this.setState({ showService: true });
+  };
+
+  setTitleProduct = () => {
+    const { productsNear } = this.props;
+    if (!productsNear || productsNear.length === 0) return;
+    let tmpData = productsNear[0];
+    tmpData.title = 'title';
+    this.setState({ showService: false });
+    this.props.dispatch(setProductInfo(tmpData));
+  };
+
   render() {
-    const { discoverNum } = this.state;
+    const { productsNear, serviceSelected, navigation } = this.props;
+    const { showService } = this.state;
+
     return (
-      <SafeAreaView forceInset={{ top: 'always' }} style={{ backgroundColor: '#FFF' }}>
-        <View style={{ width: '100%', height: '100%' }}>
+      <SafeAreaView forceInset={{ top: 'always' }} style={{ backgroundColor: '#FFF', flex: 1 }}>
+        <ServicesSlide
+          animatedValue={this.state.animatedValue}
+          onProductIdChange={productId => this.setCurrentProduct(productId)}
+          onFirstSelect={() => this.setTitleProduct()}
+          currentProducts={productsNear}
+        />
 
-          <ServiceZoneSlide />
+        <Animated.View style={{ flex: 1 }}>
+          <Image
+            style={{ ...StyleSheet.absoluteFillObject, width: '100%', height: null }}
+            resizeMode={Image.resizeMode.cover}
+            source={require('../assets/images/files/backgroundHD.png')}
+          />
+          {(showService && (serviceSelected.subType === 'directv')) && <DirecTVLayout />}
+          {(showService && (serviceSelected.subType === 'directv_now')) && <DirecTVNowLayout />}
+          {(showService && (serviceSelected.subType === 'directv_watch')) && <DirecTVWatchLayout />}
+        </Animated.View>
 
-          <View style={{ backgroundColor: 'white', width: '100%', height: height - 240 }}>
-            <Image
-              style={{
-                backgroundColor: '#ccc',
-                flex: 1,
-                position: 'absolute',
-                width: '100%',
-                height: '100%',
-                justifyContent: 'center',
-              }}
-              source={require('../assets/images/files/backgroundHD.png')}
-            />
-            {(discoverNum === 0) ? <DirecTVLayout />
-              : (discoverNum === 1) ? <DirecTVNowLayout /> : <DirecTVWatchLayout />}
-          </View>
-
-          <View style={{ position: 'absolute', top: 20, left: 10 }}>
-            <TouchableOpacity onPress={() => this.props.navigation.navigate('Home')}>
-              <Icon name="ArrowLeft" width="10" height="16" viewBox="0 0 10 16" fill="#FFFFFF" />
-            </TouchableOpacity>
-          </View>
+        <View style={{ position: 'absolute', top: 20, left: 10 }}>
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('Home')}>
+            <Icon name="ArrowLeft" width="10" height="16" viewBox="0 0 10 16" fill="#FFFFFF" />
+          </TouchableOpacity>
         </View>
       </SafeAreaView>
     );
@@ -142,14 +161,14 @@ class DiscoverServiceLayout extends Component {
 }
 
 const mapStateToProps = state => {
-  const { common, current, productsNear, locations } = state;
+  const { current, productsNear, locations } = state;
 
   return {
-    currentDiscover: current.discoverNum,
     locationData: current.position,
+    serviceSelected: current.product,
     productsNear: productsNear.productsNear,
     locationItem: locations.locationItem,
   };
-}
+};
 
-export default connect(mapStateToProps)(DiscoverServiceLayout);
+export default connect(mapStateToProps)(DiscoverServiceLayoutNew);
