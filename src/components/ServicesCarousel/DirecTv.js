@@ -5,7 +5,7 @@
  */
 
 import React, { Component } from 'react';
-import { Image, Text, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
+import { Image, Text, TouchableWithoutFeedback, View } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import { connect } from 'react-redux';
 
@@ -13,7 +13,7 @@ import { connect } from 'react-redux';
 // import { FakeDirecTv } from '../../store/DirecTvFakeData';
 
 // My Styles
-import styles, { itemWidth, sliderWidth } from '../css/DirecTVCarouselCss';
+import styles, { itemWidth, sliderWidth } from './DirecTvCss';
 
 class DirecTVCarousel extends Component {
   constructor(props) {
@@ -64,16 +64,18 @@ class DirecTVCarousel extends Component {
 
     return (
       <View style={styles.container}>
-        <Carousel
-          data={carouselData}
-          renderItem={this._renderItem.bind(this)}
-          sliderWidth={sliderWidth}
-          itemWidth={itemWidth}
-          onSnapToItem={(index) => this.setState({ currentSlide: index })}
-        />
+        <View style={{ maxWidth: 400, width: '100%' }}>
+          <Carousel
+            data={carouselData}
+            renderItem={this._renderItem.bind(this)}
+            sliderWidth={sliderWidth}
+            itemWidth={itemWidth}
+            onSnapToItem={(index) => this.setState({ currentSlide: index })}
+          />
 
-        <View style={styles.legalBox}>
-          <Text style={styles.txtLegal}>{legalText}</Text>
+          <View style={styles.legalBox}>
+            <Text style={styles.txtLegal}>{legalText}</Text>
+          </View>
         </View>
       </View>
     );

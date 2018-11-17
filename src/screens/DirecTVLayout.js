@@ -5,13 +5,14 @@
  */
 
 import React, { Component } from 'react';
-import { Animated, Dimensions, Image, ScrollView, Text, View } from 'react-native';
-import { SafeAreaView } from 'react-navigation';
+import { Image, ScrollView, Text, View } from 'react-native';
 import { connect } from 'react-redux';
 
+// My Customs
 import DirecTVSave from './components/DirecTVSave';
 import DirecTVPackage from './components/DirecTVPackage';
-import DirecTVCarousel from './components/DirectTVCarousel';
+import DirecTvCarousel from '../components/ServicesCarousel/DirecTv';
+
 // My Styles
 import styles from './css/DirecTVScreenCss';
 
@@ -54,9 +55,9 @@ class DirecTVLayout extends Component {
     const slides = [ 1, 2, 3, 4 ];
     return (
       <View style={{ width: '100%', alignItems: 'center' }}>
-        <Text style={styles.txtTitle}>DirecTV</Text>
+        <Text style={styles.txtTitle}>DIRECTV</Text>
         {/* {this._renderDirecTVCard()} */}
-        <DirecTVCarousel />
+        <DirecTvCarousel />
         <Text style={styles.txtTitle}>Find the Package that is right for you</Text>
         {this._renderDirecTVPackage()}
         <Text style={styles.txtTitle}>RELIABILITY</Text>
@@ -75,9 +76,7 @@ class DirecTVLayout extends Component {
 }
 
 const mapStateToProps = state => {
-  const { current, common } = state;
-
-  return { compareLayout: 0 };
+  return {};
 };
 
 export default connect(mapStateToProps)(DirecTVLayout);
