@@ -139,12 +139,12 @@ class DiscoverServiceLayoutNew extends Component {
           currentProducts={productsNear}
         />
 
-        <Animated.View style={{ flex: 1 }}>
-          <Image
+        <Animated.View style={{ flex: 1, backgroundColor: '#009fdb' }}>
+          {/* <Image
             style={{ ...StyleSheet.absoluteFillObject, width: '100%', height: null }}
             resizeMode={Image.resizeMode.cover}
             source={require('../assets/images/files/backgroundHD.png')}
-          />
+          /> */}
           {(showService && (serviceSelected.subType === 'directv')) && <DirecTVLayout />}
           {(showService && (serviceSelected.subType === 'directv_now')) && <DirecTVNowLayout />}
           {(showService && (serviceSelected.subType === 'directv_watch')) && <DirecTVWatchLayout />}

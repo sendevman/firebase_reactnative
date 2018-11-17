@@ -23,15 +23,21 @@ export default StyleSheet.create({
   container: {
     backgroundColor: 'transparent',
     width: width,
-    position: 'relative',
     marginTop: 15,
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
   hangOffImg: {
     position: 'absolute',
-    width: itemWidth - 20,
+    width: itemWidth - 40,
     height: (itemWidth - 60) / 2,
-    left: 10,
-    zIndex: 1
+    left: 20,
+    zIndex: 1,
+    borderRadius: 6,
+    borderTopLeftRadius: 6,
+    borderTopRightRadius: 6,
+    borderBottomLeftRadius: 6,
+    borderBottomRightRadius: 6,
   },
   cardContainer: {
     backgroundColor: '#FFFFFF',
