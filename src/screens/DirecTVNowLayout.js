@@ -9,17 +9,18 @@ import { Animated, Dimensions, Image, ScrollView, Text, View, TouchableOpacity }
 import { SafeAreaView } from 'react-navigation';
 import { connect } from 'react-redux';
 
+// My Customs
 import DirecTVNowGet from './components/DirectTVNowGet';
 import DirecTVPackage from './components/DirecTVPackage';
-var { width } = Dimensions.get('window');
+import DirecTvNowCarousel from '../components/ServicesCarousel/DirecTvNow';
 
 // My Styles
-import styles from './css/DirecTVNowScreenCss';
-const baseImages = ['base1.png', 'base2.png', 'base3.png', 'base4.png', 'base5.png'];
+import styles, { width } from './css/DirecTVNowScreenCss';
 
 class DirecTVNowLayout extends Component {
   constructor(props) {
     super(props);
+
     this.state = { selectBase: 0 };
   }
 
@@ -28,7 +29,7 @@ class DirecTVNowLayout extends Component {
       <View>
         <DirecTVNowGet />
       </View>
-    )
+    );
   }
 
   _renderBasePackage() {
@@ -122,14 +123,16 @@ class DirecTVNowLayout extends Component {
       </View>
     );
   }
+
   renderContents() {
     return (
       <View style={{ width: '100%', alignItems: 'center' }}>
         <Text style={styles.txtTitle}>DIRECTV NOW</Text>
+        <DirecTvNowCarousel />
         {this._renderDirecTVNowCard()}
         {this._renderBasePackage()}
       </View>
-    )
+    );
   }
 
   render() {
@@ -142,9 +145,7 @@ class DirecTVNowLayout extends Component {
 }
 
 const mapStateToProps = state => {
-  const { current, common } = state;
-
-  return { compareLayout: 0 };
+  return {};
 }
 
 export default connect(mapStateToProps)(DirecTVNowLayout);
