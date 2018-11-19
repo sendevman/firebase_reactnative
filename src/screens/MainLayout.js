@@ -9,6 +9,7 @@ import { Image, Platform, Text, TouchableOpacity, View } from 'react-native';
 import { NavigationActions, SafeAreaView, StackActions } from 'react-navigation';
 import Carousel from 'react-native-snap-carousel';
 import Dialog, { DialogContent, SlideAnimation } from 'react-native-popup-dialog';
+import { Button } from 'react-native-elements';
 import { connect } from 'react-redux';
 
 // My Actions
@@ -23,7 +24,6 @@ import Icon from '../assets/images/Icon';
 
 // My Styles
 import styles, { itemWidth, sliderWidth } from './css/MainScreenCss';
-import { Button } from 'react-native-elements';
 
 class MainLayout extends Component {
   constructor(props) {
@@ -82,7 +82,8 @@ class MainLayout extends Component {
             resizeMode={Image.resizeMode.cover}
             source={require('../assets/images/files/titleCardArrow.png')} />
 
-          <TouchableOpacity {...this.setTestId("MainLayoutGoToZone")}
+          <TouchableOpacity
+            {...this.setTestId("MainLayoutGoToZone")}
             onLongPress={() => {
               console.log('LONG PRESS');
               setTimeout(() => {
@@ -90,10 +91,9 @@ class MainLayout extends Component {
                 this.props.dispatch(setCurrentZonePopUp(true));
               }, 3000);
             }}
-
             onPress={() => {
-            (item.name === 'DirecTV') ? this.gotoDirecTV(index) : this.gotoZone(index)
-          }}
+              (item.name === 'DirecTV') ? this.gotoDirecTV(index) : this.gotoZone(index);
+            }}
           >
             <View style={styles.titleCardBox}>
               <Icon height="30" width="30" name="ManIcon" viewBox="0 0 127 125" fill="#000" />
@@ -137,10 +137,8 @@ class MainLayout extends Component {
     return (
       <SafeAreaView forceInset={{ top: 'always' }} style={{ backgroundColor: '#FFF' }}>
         <View {...this.setTestId("MainLayoutBox")} style={{ width: '100%', height: '100%' }}>
-          
+
           <Image {...this.setTestId("MainLayoutImg")} style={styles.backImage} source={bgImg} />
-          
-          
 
           <View {...this.setTestId("MainLayoutCarousel")} style={styles.sliderView}>
             <Carousel
@@ -166,7 +164,6 @@ class MainLayout extends Component {
               {
                 this.state.currentZone ?
                 <TouchableOpacity
-                  
                   onPress={() => {
                     this.setState({ visible: false });
 
