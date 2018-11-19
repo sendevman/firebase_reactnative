@@ -13,14 +13,15 @@ import { connect } from 'react-redux';
 
 // My Actions
 import { setFirebaseID, setNetworkInfo } from '../actions/Common';
-import { setCurrentLocation, setLocationData } from '../actions/Current';
+import { setCurrentLocation, setLocationData, setCurrentZone, setCurrentZonePopUp } from '../actions/Current';
 
 // My Customs
 import Icon from '../assets/images/Icon';
 
 // My Layouts
 import CompareLayout from '../screens/CompareLayout';
-import DiscoverServiceLayout from '../screens/DiscoverServiceLayout';
+// import DiscoverServiceLayout from '../screens/DiscoverServiceLayout';
+import DiscoverServiceLayoutNew from '../screens/DiscoverServiceLayoutNew';
 import ExperienceLayout from '../screens/ExperienceLayout';
 import MainLayout from '../screens/MainLayout';
 import ProductLayout from '../screens/ProductLayout';
@@ -39,7 +40,7 @@ const BleManagerModule = NativeModules.BleManager;
 // const ws = new WebSocket('wss://wai.walkbase.com/api/v2/subscribe');
 const ws = new WebSocket('wss://wai.walkbase.com/api/v2/subscribe/device/zones');
 
-YellowBox.ignoreWarnings([ 'Warning: isMounted(...) is deprecated', 'Class RCTCxxModule' ]);
+console.disableYellowBox = true;
 
 const MainNav = createStackNavigator(
   {
@@ -56,10 +57,10 @@ const MainNav = createStackNavigator(
       screen: ProductLayout,
     },
     Discover: {
-      screen: DiscoverServiceLayout,
+      screen: DiscoverServiceLayoutNew,
     },
     ServiceZone: {
-      screen: DiscoverServiceLayout,
+      screen: DiscoverServiceLayoutNew,
     },
   },
   {
@@ -145,6 +146,13 @@ class Routes extends Component {
         }, 10000);
         */
 
+        /*
+        setTimeout(() => {
+          this.props.dispatch(setCurrentZone(10011));
+          this.props.dispatch(setCurrentZonePopUp(true));
+        }, 8000);
+        */
+
         this.webPresenceAPI();
       });
   };
@@ -169,7 +177,33 @@ class Routes extends Component {
       try {
         locationdata = JSON.parse(e.data);
       } catch (e) {}
+      
+      if (locationdata) {
+        const {site_id, floor_id, zone_inferences} = locationdata;
 
+        // not doing anything with floor_id at the moment.
+
+        if (this.props.current.location.storeId !== site_id) {
+          this.fetchSiteData(site_id);
+          // for zone_inferences, filter zones that has confidence >= .9 (threshold)
+          const zones = zone_inferences.filter(zone => zone.confidence >= 0.9)
+          if (zones.length === 1) {
+            if (this.props.current.zoneId !== zones[0].zone_id) {
+              this.props.dispatch(setCurrentZone(zones[0].zone_id));
+              this.props.dispatch(setCurrentZonePopUp(true));
+            }
+          } else {
+            // we dont wanna do anything for more than one zones that has confidence > .9.
+            // we are taking it as a wrong output from walkbase.
+          }
+        }
+      } else {
+        if (!this.props.current.location || this.props.current.location.storeId !== 'off_site') {
+          this.fetchSiteData('off_site');
+        }
+      }
+
+      /*
       if (locationdata) {
         if (locationdata.zone_id === null) {} // zone_id = -1;
         else {
@@ -192,6 +226,10 @@ class Routes extends Component {
                 // this.props.dispatch(setLocationData(locationdata));
                 if (this.props.current.location.storeId !== locationdata.site_id) {
                   this.fetchSiteData(locationdata.site_id);
+                  if (this.props.current.zoneId !== locationdata.zone_inferences[0].zone_id) {
+                    this.props.dispatch(setCurrentZone(locationdata.zone_inferences[0].zone_id));
+                    this.props.dispatch(setCurrentZonePopUp(true));
+                  }
                 }
               }
               last_zone_id = locationdata.zone_id;
@@ -203,6 +241,7 @@ class Routes extends Component {
           this.fetchSiteData('off_site');
         }
       }
+      */
     };
 
     ws.onerror = (e) => {

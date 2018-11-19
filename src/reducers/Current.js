@@ -17,7 +17,10 @@ const initialState = {
   product: {},
   compare: [],
   discoverNum: 0,
-  location: null
+  location: null,
+  zoneId: null,
+  showZonPopup: false,
+  enteredZoneAutomaticallyForFirstTime: false
 };
 
 const setCompareData = (state, payload) => {
@@ -43,11 +46,25 @@ const setCompareData = (state, payload) => {
 export default current = (state = initialState, action) => {
   let newState = Object.assign({}, state); // _.merge({}, state)
   switch (action.type) {
-    
+    case 'SET_CURRENT_ZONE_POPUP':
+      return {
+        ...state,
+        showZonPopup: action.payload
+      }
+    case 'SET_CURRENT_ZONE':
+      return {
+        ...state,
+        zoneId: action.payload
+      }
     case 'SET_CURRENT_LOCATION':
       return {
         ...state,
         location: action.payload
+      }
+    case 'SET_AUTOMATIC_ZONE_ENTRY':
+      return {
+        ...state,
+        enteredZoneAutomaticallyForFirstTime: action.payload
       }
     case 'UPDATE_LOCATION':
       return {

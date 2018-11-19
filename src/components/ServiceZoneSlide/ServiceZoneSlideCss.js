@@ -6,10 +6,10 @@
 
 import { Dimensions, Platform, StyleSheet } from 'react-native';
 
-const { width: viewportWidth, height: viewportHeight } = Dimensions.get('window');
+const { width: width, height: viewportHeight } = Dimensions.get('window');
 
 function wp(percentage) {
-  const value = (percentage * (viewportWidth > 400 ? 400 : viewportWidth)) / 100;
+  const value = (percentage * (width > 400 ? 400 : width)) / 100;
   return Math.round(value);
 };
 
@@ -17,7 +17,8 @@ const IS_IOS = Platform.OS === 'ios';
 const slideWidth = wp(80);
 const itemHorizontalMargin = wp(1);
 
-export const sliderWidth = (viewportWidth > 400 ? 400 : viewportWidth);
+export const viewportWidth = width;
+export const sliderWidth = (width > 400 ? 400 : width);
 export const itemWidth = slideWidth + itemHorizontalMargin * 2;
 
 export default StyleSheet.create({
