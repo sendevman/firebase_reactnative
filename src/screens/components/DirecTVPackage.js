@@ -5,16 +5,31 @@
  */
 
 import React, { Component } from 'react';
-import { Image, Text, TouchableOpacity, View, ScrollView } from 'react-native';
+import { Image, Text, TextInput, TouchableOpacity, View, ScrollView, Dimensions } from 'react-native';
 import { FakeDirecTVPackages } from '../../store/DirecTVPackageFakeData';
 import { FakeDirecTVChannel } from '../../store/DirecTVChannelFakeData';
-
+import { Col, Row, Grid } from "react-native-easy-grid";
+var { height, width } = Dimensions.get('window');
 // My Styles
+import { Icon } from 'react-native-elements'
+
 import styles from '../css/DirecTVScreenCss';
 
+const package_channels = require('../../assets/channels/package_channels.json');
+const packages = require('../../assets/channels/packages.json');
+const allChannels = require('../../assets/channels/channels.json');
+const groups = require('../../assets/channels/groups.json');
+
 class DirecTVPackage extends Component {
+  
   constructor(props) {
     super(props);
+    this.state = {
+      packages: [],
+      channels: [],
+      groups: [],
+      showSearch: false
+    }
   }
 
   _renderPackageHeaders() {
@@ -76,16 +91,190 @@ class DirecTVPackage extends Component {
     )
   }
 
+  getInitialChannels = () => allChannels.filter(channel => channel.initial == true)
+
+  componentDidMount() {
+    // groups.map(group => {
+    //   group.channels = channels.find(channel => channel.grpName == group.groupName);
+    //   group.showChannels = false;
+    // });
+
+    const channels = this.getInitialChannels()
+
+    this.setState({
+      packages,
+      channels,
+      groups
+    });
+  
+  }
+
+  getChannelPresence(chLogoId, pkgId) {
+    const channels = package_channels[pkgId];
+    if (channels) {
+      const channelPresence = channels.find(pr => pr.chLogoId == chLogoId);
+      return channelPresence && channelPresence.chPresence == "true";
+    }
+    return false;
+  }
+
+  search(phrase) {
+    const channels = phrase ? allChannels.filter(channel => 
+      channel.name.toLowerCase().indexOf(phrase.toLowerCase()) != -1
+    ) : this.getInitialChannels();
+
+    this.setState({
+      channels,
+      groups: phrase ? [] : groups
+    });
+  }
+
+  toggleSearch = () => {
+    this.setState({
+      showSearch: !this.state.showSearch
+    });
+
+    if (this.state.showSearch) {
+      this.setState({
+        channels: this.getInitialChannels(),
+        groups
+      })
+    }
+  }
 
   render() {
+
     return (
-      <View style={[styles.directvPackageView]}>
-        <Text style={[styles.txtSaveDetail, { padding: 10, fontSize: 11 }]}>DIRECTV gives you sports, news, shows, and movies for the whole family, with the powerful Genie® HD DVR to deliver it all.</Text>
-        {this._renderPackageHeaders()}
-        {this._renderPackageLogo()}
-        {this._renderPackageChannels()}
+
+      <View style={tvChannelStyles.container}>
+        
+        <View style={{width: '100%', height: 70, backgroundColor: 'white'}}>
+          <View style={{flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10}}>
+            <Image source={require('../../assets/images/files/dtv.logo.png')}/>
+            <Text>Shop Now</Text>
+          </View>
+        </View>
+
+        <View style={{width: '100%', height: 60, backgroundColor: 'white'}}>
+          <View style={{width: '100%', flex: 1, flexDirection: 'row'}}>
+            <View style={{flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, backgroundColor: 'white'}}>
+              <Icon name='search' color='#00aced' onPress={() => this.toggleSearch()} />
+            </View>
+            {
+              this.state.packages.map(pkg =>
+                <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, backgroundColor: pkg.color}}>
+                  <Text style={{color: 'white', fontWeight: 'bold', fontSize: 11}}>{pkg.price}/mo</Text>
+                  <Text style={{color: 'white', fontSize: 8}}>Additional info</Text>
+                </View>
+              )
+            }
+          </View>
+        </View>
+
+        {
+          this.state.showSearch ?
+          <TextInput
+            style={{height: 40, backgroundColor: 'white', borderColor: 'gray', borderWidth: 1, paddingLeft: 3, paddingRight: 3}}
+            value={this.state.text}
+            onChangeText={searchText => this.search(searchText)}
+          />
+          :
+          <View></View>
+        }
+
+        <ScrollView style={{flex: 1}}>
+          
+          <View style={{width: '100%', height: 60, marginTop: 10}}>
+            <View style={{width: '100%', height: 60, flex: 1, flexDirection: 'row'}}>
+              <View style={{flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
+                <Text style={{color: '#666', fontSize: 8}}>99% Local channels in USA</Text>
+              </View>
+              <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
+                <Icon name='check' color='#00aced' />
+              </View>
+              <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
+                <Icon name='check' color='#00aced' />
+              </View>
+              <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
+                <Icon name='check' color='#00aced' />  
+              </View>
+              <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
+                <Icon name='check' color='#00aced' />  
+              </View>
+              <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
+                <Icon name='check' color='#00aced' />  
+              </View>
+              <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
+                <Icon name='check' color='#00aced' />  
+              </View>
+            </View> 
+          </View>
+
+          {
+            this.state.groups.map(group => {
+              return <View style={{width: '100%', height: 60, marginTop: 10}}>
+              <View style={{flex: 1}}>
+                <View style={{width: '100%', height: 60, flex: 1, flexDirection: 'row'}}>
+                  
+                  <View style={{flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
+                    <Image resizeMode="contain" style={{width: 30, height: 30}} source={{uri: group.logoUrl}}/>
+                  </View>
+
+                  {
+                    this.state.packages.map((pkg,idx) => {
+                      return <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
+                        {
+                          (idx < (this.state.packages.length - 1)) ? <Image resizeMode="contain" style={{width: 30, height: 30}} source={{uri: group.promoUrl}}/>
+                          : <Icon name='check' color='#00aced' />
+                        }
+                      </View>
+                    })
+                  }
+                </View>
+              </View>
+            </View>
+            })
+          }
+
+          {
+            this.state.channels.filter(channel => channel.grpName == null).map(channel => {
+              return <View style={{width: '100%', height: 60, marginTop: 10}}>
+              <View style={{width: '100%', height: 60, flex: 1, flexDirection: 'row'}}>
+                
+                <View style={{flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
+                  <Image resizeMode="contain" style={{width: 30, height: 30}} source={{uri: channel.logoUrl}}/>
+                </View>
+                {
+                  this.state.packages.map(pkg => {
+                    return <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
+                      {
+                        
+                        this.getChannelPresence(channel.chLogoId, pkg.id) ?
+                          <Icon name='check' color='#00aced' />
+                          :
+                          <View>
+                          </View>
+                      }
+                    </View>
+                  })
+                }
+              </View> 
+            </View>
+            })
+          }
+
+        </ScrollView>
       </View>
     );
+  }
+}
+
+const tvChannelStyles = {
+  container: {
+    backgroundColor: '#EEEEEE',
+    height: 500,
+    flexDirection: 'column',
+    width
   }
 }
 

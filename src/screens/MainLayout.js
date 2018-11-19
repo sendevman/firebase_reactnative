@@ -23,6 +23,7 @@ import Icon from '../assets/images/Icon';
 
 // My Styles
 import styles, { itemWidth, sliderWidth } from './css/MainScreenCss';
+import { Button } from 'react-native-elements';
 
 class MainLayout extends Component {
   constructor(props) {
@@ -80,9 +81,20 @@ class MainLayout extends Component {
             style={styles.titleCardArrow}
             resizeMode={Image.resizeMode.cover}
             source={require('../assets/images/files/titleCardArrow.png')} />
-          <TouchableOpacity {...this.setTestId("MainLayoutGoToZone")} onPress={() => {
+
+          <TouchableOpacity {...this.setTestId("MainLayoutGoToZone")}
+            onLongPress={() => {
+              console.log('LONG PRESS');
+              setTimeout(() => {
+                this.props.dispatch(setCurrentZone(10011));
+                this.props.dispatch(setCurrentZonePopUp(true));
+              }, 3000);
+            }}
+
+            onPress={() => {
             (item.name === 'DirecTV') ? this.gotoDirecTV(index) : this.gotoZone(index)
-          }}>
+          }}
+          >
             <View style={styles.titleCardBox}>
               <Icon height="30" width="30" name="ManIcon" viewBox="0 0 127 125" fill="#000" />
               <Text numberOfLines={1} style={styles.titleCard}>{item.homeCard.title}</Text>
@@ -108,8 +120,8 @@ class MainLayout extends Component {
       // Commented at Joseph's request!
       // 2. When the app opens it should open to the home page not the discover page
       // this.gotoZone(0);
-      this.props.dispatch(setCurrentZone(zones[0].walkbaseId))
-      this.props.dispatch(setAutomaticZoneEntry(true))
+      // this.props.dispatch(setCurrentZone(zones[0].walkbaseId))
+      // this.props.dispatch(setAutomaticZoneEntry(true))
     }
 
     if (this.props.zoneId) {
@@ -125,7 +137,11 @@ class MainLayout extends Component {
     return (
       <SafeAreaView forceInset={{ top: 'always' }} style={{ backgroundColor: '#FFF' }}>
         <View {...this.setTestId("MainLayoutBox")} style={{ width: '100%', height: '100%' }}>
+          
           <Image {...this.setTestId("MainLayoutImg")} style={styles.backImage} source={bgImg} />
+          
+          
+
           <View {...this.setTestId("MainLayoutCarousel")} style={styles.sliderView}>
             <Carousel
               data={zones}
@@ -150,6 +166,7 @@ class MainLayout extends Component {
               {
                 this.state.currentZone ?
                 <TouchableOpacity
+                  
                   onPress={() => {
                     this.setState({ visible: false });
 
