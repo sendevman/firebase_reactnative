@@ -5,19 +5,18 @@
  */
 
 import React, { Component } from 'react';
-import { Animated, Dimensions, ScrollView, Text, View, TouchableOpacity, Image } from 'react-native';
+import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
+import AutoHeightImage from 'react-native-auto-height-image';
 import { connect } from 'react-redux';
 
 // My Customs
 import DirecTVNowGet from './components/DirectTVNowGet';
 import DirecTVPackage from './components/DirecTVPackage';
 import DirecTvNowCarousel from '../components/ServicesCarousel/DirecTvNow';
-const { width } = Dimensions.get('window');
-import AutoHeightImage from 'react-native-auto-height-image';
 
 // My Styles
-import styles from './css/DirecTVNowScreenCss';
+import styles, { width } from './css/DirecTVNowScreenCss';
 
 const channelImgs = [
   [
@@ -69,7 +68,6 @@ const channelImgs = [
     require('../assets/images/now/5/22.png')
   ]
 ];
-
 
 class DirecTVNowLayout extends Component {
   constructor(props) {
@@ -164,7 +162,7 @@ class DirecTVNowLayout extends Component {
           </TouchableOpacity>
           }
         </View>
-        
+
         <View style={styles.container}>
           <ScrollView style={{height: 400, width}} contentContainerStyle={{alignItems: 'center'}}>
             {
@@ -174,7 +172,6 @@ class DirecTVNowLayout extends Component {
             }
           </ScrollView>
         </View>
-
       </View>
     );
   }
