@@ -7,6 +7,7 @@
 import React, { Component } from 'react';
 import { Image, Text, TouchableOpacity, View, Dimensions } from 'react-native';
 var { width } = Dimensions.get('window');
+import AutoHeightImage from 'react-native-auto-height-image';
 
 // My Styles
 import styles from '../css/DirecTVScreenCss';
@@ -102,6 +103,83 @@ class DirecTVWatchCard extends Component {
       </View>
     );
   }
+
+  _renderChannels() {
+    return (
+      <View style={[styles.directvCardView, { marginBottom: 50 }]}>
+        <Text style={{fontSize: 20}}>Channels</Text>
+        <View style={{width: '100%', flexDirection: 'row', justifyContent: 'center'}}>
+          <AutoHeightImage width={100} source={require('../../assets/images/logos/original/ae.jpg')}/>
+          <AutoHeightImage width={100} source={require('../../assets/images/logos/original/amc.jpg')}/>
+          <AutoHeightImage width={100} source={require('../../assets/images/logos/original/animal-planet.jpg')}/>
+        </View>
+        <View style={{width: '100%', flexDirection: 'row', justifyContent: 'center'}}>
+          <AutoHeightImage width={100} source={require('../../assets/images/logos/original/audience.jpg')}/>
+          <AutoHeightImage width={100} source={require('../../assets/images/logos/original/bbc-world-news.jpg')}/>
+          <AutoHeightImage width={100} source={require('../../assets/images/logos/original/bbc.jpg')}/>
+        </View>
+        <View style={{width: '100%', flexDirection: 'row', justifyContent: 'center'}}>
+          <AutoHeightImage width={100} source={require('../../assets/images/logos/original/bet.jpg')}/>
+          <AutoHeightImage width={100} source={require('../../assets/images/logos/original/boomerang.jpg')}/>
+          <AutoHeightImage width={100} source={require('../../assets/images/logos/original/cn.jpg')}/>
+        </View>
+        <View style={{width: '100%', flexDirection: 'row', justifyContent: 'center'}}>
+          <AutoHeightImage width={100} source={require('../../assets/images/logos/original/cnn.jpg')}/>
+          <AutoHeightImage width={100} source={require('../../assets/images/logos/original/comedy-central.jpg')}/>
+          <AutoHeightImage width={100} source={require('../../assets/images/logos/original/discovery.jpg')}/>
+        </View>
+        <View style={{width: '100%', flexDirection: 'row', justifyContent: 'center'}}>
+          <AutoHeightImage width={100} source={require('../../assets/images/logos/original/food-network.jpg')}/>
+          <AutoHeightImage width={100} source={require('../../assets/images/logos/original/fyi.jpg')}/>
+          <AutoHeightImage width={100} source={require('../../assets/images/logos/original/hallmark.jpg')}/>
+        </View>
+        <View style={{width: '100%', flexDirection: 'row', justifyContent: 'center'}}>
+          <AutoHeightImage width={100} source={require('../../assets/images/logos/original/food-network.jpg')}/>
+          <AutoHeightImage width={100} source={require('../../assets/images/logos/original/hgtv.jpg')}/>
+          <AutoHeightImage width={100} source={require('../../assets/images/logos/original/history.jpg')}/>
+        </View>
+        <View style={{width: '100%', flexDirection: 'row', justifyContent: 'center'}}>
+          <AutoHeightImage width={100} source={require('../../assets/images/logos/original/food-network.jpg')}/>
+          <AutoHeightImage width={100} source={require('../../assets/images/logos/original/hgtv.jpg')}/>
+          <AutoHeightImage width={100} source={require('../../assets/images/logos/original/history.jpg')}/>
+        </View>
+        <View style={{width: '100%', flexDirection: 'row', justifyContent: 'center'}}>
+          <AutoHeightImage width={100} source={require('../../assets/images/logos/original/hln.jpg')}/>
+          <AutoHeightImage width={100} source={require('../../assets/images/logos/original/ifc.jpg')}/>
+          <AutoHeightImage width={100} source={require('../../assets/images/logos/original/investigation-discovery.jpg')}/>
+        </View>
+        <View style={{width: '100%', flexDirection: 'row', justifyContent: 'center'}}>
+          <AutoHeightImage width={100} source={require('../../assets/images/logos/original/lifetime.jpg')}/>
+          <AutoHeightImage width={100} source={require('../../assets/images/logos/original/lifetime-movies.jpg')}/>
+          <AutoHeightImage width={100} source={require('../../assets/images/logos/original/mtv.jpg')}/>
+        </View>
+        <View style={{width: '100%', flexDirection: 'row', justifyContent: 'center'}}>
+          <AutoHeightImage width={100} source={require('../../assets/images/logos/original/nicktoons.jpg')}/>
+          <AutoHeightImage width={100} source={require('../../assets/images/logos/original/own.jpg')}/>
+          <AutoHeightImage width={100} source={require('../../assets/images/logos/original/sundance.jpg')}/>
+        </View>
+        <View style={{width: '100%', flexDirection: 'row', justifyContent: 'center'}}>
+          <AutoHeightImage width={100} source={require('../../assets/images/logos/original/tbs.jpg')}/>
+          <AutoHeightImage width={100} source={require('../../assets/images/logos/original/tcm.jpg')}/>
+          <AutoHeightImage width={100} source={require('../../assets/images/logos/original/teennick.jpg')}/>
+        </View>
+        <View style={{width: '100%', flexDirection: 'row', justifyContent: 'center'}}>
+          <AutoHeightImage width={100} source={require('../../assets/images/logos/original/tlc.jpg')}/>
+          <AutoHeightImage width={100} source={require('../../assets/images/logos/original/tnt.jpg')}/>
+          <AutoHeightImage width={100} source={require('../../assets/images/logos/original/trutv.jpg')}/>
+        </View>
+        <View style={{width: '100%', flexDirection: 'row', justifyContent: 'center'}}>
+          <AutoHeightImage width={100} source={require('../../assets/images/logos/original/velocity.jpg')}/>
+          <AutoHeightImage width={100} source={require('../../assets/images/logos/original/vh1.jpg')}/>
+          <AutoHeightImage width={100} source={require('../../assets/images/logos/original/viceland.jpg')}/>
+        </View>
+        <View style={{width: '100%', flexDirection: 'row', justifyContent: 'center'}}>
+          <AutoHeightImage width={100} source={require('../../assets/images/logos/original/wetv.jpg')}/>
+        </View>
+      </View>
+    )
+  }
+
   render() {
     const { item } = this.props;
     const { readMore } = this.state;
@@ -114,6 +192,7 @@ class DirecTVWatchCard extends Component {
         {this._renderLiveTV()}
         {this._renderGetMore()}
         {this._renderDestination()}
+        {this._renderChannels()}
       </View>
     );
   }
