@@ -127,7 +127,6 @@ class ProductsNear extends Component {
       }),
     };
 
-    console.log(matching[item]);
     if (item === 'titleCard') {
       return (
         <View style={styles.itemContainer} key={index}>
@@ -188,16 +187,22 @@ class ProductsNear extends Component {
               <Animated.View style={[ styles.deviceOptionsBox, fastOpacity ]}>
                 <View style={styles.deviceOptionItem}>
                   <Icon height="14" width="14" name="BatteryInclined" viewBox="0 0 20 20" />
-                  <Text style={styles.deviceOptionText}>
-                    {matching[item] ? matching[item].battery.life.video.replace(' ', '') : 0}
-                  </Text>
+                  {matching[item].battery.life.video && (
+                    <Text style={styles.deviceOptionText}>
+                      {matching[item] ? matching[item].battery.life.video.replace(' ', '') : 0}
+                    </Text>
+                  )}
                 </View>
               </Animated.View>
               <Animated.View style={[ styles.deviceOptionsBox, fastOpacity ]}>
                 <View style={styles.deviceOptionItem}>
                   <Icon height="14" width="14" name="Camera" viewBox="0 0 24 24" />
                   <Text style={styles.deviceOptionText}>
-                    {matching[item] ? matching[item].camera.front.sensor + ' ' + matching[item].camera.rear.sensor : ''}
+                    {matching[item] && matching[item].camera ? (
+                      matching[item].camera.front.sensor + ' ' + matching[item].camera.rear.sensor
+                    ) : (
+                      ''
+                    )}
                   </Text>
                 </View>
               </Animated.View>
@@ -226,7 +231,6 @@ class ProductsNear extends Component {
   render() {
     const { areaData, currentProducts } = this.props;
     const { sliderActiveSlide } = this.state;
-    console.log('=====', areaData);
 
     let areaDataEmpty = typeof areaData == 'undefined'; /// || (Object.keys(areaData).length === 0 && areaData.constructor === Object));
 

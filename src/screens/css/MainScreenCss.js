@@ -128,5 +128,39 @@ export default StyleSheet.create({
     fontSize: 20,
     letterSpacing: 0.1,
     lineHeight: 22,
-  }
-})
+  },
+  // Dialog Section
+  dialogStyle: {
+    height: 80,
+    top: (height/2) - 80,
+    padding: 0,
+  },
+  dialogContentImage: {
+    position: 'absolute',
+    height: 300,
+    width: width,
+    zIndex: 0,
+  },
+  dialogContentTouch: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: width - 90,
+    paddingTop: 20,
+    paddingRight: 10,
+  },
+  dialogContentTouchImage: {
+    height: 50,
+    width: 50,
+    zIndex: 2
+  },
+  dialogContentTouchOut: {
+    position: 'absolute',
+    width: 36,
+    height: 42,
+    top: 10,
+    right: -10,
+    zIndex: 2,
+    borderTopRightRadius: 16,
+  },
+});
