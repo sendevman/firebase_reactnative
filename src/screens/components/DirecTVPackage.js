@@ -146,13 +146,11 @@ class DirecTVPackage extends Component {
 
     return (
 
-      <View style={tvChannelStyles.container}>
+      <View style={{width, flex: 1, backgroundColor: 'white'}}>
         
-        <View style={{width: '100%', height: 70, backgroundColor: 'white'}}>
-          <View style={{flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10}}>
-            <Image source={require('../../assets/images/files/dtv.logo.png')}/>
-            <Text>Shop Now</Text>
-          </View>
+        <View style={{ flexx: 1, width: '100%', height: 70, alignItems: 'center', justifyContent: 'center', flexDirection: 'column'}}>
+          <Image source={require('../../assets/images/files/dtv.logo.png')}/>
+          <Text>Shop Now</Text>
         </View>
 
         <View style={{width: '100%', height: 60, backgroundColor: 'white'}}>
@@ -182,7 +180,7 @@ class DirecTVPackage extends Component {
           <View></View>
         }
 
-        <ScrollView style={{flex: 1}}>
+        <View style={{flex: 1, flexDirection: 'column'}}>
           
           <View style={{width: '100%', height: 60, marginTop: 10}}>
             <View style={{width: '100%', height: 60, flex: 1, flexDirection: 'row'}}>
@@ -219,7 +217,6 @@ class DirecTVPackage extends Component {
                     <View style={{flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
                       <Image resizeMode="contain" style={{width: 30, height: 30}} source={{uri: group.logoUrl}}/>
                     </View>
-
                     {
                       this.state.packages.map((pkg,idx) => {
                         return <View key={idx} style={{ flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
@@ -250,7 +247,7 @@ class DirecTVPackage extends Component {
                       {
                         
                         this.getChannelPresence(channel.chLogoId, pkg.id) ?
-                          <Icon name='check' color='#00aced' />
+                          <Text>✔</Text>
                           :
                           <View>
                           </View>
@@ -263,7 +260,7 @@ class DirecTVPackage extends Component {
             })
           }
 
-        </ScrollView>
+        </View>
       </View>
     );
   }

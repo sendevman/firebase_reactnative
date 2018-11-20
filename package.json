@@ -6,7 +6,8 @@
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
     "test:mocha:android": "mocha --timeout 6000000 test/Home-android.test.js",
-    "test:mocha:ios": "mocha --timeout 6000000 test/Home-ios.test.js"
+    "test:mocha:ios": "mocha --timeout 6000000 test/Home-ios.test.js",
+    "android": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res && react-native run-android"
   },
   "dependencies": {
     "appium-uiautomator2-driver": "^1.23.1",
