@@ -75,7 +75,7 @@ class BottomTabNav extends React.Component {
       >
         <View style={styles.oneButtonContent}>
           <Icon name="SharedSession" width="22" height="22" fill={'#3E3F42'} viewBox="0 0 22 22" />
-          <Text style={styles.tintText}>Home</Text>
+          <Text style={styles.tintText}>Discover</Text>
         </View>
       </TouchableOpacity>
     );
@@ -93,7 +93,7 @@ class BottomTabNav extends React.Component {
           ) : (
             <Icon name="ExclusiveVodFill" width="22" height="18" viewBox="0 0 22 18" />
           )}
-          <Text style={tab === 0 ? styles.tintText : styles.activeTintText}>Go to VOD</Text>
+          <Text style={tab === 0 ? styles.tintText : styles.activeTintText}>Entertain</Text>
         </View>
       </TouchableOpacity>
     );

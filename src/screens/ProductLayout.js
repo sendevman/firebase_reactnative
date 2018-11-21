@@ -9,6 +9,7 @@ import {
   Animated,
   AsyncStorage,
   Dimensions,
+  Platform,
   Text,
   TouchableHighlight,
   TouchableOpacity,
@@ -193,12 +194,16 @@ class ProductLayoutScreen extends Component {
         ),
       )
         .then(results => {
-          console.log('****', results);
-          this.props.dispatch(setProductsNearInfo(results));
-          let tmpData = results[1];
+          const resultsPivot = (Platform.OS === 'android') ? results.reverse() : results;
+          const arrSize = resultsPivot.length;
+          const firstIndex = (Platform.OS === 'android') ? ((arrSize > 1) ? arrSize - 2 : 0) : 1;
+
+          console.log('****', resultsPivot);
+          this.props.dispatch(setProductsNearInfo(resultsPivot));
+          let tmpData = resultsPivot[firstIndex];
           tmpData.title = 'title';
           this.props.dispatch(setProductInfo(tmpData));
-          this.setCompatibleAccessories(results[1].accessories);
+          this.setCompatibleAccessories(resultsPivot[firstIndex].accessories);
           // firebase.analytics().logEvent("deviceViewed", {"pFirebaseId":this.props.firebaseid, "pDeviceModel":results[0].model, "pDeviceManufacture":results[0].manufacture, "pResearchTab":"info"});
           setTimeout(() => this.forceUpdate(), 300);
         })
@@ -222,7 +227,6 @@ class ProductLayoutScreen extends Component {
                 if (!accessory.exists) resolve({});
                 let accessoryData = accessory.data();
                 if (accessoryData !== undefined) {
-                  console.log(accessoryData);
                   accessoryData.id = accessoryId;
                 }
                 resolve(accessoryData);
@@ -276,13 +280,13 @@ class ProductLayoutScreen extends Component {
     // firebase.analytics().logEvent("deviceViewed", {"pFirebaseId":this.props.firebaseid, "pDeviceModel":match[0].model, "pDeviceManufacture":match[0].manufacture, "pResearchTab":"info"});
   };
 
-  setTitleProduct = () => {
+  setTitleProduct = (index) => {
     const { productsNear } = this.props;
     if (!productsNear || productsNear.length === 0) return;
-    let tmpData = productsNear[0];
+    let tmpData = productsNear[index];
     tmpData.title = 'title';
     this.props.dispatch(setProductInfo(tmpData));
-    this.setCompatibleAccessories(productsNear.length > 0 ? productsNear[0].accessories : []);
+    this.setCompatibleAccessories([]);
   };
 
   setTestId = (identifier) => {
@@ -339,8 +343,8 @@ class ProductLayoutScreen extends Component {
       <SafeAreaView forceInset={{ top: 'always' }} style={{ backgroundColor: '#FFF', flex: 1 }}>
         <ProductsNearSlide
           animatedValue={this.state.animatedValue}
-          onProductIdChange={productId => this.setCurrentProduct(productId)}
-          onFirstSelect={() => this.setTitleProduct()}
+          onProductIdChange={(productId) => this.setCurrentProduct(productId)}
+          onFirstSelect={(index) => this.setTitleProduct(index)}
           currentProducts={productsNear}
           onGoToCompare={() => this.props.navigation.navigate('Compare')}
         />
