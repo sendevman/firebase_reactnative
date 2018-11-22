@@ -204,7 +204,7 @@ class ProductsNear extends Component {
               </Animated.View>
 
               <Animated.View style={[ btnBox ]}>
-                <ButtonCompare onGoToCompareBtn={() => this.props.onGoToCompare()} />
+                <ButtonCompare product={product} onGoToCompareBtn={() => this.props.onGoToCompare()} />
               </Animated.View>
             </View>
           </Animated.View>
