@@ -64,29 +64,7 @@ class DirecTVNowCarousel extends Component {
   };
 
   _renderItem({ item, index }) {
-    if (item.type === 'bullets') {
-      return (
-        <View key={index}>
-          <Image style={styles.hangOffImg} resizeMode="cover" source={{ uri: item.heroImg }} />
-          <View style={styles.cardContainer}>
-            <Text style={styles.txtTitle}>{item.title}</Text>
-
-            { (item.bullets && item.bullets.length > 0) &&
-              <View style={styles.bulletsContainer}>
-                {item.bullets.map((bullet, index) => {
-                  return (
-                    <View key={index} style={styles.bulletBox}>
-                      <Icon name="CheckMark" width="18" height="18" viewBox="0 0 490.05 490.05" />
-                      <Text style={styles.bulletText}>{bullet}</Text>
-                    </View>
-                  )
-                })}
-              </View>
-            }
-          </View>
-        </View>
-      );
-    } else if (item.type === 'sub_cards') {
+    if (item.type === 'sub_cards') {
       return (
         <View key={index}>
           <Image style={styles.hangOffImg} resizeMode="cover" source={{ uri: item.heroImg }} />
@@ -126,7 +104,7 @@ class DirecTVNowCarousel extends Component {
       <View style={styles.container}>
         <View style={{ maxWidth: 400, width: '100%' }}>
           <Carousel
-            data={carouselData}
+            data={[carouselData[1], carouselData[2]]}
             renderItem={this._renderItem.bind(this)}
             sliderWidth={sliderWidth}
             itemWidth={itemWidth}

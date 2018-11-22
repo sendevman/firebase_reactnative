@@ -5,12 +5,14 @@
  */
 
 import React, { Component } from 'react';
-import { Image, Platform, Text, TouchableOpacity, View } from 'react-native';
+import { Image, Platform, Text, TouchableOpacity, View, Dimensions } from 'react-native';
 import { NavigationActions, SafeAreaView, StackActions } from 'react-navigation';
 import Carousel from 'react-native-snap-carousel';
 import Dialog, { DialogContent, SlideAnimation } from 'react-native-popup-dialog';
 import { Button } from 'react-native-elements';
 import { connect } from 'react-redux';
+
+var { width, height } = Dimensions.get('window');
 
 // My Actions
 import { setAutomaticZoneEntry, setCurrentZone, setCurrentZonePopUp } from '../actions/Current';
@@ -24,6 +26,8 @@ import Icon from '../assets/images/Icon';
 
 // My Styles
 import styles, { itemWidth, sliderWidth } from './css/MainScreenCss';
+import AutoHeightImage from 'react-native-auto-height-image';
+import firebase from 'react-native-firebase';
 
 class MainLayout extends Component {
   constructor(props) {
@@ -33,16 +37,21 @@ class MainLayout extends Component {
       sliderActiveSlide: 0,
       visible: false,
       currentZone: null,
+      home: null
     };
+
+    firebase.firestore().doc(`locations/off_site/siteData/home`).get().then(e => {
+      this.setState({
+        home: e.data()
+      });
+    })
   }
 
-  gotoDirecTV = (index) => {
-    const arrAreas = this.props.location.zones[index];
-    this.props.dispatch(setLocationSelectItem(arrAreas));
-    this.props.navigation.navigate('Discover');
-  };
-
   gotoZone = (index) => {
+    // this is homecard and not a zone.
+    if (index === -1) {
+      return;
+    }
     /*
     const arrAreas = this.props.location.zones[index];
     this.props.dispatch(setLocationSelectItem(arrAreas));
@@ -51,13 +60,16 @@ class MainLayout extends Component {
     });
     */
     const arrAreas = this.props.location.zones[index];
+    console.log(arrAreas);
+
+    const videoService = arrAreas.titleCard.title == 'Video Service';
     this.props.dispatch(setLocationSelectItem(arrAreas));
     const resetAction = StackActions.reset({
       index: 1,
       key: null,
       actions: [
         NavigationActions.navigate({ routeName: "Home", params: { resetOrder: 1 } }),
-        NavigationActions.navigate({ routeName: "TabNav", params: { areaData: arrAreas } })
+        NavigationActions.navigate({ routeName: "TabNav", params: { areaData: arrAreas, videoService } })
       ]
     });
     this.props.navigation.dispatch(resetAction);
@@ -92,7 +104,7 @@ class MainLayout extends Component {
               }, 3000);
             }}
             onPress={() => {
-              (item.name === 'DirecTV') ? this.gotoDirecTV(index) : this.gotoZone(index);
+              this.gotoZone(index - 1);
             }}
           >
             <View style={styles.titleCardBox}>
@@ -107,7 +119,16 @@ class MainLayout extends Component {
   }
 
   render() {
-    const zones = this.props.location ? [...this.props.location.zones]: [];
+    let zones = [];
+
+    if (this.state.home) {
+      zones.push(this.state.home);
+    }
+
+    if (this.props.location) {
+      zones = [...zones, ...this.props.location.zones];
+    }
+
     const index = this.state.sliderActiveSlide;
 
     let bgImg = require('../assets/images/files/splash.png');
@@ -196,6 +217,7 @@ class MainLayout extends Component {
       </SafeAreaView>
     );
   }
+
 }
 
 const mapStateToProps = state => {
