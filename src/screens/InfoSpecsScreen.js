@@ -124,6 +124,7 @@ class InfoSpecsScreen extends Component {
       return <DisplayComponent display={display} />;
     }
   }
+
   renderFitness() {
     const { fitness } = this.props.infoSpecs;
 
@@ -241,6 +242,7 @@ class InfoSpecsScreen extends Component {
     if (y < 60) this.props.onScrollCustom.setValue(y * 2);
     else this.props.onScrollCustom.setValue(120);
   };
+
   _onScrollEndSnapToEdge = event => {
     const y = event.nativeEvent.contentOffset.y;
     if (y < 80) this.props.onScrollCustom.setValue(0);

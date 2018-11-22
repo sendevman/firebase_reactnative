@@ -29,6 +29,11 @@ export const setCompareInfo = (params) => ({
   payload: params
 })
 
+export const setLastCompareInfo = (params) => ({
+  type: 'SET_LAST_COMPARE_INFO',
+  payload: params
+})
+
 export const setSelectDiscover = (params) => ({
   type: 'UPDATE_DISCOVER_NUMBER',
   payload: params

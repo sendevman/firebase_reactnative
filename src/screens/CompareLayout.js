@@ -32,6 +32,7 @@ class CompareLayout extends Component {
       <SafeAreaView forceInset={{ top: 'always' }} style={{ backgroundColor: '#FFF' }}>
         <View style={{ width: '100%', height: '100%' }}>
           <RoutesCompare />
+
           <View style={{ position: 'absolute', top: 5, left: 10 }}>
             <TouchableOpacity onPress={() => this.props.navigation.navigate('TabNav')}>
               <Icon name="ArrowLeft" width="10" height="16" viewBox="0 0 10 16" fill="#333" />
