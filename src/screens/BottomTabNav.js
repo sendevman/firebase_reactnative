@@ -1,3 +1,9 @@
+/**
+ * Conexus-Tech - Retail Companion AT&T
+ * https://conexustech.com/
+ * @flow
+ */
+
 import React from 'react';
 import {
   AsyncStorage,
@@ -15,9 +21,12 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 
-import VodLayout from './VodLayout';
-import ProductLayout from './ProductLayout';
+// My Customs
 import Icon from '../assets/images/Icon';
+
+// My Layouts
+import ProductLayout from './ProductLayout';
+import VodLayout from './VodLayout';
 
 const styles = StyleSheet.create({
   container: {
@@ -61,10 +70,12 @@ const styles = StyleSheet.create({
 class BottomTabNav extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
       tab: 0,
     };
   }
+
   renderHomeButton() {
     return (
       <TouchableOpacity
@@ -75,13 +86,15 @@ class BottomTabNav extends React.Component {
       >
         <View style={styles.oneButtonContent}>
           <Icon name="SharedSession" width="22" height="22" fill={'#3E3F42'} viewBox="0 0 22 22" />
-          <Text style={styles.tintText}>Home</Text>
+          <Text style={styles.tintText}>Discover</Text>
         </View>
       </TouchableOpacity>
     );
   }
+
   renderEntertainButton() {
     const { tab } = this.state;
+
     return (
       <TouchableOpacity
         style={[ styles.oneButtonContainer, { backgroundColor: tab === 0 ? 'white' : '#1181ff' } ]}
@@ -93,15 +106,18 @@ class BottomTabNav extends React.Component {
           ) : (
             <Icon name="ExclusiveVodFill" width="22" height="18" viewBox="0 0 22 18" />
           )}
-          <Text style={tab === 0 ? styles.tintText : styles.activeTintText}>Go to VOD</Text>
+          <Text style={tab === 0 ? styles.tintText : styles.activeTintText}>Entertain</Text>
         </View>
       </TouchableOpacity>
     );
   }
+
   render() {
+    const { productsNear, navigation } = this.props;
+
     return (
       <View style={styles.container}>
-        <View style={styles.container}>{this.state.tab === 0 ? <ProductLayout /> : <VodLayout />}</View>
+        <View style={styles.container}>{this.state.tab === 0 ? <ProductLayout screenProps={navigation} /> : <VodLayout />}</View>
 
         <View style={styles.bottom}>
           {this.renderHomeButton()}
