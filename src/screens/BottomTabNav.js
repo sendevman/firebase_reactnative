@@ -23,6 +23,7 @@ import { connect } from 'react-redux';
 
 // My Customs
 import Icon from '../assets/images/Icon';
+import DiscoverServiceLayoutNew from './DiscoverServiceLayoutNew';
 
 // My Layouts
 import ProductLayout from './ProductLayout';
@@ -113,11 +114,22 @@ class BottomTabNav extends React.Component {
   }
 
   render() {
+<<<<<<< HEAD
     const { productsNear, navigation } = this.props;
 
     return (
       <View style={styles.container}>
         <View style={styles.container}>{this.state.tab === 0 ? <ProductLayout screenProps={navigation} /> : <VodLayout />}</View>
+=======
+    const videoService = this.props.navigation.state.params.videoService;
+    
+    return (
+      <View style={styles.container}>
+        
+        <View style={styles.container}>
+          {this.state.tab === 0 ? videoService? <DiscoverServiceLayoutNew/> : <ProductLayout /> : <VodLayout />}
+        </View>
+>>>>>>> fix QA 2.2
 
         <View style={styles.bottom}>
           {this.renderHomeButton()}

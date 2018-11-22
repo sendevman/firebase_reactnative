@@ -188,22 +188,22 @@ class DirecTVPackage extends Component {
                 <Text style={{color: '#666', fontSize: 8}}>99% Local channels in USA</Text>
               </View>
               <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
-                <Icon name='check' color='#00aced' />
+                <Text style={{color: '#00aced'}}>✔</Text>
               </View>
               <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
-                <Icon name='check' color='#00aced' />
+                <Text style={{color: '#00aced'}}>✔</Text>
               </View>
               <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
-                <Icon name='check' color='#00aced' />  
+                <Text style={{color: '#00aced'}}>✔</Text>
               </View>
               <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
-                <Icon name='check' color='#00aced' />  
+                <Text style={{color: '#00aced'}}>✔</Text>
               </View>
               <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
-                <Icon name='check' color='#00aced' />  
+                <Text style={{color: '#00aced'}}>✔</Text>
               </View>
               <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
-                <Icon name='check' color='#00aced' />  
+                <Text style={{color: '#00aced'}}>✔</Text>
               </View>
             </View> 
           </View>
@@ -228,6 +228,17 @@ class DirecTVPackage extends Component {
                       })
                     }
                   </View>
+
+                  {
+                    this.state.packages.map((pkg,idx) => {
+                      return <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
+                        {
+                          (idx < (this.state.packages.length - 1)) ? <Image resizeMode="contain" style={{width: 30, height: 30}} source={{uri: group.promoUrl}}/>
+                          : <Text style={{color: '#00aced'}}>✔</Text>
+                        }
+                      </View>
+                    })
+                  }
                 </View>
               </View>
             })
@@ -240,6 +251,7 @@ class DirecTVPackage extends Component {
                 
                 <View style={{flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
                   <Image resizeMode="contain" style={{width: 30, height: 30}} source={{uri: channel.logoUrl}}/>
+                  <Text style={{fontSize: 7}}>{channel.name}</Text>
                 </View>
                 {
                   this.state.packages.map((pkg, idx) => {
@@ -247,7 +259,7 @@ class DirecTVPackage extends Component {
                       {
                         
                         this.getChannelPresence(channel.chLogoId, pkg.id) ?
-                          <Text>✔</Text>
+                          <Text style={{color: '#00aced'}}>✔</Text>
                           :
                           <View>
                           </View>

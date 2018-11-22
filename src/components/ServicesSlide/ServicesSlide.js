@@ -179,7 +179,7 @@ class ServicesSlide extends Component {
     const { sliderActiveSlide } = this.state;
 
     let areaDataEmpty = typeof areaData == 'undefined'; /// || (Object.keys(areaData).length === 0 && areaData.constructor === Object));
-
+    console.log('AREA_DATA', areaData);
     return (
       <View style={{ width: viewportWidth, paddingVertical: 10, flexDirection: 'row', justifyContent: 'center' }}>
         {this.gradient}
