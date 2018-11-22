@@ -337,7 +337,7 @@ class ProductLayoutScreen extends Component {
   }
 
   render() {
-    const { productsNear, navigation } = this.props;
+    const { productsNear, navigation, screenProps } = this.props;
 
     return (
       <SafeAreaView forceInset={{ top: 'always' }} style={{ backgroundColor: '#FFF', flex: 1 }}>
@@ -346,7 +346,7 @@ class ProductLayoutScreen extends Component {
           onProductIdChange={(productId) => this.setCurrentProduct(productId)}
           onFirstSelect={(index) => this.setTitleProduct(index)}
           currentProducts={productsNear}
-          onGoToCompare={() => this.props.navigation.navigate('Compare')}
+          onGoToCompare={() => screenProps.navigate('Compare')}
         />
 
         <Animated.View style={{ flex: 1 }}>
