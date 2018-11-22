@@ -150,11 +150,6 @@ class DiscoverServiceLayoutNew extends Component {
           {(showService && (serviceSelected.subType === 'directv_watch')) && <DirecTVWatchLayout />}
         </Animated.View>
 
-        <View style={{ position: 'absolute', top: 20, left: 10 }}>
-          <TouchableOpacity onPress={() => this.props.navigation.navigate('Home')}>
-            <Icon name="ArrowLeft" width="10" height="16" viewBox="0 0 10 16" fill="#FFFFFF" />
-          </TouchableOpacity>
-        </View>
       </SafeAreaView>
     );
   }
