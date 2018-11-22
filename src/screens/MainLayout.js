@@ -9,7 +9,6 @@ import { Image, Platform, Text, TouchableOpacity, View, Dimensions } from 'react
 import { NavigationActions, SafeAreaView, StackActions } from 'react-navigation';
 import Carousel from 'react-native-snap-carousel';
 import Dialog, { DialogContent, SlideAnimation } from 'react-native-popup-dialog';
-import { Button } from 'react-native-elements';
 import { connect } from 'react-redux';
 
 var { width, height } = Dimensions.get('window');
@@ -26,7 +25,6 @@ import Icon from '../assets/images/Icon';
 
 // My Styles
 import styles, { itemWidth, sliderWidth } from './css/MainScreenCss';
-import AutoHeightImage from 'react-native-auto-height-image';
 import firebase from 'react-native-firebase';
 
 class MainLayout extends Component {
@@ -44,7 +42,8 @@ class MainLayout extends Component {
       this.setState({
         home: e.data()
       });
-    })
+    });
+
   }
 
   gotoZone = (index) => {
@@ -60,7 +59,6 @@ class MainLayout extends Component {
     });
     */
     const arrAreas = this.props.location.zones[index];
-    console.log(arrAreas);
 
     const videoService = arrAreas.titleCard.title == 'Video Service';
     this.props.dispatch(setLocationSelectItem(arrAreas));
@@ -119,6 +117,7 @@ class MainLayout extends Component {
   }
 
   render() {
+    console.log(this.props.location, 'MAINLAYOUT');
     let zones = [];
 
     if (this.state.home) {
