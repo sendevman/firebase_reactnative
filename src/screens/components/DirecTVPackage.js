@@ -161,8 +161,8 @@ class DirecTVPackage extends Component {
               <Icon name='search' color='#00aced' onPress={() => this.toggleSearch()} />
             </View>
             {
-              this.state.packages.map(pkg =>
-                <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, backgroundColor: pkg.color}}>
+              this.state.packages.map((pkg, index) =>
+                <View key={index} style={{ flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, backgroundColor: pkg.color}}>
                   <Text style={{color: 'white', fontWeight: 'bold', fontSize: 11}}>{pkg.price}/mo</Text>
                   <Text style={{color: 'white', fontSize: 8}}>Additional info</Text>
                 </View>
@@ -211,42 +211,42 @@ class DirecTVPackage extends Component {
           </View>
 
           {
-            this.state.groups.map(group => {
-              return <View style={{width: '100%', height: 60, marginTop: 10}}>
-              <View style={{flex: 1}}>
-                <View style={{width: '100%', height: 60, flex: 1, flexDirection: 'row'}}>
-                  
-                  <View style={{flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
-                    <Image resizeMode="contain" style={{width: 30, height: 30}} source={{uri: group.logoUrl}}/>
-                  </View>
+            this.state.groups.map((group, index) => {
+              return <View key={index} style={{width: '100%', height: 60, marginTop: 10}}>
+                <View style={{flex: 1}}>
+                  <View style={{width: '100%', height: 60, flex: 1, flexDirection: 'row'}}>
+                    
+                    <View style={{flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
+                      <Image resizeMode="contain" style={{width: 30, height: 30}} source={{uri: group.logoUrl}}/>
+                    </View>
 
-                  {
-                    this.state.packages.map((pkg,idx) => {
-                      return <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
-                        {
-                          (idx < (this.state.packages.length - 1)) ? <Image resizeMode="contain" style={{width: 30, height: 30}} source={{uri: group.promoUrl}}/>
-                          : <Icon name='check' color='#00aced' />
-                        }
-                      </View>
-                    })
-                  }
+                    {
+                      this.state.packages.map((pkg,idx) => {
+                        return <View key={idx} style={{ flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
+                          {
+                            (idx < (this.state.packages.length - 1)) ? <Image resizeMode="contain" style={{width: 30, height: 30}} source={{uri: group.promoUrl}}/>
+                            : <Icon name='check' color='#00aced' />
+                          }
+                        </View>
+                      })
+                    }
+                  </View>
                 </View>
               </View>
-            </View>
             })
           }
 
           {
-            this.state.channels.filter(channel => channel.grpName == null).map(channel => {
-              return <View style={{width: '100%', height: 60, marginTop: 10}}>
+            this.state.channels.filter(channel => channel.grpName == null).map((channel, index) => {
+              return <View key={index} style={{width: '100%', height: 60, marginTop: 10}}>
               <View style={{width: '100%', height: 60, flex: 1, flexDirection: 'row'}}>
                 
                 <View style={{flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
                   <Image resizeMode="contain" style={{width: 30, height: 30}} source={{uri: channel.logoUrl}}/>
                 </View>
                 {
-                  this.state.packages.map(pkg => {
-                    return <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
+                  this.state.packages.map((pkg, idx) => {
+                    return <View key={idx} style={{ flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
                       {
                         
                         this.getChannelPresence(channel.chLogoId, pkg.id) ?

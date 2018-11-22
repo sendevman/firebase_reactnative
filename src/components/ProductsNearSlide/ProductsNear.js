@@ -32,16 +32,6 @@ class ProductsNear extends Component {
   _renderItem({ item, index }) {
     const { areaData, currentProducts } = this.props;
 
-    const getProduct = productId => {
-      const match = currentProducts.filter(product => product.id === productId);
-      return match.length > 0 ? match[0] : null;
-    };
-
-    const matching = {};
-    ((!this.props.areaData ? [] : this.props.areaData.products) || []).forEach(element => {
-      matching[element] = getProduct(element);
-    });
-
     let titleItem = {
       transform: [
         {
@@ -155,6 +145,9 @@ class ProductsNear extends Component {
         </View>
       );
     } else {
+      const arrPivot = currentProducts.filter(product => product.id === item);
+      const product = (arrPivot.length > 0) ? arrPivot[0] : null;
+
       return (
         <View style={styles.itemContainer} key={index}>
           <Animated.View style={[ styles.itemBox, { height: itemBoxHeight } ]}>
@@ -162,16 +155,17 @@ class ProductsNear extends Component {
               <Image
                 style={styles.itemImage}
                 resizeMode={Image.resizeMode.contain}
-                source={{ uri: matching[item] ? matching[item].img : '' }}
+                source={{ uri: product ? product.img : '' }}
               />
             </Animated.View>
 
             <View style={styles.detailsBox}>
               <Animated.Text numberOfLines={1} style={[ styles.titleItem, titleItem ]}>
-                {matching[item] ? matching[item].manufacture : ''}
+                {product ? product.manufacture : ''}
               </Animated.Text>
+
               <Animated.Text numberOfLines={1} style={[ styles.titleItem, { paddingBottom: 6 }, titleItem ]}>
-                {matching[item] ? matching[item].model : ''}
+                {product ? product.model : ''}
               </Animated.Text>
 
               <Animated.View style={[ styles.hrDivider, fastOpacity ]} />
@@ -180,26 +174,28 @@ class ProductsNear extends Component {
                 <View style={styles.deviceOptionItem}>
                   <Icon height="14" width="14" name="Storage" viewBox="0 0 24 24" />
                   <Text style={styles.deviceOptionText}>
-                    {matching[item] ? matching[item].deviceOptions[0].storage : 0}GB
+                    {product ? product.deviceOptions[0].storage : 0}GB
                   </Text>
                 </View>
               </Animated.View>
+
               <Animated.View style={[ styles.deviceOptionsBox, fastOpacity ]}>
                 <View style={styles.deviceOptionItem}>
                   <Icon height="14" width="14" name="BatteryInclined" viewBox="0 0 20 20" />
-                  {matching[item].battery.life.video && (
+                  {product.battery.life.video && (
                     <Text style={styles.deviceOptionText}>
-                      {matching[item] ? matching[item].battery.life.video.replace(' ', '') : 0}
+                      {product ? product.battery.life.video.replace(' ', '') : 0}
                     </Text>
                   )}
                 </View>
               </Animated.View>
+
               <Animated.View style={[ styles.deviceOptionsBox, fastOpacity ]}>
                 <View style={styles.deviceOptionItem}>
                   <Icon height="14" width="14" name="Camera" viewBox="0 0 24 24" />
                   <Text style={styles.deviceOptionText}>
-                    {matching[item] && matching[item].camera ? (
-                      matching[item].camera.front.sensor + ' ' + matching[item].camera.rear.sensor
+                    {product && product.camera ? (
+                      product.camera.front.sensor + ' ' + product.camera.rear.sensor
                     ) : (
                       ''
                     )}
@@ -208,7 +204,7 @@ class ProductsNear extends Component {
               </Animated.View>
 
               <Animated.View style={[ btnBox ]}>
-                <ButtonCompare onGoToCompareBtn={() => this.props.onGoToCompare()} />
+                <ButtonCompare product={product} onGoToCompareBtn={() => this.props.onGoToCompare()} />
               </Animated.View>
             </View>
           </Animated.View>
@@ -234,6 +230,11 @@ class ProductsNear extends Component {
 
     let areaDataEmpty = typeof areaData == 'undefined'; /// || (Object.keys(areaData).length === 0 && areaData.constructor === Object));
 
+    let firstItem = (Platform.OS === 'android') ? (currentProducts.length - 1) : 0;
+    let data = currentProducts.map(item => {
+      return (Object.keys(item).length > 0 && item.id) ? item.id : 'titleCard';
+    });
+
     return (
       <View style={{ width: viewportWidth, paddingVertical: 10, flexDirection: 'row', justifyContent: 'center' }}>
         {this.gradient}
@@ -241,15 +242,16 @@ class ProductsNear extends Component {
           <View>
             <Carousel
               ref={c => (this._carouselRef = c)}
-              data={areaData.products}
+              data={data}
               renderItem={this._renderItem.bind(this)}
+              firstItem={firstItem}
               sliderWidth={sliderWidth}
               itemWidth={itemWidth}
               layout={'stack'}
               removeClippedSubviews={false}
               onSnapToItem={index => {
                 this.setState({ sliderActiveSlide: index });
-                index === 0 ? this.props.onFirstSelect() : this.props.onProductIdChange(areaData.products[index]);
+                index === firstItem ? this.props.onFirstSelect(firstItem) : this.props.onProductIdChange(currentProducts[index].id);
               }}
             />
           </View>
