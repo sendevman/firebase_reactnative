@@ -114,13 +114,6 @@ class BottomTabNav extends React.Component {
   }
 
   render() {
-<<<<<<< HEAD
-    const { productsNear, navigation } = this.props;
-
-    return (
-      <View style={styles.container}>
-        <View style={styles.container}>{this.state.tab === 0 ? <ProductLayout screenProps={navigation} /> : <VodLayout />}</View>
-=======
     const videoService = this.props.navigation.state.params.videoService;
     
     return (
@@ -129,7 +122,6 @@ class BottomTabNav extends React.Component {
         <View style={styles.container}>
           {this.state.tab === 0 ? videoService? <DiscoverServiceLayoutNew/> : <ProductLayout /> : <VodLayout />}
         </View>
->>>>>>> fix QA 2.2
 
         <View style={styles.bottom}>
           {this.renderHomeButton()}

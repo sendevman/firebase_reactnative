@@ -166,13 +166,8 @@ class DirecTVNowLayout extends Component {
         <View style={styles.container}>
           <View style={{flex: 1, width}} contentContainerStyle={{alignItems: 'center'}}>
             {
-<<<<<<< HEAD
               channelImgs[selectBase].map((img, idx) => 
                 <AutoHeightImage key={idx} width={width - 30} source={img} />
-=======
-              channelImgs[selectBase].map(img => 
-                <AutoHeightImage style={{marginLeft: 15}} width={width - 30} source={img} />
->>>>>>> fix QA 2.2
               )
             }
           </View>
