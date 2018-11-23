@@ -5,11 +5,13 @@
  */
 
 import React, { Component } from 'react';
-import { Image, Platform, Text, TouchableOpacity, View, Dimensions } from 'react-native';
+import { Image, Platform, Text, TouchableOpacity, View, Dimensions, StyleSheet } from 'react-native';
+import Button from 'react-native-button';
 import { NavigationActions, SafeAreaView, StackActions } from 'react-navigation';
 import Carousel from 'react-native-snap-carousel';
 import Dialog, { DialogContent, SlideAnimation } from 'react-native-popup-dialog';
 import { connect } from 'react-redux';
+import Modal from 'react-native-modalbox';
 
 var { width, height } = Dimensions.get('window');
 
@@ -171,7 +173,7 @@ class MainLayout extends Component {
               }} />
           </View>
 
-          <Dialog
+          {/* <Dialog
             dialogAnimation={new SlideAnimation({ useNativeDriver: true, slideFrom: 'bottom' })}
             dialogStyle={styles.dialogStyle}
             visible={this.state.visible}
@@ -211,13 +213,90 @@ class MainLayout extends Component {
                 <Icon name="CloseX" width="14" height="14" viewBox="0 0 14 14" fill="#1181FF" />
               </TouchableOpacity>
             </DialogContent>
-          </Dialog>
+          </Dialog> */}
+          
+          <Modal swipeToClose={true} isOpen={this.state.visible} onClosed={() => this.setState({visible: false})} style={modStyles.modal} position={"center"}>
+            <Image
+                style={{position: 'absolute', width: width - 40, zIndex: 0, height: 100}}
+                resizeMode={Image.resizeMode.cover}
+                source={{ uri: this.state.currentZone ? this.state.currentZone.homeCard.bgImg : '' }} />
+              {
+                this.state.currentZone ?
+                <TouchableOpacity
+                  onPress={() => {
+                    this.setState({ visible: false });
+
+                    this.props.dispatch(setCurrentZonePopUp(false));
+
+                    setTimeout(() => {
+                      const index = zones.findIndex(zone => zone.walkbaseId == this.props.zoneId);
+                      this.gotoZone(index);
+                    }, 300);
+                  }}
+                  style={styles.dialogContentTouch}>
+                  <Image
+                    style={styles.dialogContentTouchImage}
+                    resizeMode={Image.resizeMode.cover}
+                    source={{ uri: this.state.currentZone.homeCard.img }} />
+                  <View style={{ marginLeft: 20, zIndex: 2, height: 60 }}>
+                    <Text style={{ fontSize: 22, color: '#fff' }}>{this.state.currentZone.homeCard.title}</Text> 
+                    <Text style={{ color: '#fff' }}>{this.state.currentZone.homeCard.subtitle}</Text>
+                  </View>
+                </TouchableOpacity>
+                :
+                <View></View>
+              }
+              <TouchableOpacity onPress={() => this.setState({ visible: false })} style={styles.dialogContentTouchOut}>
+                <Icon name="CloseX" width="14" height="14" viewBox="0 0 14 14" fill="#1181FF" />
+              </TouchableOpacity>
+          </Modal>
         </View>
       </SafeAreaView>
     );
   }
 
 }
+
+
+const modStyles = StyleSheet.create({
+
+  wrapper: {
+    paddingTop: 50,
+    flex: 1
+  },
+
+  modal: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 100,
+    paddingLeft: 10,
+    paddingRight: 10,
+    width: width - 40,
+    marginTop: 200
+  },
+
+  btn: {
+    margin: 10,
+    backgroundColor: "#3B5998",
+    color: "white",
+    padding: 10
+  },
+
+  btnModal: {
+    position: "absolute",
+    top: 0,
+    right: 0,
+    width: 50,
+    height: 50,
+    backgroundColor: "transparent"
+  },
+
+  text: {
+    color: "black",
+    fontSize: 22
+  }
+
+});
 
 const mapStateToProps = state => {
   const { current } = state;
