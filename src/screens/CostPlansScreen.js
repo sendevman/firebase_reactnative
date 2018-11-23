@@ -458,8 +458,8 @@ class CostPlansScreen extends Component {
           [{ nativeEvent: { contentOffset: { y: this.props.onScrollCustom } } }],
           {
             /*useNativeDriver: true*/
-        //onScroll={this._animateScroll}
-        //onScrollEndDrag={this._onScrollEndSnapToEdge}
+        onScroll={this._animateScroll}
+        onScrollEndDrag={this._onScrollEndSnapToEdge}
       >
         {this.renderContent()}
       </Animated.ScrollView>
