@@ -184,9 +184,9 @@ class DirecTvWatchCard extends Component {
 
     return (
       <View>
-        {this._renderLiveTv()}
+        {/*this._renderLiveTv()}
         {this._renderGetMore()}
-        {this._renderDestination()}
+        {this._renderDestination()*/}
         {this._renderChannels()}
       </View>
     );
