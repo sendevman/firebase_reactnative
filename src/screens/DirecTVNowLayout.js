@@ -163,13 +163,13 @@ class DirecTvNowLayout extends Component {
         </View>
 
         <View style={styles.container}>
-          <ScrollView style={{height: 400, width}} contentContainerStyle={{alignItems: 'center'}}>
+          <View style={{flex: 1, width}} contentContainerStyle={{alignItems: 'center'}}>
             {
               channelImgs[selectBase].map((img, idx) => 
                 <AutoHeightImage key={idx} width={width - 30} source={img} />
               )
             }
-          </ScrollView>
+          </View>
         </View>
       </View>
     );

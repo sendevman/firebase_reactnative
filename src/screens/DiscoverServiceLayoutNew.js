@@ -5,7 +5,7 @@
  */
 
 import React, { Component } from 'react';
-import { Animated, Image, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Animated, Image, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 import firebase from 'react-native-firebase';
 import { connect } from 'react-redux';
@@ -15,7 +15,6 @@ import { setAreaInfo, setProductInfo } from '../actions/Current';
 import { setProductsNearInfo } from '../actions/ProductsNear';
 
 // My Customs
-import Icon from '../assets/images/Icon';
 import ServicesSlide from '../components/ServicesSlide/ServicesSlide';
 
 // My Layouts
@@ -149,12 +148,6 @@ class DiscoverServiceLayoutNew extends Component {
           {(showService && (serviceSelected.subType === 'directv_now')) && <DirecTvNowLayout />}
           {(showService && (serviceSelected.subType === 'directv_watch')) && <DirecTvWatchLayout />}
         </Animated.View>
-
-        <View style={{ position: 'absolute', top: 20, left: 10 }}>
-          <TouchableOpacity onPress={() => this.props.navigation.navigate('Home')}>
-            <Icon name="ArrowLeft" width="10" height="16" viewBox="0 0 10 16" fill="#FFFFFF" />
-          </TouchableOpacity>
-        </View>
       </SafeAreaView>
     );
   }
