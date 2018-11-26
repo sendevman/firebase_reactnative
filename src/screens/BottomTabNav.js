@@ -107,7 +107,7 @@ class BottomTabNav extends React.Component {
           ) : (
             <Icon name="ExclusiveVodFill" width="22" height="18" viewBox="0 0 22 18" />
           )}
-          <Text style={tab === 0 ? styles.tintText : styles.activeTintText}>Entertain</Text>
+          <Text style={tab === 0 ? styles.tintText : styles.activeTintText}>Stream In-Store</Text>
         </View>
       </TouchableOpacity>
     );
