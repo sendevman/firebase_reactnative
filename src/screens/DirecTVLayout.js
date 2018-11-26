@@ -58,10 +58,12 @@ class DirecTvLayout extends Component {
         <Text style={styles.txtTitle}>DIRECTV</Text>
         {/* {this._renderDirecTvCard()} */}
         <DirecTvCarousel />
-        <Text style={styles.txtTitle}>Find the Package that is right for you</Text>
-        {this._renderDirecTvPackage()}
+
         <Text style={styles.txtTitle}>RELIABILITY</Text>
         {this._renderPackageReliability()}
+
+        <Text style={styles.txtTitle}>Find the Package that is right for you</Text>
+        {this._renderDirecTvPackage()}
       </View>
     );
   }
