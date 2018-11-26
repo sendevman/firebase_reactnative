@@ -6,24 +6,24 @@
 
 import React, { Component } from 'react';
 import { Image, Text, TextInput, TouchableOpacity, View, ScrollView, Dimensions } from 'react-native';
-import { FakeDirecTVPackages } from '../../store/DirecTVPackageFakeData';
-import { FakeDirecTVChannel } from '../../store/DirecTVChannelFakeData';
+import { FakeDirecTvPackages } from '../../store/DirecTvPackageFakeData';
+import { FakeDirecTvChannel } from '../../store/DirecTvChannelFakeData';
 import { Col, Row, Grid } from "react-native-easy-grid";
 var { height, width } = Dimensions.get('window');
 // My Styles
 import { Icon } from 'react-native-elements'
 
-import styles from '../css/DirecTVScreenCss';
+import styles from '../css/DirecTvScreenCss';
 
 const package_channels = require('../../assets/channels/package_channels.json');
 const packages = require('../../assets/channels/packages.json');
 const allChannels = require('../../assets/channels/channels.json');
 const groups = require('../../assets/channels/groups.json');
 
-class DirecTVPackage extends Component {
-  
+class DirecTvPackage extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       packages: [],
       channels: [],
@@ -36,7 +36,7 @@ class DirecTVPackage extends Component {
     return (
       <View style={styles.tableView}>
         {
-          FakeDirecTVPackages.map((item, index) => {
+          FakeDirecTvPackages.map((item, index) => {
             return (
               <View key={index} style={[styles.packageItemView, { borderColor: item.color }]}>
                 <Text style={{ height: 30, color: '#070303', fontSize: 12, fontWeight: 'bold', textAlign: 'center', marginTop: 10 }}>{item.title}</Text>
@@ -278,4 +278,4 @@ const tvChannelStyles = {
   }
 }
 
-export default DirecTVPackage;
+export default DirecTvPackage;

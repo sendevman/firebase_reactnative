@@ -19,9 +19,9 @@ import Icon from '../assets/images/Icon';
 import ServicesSlide from '../components/ServicesSlide/ServicesSlide';
 
 // My Layouts
-import DirecTVLayout from './DirecTVLayout';
-import DirecTVNowLayout from './DirecTVNowLayout';
-import DirecTVWatchLayout from './DirecTVWatchLayout';
+import DirecTvLayout from './DirecTvLayout';
+import DirecTvNowLayout from './DirecTvNowLayout';
+import DirecTvWatchLayout from './DirecTvWatchLayout';
 
 // My Styles
 import styles from './css/ProductSceenCss';
@@ -145,9 +145,9 @@ class DiscoverServiceLayoutNew extends Component {
             resizeMode={Image.resizeMode.cover}
             source={require('../assets/images/files/backgroundHD.png')}
           /> */}
-          {(showService && (serviceSelected.subType === 'directv')) && <DirecTVLayout />}
-          {(showService && (serviceSelected.subType === 'directv_now')) && <DirecTVNowLayout />}
-          {(showService && (serviceSelected.subType === 'directv_watch')) && <DirecTVWatchLayout />}
+          {(showService && (serviceSelected.subType === 'directv')) && <DirecTvLayout />}
+          {(showService && (serviceSelected.subType === 'directv_now')) && <DirecTvNowLayout />}
+          {(showService && (serviceSelected.subType === 'directv_watch')) && <DirecTvWatchLayout />}
         </Animated.View>
 
         <View style={{ position: 'absolute', top: 20, left: 10 }}>
