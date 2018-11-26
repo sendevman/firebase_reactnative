@@ -148,7 +148,7 @@ class DirecTvPackage extends Component {
 
       <View style={{width, flex: 1, backgroundColor: 'white'}}>
         
-        <View style={{ flexx: 1, width: '100%', height: 70, alignItems: 'center', justifyContent: 'center', flexDirection: 'column'}}>
+        <View style={{ flex: 1, width: '100%', height: 70, alignItems: 'center', justifyContent: 'center', flexDirection: 'column'}}>
           <Image source={require('../../assets/images/files/dtv.logo.png')}/>
           <Text>Shop Now</Text>
         </View>
@@ -231,7 +231,7 @@ class DirecTvPackage extends Component {
 
                   {
                     this.state.packages.map((pkg,idx) => {
-                      return <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
+                      return <View key={idx} style={{ flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
                         {
                           (idx < (this.state.packages.length - 1)) ? <Image resizeMode="contain" style={{width: 30, height: 30}} source={{uri: group.promoUrl}}/>
                           : <Text style={{color: '#00aced'}}>✔</Text>
