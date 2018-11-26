@@ -1,6 +1,6 @@
 
 import { StyleSheet, Dimensions } from 'react-native';
-var { width } = Dimensions.get('window');
+export const { width } = Dimensions.get('window');
 
 export default StyleSheet.create({
   container: {

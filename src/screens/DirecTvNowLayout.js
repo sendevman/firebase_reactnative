@@ -11,7 +11,7 @@ import AutoHeightImage from 'react-native-auto-height-image';
 import { connect } from 'react-redux';
 
 // My Customs
-import DirecTvNowGet from './components/DirectTvNowGet';
+import DirecTvNowGet from './components/DirecTvNowGet';
 import DirecTvNowCarousel from '../components/ServicesCarousel/DirecTvNow';
 
 // My Styles
