@@ -6,12 +6,15 @@
 
 import React, { Component } from 'react';
 import { Image, Text, TouchableOpacity, View, Dimensions } from 'react-native';
-var { width } = Dimensions.get('window');
 
 // My Styles
-import styles from '../css/DirecTVNowScreenCss';
+import styles from '../css/DirecTvNowScreenCss';
+
+var { width } = Dimensions.get('window');
+
 const bulletList = ['No annual contracts', 'No satellite needed', 'True Cloud DVR BETA* included', 'No installation guy', 'Cancel anytime'];
-class DirecTVNowGet extends Component {
+
+class DirecTvNowGet extends Component {
   constructor(props) {
     super(props);
 
@@ -122,4 +125,4 @@ class DirecTVNowGet extends Component {
   }
 }
 
-export default DirecTVNowGet;
+export default DirecTvNowGet;
