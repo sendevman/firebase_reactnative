@@ -222,23 +222,14 @@ class DirecTVPackage extends Component {
                         return <View key={idx} style={{ flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
                           {
                             (idx < (this.state.packages.length - 1)) ? <Image resizeMode="contain" style={{width: 30, height: 30}} source={{uri: group.promoUrl}}/>
-                            : <Icon name='check' color='#00aced' />
+                            : <Text style={{color: '#00aced'}}>✔</Text>
                           }
                         </View>
                       })
                     }
                   </View>
 
-                  {
-                    this.state.packages.map((pkg,idx) => {
-                      return <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
-                        {
-                          (idx < (this.state.packages.length - 1)) ? <Image resizeMode="contain" style={{width: 30, height: 30}} source={{uri: group.promoUrl}}/>
-                          : <Text style={{color: '#00aced'}}>✔</Text>
-                        }
-                      </View>
-                    })
-                  }
+                
                 </View>
               </View>
             })
