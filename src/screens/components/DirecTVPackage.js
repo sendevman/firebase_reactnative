@@ -6,24 +6,24 @@
 
 import React, { Component } from 'react';
 import { Image, Text, TextInput, TouchableOpacity, View, ScrollView, Dimensions } from 'react-native';
-import { FakeDirecTVPackages } from '../../store/DirecTVPackageFakeData';
-import { FakeDirecTVChannel } from '../../store/DirecTVChannelFakeData';
+import { FakeDirecTvPackages } from '../../store/DirecTvPackageFakeData';
+import { FakeDirecTvChannel } from '../../store/DirecTvChannelFakeData';
 import { Col, Row, Grid } from "react-native-easy-grid";
 var { height, width } = Dimensions.get('window');
 // My Styles
 import { Icon } from 'react-native-elements'
 
-import styles from '../css/DirecTVScreenCss';
+import styles from '../css/DirecTvScreenCss';
 
 const package_channels = require('../../assets/channels/package_channels.json');
 const packages = require('../../assets/channels/packages.json');
 const allChannels = require('../../assets/channels/channels.json');
 const groups = require('../../assets/channels/groups.json');
 
-class DirecTVPackage extends Component {
-  
+class DirecTvPackage extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       packages: [],
       channels: [],
@@ -36,7 +36,7 @@ class DirecTVPackage extends Component {
     return (
       <View style={styles.tableView}>
         {
-          FakeDirecTVPackages.map((item, index) => {
+          FakeDirecTvPackages.map((item, index) => {
             return (
               <View key={index} style={[styles.packageItemView, { borderColor: item.color }]}>
                 <Text style={{ height: 30, color: '#070303', fontSize: 12, fontWeight: 'bold', textAlign: 'center', marginTop: 10 }}>{item.title}</Text>
@@ -146,13 +146,11 @@ class DirecTVPackage extends Component {
 
     return (
 
-      <View style={tvChannelStyles.container}>
+      <View style={{width, flex: 1, backgroundColor: 'white'}}>
         
-        <View style={{width: '100%', height: 70, backgroundColor: 'white'}}>
-          <View style={{flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10}}>
-            <Image source={require('../../assets/images/files/dtv.logo.png')}/>
-            <Text>Shop Now</Text>
-          </View>
+        <View style={{ flexx: 1, width: '100%', height: 70, alignItems: 'center', justifyContent: 'center', flexDirection: 'column'}}>
+          <Image source={require('../../assets/images/files/dtv.logo.png')}/>
+          <Text>Shop Now</Text>
         </View>
 
         <View style={{width: '100%', height: 60, backgroundColor: 'white'}}>
@@ -182,7 +180,7 @@ class DirecTVPackage extends Component {
           <View></View>
         }
 
-        <ScrollView style={{flex: 1}}>
+        <View style={{flex: 1, flexDirection: 'column'}}>
           
           <View style={{width: '100%', height: 60, marginTop: 10}}>
             <View style={{width: '100%', height: 60, flex: 1, flexDirection: 'row'}}>
@@ -190,22 +188,22 @@ class DirecTVPackage extends Component {
                 <Text style={{color: '#666', fontSize: 8}}>99% Local channels in USA</Text>
               </View>
               <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
-                <Icon name='check' color='#00aced' />
+                <Text style={{color: '#00aced'}}>✔</Text>
               </View>
               <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
-                <Icon name='check' color='#00aced' />
+                <Text style={{color: '#00aced'}}>✔</Text>
               </View>
               <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
-                <Icon name='check' color='#00aced' />  
+                <Text style={{color: '#00aced'}}>✔</Text>
               </View>
               <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
-                <Icon name='check' color='#00aced' />  
+                <Text style={{color: '#00aced'}}>✔</Text>
               </View>
               <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
-                <Icon name='check' color='#00aced' />  
+                <Text style={{color: '#00aced'}}>✔</Text>
               </View>
               <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
-                <Icon name='check' color='#00aced' />  
+                <Text style={{color: '#00aced'}}>✔</Text>
               </View>
             </View> 
           </View>
@@ -219,7 +217,6 @@ class DirecTVPackage extends Component {
                     <View style={{flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
                       <Image resizeMode="contain" style={{width: 30, height: 30}} source={{uri: group.logoUrl}}/>
                     </View>
-
                     {
                       this.state.packages.map((pkg,idx) => {
                         return <View key={idx} style={{ flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
@@ -231,6 +228,17 @@ class DirecTVPackage extends Component {
                       })
                     }
                   </View>
+
+                  {
+                    this.state.packages.map((pkg,idx) => {
+                      return <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
+                        {
+                          (idx < (this.state.packages.length - 1)) ? <Image resizeMode="contain" style={{width: 30, height: 30}} source={{uri: group.promoUrl}}/>
+                          : <Text style={{color: '#00aced'}}>✔</Text>
+                        }
+                      </View>
+                    })
+                  }
                 </View>
               </View>
             })
@@ -243,6 +251,7 @@ class DirecTVPackage extends Component {
                 
                 <View style={{flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
                   <Image resizeMode="contain" style={{width: 30, height: 30}} source={{uri: channel.logoUrl}}/>
+                  <Text style={{fontSize: 7}}>{channel.name}</Text>
                 </View>
                 {
                   this.state.packages.map((pkg, idx) => {
@@ -250,7 +259,7 @@ class DirecTVPackage extends Component {
                       {
                         
                         this.getChannelPresence(channel.chLogoId, pkg.id) ?
-                          <Icon name='check' color='#00aced' />
+                          <Text style={{color: '#00aced'}}>✔</Text>
                           :
                           <View>
                           </View>
@@ -263,7 +272,7 @@ class DirecTVPackage extends Component {
             })
           }
 
-        </ScrollView>
+        </View>
       </View>
     );
   }
@@ -278,4 +287,4 @@ const tvChannelStyles = {
   }
 }
 
-export default DirecTVPackage;
+export default DirecTvPackage;

@@ -9,7 +9,8 @@ import { Image, Platform, Text, TouchableOpacity, View } from 'react-native';
 import { NavigationActions, SafeAreaView, StackActions } from 'react-navigation';
 import Carousel from 'react-native-snap-carousel';
 import Dialog, { DialogContent, SlideAnimation } from 'react-native-popup-dialog';
-import { Button } from 'react-native-elements';
+import Modal from 'react-native-modalbox';
+import firebase from 'react-native-firebase';
 import { connect } from 'react-redux';
 
 // My Actions
@@ -23,7 +24,7 @@ import Icon from '../assets/images/Icon';
 // import { FakeAreas } from '../store/AreaFakeData';
 
 // My Styles
-import styles, { itemWidth, sliderWidth } from './css/MainScreenCss';
+import styles, { itemWidth, sliderWidth, width } from './css/MainScreenCss';
 
 class MainLayout extends Component {
   constructor(props) {
@@ -33,7 +34,13 @@ class MainLayout extends Component {
       sliderActiveSlide: 0,
       visible: false,
       currentZone: null,
+      home: null,
     };
+
+    firebase.firestore().doc('locations/off_site/siteData/home').get()
+    .then(e => {
+      this.setState({ home: e.data() });
+    });
   }
 
   gotoDirecTV = (index) => {
@@ -43,6 +50,10 @@ class MainLayout extends Component {
   };
 
   gotoZone = (index) => {
+    // this is homecard and not a zone.
+    if (index === -1) {
+      return;
+    }
     /*
     const arrAreas = this.props.location.zones[index];
     this.props.dispatch(setLocationSelectItem(arrAreas));
@@ -51,13 +62,14 @@ class MainLayout extends Component {
     });
     */
     const arrAreas = this.props.location.zones[index];
+    const videoService = arrAreas.titleCard.title == 'Video Service';
     this.props.dispatch(setLocationSelectItem(arrAreas));
     const resetAction = StackActions.reset({
       index: 1,
       key: null,
       actions: [
         NavigationActions.navigate({ routeName: "Home", params: { resetOrder: 1 } }),
-        NavigationActions.navigate({ routeName: "TabNav", params: { areaData: arrAreas } })
+        NavigationActions.navigate({ routeName: "TabNav", params: { areaData: arrAreas, videoService } })
       ]
     });
     this.props.navigation.dispatch(resetAction);
@@ -92,7 +104,7 @@ class MainLayout extends Component {
               }, 3000);
             }}
             onPress={() => {
-              (item.name === 'DirecTV') ? this.gotoDirecTV(index) : this.gotoZone(index);
+              this.gotoZone(index - 1);
             }}
           >
             <View style={styles.titleCardBox}>
@@ -107,7 +119,18 @@ class MainLayout extends Component {
   }
 
   render() {
-    const zones = this.props.location ? [...this.props.location.zones]: [];
+    console.log(this.props.location, 'MAINLAYOUT');
+    // const zones = this.props.location ? [...this.props.location.zones] : [];
+    let zones = [];
+
+    if (this.state.home) {
+      zones.push(this.state.home);
+    }
+
+    if (this.props.location) {
+      zones = [...zones, ...this.props.location.zones];
+    }
+
     const index = this.state.sliderActiveSlide;
 
     let bgImg = require('../assets/images/files/splash.png');
@@ -151,7 +174,7 @@ class MainLayout extends Component {
               }} />
           </View>
 
-          <Dialog
+          {/* <Dialog
             dialogAnimation={new SlideAnimation({ useNativeDriver: true, slideFrom: 'bottom' })}
             dialogStyle={styles.dialogStyle}
             visible={this.state.visible}
@@ -191,7 +214,43 @@ class MainLayout extends Component {
                 <Icon name="CloseX" width="14" height="14" viewBox="0 0 14 14" fill="#1181FF" />
               </TouchableOpacity>
             </DialogContent>
-          </Dialog>
+          </Dialog> */}
+          
+          <Modal swipeToClose={true} isOpen={this.state.visible} onClosed={() => this.setState({visible: false})} style={styles.modal} position={"center"}>
+            <Image
+                style={{position: 'absolute', width: width - 40, zIndex: 0, height: 100}}
+                resizeMode={Image.resizeMode.cover}
+                source={{ uri: this.state.currentZone ? this.state.currentZone.homeCard.bgImg : '' }} />
+              {
+                this.state.currentZone ?
+                <TouchableOpacity
+                  onPress={() => {
+                    this.setState({ visible: false });
+
+                    this.props.dispatch(setCurrentZonePopUp(false));
+
+                    setTimeout(() => {
+                      const index = zones.findIndex(zone => zone.walkbaseId == this.props.zoneId);
+                      this.gotoZone(index);
+                    }, 300);
+                  }}
+                  style={styles.dialogContentTouch}>
+                  <Image
+                    style={styles.dialogContentTouchImage}
+                    resizeMode={Image.resizeMode.cover}
+                    source={{ uri: this.state.currentZone.homeCard.img }} />
+                  <View style={{ marginLeft: 20, zIndex: 2, height: 60 }}>
+                    <Text style={{ fontSize: 22, color: '#fff' }}>{this.state.currentZone.homeCard.title}</Text> 
+                    <Text style={{ color: '#fff' }}>{this.state.currentZone.homeCard.subtitle}</Text>
+                  </View>
+                </TouchableOpacity>
+                :
+                <View></View>
+              }
+              <TouchableOpacity onPress={() => this.setState({ visible: false })} style={styles.dialogContentTouchOut}>
+                <Icon name="CloseX" width="14" height="14" viewBox="0 0 14 14" fill="#1181FF" />
+              </TouchableOpacity>
+          </Modal>
         </View>
       </SafeAreaView>
     );
