@@ -15,7 +15,7 @@ import Icon from '../../assets/images/Icon';
 // My Styles
 import styles, { itemWidth, sliderWidth } from './DirecTvNowCss';
 
-class DirecTVNowCarousel extends Component {
+class DirecTvNowCarousel extends Component {
   constructor(props) {
     super(props);
 
@@ -150,4 +150,4 @@ const mapStateToProps = state => {
   };
 }
 
-export default connect(mapStateToProps)(DirecTVNowCarousel);
+export default connect(mapStateToProps)(DirecTvNowCarousel);
