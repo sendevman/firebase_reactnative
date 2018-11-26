@@ -5,15 +5,16 @@
  */
 
 import React, { Component } from 'react';
-import { Image, Text, TextInput, TouchableOpacity, View, ScrollView, Dimensions } from 'react-native';
-import { FakeDirecTvPackages } from '../../store/DirecTvPackageFakeData';
-import { FakeDirecTvChannel } from '../../store/DirecTvChannelFakeData';
-import { Col, Row, Grid } from "react-native-easy-grid";
-var { height, width } = Dimensions.get('window');
-// My Styles
+import { Image, Text, TextInput, View, ScrollView } from 'react-native';
+import { Col, Grid, Row } from "react-native-easy-grid";
 import { Icon } from 'react-native-elements'
 
-import styles from '../css/DirecTvScreenCss';
+// My FakeData
+import { FakeDirecTvPackages } from '../../store/DirecTvPackageFakeData';
+import { FakeDirecTvChannel } from '../../store/DirecTvChannelFakeData';
+
+// My Styles
+import styles, { width } from '../css/DirecTvScreenCss';
 
 const package_channels = require('../../assets/channels/package_channels.json');
 const packages = require('../../assets/channels/packages.json');
@@ -143,12 +144,9 @@ class DirecTvPackage extends Component {
   }
 
   render() {
-
     return (
-
-      <View style={{width, flex: 1, backgroundColor: 'white'}}>
-        
-        <View style={{ flexx: 1, width: '100%', height: 70, alignItems: 'center', justifyContent: 'center', flexDirection: 'column'}}>
+      <View style={{ width, flex: 1, backgroundColor: 'white' }}>
+        <View style={{ width: '100%', height: 70, alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}>
           <Image source={require('../../assets/images/files/dtv.logo.png')}/>
           <Text>Shop Now</Text>
         </View>
@@ -158,6 +156,7 @@ class DirecTvPackage extends Component {
             <View style={{flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, backgroundColor: 'white'}}>
               <Icon name='search' color='#00aced' onPress={() => this.toggleSearch()} />
             </View>
+
             {
               this.state.packages.map((pkg, index) =>
                 <View key={index} style={{ flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, backgroundColor: pkg.color}}>
@@ -181,27 +180,32 @@ class DirecTvPackage extends Component {
         }
 
         <View style={{flex: 1, flexDirection: 'column'}}>
-          
           <View style={{width: '100%', height: 60, marginTop: 10}}>
             <View style={{width: '100%', height: 60, flex: 1, flexDirection: 'row'}}>
               <View style={{flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
                 <Text style={{color: '#666', fontSize: 8}}>99% Local channels in USA</Text>
               </View>
+
               <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
                 <Text style={{color: '#00aced'}}>✔</Text>
               </View>
+
               <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
                 <Text style={{color: '#00aced'}}>✔</Text>
               </View>
+
               <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
                 <Text style={{color: '#00aced'}}>✔</Text>
               </View>
+
               <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
                 <Text style={{color: '#00aced'}}>✔</Text>
               </View>
+
               <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
                 <Text style={{color: '#00aced'}}>✔</Text>
               </View>
+
               <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
                 <Text style={{color: '#00aced'}}>✔</Text>
               </View>
@@ -222,23 +226,12 @@ class DirecTvPackage extends Component {
                         return <View key={idx} style={{ flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
                           {
                             (idx < (this.state.packages.length - 1)) ? <Image resizeMode="contain" style={{width: 30, height: 30}} source={{uri: group.promoUrl}}/>
-                            : <Icon name='check' color='#00aced' />
+                            : <Text style={{color: '#00aced'}}>✔</Text>
                           }
                         </View>
                       })
                     }
                   </View>
-
-                  {
-                    this.state.packages.map((pkg,idx) => {
-                      return <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
-                        {
-                          (idx < (this.state.packages.length - 1)) ? <Image resizeMode="contain" style={{width: 30, height: 30}} source={{uri: group.promoUrl}}/>
-                          : <Text style={{color: '#00aced'}}>✔</Text>
-                        }
-                      </View>
-                    })
-                  }
                 </View>
               </View>
             })
@@ -271,7 +264,6 @@ class DirecTvPackage extends Component {
             </View>
             })
           }
-
         </View>
       </View>
     );
