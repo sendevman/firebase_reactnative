@@ -136,6 +136,16 @@ export default StyleSheet.create({
     lineHeight: 22,
     width: itemWidth - 172
   },
+  bigTitleItem: {
+    width: '100%',
+    marginLeft: -4,
+    // fontFamily: 'Rubik',
+    color: '#FFF',
+    fontSize: 24,
+    fontWeight: 'bold',
+    lineHeight: 24,
+    textAlign: 'center',
+  },
   hrDivider: {
     borderTopWidth: 1,
     borderStyle: 'solid',

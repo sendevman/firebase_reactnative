@@ -15,7 +15,7 @@ import { connect } from 'react-redux';
 // My Styles
 import styles, { itemWidth, sliderWidth } from './DirecTvCss';
 
-class DirecTVCarousel extends Component {
+class DirecTvCarousel extends Component {
   constructor(props) {
     super(props);
 
@@ -90,4 +90,4 @@ const mapStateToProps = state => {
   };
 }
 
-export default connect(mapStateToProps)(DirecTVCarousel);
+export default connect(mapStateToProps)(DirecTvCarousel);

@@ -8,9 +8,9 @@ import React, { Component } from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 
 // My Styles
-import styles from '../css/DirecTVScreenCss';
+import styles from '../css/DirecTvScreenCss';
 
-class DirecTVSave extends Component {
+class DirecTvSave extends Component {
   constructor(props) {
     super(props);
 
@@ -46,4 +46,4 @@ class DirecTVSave extends Component {
   }
 }
 
-export default DirecTVSave;
+export default DirecTvSave;
