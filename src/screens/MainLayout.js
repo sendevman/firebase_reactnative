@@ -129,6 +129,8 @@ class MainLayout extends Component {
 
     if (this.props.location) {
       zones = [...zones, ...this.props.location.zones];
+    } else {
+      zones = [];
     }
 
     const index = this.state.sliderActiveSlide;
@@ -174,7 +176,7 @@ class MainLayout extends Component {
               }} />
           </View>
 
-          {/* <Dialog
+          <Dialog
             dialogAnimation={new SlideAnimation({ useNativeDriver: true, slideFrom: 'bottom' })}
             dialogStyle={styles.dialogStyle}
             visible={this.state.visible}
@@ -214,9 +216,9 @@ class MainLayout extends Component {
                 <Icon name="CloseX" width="14" height="14" viewBox="0 0 14 14" fill="#1181FF" />
               </TouchableOpacity>
             </DialogContent>
-          </Dialog> */}
+          </Dialog>
           
-          <Modal swipeToClose={true} isOpen={this.state.visible} onClosed={() => this.setState({visible: false})} style={styles.modal} position={"center"}>
+          {/* <Modal swipeToClose={true} isOpen={this.state.visible} onClosed={() => this.setState({visible: false})} style={modStyles.modal} position={"center"}>
             <Image
                 style={{position: 'absolute', width: width - 40, zIndex: 0, height: 100}}
                 resizeMode={Image.resizeMode.cover}
@@ -250,7 +252,7 @@ class MainLayout extends Component {
               <TouchableOpacity onPress={() => this.setState({ visible: false })} style={styles.dialogContentTouchOut}>
                 <Icon name="CloseX" width="14" height="14" viewBox="0 0 14 14" fill="#1181FF" />
               </TouchableOpacity>
-          </Modal>
+          </Modal> */}
         </View>
       </SafeAreaView>
     );
