@@ -144,14 +144,7 @@ class ServicesSlide extends Component {
           <Animated.View style={[ styles.itemBox, { height: itemBoxHeight } ]}>
             <Image style={styles.bgImage} source={{ uri: matching[item] ? matching[item].pnyCard.img : '' }} />
 
-            { (matching[item].subType === 'directv_watch') &&
-              <View style={styles.detailsBox}>
-                <Animated.Text numberOfLines={2} style={[ styles.bigTitleItem, { paddingBottom: 6 }, titleItem ]}>
-                  {matching[item] ? matching[item].pnyCard.title : ''}
-                </Animated.Text>
-              </View>
-            }
-            { (matching[item].subType !== 'directv_watch') &&
+            { ((matching[item].subType === 'directv') || (matching[item].subType === 'directv_now')) &&
               <View style={styles.detailsBox}>
                 <Animated.Text numberOfLines={2} style={[ styles.titleItem, { paddingBottom: 6 }, titleItem ]}>
                   {matching[item] ? matching[item].pnyCard.title : ''}
@@ -164,6 +157,22 @@ class ServicesSlide extends Component {
                     {matching[item] ? matching[item].pnyCard.subtitle : ''}
                   </Text>
                 </Animated.View>
+              </View>
+            }
+
+            { (matching[item].subType === 'directv_watch') &&
+              <View style={styles.detailsBox}>
+                <Animated.Text numberOfLines={2} style={[ styles.bigTitleItem, { paddingBottom: 6 }, titleItem ]}>
+                  {matching[item] ? matching[item].pnyCard.title : ''}
+                </Animated.Text>
+              </View>
+            }
+
+            { (matching[item].subType === 'internet') &&
+              <View style={styles.detailsBox}>
+                <Animated.Text numberOfLines={2} style={[ styles.bottomTitle, { paddingBottom: 6 }, titleItem ]}>
+                  {matching[item] ? matching[item].pnyCard.title : ''}
+                </Animated.Text>
               </View>
             }
           </Animated.View>
