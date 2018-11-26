@@ -147,7 +147,6 @@ class DiscoverServiceLayoutNew extends Component {
           {(showService && (serviceSelected.subType === 'directv')) && <DirecTvLayout />}
           {(showService && (serviceSelected.subType === 'directv_now')) && <DirecTvNowLayout />}
           {(showService && (serviceSelected.subType === 'directv_watch')) && <DirecTvWatchLayout />}
-          
         </Animated.View>
       </SafeAreaView>
     );
