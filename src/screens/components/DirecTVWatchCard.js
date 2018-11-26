@@ -10,9 +10,9 @@ var { width } = Dimensions.get('window');
 import AutoHeightImage from 'react-native-auto-height-image';
 
 // My Styles
-import styles from '../css/DirecTVScreenCss';
+import styles from '../css/DirecTvScreenCss';
 
-class DirecTVWatchCard extends Component {
+class DirecTvWatchCard extends Component {
   constructor(props) {
     super(props);
 
@@ -23,7 +23,7 @@ class DirecTVWatchCard extends Component {
     this.setState({ readMore: !this.state.readMore });
   }
 
-  _renderLiveTV() {
+  _renderLiveTv() {
     return (
       <View style={[styles.directvCardView, { marginBottom: 10 }]}>
         <View style={{ flexDirection: 'row', marginTop: 10 }}>
@@ -189,7 +189,7 @@ class DirecTVWatchCard extends Component {
 
     return (
       <View>
-        {this._renderLiveTV()}
+        {this._renderLiveTv()}
         {this._renderGetMore()}
         {this._renderDestination()}
         {this._renderChannels()}
@@ -198,4 +198,4 @@ class DirecTVWatchCard extends Component {
   }
 }
 
-export default DirecTVWatchCard;
+export default DirecTvWatchCard;
