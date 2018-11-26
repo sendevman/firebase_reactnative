@@ -139,11 +139,6 @@ class DirecTvWatchCard extends Component {
           <AutoHeightImage width={100} source={require('../../assets/images/logos/original/history.jpg')}/>
         </View>
         <View style={{width: '100%', flexDirection: 'row', justifyContent: 'center'}}>
-          <AutoHeightImage width={100} source={require('../../assets/images/logos/original/food-network.jpg')}/>
-          <AutoHeightImage width={100} source={require('../../assets/images/logos/original/hgtv.jpg')}/>
-          <AutoHeightImage width={100} source={require('../../assets/images/logos/original/history.jpg')}/>
-        </View>
-        <View style={{width: '100%', flexDirection: 'row', justifyContent: 'center'}}>
           <AutoHeightImage width={100} source={require('../../assets/images/logos/original/hln.jpg')}/>
           <AutoHeightImage width={100} source={require('../../assets/images/logos/original/ifc.jpg')}/>
           <AutoHeightImage width={100} source={require('../../assets/images/logos/original/investigation-discovery.jpg')}/>
