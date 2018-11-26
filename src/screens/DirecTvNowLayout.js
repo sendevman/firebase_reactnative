@@ -93,7 +93,7 @@ class DirecTvNowLayout extends Component {
     else selectedImage = require('../assets/images/files/base5.png');
 
     return (
-      <View style={[styles.directvCardView, { marginTop: 10, marginBottom: 40 }]}>
+      <View style={[styles.directvCardView, { marginTop: 30, marginBottom: 40 }]}>
         <View style={{ flexDirection: 'row', marginTop: 10 }}>
           {selectBase === 0 ? 
             <View style={{ width: (width - 30) / 5, height: 65, backgroundColor: '#FFC126', alignItems: 'center' }}>
@@ -179,8 +179,11 @@ class DirecTvNowLayout extends Component {
     return (
       <View style={{ width: '100%', alignItems: 'center' }}>
         <Text style={styles.txtTitle}>DIRECTV NOW</Text>
+        
         <DirecTvNowCarousel />
-        {this._renderDirecTvNowCard()}
+        
+        {/* this._renderDirecTvNowCard() */}
+        
         {this._renderBasePackage()}
       </View>
     );
