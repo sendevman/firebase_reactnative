@@ -62,7 +62,7 @@ class MainLayout extends Component {
     });
     */
     const arrAreas = this.props.location.zones[index];
-    const videoService = arrAreas.titleCard.title == 'Video Service';
+    const videoService = arrAreas.titleCard.title == 'Entertainment';
     this.props.dispatch(setLocationSelectItem(arrAreas));
     const resetAction = StackActions.reset({
       index: 1,
