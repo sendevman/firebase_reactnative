@@ -144,7 +144,6 @@ class DirecTvPackage extends Component {
   }
 
   render() {
-
     return (
       <View style={{ width, flex: 1, backgroundColor: 'white' }}>
         <View style={{ width: '100%', height: 70, alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}>
@@ -227,23 +226,12 @@ class DirecTvPackage extends Component {
                         return <View key={idx} style={{ flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
                           {
                             (idx < (this.state.packages.length - 1)) ? <Image resizeMode="contain" style={{width: 30, height: 30}} source={{uri: group.promoUrl}}/>
-                            : <Icon name='check' color='#00aced' />
+                            : <Text style={{color: '#00aced'}}>✔</Text>
                           }
                         </View>
                       })
                     }
                   </View>
-
-                  {
-                    this.state.packages.map((pkg,idx) => {
-                      return <View key={idx} style={{ flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
-                        {
-                          (idx < (this.state.packages.length - 1)) ? <Image resizeMode="contain" style={{width: 30, height: 30}} source={{uri: group.promoUrl}}/>
-                          : <Text style={{color: '#00aced'}}>✔</Text>
-                        }
-                      </View>
-                    })
-                  }
                 </View>
               </View>
             })
@@ -276,7 +264,6 @@ class DirecTvPackage extends Component {
             </View>
             })
           }
-
         </View>
       </View>
     );
