@@ -6,7 +6,7 @@
 
 import { Dimensions, Platform, StyleSheet } from 'react-native';
 
-const { width, height } = Dimensions.get('window');
+export const { width, height } = Dimensions.get('window');
 
 function wp (percentage) {
   const value = (percentage * (width > 400 ? 400 : width)) / 100;
@@ -162,5 +162,15 @@ export default StyleSheet.create({
     right: -10,
     zIndex: 2,
     borderTopRightRadius: 16,
+  },
+  // Modal Section
+  modal: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 100,
+    paddingLeft: 10,
+    paddingRight: 10,
+    width: width - 40,
+    marginTop: 200
   },
 });
