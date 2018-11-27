@@ -21,6 +21,7 @@ import ServicesSlide from '../components/ServicesSlide/ServicesSlide';
 import DirecTvLayout from './DirecTvLayout';
 import DirecTvNowLayout from './DirecTvNowLayout';
 import DirecTvWatchLayout from './DirecTvWatchLayout';
+import InternetLayout from './InternetLayout';
 
 // My Styles
 import styles from './css/ProductSceenCss';
@@ -147,6 +148,7 @@ class DiscoverServiceLayoutNew extends Component {
           {(showService && (serviceSelected.subType === 'directv')) && <DirecTvLayout />}
           {(showService && (serviceSelected.subType === 'directv_now')) && <DirecTvNowLayout />}
           {(showService && (serviceSelected.subType === 'directv_watch')) && <DirecTvWatchLayout />}
+          {(showService && (serviceSelected.subType === 'internet')) && <InternetLayout />}
         </Animated.View>
       </SafeAreaView>
     );
