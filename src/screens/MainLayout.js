@@ -35,6 +35,7 @@ class MainLayout extends Component {
       visible: false,
       currentZone: null,
       home: null,
+      homeLoaded: false
     };
 
     firebase.firestore().doc('locations/off_site/siteData/home').get()
@@ -163,7 +164,14 @@ class MainLayout extends Component {
       <SafeAreaView forceInset={{ top: 'always' }} style={{ backgroundColor: '#FFF' }}>
         <View {...this.setTestId("MainLayoutBox")} style={{ width: '100%', height: '100%' }}>
 
-          <Image {...this.setTestId("MainLayoutImg")} style={styles.backImage} source={bgImg} />
+          <Image {...this.setTestId("MainLayoutImg")} style={styles.backImage} source={bgImg} onLoad={() => {
+            if (bgImg.uri && !this.state.homeLoaded) {
+              this.setState({homeLoaded: true});
+            }
+          }} />
+
+          {
+            this.state.homeLoaded ? 
 
           <View {...this.setTestId("MainLayoutCarousel")} style={styles.sliderView}>
             <Carousel
@@ -175,6 +183,10 @@ class MainLayout extends Component {
                 this.setState({ sliderActiveSlide: index });
               }} />
           </View>
+          :
+          <View></View>
+          
+          }
 
           <Dialog
             dialogAnimation={new SlideAnimation({ useNativeDriver: true, slideFrom: 'bottom' })}
