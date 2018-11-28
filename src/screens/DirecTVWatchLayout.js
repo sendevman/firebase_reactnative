@@ -5,17 +5,19 @@
  */
 
 import React, { Component } from 'react';
-import { Animated, Dimensions, Image, ScrollView, Text, View } from 'react-native';
+import { Image, ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 import { connect } from 'react-redux';
 
-import DirecTVWatchCard from './components/DirecTVWatchCard';
-import DirecTVPackage from './components/DirecTVPackage';
-// My Styles
-import styles from './css/DirecTVWatchScreenCss';
-var { width } = Dimensions.get('window');
 
-class DirecTVWatchLayout extends Component {
+// My Customs
+import DirecTvWatchCard from './components/DirecTvWatchCard';
+import DirecTvWatchCarousel from '../components/ServicesCarousel/DirecTvWatch';
+
+// My Styles
+import styles, { width } from './css/DirecTvWatchScreenCss';
+
+class DirecTvWatchLayout extends Component {
   constructor(props) {
     super(props);
   }
@@ -46,7 +48,8 @@ class DirecTVWatchLayout extends Component {
     return (
       <View style={{ width: '100%', alignItems: 'center' }}>
         {this._renderTopIcons()}
-        <DirecTVWatchCard />
+        <DirecTvWatchCarousel />
+        <DirecTvWatchCard />
       </View>
     )
   }
@@ -66,4 +69,4 @@ const mapStateToProps = state => {
   return { compareLayout: 0 };
 }
 
-export default connect(mapStateToProps)(DirecTVWatchLayout);
+export default connect(mapStateToProps)(DirecTvWatchLayout);

@@ -9,30 +9,30 @@ import { Image, ScrollView, Text, View } from 'react-native';
 import { connect } from 'react-redux';
 
 // My Customs
-import DirecTVSave from './components/DirecTVSave';
-import DirecTVPackage from './components/DirecTVPackage';
+import DirecTvSave from './components/DirecTvSave';
+import DirecTvPackage from './components/DirecTvPackage';
 import DirecTvCarousel from '../components/ServicesCarousel/DirecTv';
 
 // My Styles
-import styles from './css/DirecTVScreenCss';
+import styles from './css/DirecTvScreenCss';
 
-class DirecTVLayout extends Component {
+class DirecTvLayout extends Component {
   constructor(props) {
     super(props);
   }
 
-  _renderDirecTVCard() {
+  _renderDirecTvCard() {
     return (
       <View>
-        <DirecTVSave />
+        <DirecTvSave />
       </View>
     );
   }
 
-  _renderDirecTVPackage() {
+  _renderDirecTvPackage() {
     return (
       <View>
-        <DirecTVPackage />
+        <DirecTvPackage />
       </View>
     );
   }
@@ -56,12 +56,14 @@ class DirecTVLayout extends Component {
     return (
       <View style={{ width: '100%', alignItems: 'center' }}>
         <Text style={styles.txtTitle}>DIRECTV</Text>
-        {/* {this._renderDirecTVCard()} */}
+        {/* {this._renderDirecTvCard()} */}
         <DirecTvCarousel />
-        <Text style={styles.txtTitle}>Find the Package that is right for you</Text>
-        {this._renderDirecTVPackage()}
+
         <Text style={styles.txtTitle}>RELIABILITY</Text>
         {this._renderPackageReliability()}
+
+        <Text style={styles.txtTitle}>Find the Package that is right for you</Text>
+        {this._renderDirecTvPackage()}
       </View>
     );
   }
@@ -79,4 +81,4 @@ const mapStateToProps = state => {
   return {};
 };
 
-export default connect(mapStateToProps)(DirecTVLayout);
+export default connect(mapStateToProps)(DirecTvLayout);

@@ -10,9 +10,9 @@ var { width } = Dimensions.get('window');
 import AutoHeightImage from 'react-native-auto-height-image';
 
 // My Styles
-import styles from '../css/DirecTVScreenCss';
+import styles from '../css/DirecTvScreenCss';
 
-class DirecTVWatchCard extends Component {
+class DirecTvWatchCard extends Component {
   constructor(props) {
     super(props);
 
@@ -23,7 +23,7 @@ class DirecTVWatchCard extends Component {
     this.setState({ readMore: !this.state.readMore });
   }
 
-  _renderLiveTV() {
+  _renderLiveTv() {
     return (
       <View style={[styles.directvCardView, { marginBottom: 10 }]}>
         <View style={{ flexDirection: 'row', marginTop: 10 }}>
@@ -139,11 +139,6 @@ class DirecTVWatchCard extends Component {
           <AutoHeightImage width={100} source={require('../../assets/images/logos/original/history.jpg')}/>
         </View>
         <View style={{width: '100%', flexDirection: 'row', justifyContent: 'center'}}>
-          <AutoHeightImage width={100} source={require('../../assets/images/logos/original/food-network.jpg')}/>
-          <AutoHeightImage width={100} source={require('../../assets/images/logos/original/hgtv.jpg')}/>
-          <AutoHeightImage width={100} source={require('../../assets/images/logos/original/history.jpg')}/>
-        </View>
-        <View style={{width: '100%', flexDirection: 'row', justifyContent: 'center'}}>
           <AutoHeightImage width={100} source={require('../../assets/images/logos/original/hln.jpg')}/>
           <AutoHeightImage width={100} source={require('../../assets/images/logos/original/ifc.jpg')}/>
           <AutoHeightImage width={100} source={require('../../assets/images/logos/original/investigation-discovery.jpg')}/>
@@ -189,13 +184,13 @@ class DirecTVWatchCard extends Component {
 
     return (
       <View>
-        {this._renderLiveTV()}
+        {/*this._renderLiveTv()}
         {this._renderGetMore()}
-        {this._renderDestination()}
+        {this._renderDestination()*/}
         {this._renderChannels()}
       </View>
     );
   }
 }
 
-export default DirecTVWatchCard;
+export default DirecTvWatchCard;
