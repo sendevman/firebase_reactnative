@@ -5,7 +5,7 @@
  */
 
 import React, { Component } from 'react';
-import { Animated, Dimensions, Image, ScrollView, Text, View } from 'react-native';
+import { Animated, Dimensions, Image, Modal, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import Svg, { Rect } from 'react-native-svg';
 import LinearGradient from 'react-native-linear-gradient';
 import firebase from 'react-native-firebase';
@@ -62,9 +62,45 @@ const InfoSpecsSkeleton = () => (
   </View>
 );
 
+const FirstNetModal = (props) => (
+  <Modal
+    animationType="slide"
+    transparent={true}
+    presentationStyle="overFullScreen"
+    visible={true}
+    onRequestClose={() => props.showPopupFirstNet()}>
+    <View style={styles.containerModal}>
+      <View style={styles.headerModal}>
+        <TouchableOpacity onPress={() => props.showPopupFirstNet()} style={[styles.headerCloseModal, { borderTopRightRadius: 16 }]}>
+          <Icon name="CloseX" width="14" height="14" viewBox="0 0 14 14" fill="#1181FF" />
+        </TouchableOpacity>
+      </View>
+      <View style={styles.contentContainerModal}>
+        <View style={styles.contentModal}>
+          <Image style={styles.imageModal} resizeMode={Image.resizeMode.contain} source={{ uri: props.data.img }} />
+          <View>
+            <Text style={styles.contentTitleModal}>{props.data.title}</Text>
+          </View>
+          <View style={styles.contentViewModal}>
+            <Text style={styles.contentBodyModal}>{props.data.body}</Text>
+          </View>
+          <View style={styles.contentViewModal}>
+            <Text style={styles.contentLegalModal}>{props.data.legal}</Text>
+          </View>
+        </View>
+      </View>
+      <View style={styles.footerModal}>
+      </View>
+    </View>
+  </Modal>);
+
 class InfoSpecsScreen extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      showFirstNetModal: false,
+      appData: {},
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -75,6 +111,14 @@ class InfoSpecsScreen extends Component {
         pDeviceManufacture: nextProps.infoSpecs.manufacture,
         pResearchTab: 'info',
       });
+    }
+    if (nextProps.infoSpecs !== this.props.infoSpecs) {
+      if (nextProps.infoSpecs.firstnet) {
+        firebase.firestore().doc('appData/app_data').get()
+        .then(e => {
+          this.setState({ appData: e.data() });
+        });
+      }
     }
   }
 
@@ -96,6 +140,10 @@ class InfoSpecsScreen extends Component {
       result += item;
     });
     return result;
+  }
+
+  showPopupFirstNet = () => {
+    this.setState({ showFirstNetModal: !this.state.showFirstNetModal });
   }
 
   renderOffer() {
@@ -141,7 +189,7 @@ class InfoSpecsScreen extends Component {
   }
 
   renderPerformanceAndStorage() {
-    const { deviceOptions, expandableStorage, memory, processor, subType, performance } = this.props.infoSpecs;
+    const { deviceOptions, expandableStorage, firstnet, memory, processor, subType, performance } = this.props.infoSpecs;
 
     return (
       <PerformanceComponent
@@ -151,6 +199,8 @@ class InfoSpecsScreen extends Component {
         processor={processor}
         subType={subType}
         performance={performance}
+        firstnet={firstnet}
+        showPopupFirstNet={this.showPopupFirstNet}
       />
     );
   }
@@ -173,8 +223,10 @@ class InfoSpecsScreen extends Component {
 
   renderContent() {
     const { infoSpecs } = this.props;
+    const { appData, showFirstNetModal } = this.state;
     const viewWidth = width - 34;
     const isTitle = infoSpecs.title !== 'title' ? true : false;
+    console.log('here1', appData);
 
     if (!isTitle) {
       return (
@@ -232,6 +284,7 @@ class InfoSpecsScreen extends Component {
             {this.renderAccessories()}
             <FeedbackSurvey />
           </View>
+          {showFirstNetModal && <FirstNetModal showPopupFirstNet={this.showPopupFirstNet} data={appData}/>}
         </View>
       );
     }
