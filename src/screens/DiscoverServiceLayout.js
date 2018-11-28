@@ -5,7 +5,7 @@
  */
 
 import React, { Component } from 'react';
-import { Dimensions, Image, TouchableOpacity, View} from 'react-native';
+import { Dimensions, Image, View} from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 import firebase from 'react-native-firebase';
 import { connect } from 'react-redux';
@@ -15,7 +15,6 @@ import { setAreaInfo, setProductAccsInfo, setProductInfo } from '../actions/Curr
 import { setProductsAllInfo, setProductsNearInfo } from '../actions/ProductsNear';
 
 // My Customs
-import Icon from '../assets/images/Icon';
 import ServiceZoneSlide from '../components/ServiceZoneSlide/ServiceZoneHead';
 
 // My Layouts
@@ -128,12 +127,6 @@ class DiscoverServiceLayout extends Component {
             />
             {(discoverNum === 0) ? <DirecTVLayout />
               : (discoverNum === 1) ? <DirecTVNowLayout /> : <DirecTVWatchLayout />}
-          </View>
-
-          <View style={{ position: 'absolute', top: 20, left: 10 }}>
-            <TouchableOpacity onPress={() => this.props.navigation.navigate('Home')}>
-              <Icon name="ArrowLeft" width="10" height="16" viewBox="0 0 10 16" fill="#FFFFFF" />
-            </TouchableOpacity>
           </View>
         </View>
       </SafeAreaView>

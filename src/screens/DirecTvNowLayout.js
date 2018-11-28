@@ -11,12 +11,11 @@ import AutoHeightImage from 'react-native-auto-height-image';
 import { connect } from 'react-redux';
 
 // My Customs
-import DirecTVNowGet from './components/DirectTVNowGet';
-import DirecTVPackage from './components/DirecTVPackage';
+import DirecTvNowGet from './components/DirecTvNowGet';
 import DirecTvNowCarousel from '../components/ServicesCarousel/DirecTvNow';
 
 // My Styles
-import styles, { width } from './css/DirecTVNowScreenCss';
+import styles, { width } from './css/DirecTvNowScreenCss';
 
 const channelImgs = [
   [
@@ -69,17 +68,17 @@ const channelImgs = [
   ]
 ];
 
-class DirecTVNowLayout extends Component {
+class DirecTvNowLayout extends Component {
   constructor(props) {
     super(props);
 
     this.state = { selectBase: 0 };
   }
 
-  _renderDirecTVNowCard() {
+  _renderDirecTvNowCard() {
     return (
       <View>
-        <DirecTVNowGet />
+        <DirecTvNowGet />
       </View>
     );
   }
@@ -94,7 +93,7 @@ class DirecTVNowLayout extends Component {
     else selectedImage = require('../assets/images/files/base5.png');
 
     return (
-      <View style={[styles.directvCardView, { marginTop: 10, marginBottom: 40 }]}>
+      <View style={[styles.directvCardView, { marginTop: 30, marginBottom: 40 }]}>
         <View style={{ flexDirection: 'row', marginTop: 10 }}>
           {selectBase === 0 ? 
             <View style={{ width: (width - 30) / 5, height: 65, backgroundColor: '#FFC126', alignItems: 'center' }}>
@@ -164,13 +163,13 @@ class DirecTVNowLayout extends Component {
         </View>
 
         <View style={styles.container}>
-          <ScrollView style={{height: 400, width}} contentContainerStyle={{alignItems: 'center'}}>
+          <View style={{flex: 1, width}} contentContainerStyle={{alignItems: 'center'}}>
             {
               channelImgs[selectBase].map((img, idx) => 
                 <AutoHeightImage key={idx} width={width - 30} source={img} />
               )
             }
-          </ScrollView>
+          </View>
         </View>
       </View>
     );
@@ -180,8 +179,11 @@ class DirecTVNowLayout extends Component {
     return (
       <View style={{ width: '100%', alignItems: 'center' }}>
         <Text style={styles.txtTitle}>DIRECTV NOW</Text>
+        
         <DirecTvNowCarousel />
-        {this._renderDirecTVNowCard()}
+        
+        {/* this._renderDirecTvNowCard() */}
+        
         {this._renderBasePackage()}
       </View>
     );
@@ -200,4 +202,4 @@ const mapStateToProps = state => {
   return {};
 }
 
-export default connect(mapStateToProps)(DirecTVNowLayout);
+export default connect(mapStateToProps)(DirecTvNowLayout);

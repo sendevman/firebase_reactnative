@@ -25,6 +25,7 @@ import { connect } from 'react-redux';
 import Icon from '../assets/images/Icon';
 
 // My Layouts
+import DiscoverServiceLayoutNew from './DiscoverServiceLayoutNew';
 import ProductLayout from './ProductLayout';
 import VodLayout from './VodLayout';
 
@@ -106,18 +107,21 @@ class BottomTabNav extends React.Component {
           ) : (
             <Icon name="ExclusiveVodFill" width="22" height="18" viewBox="0 0 22 18" />
           )}
-          <Text style={tab === 0 ? styles.tintText : styles.activeTintText}>Entertain</Text>
+          <Text style={tab === 0 ? styles.tintText : styles.activeTintText}>Stream In-Store</Text>
         </View>
       </TouchableOpacity>
     );
   }
 
   render() {
-    const { productsNear, navigation } = this.props;
+    const { navigation } = this.props;
+    const videoService = navigation.state.params.videoService;
 
     return (
       <View style={styles.container}>
-        <View style={styles.container}>{this.state.tab === 0 ? <ProductLayout screenProps={navigation} /> : <VodLayout />}</View>
+        <View style={styles.container}>
+          {this.state.tab === 0 ? (videoService ? <DiscoverServiceLayoutNew/> : <ProductLayout screenProps={navigation} />) : <VodLayout />}
+        </View>
 
         <View style={styles.bottom}>
           {this.renderHomeButton()}

@@ -136,6 +136,16 @@ export default StyleSheet.create({
     lineHeight: 22,
     width: itemWidth - 172
   },
+  bigTitleItem: {
+    width: '100%',
+    marginLeft: -4,
+    // fontFamily: 'Rubik',
+    color: '#FFF',
+    fontSize: 24,
+    fontWeight: 'bold',
+    lineHeight: 24,
+    textAlign: 'center',
+  },
   hrDivider: {
     borderTopWidth: 1,
     borderStyle: 'solid',
@@ -154,5 +164,18 @@ export default StyleSheet.create({
     fontSize: 12,
     lineHeight: 15,
     marginLeft: 3
+  },
+  bottomTitle: {
+    width: '100%',
+    marginLeft: -4,
+    // fontFamily: 'Rubik',
+    marginTop: 90,
+    color: '#FFF',
+    fontSize: 24,
+    fontWeight: 'bold',
+    lineHeight: 24,
+    textShadowColor: 'rgba(0, 0, 0, 0.75)',
+    textShadowOffset: { width: -1, height: 1 },
+    textShadowRadius: 10,
   },
 });
