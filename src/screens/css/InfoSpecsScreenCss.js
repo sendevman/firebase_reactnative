@@ -12,6 +12,66 @@ export default StyleSheet.create({
     // backgroundColor: '#009FDB',
     backgroundColor: 'transparent',
   },
+  containerModal: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.7)',
+    flexDirection: 'column',
+    justifyContent: 'center',
+  },
+  headerModal: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    alignItems: 'flex-end',
+  },
+  headerCloseModal: {
+    marginBottom: 50,
+    marginRight: 30,
+  },
+  contentContainerModal: {
+    width: width,
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  contentModal: {
+    // flex: 1,
+    backgroundColor: 'rgb(255, 255, 255)',
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    width: width - 30,
+    borderRadius: 4,
+  },
+  contentTitleModal: {
+    fontSize: 18,
+    marginTop: 20,
+    marginLeft: 10,
+    marginRight: 10,
+  },
+  contentViewModal: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+  },
+  contentBodyModal: {
+    fontSize: 14,
+    marginTop: 10,
+    marginLeft: 10,
+    marginRight: 10,
+  },
+  contentLegalModal: {
+    fontSize: 14,
+    marginTop: 10,
+    marginLeft: 10,
+    marginRight: 10,
+    marginBottom: 20,
+  },
+  footerModal: {
+    flex: 1,
+    marginBottom: 50,
+  },
+  imageModal: {
+    width: width - 30,
+    height: 447 * (width - 30) / 640,
+    borderRadius: 4,
+  },
   infoSpecBox: { paddingHorizontal: 10 },
   // - - Skeleton Loading Box - -
   skeletonLoading: {
