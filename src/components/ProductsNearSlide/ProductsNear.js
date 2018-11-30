@@ -172,10 +172,18 @@ class ProductsNear extends Component {
 
               <Animated.View style={[ styles.deviceOptionsBox, fastOpacity ]}>
                 <View style={styles.deviceOptionItem}>
-                  <Icon height="14" width="14" name="Storage" viewBox="0 0 24 24" />
-                  <Text style={styles.deviceOptionText}>
-                    {product ? product.deviceOptions[0].storage : 0}GB
-                  </Text>
+                  <View style={styles.deviceOptionItem}>
+                    <Icon height="14" width="14" name="Storage" viewBox="0 0 24 24" />
+                    <Text style={styles.deviceOptionText}>
+                      {product ? product.deviceOptions[0].storage : 0}GB
+                    </Text>
+                  </View>
+                  {product.firstnet && <View style={styles.deviceOptionItem}>
+                    <Image style={styles.firstNetIcon} source={require('../../assets/images/files/firstnet_logo.png')} />
+                    <Text style={styles.deviceOptionText}>
+                      Firstnet
+                    </Text>
+                  </View>}
                 </View>
               </Animated.View>
 
