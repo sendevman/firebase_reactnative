@@ -308,7 +308,11 @@ class InfoSpecsScreen extends Component {
     let infoSpecsEmpty = typeof infoSpecs == 'undefined'; // || (Object.keys(infoSpecs).length === 0 && infoSpecs.constructor === Object));
 
     return (
-      <Animated.ScrollView contentContainerStyle={styles.container} scrollEventThrottle={16}>
+      <Animated.ScrollView
+        contentContainerStyle={styles.container}
+        scrollEventThrottle={16}
+        onScroll={this._animateScroll}
+      >
         {this.renderContent()}
       </Animated.ScrollView>
     );
