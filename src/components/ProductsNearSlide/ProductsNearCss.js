@@ -146,13 +146,18 @@ export default StyleSheet.create({
     alignItems: 'center',
     marginBottom: 8
   },
+  firstNetIcon: {
+    width: 14,
+    height: 14,
+  },
   deviceOptionItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginRight: 10
+    justifyContent: 'center',
+    marginRight: 1
   },
   deviceOptionText: {
-    width: 120,
+    // width: 120,
     color: '#3E3F42',
     // fontFamily: 'Roboto',
     fontSize: 13,

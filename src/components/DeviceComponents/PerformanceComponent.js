@@ -5,7 +5,7 @@
  */
 
 import React, { Component } from 'react';
-import { Image, View, Text, StyleSheet, Dimensions } from 'react-native';
+import { Image, View, Text, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
 import { Button } from 'react-native-elements';
 var { width } = Dimensions.get('window');
 
@@ -17,7 +17,7 @@ class PerformanceComponent extends Component {
     super(props);
   }
   render() {
-    const { deviceOptions, expandableStorage, memory, processor, subType, performance } = this.props;
+    const { deviceOptions, expandableStorage, firstnet, memory, processor, subType, performance } = this.props;
     const viewWidth = width - 34;
     const memoryEmpty = !memory || !memory.trim() || 0 === memory.length;
     const processorEmpty = typeof processor == 'undefined'; // || (Object.keys(processor).length === 0 && processor.constructor === Object));
@@ -72,32 +72,34 @@ class PerformanceComponent extends Component {
           </View>
         )}
 
-        {subType !== 'watch' &&
-        (isAvailable || doIsValid) && (
-          <View style={[ styles.performanceStorageBox, mpChangeStyle ? {} : { marginTop: 20 }, { marginBottom: 20 } ]}>
-            {isAvailable && (
-              <View style={styles.storageBlueBox}>
-                <Icon name="StorageBackground" width="135" height="90" fill="#FFFFFFBB" viewBox="0 0 270 180" />
-                <Text style={styles.storageBlueTitle}>SD CARD SLOT</Text>
-                <Text style={styles.storageBlueText}>Available</Text>
-              </View>
-            )}
+        <View style={[ styles.performanceStorageBox, mpChangeStyle ? {} : { marginTop: 20 }, { marginBottom: 20 } ]}>
+          {(subType !== 'watch' && isAvailable) && (
+            <View style={styles.storageBlueBox}>
+              <Icon name="StorageBackground" width="135" height="90" fill="#FFFFFFBB" viewBox="0 0 270 180" />
+              <Text style={styles.storageBlueTitle}>SD CARD SLOT</Text>
+              <Text style={styles.storageBlueText}>Available</Text>
+            </View>
+          )}
 
-            {doIsValid && (
-              <View style={styles.storageBlueBox}>
-                <Icon name="SDCardBackground" width="135" height="90" fill="#FFFFFFBB" viewBox="0 0 270 180" />
-                <Text style={styles.storageBlueTitle}>STORAGE</Text>
-                <Text style={[ styles.storageBlueText, { fontSize: deviceOptions.length < 3 ? 14 : 12 } ]}>
-                  {deviceOptions
-                    .map(obj => {
-                      return `${obj.storage}Gb`;
-                    })
-                    .join(' | ')}
-                </Text>
-              </View>
-            )}
-          </View>
-        )}
+          {firstnet && <TouchableOpacity style={styles.storageBlueBox} onPress={this.props.showPopupFirstNet}>
+            <Image style={styles.firstNetIcon} source={require('../../assets/images/files/firstnet_logo.png')} />
+          </TouchableOpacity>}
+
+          {(subType !== 'watch' && doIsValid) && (
+            <View style={styles.storageBlueBox}>
+              <Icon name="SDCardBackground" width="135" height="90" fill="#FFFFFFBB" viewBox="0 0 270 180" />
+              <Text style={styles.storageBlueTitle}>STORAGE</Text>
+              <Text style={[ styles.storageBlueText, { fontSize: deviceOptions.length < 3 ? 14 : 12 } ]}>
+                {deviceOptions
+                  .map(obj => {
+                    return `${obj.storage}Gb`;
+                  })
+                  .join(' | ')}
+              </Text>
+            </View>
+          )}
+        </View>
+
         {subType === 'watch' &&
         (wifi || celluar || bluetooth) && (
           <View style={styles.performanceContainer}>
@@ -112,6 +114,10 @@ class PerformanceComponent extends Component {
 }
 
 const styles = StyleSheet.create({
+  firstNetIcon: {
+    width: 60,
+    height: 60,
+  },
   hrDivider: {
     borderTopWidth: 0,
     borderStyle: 'solid',
