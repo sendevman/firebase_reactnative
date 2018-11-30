@@ -198,8 +198,8 @@ class ReviewsScreen extends Component {
       <Animated.ScrollView
         contentContainerStyle={styles.container}
         scrollEventThrottle={1}
-        //onScroll={this._animateScroll}
-        //onScrollEndDrag={this._onScrollEndSnapToEdge}
+        onScroll={this._animateScroll}
+        onScrollEndDrag={this._onScrollEndSnapToEdge}
       >
         {this.renderContent()}
       </Animated.ScrollView>
