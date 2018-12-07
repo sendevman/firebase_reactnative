@@ -10,11 +10,11 @@ import { Col, Grid, Row } from "react-native-easy-grid";
 import { Icon } from 'react-native-elements'
 
 // My FakeData
-import { FakeDirecTvPackages } from '../../store/DirecTvPackageFakeData';
-import { FakeDirecTvChannel } from '../../store/DirecTvChannelFakeData';
+import { FakeDirecTvPackages } from '../../store/DirecTVPackageFakeData';
+import { FakeDirecTvChannel } from '../../store/DirecTVChannelFakeData';
 
 // My Styles
-import styles, { width } from '../css/DirecTvScreenCss';
+import styles, { width } from '../css/DirecTVScreenCss';
 
 const package_channels = require('../../assets/channels/package_channels.json');
 const packages = require('../../assets/channels/packages.json');

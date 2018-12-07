@@ -10,7 +10,7 @@ var { width } = Dimensions.get('window');
 import AutoHeightImage from 'react-native-auto-height-image';
 
 // My Styles
-import styles from '../css/DirecTvScreenCss';
+import styles from '../css/DirecTVScreenCss';
 
 class DirecTvWatchCard extends Component {
   constructor(props) {
