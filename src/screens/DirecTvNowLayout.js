@@ -15,7 +15,7 @@ import DirecTvNowGet from './components/DirecTvNowGet';
 import DirecTvNowCarousel from '../components/ServicesCarousel/DirecTvNow';
 
 // My Styles
-import styles, { width } from './css/DirecTvNowScreenCss';
+import styles, { width } from './css/DirecTVNowScreenCss';
 
 const channelImgs = [
   [
