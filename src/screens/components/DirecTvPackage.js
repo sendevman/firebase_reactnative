@@ -5,9 +5,9 @@
  */
 
 import React, { Component } from 'react';
-import { Image, Text, TextInput, View, ScrollView } from 'react-native';
+import { Image, Text, TextInput, View, ScrollView, TouchableOpacity } from 'react-native';
 import { Col, Grid, Row } from "react-native-easy-grid";
-import { Icon } from 'react-native-elements'
+import { Icon, Button } from 'react-native-elements'
 
 // My FakeData
 import { FakeDirecTvPackages } from '../../store/DirecTVPackageFakeData';
@@ -15,6 +15,7 @@ import { FakeDirecTvChannel } from '../../store/DirecTVChannelFakeData';
 
 // My Styles
 import styles, { width } from '../css/DirecTVScreenCss';
+import AutoHeightImage from 'react-native-auto-height-image';
 
 const package_channels = require('../../assets/channels/package_channels.json');
 const packages = require('../../assets/channels/packages.json');
@@ -145,126 +146,104 @@ class DirecTvPackage extends Component {
 
   render() {
     return (
-      <View style={{ width, flex: 1, backgroundColor: 'white' }}>
-        <View style={{ width: '100%', height: 70, alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}>
-          <Image source={require('../../assets/images/files/dtv.logo.png')}/>
-          <Text>Shop Now</Text>
+      <View style={{flex: 1, width, backgroundColor: '#F0F0F0'}}>
+        <View style={{width, height: 80, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
+          <TouchableOpacity style={{width: '55%'}}>
+            <Image resizeMode="contain" style={{width: '100%', height: 60}} source={require('../../assets/images/directv/sm_btn_vap.jpg')}/>
+          </TouchableOpacity>
+          <TouchableOpacity style={{width: '40%'}}>
+            <Image resizeMode="contain" style={{width: '100%', height: 60}} source={require('../../assets/images/directv/sm_btn_call_to_order.jpg')}/>
+          </TouchableOpacity>
+        </View>
+        <AutoHeightImage width={width} source={require('../../assets/images/directv/hdr_Packages.jpg')}/>
+        <View style={{width, backgroundColor: '#fff', alignItems: 'center', paddingTop: 20, paddingBottom: 20}}>
+          <Text style={{fontSize: 15}}>Build your perfect entertainment package.</Text>
+          <AutoHeightImage style={{marginTop: 20}} width={width} source={require('../../assets/images/directv/img_pkg_pricing.jpg')}/>
+          <Text style={{color: '#5f5f5f', fontWeight: 'bold', fontSize: 10, width, textAlign: 'center', paddingTop: 10}}>
+            All DIRECTV offers require 24-mo. TV agreement. $19.95 ACTIVATION, EARLY TERMINATION FEE OF $20/MO. FOR EACH MONTH REMAINING ON AGMT., EQUIPMENT NON-RETURN & ADD’L FEES APPLY.
+          </Text>
+          <Text style={{color: '#9c9c9c', fontSize: 8, width, textAlign: 'center', paddingTop: 10}}>
+            Price incl. TV Pkg., monthly service and equip. fees for 1 HD DVR & is after $5/mo. AutoPay & Paperless bill discount for 12 mo. New approved residential customers only (equipment lease req’d). Credit card req’d (except MA & PA). Restr’s apply.
+          </Text>
+          <Text style={{fontSize: 14, textAlign: 'center', paddingTop: 10}}>
+            Get an HD DVR at no extra cost
+          </Text>
+          <Text style={{fontSize: 10, textAlign: 'center', paddingTop: 5}}>Our all-included DIRECTV package prices include an HD DVR at no extra cost. It's a simpler way to enjoy DIRECTV and all your favorite movies and shows.</Text>
+        </View>
+        
+        <View style={{width, backgroundColor: '#fff', alignItems: 'center', paddingTop: 20, paddingBottom: 20, borderBottomColor: '#e4e7ed', borderBottomWidth: 1}}>
+          <AutoHeightImage style={{marginTop: 20}} width={width} source={require('../../assets/images/directv/img_pkg_premiums.jpg')}/>
+          
+          <Text style={{fontSize: 14, textAlign: 'center', paddingTop: 15}}>
+            Get first 3 months of premium networks at no extra cost!
+          </Text>
+
+          <Text style={{color: '#5f5f5f', textAlign: 'center', paddingTop: 15, fontSize: 12}}>
+            Get the shows everyone's buzzing about on your TV and streaming on all your favorite devices—live and On Demand^.            
+          </Text>
+
+          <Text style={{color: '#9c9c9c', textAlign: 'center', paddingTop: 15, fontSize: 8, paddingLeft: 10, paddingRight: 10}}>
+            WITH SELECT through ULTIMATE Pkgs. After 3 mos. services automatically continue each month at then prevailing rate (currently $53.99/mo) unless you call to change or cancel. Req's you to select offer.
+          </Text>
         </View>
 
-        <View style={{width: '100%', height: 60, backgroundColor: 'white'}}>
-          <View style={{width: '100%', flex: 1, flexDirection: 'row'}}>
-            <View style={{flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, backgroundColor: 'white'}}>
-              <Icon name='search' color='#00aced' onPress={() => this.toggleSearch()} />
-            </View>
+        <View style={{width, backgroundColor: '#fff', alignItems: 'center', paddingBottom: 20, borderBottomColor: '#e4e7ed', borderBottomWidth: 1}}>
+          <AutoHeightImage width={width} source={require('../../assets/images/directv/img_pkg_NFLST.jpg')}/>
+          
+          <Text style={{fontSize: 14, textAlign: 'center', paddingTop: 15}}>
+            2018 & 2019 seasons at no extra cost.
+          </Text>
 
-            {
-              this.state.packages.map((pkg, index) =>
-                <View key={index} style={{ flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, backgroundColor: pkg.color}}>
-                  <Text style={{color: 'white', fontWeight: 'bold', fontSize: 11}}>{pkg.price}/mo</Text>
-                  <Text style={{color: 'white', fontSize: 8}}>Additional info</Text>
-                </View>
-              )
-            }
+          <Text style={{color: '#5f5f5f', textAlign: 'center', paddingTop: 15, fontSize: 12}}>
+            Get every NFL game, every Sunday with NFL SUNDAY TICKET. Only on DIRECTV.
+          </Text>
+
+          <Text style={{color: '#9c9c9c', textAlign: 'center', paddingTop: 15, fontSize: 8, paddingLeft: 10, paddingRight: 10}}>
+            With CHOICE™ Package or above. Subscription renews automatically for 2020 season and each season thereafter at then prevailing rate (currently $293.94/season) unless you call to cancel prior to the start of the season. Req's you to select offer.
+          </Text>
+        </View>
+
+        <View style={{width, backgroundColor: '#fff', alignItems: 'center', paddingBottom: 20, borderBottomColor: '#e4e7ed', borderBottomWidth: 1}}>
+          <Text style={{fontSize: 16, textAlign: 'center', paddingTop: 15}}>
+            Get special exclusive offers sent to your inbox.
+          </Text>
+          <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center', height: 100, width}}>
+            <TextInput
+              style={{height: 40, width: '65%', borderColor: '#9c9c9c', borderWidth: 1}}
+              onChangeText={(text) => this.setState({text})}
+              value={this.state.text}
+            />
+            <Button
+              title="Submit"
+              color="#fff"
+              style={{backgroundColor: '#2E81C3',  width: 80}}
+            />
           </View>
         </View>
 
-        {
-          this.state.showSearch ?
-          <TextInput
-            style={{height: 40, backgroundColor: 'white', borderColor: 'gray', borderWidth: 1, paddingLeft: 3, paddingRight: 3}}
-            value={this.state.text}
-            onChangeText={searchText => this.search(searchText)}
-          />
-          :
-          <View></View>
-        }
+        <View style={{width, alignItems: 'center', paddingBottom: 20, borderBottomColor: '#e4e7ed', borderBottomWidth: 1}}>
+          <Text style={{color: '#5f5f5f', fontSize: 8, fontWeight: '800', paddingTop: 15}}>
+            All DIRECTV offers require 24-mo. TV agreement. $19.95 ACTIVATION, EARLY TERMINATION FEE OF $20/MO. FOR EACH MONTH REMAINING ON AGMT., EQUIPMENT NON-RETURN & ADD’L FEES APPLY
+          </Text>
+          <Text style={{color: '#5f5f5f', fontSize: 8, paddingLeft: 5, paddingRight: 5}}>
+            Price incl. TV Pkg., monthly service and equip. fees for 1 HD DVR & is after $5/mo. AutoPay & Paperless bill discount for 12 mo. New approved residential customers only (equipment lease req’d). Credit card req’d (except MA & PA). Restr’s apply. 
+          </Text>
+          <Text style={{color: '#5f5f5f', fontSize: 8, paddingLeft: 5, paddingRight: 5}}>
+            1-YR ALL INCLUDED PACKAGE: Ends 1/19/19. Available only in the U.S. (excludes Puerto Rico and U.S.V.I.). 1st & 2nd year Pricing: $35/mo for SELECT All Included; $40/mo for ENTERTAINMENT All Included; $45/mo for CHOICE All Included; $55/mo for XTRA All Included; $60/mo for ULTIMATE All Included; $110/mo for PREMIER All Included for first 12 mos. only. After 12 mos. or loss of eligibility, then prevailing rate applies (currently $78/mo for SELECT All Included; $90/mo for ENTERTAINMENT All Included; $105/mo for CHOICE All Included; $117/mo for XTRA All Included; $128/mo for ULTIMATE All Included; $181/mo for PREMIER All Included), unless cancelled or changed prior to end of the promo period. Pricing subject to change. $5/mo. discount: Must enroll inAutoPay & Paperless bill within 30 days of TV activation to receive bill credit starting in 1-3 bill cycles. First time credit will include all credits earned since meeting offer requirements. Must maintain AutoPay/Paperless bill and valid email address to continue credits. No credits in 2nd year for AutoPay/Paperless bill. Includes: All Included TV Pkg., monthly service & equipment fees for one Genie HD DVR, and standard pro installation. Exclusions: Price excludes Regional Sports Fee of up to $7.49/mo. (which is extra & applies to CHOICE and/or MÁS ULTRA and higher Pkgs.), applicable use tax expense surcharge on retail value of installation, custom installation, equipment upgrades/add-ons (min. $99 one-time & $7/mo. monthly fees for each extra receiver/DIRECTV Ready TV/Device), and certain other add’l fees & charges. Different offers may apply for eligible multi-dwelling unit and telco customers. 
+          </Text>
+          <Text style={{color: '#5f5f5f', fontSize: 8, paddingLeft: 5, paddingRight: 5}}>
+            DIRECTV SVC TERMS: Subject to Equipment Lease & Customer Agreements. Must maintain a min. base TV pkg of $29.99/mo. Programming, pricing, terms and conditions subject to change at any time. Some offers may not be available through all channels and in select areas. Visit directv.com/legal or call for details. 
+          </Text>
+          <Text style={{color: '#5f5f5f', fontSize: 8, paddingLeft: 5, marginTop: 5, paddingRight: 5}}>
+            ©2018 Home Box Office, Inc. All rights reserved. HBO® and related channels and service marks are the property of Home Box Office, Inc. SHOWTIME, THE MOVIE CHANNEL, FLIX and related marks are trademarks of Showtime Networks Inc., a CBS Company. STARZ® and related channels and service marks are the property of STARZ Entertainment, LLC.
+          </Text>
+          <Text style={{color: '#5f5f5f', fontSize: 8, paddingLeft: 5, marginTop: 5, paddingRight: 5}}>          
+            ©2018 Home Box Office, Inc. All rights reserved. HBO® and related channels and service marks are the property of Home Box Office, Inc. SHOWTIME, THE MOVIE CHANNEL, FLIX and related marks are trademarks of Showtime Networks Inc., a CBS Company. STARZ® and related channels and service marks are the property of STARZ Entertainment, LLC.
+          </Text>
 
-        <View style={{flex: 1, flexDirection: 'column'}}>
-          <View style={{width: '100%', height: 60, marginTop: 10}}>
-            <View style={{width: '100%', height: 60, flex: 1, flexDirection: 'row'}}>
-              <View style={{flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
-                <Text style={{color: '#666', fontSize: 8}}>99% Local channels in USA</Text>
-              </View>
 
-              <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
-                <Text style={{color: '#00aced'}}>✔</Text>
-              </View>
-
-              <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
-                <Text style={{color: '#00aced'}}>✔</Text>
-              </View>
-
-              <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
-                <Text style={{color: '#00aced'}}>✔</Text>
-              </View>
-
-              <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
-                <Text style={{color: '#00aced'}}>✔</Text>
-              </View>
-
-              <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
-                <Text style={{color: '#00aced'}}>✔</Text>
-              </View>
-
-              <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
-                <Text style={{color: '#00aced'}}>✔</Text>
-              </View>
-            </View> 
-          </View>
-
-          {
-            this.state.groups.map((group, index) => {
-              return <View key={index} style={{width: '100%', height: 60, marginTop: 10}}>
-                <View style={{flex: 1}}>
-                  <View style={{width: '100%', height: 60, flex: 1, flexDirection: 'row'}}>
-                    
-                    <View style={{flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
-                      <Image resizeMode="contain" style={{width: 30, height: 30}} source={{uri: group.logoUrl}}/>
-                    </View>
-                    {
-                      this.state.packages.map((pkg,idx) => {
-                        return <View key={idx} style={{ flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
-                          {
-                            (idx < (this.state.packages.length - 1)) ? <Image resizeMode="contain" style={{width: 30, height: 30}} source={{uri: group.promoUrl}}/>
-                            : <Text style={{color: '#00aced'}}>✔</Text>
-                          }
-                        </View>
-                      })
-                    }
-                  </View>
-                </View>
-              </View>
-            })
-          }
-
-          {
-            this.state.channels.filter(channel => channel.grpName == null).map((channel, index) => {
-              return <View key={index} style={{width: '100%', height: 60, marginTop: 10}}>
-              <View style={{width: '100%', height: 60, flex: 1, flexDirection: 'row'}}>
-                
-                <View style={{flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
-                  <Image resizeMode="contain" style={{width: 30, height: 30}} source={{uri: channel.logoUrl}}/>
-                  <Text style={{fontSize: 7}}>{channel.name}</Text>
-                </View>
-                {
-                  this.state.packages.map((pkg, idx) => {
-                    return <View key={idx} style={{ flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
-                      {
-                        
-                        this.getChannelPresence(channel.chLogoId, pkg.id) ?
-                          <Text style={{color: '#00aced'}}>✔</Text>
-                          :
-                          <View>
-                          </View>
-                      }
-                    </View>
-                  })
-                }
-              </View> 
-            </View>
-            })
-          }
         </View>
+
       </View>
     );
   }
