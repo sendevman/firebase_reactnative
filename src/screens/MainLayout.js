@@ -257,7 +257,14 @@ class MainLayout extends Component {
       <SafeAreaView forceInset={{ top: 'always' }} style={{ backgroundColor: '#FFF' }}>
         <View {...this.setTestId("MainLayoutBox")} style={{ width: '100%', height: '100%' }}>
 
-          <Image {...this.setTestId("MainLayoutImg")} style={styles.backImage} source={bgImg} />
+          <Image {...this.setTestId("MainLayoutImg")} style={styles.backImage} source={bgImg} onLoad={() => {
+            if (bgImg.uri && !this.state.homeLoaded) {
+              this.setState({homeLoaded: true});
+            }
+          }} />
+
+          {
+            this.state.homeLoaded ? 
 
           <View {...this.setTestId("MainLayoutCarousel")} style={styles.sliderView}>
             <Carousel
