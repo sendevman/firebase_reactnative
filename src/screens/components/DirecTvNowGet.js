@@ -8,7 +8,7 @@ import React, { Component } from 'react';
 import { Image, Text, TouchableOpacity, View, Dimensions } from 'react-native';
 
 // My Styles
-import styles from '../css/DirecTvNowScreenCss';
+import styles from '../css/DirecTVNowScreenCss';
 
 var { width } = Dimensions.get('window');
 

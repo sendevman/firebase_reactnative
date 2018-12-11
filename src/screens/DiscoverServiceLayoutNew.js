@@ -20,7 +20,7 @@ import ServicesSlide from '../components/ServicesSlide/ServicesSlide';
 // My Layouts
 import DirecTvLayout from './DirecTvLayout';
 import DirecTvNowLayout from './DirecTvNowLayout';
-import DirecTvWatchLayout from './DirecTvWatchLayout';
+import DirecTvWatchLayout from './DirecTVWatchLayout';
 import InternetLayout from './InternetLayout';
 
 // My Styles
