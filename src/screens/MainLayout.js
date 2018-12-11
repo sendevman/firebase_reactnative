@@ -5,23 +5,28 @@
  */
 
 import React, { Component } from 'react';
-import { Image, Platform, Text, TouchableOpacity, View } from 'react-native';
+import { AsyncStorage, Image, Platform, Text, TouchableOpacity, View } from 'react-native';
 import { NavigationActions, SafeAreaView, StackActions } from 'react-navigation';
 import Carousel from 'react-native-snap-carousel';
 import Dialog, { DialogContent, SlideAnimation } from 'react-native-popup-dialog';
-import Modal from 'react-native-modalbox';
 import firebase from 'react-native-firebase';
+import SystemSetting from 'react-native-system-setting';
 import { connect } from 'react-redux';
 
 // My Actions
-import { setAutomaticZoneEntry, setCurrentZone, setCurrentZonePopUp } from '../actions/Current';
+import { setCurrentZone, setCurrentZonePopUp } from '../actions/Current';
 import { setLocationSelectItem } from '../actions/Locations';
 
 // My Customs
 import Icon from '../assets/images/Icon';
 
+import OnBoardingModal from '../components/OnBoardingModal/OnBoardingModal';
+
 // My FakeData
 // import { FakeAreas } from '../store/AreaFakeData';
+
+// My Actions
+import { updateBluetoothIsOn, updateLocationIsOn } from '../actions/Common';
 
 // My Styles
 import styles, { itemWidth, sliderWidth, width } from './css/MainScreenCss';
@@ -36,18 +41,74 @@ class MainLayout extends Component {
       visible: false,
       currentZone: null,
       home: null,
+      ispass: false,
+      showModal: false,
     };
-
     firebase.firestore().doc('locations/off_site/siteData/home').get()
     .then(e => {
       this.setState({ home: e.data() });
+      this.getStoreData();
     });
+  }
+
+  componentWillMount() {
+    SystemSetting.addBluetoothListener(this.checkSwitchBluetooth);
+    SystemSetting.addLocationListener(this.checkSwitchLocation);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.locationIsOn !== nextProps.locationIsOn) {
+      if (!nextProps.locationIsOn) {
+        if (this.state.ispass) {
+          this.props.navigation.navigate('NewOnBoarding');
+        }
+      }
+    }
+    if (this.props.bluetoothIsOn !== nextProps.bluetoothIsOn) {
+      if (!nextProps.bluetoothIsOn) {
+        if (this.props.locationIsOn && this.state.ispass) {
+          this.setState({ showModal: true });
+        }
+      }
+    }
+  }
+
+  hideModal = () => {
+    this.setState({ showModal: false });
+    this.props.navigation.navigate('Home');
+  }
+
+  checkSwitchLocation() {
+    SystemSetting.isLocationEnabled().then((enable) => {
+      this.props.dispatch(updateLocationIsOn(enable));
+    })
+  }
+
+  checkSwitchBluetooth() {
+    SystemSetting.isBluetoothEnabled().then((enable) => {
+      this.props.dispatch(updateBluetoothIsOn(enable));
+    })
   }
 
   gotoDirecTV = (index) => {
     const arrAreas = this.props.location.zones[index];
     this.props.dispatch(setLocationSelectItem(arrAreas));
     this.props.navigation.navigate('Discover');
+  };
+
+  getStoreData = async () => {
+    try {
+      const result = await AsyncStorage.getItem('passOnboarding');
+      if (result === '1') {
+        this.setState({ ispass: true });
+        this.checkSwitchLocation();
+        this.checkSwitchBluetooth();  
+      } else {
+        this.props.navigation.navigate('OnBoarding');
+      }
+    } catch (error) {
+      console.log('===', error);
+    }
   };
 
   gotoZone = (index) => {
@@ -96,8 +157,9 @@ class MainLayout extends Component {
   _renderItem({ item, index }) {
     return (
       <View {...this.setTestId("MainLayoutCarouselItemCard")} style={styles.itemContainer} key={index}>
-        
-        <TouchableOpacity activeOpacity={1} style={[styles.itemBox, { height: 200 }]} onLongPress={() => {
+
+        <TouchableOpacity activeOpacity={1} style={[styles.itemBox, { height: 200 }]}
+            onLongPress={() => {
               console.log('LONG PRESS');
               setTimeout(() => {
                 this.props.dispatch(setCurrentZone(10011));
@@ -119,7 +181,7 @@ class MainLayout extends Component {
             style={styles.titleCardArrow}
             resizeMode={Image.resizeMode.cover}
             source={require('../assets/images/files/titleCardArrow.png')} />
-          
+
           {
             item.homeCard.img == 'streamInStore' ? null : 
             <View
@@ -207,7 +269,7 @@ class MainLayout extends Component {
                 this.setState({ sliderActiveSlide: index });
               }} />
           </View>
-
+          <OnBoardingModal type='location' onHideModal={this.hideModal} showModal={this.state.showModal} />
           <Dialog
             dialogAnimation={new SlideAnimation({ useNativeDriver: true, slideFrom: 'bottom' })}
             dialogStyle={styles.dialogStyle}
@@ -292,9 +354,11 @@ class MainLayout extends Component {
 }
 
 const mapStateToProps = state => {
-  const { current } = state;
+  const { common, current } = state;
 
   return {
+    bluetoothIsOn: common.bluetoothIsOn,
+    locationIsOn: common.locationIsOn,
     ...current
   };
 }

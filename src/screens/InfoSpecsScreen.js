@@ -226,7 +226,6 @@ class InfoSpecsScreen extends Component {
     const { appData, showFirstNetModal } = this.state;
     const viewWidth = width - 34;
     const isTitle = infoSpecs.title !== 'title' ? true : false;
-    console.log('here1', appData);
 
     if (!isTitle) {
       return (
