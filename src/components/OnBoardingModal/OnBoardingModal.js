@@ -25,7 +25,7 @@ class OnBoardingModal extends Component {
   };
 
   render() {
-    const { onHideModal, showModal } = this.props;
+    const { type, onHideModal, showModal } = this.props;
 
     return (
       <Modal
@@ -37,22 +37,37 @@ class OnBoardingModal extends Component {
         <View style={styles.containerModal}>
           <View style={styles.container}>
             <View style={styles.modalBox}>
-              <View style={styles.bluetoothBox}>
-                <Icon name="Bluetooth" width={205} height={56} viewBox="0 0 230 63" />
-              </View>
+              {type ==='bluetooth' &&
+                <View style={styles.bluetoothBox}>
+                  <Icon name="Bluetooth" width={205} height={56} viewBox="0 0 230 63" />
+                </View>}
 
               <View>
                 <Text style={styles.modalText}>In order for AT&T Retail Companion™</Text>
                 <Text style={styles.modalText}>to work, you need to grant it permission</Text>
-                <Text style={styles.modalText}>to use your device’s Bluetooth.</Text>
+                <Text style={styles.modalText}>to use your device’s {type === 'bluetooth' ? 'Bluetooth' : 'Location'}.</Text>
               </View>
 
               <TouchableOpacity style={styles.allowBtn}
                 onPress={() => Alert.alert(
-                  'Turn On Bluetooth To Allow "AT&T Retail Companion" to Connect to Accessories',
+                  `Turn On ${type === 'bluetooth' ? 'Bluetooth' : 'Location'} To Allow "AT&T Retail Companion" to Connect to Accessories`,
                   'Go to Allow Action!',
                   [
-                    { text: 'Settings', onPress: () => Platform.OS == 'ios' ? OpenSettings.openBluetooth() : SystemSetting.switchBluetooth(() => console.log('switch bluetooth successfully')) },
+                    {
+                      text: 'Settings',
+                      onPress:
+                        () => {
+                          if (type === 'bluetooth') {
+                            Platform.OS == 'ios'
+                              ? OpenSettings.openBluetooth()
+                              : SystemSetting.switchBluetooth(() => onHideModal());
+                          } else {
+                            Platform.OS == 'ios'
+                              ? OpenSettings.openLocation()
+                              : SystemSetting.switchLocation(() => onHideModal());
+                          }
+                        },
+                    },
                     { text: 'Cancel', onPress: () => console.log('Go to Cancel'), style: 'cancel' }
                   ],
                   { cancelable: false }

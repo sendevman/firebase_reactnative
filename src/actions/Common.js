@@ -9,6 +9,11 @@ export const updateBluetoothIsOn = (params) => ({
   payload: params
 })
 
+export const updateLocationIsOn = (params) => ({
+  type: 'UPDATE_LOCATION_IS_ON',
+  payload: params
+})
+
 export const setNetworkInfo = (params) => ({
   type: 'UPDATE_NETWORK_INFO',
   payload: params
