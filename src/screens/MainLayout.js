@@ -25,6 +25,7 @@ import Icon from '../assets/images/Icon';
 
 // My Styles
 import styles, { itemWidth, sliderWidth, width } from './css/MainScreenCss';
+import AutoHeightImage from 'react-native-auto-height-image';
 
 class MainLayout extends Component {
   constructor(props) {
@@ -54,6 +55,14 @@ class MainLayout extends Component {
     if (index === -1) {
       return;
     }
+    
+    //console.log(this.props.location.zones.length, index, 'STREAMIN');
+    let stream = false;
+    if (index === this.props.location.zones.length) {
+      index = this.props.location.zones.length - 1;
+      stream = true;
+    }
+
     /*
     const arrAreas = this.props.location.zones[index];
     this.props.dispatch(setLocationSelectItem(arrAreas));
@@ -69,7 +78,7 @@ class MainLayout extends Component {
       key: null,
       actions: [
         NavigationActions.navigate({ routeName: "Home", params: { resetOrder: 1 } }),
-        NavigationActions.navigate({ routeName: "TabNav", params: { areaData: arrAreas, videoService } })
+        NavigationActions.navigate({ routeName: "TabNav", params: { areaData: arrAreas, videoService, stream } })
       ]
     });
     this.props.navigation.dispatch(resetAction);
@@ -99,22 +108,32 @@ class MainLayout extends Component {
               this.gotoZone(index - 1);
             }}>
 
-          <Image style={styles.bgImage} source={{ uri: item.homeCard.img }} />
+          {
+            item.homeCard.img == 'streamInStore' ?
+            <AutoHeightImage style={styles.bgImage} width={itemWidth} source={require('../assets/images/files/stream_hc.png')} />
+            :
+            <Image style={styles.bgImage} source={{uri: item.homeCard.img}} />
+          }
+
           <Image
             style={styles.titleCardArrow}
             resizeMode={Image.resizeMode.cover}
             source={require('../assets/images/files/titleCardArrow.png')} />
-
-          <View
-            {...this.setTestId("MainLayoutGoToZone")}
-            activeOpacity={1}
-          >
-            <View style={styles.titleCardBox}>
-              <Icon height="30" width="30" name="ManIcon" viewBox="0 0 127 125" fill="#000" />
-              <Text numberOfLines={1} style={styles.titleCard}>{item.homeCard.title}</Text>
+          
+          {
+            item.homeCard.img == 'streamInStore' ? null : 
+            <View
+              {...this.setTestId("MainLayoutGoToZone")}
+              activeOpacity={1}
+            >
+              <View style={styles.titleCardBox}>
+                <Icon height="30" width="30" name="ManIcon" viewBox="0 0 127 125" fill="#000" />
+                <Text numberOfLines={1} style={styles.titleCard}>{item.homeCard.title}</Text>
+              </View>
+              <Text numberOfLines={1} style={styles.subTitleCard}>{item.homeCard.subtitle}</Text>
             </View>
-            <Text numberOfLines={1} style={styles.subTitleCard}>{item.homeCard.subtitle}</Text>
-          </View>
+          }
+
         </TouchableOpacity>
       </View>
     );
@@ -131,6 +150,12 @@ class MainLayout extends Component {
 
     if (this.props.location) {
       zones = [...zones, ...this.props.location.zones];
+      zones.push({
+        homeCard: {
+          title: 'Stream In Store',
+          img: 'streamInStore'
+        }
+      })
     } else {
       zones = [];
     }
@@ -142,6 +167,11 @@ class MainLayout extends Component {
     if (zones.length && index < (zones.length - 1)) {
       bgImg = { uri: zones[index].homeCard.bgImg };
     }
+
+    if (zones.length && index == (zones.length - 1)) {
+      bgImg = require('../assets/images/files/sis_bg.png');  
+    }
+
 
     if (zones.length > 1 && !this.props.enteredZoneAutomaticallyForFirstTime) {
       // Commented at Joseph's request!
