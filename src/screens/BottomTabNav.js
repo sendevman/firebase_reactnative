@@ -95,19 +95,20 @@ class BottomTabNav extends React.Component {
 
   renderEntertainButton() {
     const { tab } = this.state;
+    const hasStream = tab === 0 && !this.props.navigation.state.params.stream;
 
     return (
       <TouchableOpacity
-        style={[ styles.oneButtonContainer, { backgroundColor: tab === 0 ? 'white' : '#1181ff' } ]}
+        style={[ styles.oneButtonContainer, { backgroundColor: hasStream ? 'white' : '#1181ff' } ]}
         onPress={() => this.setState({ tab: 1 })}
       >
         <View style={styles.oneButtonContent}>
-          {tab === 0 ? (
+          {hasStream ? (
             <Icon name="ExclusiveVodUnFill" width="22" height="18" viewBox="0 0 22 18" fill={'#3E3F42'} />
           ) : (
             <Icon name="ExclusiveVodFill" width="22" height="18" viewBox="0 0 22 18" />
           )}
-          <Text style={tab === 0 ? styles.tintText : styles.activeTintText}>Stream In-Store</Text>
+          <Text style={hasStream ? styles.tintText : styles.activeTintText}>Stream In-Store</Text>
         </View>
       </TouchableOpacity>
     );
@@ -116,11 +117,12 @@ class BottomTabNav extends React.Component {
   render() {
     const { navigation } = this.props;
     const videoService = navigation.state.params.videoService;
+    const stream = navigation.state.params.stream;
 
     return (
       <View style={styles.container}>
         <View style={styles.container}>
-          {this.state.tab === 0 ? (videoService ? <DiscoverServiceLayoutNew/> : <ProductLayout screenProps={navigation} />) : <VodLayout />}
+          {this.state.tab === 0 && !stream ? (videoService ? <DiscoverServiceLayoutNew/> : <ProductLayout screenProps={navigation} />) : <VodLayout />}
         </View>
 
         <View style={styles.bottom}>
@@ -129,6 +131,10 @@ class BottomTabNav extends React.Component {
         </View>
       </View>
     );
+  }
+
+  getLayout() {
+
   }
 }
 
