@@ -11,26 +11,23 @@ import Carousel from 'react-native-snap-carousel';
 import Dialog, { DialogContent, SlideAnimation } from 'react-native-popup-dialog';
 import firebase from 'react-native-firebase';
 import SystemSetting from 'react-native-system-setting';
+import AutoHeightImage from 'react-native-auto-height-image';
 import { connect } from 'react-redux';
 
 // My Actions
+import { updateBluetoothIsOn, updateLocationIsOn } from '../actions/Common';
 import { setCurrentZone, setCurrentZonePopUp } from '../actions/Current';
 import { setLocationSelectItem } from '../actions/Locations';
 
 // My Customs
 import Icon from '../assets/images/Icon';
-
 import OnBoardingModal from '../components/OnBoardingModal/OnBoardingModal';
 
 // My FakeData
 // import { FakeAreas } from '../store/AreaFakeData';
 
-// My Actions
-import { updateBluetoothIsOn, updateLocationIsOn } from '../actions/Common';
-
 // My Styles
 import styles, { itemWidth, sliderWidth, width } from './css/MainScreenCss';
-import AutoHeightImage from 'react-native-auto-height-image';
 
 class MainLayout extends Component {
   constructor(props) {
@@ -44,6 +41,7 @@ class MainLayout extends Component {
       ispass: false,
       showModal: false,
     };
+
     firebase.firestore().doc('locations/off_site/siteData/home').get()
     .then(e => {
       this.setState({ home: e.data() });
@@ -257,14 +255,7 @@ class MainLayout extends Component {
       <SafeAreaView forceInset={{ top: 'always' }} style={{ backgroundColor: '#FFF' }}>
         <View {...this.setTestId("MainLayoutBox")} style={{ width: '100%', height: '100%' }}>
 
-          <Image {...this.setTestId("MainLayoutImg")} style={styles.backImage} source={bgImg} onLoad={() => {
-            if (bgImg.uri && !this.state.homeLoaded) {
-              this.setState({homeLoaded: true});
-            }
-          }} />
-
-          {
-            this.state.homeLoaded ? 
+          <Image {...this.setTestId("MainLayoutImg")} style={styles.backImage} source={bgImg} />
 
           <View {...this.setTestId("MainLayoutCarousel")} style={styles.sliderView}>
             <Carousel
