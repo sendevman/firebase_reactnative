@@ -9,12 +9,12 @@ import { Image, ScrollView, Text, View } from 'react-native';
 import { connect } from 'react-redux';
 
 // My Customs
-import DirecTvSave from './components/DirecTvSave';
+import DirecTvSave from './components/DirecTVSave';
 import DirecTvPackage from './components/DirecTvPackage';
 import DirecTvCarousel from '../components/ServicesCarousel/DirecTv';
 
 // My Styles
-import styles from './css/DirecTvScreenCss';
+import styles from './css/DirecTVScreenCss';
 
 class DirecTvLayout extends Component {
   constructor(props) {

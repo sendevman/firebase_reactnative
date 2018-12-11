@@ -15,7 +15,7 @@ import DirecTvWatchCard from './components/DirecTvWatchCard';
 import DirecTvWatchCarousel from '../components/ServicesCarousel/DirecTvWatch';
 
 // My Styles
-import styles, { width } from './css/DirecTvWatchScreenCss';
+import styles, { width } from './css/DirecTVWatchScreenCss';
 
 class DirecTvWatchLayout extends Component {
   constructor(props) {
