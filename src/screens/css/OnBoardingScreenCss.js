@@ -79,7 +79,7 @@ export default StyleSheet.create({
     height: 48,
     width: 243,
     paddingVertical: 15,
-    paddingHorizontal: 77,
+    paddingHorizontal: 50,
     borderRadius: 24,
     borderWidth: 1,
     borderStyle: 'solid',

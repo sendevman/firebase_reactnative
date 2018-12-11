@@ -26,6 +26,8 @@ import ExperienceLayout from '../screens/ExperienceLayout';
 import MainLayout from '../screens/MainLayout';
 import ProductLayout from '../screens/ProductLayout';
 import VodLayout from '../screens/VodLayout';
+import OnBoardingLayout from '../screens/OnBoardingLayout';
+import NewOnBoardingLayout from '../screens/NewOnBoardingLayout';
 
 // My Screens
 import BottomTabNav from '../screens/BottomTabNav';
@@ -62,6 +64,12 @@ const MainNav = createStackNavigator(
     ServiceZone: {
       screen: DiscoverServiceLayoutNew,
     },
+    OnBoarding: {
+      screen: OnBoardingLayout,
+    },
+    NewOnBoarding: {
+      screen: NewOnBoardingLayout,
+    },
   },
   {
     initialRouteName: 'Home',
@@ -78,7 +86,7 @@ class Routes extends Component {
       ispass: false,
     };
 
-    this.getStoreData();
+    // this.getStoreData();
   }
 
   componentWillMount() {

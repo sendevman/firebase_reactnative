@@ -72,7 +72,6 @@ class ProductLayoutScreen extends Component {
     };
 
     this.getAllProductDetail();
-    // this.setStorageData();
     this.getAreaData();
   }
 
@@ -118,16 +117,6 @@ class ProductLayoutScreen extends Component {
     });
   };
 
-  setStorageData = async () => {
-    try {
-      await AsyncStorage.setItem('passOnboarding', '1');
-    } catch (error) {
-      // Error saving data
-      console.log(error);
-    }
-    this.getAllProductDetail();
-    this.setStorageData();
-  };
 
   getAreaData = () => {
     // const { navigation } = this.props;

@@ -5,10 +5,9 @@
  */
 
 import React, { Component } from 'react';
-import { Alert, Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { AsyncStorage, Image, Text, TouchableOpacity, View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import { PagerTabIndicator, IndicatorViewPager, PagerTitleIndicator, PagerDotIndicator } from 'rn-viewpager';
-import SystemSetting from 'react-native-system-setting';
+import { IndicatorViewPager, PagerDotIndicator } from 'rn-viewpager';
 import { connect } from 'react-redux';
 
 // My Styles
@@ -16,36 +15,17 @@ import styles from './css/OnBoardingScreenCss';
 
 // My Customs
 import Icon from '../assets/images/Icon';
-import OnBoardingModal from '../components/OnBoardingModal/OnBoardingModal';
-
-// My Actions
-import { updateBluetoothIsOn } from '../actions/Common';
 
 class OnBoardingScreen extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = { showModal: false };
-
-    this.checkSwitchBluetooth = this.checkSwitchBluetooth.bind(this);
-  };
-
-  componentWillMount() {
-    // SystemSetting.switchBluetooth(() => {
-    //   console.log('switch bluetooth successfully');
-    // })
-
-    SystemSetting.addBluetoothListener(this.checkSwitchBluetooth);
+  getStart = async () => {
+    try {
+      await AsyncStorage.setItem('passOnboarding', '1');
+      this.props.navigation.navigate('NewOnBoarding');
+    } catch (error) {
+      // Error saving data
+      console.log(error);
+    }
   }
-
-  checkSwitchBluetooth() {
-    SystemSetting.isBluetoothEnabled().then((enable) => {
-      this.props.dispatch(updateBluetoothIsOn(enable));
-    })
-  }
-
-  hideModal = () => { this.setState({ showModal: false }); }
-  showModal = () => { this.setState({ showModal: true }); }
 
   _renderDotIndicator() {
     return <PagerDotIndicator pageCount={4} />;
@@ -152,14 +132,13 @@ class OnBoardingScreen extends Component {
                   <Text style={styles.subTitle}>Discover a selection of AT&T original content, movie trailers, and more.</Text>
                 </View>
 
-                <TouchableOpacity style={styles.getStartedBtn} onPress={this.showModal}>
+                <TouchableOpacity style={styles.getStartedBtn} onPress={this.getStart}>
                   <Text style={styles.getStartedBtnText}>Get started</Text>
                 </TouchableOpacity>
               </View>
             </View>
           </View>
         </IndicatorViewPager>
-        <OnBoardingModal onHideModal={this.hideModal} showModal={this.state.showModal} />
       </LinearGradient>
     );
   }
