@@ -23,12 +23,6 @@ const { width: viewportWidth } = Dimensions.get('window');
 YellowBox.ignoreWarnings([ 'Warning: isMounted(...) is deprecated', 'Class RCTCxxModule' ]);
 
 class ProductsNear extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = { sliderActiveSlide: 0 };
-  }
-
   _renderItem({ item, index }) {
     const { areaData, currentProducts } = this.props;
 
@@ -234,7 +228,6 @@ class ProductsNear extends Component {
 
   render() {
     const { areaData, currentProducts } = this.props;
-    const { sliderActiveSlide } = this.state;
 
     let areaDataEmpty = typeof areaData == 'undefined'; /// || (Object.keys(areaData).length === 0 && areaData.constructor === Object));
 
@@ -257,8 +250,10 @@ class ProductsNear extends Component {
               itemWidth={itemWidth}
               layout={'stack'}
               removeClippedSubviews={false}
+              // callbackOffsetMargin={2}
+              lockScrollTimeoutDuration={600}
+              lockScrollWhileSnapping={Platform.OS === 'android' ? true : false}
               onSnapToItem={index => {
-                this.setState({ sliderActiveSlide: index });
                 index === firstItem ? this.props.onFirstSelect(firstItem) : this.props.onProductIdChange(currentProducts[index].id);
               }}
             />
