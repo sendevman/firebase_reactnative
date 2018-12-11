@@ -87,16 +87,8 @@ class MainLayout extends Component {
   _renderItem({ item, index }) {
     return (
       <View {...this.setTestId("MainLayoutCarouselItemCard")} style={styles.itemContainer} key={index}>
-        <View style={[styles.itemBox, { height: 200 }]}>
-          <Image style={styles.bgImage} source={{ uri: item.homeCard.img }} />
-          <Image
-            style={styles.titleCardArrow}
-            resizeMode={Image.resizeMode.cover}
-            source={require('../assets/images/files/titleCardArrow.png')} />
-
-          <TouchableOpacity
-            {...this.setTestId("MainLayoutGoToZone")}
-            onLongPress={() => {
+        
+        <TouchableOpacity activeOpacity={1} style={[styles.itemBox, { height: 200 }]} onLongPress={() => {
               console.log('LONG PRESS');
               setTimeout(() => {
                 this.props.dispatch(setCurrentZone(10011));
@@ -105,15 +97,25 @@ class MainLayout extends Component {
             }}
             onPress={() => {
               this.gotoZone(index - 1);
-            }}
+            }}>
+
+          <Image style={styles.bgImage} source={{ uri: item.homeCard.img }} />
+          <Image
+            style={styles.titleCardArrow}
+            resizeMode={Image.resizeMode.cover}
+            source={require('../assets/images/files/titleCardArrow.png')} />
+
+          <View
+            {...this.setTestId("MainLayoutGoToZone")}
+            activeOpacity={1}
           >
             <View style={styles.titleCardBox}>
               <Icon height="30" width="30" name="ManIcon" viewBox="0 0 127 125" fill="#000" />
               <Text numberOfLines={1} style={styles.titleCard}>{item.homeCard.title}</Text>
             </View>
             <Text numberOfLines={1} style={styles.subTitleCard}>{item.homeCard.subtitle}</Text>
-          </TouchableOpacity>
-        </View>
+          </View>
+        </TouchableOpacity>
       </View>
     );
   }
