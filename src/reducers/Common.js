@@ -23,31 +23,31 @@ export default common = (state = initialState, action) => {
         ...state,
         bluetoothIsOn: action.payload
       }
-      break;
+    case 'UPDATE_LOCATION_IS_ON':
+      return {
+        ...state,
+        locationIsOn: action.payload
+      }
     case 'UPDATE_NETWORK_INFO':
       return {
         ...state,
         network: action.payload
       }
-      break;
     case 'UPDATE_REPLACE_URL':
       return {
         ...state,
         replaceurl: action.payload
       }
-      break;
     case 'GET_FIREBASE_ID':
       return {
         ...state,
         firebaseid: action.payload
       }
-      break;
     case 'SELECT_TABBAR_ID':
       return {
         ...state,
         selectedTab: action.payload
       }
-      break;
     default:
       return state
   }
