@@ -271,12 +271,18 @@ class ProductLayoutScreen extends Component {
     if (match.length > 0) {
       let tmpData = match[0];
       tmpData.title = 'no';
-      this.props.dispatch(setProductInfo(tmpData));
+      if (match.length > 0 && match[0].accessories &&  match[0].accessories.length > 0) {
+        const { products } = this.props;
+        const results = match[0].accessories.map(accessoryId => products.filter(product => product.id === accessoryId)[0]);
+        const data = { featured: results.slice(0, 4), fullList: this.orderFullList(results) };
+        this.props.dispatch(setProductInfo({ ...tmpData, compatibleAccessories: data }));
+      } else {
+        this.props.dispatch(setProductInfo({ ...tmpData, compatibleAccessories: [] }));
+      }
     } else {
       this.props.dispatch(setProductInfo({}));
     }
     // this.props.dispatch(setProductInfo(match.length > 0 ? match[0] : {}));
-    this.setCompatibleAccessories(match.length > 0 ? match[0].accessories : []);
     // firebase.analytics().logEvent("deviceViewed", {"pFirebaseId":this.props.firebaseid, "pDeviceModel":match[0].model, "pDeviceManufacture":match[0].manufacture, "pResearchTab":"info"});
   };
 
@@ -285,8 +291,8 @@ class ProductLayoutScreen extends Component {
     if (!productsNear || productsNear.length === 0) return;
     let tmpData = productsNear[index];
     tmpData.title = 'title';
-    this.props.dispatch(setProductInfo(tmpData));
-    this.setCompatibleAccessories([]);
+    this.props.dispatch(setProductInfo({ ...tmpData, compatibleAccessories: [] }));
+    // this.setCompatibleAccessoriesSliders([]);
   };
 
   setTestId = (identifier) => {
@@ -365,6 +371,7 @@ const mapStateToProps = state => {
     firebaseid: common.firebaseid,
     locationData: current.position,
     productsNear: productsNear.productsNear,
+    products: productsNear.productsAll,
     locationItem: locations.locationItem,
   };
 };
