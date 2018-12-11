@@ -24,8 +24,12 @@ export default StyleSheet.create({
     alignItems: 'flex-end',
   },
   headerCloseModal: {
-    marginBottom: 50,
-    marginRight: 30,
+    marginBottom: 34,
+    marginRight: 14,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 30,
+    height: 30,
   },
   contentContainerModal: {
     width: width,

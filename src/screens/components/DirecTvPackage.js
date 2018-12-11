@@ -5,16 +5,17 @@
  */
 
 import React, { Component } from 'react';
-import { Image, Text, TextInput, View, ScrollView } from 'react-native';
+import { Image, Text, TextInput, View, ScrollView, TouchableOpacity } from 'react-native';
 import { Col, Grid, Row } from "react-native-easy-grid";
-import { Icon } from 'react-native-elements'
+import { Icon, Button } from 'react-native-elements'
 
 // My FakeData
-import { FakeDirecTvPackages } from '../../store/DirecTvPackageFakeData';
-import { FakeDirecTvChannel } from '../../store/DirecTvChannelFakeData';
+import { FakeDirecTvPackages } from '../../store/DirecTVPackageFakeData';
+import { FakeDirecTvChannel } from '../../store/DirecTVChannelFakeData';
 
 // My Styles
-import styles, { width } from '../css/DirecTvScreenCss';
+import styles, { width } from '../css/DirecTVScreenCss';
+import AutoHeightImage from 'react-native-auto-height-image';
 
 const package_channels = require('../../assets/channels/package_channels.json');
 const packages = require('../../assets/channels/packages.json');
@@ -145,125 +146,9 @@ class DirecTvPackage extends Component {
 
   render() {
     return (
-      <View style={{ width, flex: 1, backgroundColor: 'white' }}>
-        <View style={{ width: '100%', height: 70, alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}>
-          <Image source={require('../../assets/images/files/dtv.logo.png')}/>
-          <Text>Shop Now</Text>
-        </View>
-
-        <View style={{width: '100%', height: 60, backgroundColor: 'white'}}>
-          <View style={{width: '100%', flex: 1, flexDirection: 'row'}}>
-            <View style={{flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, backgroundColor: 'white'}}>
-              <Icon name='search' color='#00aced' onPress={() => this.toggleSearch()} />
-            </View>
-
-            {
-              this.state.packages.map((pkg, index) =>
-                <View key={index} style={{ flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, backgroundColor: pkg.color}}>
-                  <Text style={{color: 'white', fontWeight: 'bold', fontSize: 11}}>{pkg.price}/mo</Text>
-                  <Text style={{color: 'white', fontSize: 8}}>Additional info</Text>
-                </View>
-              )
-            }
-          </View>
-        </View>
-
-        {
-          this.state.showSearch ?
-          <TextInput
-            style={{height: 40, backgroundColor: 'white', borderColor: 'gray', borderWidth: 1, paddingLeft: 3, paddingRight: 3}}
-            value={this.state.text}
-            onChangeText={searchText => this.search(searchText)}
-          />
-          :
-          <View></View>
-        }
-
-        <View style={{flex: 1, flexDirection: 'column'}}>
-          <View style={{width: '100%', height: 60, marginTop: 10}}>
-            <View style={{width: '100%', height: 60, flex: 1, flexDirection: 'row'}}>
-              <View style={{flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
-                <Text style={{color: '#666', fontSize: 8}}>99% Local channels in USA</Text>
-              </View>
-
-              <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
-                <Text style={{color: '#00aced'}}>✔</Text>
-              </View>
-
-              <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
-                <Text style={{color: '#00aced'}}>✔</Text>
-              </View>
-
-              <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
-                <Text style={{color: '#00aced'}}>✔</Text>
-              </View>
-
-              <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
-                <Text style={{color: '#00aced'}}>✔</Text>
-              </View>
-
-              <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
-                <Text style={{color: '#00aced'}}>✔</Text>
-              </View>
-
-              <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
-                <Text style={{color: '#00aced'}}>✔</Text>
-              </View>
-            </View> 
-          </View>
-
-          {
-            this.state.groups.map((group, index) => {
-              return <View key={index} style={{width: '100%', height: 60, marginTop: 10}}>
-                <View style={{flex: 1}}>
-                  <View style={{width: '100%', height: 60, flex: 1, flexDirection: 'row'}}>
-                    
-                    <View style={{flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
-                      <Image resizeMode="contain" style={{width: 30, height: 30}} source={{uri: group.logoUrl}}/>
-                    </View>
-                    {
-                      this.state.packages.map((pkg,idx) => {
-                        return <View key={idx} style={{ flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
-                          {
-                            (idx < (this.state.packages.length - 1)) ? <Image resizeMode="contain" style={{width: 30, height: 30}} source={{uri: group.promoUrl}}/>
-                            : <Text style={{color: '#00aced'}}>✔</Text>
-                          }
-                        </View>
-                      })
-                    }
-                  </View>
-                </View>
-              </View>
-            })
-          }
-
-          {
-            this.state.channels.filter(channel => channel.grpName == null).map((channel, index) => {
-              return <View key={index} style={{width: '100%', height: 60, marginTop: 10}}>
-              <View style={{width: '100%', height: 60, flex: 1, flexDirection: 'row'}}>
-                
-                <View style={{flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
-                  <Image resizeMode="contain" style={{width: 30, height: 30}} source={{uri: channel.logoUrl}}/>
-                  <Text style={{fontSize: 7}}>{channel.name}</Text>
-                </View>
-                {
-                  this.state.packages.map((pkg, idx) => {
-                    return <View key={idx} style={{ flex: 1, flexDirection: 'column', alignItems: 'center', paddingTop: 10, borderLeftColor: '#fff', borderLeftWidth: 1, borderRightColor: '#d4d4d4', borderRightWidth: 1}}>
-                      {
-                        
-                        this.getChannelPresence(channel.chLogoId, pkg.id) ?
-                          <Text style={{color: '#00aced'}}>✔</Text>
-                          :
-                          <View>
-                          </View>
-                      }
-                    </View>
-                  })
-                }
-              </View> 
-            </View>
-            })
-          }
+      <View style={{flex: 1, width}}>
+        <View style={{width, alignItems: 'center', marginTop: 10}}>
+          <AutoHeightImage width={width} source={require('../../assets/images/directv/img_pkg_pricing.jpg')}/>
         </View>
       </View>
     );
