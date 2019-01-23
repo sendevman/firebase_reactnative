@@ -9,6 +9,7 @@ import { AsyncStorage, Image, Text, TouchableOpacity, View, NativeModules, Permi
 import LinearGradient from 'react-native-linear-gradient';
 import { IndicatorViewPager, PagerDotIndicator } from 'rn-viewpager';
 import { connect } from 'react-redux';
+import { BluetoothStatus } from 'react-native-bluetooth-status';
 
 
 // My Styles
@@ -18,6 +19,14 @@ import styles from './css/OnBoardingScreenCss';
 import Icon from '../assets/images/Icon';
 
 class OnBoardingScreen extends Component {
+
+
+  async componentDidMount() {
+    const isEnabled = await BluetoothStatus.state();
+    console.log('BLUETOOTH', isEnabled);
+  }
+
+
   getStart = async () => {
     try {
       await AsyncStorage.setItem('passOnboarding', '1');

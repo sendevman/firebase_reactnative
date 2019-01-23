@@ -10,4 +10,6 @@ target 'RetailCompanion' do
   pod 'Firebase/Storage'
   pod 'Firebase/Auth'
   pod 'Firebase/Database'
+  pod 'react-native-bluetooth-status', :path => '../node_modules/react-native-bluetooth-status'
+
 end
