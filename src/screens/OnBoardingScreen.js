@@ -5,10 +5,11 @@
  */
 
 import React, { Component } from 'react';
-import { AsyncStorage, Image, Text, TouchableOpacity, View } from 'react-native';
+import { AsyncStorage, Image, Text, TouchableOpacity, View, NativeModules, PermissionsAndroid, Platform } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { IndicatorViewPager, PagerDotIndicator } from 'rn-viewpager';
 import { connect } from 'react-redux';
+
 
 // My Styles
 import styles from './css/OnBoardingScreenCss';
@@ -31,8 +32,58 @@ class OnBoardingScreen extends Component {
     return <PagerDotIndicator pageCount={5} />;
   }
 
-  locationCheck() {
-    
+  locationCheck = async () => {
+    var permissionn = await this.hasPermission();
+    if (permissionn) {
+      // if i immediately call this.goHome() it throws exception (i donnt know why).
+      // this is a work around to that exception
+      setTimeout(() => {
+        this.goHome();
+        AsyncStorage.setItem('passOnboarding', '1');
+      }, 500)
+    }
+  }
+
+  hasPermission = () => {
+    return new Promise((resolve, reject) => {
+
+      if (Platform.OS === 'ios') {
+        navigator.geolocation.watchPosition((success) => {
+          console.log(success, 'success');
+
+          // call native code to initialise walkbase.
+          var CalendarManager = NativeModules.CalendarManager;
+          CalendarManager.addEvent('test', 'test');
+  
+          setTimeout(() => {
+            resolve(true);
+          }, 2000);
+        }, function(err) {
+          console.log('error', err);
+          resolve(false);
+        });
+      } else {
+        
+        PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+          {
+            'title': 'The application wants to access your location',
+            'message': 'Please grant the location access to use the full functionalities of the app'
+          }
+        ).then(grant => {
+          if (grant === 'granted') {
+            // call native android code to initialise walkbase sdk.
+            NativeModules.WalkbaseModule.initWalkbase();
+            resolve(true);
+          }
+        })
+      }
+      
+    });
+  }
+
+  goHome = () => {
+    this.props.navigation.navigate('Home');
   }
 
   render() {

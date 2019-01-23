@@ -35,6 +35,7 @@
 		7A4EBE505F3A4280B7320187 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 52B2D3D73BE847CCA9A25F48 /* SimpleLineIcons.ttf */; };
 		8236B905BABB4883921EE563 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 753F854AB33B4071B3292DD8 /* FontAwesome.ttf */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
+		841A813A21F1135500352C26 /* CalendarManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 841A813921F1135500352C26 /* CalendarManager.m */; };
 		930089ADEBA94050929FB97E /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E03F47821E9A4A8D96924417 /* libRNVectorIcons.a */; };
 		A71C3732B1FC4B7FB4B53E70 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
@@ -512,6 +513,8 @@
 		7EAC211D04E94A2F920D423E /* Rubik-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Rubik-Regular.ttf"; path = "../app/fonts/Rubik-Regular.ttf"; sourceTree = "<group>"; };
 		8174F01626CE47B985412E3A /* Rubik-BlackItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Rubik-BlackItalic.ttf"; path = "../app/fonts/Rubik-BlackItalic.ttf"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
+		841A813921F1135500352C26 /* CalendarManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CalendarManager.m; sourceTree = "<group>"; };
+		841A813B21F1137800352C26 /* CalendarManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CalendarManager.h; sourceTree = "<group>"; };
 		85DF8AC8304F4162B43A17C8 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		87D76752D62148748CD5C084 /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
 		899EE0FEC4DC4ADA8CAAB88A /* libRNSVG-tvOS.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = "libRNSVG-tvOS.a"; sourceTree = "<group>"; };
@@ -847,6 +850,8 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				841A813B21F1137800352C26 /* CalendarManager.h */,
+				841A813921F1135500352C26 /* CalendarManager.m */,
 				13B07FAE1A68108700A75B9A /* RetailCompanion */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* RetailCompanionTests */,
@@ -1028,6 +1033,7 @@
 				TargetAttributes = {
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = Y99QWNW447;
+						LastSwiftMigration = 1010;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = true;
@@ -1652,6 +1658,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				841A813A21F1135500352C26 /* CalendarManager.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 				E9704B1EA4054B9093B05D81 /* (null) in Sources */,
 			);
@@ -1677,6 +1684,7 @@
 			baseConfigurationReference = A18ABEFEF4100DF2C3343042 /* Pods-RetailCompanion.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = Y99QWNW447;
@@ -1708,6 +1716,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.conexustech.rc;
 				PRODUCT_NAME = RetailCompanion;
+				SWIFT_OBJC_BRIDGING_HEADER = "RetailCompanion-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1717,6 +1728,7 @@
 			baseConfigurationReference = E32C9411C1FFC05C8D36FAF4 /* Pods-RetailCompanion.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Y99QWNW447;
 				ENABLE_BITCODE = NO;
@@ -1747,6 +1759,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.conexustech.rc;
 				PRODUCT_NAME = RetailCompanion;
+				SWIFT_OBJC_BRIDGING_HEADER = "RetailCompanion-Bridging-Header.h";
+				SWIFT_VERSION = 4.2;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;

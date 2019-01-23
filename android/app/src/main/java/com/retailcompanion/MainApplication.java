@@ -48,7 +48,8 @@ public class MainApplication extends Application implements ReactApplication {
 //            new RNBackgroundGeolocation(),
           new RNFirebaseFirestorePackage(),
           new RNFirebaseDatabasePackage(),
-          new RNNetworkInfoPackage()
+          new RNNetworkInfoPackage(),
+              new WalkbasePackage()
       );
     }
 

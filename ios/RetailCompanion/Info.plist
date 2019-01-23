@@ -64,8 +64,18 @@
 			</dict>
 		</dict>
 	</dict>
+
 	<key>NSBluetoothPeripheralUsageDescription</key>
 	<string>BLE Permission required</string>
+
+
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>This app requires background tracking</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>This app requires background tracking</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Location permission required</string>
+
 	
 
 	<key>NSMotionUsageDescription</key>

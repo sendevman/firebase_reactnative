@@ -23,6 +23,7 @@ public class MainActivity extends ReactActivity {
     private int PERMISION_REQUEST_CODE = 1111;
     private String apiKey = "VZHkscRFhAjkScc";
     private String android_id;
+
     /**
      * Returns the name of the main component registered from JavaScript.
      * This is used to schedule rendering of the component.
@@ -36,71 +37,63 @@ public class MainActivity extends ReactActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        android_id = Secure.getString(getContentResolver(),
-                Secure.ANDROID_ID);
 //        Fabric.with(this, new Crashlytics());
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
-        walkbaseManager = new WalkbaseManager(this);
-        if(havePermissions() != PackageManager.PERMISSION_GRANTED) {
-            requestPermissions();;
-        }else{
-            walkbaseManager.startWithApiKey(apiKey);
-            walkbaseManager.setUserID(android_id);
-        }
     }
 
-    private int havePermissions() {
-        return ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION);
-    }
+//    private int havePermissions() {
+//        return ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION);
+//    }
 
-    private void requestPermissions() {
-        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},PERMISION_REQUEST_CODE);
-    }
+//    private void requestPermissions() {
+//        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},PERMISION_REQUEST_CODE);
+//    }
 
-    private void showRequestPermissionsSnackbar() {
-    }
-    private void showLinkToSettingsSnackbar() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-        builder.setTitle("Permission Request!");
-        builder.setMessage("We need permissions to access your location.");
-        builder.setPositiveButton("Grant", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-                ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PERMISION_REQUEST_CODE);
-            }
-        });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
-        builder.show();
-    }
+//    private void showRequestPermissionsSnackbar() {
+//    }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if(requestCode != PERMISION_REQUEST_CODE) {
-            return;
-        }
+//    private void showLinkToSettingsSnackbar() {
+//        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+//        builder.setTitle("Permission Request!");
+//        builder.setMessage("We need permissions to access your location.");
+//        builder.setPositiveButton("Grant", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                dialog.cancel();
+//                ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PERMISION_REQUEST_CODE);
+//            }
+//        });
+//        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                dialog.cancel();
+//            }
+//        });
+//        builder.show();
+//    }
 
-        if(requestCode == PERMISION_REQUEST_CODE) {
-            if (grantResults.length > 0
-                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                walkbaseManager.startWithApiKey(apiKey);
-                walkbaseManager.setUserID(android_id);
-            }else{
-                String permission = permissions[0];
-                if (shouldShowRequestPermissionRationale(permission)) {
-                    showRequestPermissionsSnackbar();
-                } else {
-                    showLinkToSettingsSnackbar();
-                }
-            }
-        }
-    }
+//    @Override
+//    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+//        if(requestCode != PERMISION_REQUEST_CODE) {
+//            return;
+//        }
+//
+//        if(requestCode == PERMISION_REQUEST_CODE) {
+//            if (grantResults.length > 0
+//                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//                walkbaseManager.startWithApiKey(apiKey);
+//                walkbaseManager.setUserID(android_id);
+//            }else{
+//                String permission = permissions[0];
+//                if (shouldShowRequestPermissionRationale(permission)) {
+//                    showRequestPermissionsSnackbar();
+//                } else {
+//                    showLinkToSettingsSnackbar();
+//                }
+//            }
+//        }
+//    }
 
     @Override
     protected void onPause() {
@@ -110,12 +103,12 @@ public class MainActivity extends ReactActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        walkbaseManager.onResume();
+        // walkbaseManager.onResume();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        walkbaseManager.onStop();
+        // walkbaseManager.onStop();
     }
 }

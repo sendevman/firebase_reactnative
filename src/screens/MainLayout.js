@@ -42,16 +42,28 @@ class MainLayout extends Component {
       showModal: false,
     };
 
-    firebase.firestore().doc('locations/off_site/siteData/home').get()
-    .then(e => {
-      this.setState({ home: e.data() });
-      this.getStoreData();
-    });
   }
 
-  componentWillMount() {
+  async componentWillMount() {
     SystemSetting.addBluetoothListener(this.checkSwitchBluetooth);
     SystemSetting.addLocationListener(this.checkSwitchLocation);
+    
+    const result = await AsyncStorage.getItem('passOnboarding');
+    if (result === '1') {
+      this.setState({ ispass: true });
+      this.checkSwitchLocation();
+      this.checkSwitchBluetooth();
+
+      firebase.firestore().doc('locations/off_site/siteData/home').get()
+      .then(e => {
+        console.log('RECEIVED FIRESTORE', e);
+        this.setState({ home: e.data() });
+        this.getStoreData();
+      });
+    } else {
+      this.props.navigation.navigate('OnBoarding');
+    }
+
   }
 
   componentWillReceiveProps(nextProps) {
@@ -92,21 +104,6 @@ class MainLayout extends Component {
     const arrAreas = this.props.location.zones[index];
     this.props.dispatch(setLocationSelectItem(arrAreas));
     this.props.navigation.navigate('Discover');
-  };
-
-  getStoreData = async () => {
-    try {
-      const result = await AsyncStorage.getItem('passOnboarding');
-      if (result === '1') {
-        this.setState({ ispass: true });
-        this.checkSwitchLocation();
-        this.checkSwitchBluetooth();  
-      } else {
-        this.props.navigation.navigate('OnBoarding');
-      }
-    } catch (error) {
-      console.log('===', error);
-    }
   };
 
   gotoZone = (index) => {
