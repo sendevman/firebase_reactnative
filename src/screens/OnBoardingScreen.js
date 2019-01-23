@@ -38,8 +38,12 @@ class OnBoardingScreen extends Component {
       // if i immediately call this.goHome() it throws exception (i donnt know why).
       // this is a work around to that exception
       setTimeout(() => {
-        this.goHome();
         AsyncStorage.setItem('passOnboarding', '1');
+
+        setTimeout(()=> {
+          this.goHome();
+        }, 3000)
+
       }, 500)
     }
   }
@@ -48,16 +52,18 @@ class OnBoardingScreen extends Component {
     return new Promise((resolve, reject) => {
 
       if (Platform.OS === 'ios') {
-        navigator.geolocation.watchPosition((success) => {
+        navigator.geolocation.getCurrentPosition((success) => {
           console.log(success, 'success');
 
           // call native code to initialise walkbase.
-          var CalendarManager = NativeModules.CalendarManager;
-          CalendarManager.addEvent('test', 'test');
-  
+          // implemennted onn example code, its nothing related to calender or event.
+          // TODO: Change class name from CalendarManager to WalkbaseManager in objective c.
           setTimeout(() => {
-            resolve(true);
+            var CalendarManager = NativeModules.CalendarManager;
+            CalendarManager.addEvent('test', 'test');
           }, 2000);
+  
+          resolve(true);
         }, function(err) {
           console.log('error', err);
           resolve(false);
@@ -75,6 +81,8 @@ class OnBoardingScreen extends Component {
             // call native android code to initialise walkbase sdk.
             NativeModules.WalkbaseModule.initWalkbase();
             resolve(true);
+          } else  {
+            resolve(false);
           }
         })
       }

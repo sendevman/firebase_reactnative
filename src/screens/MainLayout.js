@@ -42,6 +42,14 @@ class MainLayout extends Component {
       showModal: false,
     };
 
+    /*
+    firebase.firestore().doc('locations/off_site/siteData/home').get()
+    .then(e => {
+      console.log('RECEIVED FIRESTORE', e);
+      this.setState({ home: e.data() });
+      this.getStoreData();
+    });
+    */
   }
 
   async componentWillMount() {
@@ -197,6 +205,7 @@ class MainLayout extends Component {
   }
 
   render() {
+   
     console.log(this.props.location, 'MAINLAYOUT');
     // const zones = this.props.location ? [...this.props.location.zones] : [];
     let zones = [];
@@ -247,6 +256,8 @@ class MainLayout extends Component {
         }
       }
     }
+
+    console.log(zones, 'renderLocation');
 
     return (
       <SafeAreaView forceInset={{ top: 'always' }} style={{ backgroundColor: '#FFF' }}>
