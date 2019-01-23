@@ -10,7 +10,8 @@ import LinearGradient from 'react-native-linear-gradient';
 import { IndicatorViewPager, PagerDotIndicator } from 'rn-viewpager';
 import { connect } from 'react-redux';
 import { BluetoothStatus } from 'react-native-bluetooth-status';
-
+import GPSState from 'react-native-gps-state';
+import OpenSettings from 'open-settings';
 
 // My Styles
 import styles from './css/OnBoardingScreenCss';
@@ -20,10 +21,24 @@ import Icon from '../assets/images/Icon';
 
 class OnBoardingScreen extends Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      gpsEnabled: false,
+      bluetoothEnabled: false
+    }
+  }
+
 
   async componentDidMount() {
     const isEnabled = await BluetoothStatus.state();
+    const gps = await GPSState.getStatus();
     console.log('BLUETOOTH', isEnabled);
+    console.log('GPS', gps);
+    this.setState({
+      gpsEnabled: gps === 2,
+      bluetoothEnabled: isEnabled
+    })
   }
 
 
@@ -211,23 +226,10 @@ class OnBoardingScreen extends Component {
             </View>
           </View>
           <View>
-          <View style={[styles.fiftyBox, { height: '30%', alignItems: 'flex-end' }]}>
-            <View style={styles.containerPhone}>
-              <View>
-                <Image style={styles.imageFourLeft} source={require('../assets/images/files/imageLeft.png')} />
-              </View>
-              <View>
-                <Image style={styles.imageFourCenter} source={require('../assets/images/files/imageCenter.png')} />
-              </View>
-              <View>
-                <Image style={styles.imageFourRight} source={require('../assets/images/files/imageRight.png')} />
-              </View>
-            </View>
-          </View>
+          
 
-          <View style={[styles.fiftyBox, { height: '70%', alignItems: 'flex-start' }]}>
+          <View style={[styles.fiftyBox, { height: '100%', alignItems: 'flex-start' }]}>
             <View style={styles.containerText}>
-
               <View>
                 <Text style={[styles.subTitle, { marginBottom: 20, marginLeft: 12, marginRight: 12 }]}>
                   Retail Insider is an exclusive in store AT&T experience.
@@ -240,6 +242,32 @@ class OnBoardingScreen extends Component {
                   We may use your location to support or improve this application.
                 </Text>
               </View>
+              
+              {
+                (!this.state.gpsEnabled || !this.state.bluetoothEnabled) ? 
+                <Text style={[styles.subTitle, { marginLeft: 12, marginRight: 12, color: 'white', fontSize: 15 }]}>
+                  The app requires your bluetooth and location services turned on
+                </Text>
+                :<View></View>
+              }
+              
+               {
+                 !this.state.bluetoothEnabled ?
+                 <TouchableOpacity style={[styles.getStartedBtn]} onPress={() => OpenSettings.openSettings()}>
+                  <Text style={[styles.getStartedBtnText]}>Turn on Bluetooth</Text>
+                </TouchableOpacity>
+                :
+                <View></View>
+               }
+
+               {
+                 !this.state.gpsEnabled ?
+                 <TouchableOpacity style={styles.getStartedBtn} onPress={this.locationCheck}>
+                  <Text style={styles.getStartedBtnText}>Turn on Location</Text>
+                </TouchableOpacity>
+                :
+                <View></View>
+               }
 
               <TouchableOpacity style={styles.getStartedBtn} onPress={this.locationCheck}>
                 <Text style={styles.getStartedBtnText}>OK WITH ME</Text>

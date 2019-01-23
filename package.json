@@ -26,6 +26,7 @@
     "react-native-easy-grid": "^0.2.0",
     "react-native-elements": "^0.19.1",
     "react-native-firebase": "^4.2.0",
+    "react-native-gps-state": "^1.2.1",
     "react-native-linear-gradient": "^2.4.0",
     "react-native-modal": "^6.5.0",
     "react-native-modalbox": "^1.6.0",

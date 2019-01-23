@@ -147,6 +147,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-gps-state')
     compile project(':react-native-bluetooth-status')
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     implementation project(':react-native-video')

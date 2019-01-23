@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -32,6 +33,7 @@
 		6E549C8AC7DB4920A61A71B2 /* Rubik.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A7A973CA2D184BFCB6FF01A7 /* Rubik.ttf */; };
 		7613B8E965684A778CBA31C7 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		7A4EBE505F3A4280B7320187 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 52B2D3D73BE847CCA9A25F48 /* SimpleLineIcons.ttf */; };
+		7CB9EDB5D9A04C288AD49ACC /* libDPMGpsState.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DC88AE29FFA14712A542CEEA /* libDPMGpsState.a */; };
 		8236B905BABB4883921EE563 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 753F854AB33B4071B3292DD8 /* FontAwesome.ttf */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		841A813A21F1135500352C26 /* CalendarManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 841A813921F1135500352C26 /* CalendarManager.m */; };
@@ -347,6 +349,20 @@
 			remoteGlobalIDString = 134814201AA4EA6300B7C361;
 			remoteInfo = BleManager;
 		};
+		849C44C721F8EDBE00F1E037 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FE063C814A1145C087777932 /* DPMGpsState.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3F1864C81F3D038C0071102C;
+			remoteInfo = DPMGpsState;
+		};
+		849C44CD21F8F31600F1E037 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 849C44C921F8F31600F1E037 /* DPMGpsState.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3F1864C81F3D038C0071102C;
+			remoteInfo = DPMGpsState;
+		};
 		ADBDB9261DFEBF0700ED6528 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */;
@@ -533,6 +549,7 @@
 		841A813921F1135500352C26 /* CalendarManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CalendarManager.m; sourceTree = "<group>"; };
 		841A813B21F1137800352C26 /* CalendarManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CalendarManager.h; sourceTree = "<group>"; };
 		849C42AA21F8905700F1E037 /* RNBluetoothManager.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNBluetoothManager.xcodeproj; path = "../node_modules/react-native-bluetooth-status/ios/RNBluetoothManager.xcodeproj"; sourceTree = "<group>"; };
+		849C44C921F8F31600F1E037 /* DPMGpsState.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DPMGpsState.xcodeproj; path = "../node_modules/react-native-gps-state/ios/DPMGpsState.xcodeproj"; sourceTree = "<group>"; };
 		85DF8AC8304F4162B43A17C8 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		87D76752D62148748CD5C084 /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
 		899EE0FEC4DC4ADA8CAAB88A /* libRNSVG-tvOS.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = "libRNSVG-tvOS.a"; sourceTree = "<group>"; };
@@ -548,6 +565,7 @@
 		B8AD524A95FC4A52A34079FF /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
 		CE819D3A2193D9F6005C0147 /* React Native Open Settings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "React Native Open Settings.xcodeproj"; path = "../node_modules/open-settings/React Native Open Settings.xcodeproj"; sourceTree = "<group>"; };
 		DAB3719094E141409B187CBA /* SF-Pro-Text.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Text.ttf"; path = "../app/fonts/SF-Pro-Text.ttf"; sourceTree = "<group>"; };
+		DC88AE29FFA14712A542CEEA /* libDPMGpsState.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libDPMGpsState.a; sourceTree = "<group>"; };
 		DCBE1EB5211A768700B86F08 /* RCTVideo.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTVideo.xcodeproj; path = "../node_modules/react-native-video/ios/RCTVideo.xcodeproj"; sourceTree = "<group>"; };
 		DECDDA4AA7E549C2BF7F800B /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
 		E03F47821E9A4A8D96924417 /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
@@ -582,6 +600,7 @@
 		F0548CD820E5286C00340237 /* Rubik.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Rubik.ttf; sourceTree = "<group>"; };
 		F7275B076CF0439E97E848C1 /* Rubik-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Rubik-Light.ttf"; path = "../app/fonts/Rubik-Light.ttf"; sourceTree = "<group>"; };
 		F7E7043250064637A12355E7 /* BVLinearGradient.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = BVLinearGradient.xcodeproj; path = "../node_modules/react-native-linear-gradient/BVLinearGradient.xcodeproj"; sourceTree = "<group>"; };
+		FE063C814A1145C087777932 /* DPMGpsState.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = DPMGpsState.xcodeproj; path = "../node_modules/react-native-gps-state/ios/DPMGpsState.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -622,6 +641,7 @@
 				47096F48682BFCF616075F73 /* libPods-RetailCompanion.a in Frameworks */,
 				09BAAC11B52943268093AE12 /* libRNFirebase.a in Frameworks */,
 				E751791C2C944BD59C1ED074 /* libBleManager.a in Frameworks */,
+				7CB9EDB5D9A04C288AD49ACC /* libDPMGpsState.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -832,6 +852,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				849C44C921F8F31600F1E037 /* DPMGpsState.xcodeproj */,
 				849C42AA21F8905700F1E037 /* RNBluetoothManager.xcodeproj */,
 				CE819D3A2193D9F6005C0147 /* React Native Open Settings.xcodeproj */,
 				E1A5DA912118CDED00D6059D /* RCTVideo.xcodeproj */,
@@ -857,6 +878,7 @@
 				9C29040D5EAB40B48A02706B /* RNFirebase.xcodeproj */,
 				DCBE1EB5211A768700B86F08 /* RCTVideo.xcodeproj */,
 				B4FF88E61E8146A2B962426B /* BleManager.xcodeproj */,
+				FE063C814A1145C087777932 /* DPMGpsState.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -913,6 +935,22 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		849C44C421F8EDBE00F1E037 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				849C44C821F8EDBE00F1E037 /* libDPMGpsState.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		849C44CA21F8F31600F1E037 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				849C44CE21F8F31600F1E037 /* libDPMGpsState.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		ADBDB9201DFEBF0600ED6528 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -960,6 +998,7 @@
 				E1A5DAAC2118CDED00D6059D /* libRCTVideo.a */,
 				17F45CC4AF33427D8C69E0A6 /* libRNBluetoothInfo.a */,
 				1DD1CBA4948346089C1E5D6A /* libBleManager.a */,
+				DC88AE29FFA14712A542CEEA /* libDPMGpsState.a */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -1102,6 +1141,14 @@
 				{
 					ProductGroup = E1621E9220E15EB600776A66 /* Products */;
 					ProjectRef = F7E7043250064637A12355E7 /* BVLinearGradient.xcodeproj */;
+				},
+				{
+					ProductGroup = 849C44C421F8EDBE00F1E037 /* Products */;
+					ProjectRef = FE063C814A1145C087777932 /* DPMGpsState.xcodeproj */;
+				},
+				{
+					ProductGroup = 849C44CA21F8F31600F1E037 /* Products */;
+					ProjectRef = 849C44C921F8F31600F1E037 /* DPMGpsState.xcodeproj */;
 				},
 				{
 					ProductGroup = E195E8AF20F756DA00695497 /* Products */;
@@ -1474,6 +1521,20 @@
 			remoteRef = 849C433B21F8911100F1E037 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		849C44C821F8EDBE00F1E037 /* libDPMGpsState.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libDPMGpsState.a;
+			remoteRef = 849C44C721F8EDBE00F1E037 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		849C44CE21F8F31600F1E037 /* libDPMGpsState.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libDPMGpsState.a;
+			remoteRef = 849C44CD21F8F31600F1E037 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1765,12 +1826,14 @@
 					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
 					"$(SRCROOT)/../node_modules/react-native-bluetooth-info/ios/**",
 					"$(SRCROOT)/../node_modules/walkbase-sdk/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-gps-state/ios",
 				);
 				INFOPLIST_FILE = RetailCompanion/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/RetailCompanion\"",
 					"\"$(SRCROOT)/RetailCompanion\"",
 					"\"$(SRCROOT)/RetailCompanion\"",
 					"\"$(SRCROOT)/RetailCompanion\"",
@@ -1812,12 +1875,14 @@
 					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
 					"$(SRCROOT)/../node_modules/react-native-bluetooth-info/ios/**",
 					"$(SRCROOT)/../node_modules/walkbase-sdk/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-gps-state/ios",
 				);
 				INFOPLIST_FILE = RetailCompanion/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/RetailCompanion\"",
 					"\"$(SRCROOT)/RetailCompanion\"",
 					"\"$(SRCROOT)/RetailCompanion\"",
 					"\"$(SRCROOT)/RetailCompanion\"",

@@ -3,6 +3,7 @@ package com.retailcompanion;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import br.com.dopaminamob.gpsstate.GPSStatePackage;
 import com.solinor.bluetoothstatus.RNBluetoothManagerPackage;
 import com.brentvatne.react.ReactVideoPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
@@ -36,6 +37,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new GPSStatePackage(),
             new RNBluetoothManagerPackage(),
           new ReactVideoPackage(),
           new RNDeviceInfo(),
