@@ -66,7 +66,7 @@ class OnBoardingScreen extends Component {
 
         setTimeout(()=> {
           this.goHome();
-        }, 3000)
+        }, 1000)
 
       }, 500)
     }
@@ -82,10 +82,11 @@ class OnBoardingScreen extends Component {
           // call native code to initialise walkbase.
           // implemennted onn example code, its nothing related to calender or event.
           // TODO: Change class name from CalendarManager to WalkbaseManager in objective c.
+          
           setTimeout(() => {
             var CalendarManager = NativeModules.CalendarManager;
             CalendarManager.addEvent('test', 'test');
-          }, 2000);
+          }, 5000);
   
           resolve(true);
         }, function(err) {

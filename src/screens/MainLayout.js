@@ -42,53 +42,33 @@ class MainLayout extends Component {
       showModal: false,
     };
 
-    /*
+    console.log('MAINLAYOUT','RECEIVED FIRESTORE');
+
     firebase.firestore().doc('locations/off_site/siteData/home').get()
     .then(e => {
-      console.log('RECEIVED FIRESTORE', e);
+      console.log('RECEIVED FIRESTORE');
       this.setState({ home: e.data() });
-      this.getStoreData();
     });
-    */
   }
 
-  async componentWillMount() {
+  checkOnBoarding = async () => {
+    try {
+      const result = await AsyncStorage.getItem('passOnboarding');
+      if (result === '1') {
+        this.setState({ ispass: true });
+        this.checkSwitchLocation();
+        this.checkSwitchBluetooth();  
+      } else {
+        this.props.navigation.navigate('OnBoarding');
+      }
+    } catch (error) {
+      console.log('===', error);
+    }
+  };
+
+  componentWillMount() {
     SystemSetting.addBluetoothListener(this.checkSwitchBluetooth);
     SystemSetting.addLocationListener(this.checkSwitchLocation);
-    
-    const result = await AsyncStorage.getItem('passOnboarding');
-    if (result === '1') {
-      this.setState({ ispass: true });
-      this.checkSwitchLocation();
-      this.checkSwitchBluetooth();
-
-      firebase.firestore().doc('locations/off_site/siteData/home').get()
-      .then(e => {
-        console.log('RECEIVED FIRESTORE', e);
-        this.setState({ home: e.data() });
-        this.getStoreData();
-      });
-    } else {
-      this.props.navigation.navigate('OnBoarding');
-    }
-
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (this.props.locationIsOn !== nextProps.locationIsOn) {
-      if (!nextProps.locationIsOn) {
-        if (this.state.ispass) {
-          this.props.navigation.navigate('NewOnBoarding');
-        }
-      }
-    }
-    if (this.props.bluetoothIsOn !== nextProps.bluetoothIsOn) {
-      if (!nextProps.bluetoothIsOn) {
-        if (this.props.locationIsOn && this.state.ispass) {
-          this.setState({ showModal: true });
-        }
-      }
-    }
   }
 
   hideModal = () => {
@@ -205,8 +185,8 @@ class MainLayout extends Component {
   }
 
   render() {
-   
     console.log(this.props.location, 'MAINLAYOUT');
+  
     // const zones = this.props.location ? [...this.props.location.zones] : [];
     let zones = [];
 
@@ -247,6 +227,13 @@ class MainLayout extends Component {
       // this.props.dispatch(setAutomaticZoneEntry(true))
     }
 
+    if (zones.length > 1) {
+      setTimeout(() => {
+        this.checkOnBoarding();
+      }, 1000);
+    }
+
+
     if (this.props.zoneId) {
       if (this.state.currentZone === null || (this.state.currentZone && this.state.currentZone.walkbaseId !== this.props.zoneId)) {
         const currentZone = zones.find(zone => zone.walkbaseId == this.props.zoneId);
@@ -256,8 +243,6 @@ class MainLayout extends Component {
         }
       }
     }
-
-    console.log(zones, 'renderLocation');
 
     return (
       <SafeAreaView forceInset={{ top: 'always' }} style={{ backgroundColor: '#FFF' }}>
