@@ -263,7 +263,7 @@ class OnBoardingScreen extends Component {
 
                {
                  !this.state.gpsEnabled ?
-                 <TouchableOpacity style={styles.getStartedBtn} onPress={this.locationCheck}>
+                 <TouchableOpacity style={styles.getStartedBtn} onPress={() => OpenSettings.openSettings()}>
                   <Text style={styles.getStartedBtnText}>Turn on Location</Text>
                 </TouchableOpacity>
                 :
