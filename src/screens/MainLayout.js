@@ -5,7 +5,7 @@
  */
 
 import React, { Component } from 'react';
-import { AsyncStorage, Image, Platform, Text, TouchableOpacity, View } from 'react-native';
+import { AsyncStorage, Image, Platform, Text, TouchableOpacity, View, AppState } from 'react-native';
 import { NavigationActions, SafeAreaView, StackActions } from 'react-navigation';
 import Carousel from 'react-native-snap-carousel';
 import Dialog, { DialogContent, SlideAnimation } from 'react-native-popup-dialog';
@@ -13,6 +13,8 @@ import firebase from 'react-native-firebase';
 import SystemSetting from 'react-native-system-setting';
 import AutoHeightImage from 'react-native-auto-height-image';
 import { connect } from 'react-redux';
+import { BluetoothStatus } from 'react-native-bluetooth-status';
+import GPSState from 'react-native-gps-state';
 
 // My Actions
 import { updateBluetoothIsOn, updateLocationIsOn } from '../actions/Common';
@@ -40,6 +42,9 @@ class MainLayout extends Component {
       home: null,
       ispass: false,
       showModal: false,
+      location: false,
+      bluetooth: false,
+      showServicesModal: false
     };
 
     console.log('MAINLAYOUT','RECEIVED FIRESTORE');
@@ -49,15 +54,46 @@ class MainLayout extends Component {
       console.log('RECEIVED FIRESTORE');
       this.setState({ home: e.data() });
     });
+
+    this.props.navigation.addListener(
+      'didFocus',
+      payload => {
+        AsyncStorage.getItem('passOnboarding').then(result => {
+          console.log('ONBOARDING', result);
+          if (result === '1') {
+            this.checksensors();
+          }
+        })
+      }
+    );
   }
 
+  componentDidMount() {
+    console.log('COMPONENT_DID_MOUNT');
+  }
+
+  checksensors = async () => {
+    const isEnabled = await BluetoothStatus.state();
+    const gps = await GPSState.getStatus();
+    console.log('BLUETOOTH', isEnabled);
+    console.log('GPS', gps);
+    this.setState({
+      location: gps < 3,
+      bluetooth: isEnabled,
+      showServicesModal: gps < 3 || !isEnabled
+    })
+    
+  }
+  
   checkOnBoarding = async () => {
     try {
       const result = await AsyncStorage.getItem('passOnboarding');
-      if (result === '1') {
+      const maybeLater = await AsyncStorage.getItem('maybeLater');
+
+      if (result === '1' || maybeLater == '1') {
         this.setState({ ispass: true });
-        this.checkSwitchLocation();
-        this.checkSwitchBluetooth();  
+        
+        AsyncStorage.setItem('maybeLater', '1');
       } else {
         this.props.navigation.navigate('OnBoarding');
       }
@@ -67,6 +103,7 @@ class MainLayout extends Component {
   };
 
   componentWillMount() {
+    console.log('COMPONENT_WILL_MOUNT');
     SystemSetting.addBluetoothListener(this.checkSwitchBluetooth);
     SystemSetting.addLocationListener(this.checkSwitchLocation);
   }
@@ -184,8 +221,28 @@ class MainLayout extends Component {
     );
   }
 
+  async componentDidMount() {
+    AppState.addEventListener('change', this._handleAppStateChange);
+  }
+
+  componentWillUnmount() {
+    AppState.removeEventListener('change', this._handleAppStateChange);
+  }
+
+  _handleAppStateChange = (state) => {
+    if (state == 'active') {
+     this.checksensors();
+    }
+  }
+
+  hideModal = () => {
+    this.setState({
+      showServicesModal: false
+    })
+  }
+
   render() {
-    console.log(this.props.location, 'MAINLAYOUT');
+    console.log(this.props.bluetoothIsOn, 'MAINLAYOUT');
   
     // const zones = this.props.location ? [...this.props.location.zones] : [];
     let zones = [];
@@ -260,7 +317,6 @@ class MainLayout extends Component {
                 this.setState({ sliderActiveSlide: index });
               }} />
           </View>
-          <OnBoardingModal type='location' onHideModal={this.hideModal} showModal={this.state.showModal} />
           <Dialog
             dialogAnimation={new SlideAnimation({ useNativeDriver: true, slideFrom: 'bottom' })}
             dialogStyle={styles.dialogStyle}
@@ -339,10 +395,13 @@ class MainLayout extends Component {
               </TouchableOpacity>
           </Modal> */}
         </View>
+        <OnBoardingModal location={this.state.location} bluetooth={this.state.bluetooth} onHideModal={this.hideModal} showModal={this.state.showServicesModal} />
       </SafeAreaView>
     );
   }
 }
+
+
 
 const mapStateToProps = state => {
   const { common, current } = state;
