@@ -16,6 +16,8 @@ import OpenSettings from 'open-settings';
 
 import SystemSetting from 'react-native-system-setting';
 
+
+
 // My Actions
 import { updateBluetoothIsOn } from '../../actions/Common';
 
@@ -25,8 +27,21 @@ class OnBoardingModal extends Component {
   };
 
   render() {
-    const { type, onHideModal, showModal } = this.props;
+    const { type, onHideModal, showModal, location, bluetooth } = this.props;
 
+    let turnOnText = '';
+    console.log('location', 'bluetooth', location, bluetooth);
+    if (location == false && bluetooth == false) {
+      turnOnText = 'Location and Bluetooth';
+    } else {
+      if (!location) {
+        turnOnText = 'Location';
+      } else {
+        turnOnText = 'Bluetooth';
+      }
+    }
+
+    
     return (
       <Modal
         animationType="slide"
@@ -37,7 +52,7 @@ class OnBoardingModal extends Component {
         <View style={styles.containerModal}>
           <View style={styles.container}>
             <View style={styles.modalBox}>
-              {type ==='bluetooth' &&
+              {bluetooth &&
                 <View style={styles.bluetoothBox}>
                   <Icon name="Bluetooth" width={205} height={56} viewBox="0 0 230 63" />
                 </View>}
@@ -45,34 +60,14 @@ class OnBoardingModal extends Component {
               <View>
                 <Text style={styles.modalText}>In order for AT&T Retail Companion™</Text>
                 <Text style={styles.modalText}>to work, you need to grant it permission</Text>
-                <Text style={styles.modalText}>to use your device’s {type === 'bluetooth' ? 'Bluetooth' : 'Location'}.</Text>
+                <Text style={styles.modalText}>to use your device’s {turnOnText}.</Text>
               </View>
 
               <TouchableOpacity style={styles.allowBtn}
-                onPress={() => Alert.alert(
-                  `Turn On ${type === 'bluetooth' ? 'Bluetooth' : 'Location'} To Allow "AT&T Retail Companion" to Connect to Accessories`,
-                  'Go to Allow Action!',
-                  [
-                    {
-                      text: 'Settings',
-                      onPress:
-                        () => {
-                          if (type === 'bluetooth') {
-                            Platform.OS == 'ios'
-                              ? OpenSettings.openBluetooth()
-                              : SystemSetting.switchBluetooth(() => onHideModal());
-                          } else {
-                            Platform.OS == 'ios'
-                              ? OpenSettings.openLocation()
-                              : SystemSetting.switchLocation(() => onHideModal());
-                          }
-                        },
-                    },
-                    { text: 'Cancel', onPress: () => console.log('Go to Cancel'), style: 'cancel' }
-                  ],
-                  { cancelable: false }
-                )}>
-                <Text style={styles.allowBtnText}>Allow</Text>
+                onPress={() => {
+                  OpenSettings.openSettings()
+                }}>
+                <Text style={styles.allowBtnText}>Open settings</Text>
               </TouchableOpacity>
 
               <TouchableOpacity style={styles.declineBtn}

@@ -3,6 +3,9 @@ package com.retailcompanion;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.opensettings.OpenSettingsPackage;
+import br.com.dopaminamob.gpsstate.GPSStatePackage;
+import com.solinor.bluetoothstatus.RNBluetoothManagerPackage;
 import com.brentvatne.react.ReactVideoPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.ninty.system.setting.SystemSettingPackage;
@@ -35,6 +38,9 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new OpenSettingsPackage(),
+            new GPSStatePackage(),
+            new RNBluetoothManagerPackage(),
           new ReactVideoPackage(),
           new RNDeviceInfo(),
           new SystemSettingPackage(),
@@ -48,7 +54,8 @@ public class MainApplication extends Application implements ReactApplication {
 //            new RNBackgroundGeolocation(),
           new RNFirebaseFirestorePackage(),
           new RNFirebaseDatabasePackage(),
-          new RNNetworkInfoPackage()
+          new RNNetworkInfoPackage(),
+              new WalkbasePackage()
       );
     }
 

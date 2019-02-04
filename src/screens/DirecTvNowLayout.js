@@ -19,52 +19,57 @@ import styles, { width } from './css/DirecTVNowScreenCss';
 
 const channelImgs = [
   [
-    require('../assets/images/now/1/1.png'),
-    require('../assets/images/now/1/2.png'),
-    require('../assets/images/now/1/3.png'),
-    require('../assets/images/now/1/4.png')
+    require('../assets/images/now/tab1.png')
+    // require('../assets/images/now/1/1.png'),
+    // require('../assets/images/now/1/2.png'),
+    // require('../assets/images/now/1/3.png'),
+    // require('../assets/images/now/1/4.png')
   ],
   [
-    require('../assets/images/now/2/1.png'),
-    require('../assets/images/now/2/2.png'),
-    require('../assets/images/now/2/3.png'),
-    require('../assets/images/now/2/4.png'),
-    require('../assets/images/now/2/5.png')
+    require('../assets/images/now/tab2.png')
+    // require('../assets/images/now/2/1.png'),
+    // require('../assets/images/now/2/2.png'),
+    // require('../assets/images/now/2/3.png'),
+    // require('../assets/images/now/2/4.png'),
+    // require('../assets/images/now/2/5.png')
   ],
   [
-    require('../assets/images/now/3/1.png'),
-    require('../assets/images/now/3/2.png'),
-    require('../assets/images/now/3/3.png'),
-    require('../assets/images/now/3/4.png')
+    require('../assets/images/now/tab3.png')
+    // require('../assets/images/now/3/1.png'),
+    // require('../assets/images/now/3/2.png'),
+    // require('../assets/images/now/3/3.png'),
+    // require('../assets/images/now/3/4.png')
   ],
   [
-    require('../assets/images/now/4/1.png'),
-    require('../assets/images/now/4/2.png'),
-    require('../assets/images/now/4/3.png'),
-    require('../assets/images/now/4/4.png')
+    require('../assets/images/now/tab4.png')
+    // require('../assets/images/now/4/1.png'),
+    // require('../assets/images/now/4/2.png'),
+    // require('../assets/images/now/4/3.png'),
+    // require('../assets/images/now/4/4.png')
   ],
   [
-    require('../assets/images/now/5/1.png'),
-    require('../assets/images/now/5/2.png'),
-    require('../assets/images/now/5/3.png'),
-    require('../assets/images/now/5/4.png'),
-    require('../assets/images/now/5/6.png'),
-    require('../assets/images/now/5/7.png'),
-    require('../assets/images/now/5/8.png'),
-    require('../assets/images/now/5/9.png'),
-    require('../assets/images/now/5/10.png'),
-    require('../assets/images/now/5/11.png'),
-    require('../assets/images/now/5/12.png'),
-    require('../assets/images/now/5/13.png'),
-    require('../assets/images/now/5/14.png'),
-    require('../assets/images/now/5/15.png'),
-    require('../assets/images/now/5/16.png'),
-    require('../assets/images/now/5/17.png'),
-    require('../assets/images/now/5/18.png'),
-    require('../assets/images/now/5/19.png'),
-    require('../assets/images/now/5/20.png'),
-    require('../assets/images/now/5/21.png'),
-    require('../assets/images/now/5/22.png')
+    require('../assets/images/now/tab5.png')
+    // require('../assets/images/now/5/1.png'),
+    // require('../assets/images/now/5/2.png'),
+    // require('../assets/images/now/5/3.png'),
+    // require('../assets/images/now/5/4.png'),
+    // require('../assets/images/now/5/6.png'),
+    // require('../assets/images/now/5/7.png'),
+    // require('../assets/images/now/5/8.png'),
+    // require('../assets/images/now/5/9.png'),
+    // require('../assets/images/now/5/10.png'),
+    // require('../assets/images/now/5/11.png'),
+    // require('../assets/images/now/5/12.png'),
+    // require('../assets/images/now/5/13.png'),
+    // require('../assets/images/now/5/14.png'),
+    // require('../assets/images/now/5/15.png'),
+    // require('../assets/images/now/5/16.png'),
+    // require('../assets/images/now/5/17.png'),
+    // require('../assets/images/now/5/18.png'),
+    // require('../assets/images/now/5/19.png'),
+    // require('../assets/images/now/5/20.png'),
+    // require('../assets/images/now/5/21.png'),
+    // require('../assets/images/now/5/22.png')
   ]
 ];
 
@@ -93,80 +98,90 @@ class DirecTvNowLayout extends Component {
     else selectedImage = require('../assets/images/files/base5.png');
 
     return (
-      <View style={[styles.directvCardView, { marginTop: 30, marginBottom: 40 }]}>
-        <View style={{ flexDirection: 'row', marginTop: 10 }}>
+      <View style={[styles.directvCardView, { width: '100%', marginTop: 30, marginBottom: 40 }]}>
+        <ScrollView horizontal>
           {selectBase === 0 ? 
-            <View style={{ width: (width - 30) / 5, height: 65, backgroundColor: '#FFC126', alignItems: 'center' }}>
-              <Text style={{ color: '#FFF', marginTop: 2, fontSize: 10, }}>LIVE A LITTLE</Text>
-              <Text style={{ color: '#FFF', marginTop: 2, fontSize: 12, }}>$40/mo, 65+ channels</Text>
+            <View style={{ width: 150, height: 65, backgroundColor: '#FFC126', alignItems: 'center' }}>
+              <Text style={{ color: '#FFF', marginTop: 7, fontSize: 12, }}>LIVE A LITTLE</Text>
+              <Text style={{ color: '#FFF', marginTop: 2, fontSize: 14, }}>$40/mo</Text>
+              <Text style={{ color: '#FFF', marginTop: 2, fontSize: 14, }}>65+ channels</Text>
             </View>
           : 
           <TouchableOpacity onPress={() => this.setState({ selectBase: 0 })}>
-            <View style={{ width: (width - 30) / 5, height: 65, backgroundColor: '#333', alignItems: 'center' }}>
-              <Text style={{ color: '#5c5c5c', marginTop: 2, fontSize: 10, }}>LIVE A LITTLE</Text>
-              <Text style={{ color: '#5c5c5c', marginTop: 2, fontSize: 12, }}>$40/mo, 65+ channels</Text>
+            <View style={{ width: 150, height: 65, backgroundColor: '#333', alignItems: 'center' }}>
+              <Text style={{ color: '#5c5c5c', marginTop: 7, fontSize: 12, }}>LIVE A LITTLE</Text>
+              <Text style={{ color: '#5c5c5c', marginTop: 2, fontSize: 14, }}>$40/mo</Text>
+              <Text style={{ color: '#5c5c5c', marginTop: 2, fontSize: 14, }}>65+ channels</Text>
             </View>
           </TouchableOpacity>
           }
           {selectBase === 1 ? 
-            <View style={{ width: (width - 30) / 5, height: 65, backgroundColor: '#7dd105', alignItems: 'center', marginLeft: 2 }}>
-              <Text style={{ color: '#FFF', marginTop: 2, fontSize: 10, }}>JUST RIGHT</Text>
-              <Text style={{ color: '#FFF', marginTop: 2, fontSize: 12, }}>$55/mo, 85+ channels</Text>
+            <View style={{ width: 150, height: 65, backgroundColor: '#7dd105', alignItems: 'center', marginLeft: 2 }}>
+              <Text style={{ color: '#FFF', marginTop: 7, fontSize: 12, }}>JUST RIGHT</Text>
+              <Text style={{ color: '#FFF', marginTop: 2, fontSize: 14, }}>$55/mo</Text>
+              <Text style={{ color: '#FFF', marginTop: 2, fontSize: 14, }}>85+ channels</Text>
             </View>
           :
           <TouchableOpacity onPress={() => this.setState({ selectBase: 1 })}>
-            <View style={{ width: (width - 30) / 5, height: 65, backgroundColor: '#333', alignItems: 'center', marginLeft: 2 }}>
-              <Text style={{ color: '#5c5c5c', marginTop: 2, fontSize: 10, }}>JUST RIGHT</Text>
-              <Text style={{ color: '#5c5c5c', marginTop: 2, fontSize: 12, }}>$55/mo, 85+ channels</Text>
+            <View style={{ width: 150, height: 65, backgroundColor: '#333', alignItems: 'center', marginLeft: 2 }}>
+              <Text style={{ color: '#5c5c5c', marginTop: 7, fontSize: 12, }}>JUST RIGHT</Text>
+              <Text style={{ color: '#5c5c5c', marginTop: 2, fontSize: 14, }}>$55/mo</Text>
+              <Text style={{ color: '#5c5c5c', marginTop: 2, fontSize: 14, }}>85+ channels</Text>
             </View>
           </TouchableOpacity>
           }
           {selectBase === 2 ? 
-            <View style={{ width: (width - 30) / 5, height: 65, backgroundColor: '#039fdb', alignItems: 'center', marginLeft: 2 }}>
-              <Text style={{ color: '#FFF', marginTop: 2, fontSize: 10, }}>GO BIG</Text>
-              <Text style={{ color: '#FFF', marginTop: 2, fontSize: 12, }}>$65/mo, 105+ channels</Text>
+            <View style={{ width: 150, height: 65, backgroundColor: '#039fdb', alignItems: 'center', marginLeft: 2 }}>
+              <Text style={{ color: '#FFF', marginTop: 7, fontSize: 12, }}>GO BIG</Text>
+              <Text style={{ color: '#FFF', marginTop: 2, fontSize: 14, }}>$65/mo</Text>
+              <Text style={{ color: '#FFF', marginTop: 2, fontSize: 14, }}>105+ channels</Text>
             </View>
           : 
           <TouchableOpacity onPress={() => this.setState({ selectBase: 2 })}>
-            <View style={{ width: (width - 30) / 5, height: 65, backgroundColor: '#333', alignItems: 'center', marginLeft: 2 }}>
-              <Text style={{ color: '#5c5c5c', marginTop: 2, fontSize: 10, }}>GO BIG</Text>
-              <Text style={{ color: '#5c5c5c', marginTop: 2, fontSize: 12, }}>$65/mo, 105+ channels</Text>
+            <View style={{ width: 150, height: 65, backgroundColor: '#333', alignItems: 'center', marginLeft: 2 }}>
+              <Text style={{ color: '#5c5c5c', marginTop: 7, fontSize: 12, }}>GO BIG</Text>
+              <Text style={{ color: '#5c5c5c', marginTop: 2, fontSize: 14, }}>$65/mo</Text>
+              <Text style={{ color: '#5c5c5c', marginTop: 2, fontSize: 14, }}>105+ channels</Text>
             </View>
           </TouchableOpacity>
           }
           {selectBase === 3 ? 
-            <View style={{ width: (width - 30) / 5, height: 65, backgroundColor: '#c890f8', alignItems: 'center', marginLeft: 2 }}>
-              <Text style={{ color: '#FFF', marginTop: 2, fontSize: 10, }}>GOTTA HAVE IT</Text>
-              <Text style={{ color: '#FFF', marginTop: 2, fontSize: 12, }}>$75/mo, 125+ channels</Text>
+            <View style={{ width: 150, height: 65, backgroundColor: '#c890f8', alignItems: 'center', marginLeft: 2 }}>
+              <Text style={{ color: '#FFF', marginTop: 7, fontSize: 12, }}>GOTTA HAVE IT</Text>
+              <Text style={{ color: '#FFF', marginTop: 2, fontSize: 14, }}>$75/mo</Text>
+              <Text style={{ color: '#FFF', marginTop: 2, fontSize: 14, }}>125+ channels</Text>
             </View>
           : 
           <TouchableOpacity onPress={() => this.setState({ selectBase: 3 })}>
-            <View style={{ width: (width - 30) / 5, height: 65, backgroundColor: '#333', alignItems: 'center', marginLeft: 2 }}>
-              <Text style={{ color: '#5c5c5c', marginTop: 2, fontSize: 10, }}>GOTTA HAVE IT</Text>
-              <Text style={{ color: '#5c5c5c', marginTop: 2, fontSize: 12, }}>$75/mo, 125+ channels</Text>
+            <View style={{ width: 150, height: 65, backgroundColor: '#333', alignItems: 'center', marginLeft: 2 }}>
+              <Text style={{ color: '#5c5c5c', marginTop: 7, fontSize: 12, }}>GOTTA HAVE IT</Text>
+              <Text style={{ color: '#5c5c5c', marginTop: 2, fontSize: 14, }}>$75/mo</Text>
+              <Text style={{ color: '#5c5c5c', marginTop: 2, fontSize: 14, }}>125+ channels</Text>
             </View>
           </TouchableOpacity>
           }
           {selectBase === 4 ? 
-            <View style={{ width: (width - 30) / 5, height: 65, backgroundColor: '#FFF', alignItems: 'center', marginLeft: 2 }}>
-              <Text style={{ color: '#333', marginTop: 2, fontSize: 10, }}>TODO Y MAS</Text>
-              <Text style={{ color: '#333', marginTop: 2, fontSize: 12 }}>$45/mo, 90+ channels</Text>
+            <View style={{ width: 150, height: 65, backgroundColor: '#FFF', alignItems: 'center', marginLeft: 2 }}>
+              <Text style={{ color: '#333', marginTop: 7, fontSize: 12, }}>TODO Y MAS</Text>
+              <Text style={{ color: '#333', marginTop: 2, fontSize: 14, }}>$45/mo</Text>
+              <Text style={{ color: '#333', marginTop: 2, fontSize: 14, }}>90+ channels</Text>
             </View>
           : 
           <TouchableOpacity onPress={() => this.setState({ selectBase: 4 })}>
-            <View style={{ width: (width - 30) / 5, height: 65, backgroundColor: '#333', alignItems: 'center', marginLeft: 2 }}>
-              <Text style={{ color: '#5c5c5c', marginTop: 2, fontSize: 10, }}>TODO Y MAS</Text>
-              <Text style={{ color: '#5c5c5c', marginTop: 2, fontSize: 12 }}>$45/mo,  90+ channels</Text>
+            <View style={{ width: 150, height: 65, backgroundColor: '#333', alignItems: 'center', marginLeft: 2 }}>
+              <Text style={{ color: '#5c5c5c', marginTop: 7, fontSize: 12, }}>TODO Y MAS</Text>
+              <Text style={{ color: '#5c5c5c', marginTop: 2, fontSize: 14, }}>$45/mo</Text>
+              <Text style={{ color: '#5c5c5c', marginTop: 2, fontSize: 14, }}>90+ channels</Text>
             </View>
           </TouchableOpacity>
           }
-        </View>
+        </ScrollView>
 
         <View style={styles.container}>
           <View style={{flex: 1, width}} contentContainerStyle={{alignItems: 'center'}}>
             {
               channelImgs[selectBase].map((img, idx) => 
-                <AutoHeightImage key={idx} width={width - 30} source={img} />
+                <AutoHeightImage key={idx} width={width} source={img} />
               )
             }
           </View>
